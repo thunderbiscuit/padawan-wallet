@@ -1,4 +1,4 @@
-package com.example.padawanwallet
+package com.grizzlysoftware.padawanwallet
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4

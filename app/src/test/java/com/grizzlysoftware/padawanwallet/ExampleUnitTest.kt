@@ -1,4 +1,4 @@
-package com.example.padawanwallet
+package com.grizzlysoftware.padawanwallet
 
 import org.junit.Test
 
