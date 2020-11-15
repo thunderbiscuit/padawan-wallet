@@ -1,4 +1,4 @@
-package com.grizzlysoftware.padawanwallet
+package com.libertysoftware.padawanwallet
 
 import org.junit.Test
 
