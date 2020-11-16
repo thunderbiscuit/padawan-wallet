@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="night1">#2e3440</color>
+    <color name="night4">#4c566a</color>
     <color name="snow3">#eceff4</color>
     <color name="aurora4">#a3be8c</color>
+    <color name="frost4">#5e81ac</color>
     <color name="black">#ff0000</color>
     <color name="white">#ffffff</color>
 </resources>
