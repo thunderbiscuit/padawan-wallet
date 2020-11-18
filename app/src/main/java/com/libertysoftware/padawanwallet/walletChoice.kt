@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 
 class walletChoice : Fragment() {
@@ -25,6 +26,16 @@ class walletChoice : Fragment() {
         view.findViewById<Button>(R.id.button2).setOnClickListener {
             val intent: Intent = Intent(this@walletChoice.context, MainActivity::class.java)
             startActivity(intent)
+            // val activity? : Activity = getActivity()
+            // activity.overridePendingTransition(R.anim.slide_in_bottom, R.anim.fragment_fade_exit)
+        }
+
+        view.findViewById<Button>(R.id.button3).setOnClickListener {
+            // toast
+            val text = "Currently in development..."
+            val duration = Toast.LENGTH_SHORT
+            val toast = Toast.makeText(this@walletChoice.context, text, duration)
+            toast.show()
         }
     }
 }
