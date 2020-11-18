@@ -2,10 +2,8 @@
     <string name="app_name">Padawan Wallet</string>
     <string name="wallet_name">Padawan</string>
     <string name="elevator_pitch">the bitcoin wallet trainer</string>
-    <string name="welcome_statement">Welcome to Padawan!\n\nThis application is a place for you to learn and practice how to use the common features of typical mobile bitcoin wallets.\n\nIt uses bitcoin\'s testnet only, an alternative bitcoin network used globally and built exlusively for testing. The coins on this network do not have any value, but they otherwise look and behave just like normal bitcoins!\n\nYou should feel free to experiment, and not worry too much about making mistakes.</string>
+    <string name="welcome_statement">Welcome to Padawan!\n\nThis application is a place for you to learn the common features of typical mobile bitcoin wallets.\n\nIt uses bitcoin\'s testnet, an alternative bitcoin network used globally and built exlusively for testing. The coins on this network do not have any value, but they otherwise look and behave just like normal bitcoins!\n\nYou should feel free to experiment, and not worry too much about making mistakes.</string>
     <string name="entry_button">Let\'s go!</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="already_have_a_wallet">I already have a\nPadawan wallet\n(12-words backup)</string>
     <string name="create_new_wallet">I want to create\na new wallet</string>
 </resources>

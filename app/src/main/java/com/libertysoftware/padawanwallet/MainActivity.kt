@@ -8,4 +8,16 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
     }
+
+//    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+//        super.onViewCreated(view, savedInstanceState)
+//    }
+//
+//    fun showTutorialsFragment(view: View) {
+//        Navigation.findNavController(view).navigate(R.id.action_walletFragment_to_tutorialsFragment)
+//    }
+//
+//    fun showWalletFragment(view: View) {
+//        Navigation.findNavController(view).navigate(R.id.action_tutorialsFragment_to_walletFragment)
+//    }
 }

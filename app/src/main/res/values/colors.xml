@@ -1,10 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!--   basic colors   -->
+    <color name="white">#ffffff</color>
+
+    <!--   Nord theme   -->
     <color name="night1">#2e3440</color>
     <color name="night4">#4c566a</color>
     <color name="snow3">#eceff4</color>
     <color name="aurora4">#a3be8c</color>
     <color name="frost4">#5e81ac</color>
     <color name="black">#ff0000</color>
-    <color name="white">#ffffff</color>
+
+    <!--   Gruvbox dark  -->
+    <color name="bg0soft">#32302f</color>
+    <color name="bg0">#282828</color>
+    <color name="bg0hard">#1d2021</color>
+    <color name="bg1">#3c3836</color>
+    <color name="bg2">#504945</color>
+    <color name="bg3">#665c54</color>
+    <color name="bg4">#7c6f64</color>
+    <color name="gray">#928374</color>
+    <color name="fg0">#fbf1c7</color>
+    <color name="fg1">#ebdbb2</color>
+    <color name="fg2">#d5c4a1</color>
+    <color name="fg3">#bdae93</color>
+    <color name="fg4">#a89984</color>
+    <color name="bright_red">#fb4934</color>
+    <color name="bright_green">#b8bb26</color>
+    <color name="bright_yellow">#fabd2f</color>
+    <color name="bright_blue">#83a598</color>
+    <color name="bright_purple">#d3869b</color>
+    <color name="bright_aqua">#8ec07c</color>
+    <color name="bright_orange">#fe8019</color>
+    <color name="red">#cc241d</color>
+    <color name="green">#98971a</color>
+    <color name="yellow">#d79921</color>
+    <color name="blue">#458588</color>
+    <color name="purple">#b16286</color>
+    <color name="aqua">#689d6a</color>
+    <color name="orange">#d65d0e</color>
 </resources>

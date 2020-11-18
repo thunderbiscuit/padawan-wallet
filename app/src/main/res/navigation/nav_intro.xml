@@ -13,8 +13,8 @@
         <action
             android:id="@+id/action_introFragment_to_walletChoice"
             app:destination="@id/walletChoice"
-            app:enterAnim="@android:anim/slide_in_left"
-            app:exitAnim="@android:anim/fade_out" />
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left" />
     </fragment>
 
     <fragment
