@@ -8,7 +8,7 @@ import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 
-class introFragment : Fragment() {
+class IntroFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -27,4 +27,5 @@ class introFragment : Fragment() {
             navController!!.navigate(R.id.action_introFragment_to_walletChoice)
         }
     }
+
 }

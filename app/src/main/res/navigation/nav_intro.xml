@@ -19,7 +19,7 @@
 
     <fragment
         android:id="@+id/walletChoice"
-        android:name="com.libertysoftware.padawanwallet.walletChoice"
+        android:name="com.libertysoftware.padawanwallet.WalletChoiceFragment"
         android:label="fragment_wallet_choice"
         tools:layout="@layout/fragment_wallet_choice" />
 

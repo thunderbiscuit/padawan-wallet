@@ -9,7 +9,7 @@ import android.widget.Button
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 
-class walletChoice : Fragment() {
+class WalletChoiceFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -24,7 +24,7 @@ class walletChoice : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         view.findViewById<Button>(R.id.button2).setOnClickListener {
-            val intent: Intent = Intent(this@walletChoice.context, MainActivity::class.java)
+            val intent: Intent = Intent(this@WalletChoiceFragment.context, MainActivity::class.java)
             startActivity(intent)
             // val activity? : Activity = getActivity()
             // activity.overridePendingTransition(R.anim.slide_in_bottom, R.anim.fragment_fade_exit)
@@ -34,7 +34,7 @@ class walletChoice : Fragment() {
             // toast
             val text = "Currently in development..."
             val duration = Toast.LENGTH_SHORT
-            val toast = Toast.makeText(this@walletChoice.context, text, duration)
+            val toast = Toast.makeText(this@WalletChoiceFragment.context, text, duration)
             toast.show()
         }
     }
