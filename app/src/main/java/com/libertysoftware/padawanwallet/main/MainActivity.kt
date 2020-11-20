@@ -1,7 +1,8 @@
-package com.libertysoftware.padawanwallet
+package com.libertysoftware.padawanwallet.main
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.libertysoftware.padawanwallet.R
 
 class MainActivity : AppCompatActivity() {
 
