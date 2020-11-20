@@ -1,4 +1,4 @@
-package com.libertysoftware.padawanwallet
+package com.libertysoftware.padawanwallet.intro
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
+import com.libertysoftware.padawanwallet.R
 
 class IntroFragment : Fragment() {
 

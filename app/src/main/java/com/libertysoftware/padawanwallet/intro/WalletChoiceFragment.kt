@@ -1,4 +1,4 @@
-package com.libertysoftware.padawanwallet
+package com.libertysoftware.padawanwallet.intro
 
 import android.content.Intent
 import android.os.Bundle
@@ -8,6 +8,8 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import com.libertysoftware.padawanwallet.R
+import com.libertysoftware.padawanwallet.main.MainActivity
 
 class WalletChoiceFragment : Fragment() {
 

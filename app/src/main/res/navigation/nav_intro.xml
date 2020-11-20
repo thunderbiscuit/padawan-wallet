@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/introFragment"
-        android:name="com.libertysoftware.padawanwallet.introFragment"
+        android:name="com.libertysoftware.padawanwallet.intro.IntroFragment"
         android:label="fragment_intro"
         tools:layout="@layout/fragment_intro" >
         <action
@@ -19,7 +19,7 @@
 
     <fragment
         android:id="@+id/walletChoice"
-        android:name="com.libertysoftware.padawanwallet.WalletChoiceFragment"
+        android:name="com.libertysoftware.padawanwallet.intro.WalletChoiceFragment"
         android:label="fragment_wallet_choice"
         tools:layout="@layout/fragment_wallet_choice" />
 

@@ -10,22 +10,22 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PadawanWallet">
 
-        <activity android:name=".IntroActivity">
+        <activity android:name=".intro.IntroActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
-        <activity android:name=".MainActivity"
-                  android:parentActivityName=".IntroActivity">
+        <activity android:name=".main.MainActivity"
+                  android:parentActivityName=".intro.IntroActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".IntroActivity" />
+                android:value=".intro.IntroActivity" />
         </activity>
 
         <meta-data
