@@ -22,19 +22,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-<!--    <TextView-->
-<!--        android:id="@+id/textView5"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:fontFamily="@font/roboto_light_italic"-->
-<!--        android:text="your wallet"-->
-<!--        android:textColor="@color/fg1"-->
-<!--        android:textSize="14sp"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintHorizontal_bias="0.046"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/textView1" /> -->
-
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabLayout"
         android:layout_width="match_parent"
@@ -49,14 +36,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/bg1"
-            android:id="@+id/walletTab"
             android:text="Wallet" />
 
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/bg1"
-            android:id="@+id/tutorialsTab"
             android:text="Tutorials" />
 
     </com.google.android.material.tabs.TabLayout>
@@ -72,18 +57,5 @@
         app:layout_constraintTop_toBottomOf="@+id/tabLayout">
 
     </androidx.viewpager2.widget.ViewPager2>
-
-<!--    <fragment-->
-<!--        android:id="@+id/nav_host_main"-->
-<!--        android:name="androidx.navigation.fragment.NavHostFragment"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="0dp"-->
-<!--        android:background="@color/bg0"-->
-<!--        app:defaultNavHost="true"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/tabLayout"-->
-<!--        app:navGraph="@navigation/nav_wallet" />-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>
