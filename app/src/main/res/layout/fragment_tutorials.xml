@@ -39,19 +39,24 @@
 
             <Button
                 android:layout_width="350dp"
-                android:layout_height="wrap_content"
+                android:layout_height="60dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="12dp"
-                android:backgroundTint="#c6c951"
-                android:text="E1. What is the bitcoin testnet?"></Button>
+                android:backgroundTint="@color/bright_aqua"
+                android:textAllCaps="false"
+                android:text="E1. What is the bitcoin testnet?"
+                android:textAlignment="viewStart">
+            </Button>
 
             <Button
                 android:layout_width="350dp"
-                android:layout_height="wrap_content"
+                android:layout_height="60dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="12dp"
                 android:backgroundTint="@color/fg4"
-                android:text="E2. Bitcoin units">
+                android:textAllCaps="false"
+                android:text="E2. Bitcoin units"
+                android:textAlignment="viewStart">
             </Button>
 
             <TextView
@@ -63,7 +68,8 @@
                 android:backgroundTint="@color/bg1"
                 android:fontFamily="@font/share_tech_mono"
                 android:text="Receiving Coins"
-                android:textColor="@color/fg1"></TextView>
+                android:textColor="@color/fg1">
+            </TextView>
 
             <View
                 android:layout_width="match_parent"
@@ -76,20 +82,24 @@
 
             <Button
                 android:layout_width="350dp"
-                android:layout_height="wrap_content"
+                android:layout_height="60dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="12dp"
                 android:backgroundTint="@color/fg4"
-                android:text="E3. Generating a receive address">
+                android:textAllCaps="false"
+                android:text="E3. Generating a receive address"
+                android:textAlignment="viewStart">
             </Button>
 
             <Button
                 android:layout_width="350dp"
-                android:layout_height="wrap_content"
+                android:layout_height="60dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="12dp"
                 android:backgroundTint="@color/fg4"
-                android:text="E4. What are unconfirmed transactions?">
+                android:textAllCaps="false"
+                android:text="E4. What are unconfirmed transactions?"
+                android:textAlignment="viewStart">
             </Button>
 
         </LinearLayout>

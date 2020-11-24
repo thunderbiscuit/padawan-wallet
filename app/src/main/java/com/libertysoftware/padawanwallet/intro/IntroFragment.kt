@@ -21,19 +21,17 @@ class IntroFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_intro, container, false)
     }
 
+    val dialogMessage: String = "It’s important you know that Padawan is not a bitcoin wallet that can handle normal bitcoins!\n\nThis wallet is built to help you learn how to use bitcoin wallets through a series of tutorials, and it does so using testnet coins, a type of bitcoin that doesn't have any value.\n\nThe wallet can only handle testnet coins, so make sure you don’t send it normal coins!"
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         val navController = Navigation.findNavController(view)
 
         val testnetDialog = this@IntroFragment.context?.let {
-            AlertDialog.Builder(it)
+            AlertDialog.Builder(it, R.style.MyDialogTheme)
                 .setTitle("Be Careful!")
-                .setMessage("It’s important you know that Padawan is not a bitcoin wallet that can handle normal bitcoins!\n" +
-                        "\n" +
-                        "This wallet is built to help you learn how to use bitcoin wallets through a series of tutorials, and it does so using testnet coins, a type of bitcoin that doesn’t have any value.\n" +
-                        "\n" +
-                        "The wallet can only handle testnet coins, so make sure you don’t send it normal coins!")
+                    .setMessage(dialogMessage)
                     .setPositiveButton("I understand") { _, _ ->
                         navController!!.navigate(R.id.action_introFragment_to_walletChoice)
                     }
@@ -50,6 +48,5 @@ class IntroFragment : Fragment() {
             // navController!!.navigate(R.id.action_introFragment_to_walletChoice)
             testnetDialog?.show()
         }
-
     }
 }
