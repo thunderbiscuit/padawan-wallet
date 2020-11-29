@@ -9,6 +9,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import com.libertysoftware.padawanwallet.R
+import timber.log.Timber
 
 class IntroFragment : Fragment() {
 
@@ -33,6 +34,7 @@ class IntroFragment : Fragment() {
                 .setTitle("Be Careful!")
                     .setMessage(dialogMessage)
                     .setPositiveButton("I understand") { _, _ ->
+                        Timber.i("User confirms they understands it's a testnet only wallet")
                         navController!!.navigate(R.id.action_introFragment_to_walletChoice)
                     }
                     .setNegativeButton("Cancel") { _, _ ->
@@ -42,6 +44,7 @@ class IntroFragment : Fragment() {
         }
 
         view.findViewById<Button>(R.id.button1).setOnClickListener {
+            Timber.i("User is ready to go!")
             testnetDialog?.show()
         }
     }
