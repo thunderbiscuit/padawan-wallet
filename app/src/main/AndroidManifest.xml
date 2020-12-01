@@ -11,7 +11,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PadawanWallet">
 
-        <activity android:name=".intro.IntroActivity">
+        <activity
+            android:name=".intro.IntroActivity"
+            android:theme="@style/Theme.IntroPadawanWallet">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

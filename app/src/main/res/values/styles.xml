@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="Toolbar.TitleText" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
-        <item name="android:textSize">42sp</item>
-        <item name="android:fontFamily">@font/share_tech_mono</item>
+    <style name="ActionBarStyle" parent="Theme.AppCompat.DayNight.DarkActionBar">
+        <item name="android:background">@color/bright_purple</item>
     </style>
+<!--    <style name="Toolbar.TitleText" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">-->
+<!--        <item name="android:textSize">42sp</item>-->
+<!--        <item name="android:fontFamily">@font/share_tech_mono</item>-->
+<!--    </style>-->
+<!--    <style name="TextAppearance.AppCompat.Widget.ActionBar.Title" parent="@android:style/TextAppearance">-->
+<!--        <item name="android:textSize">42sp</item>-->
+<!--        <item name="android:fontFamily">@font/share_tech_mono</item>-->
+<!--    </style>-->
 </resources>

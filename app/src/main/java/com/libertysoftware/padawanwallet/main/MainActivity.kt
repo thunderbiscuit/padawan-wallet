@@ -1,12 +1,11 @@
+package com.libertysoftware.padawanwallet.main
+
 /*
  * Copyright 2020 thunderbiscuit and contributors.
  * Use of this source code is governed by the Apache 2.0 license that can be found in the ./LICENSE file.
  */
 
-package com.libertysoftware.padawanwallet.main
-
 import android.os.Bundle
-import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
@@ -40,6 +39,8 @@ class MainActivity : AppCompatActivity() {
             }
         }.attach()
 
+
+
         toggle = ActionBarDrawerToggle(this, binding.drawerLayout, R.string.open, R.string.close)
         binding.drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
@@ -48,15 +49,15 @@ class MainActivity : AppCompatActivity() {
 
         binding.navView.setNavigationItemSelectedListener {
             when(it.itemId) {
-                R.id.item1 -> Toast.makeText(applicationContext, "You clicked on the About page link!", Toast.LENGTH_LONG).show()
-                R.id.item2 -> Toast.makeText(applicationContext, "You clicked on the Test bdk page link!", Toast.LENGTH_LONG).show()
+                R.id.item1 -> Toast.makeText(applicationContext, "About screen clicked", Toast.LENGTH_SHORT).show()
+                R.id.item1 -> Toast.makeText(applicationContext, "Test bdk screen clicked", Toast.LENGTH_SHORT).show()
             }
             true
         }
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if(toggle.onOptionsItemSelected(item)) {
+    override fun onOptionsItemSelected(item: android.view.MenuItem): kotlin.Boolean {
+        if (toggle.onOptionsItemSelected(item)) {
             return true
         }
         return super.onOptionsItemSelected(item)
