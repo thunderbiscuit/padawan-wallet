@@ -26,7 +26,8 @@
                 android:backgroundTint="@color/bg1"
                 android:fontFamily="@font/share_tech_mono"
                 android:text="Introduction"
-                android:textColor="@color/fg1"></TextView>
+                android:textColor="@color/fg1">
+            </TextView>
 
             <View
                 android:layout_width="match_parent"

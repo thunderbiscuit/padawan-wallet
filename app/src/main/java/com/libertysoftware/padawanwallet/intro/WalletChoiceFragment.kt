@@ -1,3 +1,8 @@
+/*
+ * Copyright 2020 thunderbiscuit and contributors.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the ./LICENSE file.
+ */
+
 package com.libertysoftware.padawanwallet.intro
 
 import android.content.Intent
@@ -8,8 +13,10 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import com.libertysoftware.padawanwallet.PadawanWalletApplication
 import com.libertysoftware.padawanwallet.R
 import com.libertysoftware.padawanwallet.main.MainActivity
+import timber.log.Timber
 
 class WalletChoiceFragment : Fragment() {
 
@@ -26,18 +33,34 @@ class WalletChoiceFragment : Fragment() {
 
         view.findViewById<Button>(R.id.button2).setOnClickListener {
             val intent: Intent = Intent(this@WalletChoiceFragment.context, MainActivity::class.java)
+            showSeedToast()
             startActivity(intent)
         }
 
         view.findViewById<Button>(R.id.button3).setOnClickListener {
-            showToast()
+            showDevelopmentToast()
         }
     }
 
-    fun showToast() {
+    fun showSeedToast() {
+        val seedWords: String = generateSeedWords().toString()
+        val duration = Toast.LENGTH_LONG
+        val toast = Toast.makeText(this@WalletChoiceFragment.context, seedWords, duration)
+        toast.show()
+    }
+
+    fun showDevelopmentToast() {
         val text = "Currently in development..."
         val duration = Toast.LENGTH_SHORT
         val toast = Toast.makeText(this@WalletChoiceFragment.context, text, duration)
         toast.show()
+    }
+
+    fun generateSeedWords(): List<String> {
+        val app = requireActivity().application as PadawanWalletApplication
+        val keys = app.generateExtendedKey(12)
+        val seedWords: List<String> = keys.mnemonic.split(' ')
+        Timber.i(seedWords.toString())
+        return seedWords
     }
 }

@@ -6,4 +6,6 @@
     <string name="entry_button">Let\'s go!</string>
     <string name="already_have_a_wallet">I already have a\nPadawan wallet\n(12-words backup)</string>
     <string name="create_new_wallet">I want to create\na new wallet</string>
+    <string name="open">Open drawer</string>
+    <string name="close">Close drawer</string>
 </resources>
