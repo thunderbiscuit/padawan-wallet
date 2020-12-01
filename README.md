@@ -9,3 +9,23 @@ This is the wallet app you'd want to recommend to your teenage cousins at Christ
 <div align="center" >
   <img src="./images/screenshots-padawan.jpg" alt="Padawan Screenshot">
 </div>
+<br />
+
+## Planned Tutorials
+The tutorials are broken down in two groups: _Essentials_ and _Advanced_. The currently planned tutorials are the following:
+
+#### Essentials
+- [ ] What is the bitcoin testnet?  
+- [ ] Bitcoin units  
+- [ ] Generating a receive address  
+- [ ] What are unconfirmed transactions?  
+- [ ] What is the mempool?  
+- [ ] Sending your first coins  
+- [ ] What are transaction fees?  
+- [ ] What is a wallet backup seed?  
+
+#### Advanced
+- [ ] Connect to your own node  
+- [ ] Replace-by-fee  
+- [ ] Address types  
+- [ ] What are light clients?  
