@@ -1,14 +1,16 @@
-package com.libertysoftware.padawanwallet.main
-
 /*
  * Copyright 2020 thunderbiscuit and contributors.
  * Use of this source code is governed by the Apache 2.0 license that can be found in the ./LICENSE file.
  */
 
+package com.libertysoftware.padawanwallet.main
+
 import android.os.Bundle
-import android.widget.Toast
+import android.view.MenuItem
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
+import androidx.core.view.GravityCompat
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
@@ -17,7 +19,7 @@ import com.libertysoftware.padawanwallet.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
-    lateinit var toggle: ActionBarDrawerToggle
+    // lateinit var toggle: ActionBarDrawerToggle
     lateinit var tabLayout: TabLayout
     lateinit var viewPager: ViewPager2
     private lateinit var binding: ActivityMainBinding
@@ -38,26 +40,32 @@ class MainActivity : AppCompatActivity() {
                 1 -> { tab.text = "Tutorials" }
             }
         }.attach()
-        
-        toggle = ActionBarDrawerToggle(this, binding.drawerLayout, R.string.open, R.string.close)
-        binding.drawerLayout.addDrawerListener(toggle)
-        toggle.syncState()
+
+        var toolbar: Toolbar = findViewById(R.id.toolbar)
+        setSupportActionBar(toolbar)
+        val drawerToggle = ActionBarDrawerToggle(this, binding.drawerLayout, R.string.open, R.string.close)
+        binding.drawerLayout.addDrawerListener(drawerToggle)
+        drawerToggle.syncState()
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setDisplayShowTitleEnabled(false)
+    }
 
-        binding.navView.setNavigationItemSelectedListener {
-            when(it.itemId) {
-                R.id.item1 -> Toast.makeText(applicationContext, "About screen clicked", Toast.LENGTH_SHORT).show()
-                R.id.item2 -> Toast.makeText(applicationContext, "Test bdk screen clicked", Toast.LENGTH_SHORT).show()
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            android.R.id.home -> {
+                binding.drawerLayout.openDrawer(GravityCompat.START)
+                true
             }
-            true
+            else -> super.onOptionsItemSelected(item)
         }
     }
 
-    override fun onOptionsItemSelected(item: android.view.MenuItem): kotlin.Boolean {
-        if (toggle.onOptionsItemSelected(item)) {
-            return true
+    override fun onBackPressed() {
+        if (binding.drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            binding.drawerLayout.closeDrawer(GravityCompat.START)
+        } else {
+            super.onBackPressed()
         }
-        return super.onOptionsItemSelected(item)
     }
 }
