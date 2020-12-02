@@ -38,9 +38,7 @@ class MainActivity : AppCompatActivity() {
                 1 -> { tab.text = "Tutorials" }
             }
         }.attach()
-
-
-
+        
         toggle = ActionBarDrawerToggle(this, binding.drawerLayout, R.string.open, R.string.close)
         binding.drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
@@ -50,7 +48,7 @@ class MainActivity : AppCompatActivity() {
         binding.navView.setNavigationItemSelectedListener {
             when(it.itemId) {
                 R.id.item1 -> Toast.makeText(applicationContext, "About screen clicked", Toast.LENGTH_SHORT).show()
-                R.id.item1 -> Toast.makeText(applicationContext, "Test bdk screen clicked", Toast.LENGTH_SHORT).show()
+                R.id.item2 -> Toast.makeText(applicationContext, "Test bdk screen clicked", Toast.LENGTH_SHORT).show()
             }
             true
         }
