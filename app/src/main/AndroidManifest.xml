@@ -20,7 +20,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".main.MainActivity"
+        <activity android:name=".main.HomeActivity"
                   android:parentActivityName=".intro.IntroActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />

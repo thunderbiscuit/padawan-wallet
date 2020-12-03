@@ -15,22 +15,22 @@ import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.libertysoftware.padawanwallet.R
-import com.libertysoftware.padawanwallet.databinding.ActivityMainBinding
+import com.libertysoftware.padawanwallet.databinding.ActivityHomeBinding
 
-class MainActivity : AppCompatActivity() {
+class HomeActivity : AppCompatActivity() {
 
     // lateinit var toggle: ActionBarDrawerToggle
     lateinit var tabLayout: TabLayout
     lateinit var viewPager: ViewPager2
-    private lateinit var binding: ActivityMainBinding
+    private lateinit var binding: ActivityHomeBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
+        binding = ActivityHomeBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
 
-        binding.pager.adapter = MainPagerAdapter(this)
+        binding.pager.adapter = HomePagerAdapter(this)
         tabLayout = binding.tabLayout
         viewPager = binding.pager
 

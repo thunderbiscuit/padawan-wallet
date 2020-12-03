@@ -15,7 +15,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.libertysoftware.padawanwallet.PadawanWalletApplication
 import com.libertysoftware.padawanwallet.R
-import com.libertysoftware.padawanwallet.main.MainActivity
+import com.libertysoftware.padawanwallet.main.HomeActivity
 import timber.log.Timber
 
 class WalletChoiceFragment : Fragment() {
@@ -32,7 +32,7 @@ class WalletChoiceFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         view.findViewById<Button>(R.id.button2).setOnClickListener {
-            val intent: Intent = Intent(this@WalletChoiceFragment.context, MainActivity::class.java)
+            val intent: Intent = Intent(this@WalletChoiceFragment.context, HomeActivity::class.java)
             showSeedToast()
             startActivity(intent)
         }
