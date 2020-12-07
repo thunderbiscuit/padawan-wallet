@@ -30,7 +30,7 @@
                 android:paddingEnd="21dp"
                 android:text="@string/wallet_name"
                 android:textColor="@color/bright_green"
-                android:textSize="36sp"
+                android:textSize="28sp"
                 tools:layout_editor_absoluteX="354dp"
                 tools:layout_editor_absoluteY="18dp" />
 

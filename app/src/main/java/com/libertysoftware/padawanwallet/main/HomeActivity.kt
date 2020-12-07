@@ -5,6 +5,7 @@
 
 package com.libertysoftware.padawanwallet.main
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.ActionBarDrawerToggle
@@ -16,6 +17,8 @@ import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.libertysoftware.padawanwallet.R
 import com.libertysoftware.padawanwallet.databinding.ActivityHomeBinding
+import com.libertysoftware.padawanwallet.drawer.DrawerActivity
+import timber.log.Timber
 
 class HomeActivity : AppCompatActivity() {
 
@@ -50,6 +53,29 @@ class HomeActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowTitleEnabled(false)
         supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_action_name)
+
+        val intentAbout: Intent = Intent(this, DrawerActivity::class.java)
+        val intentSettings: Intent = Intent(this, DrawerActivity::class.java)
+
+
+        binding.navView.setNavigationItemSelectedListener {
+            when(it.itemId) {
+                R.id.about -> {
+                    Timber.i("clicked about")
+                    startActivity(intentAbout)
+                    true
+                }
+                R.id.settings -> {
+                    Timber.i("clicked setting")
+                    startActivity(intentSettings)
+                    true
+                }
+                else -> {
+                    Timber.i("Drawer selection didn't work properly")
+                    true
+                }
+            }
+        }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
