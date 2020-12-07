@@ -7,5 +7,5 @@
         android:title="About" />
     <item
         android:id="@+id/settings"
-        android:title="Test bdk" />
+        android:title="Settings" />
 </menu>

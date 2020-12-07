@@ -54,8 +54,8 @@ class HomeActivity : AppCompatActivity() {
         supportActionBar?.setDisplayShowTitleEnabled(false)
         supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_action_name)
 
-        val intentAbout: Intent = Intent(this, DrawerActivity::class.java)
-        val intentSettings: Intent = Intent(this, DrawerActivity::class.java)
+        val intentAbout: Intent = Intent(this, DrawerActivity::class.java).putExtra("drawerItem", "about")
+        val intentSettings: Intent = Intent(this, DrawerActivity::class.java).putExtra("drawerItem", "settings")
 
 
         binding.navView.setNavigationItemSelectedListener {

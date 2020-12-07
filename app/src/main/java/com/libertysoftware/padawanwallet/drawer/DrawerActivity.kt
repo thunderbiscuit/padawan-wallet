@@ -9,6 +9,10 @@ class DrawerActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_drawer)
 
-
+        val drawerItem: String? = intent.getStringExtra("drawerItem")
+        when(drawerItem) {
+            "about" -> supportFragmentManager.beginTransaction().replace(R.id.fragment_about, AboutFragment()).commit()
+            "settings" -> supportFragmentManager.beginTransaction().replace(R.id.fragment_about, SettingsFragment()).commit()
+        }
     }
 }
