@@ -83,6 +83,7 @@
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
         app:headerLayout="@layout/nav_header"
+        app:itemTextColor="@color/fg1"
         app:menu="@menu/nav_drawer_menu">
     </com.google.android.material.navigation.NavigationView>
 

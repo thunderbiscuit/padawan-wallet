@@ -44,7 +44,7 @@ class HomeActivity : AppCompatActivity() {
             }
         }.attach()
 
-        var toolbar: Toolbar = findViewById(R.id.toolbar)
+        val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
         val drawerToggle = ActionBarDrawerToggle(this, binding.drawerLayout, R.string.open, R.string.close)
         binding.drawerLayout.addDrawerListener(drawerToggle)
