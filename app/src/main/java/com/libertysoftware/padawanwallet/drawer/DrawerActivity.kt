@@ -70,11 +70,11 @@ class DrawerActivity : AppCompatActivity() {
         }
     }
 
-//    override fun onBackPressed() {
-//        if (binding.drawerActivityLayout.isDrawerOpen(GravityCompat.START)) {
-//            binding.drawerActivityLayout.closeDrawer(GravityCompat.START)
-//        } else {
-//            super.onBackPressed()
-//        }
-//    }
+    override fun onBackPressed() {
+        if (binding.drawerActivityLayout.isDrawerOpen(GravityCompat.START)) {
+            binding.drawerActivityLayout.closeDrawer(GravityCompat.START)
+        } else {
+            super.onBackPressed()
+        }
+    }
 }
