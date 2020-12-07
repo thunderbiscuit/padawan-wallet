@@ -63,11 +63,13 @@ class HomeActivity : AppCompatActivity() {
                 R.id.about -> {
                     Timber.i("clicked about")
                     startActivity(intentAbout)
+                    binding.drawerLayout.closeDrawer(GravityCompat.START)
                     true
                 }
                 R.id.settings -> {
                     Timber.i("clicked setting")
                     startActivity(intentSettings)
+                    binding.drawerLayout.closeDrawer(GravityCompat.START)
                     true
                 }
                 else -> {
