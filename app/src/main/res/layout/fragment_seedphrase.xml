@@ -13,17 +13,18 @@
         android:fontFamily="@font/share_tech_mono"
         android:text="Seed Phrase"
         android:textColor="@color/bright_green"
-        android:textSize="42sp"
+        android:textSize="32sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
+        android:id="@+id/seedPhraseText"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:text="TextView"
         android:textColor="@color/bright_yellow"
+        android:textSize="21sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

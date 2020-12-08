@@ -5,7 +5,9 @@
 
 package com.libertysoftware.padawanwallet.intro
 
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -16,9 +18,12 @@ import androidx.fragment.app.Fragment
 import com.libertysoftware.padawanwallet.PadawanWalletApplication
 import com.libertysoftware.padawanwallet.R
 import com.libertysoftware.padawanwallet.main.HomeActivity
+import org.bitcoindevkit.bdkjni.Types.ExtendedKeys
 import timber.log.Timber
 
 class WalletChoiceFragment : Fragment() {
+
+    private lateinit var keys: ExtendedKeys
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -33,7 +38,8 @@ class WalletChoiceFragment : Fragment() {
 
         view.findViewById<Button>(R.id.button2).setOnClickListener {
             val intent: Intent = Intent(this@WalletChoiceFragment.context, HomeActivity::class.java)
-            showSeedToast()
+            generateWallet()
+            // showSeedToast()
             startActivity(intent)
         }
 
@@ -42,12 +48,12 @@ class WalletChoiceFragment : Fragment() {
         }
     }
 
-    fun showSeedToast() {
-        val seedWords: String = generateSeedWords().toString()
-        val duration = Toast.LENGTH_LONG
-        val toast = Toast.makeText(this@WalletChoiceFragment.context, seedWords, duration)
-        toast.show()
-    }
+//    fun showSeedToast() {
+//        val seedWords: String = generateSeedWords().toString()
+//        val duration = Toast.LENGTH_LONG
+//        val toast = Toast.makeText(this@WalletChoiceFragment.context, seedWords, duration)
+//        toast.show()
+//    }
 
     fun showDevelopmentToast() {
         val text = "Currently in development..."
@@ -56,11 +62,26 @@ class WalletChoiceFragment : Fragment() {
         toast.show()
     }
 
-    fun generateSeedWords(): List<String> {
+//    fun generateSeedWords(): List<String> {
+//        val app = requireActivity().application as PadawanWalletApplication
+//        val keys = app.generateExtendedKey(12)
+//        val seedWords: List<String> = keys.mnemonic.split(' ')
+//        Timber.i(seedWords.toString())
+//        return seedWords
+//    }
+
+    fun generateWallet(): Unit {
         val app = requireActivity().application as PadawanWalletApplication
-        val keys = app.generateExtendedKey(12)
-        val seedWords: List<String> = keys.mnemonic.split(' ')
-        Timber.i(seedWords.toString())
-        return seedWords
+        this.keys = app.generateExtendedKey(12)
+
+        // save seedphrase to shared preferences
+        val editor: SharedPreferences.Editor = this.requireActivity().getSharedPreferences("current_wallet", Context.MODE_PRIVATE)!!.edit()
+        Timber.i("The seed phrase is: ${keys.mnemonic}")
+        editor.putString("seedphrase", keys.mnemonic)
+        editor.apply()
+
+        val descriptor: String = app.createDescriptor(keys)
+        val changeDescriptor: String = app.createChangeDescriptor(keys)
+        // app.createWallet(descriptor, changeDescriptor)
     }
 }

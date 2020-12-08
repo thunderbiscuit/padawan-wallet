@@ -13,7 +13,7 @@
         android:fontFamily="@font/share_tech_mono"
         android:text="Settings"
         android:textColor="@color/bright_green"
-        android:textSize="58sp"
+        android:textSize="32sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
