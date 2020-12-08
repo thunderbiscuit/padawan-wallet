@@ -49,7 +49,7 @@ class PadawanWalletApplication : Application() {
         this.name = "Padawan Testnet 0"
         this.network = "testnet"
         this.path = applicationContext.filesDir.toString()
-        this.electrumURL = "tcp://testet.aranguren.org:51001"
+        this.electrumURL = "tcp://testnet.aranguren.org:51001"
     }
 
     fun initialize(

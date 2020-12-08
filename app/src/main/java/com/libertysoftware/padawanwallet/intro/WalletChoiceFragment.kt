@@ -82,6 +82,6 @@ class WalletChoiceFragment : Fragment() {
 
         val descriptor: String = app.createDescriptor(keys)
         val changeDescriptor: String = app.createChangeDescriptor(keys)
-        // app.createWallet(descriptor, changeDescriptor)
+        app.createWallet(descriptor, changeDescriptor)
     }
 }
