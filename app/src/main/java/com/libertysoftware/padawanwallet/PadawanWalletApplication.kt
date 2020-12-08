@@ -8,6 +8,8 @@ package com.libertysoftware.padawanwallet
 // import android.content.SharedPreferences
 // import android.net.Network
 import android.app.Application
+import android.content.Context
+import android.content.SharedPreferences
 import org.bitcoindevkit.bdkjni.Lib
 import org.bitcoindevkit.bdkjni.Types.ExtendedKeys
 import org.bitcoindevkit.bdkjni.Types.Network
@@ -20,7 +22,7 @@ class PadawanWalletApplication : Application() {
     private lateinit var lib: Lib
     private lateinit var walletPtr: WalletPtr
     private lateinit var name: String
-    private lateinit var network: Network
+    private lateinit var network: String
     private lateinit var path: String
     private lateinit var descriptor: String
     private lateinit var changeDescriptor: String
@@ -44,15 +46,15 @@ class PadawanWalletApplication : Application() {
     }
 
     private fun setDefaults() {
-        name = "Padawan Testnet 0"
-        network = Network.testnet
-        path = applicationContext.filesDir.toString()
-        electrumURL = "tcp://testet.aranguren.org:51001"
+        this.name = "Padawan Testnet 0"
+        this.network = "testnet"
+        this.path = applicationContext.filesDir.toString()
+        this.electrumURL = "tcp://testet.aranguren.org:51001"
     }
 
     fun initialize(
         name: String,
-        network: Network,
+        network: String,
         path: String,
         descriptor: String,
         changeDescriptor: String,
@@ -69,7 +71,7 @@ class PadawanWalletApplication : Application() {
         walletPtr = lib.constructor(
             WalletConstructor(
                 name,
-                network,
+                Network.testnet,
                 path,
                 descriptor,
                 changeDescriptor,
@@ -90,11 +92,33 @@ class PadawanWalletApplication : Application() {
             electrumURL,
             electrumProxy = null,
         )
-        // saveWalletPrefs()
+        saveWallet()
     }
+
+    // save wallet parameters so that the wallet can be reloaded upon starting the app
+    private fun saveWallet() {
+        val editor: SharedPreferences.Editor = getSharedPreferences("current_wallet", Context.MODE_PRIVATE).edit()
+        editor.putBoolean("initialized", true)
+        editor.putString("name", name)
+        editor.putString("network", network)
+        editor.putString("path", path)
+        editor.putString("descriptor", descriptor)
+        editor.putString("changeDescriptor", changeDescriptor)
+        editor.putString("electrum_url", electrumURL)
+        editor.apply()
+    }
+
 
     public fun generateExtendedKey(mnemonicWordCount: Int): ExtendedKeys {
         Timber.i("Extended keys generated")
         return lib.generate_extended_key(Network.testnet, mnemonicWordCount)
+    }
+
+    public fun createDescriptor(keys: ExtendedKeys): String {
+        return ("wpkh(" + keys.ext_priv_key + "/0/*)")
+    }
+
+    public fun createChangeDescriptor(keys: ExtendedKeys): String {
+        return ("wpkh(" + keys.ext_priv_key + "/1/*)")
     }
 }
