@@ -79,6 +79,11 @@ class HomeActivity : AppCompatActivity() {
                     binding.drawerLayout.closeDrawer(GravityCompat.START)
                     true
                 }
+                R.id.wallet -> {
+                    Timber.i("clicked seed phrase")
+                    binding.drawerLayout.closeDrawer(GravityCompat.START)
+                    true
+                }
                 else -> {
                     Timber.i("Drawer selection didn't work properly")
                     true

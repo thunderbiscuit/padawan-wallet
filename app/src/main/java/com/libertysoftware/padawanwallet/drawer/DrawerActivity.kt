@@ -1,5 +1,6 @@
 package com.libertysoftware.padawanwallet.drawer
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.ActionBarDrawerToggle
@@ -8,6 +9,7 @@ import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
 import com.libertysoftware.padawanwallet.R
 import com.libertysoftware.padawanwallet.databinding.ActivityDrawerBinding
+import com.libertysoftware.padawanwallet.main.HomeActivity
 import timber.log.Timber
 
 class DrawerActivity : AppCompatActivity() {
@@ -55,6 +57,12 @@ class DrawerActivity : AppCompatActivity() {
                 R.id.mnemonic -> {
                     Timber.i("clicked seed phrase")
                     supportFragmentManager.beginTransaction().replace(R.id.fragment_about, SeedPhraseFragment()).commit()
+                    binding.drawerActivityLayout.closeDrawer(GravityCompat.START)
+                    true
+                }
+                R.id.wallet -> {
+                    Timber.i("clicked seed phrase")
+                    startActivity(Intent(this, HomeActivity::class.java))
                     binding.drawerActivityLayout.closeDrawer(GravityCompat.START)
                     true
                 }

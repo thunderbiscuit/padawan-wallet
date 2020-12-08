@@ -11,4 +11,7 @@
     <item
         android:id="@+id/mnemonic"
         android:title="Show Seed Phrase" />
+    <item
+        android:id="@+id/wallet"
+        android:title="Home" />
 </menu>
