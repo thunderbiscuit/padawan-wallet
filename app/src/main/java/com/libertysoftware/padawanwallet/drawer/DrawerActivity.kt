@@ -35,9 +35,9 @@ class DrawerActivity : AppCompatActivity() {
         when(drawerItem) {
             "about" -> supportFragmentManager.beginTransaction().replace(R.id.fragment_about, AboutFragment()).commit()
             "settings" -> supportFragmentManager.beginTransaction().replace(R.id.fragment_about, SettingsFragment()).commit()
+            "seedphrase" -> supportFragmentManager.beginTransaction().replace(R.id.fragment_about, SeedPhraseFragment()).commit()
         }
 
-//        binding.navViewDrawerActivity
         binding.navViewDrawerActivity.setNavigationItemSelectedListener {
             when(it.itemId) {
                 R.id.about -> {
@@ -49,6 +49,12 @@ class DrawerActivity : AppCompatActivity() {
                 R.id.settings -> {
                     Timber.i("clicked setting")
                     supportFragmentManager.beginTransaction().replace(R.id.fragment_about, SettingsFragment()).commit()
+                    binding.drawerActivityLayout.closeDrawer(GravityCompat.START)
+                    true
+                }
+                R.id.mnemonic -> {
+                    Timber.i("clicked seed phrase")
+                    supportFragmentManager.beginTransaction().replace(R.id.fragment_about, SeedPhraseFragment()).commit()
                     binding.drawerActivityLayout.closeDrawer(GravityCompat.START)
                     true
                 }

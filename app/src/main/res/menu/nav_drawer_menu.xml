@@ -8,4 +8,7 @@
     <item
         android:id="@+id/settings"
         android:title="Settings" />
+    <item
+        android:id="@+id/mnemonic"
+        android:title="Show Seed Phrase" />
 </menu>

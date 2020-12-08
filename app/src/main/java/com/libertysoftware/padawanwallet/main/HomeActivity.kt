@@ -56,6 +56,7 @@ class HomeActivity : AppCompatActivity() {
 
         val intentAbout: Intent = Intent(this, DrawerActivity::class.java).putExtra("drawerItem", "about")
         val intentSettings: Intent = Intent(this, DrawerActivity::class.java).putExtra("drawerItem", "settings")
+        val intentSeedPhrase: Intent = Intent(this, DrawerActivity::class.java).putExtra("drawerItem", "seedphrase")
 
 
         binding.navView.setNavigationItemSelectedListener {
@@ -69,6 +70,12 @@ class HomeActivity : AppCompatActivity() {
                 R.id.settings -> {
                     Timber.i("clicked setting")
                     startActivity(intentSettings)
+                    binding.drawerLayout.closeDrawer(GravityCompat.START)
+                    true
+                }
+                R.id.mnemonic -> {
+                    Timber.i("clicked seed phrase")
+                    startActivity(intentSeedPhrase)
                     binding.drawerLayout.closeDrawer(GravityCompat.START)
                     true
                 }
