@@ -48,27 +48,12 @@ class WalletChoiceFragment : Fragment() {
         }
     }
 
-//    fun showSeedToast() {
-//        val seedWords: String = generateSeedWords().toString()
-//        val duration = Toast.LENGTH_LONG
-//        val toast = Toast.makeText(this@WalletChoiceFragment.context, seedWords, duration)
-//        toast.show()
-//    }
-
     fun showDevelopmentToast() {
         val text = "Currently in development..."
         val duration = Toast.LENGTH_SHORT
         val toast = Toast.makeText(this@WalletChoiceFragment.context, text, duration)
         toast.show()
     }
-
-//    fun generateSeedWords(): List<String> {
-//        val app = requireActivity().application as PadawanWalletApplication
-//        val keys = app.generateExtendedKey(12)
-//        val seedWords: List<String> = keys.mnemonic.split(' ')
-//        Timber.i(seedWords.toString())
-//        return seedWords
-//    }
 
     fun generateWallet(): Unit {
         val app = requireActivity().application as PadawanWalletApplication
