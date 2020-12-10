@@ -35,6 +35,6 @@ class SeedPhraseFragment : Fragment() {
         val sharedPref = this.getActivity()?.getSharedPreferences("current_wallet", Context.MODE_PRIVATE)
         val seedphrase: String? = sharedPref?.getString("seedphrase", "No seed phrase")
         Timber.i("Seed phrase: $seedphrase")
-        getView()?.findViewById<TextView>(R.id.seedPhraseText)?.text = seedphrase
+        view?.findViewById<TextView>(R.id.seedPhraseText)?.text = seedphrase
     }
 }

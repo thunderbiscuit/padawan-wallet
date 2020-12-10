@@ -54,7 +54,7 @@ class PadawanWalletApplication : Application() {
 
     fun initialize(
         name: String,
-        network: String,
+        // network: String,
         path: String,
         descriptor: String,
         changeDescriptor: String,
@@ -62,7 +62,7 @@ class PadawanWalletApplication : Application() {
         electrumProxy: String?,
     ) {
         this.name = name
-        this.network = network
+        // this.network = network
         this.path = path
         this.descriptor = descriptor
         this.changeDescriptor = changeDescriptor
@@ -85,7 +85,7 @@ class PadawanWalletApplication : Application() {
         setDefaults()
         initialize(
             name,
-            network,
+            // network,
             path,
             descriptor,
             changeDescriptor,
@@ -104,7 +104,7 @@ class PadawanWalletApplication : Application() {
         editor.putString("path", path)
         editor.putString("descriptor", descriptor)
         editor.putString("changeDescriptor", changeDescriptor)
-        editor.putString("electrum_url", electrumURL)
+        editor.putString("electrumURL", electrumURL)
         editor.apply()
     }
 

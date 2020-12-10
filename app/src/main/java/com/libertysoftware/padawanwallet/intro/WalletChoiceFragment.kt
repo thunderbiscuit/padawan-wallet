@@ -55,15 +55,22 @@ class WalletChoiceFragment : Fragment() {
         toast.show()
     }
 
-    fun generateWallet(): Unit {
+    private fun generateWallet(): Unit {
         val app = requireActivity().application as PadawanWalletApplication
+
+        // Timber.i("thunderlogs: keys value is: ${keys}")
+        // Timber.i("thunderlogs: this.keys value is: ${this.keys}")
+        // Timber.i("thunderlogs: this@WalletChoiceFragment.keys value is: ${this@WalletChoiceFragment.keys}")
         this.keys = app.generateExtendedKey(12)
+        // Timber.i("thunderlogs: 2 keys value is: $keys")
+        // Timber.i("thunderlogs: 2 this.keys value is: ${this.keys}")
+        // Timber.i("thunderlogs: 2 this@WalletChoiceFragment.keys value is: ${this@WalletChoiceFragment.keys}")
 
         // save seedphrase to shared preferences
         val editor: SharedPreferences.Editor = this.requireActivity().getSharedPreferences("current_wallet", Context.MODE_PRIVATE)!!.edit()
-        Timber.i("The seed phrase is: ${keys.mnemonic}")
+        Timber.tag("THUNDERLOGS").i("The seed phrase is: ${keys.mnemonic}")
         editor.putString("seedphrase", keys.mnemonic)
-        editor.apply()
+        editor.commit()
 
         val descriptor: String = app.createDescriptor(keys)
         val changeDescriptor: String = app.createChangeDescriptor(keys)
