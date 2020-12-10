@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.libertysoftware.padawanwallet">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
     <application
         android:name=".PadawanWalletApplication"
         android:allowBackup="true"
@@ -12,11 +15,20 @@
         android:theme="@style/Theme.PadawanWallet">
 
         <activity
-            android:name=".intro.IntroActivity"
+            android:name=".DispatchActivity"
             android:theme="@style/Theme.IntroPadawanWallet">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".intro.IntroActivity"
+            android:theme="@style/Theme.IntroPadawanWallet">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
 
@@ -47,5 +59,4 @@
             android:resource="@array/preloaded_fonts" />
 
     </application>
-
 </manifest>

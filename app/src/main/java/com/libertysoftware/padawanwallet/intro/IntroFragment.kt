@@ -50,6 +50,8 @@ class IntroFragment : Fragment() {
 
         view.findViewById<Button>(R.id.button1).setOnClickListener {
             Timber.i("User is ready to go!")
+            // val sharedpreferences: String = this.activity?.getSharedPreferences("current_wallet", Context.MODE_PRIVATE)?.all.toString()
+            // Timber.i("thunderlogs: sharedpreferences: $sharedpreferences")
             testnetDialog?.show()
         }
     }

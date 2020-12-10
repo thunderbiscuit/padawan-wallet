@@ -1,3 +1,8 @@
+/*
+ * Copyright 2020 thunderbiscuit and contributors.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the ./LICENSE file.
+ */
+
 package com.libertysoftware.padawanwallet.drawer
 
 import android.content.Context
@@ -30,6 +35,6 @@ class SeedPhraseFragment : Fragment() {
         val sharedPref = this.getActivity()?.getSharedPreferences("current_wallet", Context.MODE_PRIVATE)
         val seedphrase: String? = sharedPref?.getString("seedphrase", "No seed phrase")
         Timber.i("Seed phrase: $seedphrase")
-        getView()?.findViewById<TextView>(R.id.seedPhraseText)?.text = seedphrase
+        view?.findViewById<TextView>(R.id.seedPhraseText)?.text = seedphrase
     }
 }
