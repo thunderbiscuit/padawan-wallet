@@ -39,19 +39,16 @@ class IntroFragment : Fragment() {
                 .setTitle("Be Careful!")
                     .setMessage(dialogMessage)
                     .setPositiveButton("I understand") { _, _ ->
-                        Timber.i("User confirms they understands it's a testnet only wallet")
+                        Timber.i("[PADAWANLOGS] User confirms they understands it's a testnet only wallet")
                         navController!!.navigate(R.id.action_introFragment_to_walletChoice)
                     }
                     .setNegativeButton("Cancel") { _, _ ->
                         // Toast.makeText(this!!, "Read this page again!", Toast.LENGTH_LONG).show()
-                        // log cancel
                     }
         }
 
         view.findViewById<Button>(R.id.button1).setOnClickListener {
-            Timber.i("User is ready to go!")
-            // val sharedpreferences: String = this.activity?.getSharedPreferences("current_wallet", Context.MODE_PRIVATE)?.all.toString()
-            // Timber.i("thunderlogs: sharedpreferences: $sharedpreferences")
+            Timber.i("[PADAWANLOGS] User is ready to go!")
             testnetDialog?.show()
         }
     }

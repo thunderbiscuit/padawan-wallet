@@ -48,31 +48,31 @@ class DrawerActivity : AppCompatActivity() {
         binding.navViewDrawerActivity.setNavigationItemSelectedListener {
             when(it.itemId) {
                 R.id.about -> {
-                    Timber.i("clicked about")
+                    Timber.i("[PADAWANLOGS] clicked about")
                     supportFragmentManager.beginTransaction().replace(R.id.fragment_about, AboutFragment()).commit()
                     binding.drawerActivityLayout.closeDrawer(GravityCompat.START)
                     true
                 }
                 R.id.settings -> {
-                    Timber.i("clicked setting")
+                    Timber.i("[PADAWANLOGS] clicked setting")
                     supportFragmentManager.beginTransaction().replace(R.id.fragment_about, SettingsFragment()).commit()
                     binding.drawerActivityLayout.closeDrawer(GravityCompat.START)
                     true
                 }
                 R.id.mnemonic -> {
-                    Timber.i("clicked seed phrase")
+                    Timber.i("[PADAWANLOGS] clicked seed phrase")
                     supportFragmentManager.beginTransaction().replace(R.id.fragment_about, SeedPhraseFragment()).commit()
                     binding.drawerActivityLayout.closeDrawer(GravityCompat.START)
                     true
                 }
                 R.id.wallet -> {
-                    Timber.i("clicked seed phrase")
+                    Timber.i("[PADAWANLOGS] clicked navigate back to wallet")
                     startActivity(Intent(this, HomeActivity::class.java))
                     binding.drawerActivityLayout.closeDrawer(GravityCompat.START)
                     true
                 }
                 else -> {
-                    Timber.i("Drawer selection didn't work properly")
+                    Timber.i("[PADAWANLOGS] Drawer selection didn't work properly")
                     true
                 }
             }

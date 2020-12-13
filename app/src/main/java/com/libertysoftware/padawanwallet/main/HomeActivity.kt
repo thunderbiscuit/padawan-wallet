@@ -62,30 +62,30 @@ class HomeActivity : AppCompatActivity() {
         binding.navView.setNavigationItemSelectedListener {
             when(it.itemId) {
                 R.id.about -> {
-                    Timber.i("clicked about")
+                    Timber.i("[PADAWANLOGS] clicked about")
                     startActivity(intentAbout)
                     binding.drawerLayout.closeDrawer(GravityCompat.START)
                     true
                 }
                 R.id.settings -> {
-                    Timber.i("clicked setting")
+                    Timber.i("[PADAWANLOGS] clicked setting")
                     startActivity(intentSettings)
                     binding.drawerLayout.closeDrawer(GravityCompat.START)
                     true
                 }
                 R.id.mnemonic -> {
-                    Timber.i("clicked seed phrase")
+                    Timber.i("[PADAWANLOGS] clicked seed phrase")
                     startActivity(intentSeedPhrase)
                     binding.drawerLayout.closeDrawer(GravityCompat.START)
                     true
                 }
                 R.id.wallet -> {
-                    Timber.i("clicked seed phrase")
+                    Timber.i("[PADAWANLOGS] clicked seed phrase")
                     binding.drawerLayout.closeDrawer(GravityCompat.START)
                     true
                 }
                 else -> {
-                    Timber.i("Drawer selection didn't work properly")
+                    Timber.i("[PADAWANLOGS] Drawer selection didn't work properly")
                     true
                 }
             }

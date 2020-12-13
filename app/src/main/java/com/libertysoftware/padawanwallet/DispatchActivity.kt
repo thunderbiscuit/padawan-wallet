@@ -22,7 +22,7 @@ class DispatchActivity : AppCompatActivity() {
         val currentWallet: SharedPreferences = getSharedPreferences("current_wallet", Context.MODE_PRIVATE)
 
         val currentWalletExists: Boolean = currentWallet.getBoolean("initialized", false)
-        Timber.tag("THUNDERLOGS").i("Value of currentWalletExists at lauch: $currentWalletExists")
+        Timber.i("[PADAWANLOGS] Value of currentWalletExists at launch: $currentWalletExists")
 
         if (currentWalletExists) {
            val name: String = currentWallet.getString("name", null)!!
