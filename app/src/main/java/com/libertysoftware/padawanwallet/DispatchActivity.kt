@@ -33,12 +33,12 @@ class DispatchActivity : AppCompatActivity() {
 
            val app = application as PadawanWalletApplication
            app.initialize(
-               name,
-               path,
-               descriptor,
-               changeDescriptor,
-               electrumURL,
-               null
+               name = name,
+               path = path,
+               descriptor = descriptor,
+               changeDescriptor = changeDescriptor,
+               electrumURL = electrumURL,
+               electrumProxy = null,
            )
         }
 
@@ -46,7 +46,6 @@ class DispatchActivity : AppCompatActivity() {
         if (currentWalletExists) {
             startActivity(Intent(this, HomeActivity::class.java))
         } else {
-            // startActivity(Intent(this, IntroActivity::class.java))
             startActivity(Intent(this, IntroActivity::class.java))
         }
     }

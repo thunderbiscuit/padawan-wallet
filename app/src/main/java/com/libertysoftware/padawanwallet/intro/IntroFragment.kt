@@ -23,7 +23,6 @@ class IntroFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View? {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_intro, container, false)
     }
 
@@ -40,7 +39,7 @@ class IntroFragment : Fragment() {
                     .setMessage(dialogMessage)
                     .setPositiveButton("I understand") { _, _ ->
                         Timber.i("[PADAWANLOGS] User confirms they understands it's a testnet only wallet")
-                        navController!!.navigate(R.id.action_introFragment_to_walletChoice)
+                        navController.navigate(R.id.action_introFragment_to_walletChoice)
                     }
                     .setNegativeButton("Cancel") { _, _ ->
                         // Toast.makeText(this!!, "Read this page again!", Toast.LENGTH_LONG).show()

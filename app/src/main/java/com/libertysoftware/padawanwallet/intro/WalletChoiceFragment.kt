@@ -39,7 +39,6 @@ class WalletChoiceFragment : Fragment() {
         view.findViewById<Button>(R.id.button2).setOnClickListener {
             val intent: Intent = Intent(this@WalletChoiceFragment.context, HomeActivity::class.java)
             generateWallet()
-            // showSeedToast()
             startActivity(intent)
         }
 
@@ -48,7 +47,7 @@ class WalletChoiceFragment : Fragment() {
         }
     }
 
-    fun showDevelopmentToast() {
+    private fun showDevelopmentToast(): Unit {
         val text = "Currently in development..."
         val duration = Toast.LENGTH_SHORT
         val toast = Toast.makeText(this@WalletChoiceFragment.context, text, duration)
@@ -59,12 +58,13 @@ class WalletChoiceFragment : Fragment() {
         val app = requireActivity().application as PadawanWalletApplication
         this.keys = app.generateExtendedKey(12)
 
-        // save seedphrase to shared preferences
+        // save seed phrase to shared preferences
         val editor: SharedPreferences.Editor = this.requireActivity().getSharedPreferences("current_wallet", Context.MODE_PRIVATE)!!.edit()
         Timber.i("[PADAWANLOGS] The seed phrase is: ${keys.mnemonic}")
         editor.putString("seedphrase", keys.mnemonic)
-        editor.commit()
+        editor.apply()
 
+        // generate new wallet
         val descriptor: String = app.createDescriptor(keys)
         val changeDescriptor: String = app.createChangeDescriptor(keys)
         app.createWallet(descriptor, changeDescriptor)
