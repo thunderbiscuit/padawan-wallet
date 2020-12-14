@@ -5,8 +5,6 @@
 
 package com.libertysoftware.padawanwallet
 
-// import android.content.SharedPreferences
-// import android.net.Network
 import android.app.Application
 import android.content.Context
 import android.content.SharedPreferences
@@ -40,12 +38,12 @@ class PadawanWalletApplication : Application() {
         setDefaults()
     }
 
-    override fun onTerminate() {
+    override fun onTerminate(): Unit {
         super.onTerminate()
         lib.destructor(walletPtr)
     }
 
-    private fun setDefaults() {
+    private fun setDefaults(): Unit {
         this.name = "Padawan Testnet 0"
         this.network = "testnet"
         this.path = applicationContext.filesDir.toString()
@@ -54,15 +52,13 @@ class PadawanWalletApplication : Application() {
 
     fun initialize(
         name: String,
-        // network: String,
         path: String,
         descriptor: String,
         changeDescriptor: String,
         electrumURL: String,
         electrumProxy: String?,
-    ) {
+    ): Unit {
         this.name = name
-        // this.network = network
         this.path = path
         this.descriptor = descriptor
         this.changeDescriptor = changeDescriptor
@@ -70,41 +66,40 @@ class PadawanWalletApplication : Application() {
 
         walletPtr = lib.constructor(
             WalletConstructor(
-                name,
-                Network.testnet,
-                path,
-                descriptor,
-                changeDescriptor,
-                electrumURL,
-                electrumProxy
+                name = name,
+                network = Network.testnet,
+                path = path,
+                descriptor = descriptor,
+                change_descriptor = changeDescriptor,
+                electrum_url = electrumURL,
+                electrum_proxy = electrumProxy,
             )
         )
     }
 
-    fun createWallet(descriptor: String, changeDescriptor: String) {
-        setDefaults()
-        initialize(
-            name,
-            // network,
-            path,
-            descriptor,
-            changeDescriptor,
-            electrumURL,
+    fun createWallet(descriptor: String, changeDescriptor: String): Unit {
+        this.setDefaults()
+        this.initialize(
+            name = this.name,
+            path = this.path,
+            descriptor = descriptor,
+            changeDescriptor = changeDescriptor,
+            electrumURL = this.electrumURL,
             electrumProxy = null,
         )
-        saveWallet()
+        this.saveWallet()
     }
 
     // save wallet parameters so that the wallet can be reloaded upon starting the app
-    private fun saveWallet() {
+    private fun saveWallet(): Unit {
         val editor: SharedPreferences.Editor = getSharedPreferences("current_wallet", Context.MODE_PRIVATE).edit()
         editor.putBoolean("initialized", true)
-        editor.putString("name", name)
-        editor.putString("network", network)
-        editor.putString("path", path)
-        editor.putString("descriptor", descriptor)
-        editor.putString("changeDescriptor", changeDescriptor)
-        editor.putString("electrumURL", electrumURL)
+        editor.putString("name", this.name)
+        editor.putString("network", this.network)
+        editor.putString("path", this.path)
+        editor.putString("descriptor", this.descriptor)
+        editor.putString("changeDescriptor", this.changeDescriptor)
+        editor.putString("electrumURL", this.electrumURL)
         editor.apply()
     }
 
