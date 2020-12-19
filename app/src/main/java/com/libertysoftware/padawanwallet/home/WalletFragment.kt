@@ -9,8 +9,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import com.libertysoftware.padawanwallet.PadawanWalletApplication
 import com.libertysoftware.padawanwallet.databinding.FragmentWalletBinding
+import timber.log.Timber
 
 class WalletFragment : Fragment() {
 
@@ -28,8 +31,28 @@ class WalletFragment : Fragment() {
         return view
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding.button4.setOnClickListener {
+            showNewAddressToast()
+        }
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
+
+    private fun showNewAddressToast(): Unit {
+
+        val app = requireActivity().application as PadawanWalletApplication
+        val newAddress: String = app.getNewAddress()
+        Timber.i("[PADAWANLOGS] New deposit address is $newAddress")
+
+        val text = "New deposit address is $newAddress"
+        val duration = Toast.LENGTH_SHORT
+        val toast = Toast.makeText(this@WalletFragment.context, text, duration)
+        toast.show()
+    }
+
 }

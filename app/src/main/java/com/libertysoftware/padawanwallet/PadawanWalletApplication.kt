@@ -116,4 +116,8 @@ class PadawanWalletApplication : Application() {
     public fun createChangeDescriptor(keys: ExtendedKeys): String {
         return ("wpkh(" + keys.ext_priv_key + "/1/*)")
     }
+
+    public fun getNewAddress(): String {
+        return lib.get_new_address(walletPtr)
+    }
 }
