@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:backgroundTint="@color/bg1"
-    tools:context=".main.TutorialsFragment">
+    tools:context=".home.TutorialsFragment">
 
     <ScrollView
         android:layout_width="match_parent"

@@ -11,7 +11,7 @@ import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.libertysoftware.padawanwallet.intro.IntroActivity
-import com.libertysoftware.padawanwallet.main.HomeActivity
+import com.libertysoftware.padawanwallet.home.HomeActivity
 import timber.log.Timber
 
 class DispatchActivity : AppCompatActivity() {

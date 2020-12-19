@@ -3,7 +3,7 @@
  * Use of this source code is governed by the Apache 2.0 license that can be found in the ./LICENSE file.
  */
 
-package com.libertysoftware.padawanwallet.main
+package com.libertysoftware.padawanwallet.home
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -12,7 +12,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.libertysoftware.padawanwallet.R
 
-class TutorialsFragment : Fragment() {
+class WalletFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -20,6 +20,6 @@ class TutorialsFragment : Fragment() {
         savedInstanceState: Bundle?,
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_tutorials, container, false)
+        return inflater.inflate(R.layout.fragment_wallet, container, false)
     }
 }

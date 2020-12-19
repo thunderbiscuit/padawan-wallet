@@ -17,7 +17,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.libertysoftware.padawanwallet.PadawanWalletApplication
 import com.libertysoftware.padawanwallet.R
-import com.libertysoftware.padawanwallet.main.HomeActivity
+import com.libertysoftware.padawanwallet.home.HomeActivity
 import org.bitcoindevkit.bdkjni.Types.ExtendedKeys
 import timber.log.Timber
 
@@ -56,6 +56,7 @@ class WalletChoiceFragment : Fragment() {
 
     private fun generateWallet(): Unit {
         val app = requireActivity().application as PadawanWalletApplication
+        // val app = activity.application as PadawanWalletApplication
         this.keys = app.generateExtendedKey(12)
 
         // save seed phrase to shared preferences

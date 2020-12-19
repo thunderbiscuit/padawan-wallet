@@ -14,7 +14,7 @@ import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
 import com.libertysoftware.padawanwallet.R
 import com.libertysoftware.padawanwallet.databinding.ActivityDrawerBinding
-import com.libertysoftware.padawanwallet.main.HomeActivity
+import com.libertysoftware.padawanwallet.home.HomeActivity
 import timber.log.Timber
 
 class DrawerActivity : AppCompatActivity() {

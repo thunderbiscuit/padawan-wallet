@@ -32,7 +32,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".main.HomeActivity"
+        <activity android:name=".home.HomeActivity"
                   android:parentActivityName=".intro.IntroActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -44,14 +44,14 @@
         </activity>
 
         <activity android:name=".drawer.DrawerActivity"
-            android:parentActivityName=".main.HomeActivity">
+            android:parentActivityName=".home.HomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".main.HomeActivity" />
+                android:value=".home.HomeActivity" />
         </activity>
 
         <meta-data
