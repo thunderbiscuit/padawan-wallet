@@ -110,6 +110,7 @@ class PadawanWalletApplication : Application() {
     }
 
     public fun createDescriptor(keys: ExtendedKeys): String {
+        Timber.i("[PADAWANLOGS] Descriptor is wpkh(${keys.ext_priv_key}/0/*)")
         return ("wpkh(" + keys.ext_priv_key + "/0/*)")
     }
 
