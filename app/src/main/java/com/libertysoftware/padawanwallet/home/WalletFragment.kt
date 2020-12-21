@@ -17,8 +17,7 @@ import timber.log.Timber
 
 class WalletFragment : Fragment() {
 
-    private var _binding: FragmentWalletBinding? = null
-    private val binding get() = _binding!!
+    private lateinit var binding: FragmentWalletBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -26,7 +25,7 @@ class WalletFragment : Fragment() {
         savedInstanceState: Bundle?,
     ): View? {
         // return inflater.inflate(R.layout.fragment_wallet, container, false)
-        _binding = FragmentWalletBinding.inflate(inflater, container, false)
+        binding = FragmentWalletBinding.inflate(inflater, container, false)
         val view: View = binding.root
         return view
     }
@@ -36,11 +35,6 @@ class WalletFragment : Fragment() {
         binding.button4.setOnClickListener {
             showNewAddressToast()
         }
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 
     private fun showNewAddressToast(): Unit {
@@ -54,5 +48,4 @@ class WalletFragment : Fragment() {
         val toast = Toast.makeText(this@WalletFragment.context, text, duration)
         toast.show()
     }
-
 }
