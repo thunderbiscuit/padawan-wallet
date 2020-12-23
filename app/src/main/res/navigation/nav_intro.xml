@@ -21,6 +21,19 @@
         android:id="@+id/walletChoice"
         android:name="com.libertysoftware.padawanwallet.intro.WalletChoiceFragment"
         android:label="fragment_wallet_choice"
-        tools:layout="@layout/fragment_wallet_choice" />
+        tools:layout="@layout/fragment_wallet_choice">
+        <action
+            android:id="@+id/action_walletChoice_to_walletRecoveryFragment"
+            app:destination="@id/walletRecoveryFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/walletRecoveryFragment"
+        android:name="com.libertysoftware.padawanwallet.intro.WalletRecoveryFragment"
+        android:label="fragment_recover"
+        tools:layout="@layout/fragment_recover">
+    </fragment>
 
 </navigation>
