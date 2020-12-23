@@ -110,12 +110,13 @@ class PadawanWalletApplication : Application() {
     }
 
     public fun createDescriptor(keys: ExtendedKeys): String {
-        Timber.i("[PADAWANLOGS] Descriptor is wpkh(${keys.ext_priv_key}/0/*)")
-        return ("wpkh(" + keys.ext_priv_key + "/0/*)")
+        Timber.i("[PADAWANLOGS] Descriptor for receive addresses is wpkh(${keys.ext_priv_key}/84'/1'/0'/0/*)")
+        return ("wpkh(" + keys.ext_priv_key + "/84'/1'/0'/0/*)")
     }
 
     public fun createChangeDescriptor(keys: ExtendedKeys): String {
-        return ("wpkh(" + keys.ext_priv_key + "/1/*)")
+        Timber.i("[PADAWANLOGS] Descriptor for change addresses is wpkh(${keys.ext_priv_key}/84'/1'/0'/0/*)")
+        return ("wpkh(" + keys.ext_priv_key + "/84'/1'/0'/1/*)")
     }
 
     public fun getNewAddress(): String {
