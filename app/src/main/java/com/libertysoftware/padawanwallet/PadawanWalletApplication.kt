@@ -109,6 +109,10 @@ class PadawanWalletApplication : Application() {
         return lib.generate_extended_key(Network.testnet, mnemonicWordCount)
     }
 
+    public fun createExtendedKeyFromMnemonic(mnemonic: String): ExtendedKeys {
+        return lib.create_extended_keys(Network.testnet, mnemonic)
+    }
+
     public fun createDescriptor(keys: ExtendedKeys): String {
         Timber.i("[PADAWANLOGS] Descriptor for receive addresses is wpkh(${keys.ext_priv_key}/84'/1'/0'/0/*)")
         return ("wpkh(" + keys.ext_priv_key + "/84'/1'/0'/0/*)")

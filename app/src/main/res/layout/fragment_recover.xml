@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
     tools:context=".intro.WalletRecoveryFragment">
 
     <TextView
@@ -17,8 +17,7 @@
         android:textSize="58sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-    </TextView>
+        app:layout_constraintTop_toTopOf="parent"></TextView>
 
     <TextView
         android:id="@+id/tagline"
@@ -31,7 +30,204 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.64"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/title">
-    </TextView>
+        app:layout_constraintTop_toBottomOf="@id/title"></TextView>
+
+    <EditText
+        android:id="@+id/mnemonicword1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="70dp"
+        android:width="170dp"
+        android:backgroundTint="@color/bg4"
+        android:ems="10"
+        android:hint="word 1"
+        android:inputType="textPersonName"
+        android:textColor="@color/fg1"
+        android:textColorHint="@color/bg4"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tagline" />
+
+    <EditText
+        android:id="@+id/mnemonicword3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        android:width="170dp"
+        android:backgroundTint="@color/bg4"
+        android:ems="10"
+        android:hint="word 3"
+        android:inputType="textPersonName"
+        android:textColorHint="@color/bg4"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mnemonicword1" />
+
+    <EditText
+        android:id="@+id/mnemonicword5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        android:width="170dp"
+        android:backgroundTint="@color/bg4"
+        android:ems="10"
+        android:hint="word 5"
+        android:inputType="textPersonName"
+        android:textColorHint="@color/bg4"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mnemonicword3" />
+
+    <EditText
+        android:id="@+id/mnemonicword7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        android:width="170dp"
+        android:backgroundTint="@color/bg4"
+        android:ems="10"
+        android:hint="word #7"
+        android:inputType="textPersonName"
+        android:textColorHint="@color/bg4"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mnemonicword5" />
+
+    <EditText
+        android:id="@+id/mnemonicword9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        android:width="170dp"
+        android:backgroundTint="@color/bg4"
+        android:ems="10"
+        android:hint="word #9"
+        android:inputType="textPersonName"
+        android:textColorHint="@color/bg4"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mnemonicword7" />
+
+    <EditText
+        android:id="@+id/mnemonicword11"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        android:width="170dp"
+        android:backgroundTint="@color/bg4"
+        android:ems="10"
+        android:hint="word #11"
+        android:inputType="textPersonName"
+        android:textColorHint="@color/bg4"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mnemonicword9" />
+
+    <EditText
+        android:id="@+id/mnemonicword2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="70dp"
+        android:layout_marginEnd="32dp"
+        android:width="170dp"
+        android:backgroundTint="@color/bg4"
+        android:ems="10"
+        android:hint="word 2"
+        android:inputType="textPersonName"
+        android:textColorHint="@color/bg4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tagline" />
+
+    <EditText
+        android:id="@+id/mnemonicword4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="32dp"
+        android:width="170dp"
+        android:backgroundTint="@color/bg4"
+        android:ems="10"
+        android:hint="word 4"
+        android:inputType="textPersonName"
+        android:textColorHint="@color/bg4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mnemonicword2" />
+
+    <EditText
+        android:id="@+id/mnemonicword6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="32dp"
+        android:width="170dp"
+        android:backgroundTint="@color/bg4"
+        android:ems="10"
+        android:hint="word 6"
+        android:inputType="textPersonName"
+        android:textColorHint="@color/bg4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mnemonicword4" />
+
+    <EditText
+        android:id="@+id/mnemonicword8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="32dp"
+        android:width="170dp"
+        android:backgroundTint="@color/bg4"
+        android:ems="10"
+        android:hint="word #8"
+        android:inputType="textPersonName"
+        android:textColorHint="@color/bg4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mnemonicword6" />
+
+    <EditText
+        android:id="@+id/mnemonicword10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="32dp"
+        android:width="170dp"
+        android:backgroundTint="@color/bg4"
+        android:ems="10"
+        android:hint="word #9"
+        android:inputType="textPersonName"
+        android:textColorHint="@color/bg4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mnemonicword8" />
+
+    <EditText
+        android:id="@+id/mnemonicword12"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="32dp"
+        android:width="170dp"
+        android:backgroundTint="@color/bg4"
+        android:ems="10"
+        android:hint="word #12"
+        android:inputType="textPersonName"
+        android:textColorHint="@color/bg4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mnemonicword10" />
+
+    <Button
+        android:id="@+id/buttonRecoverWallet"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:width="200dp"
+        android:height="100dp"
+        android:backgroundTint="@color/green"
+        android:text="Recover Wallet"
+        android:textAllCaps="false"
+        android:textColor="@color/fg1"
+        android:textSize="18sp"
+        app:cornerRadius="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mnemonicword12" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
