@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_home.xml"
+    app:startDestination="@id/walletFragment">
+
+    <fragment
+        android:id="@+id/walletFragment"
+        android:name="com.libertysoftware.padawanwallet.home.WalletFragment"
+        android:label="fragment_wallet"
+        tools:layout="@layout/fragment_wallet" >
+        <action
+            android:id="@+id/action_walletFragment_to_tutorialsFragment"
+            app:destination="@id/tutorialsFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/fade_out" />
+    </fragment>
+    <fragment
+        android:id="@+id/tutorialsFragment"
+        android:name="com.libertysoftware.padawanwallet.home.TutorialsFragment"
+        android:label="fragment_tutorials"
+        tools:layout="@layout/fragment_tutorials" >
+        <action
+            android:id="@+id/action_tutorialsFragment_to_walletFragment"
+            app:destination="@id/walletFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/fade_out" />
+    </fragment>
+
+</navigation>
