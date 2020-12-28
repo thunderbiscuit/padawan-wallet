@@ -36,7 +36,12 @@ class WalletReceive : Fragment() {
         val app = requireActivity().application as PadawanWalletApplication
         val newAddress: String = app.getNewAddress()
         Timber.i("[PADAWANLOGS] New deposit address is $newAddress")
-
         binding.receiveAddress.text = newAddress
+
+        binding.buttonGenerateNewAddress.setOnClickListener {
+            val newGeneratedAddress: String = app.getNewAddress()
+            Timber.i("[PADAWANLOGS] New deposit address is $newGeneratedAddress")
+            binding.receiveAddress.text = newGeneratedAddress
+        }
     }
 }

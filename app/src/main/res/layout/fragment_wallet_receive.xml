@@ -34,6 +34,24 @@
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <Button
+        android:id="@+id/buttonGenerateNewAddress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:width="320dp"
+        android:height="80dp"
+        android:backgroundTint="@color/bg2"
+        android:fontFamily="@font/roboto"
+        android:text="Generate new address"
+        android:textAllCaps="false"
+        android:textColor="@color/fg1"
+        android:textSize="17sp"
+        app:cornerRadius="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/receiveAddress" />
+
+    <Button
         android:id="@+id/button4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
