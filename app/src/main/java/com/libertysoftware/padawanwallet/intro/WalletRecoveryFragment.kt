@@ -5,6 +5,9 @@
 
 package com.libertysoftware.padawanwallet.intro
 
+import android.content.Context
+import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,14 +16,19 @@ import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import com.libertysoftware.padawanwallet.PadawanWalletApplication
 import com.libertysoftware.padawanwallet.R
 import com.libertysoftware.padawanwallet.databinding.FragmentRecoverBinding
+import com.libertysoftware.padawanwallet.home.HomeActivity
+import org.bitcoindevkit.bdkjni.Types.ExtendedKeys
 import timber.log.Timber
 
 class WalletRecoveryFragment : Fragment() {
 
     private lateinit var binding: FragmentRecoverBinding
     private lateinit var wordList: List<String>
+    private lateinit var mnemonicString: String
+    private lateinit var keys: ExtendedKeys
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = FragmentRecoverBinding.inflate(inflater, container, false)
@@ -40,7 +48,13 @@ class WalletRecoveryFragment : Fragment() {
         // Timber.i("[PADAWANLOGS] Word list is $wordList")
 
         view.findViewById<Button>(R.id.buttonRecoverWallet).setOnClickListener {
-            checkWords()
+            if (checkWords()) {
+                this.loadWallet()
+                val intent: Intent = Intent(this@WalletRecoveryFragment.context, HomeActivity::class.java)
+                startActivity(intent)
+            } else {
+                Timber.i("[PADAWANLOGS] Mnemonic seed phrase was not valid")
+            }
         }
     }
 
@@ -70,7 +84,24 @@ class WalletRecoveryFragment : Fragment() {
         }
 
         Timber.i("[PADAWANLOGS] The final mnemonic is $mnemonicWordList")
+        this.mnemonicString = mnemonicWordList.joinToString(" ")
         return true
+    }
+
+    private fun loadWallet() {
+        val app = requireActivity().application as PadawanWalletApplication
+        this.keys = app.createExtendedKeyFromMnemonic(this.mnemonicString)
+
+        // save seed phrase to shared preferences
+        val editor: SharedPreferences.Editor = requireActivity().getSharedPreferences("current_wallet", Context.MODE_PRIVATE)!!.edit()
+        Timber.i("[PADAWANLOGS] The seed phrase for the recovered wallet is: ${keys.mnemonic}")
+        editor.putString("seedphrase", keys.mnemonic)
+        editor.apply()
+
+        // generate new wallet
+        val descriptor: String = app.createDescriptor(this.keys)
+        val changeDescriptor: String = app.createChangeDescriptor(this.keys)
+        app.createWallet(descriptor, changeDescriptor)
     }
 
     private fun toastWordIsEmpty(wordNumber: Int) {
