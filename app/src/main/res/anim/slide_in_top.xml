@@ -4,6 +4,6 @@
         android:duration="@android:integer/config_shortAnimTime"
         android:fromXDelta="0%"
         android:toXDelta="0%"
-        android:fromYDelta="50%"
+        android:fromYDelta="-70%"
         android:toYDelta="0%" />
 </set>

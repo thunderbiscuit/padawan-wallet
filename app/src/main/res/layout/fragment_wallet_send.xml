@@ -8,14 +8,17 @@
     tools:context="home.WalletSend">
 
     <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:text="Send testnet bitcoin"
+        android:id="@+id/textView"
+        android:layout_width="0dp"
+        android:layout_height="100dp"
+        android:backgroundTint="@color/orange"
+        android:gravity="center"
+        android:text="Send bitcoin (testnet)"
         android:textColor="@color/fg1"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="143dp" />
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/button5"
@@ -25,6 +28,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
