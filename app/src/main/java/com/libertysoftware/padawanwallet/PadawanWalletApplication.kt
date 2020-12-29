@@ -126,4 +126,12 @@ class PadawanWalletApplication : Application() {
     public fun getNewAddress(): String {
         return lib.get_new_address(walletPtr)
     }
+
+    public fun sync(max_address: Int?=null) {
+        lib.sync(walletPtr, max_address)
+    }
+
+    fun getBalance(): Long {
+        return lib.get_balance(walletPtr)
+    }
 }

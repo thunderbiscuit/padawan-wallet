@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import com.libertysoftware.padawanwallet.R
 import com.libertysoftware.padawanwallet.databinding.FragmentWalletHomeBinding
@@ -17,8 +18,6 @@ class WalletHome : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        // return inflater.inflate(R.layout.fragment_wallet_send, container, false)
         binding = FragmentWalletHomeBinding.inflate(inflater, container, false)
         val view: View = binding.root
         return view
@@ -27,6 +26,17 @@ class WalletHome : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val viewModel = ViewModelProvider(requireActivity()).get(HomeViewModel::class.java)
+
+        viewModel.balance.observe(viewLifecycleOwner, {
+            binding.balance.text = it.toString()
+        })
+
+        binding.syncButton.setOnClickListener {
+            viewModel.updateBalance()
+        }
+
+        // navigation
         val navController = Navigation.findNavController(view)
 
         binding.receiveButton.setOnClickListener {
