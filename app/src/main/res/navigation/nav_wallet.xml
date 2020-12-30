@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+<navigation
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_wallet.xml"
@@ -16,26 +17,14 @@
             app:enterAnim="@android:anim/slide_in_left"
             app:exitAnim="@android:anim/fade_out" />
         <action
-            android:id="@+id/action_walletHome_to_walletSend"
-            app:destination="@id/walletSend"
-            app:enterAnim="@anim/slide_in_bottom"
-            app:exitAnim="@android:anim/fade_out"/>
-        <action
             android:id="@+id/action_walletHome_to_walletReceive"
             app:destination="@id/walletReceive"
-            app:enterAnim="@anim/slide_in_bottom"
+            app:enterAnim="@anim/slide_in_bottom70"
             app:exitAnim="@android:anim/fade_out"/>
-    </fragment>
-
-    <fragment
-        android:id="@+id/walletSend"
-        android:name="com.libertysoftware.padawanwallet.home.WalletSend"
-        android:label="fragment_wallet_send"
-        tools:layout="@layout/fragment_wallet_send" >
         <action
-            android:id="@+id/action_walletSend_to_walletHome"
-            app:destination="@id/walletHome"
-            app:enterAnim="@anim/slide_in_bottom"
+            android:id="@+id/action_walletHome_to_walletSend"
+            app:destination="@id/walletSend"
+            app:enterAnim="@anim/slide_in_bottom70"
             app:exitAnim="@android:anim/fade_out"/>
     </fragment>
 
@@ -47,8 +36,19 @@
         <action
             android:id="@+id/action_walletReceive_to_walletHome"
             app:destination="@id/walletHome"
-            app:enterAnim="@anim/slide_in_bottom"
-            app:exitAnim="@android:anim/fade_out"/>
+            app:enterAnim="@anim/fade_in_slow"
+            app:exitAnim="@anim/slide_out_bottom70"/>
     </fragment>
 
+    <fragment
+        android:id="@+id/walletSend"
+        android:name="com.libertysoftware.padawanwallet.home.WalletSend"
+        android:label="fragment_wallet_send"
+        tools:layout="@layout/fragment_wallet_send" >
+        <action
+            android:id="@+id/action_walletSend_to_walletHome"
+            app:destination="@id/walletHome"
+            app:enterAnim="@anim/fade_in_slow"
+            app:exitAnim="@anim/slide_out_bottom70"/>
+    </fragment>
 </navigation>

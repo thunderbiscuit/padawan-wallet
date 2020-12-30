@@ -55,7 +55,7 @@
         android:id="@+id/button4"
         android:layout_width="0dp"
         android:layout_height="70dp"
-        android:backgroundTint="@color/blue"
+        android:backgroundTint="@color/bg4"
         android:insetTop="0dp"
         android:insetBottom="0dp"
         android:text="Back to wallet"
