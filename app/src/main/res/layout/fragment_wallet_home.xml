@@ -32,7 +32,6 @@
         android:text="Sync"
         android:textColor="@color/fg1"
         android:textSize="8sp"
-        app:layout_constraintBottom_toTopOf="@+id/textView9"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

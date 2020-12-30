@@ -37,18 +37,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
-    <Button
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:backgroundTint="@color/orange"
-        android:text="Verify transaction"
-        android:textColor="@color/fg1"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextNumber" />
-
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
@@ -85,6 +73,27 @@
         android:textColor="@color/fg1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName" />
+
+    <Button
+        android:id="@+id/buttonVerify"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:layout_marginBottom="90dp"
+        android:width="320dp"
+        android:height="80dp"
+        android:backgroundTint="@color/bg2"
+        android:fontFamily="@font/roboto"
+        android:text="Verify transaction"
+        android:textAllCaps="false"
+        android:textColor="@color/fg1"
+        android:textSize="17sp"
+        app:cornerRadius="12dp"
+        app:layout_constraintBottom_toTopOf="@+id/button5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/receiveAddress" />
 
     <Button
         android:id="@+id/button5"

@@ -50,5 +50,22 @@
             app:destination="@id/walletHome"
             app:enterAnim="@anim/fade_in_slow"
             app:exitAnim="@anim/slide_out_bottom70"/>
+        <action
+            android:id="@+id/action_walletSend_to_walletVerify"
+            app:destination="@id/walletVerify"
+            app:enterAnim="@anim/fragment_fade_enter"
+            app:exitAnim="@anim/fragment_fade_exit"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/walletVerify"
+        android:name="com.libertysoftware.padawanwallet.home.WalletVerify"
+        android:label="WalletVerify"
+        tools:layout="@layout/fragment_wallet_verify" >
+        <action
+            android:id="@+id/action_walletVerify_to_walletSend"
+            app:destination="@id/walletSend"
+            app:enterAnim="@anim/fragment_fade_enter"
+            app:exitAnim="@anim/fragment_fade_exit" />
     </fragment>
 </navigation>
