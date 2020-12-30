@@ -26,6 +26,7 @@ class WalletHome : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // ViewModel
         val viewModel = ViewModelProvider(requireActivity()).get(HomeViewModel::class.java)
 
         viewModel.balance.observe(viewLifecycleOwner, {

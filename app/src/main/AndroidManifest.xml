@@ -33,7 +33,8 @@
         </activity>
 
         <activity android:name=".home.HomeActivity"
-                  android:parentActivityName=".intro.IntroActivity">
+                  android:parentActivityName=".intro.IntroActivity"
+                  android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
