@@ -30,7 +30,7 @@
         android:backgroundTint="@color/fg1"
         android:ems="10"
         android:fontFamily="@font/share_tech_mono"
-        android:inputType="textPersonName"
+        android:inputType="text"
         android:textColor="@color/fg1"
         android:textColorHint="@color/bg4"
         android:textSize="14sp"
