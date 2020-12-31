@@ -25,6 +25,18 @@ class WalletVerify : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val amount: String = requireArguments().getString("amount", "No amount provided")
+        val address: String = requireArguments().getString("address", "No address provided")
+        val fees: Int = 0
+        val total: String = (amount.toInt() + fees).toString()
+
+        binding.amountTransacted.text = amount
+        binding.fees.text = fees.toString()
+        binding.total.text = total
+        binding.sendToAddress.text = address
+
+
+
         val navController = Navigation.findNavController(view)
 
         binding.buttonBackTransactionBuilder.setOnClickListener {

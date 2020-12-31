@@ -58,7 +58,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
     <TextView
-        android:id="@+id/textView11"
+        android:id="@+id/amountTransacted"
         android:layout_width="wrap_content"
         android:layout_height="16dp"
         android:layout_marginTop="120dp"
@@ -72,7 +72,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <TextView
-        android:id="@+id/textView15"
+        android:id="@+id/fees"
         android:layout_width="0dp"
         android:layout_height="16dp"
         android:layout_marginTop="8dp"
@@ -83,7 +83,7 @@
         android:textColor="@color/fg1"
         android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView11" />
+        app:layout_constraintTop_toBottomOf="@+id/amountTransacted" />
 
     <View
         android:id="@+id/view"
@@ -99,7 +99,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView13" />
 
     <TextView
-        android:id="@+id/textView16"
+        android:id="@+id/total"
         android:layout_width="wrap_content"
         android:layout_height="36dp"
         android:layout_marginTop="16dp"
@@ -126,7 +126,7 @@
         app:layout_constraintTop_toBottomOf="@+id/view" />
 
     <TextView
-        android:id="@+id/textView10"
+        android:id="@+id/sendToAddress"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
