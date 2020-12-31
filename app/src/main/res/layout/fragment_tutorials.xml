@@ -2,132 +2,20 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:backgroundTint="@color/bg1"
-    tools:context=".home.TutorialsFragment">
+    android:backgroundTint="@color/bg1">
 
-    <ScrollView
+    <fragment
+        android:id="@+id/nav_host_wallet"
+        android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginStart="0dp"
-                android:layout_marginTop="24dp"
-                android:backgroundTint="@color/bg1"
-                android:fontFamily="@font/share_tech_mono"
-                android:text="Introduction"
-                android:textColor="@color/fg1">
-            </TextView>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="0.5dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="4dp"
-                android:layout_marginEnd="32dp"
-                android:background="@color/fg1">
-            </View>
-
-            <Button
-                android:layout_width="350dp"
-                android:layout_height="60dp"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="12dp"
-                android:backgroundTint="@color/bright_aqua"
-                android:textAllCaps="false"
-                android:text="E1. What is the bitcoin testnet?"
-                android:textAlignment="viewStart">
-            </Button>
-
-            <Button
-                android:layout_width="350dp"
-                android:layout_height="60dp"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="12dp"
-                android:backgroundTint="@color/fg4"
-                android:textAllCaps="false"
-                android:text="E2. Bitcoin units"
-                android:textAlignment="viewStart">
-            </Button>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginStart="0dp"
-                android:layout_marginTop="48dp"
-                android:backgroundTint="@color/bg1"
-                android:fontFamily="@font/share_tech_mono"
-                android:text="Receiving Coins"
-                android:textColor="@color/fg1">
-            </TextView>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="0.5dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="4dp"
-                android:layout_marginEnd="32dp"
-                android:background="@color/fg1">
-            </View>
-
-            <Button
-                android:layout_width="350dp"
-                android:layout_height="60dp"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="12dp"
-                android:backgroundTint="@color/fg4"
-                android:textAllCaps="false"
-                android:text="E3. Generating a receive address"
-                android:textAlignment="viewStart">
-            </Button>
-
-            <Button
-                android:layout_width="350dp"
-                android:layout_height="60dp"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="12dp"
-                android:backgroundTint="@color/fg4"
-                android:textAllCaps="false"
-                android:text="E4. What are unconfirmed transactions?"
-                android:textAlignment="viewStart">
-            </Button>
-
-        </LinearLayout>
-    </ScrollView>
-
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/tabLayout2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/fg4"
-        android:backgroundTintMode="add"
+        android:layout_height="match_parent"
+        app:defaultNavHost="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:tabTextColor="@color/bg1">
-
-        <com.google.android.material.tabs.TabItem
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Essentials" />
-
-        <com.google.android.material.tabs.TabItem
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:backgroundTint="@color/bg4"
-            android:text="Advanced" />
-
-    </com.google.android.material.tabs.TabLayout>
+        app:layout_constraintTop_toTopOf="parent"
+        app:navGraph="@navigation/nav_tutorials" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

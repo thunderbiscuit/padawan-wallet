@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_tutorials.xml"
+    app:startDestination="@id/tutorialsHome">
+
+    <fragment
+        android:id="@+id/tutorialsHome"
+        android:name="com.libertysoftware.padawanwallet.home.TutorialsHome"
+        android:label="TutorialsHome"
+        tools:layout="@layout/fragment_tutorials_home"/>
+</navigation>
