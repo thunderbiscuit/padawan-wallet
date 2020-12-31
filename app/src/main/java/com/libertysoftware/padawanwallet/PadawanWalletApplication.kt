@@ -9,10 +9,7 @@ import android.app.Application
 import android.content.Context
 import android.content.SharedPreferences
 import org.bitcoindevkit.bdkjni.Lib
-import org.bitcoindevkit.bdkjni.Types.ExtendedKeys
-import org.bitcoindevkit.bdkjni.Types.Network
-import org.bitcoindevkit.bdkjni.Types.WalletConstructor
-import org.bitcoindevkit.bdkjni.Types.WalletPtr
+import org.bitcoindevkit.bdkjni.Types.*
 import timber.log.Timber
 
 class PadawanWalletApplication : Application() {
@@ -131,7 +128,30 @@ class PadawanWalletApplication : Application() {
         lib.sync(walletPtr, max_address)
     }
 
-    fun getBalance(): Long {
+    public fun getBalance(): Long {
         return lib.get_balance(walletPtr)
+    }
+
+    public fun createTransaction(
+            fee_rate: Float,
+            addressees: List<Pair<String, String>>,
+            send_all: Boolean? = false,
+            utxos: List<String>? = null,
+            unspendable: List<String>? = null,
+            policy: Map<String, List<String>>? = null,
+    ): CreateTxResponse {
+        return lib.create_tx(walletPtr, fee_rate, addressees, send_all, utxos, unspendable, policy)
+    }
+
+    public fun sign(psbt: String, assume_height: Int? = null): SignResponse {
+        return lib.sign(walletPtr, psbt, assume_height)
+    }
+
+    public fun extractPsbt(psbt: String): RawTransaction {
+        return lib.extract_psbt(walletPtr, psbt)
+    }
+
+    public fun broadcast(raw_tx: String): Txid {
+        return lib.broadcast(walletPtr, raw_tx)
     }
 }
