@@ -1,4 +1,4 @@
-package com.libertysoftware.padawanwallet.home
+package com.libertysoftware.padawanwallet.home.tutorials
 
 import android.os.Bundle
 import android.view.LayoutInflater
