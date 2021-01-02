@@ -9,5 +9,38 @@
         android:id="@+id/tutorialsHome"
         android:name="com.libertysoftware.padawanwallet.home.tutorials.TutorialsHome"
         android:label="TutorialsHome"
-        tools:layout="@layout/fragment_tutorials_home"/>
+        tools:layout="@layout/fragment_tutorials_home">
+        <action
+            android:id="@+id/action_tutorialsHome_to_tutorialE1"
+            app:destination="@id/tutorialE1"
+            app:enterAnim="@anim/slide_in_bottom70"
+            app:exitAnim="@android:anim/fade_out" />
+        <action
+            android:id="@+id/action_tutorialsHome_to_tutorialE2"
+            app:destination="@id/tutorialE2"
+            app:enterAnim="@anim/slide_in_bottom70"
+            app:exitAnim="@android:anim/fade_out" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/tutorialE1"
+        android:name="com.libertysoftware.padawanwallet.home.tutorials.TutorialE1"
+        android:label="Tutorial1" >
+        <action
+            android:id="@+id/action_tutorialE1_to_tutorialsHome"
+            app:destination="@id/tutorialsHome"
+            app:enterAnim="@anim/fade_in_slow"
+            app:exitAnim="@anim/slide_out_bottom70" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/tutorialE2"
+        android:name="com.libertysoftware.padawanwallet.home.tutorials.TutorialE2"
+        android:label="Tutorial2" >
+        <action
+            android:id="@+id/action_tutorialE2_to_tutorialsHome"
+            app:destination="@id/tutorialsHome"
+            app:enterAnim="@anim/fade_in_slow"
+            app:exitAnim="@anim/slide_out_bottom70" />
+    </fragment>
 </navigation>

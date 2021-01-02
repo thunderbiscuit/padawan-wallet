@@ -1,16 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!--   basic colors   -->
-    <color name="white">#ffffff</color>
-
-    <!--   Nord theme   -->
-    <color name="night1">#2e3440</color>
-    <color name="night4">#4c566a</color>
-    <color name="snow3">#eceff4</color>
-    <color name="aurora4">#a3be8c</color>
-    <color name="frost4">#5e81ac</color>
-    <color name="black">#ff0000</color>
-
     <!--   Gruvbox dark  -->
     <color name="bg0soft">#32302f</color>
     <color name="bg0">#282828</color>
@@ -39,4 +28,8 @@
     <color name="purple">#b16286</color>
     <color name="aqua">#689d6a</color>
     <color name="orange">#d65d0e</color>
+
+    <!--  Gruvbox light  -->
+    <color name="bg0soft_light">#f2e5bc</color>
+    <color name="fg1_light">#3c3836</color>
 </resources>
