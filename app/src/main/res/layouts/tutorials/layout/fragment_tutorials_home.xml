@@ -2,7 +2,6 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:backgroundTint="@color/bg1">
@@ -54,7 +53,7 @@
             android:layout_marginStart="16dp"
             android:backgroundTint="@color/bg4"
             android:fontFamily="sans-serif-medium"
-            android:text="Generate an address"
+            android:text="What is the bitcoin testnet?"
             android:textAllCaps="false"
             android:textAppearance="?android:attr/textAppearanceButton"
             android:textColor="#FFFFFF"
@@ -62,7 +61,8 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.35"></TextView>
+            app:layout_constraintVertical_bias="0.35">
+        </TextView>
 
         <TextView
             android:layout_width="wrap_content"
@@ -70,10 +70,10 @@
             android:layout_marginStart="16dp"
             android:backgroundTint="@color/bg4"
             android:fontFamily="@font/roboto_light_italic"
-            android:text="Skills"
+            android:text="Concepts"
             android:textAllCaps="false"
             android:textAppearance="?android:attr/textAppearanceButton"
-            android:textColor="#FFFFFF"
+            android:textColor="#ffffff"
             android:textColorHighlight="@color/fg1"
             android:textSize="10sp"
             android:textStyle="normal"
@@ -113,7 +113,8 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.35"></TextView>
+            app:layout_constraintVertical_bias="0.35">
+        </TextView>
 
         <TextView
             android:layout_width="wrap_content"
@@ -124,12 +125,13 @@
             android:text="Concepts"
             android:textAllCaps="false"
             android:textAppearance="?android:attr/textAppearanceButton"
-            android:textColor="#FFFFFF"
+            android:textColor="#ffffff"
             android:textColorHighlight="@color/fg1"
             android:textSize="10sp"
             android:textStyle="normal"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/text2"></TextView>
+            app:layout_constraintTop_toBottomOf="@+id/text2">
+        </TextView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -155,7 +157,7 @@
             android:layout_marginStart="16dp"
             android:backgroundTint="@color/bg4"
             android:fontFamily="sans-serif-medium"
-            android:text="What is the bitcoin testnet?"
+            android:text="Generating a receive address"
             android:textAllCaps="false"
             android:textAppearance="?android:attr/textAppearanceButton"
             android:textColor="#FFFFFF"
@@ -163,7 +165,60 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.35"></TextView>
+            app:layout_constraintVertical_bias="0.35">
+        </TextView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:backgroundTint="@color/bg4"
+            android:fontFamily="@font/roboto_light_italic"
+            android:text="Skills"
+            android:textAllCaps="false"
+            android:textAppearance="?android:attr/textAppearanceButton"
+            android:textColor="#FFFFFF"
+            android:textColorHighlight="@color/fg1"
+            android:textSize="10sp"
+            android:textStyle="normal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text3">
+        </TextView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/buttonTutorial4"
+        android:layout_width="0dp"
+        android:layout_height="70dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/tutorial_button_background"
+        android:backgroundTint="@color/bg4"
+        android:clickable="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonTutorial3">
+
+        <TextView
+            android:id="@+id/text4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:backgroundTint="@color/bg4"
+            android:fontFamily="sans-serif-medium"
+            android:text="What are transaction fees?"
+            android:textAllCaps="false"
+            android:textAppearance="?android:attr/textAppearanceButton"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.35">
+        </TextView>
 
         <TextView
             android:layout_width="wrap_content"
@@ -179,80 +234,8 @@
             android:textSize="10sp"
             android:textStyle="normal"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/text3"></TextView>
-
-        <ImageView
-            android:layout_width="40dp"
-            android:layout_height="30dp"
-            android:layout_marginEnd="16dp"
-            android:backgroundTint="@color/bg4"
-            android:src="@drawable/smiling_face_with_sunglasses"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.5" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/buttonTutorial4"
-        android:layout_width="0dp"
-        android:layout_height="70dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="16dp"
-        android:background="@drawable/tutorial_button_background"
-        android:backgroundTint="@color/aqua"
-        android:clickable="true"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonTutorial3">
-
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="40dp"
-            android:layout_height="30dp"
-            android:layout_marginEnd="16dp"
-            android:backgroundTint="@color/aqua"
-            android:src="@drawable/smiling_face_with_sunglasses"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.5" />
-
-        <TextView
-            android:id="@+id/text4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:backgroundTint="@color/aqua"
-            android:fontFamily="sans-serif-medium"
-            android:text="What are unconfirmed transactions?"
-            android:textAllCaps="false"
-            android:textAppearance="?android:attr/textAppearanceButton"
-            android:textColor="#FFFFFF"
-            android:textSize="16sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.35"></TextView>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:backgroundTint="@color/aqua"
-            android:fontFamily="@font/roboto_light_italic"
-            android:text="Skills"
-            android:textAllCaps="false"
-            android:textAppearance="?android:attr/textAppearanceButton"
-            android:textColor="#FFFFFF"
-            android:textColorHighlight="@color/fg1"
-            android:textSize="10sp"
-            android:textStyle="normal"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/text4"></TextView>
+            app:layout_constraintTop_toBottomOf="@+id/text4">
+        </TextView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -264,7 +247,7 @@
         android:layout_marginTop="24dp"
         android:layout_marginEnd="16dp"
         android:background="@drawable/tutorial_button_background"
-        android:backgroundTint="@color/aqua"
+        android:backgroundTint="@color/bg4"
         android:clickable="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -276,9 +259,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:backgroundTint="@color/aqua"
+            android:backgroundTint="@color/bg4"
             android:fontFamily="sans-serif-medium"
-            android:text="Broadcasting transactions"
+            android:text="Sending your first coins"
             android:textAllCaps="false"
             android:textAppearance="?android:attr/textAppearanceButton"
             android:textColor="#FFFFFF"
@@ -286,13 +269,14 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.35"></TextView>
+            app:layout_constraintVertical_bias="0.35">
+        </TextView>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:backgroundTint="@color/aqua"
+            android:backgroundTint="@color/bg4"
             android:fontFamily="@font/roboto_light_italic"
             android:text="Skills"
             android:textAllCaps="false"
@@ -302,7 +286,8 @@
             android:textSize="10sp"
             android:textStyle="normal"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/text5"></TextView>
+            app:layout_constraintTop_toBottomOf="@+id/text5">
+    </TextView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -328,7 +313,7 @@
             android:layout_marginStart="16dp"
             android:backgroundTint="@color/bg4"
             android:fontFamily="sans-serif-medium"
-            android:text="Generate an address"
+            android:text="What is the mempool?"
             android:textAllCaps="false"
             android:textAppearance="?android:attr/textAppearanceButton"
             android:textColor="#FFFFFF"
@@ -336,7 +321,8 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.35"></TextView>
+            app:layout_constraintVertical_bias="0.35">
+        </TextView>
 
         <TextView
             android:layout_width="wrap_content"
@@ -344,7 +330,7 @@
             android:layout_marginStart="16dp"
             android:backgroundTint="@color/bg4"
             android:fontFamily="@font/roboto_light_italic"
-            android:text="Skills"
+            android:text="Concepts"
             android:textAllCaps="false"
             android:textAppearance="?android:attr/textAppearanceButton"
             android:textColor="#FFFFFF"
@@ -352,7 +338,8 @@
             android:textSize="10sp"
             android:textStyle="normal"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/text6"></TextView>
+            app:layout_constraintTop_toBottomOf="@+id/text6">
+        </TextView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -378,7 +365,7 @@
             android:layout_marginStart="16dp"
             android:backgroundTint="@color/bg4"
             android:fontFamily="sans-serif-medium"
-            android:text="Generate an address"
+            android:text="What is a wallet backup seed?"
             android:textAllCaps="false"
             android:textAppearance="?android:attr/textAppearanceButton"
             android:textColor="#FFFFFF"
@@ -386,7 +373,8 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.35"></TextView>
+            app:layout_constraintVertical_bias="0.35">
+        </TextView>
 
         <TextView
             android:layout_width="wrap_content"
@@ -394,7 +382,7 @@
             android:layout_marginStart="16dp"
             android:backgroundTint="@color/bg4"
             android:fontFamily="@font/roboto_light_italic"
-            android:text="Skills"
+            android:text="Concepts"
             android:textAllCaps="false"
             android:textAppearance="?android:attr/textAppearanceButton"
             android:textColor="#FFFFFF"
@@ -402,7 +390,8 @@
             android:textSize="10sp"
             android:textStyle="normal"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/text7"></TextView>
+            app:layout_constraintTop_toBottomOf="@+id/text7">
+        </TextView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -411,7 +400,7 @@
         android:layout_width="0dp"
         android:layout_height="70dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="24dp"
         android:layout_marginEnd="16dp"
         android:background="@drawable/tutorial_button_background"
         android:backgroundTint="@color/bg4"
@@ -428,7 +417,7 @@
             android:layout_marginStart="16dp"
             android:backgroundTint="@color/bg4"
             android:fontFamily="sans-serif-medium"
-            android:text="Generate an address"
+            android:text="Recovering your wallet from a backup seed"
             android:textAllCaps="false"
             android:textAppearance="?android:attr/textAppearanceButton"
             android:textColor="#FFFFFF"

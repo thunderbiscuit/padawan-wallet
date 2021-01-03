@@ -8,6 +8,6 @@
     <string name="create_new_wallet">I want to create\na new wallet</string>
     <string name="open">Open drawer</string>
     <string name="close">Close drawer</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="tutorial1_text">text 1</string>
+    <string name="tutorial2_text">text 2 </string>
 </resources>
