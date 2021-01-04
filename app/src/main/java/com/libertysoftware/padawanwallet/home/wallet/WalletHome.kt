@@ -46,7 +46,12 @@ class WalletHome : Fragment() {
                 val humanReadableBalance = DecimalFormat("###,###,###").format(balanceInSatoshis).replace(",", "\u2008")
                 binding.balance.text = humanReadableBalance
             } else {
-                val balanceInBitcoin = it.toFloat().div(100_000_000)
+                var balanceInBitcoin: Float
+                if (it == 0L) {
+                    balanceInBitcoin = 0F
+                } else {
+                    balanceInBitcoin = it.toFloat().div(100_000_000)
+                }
                 val humanReadableBalance = DecimalFormat("0.00000000").format(balanceInBitcoin)
                 binding.balance.text = humanReadableBalance
             }

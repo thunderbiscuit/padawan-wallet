@@ -18,7 +18,7 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
     public var satoshiUnit: MutableLiveData<Boolean> = MutableLiveData(true)
 
     public fun updateBalance() {
-        app.sync(10)
+        app.sync(100)
         val newBalance = app.getBalance()
         balance.postValue(newBalance)
     }
