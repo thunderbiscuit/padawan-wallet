@@ -1,18 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="Theme.PadawanWallet2" parent="Theme.MaterialComponents.NoActionBar">
-        <item name="android:statusBarColor">@color/bright_yellow</item>
-        <!--        <item name="android:background">@color/bg0soft</item>-->
-    </style>
-<!--    <style name="Toolbar.TitleText" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">-->
-<!--        <item name="android:textSize">32sp</item>-->
-<!--        <item name="android:fontFamily">@font/share_tech_mono</item>-->
-<!--    </style>-->
-<!--    <style name="Theme.MaterialComponents.NoActionBar">-->
-<!--        <item name="snackbarStyle">@style/MySnackBarStyle</item>-->
-<!--    </style>-->
 
-<!--    <style name="MySnackBarStyle" parent="Widget.MaterialComponents.Snackbar">-->
-<!--        <item name="android:backgroundTint">@color/bright_yellow</item>-->
-<!--    </style>-->
 </resources>

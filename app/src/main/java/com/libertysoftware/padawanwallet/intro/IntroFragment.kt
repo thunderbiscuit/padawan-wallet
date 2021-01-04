@@ -10,9 +10,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.libertysoftware.padawanwallet.R
 import timber.log.Timber
 
@@ -26,29 +26,41 @@ class IntroFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_intro, container, false)
     }
 
-    private val dialogMessage: String = "It’s important you know that Padawan is not a bitcoin wallet that can handle normal bitcoins!\n\nThis wallet is built to help you learn how to use bitcoin wallets through a series of tutorials, and it does so using testnet coins, a type of bitcoin that doesn't have any value.\n\nThe wallet can only handle testnet coins, so make sure you don’t send it normal coins!"
+    private val dialogMessage: String = "It’s important you know that Padawan is not a bitcoin wallet that can handle normal bitcoins!\n\nThis wallet is built to help you learn how to use bitcoin wallets through a series of tutorials, and it does so using testnet coins, a type of bitcoin that doesn't have any value.\n\nThe wallet can only handle testnet coins, so make sure you don’t send it normal bitcoins!"
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         val navController = Navigation.findNavController(view)
 
-        val testnetDialog = this@IntroFragment.context?.let {
-            AlertDialog.Builder(it, R.style.MyDialogTheme)
-                .setTitle("Be Careful!")
-                    .setMessage(dialogMessage)
-                    .setPositiveButton("I understand") { _, _ ->
-                        Timber.i("[PADAWANLOGS] User confirms they understands it's a testnet only wallet")
-                        navController.navigate(R.id.action_introFragment_to_walletChoice)
-                    }
-                    .setNegativeButton("Cancel") { _, _ ->
-                        // Toast.makeText(this!!, "Read this page again!", Toast.LENGTH_LONG).show()
-                    }
-        }
+        val testnetDialog = MaterialAlertDialogBuilder(this@IntroFragment.requireContext(), R.style.MyCustomDialogTheme)
+                                .setTitle("Be careful!")
+                                .setMessage(dialogMessage)
+                                .setPositiveButton("I understand") { _, _ ->
+                                    Timber.i("[PADAWANLOGS] User confirms they understands it's a testnet only wallet")
+                                    navController.navigate(R.id.action_introFragment_to_walletChoice)
+                                }
+                                .setNegativeButton("Cancel") { _, _ ->
+                                    // Toast.makeText(this!!, "Read this page again!", Toast.LENGTH_LONG).show()
+                                }
+
+//        val testnetDialog = this@IntroFragment.context?.let {
+//            AlertDialog.Builder(it, R.style.MyDialogTheme)
+//                .setTitle("Be Careful!")
+//                    .setMessage(dialogMessage)
+//                    .setPositiveButton("I understand") { _, _ ->
+//                        Timber.i("[PADAWANLOGS] User confirms they understands it's a testnet only wallet")
+//                        navController.navigate(R.id.action_introFragment_to_walletChoice)
+//                    }
+//                    .setNegativeButton("Cancel") { _, _ ->
+//                        // Toast.makeText(this!!, "Read this page again!", Toast.LENGTH_LONG).show()
+//                    }
+//        }
 
         view.findViewById<Button>(R.id.button1).setOnClickListener {
             Timber.i("[PADAWANLOGS] User is ready to go!")
-            testnetDialog?.show()
+            // testnetDialog?.show()
+            testnetDialog.show()
         }
     }
 }

@@ -31,5 +31,9 @@
 
     <!--  Gruvbox light  -->
     <color name="bg0soft_light">#f2e5bc</color>
+    <color name="bg0_light">#fbf1c7</color>
+    <color name="bg2_light">#d5c4a1</color>
+    <color name="fg0_light">#282828</color>
     <color name="fg1_light">#3c3836</color>
+    <color name="fg4_light">#7c6f64</color>
 </resources>
