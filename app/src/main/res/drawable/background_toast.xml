@@ -4,12 +4,12 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <solid android:color="@color/bg0hard" />
-    <corners android:radius="10dp" />
-    <padding
-        android:left="8dp"
-        android:right="8dp"
-        android:top="8dp"
-        android:bottom="8dp">
-    </padding>
+    <corners android:radius="8dp" />
+<!--    <padding-->
+<!--        android:left="8dp"-->
+<!--        android:right="8dp"-->
+<!--        android:top="8dp"-->
+<!--        android:bottom="8dp">-->
+<!--    </padding>-->
 
 </shape>

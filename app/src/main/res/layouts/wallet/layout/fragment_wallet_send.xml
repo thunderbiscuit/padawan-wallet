@@ -13,7 +13,7 @@
         android:id="@+id/textView"
         android:layout_width="0dp"
         android:layout_height="100dp"
-        android:backgroundTint="@color/orange"
+        android:background="@color/orange"
         android:gravity="center"
         android:text="Send bitcoin (testnet)"
         android:textColor="@color/fg1"

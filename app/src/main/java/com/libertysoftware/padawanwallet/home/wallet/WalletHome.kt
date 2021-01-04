@@ -9,9 +9,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
+import com.google.android.material.snackbar.BaseTransientBottomBar
 import com.google.android.material.snackbar.Snackbar
 import com.libertysoftware.padawanwallet.R
 import com.libertysoftware.padawanwallet.databinding.FragmentWalletHomeBinding
@@ -43,6 +45,9 @@ class WalletHome : Fragment() {
         binding.syncButton.setOnClickListener {
             viewModel.updateBalance()
             val snackBar = Snackbar.make(view, "Wallet successfully synced", Snackbar.LENGTH_LONG)
+            snackBar.setTextColor(ContextCompat.getColor(requireActivity(), R.color.fg1))
+            snackBar.view.background = resources.getDrawable(R.drawable.background_toast, null)
+            snackBar.animationMode = BaseTransientBottomBar.ANIMATION_MODE_SLIDE
             snackBar.show()
         }
 
