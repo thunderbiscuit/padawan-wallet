@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background_unit"
+    android:background="@drawable/background_unit_bitcoin"
     android:backgroundTint="@color/bg1">
 
     <TextView
@@ -53,7 +53,8 @@
         android:layout_height="90dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="24dp"
-        android:background="@drawable/background_unit"
+        android:background="@drawable/background_unit_bitcoin"
+        android:fontFamily="@font/roboto"
         android:gravity="center_vertical|center_horizontal"
         android:text="Ƀ"
         android:textColor="@color/fg1"

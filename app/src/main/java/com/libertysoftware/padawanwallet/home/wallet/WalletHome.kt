@@ -45,6 +45,11 @@ class WalletHome : Fragment() {
                 val balanceInSatoshis = it
                 val humanReadableBalance = DecimalFormat("###,###,###").format(balanceInSatoshis).replace(",", "\u2008")
                 binding.balance.text = humanReadableBalance
+                // binding.unitToggleButton.text = "sat"
+                // binding.unitToggleButton.textSize = 28F
+                // binding.unitToggleButton.setTypeface()
+                binding.unitToggleButton.text = ""
+                binding.unitToggleButton.background = resources.getDrawable(R.drawable.background_unit_satoshi, null)
             } else {
                 var balanceInBitcoin: Float
                 if (it == 0L) {
@@ -54,6 +59,9 @@ class WalletHome : Fragment() {
                 }
                 val humanReadableBalance = DecimalFormat("0.00000000").format(balanceInBitcoin)
                 binding.balance.text = humanReadableBalance
+                binding.unitToggleButton.background = resources.getDrawable(R.drawable.background_unit_bitcoin, null)
+                binding.unitToggleButton.textSize = 42F
+                binding.unitToggleButton.text = "Ƀ"
             }
         })
 
