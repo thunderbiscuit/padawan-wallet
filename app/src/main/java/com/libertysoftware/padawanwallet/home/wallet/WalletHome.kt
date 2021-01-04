@@ -18,6 +18,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.libertysoftware.padawanwallet.R
 import com.libertysoftware.padawanwallet.databinding.FragmentWalletHomeBinding
 import com.libertysoftware.padawanwallet.home.HomeViewModel
+import java.text.DecimalFormat
 
 class WalletHome : Fragment() {
 
@@ -39,7 +40,9 @@ class WalletHome : Fragment() {
         val viewModel = ViewModelProvider(requireActivity()).get(HomeViewModel::class.java)
 
         viewModel.balance.observe(viewLifecycleOwner, {
-            binding.balance.text = it.toString()
+            val humanReadableBalance = DecimalFormat("###,###").format(it).replace(",", "\u2008")
+            binding.balance.text = humanReadableBalance.toString()
+//            binding.balance.text = it.toString()
         })
 
         binding.syncButton.setOnClickListener {
