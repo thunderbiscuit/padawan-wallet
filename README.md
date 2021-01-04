@@ -1,5 +1,8 @@
 # Padawan Wallet
 
+
+![GitHub](https://img.shields.io/github/license/thunderbiscuit/padawan-wallet?color=brightgreen) ![GitHub tag (latest SemVer)](https://img.shields.io/github/v/tag/thunderbiscuit/padawan-wallet)
+
 A testnet-only wallet full of tutorials on how to use bitcoin wallets.
 
 This is the wallet app you'd want to recommend to your teenage cousins at Christmas or your dad that keeps asking questions about bitcoin. It's hopefully a self-study tool, getting its users acquainted with the usual workflow and basic jargon of mobile wallets, in an environment where mistakes don't matter too much (testnet only).
