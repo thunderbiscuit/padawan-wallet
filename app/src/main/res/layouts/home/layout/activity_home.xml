@@ -10,7 +10,8 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/bg0soft">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
@@ -20,7 +21,8 @@
             android:minHeight="?attr/actionBarSize"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent"
+            android:background="@color/bg0soft">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -40,14 +42,17 @@
             android:id="@+id/tabLayout"
             android:layout_width="match_parent"
             android:layout_height="60dp"
+            android:background="@color/bg0soft"
+            android:elevation="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/toolbar"
+            app:tabIndicatorColor="@color/fg1"
             app:tabIndicatorFullWidth="true"
+            app:tabIndicatorHeight="1dp"
             app:tabRippleColor="@color/bg4"
             app:tabSelectedTextColor="@color/fg1"
-            app:tabTextColor="@color/fg4"
-            android:elevation="8dp">
+            app:tabTextColor="@color/fg4">
 
             <com.google.android.material.tabs.TabItem
                 android:layout_width="wrap_content"
@@ -67,7 +72,7 @@
             android:id="@+id/pager"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:backgroundTint="@color/bg4"
+            android:background="@color/bg1"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

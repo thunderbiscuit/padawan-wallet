@@ -12,6 +12,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
+import com.google.android.material.snackbar.Snackbar
 import com.libertysoftware.padawanwallet.R
 import com.libertysoftware.padawanwallet.databinding.FragmentWalletHomeBinding
 import com.libertysoftware.padawanwallet.home.HomeViewModel
@@ -41,6 +42,8 @@ class WalletHome : Fragment() {
 
         binding.syncButton.setOnClickListener {
             viewModel.updateBalance()
+            val snackBar = Snackbar.make(view, "Wallet successfully synced", Snackbar.LENGTH_LONG)
+            snackBar.show()
         }
 
         // navigation
@@ -54,4 +57,13 @@ class WalletHome : Fragment() {
             navController.navigate(R.id.action_walletHome_to_walletSend)
         }
     }
+
+//    public fun showWalletSyncedToast() {
+//        val layout: View = layoutInflater.inflate(R.layout.toast, requireView().findViewById(R.id.custom_toast))
+//        val text: String = "Wallet was synced successfully"
+//        layout.findViewById<TextView>(R.id.toastMessage).text = text
+//        val toast: Toast = Toast.makeText(this@WalletHome.context, text, Toast.LENGTH_LONG)
+//        toast.view = layout
+//        toast.show()
+//    }
 }

@@ -5,7 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".intro.IntroActivity">
+    tools:context=".intro.IntroActivity"
+    android:background="@color/bg0soft">
 
     <fragment
         android:id="@+id/nav_host_intro"

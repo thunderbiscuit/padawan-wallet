@@ -5,7 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".intro.WalletChoiceFragment">
+    tools:context=".intro.WalletChoiceFragment"
+    android:background="@color/bg0soft">
 
     <TextView
         android:id="@+id/textView4"
