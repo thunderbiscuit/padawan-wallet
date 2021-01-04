@@ -18,6 +18,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.libertysoftware.padawanwallet.R
 import com.libertysoftware.padawanwallet.databinding.FragmentWalletHomeBinding
 import com.libertysoftware.padawanwallet.home.HomeViewModel
+import timber.log.Timber
 import java.text.DecimalFormat
 
 class WalletHome : Fragment() {
@@ -40,9 +41,13 @@ class WalletHome : Fragment() {
         val viewModel = ViewModelProvider(requireActivity()).get(HomeViewModel::class.java)
 
         viewModel.balance.observe(viewLifecycleOwner, {
-            val humanReadableBalance = DecimalFormat("###,###").format(it).replace(",", "\u2008")
-            binding.balance.text = humanReadableBalance.toString()
-//            binding.balance.text = it.toString()
+            if (viewModel.satoshiUnit.value == true) {
+                val humanReadableBalance = DecimalFormat("###,###,###").format(it).replace(",", "\u2008")
+                binding.balance.text = humanReadableBalance
+            } else {
+                val humanReadableBalance = DecimalFormat("###,##0.00000000").format(it).replace(",", "\u2008")
+                binding.balance.text = humanReadableBalance
+            }
         })
 
         binding.syncButton.setOnClickListener {
@@ -52,6 +57,11 @@ class WalletHome : Fragment() {
             snackBar.view.background = resources.getDrawable(R.drawable.background_toast, null)
             snackBar.animationMode = BaseTransientBottomBar.ANIMATION_MODE_SLIDE
             snackBar.show()
+        }
+
+        binding.unitToggleButton.setOnClickListener {
+            Timber.i("[PADAWANLOGS] Toggle unit button was pressed")
+            viewModel.changeUnit()
         }
 
         // navigation
@@ -65,13 +75,4 @@ class WalletHome : Fragment() {
             navController.navigate(R.id.action_walletHome_to_walletSend)
         }
     }
-
-//    public fun showWalletSyncedToast() {
-//        val layout: View = layoutInflater.inflate(R.layout.toast, requireView().findViewById(R.id.custom_toast))
-//        val text: String = "Wallet was synced successfully"
-//        layout.findViewById<TextView>(R.id.toastMessage).text = text
-//        val toast: Toast = Toast.makeText(this@WalletHome.context, text, Toast.LENGTH_LONG)
-//        toast.view = layout
-//        toast.show()
-//    }
 }

@@ -48,7 +48,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView7" />
 
     <TextView
-        android:id="@+id/textView8"
+        android:id="@+id/unitToggleButton"
         android:layout_width="90dp"
         android:layout_height="90dp"
         android:layout_marginStart="16dp"
@@ -90,7 +90,7 @@
         android:textSize="18dp"
         app:cornerRadius="8dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView8" />
+        app:layout_constraintTop_toBottomOf="@+id/unitToggleButton" />
 
     <Button
         android:id="@+id/receiveButton"
@@ -105,7 +105,7 @@
         android:textSize="18dp"
         app:cornerRadius="8dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView8" />
+        app:layout_constraintTop_toBottomOf="@+id/unitToggleButton" />
 
     <TextView
         android:id="@+id/sendToAddress"
