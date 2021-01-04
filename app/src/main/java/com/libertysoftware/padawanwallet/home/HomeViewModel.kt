@@ -9,46 +9,27 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.libertysoftware.padawanwallet.PadawanWalletApplication
-import timber.log.Timber
 
 class HomeViewModel(application: Application) : AndroidViewModel(application) {
 
     val app = application as PadawanWalletApplication
 
-    public var balance: MutableLiveData<Float> = MutableLiveData(0F)
-    public var satoshiUnit: MutableLiveData<Boolean> = MutableLiveData(false)
-
-    private var internalBalance: Float = 0F
+    public var balance: MutableLiveData<Long> = MutableLiveData(0)
+    public var satoshiUnit: MutableLiveData<Boolean> = MutableLiveData(true)
 
     public fun updateBalance() {
         app.sync(10)
-        internalBalance = app.getBalance().toFloat()
-        balance.postValue(internalBalance)
+        val newBalance = app.getBalance()
+        balance.postValue(newBalance)
     }
 
     public fun changeUnit() {
-        if (satoshiUnit.value!!) {
-            Timber.i("[PADAWANLOGS] Satoshi unit value was true: ${satoshiUnit.value}")
-            convertBalance()
+        if (satoshiUnit.value == true) {
             satoshiUnit.value = false
-            Timber.i("[PADAWANLOGS] Satoshi unit value after conversion is: ${satoshiUnit.value}")
+            balance.postValue(balance.value)
         } else {
-            convertBalance()
             satoshiUnit.value = true
-        }
-    }
-
-    private fun convertBalance() {
-        if (satoshiUnit.value!!) {
-            Timber.i("[PADAWANLOGS] Satoshi balance before converting is: ${balance.value}")
-            internalBalance = internalBalance / 100_000_000
-            balance.postValue(internalBalance)
-            Timber.i("[PADAWANLOGS] Satoshi balance after conversion is: ${balance.value}")
-        } else {
-            Timber.i("[PADAWANLOGS] Satoshi balance before conversion is: ${balance.value}")
-            internalBalance = internalBalance * 100_000_000
-            balance.postValue(internalBalance)
-            Timber.i("[PADAWANLOGS] Satoshi balance after conversion is: ${balance.value}")
+            balance.postValue(balance.value)
         }
     }
 }

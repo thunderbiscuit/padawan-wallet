@@ -42,10 +42,12 @@ class WalletHome : Fragment() {
 
         viewModel.balance.observe(viewLifecycleOwner, {
             if (viewModel.satoshiUnit.value == true) {
-                val humanReadableBalance = DecimalFormat("###,###,###").format(it).replace(",", "\u2008")
+                val balanceInSatoshis = it
+                val humanReadableBalance = DecimalFormat("###,###,###").format(balanceInSatoshis).replace(",", "\u2008")
                 binding.balance.text = humanReadableBalance
             } else {
-                val humanReadableBalance = DecimalFormat("###,##0.00000000").format(it).replace(",", "\u2008")
+                val balanceInBitcoin = it.toFloat().div(100_000_000)
+                val humanReadableBalance = DecimalFormat("0.00000000").format(balanceInBitcoin)
                 binding.balance.text = humanReadableBalance
             }
         })
