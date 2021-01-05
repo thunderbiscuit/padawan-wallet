@@ -13,7 +13,6 @@ import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
-import com.goldenraven.padawanwallet.PadawanWalletApplication
 import com.goldenraven.padawanwallet.R
 import com.goldenraven.padawanwallet.databinding.FragmentWalletSendBinding
 import com.google.android.material.snackbar.BaseTransientBottomBar
@@ -47,10 +46,14 @@ class WalletSend : Fragment() {
         }
 
         binding.buttonVerify.setOnClickListener {
-            verifyTransaction()
-            // val bundle = bundleOf("address" to address, "amount" to amount, "transactionDetails" to transactionDetails)
-            val bundle = bundleOf("address" to address, "amount" to amount)
-            navController.navigate(R.id.action_walletSend_to_walletVerify, bundle)
+            val validInputs: Boolean = verifyTransaction()
+
+            if (validInputs) {
+                val bundle = bundleOf("address" to address, "amount" to amount)
+                navController.navigate(R.id.action_walletSend_to_walletVerify, bundle)
+            } else {
+                Timber.i("[PADAWANLOGS] Inputs were not valid")
+            }
         }
 
         binding.feeRate.setOnClickListener {
@@ -58,23 +61,34 @@ class WalletSend : Fragment() {
         }
     }
 
-    private fun verifyTransaction() {
-        val app = requireActivity().application as PadawanWalletApplication
+    private fun verifyTransaction(): Boolean {
         address = binding.sendAddress.text.toString().trim()
-        amount = binding.sendAmount.text.toString()
+        amount = binding.sendAmount.text.toString().trim()
+
+        if (address == "") {
+            showEmptyField("Address")
+            Timber.i("[PADAWANLOGS] Address field was empty")
+            return false
+        }
+        if (amount == "") {
+            showEmptyField("Amount")
+            Timber.i("[PADAWANLOGS] Amount field was empty")
+            return false
+        }
+
         val addresseesAndAmounts: List<Pair<String, String>> = listOf(Pair(address, amount))
         val feeRate = 1F
 
         Timber.i("[PADAWANLOGS] Send addresses are: $addresseesAndAmounts")
+        return true
+    }
 
-        try {
-            transactionDetails = app.createTransaction(feeRate, addresseesAndAmounts, false, null, null, null)
-            Timber.i("[PADAWANLOGS] transactionDetails from WalletSend fragment is: $transactionDetails")
-        } catch (e: Throwable) {
-            Timber.i("[PADAWANLOGS] Verify transaction failed: ${e.message}")
-            // TODO: Show toast related to error
-            return
-        }
+    private fun showEmptyField(itemMissing: String) {
+        val emptyFieldSnackbar = Snackbar.make(requireView(), "$itemMissing is empty!", Snackbar.LENGTH_LONG)
+        emptyFieldSnackbar.setTextColor(ContextCompat.getColor(requireActivity(), R.color.bg0hard))
+        emptyFieldSnackbar.view.background = resources.getDrawable(R.drawable.background_toast_warning, null)
+        emptyFieldSnackbar.animationMode = BaseTransientBottomBar.ANIMATION_MODE_SLIDE
+        emptyFieldSnackbar.show()
     }
 
     private fun showFeatureInDevelopmentSnackbar() {
