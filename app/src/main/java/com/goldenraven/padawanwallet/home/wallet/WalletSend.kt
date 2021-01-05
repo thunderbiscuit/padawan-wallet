@@ -9,12 +9,15 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import com.goldenraven.padawanwallet.PadawanWalletApplication
 import com.goldenraven.padawanwallet.R
 import com.goldenraven.padawanwallet.databinding.FragmentWalletSendBinding
+import com.google.android.material.snackbar.BaseTransientBottomBar
+import com.google.android.material.snackbar.Snackbar
 import org.bitcoindevkit.bdkjni.Types.CreateTxResponse
 import timber.log.Timber
 
@@ -49,6 +52,10 @@ class WalletSend : Fragment() {
             val bundle = bundleOf("address" to address, "amount" to amount)
             navController.navigate(R.id.action_walletSend_to_walletVerify, bundle)
         }
+
+        binding.feeRate.setOnClickListener {
+            showFeatureInDevelopmentSnackbar()
+        }
     }
 
     private fun verifyTransaction() {
@@ -68,5 +75,13 @@ class WalletSend : Fragment() {
             // TODO: Show toast related to error
             return
         }
+    }
+
+    private fun showFeatureInDevelopmentSnackbar() {
+        val featureInDevelopmentSnackbar = Snackbar.make(requireView(), "Choosing your fee rate is a feature currently in development!", Snackbar.LENGTH_LONG)
+        featureInDevelopmentSnackbar.setTextColor(ContextCompat.getColor(requireActivity(), R.color.fg1))
+        featureInDevelopmentSnackbar.view.background = resources.getDrawable(R.drawable.background_toast, null)
+        featureInDevelopmentSnackbar.animationMode = BaseTransientBottomBar.ANIMATION_MODE_SLIDE
+        featureInDevelopmentSnackbar.show()
     }
 }

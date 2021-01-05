@@ -25,7 +25,7 @@
     <EditText
         android:id="@+id/sendAddress"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:backgroundTint="@color/fg1"
@@ -50,17 +50,20 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
-    <EditText
-        android:id="@+id/editTextNumber"
+    <TextView
+        android:id="@+id/feeRate"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:backgroundTint="@color/fg1"
         android:ems="10"
         android:fontFamily="@font/share_tech_mono"
+        android:gravity="center|fill_horizontal"
         android:inputType="number"
+        android:text="1 satoshi/vByte"
         android:textColor="@color/fg1"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView6" />
@@ -68,7 +71,7 @@
     <EditText
         android:id="@+id/sendAmount"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:backgroundTint="@color/fg1"
