@@ -1,4 +1,8 @@
-# Padawan Wallet
+<div align="center" >
+  <h1>Padawan Wallet</h1>
+  <img src="./images/logo_0.1.0.png" alt="Logo 0.1.0" width="300">
+</div>
+<br/>
 
 
 ![GitHub](https://img.shields.io/github/license/thunderbiscuit/padawan-wallet?color=brightgreen) ![GitHub tag (latest SemVer)](https://img.shields.io/github/v/tag/thunderbiscuit/padawan-wallet)
