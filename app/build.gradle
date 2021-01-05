@@ -12,7 +12,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.libertysoftware.padawanwallet"
+        applicationId "com.goldenraven.padawanwallet"
         minSdkVersion 26
         targetSdkVersion 30
         versionCode 1

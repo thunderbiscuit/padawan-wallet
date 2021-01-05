@@ -8,14 +8,14 @@
 
     <fragment
         android:id="@+id/aboutFragment"
-        android:name="com.libertysoftware.padawanwallet.drawer.AboutFragment"
+        android:name="com.goldenraven.padawanwallet.drawer.AboutFragment"
         android:label="fragment_about"
         tools:layout="@layout/fragment_about">
     </fragment>
 
     <fragment
         android:id="@+id/settingsFragment"
-        android:name="com.libertysoftware.padawanwallet.drawer.SettingsFragment"
+        android:name="com.goldenraven.padawanwallet.drawer.SettingsFragment"
         android:label="fragment_settings"
         tools:layout="@layout/fragment_settings">
     </fragment>

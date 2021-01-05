@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/tutorialsHome"
-        android:name="com.libertysoftware.padawanwallet.home.tutorials.TutorialsHome"
+        android:name="com.goldenraven.padawanwallet.home.tutorials.TutorialsHome"
         android:label="TutorialsHome"
         tools:layout="@layout/fragment_tutorials_home">
         <action
@@ -24,7 +24,7 @@
 
     <fragment
         android:id="@+id/tutorialE1"
-        android:name="com.libertysoftware.padawanwallet.home.tutorials.TutorialE1"
+        android:name="com.goldenraven.padawanwallet.home.tutorials.TutorialE1"
         android:label="Tutorial1" >
         <action
             android:id="@+id/action_tutorialE1_to_tutorialsHome"
@@ -35,7 +35,7 @@
 
     <fragment
         android:id="@+id/tutorialE2"
-        android:name="com.libertysoftware.padawanwallet.home.tutorials.TutorialE2"
+        android:name="com.goldenraven.padawanwallet.home.tutorials.TutorialE2"
         android:label="Tutorial2" >
         <action
             android:id="@+id/action_tutorialE2_to_tutorialsHome"

@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/introFragment"
-        android:name="com.libertysoftware.padawanwallet.intro.IntroFragment"
+        android:name="com.goldenraven.padawanwallet.intro.IntroFragment"
         android:label="fragment_intro"
         tools:layout="@layout/fragment_intro" >
         <action
@@ -19,7 +19,7 @@
 
     <fragment
         android:id="@+id/walletChoice"
-        android:name="com.libertysoftware.padawanwallet.intro.WalletChoiceFragment"
+        android:name="com.goldenraven.padawanwallet.intro.WalletChoiceFragment"
         android:label="fragment_wallet_choice"
         tools:layout="@layout/fragment_wallet_choice">
         <action
@@ -31,7 +31,7 @@
 
     <fragment
         android:id="@+id/walletRecoveryFragment"
-        android:name="com.libertysoftware.padawanwallet.intro.WalletRecoveryFragment"
+        android:name="com.goldenraven.padawanwallet.intro.WalletRecoveryFragment"
         android:label="fragment_recover"
         tools:layout="@layout/fragment_recover">
     </fragment>

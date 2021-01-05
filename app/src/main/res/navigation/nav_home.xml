@@ -8,7 +8,7 @@
 
     <fragment
         android:id="@+id/walletFragment"
-        android:name="com.libertysoftware.padawanwallet.home.wallet.WalletFragment"
+        android:name="com.goldenraven.padawanwallet.home.wallet.WalletFragment"
         android:label="fragment_wallet"
         tools:layout="@layout/fragment_wallet" >
         <action
@@ -19,7 +19,7 @@
     </fragment>
     <fragment
         android:id="@+id/tutorialsFragment"
-        android:name="com.libertysoftware.padawanwallet.home.tutorials.TutorialsFragment"
+        android:name="com.goldenraven.padawanwallet.home.tutorials.TutorialsFragment"
         android:label="fragment_tutorials"
         tools:layout="@layout/fragment_tutorials" >
         <action

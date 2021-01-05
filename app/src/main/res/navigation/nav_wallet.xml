@@ -8,7 +8,7 @@
 
     <fragment
         android:id="@+id/walletHome"
-        android:name="com.libertysoftware.padawanwallet.home.wallet.WalletHome"
+        android:name="com.goldenraven.padawanwallet.home.wallet.WalletHome"
         android:label="fragment_wallet_home"
         tools:layout="@layout/fragment_wallet_home">
         <action
@@ -30,7 +30,7 @@
 
     <fragment
         android:id="@+id/walletReceive"
-        android:name="com.libertysoftware.padawanwallet.home.wallet.WalletReceive"
+        android:name="com.goldenraven.padawanwallet.home.wallet.WalletReceive"
         android:label="WalletReceive"
         tools:layout="@layout/fragment_wallet_receive">
         <action
@@ -42,7 +42,7 @@
 
     <fragment
         android:id="@+id/walletSend"
-        android:name="com.libertysoftware.padawanwallet.home.wallet.WalletSend"
+        android:name="com.goldenraven.padawanwallet.home.wallet.WalletSend"
         android:label="fragment_wallet_send"
         tools:layout="@layout/fragment_wallet_send" >
         <action
@@ -59,7 +59,7 @@
 
     <fragment
         android:id="@+id/walletVerify"
-        android:name="com.libertysoftware.padawanwallet.home.wallet.WalletVerify"
+        android:name="com.goldenraven.padawanwallet.home.wallet.WalletVerify"
         android:label="WalletVerify"
         tools:layout="@layout/fragment_wallet_verify" >
         <action
