@@ -2,7 +2,7 @@
   <h1>Padawan Wallet</h1>
 </div>
 <br/>
-<div>
+<div align="center">
   <img src="./images/logo_0.1.0.png" alt="Logo 0.1.0" width="300">
 </div>
 <br/>
