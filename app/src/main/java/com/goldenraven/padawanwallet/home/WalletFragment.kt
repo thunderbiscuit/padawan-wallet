@@ -21,28 +21,8 @@ class WalletFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View? {
-        // return inflater.inflate(R.layout.fragment_wallet, container, false)
         binding = FragmentWalletBinding.inflate(inflater, container, false)
         val view: View = binding.root
         return view
     }
-
-//    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-//        super.onViewCreated(view, savedInstanceState)
-//        binding.button4.setOnClickListener {
-//            showNewAddressToast()
-//        }
-//    }
-
-//    private fun showNewAddressToast(): Unit {
-//
-//        val app = requireActivity().application as PadawanWalletApplication
-//        val newAddress: String = app.getNewAddress()
-//        Timber.i("[PADAWANLOGS] New deposit address is $newAddress")
-//
-//        val text = "New deposit address is $newAddress"
-//        val duration = Toast.LENGTH_SHORT
-//        val toast = Toast.makeText(this@WalletFragment.context, text, duration)
-//        toast.show()
-//    }
 }
