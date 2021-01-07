@@ -42,7 +42,7 @@
                 android:fontFamily="@font/roboto"
                 android:justificationMode="inter_word"
                 android:lineSpacingExtra="2sp"
-                android:text="content"
+                android:text="@string/E1_testnet"
                 android:textColor="@color/fg1"
                 android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="parent"

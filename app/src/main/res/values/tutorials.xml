@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="E1_testnet">You should think of the Bitcoin network as thousands of computers who speak a common language and communicate with each other over the internet. But even though the biggest and most well known of these computer networks is the one you\'re most familiar with and the one most people speak of when they say \"the Bitcoin network\", there are in fact three different types of Bitcoin networks one might use.\n\nThe most well known of those is called <i>mainnet</i>, and refers to the bitcoins that have monetary value and can be traded on exchanges. The other two networks are built for testing and training, and are used by software developers who need to develop and test their software, and by humans who wish to learn how to use Bitcoin without the worry of protecting and sending around "real" (mainnet) bitcoins.\n\nThose two testing networks are called the regtest (short for <i>regression testing network</i>) and testnet (short for test network).\n\n
+
+    <h3>Regtest</h3>
+
+    The regtest network is a sort of "micro" bitcoin network software developers use to start an instance of a bitcoin network locally (on a single computer, for example, or between a few computer under a single person\'s control). It is useful because one can control all aspects of the network and nodes (mining new blocks, creating and deleting nodes, etc.). It is a network that is almost uniquely used by software developers.\n\n
+
+    <h3>Tesnet</h3>
+
+    The testnet consists of a full-fledged bitcoin network that is available worldwide, and connects thousands of nodes (just like mainnet). The bitcoins on this network are often called <i>testnet coins</i>, and look and behave most identically to normal bitcoin, except that they have no value! This feature is extremely useful for testing applications in the real world. It also allows curious minds to explore bitcoin in a real way, make transactions, back up wallets, and understand the foundational building blocks of the network without having to touch real bitcoin before they get comfortable with the basic set of heuristics that bitcoin requires users to understand in order to use it safely and effectively.
+    </string>
+</resources>
