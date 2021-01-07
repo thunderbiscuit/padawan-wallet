@@ -2,52 +2,83 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/bg0soft_light">
+    android:background="@color/bg1">
 
-    <TextView
-        android:id="@+id/textView10"
+    <ScrollView
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:backgroundTint="@color/bg0soft_light"
-        android:fontFamily="@font/roboto"
-        android:text="What is the bitcoin testnet?"
-        android:textColor="@color/fg1_light"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/textView11"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="24dp"
-        android:backgroundTint="@color/bg0soft_light"
-        android:fontFamily="@font/roboto"
-        android:justificationMode="inter_word"
-        android:text="@string/tutorial1_text"
-        android:textColor="@color/fg1_light"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView10" />
-
-    <Button
-        android:id="@+id/buttonBack"
-        android:layout_width="0dp"
-        android:layout_height="70dp"
-        android:backgroundTint="@color/bg4"
-        android:insetTop="0dp"
-        android:insetBottom="0dp"
-        android:text="Back to tutorials list"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/E1_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:fontFamily="@font/roboto"
+                android:text="What is the Bitcoin testnet?"
+                android:textColor="@color/fg1"
+                android:textSize="24sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/E1_content"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:backgroundTint="@color/bg1"
+                android:fontFamily="@font/roboto"
+                android:justificationMode="inter_word"
+                android:lineSpacingExtra="2sp"
+                android:text="content"
+                android:textColor="@color/fg1"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/E1_title" />
+
+            <Button
+                android:id="@+id/buttonMarkDone"
+                android:layout_width="170dp"
+                android:layout_height="55dp"
+                android:layout_marginTop="32dp"
+                android:backgroundTint="@color/aqua"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:shadowColor="@color/aqua"
+                android:text="Mark tutorial\nas done"
+                android:textAllCaps="false"
+                android:textColor="@color/fg1"
+                android:textColorHighlight="@color/aqua"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/E1_content" />
+
+            <Button
+                android:id="@+id/buttonBack"
+                android:layout_width="0dp"
+                android:layout_height="55dp"
+                android:layout_marginTop="24dp"
+                android:backgroundTint="@color/bg4"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:text="Back to tutorials list"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/buttonMarkDone" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
