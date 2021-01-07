@@ -11,11 +11,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
-import com.google.android.material.snackbar.BaseTransientBottomBar
-import com.google.android.material.snackbar.Snackbar
 import com.goldenraven.padawanwallet.R
 import com.goldenraven.padawanwallet.databinding.FragmentTutorialsHomeBinding
+import com.goldenraven.padawanwallet.home.HomeViewModel
+import com.google.android.material.snackbar.BaseTransientBottomBar
+import com.google.android.material.snackbar.Snackbar
 
 class TutorialsHome : Fragment() {
 
@@ -34,6 +36,15 @@ class TutorialsHome : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // monitor done flags for tutorials
+        val viewModel = ViewModelProvider(requireActivity()).get(HomeViewModel::class.java)
+
+        viewModel.tutorialsDone.observe(viewLifecycleOwner, {
+            if (viewModel.tutorialsDone.value?.get("e1") == true) binding.buttonTutorial1.setBackgroundResource(R.drawable.tutorial_button_done_background)
+            if (viewModel.tutorialsDone.value?.get("e2") == true) binding.buttonTutorial2.setBackgroundResource(R.drawable.tutorial_button_done_background)
+        })
+
+        // navigation
         val navController = Navigation.findNavController(view)
 
         binding.buttonTutorial1.setOnClickListener {

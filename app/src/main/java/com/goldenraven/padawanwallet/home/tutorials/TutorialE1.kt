@@ -10,9 +10,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import com.goldenraven.padawanwallet.R
 import com.goldenraven.padawanwallet.databinding.FragmentTutorialE1Binding
+import com.goldenraven.padawanwallet.home.HomeViewModel
 
 class TutorialE1 : Fragment() {
 
@@ -32,7 +34,12 @@ class TutorialE1 : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val navController = Navigation.findNavController(view)
+        val viewModel = ViewModelProvider(requireActivity()).get(HomeViewModel::class.java)
 
+        binding.buttonMarkDone.setOnClickListener {
+            viewModel.markAsDone(tutorialNumber = 1)
+            navController.navigate(R.id.action_tutorialE1_to_tutorialsHome)
+        }
         binding.buttonBack.setOnClickListener {
             navController.navigate(R.id.action_tutorialE1_to_tutorialsHome)
         }
