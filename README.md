@@ -15,13 +15,12 @@ This is the app you'd want to recommend to your teenage cousins at Christmas or 
 
 The builders of this wallet are of the opinion that testnet is an underused resource outside of software development circles, and believe it can be leveraged for bitcoin-curious people everywhere. Testnet offers all the complexity of mainnet, and one of the goal of this wallet is to eventually foray into these more advanced bitcoin features (multisig, DLCs, etc.) and offer a trainning/testing ground for users.
 
-<br />
-<div align="center" >
-  <img src="./images/screenshots-padawan.jpg" alt="Padawan Screenshot">
-</div>
-<br />
+<br/>
 
+## Screenshots
 <div align="center" >
+  <img src="./images/screenshots-intro.png" alt="Padawan Screenshot Intro">
+  <img src="./images/screenshots-home.png" alt="Padawan Screenshot Home">
   <img src="./images/padawan-wallet-navigation.png" alt="Padawan Wallet Navigation">
 </div>
 <br />
