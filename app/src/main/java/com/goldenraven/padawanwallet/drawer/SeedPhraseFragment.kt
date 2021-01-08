@@ -13,16 +13,21 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.goldenraven.padawanwallet.R
+import com.goldenraven.padawanwallet.databinding.FragmentSeedphraseBinding
 import timber.log.Timber
 
 class SeedPhraseFragment : Fragment() {
+
+    private lateinit var binding: FragmentSeedphraseBinding
+
     override fun onCreateView(
             inflater: LayoutInflater,
             container: ViewGroup?,
             savedInstanceState: Bundle?,
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_seedphrase, container, false)
+        binding = FragmentSeedphraseBinding.inflate(inflater, container, false)
+        val view: View = binding.root
+        return view
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

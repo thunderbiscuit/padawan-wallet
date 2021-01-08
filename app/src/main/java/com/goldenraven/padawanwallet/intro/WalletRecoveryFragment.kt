@@ -14,12 +14,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
-import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.goldenraven.padawanwallet.PadawanWalletApplication
 import com.goldenraven.padawanwallet.R
 import com.goldenraven.padawanwallet.databinding.FragmentRecoverBinding
 import com.goldenraven.padawanwallet.home.HomeActivity
+import com.google.android.material.snackbar.BaseTransientBottomBar
+import com.google.android.material.snackbar.Snackbar
 import org.bitcoindevkit.bdkjni.Types.ExtendedKeys
 import timber.log.Timber
 
@@ -71,11 +73,11 @@ class WalletRecoveryFragment : Fragment() {
 
             if (mnemonicWord.isEmpty()) {
                 Timber.i("[PADAWANLOGS] Word #$word is empty!")
-                toastWordIsEmpty(word)
+                showWordIsEmptySnackbar(word)
                 return false
             } else if (mnemonicWord !in this.wordList) {
                 Timber.i("[PADAWANLOGS] Word #$word, $mnemonicWord, is not valid!")
-                toastWordIsInvalid(word)
+                showWordIsInvalidSnackbar(word)
                 return false
             } else {
                 mnemonicWordList.add(mnemonicWord)
@@ -104,17 +106,19 @@ class WalletRecoveryFragment : Fragment() {
         app.createWallet(descriptor, changeDescriptor)
     }
 
-    private fun toastWordIsEmpty(wordNumber: Int) {
-        val text = "Word ${(wordNumber + 1).toString()} is empty!"
-        val duration = Toast.LENGTH_LONG
-        val toast = Toast.makeText(this@WalletRecoveryFragment.context, text, duration)
-        toast.show()
+    private fun showWordIsEmptySnackbar(wordNumber: Int) {
+        val wordIsEmptySnackbar = Snackbar.make(requireView(), "Word ${(wordNumber + 1).toString()} is empty!", Snackbar.LENGTH_LONG)
+        wordIsEmptySnackbar.setTextColor(ContextCompat.getColor(requireActivity(), R.color.fg1))
+        wordIsEmptySnackbar.view.background = resources.getDrawable(R.drawable.background_toast_warning, null)
+        wordIsEmptySnackbar.animationMode = BaseTransientBottomBar.ANIMATION_MODE_SLIDE
+        wordIsEmptySnackbar.show()
     }
 
-    private fun toastWordIsInvalid(wordNumber: Int) {
-        val text = "Word ${(wordNumber + 1).toString()} is invalid!"
-        val duration = Toast.LENGTH_LONG
-        val toast = Toast.makeText(this@WalletRecoveryFragment.context, text, duration)
-        toast.show()
+    private fun showWordIsInvalidSnackbar(wordNumber: Int) {
+        val wordIsInvalid = Snackbar.make(requireView(), "Word ${(wordNumber + 1).toString()} is invalid!", Snackbar.LENGTH_LONG)
+        wordIsInvalid.setTextColor(ContextCompat.getColor(requireActivity(), R.color.fg1))
+        wordIsInvalid.view.background = resources.getDrawable(R.drawable.background_toast_warning, null)
+        wordIsInvalid.animationMode = BaseTransientBottomBar.ANIMATION_MODE_SLIDE
+        wordIsInvalid.show()
     }
 }

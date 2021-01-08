@@ -17,12 +17,14 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import com.goldenraven.padawanwallet.PadawanWalletApplication
 import com.goldenraven.padawanwallet.R
+import com.goldenraven.padawanwallet.databinding.FragmentWalletChoiceBinding
 import com.goldenraven.padawanwallet.home.HomeActivity
 import org.bitcoindevkit.bdkjni.Types.ExtendedKeys
 import timber.log.Timber
 
 class WalletChoiceFragment : Fragment() {
 
+    private lateinit var binding: FragmentWalletChoiceBinding
     private lateinit var keys: ExtendedKeys
 
     override fun onCreateView(
@@ -30,7 +32,9 @@ class WalletChoiceFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View? {
-        return inflater.inflate(R.layout.fragment_wallet_choice, container, false)
+        binding = FragmentWalletChoiceBinding.inflate(inflater, container, false)
+        val view: View = binding.root
+        return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

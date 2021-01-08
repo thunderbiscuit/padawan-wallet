@@ -12,18 +12,23 @@ import android.view.ViewGroup
 import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.goldenraven.padawanwallet.R
+import com.goldenraven.padawanwallet.databinding.FragmentIntroBinding
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import timber.log.Timber
 
 class IntroFragment : Fragment() {
+
+    private lateinit var binding: FragmentIntroBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View? {
-        return inflater.inflate(R.layout.fragment_intro, container, false)
+        binding = FragmentIntroBinding.inflate(inflater, container, false)
+        val view: View = binding.root
+        return view
     }
 
     private val dialogMessage: String = "It’s important you know that Padawan is not a bitcoin wallet that can handle normal bitcoins!\n\nThis wallet is built to help you learn how to use bitcoin wallets through a series of tutorials, and it does so using testnet coins, a type of bitcoin that doesn't have any value.\n\nThe wallet can only handle testnet coins, so make sure you don’t send it normal bitcoins!"
