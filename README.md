@@ -19,9 +19,9 @@ The builders of this wallet are of the opinion that testnet is an underused reso
 
 ## Screenshots
 <div align="center" >
-  <img src="./images/screenshots-intro.png" alt="Padawan Screenshot Intro">
-  <img src="./images/screenshots-home.png" alt="Padawan Screenshot Home">
-  <img src="./images/padawan-wallet-navigation.png" alt="Padawan Wallet Navigation">
+  <img src="./images/screenshots-intro.png" alt="Padawan Screenshot Intro" width="700">
+  <img src="./images/screenshots-home.png" alt="Padawan Screenshot Home" width="700">
+  <img src="./images/padawan-wallet-navigation.png" alt="Padawan Wallet Navigation" width="700">
 </div>
 <br />
 
