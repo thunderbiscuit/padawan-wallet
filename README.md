@@ -9,14 +9,20 @@
 
 ![GitHub](https://img.shields.io/github/license/thunderbiscuit/padawan-wallet?color=brightgreen) ![GitHub tag (latest SemVer)](https://img.shields.io/github/v/tag/thunderbiscuit/padawan-wallet)
 
-A testnet-only wallet full of tutorials on how to use bitcoin wallets.
+A testnet-only bitcoin wallet full of tutorials on how to use bitcoin wallets.
 
-This is the wallet app you'd want to recommend to your teenage cousins at Christmas or your dad that keeps asking questions about bitcoin. It's hopefully a self-study tool, getting its users acquainted with the usual workflow and basic jargon of mobile wallets, in an environment where mistakes don't matter too much (testnet only).
+This is the app you'd want to recommend to your teenage cousins at Christmas or your dad that keeps asking questions about bitcoin. It is hopefully a self-study tool, getting its users acquainted with the usual workflow and basic jargon of mobile wallets, in an risk-free environment perfect for experimentation and learning (testnet).
 
+The builders of this wallet are of the opinion that testnet is an underused resource outside of software development circles, and believe it can be leveraged for bitcoin-curious people everywhere. Testnet offers all the complexity of mainnet, and one of the goal of this wallet is to eventually foray into these more advanced bitcoin features (multisig, DLCs, etc.) and offer a trainning/testing ground for users.
+
+<br />
+<div align="center" >
+  <img src="./images/screenshots-padawan.jpg" alt="Padawan Screenshot">
+</div>
 <br />
 
 <div align="center" >
-  <img src="./images/screenshots-padawan.jpg" alt="Padawan Screenshot">
+  <img src="./images/padawan-wallet-navigation.png" alt="Padawan Wallet Navigation">
 </div>
 <br />
 
