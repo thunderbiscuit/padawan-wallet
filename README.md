@@ -7,7 +7,7 @@
 </div>
 <br/>
 
-![GitHub](https://img.shields.io/github/license/thunderbiscuit/padawan-wallet?color=brightgreen) ![GitHub tag (latest SemVer)](https://img.shields.io/github/v/tag/thunderbiscuit/padawan-wallet)
+![GitHub](https://img.shields.io/github/license/thunderbiscuit/padawan-wallet?color=brightgreen) ![Kotlin Version](https://img.shields.io/badge/kotlin-v1.4.21-orange) [![Conventional Commits](https://img.shields.io/badge/conventional%20commits-1.0.0-yellow.svg)](https://conventionalcommits.org) ![GitHub tag (latest SemVer)](https://img.shields.io/github/v/tag/thunderbiscuit/padawan-wallet)
 
 A testnet-only bitcoin wallet full of tutorials on how to use bitcoin wallets.
 
