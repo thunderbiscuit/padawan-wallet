@@ -4,6 +4,8 @@
 .idea
 .DS_Store
 /build
+/app/build
+output-metadata.json
 /captures
 .externalNativeBuild
 .cxx
