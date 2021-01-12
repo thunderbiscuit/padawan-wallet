@@ -53,10 +53,6 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
                 newTutorialsDoneMap?.set("e1", true)
                 tutorialsDone.postValue(newTutorialsDoneMap)
             }
-            2 -> {
-                newTutorialsDoneMap?.set("e2", true)
-                tutorialsDone.postValue(newTutorialsDoneMap)
-            }
             else -> Timber.i("[PADAWANLOGS] Tutorial number was invalid")
         }
     }
