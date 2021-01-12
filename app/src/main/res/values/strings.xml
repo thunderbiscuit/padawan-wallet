@@ -1,13 +1,63 @@
 <resources>
+    <!-- meta -->
     <string name="app_name">Padawan Wallet</string>
-    <string name="wallet_name">Padawan</string>
+    <string name="padawan">Padawan</string>
     <string name="elevator_pitch">the bitcoin wallet trainer</string>
+
+    <!-- intro -->
     <string name="welcome_statement">Welcome to Padawan!\n\nThis application is a place to learn the common features of mobile bitcoin wallets.\n\nIt uses bitcoin\'s <i><b>testnet</b></i>, an alternative bitcoin network used globally and built exclusively for testing. The coins on this network do not have any value, but they otherwise look and behave just like normal bitcoins!\n\nThis wallet is built for users of all ages to experiment and learn about bitcoin in a risk-free environment.</string>
     <string name="entry_button">Let\'s go!</string>
     <string name="already_have_a_wallet">I already have a\nPadawan wallet\n(12-words backup)</string>
     <string name="create_new_wallet">I want to create\na new wallet</string>
+    <string name="word1">word 1</string>
+    <string name="word2">word 2</string>
+    <string name="word3">word 3</string>
+    <string name="word4">word 4</string>
+    <string name="word5">word 5</string>
+    <string name="word6">word 6</string>
+    <string name="word7">word 7</string>
+    <string name="word8">word 8</string>
+    <string name="word9">word 9</string>
+    <string name="word10">word 10</string>
+    <string name="word11">word 11</string>
+    <string name="word12">word 12</string>
+
+    <!-- wallet -->
+    <string name="tab_wallet">Wallet</string>
+    <string name="tab_tutorials">Tutorials</string>
+    <string name="wallet_balance_section">Wallet Balance (testnet coins)</string>
+    <string name="transaction_history_section">Transaction History</string>
+    <string name="sync">Sync</string>
+    <string name="send">Send</string>
+    <string name="receive">Receive</string>
+    <string name="receive_screen_title">Receive bitcoin (testnet)</string>
+    <string name="generate_new_address">Generate new address</string>
+    <string name="back_to_wallet">Back to wallet</string>
+    <string name="send_screen_title">Send bitcoin (testnet)</string>
+    <string name="send_to_address">Send to address:</string>
+    <string name="fee_rate">Fee rate:</string>
+    <string name="amount">Amount (satoshis):</string>
+    <string name="verify_transaction">Verify transaction</string>
+    <string name="network_fee">Network fee</string>
+    <string name="amount_transacted">Amount transacted (satoshis):</string>
+    <string name="broadcast_screen_title">Verify Send Transaction</string>
+    <string name="to_address">To the address:</string>
+    <string name="total">Total:</string>
+    <string name="broadcast_transaction_button">Broadcast transaction</string>
+    <string name="back_to_transaction_build">Back to transaction build</string>
+
+    <!-- tutorials -->
+    <string name="essentials_section_name">Essentials</string>
+    <string name="concept">Concept</string>
+    <string name="skill">Skill</string>
+    <string name="E1_title">What is the Bitcoin testnet?</string>
+    <string name="tutorial_done">Mark tutorial\nas done</string>
+    <string name="back_to_list">Back to tutorials list</string>
+
+    <!-- drawer -->
+    <string name="about_title">About</string>
+    <string name="seed_phrase_title">Seed Phrase</string>
+    <string name="settings">Settings</string>
     <string name="open">Open drawer</string>
     <string name="close">Close drawer</string>
-    <string name="tutorial1_text">text 1</string>
-    <string name="tutorial2_text">text 2 </string>
 </resources>

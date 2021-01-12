@@ -15,7 +15,7 @@
         android:layout_marginTop="24dp"
         android:backgroundTint="@color/bg1"
         android:fontFamily="@font/share_tech_mono"
-        android:text="Essentials"
+        android:text="@string/essentials_section_name"
         android:textColor="@color/fg1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -53,7 +53,7 @@
             android:layout_marginStart="16dp"
             android:backgroundTint="@color/bg4"
             android:fontFamily="sans-serif-medium"
-            android:text="What is the bitcoin testnet?"
+            android:text="@string/E1_title"
             android:textAllCaps="false"
             android:textAppearance="?android:attr/textAppearanceButton"
             android:textColor="#FFFFFF"
@@ -70,7 +70,7 @@
             android:layout_marginStart="16dp"
             android:backgroundTint="@color/bg4"
             android:fontFamily="@font/roboto_light_italic"
-            android:text="Concepts"
+            android:text="@string/concept"
             android:textAllCaps="false"
             android:textAppearance="?android:attr/textAppearanceButton"
             android:textColor="#ffffff"
@@ -121,7 +121,7 @@
             android:layout_marginStart="16dp"
             android:backgroundTint="@color/bg4"
             android:fontFamily="@font/roboto_light_italic"
-            android:text="Concepts"
+            android:text="@string/concept"
             android:textAllCaps="false"
             android:textAppearance="?android:attr/textAppearanceButton"
             android:textColor="#ffffff"
@@ -173,7 +173,7 @@
             android:layout_marginStart="16dp"
             android:backgroundTint="@color/bg4"
             android:fontFamily="@font/roboto_light_italic"
-            android:text="Skills"
+            android:text="@string/skill"
             android:textAllCaps="false"
             android:textAppearance="?android:attr/textAppearanceButton"
             android:textColor="#FFFFFF"
@@ -225,7 +225,7 @@
             android:layout_marginStart="16dp"
             android:backgroundTint="@color/bg4"
             android:fontFamily="@font/roboto_light_italic"
-            android:text="Concepts"
+            android:text="@string/concept"
             android:textAllCaps="false"
             android:textAppearance="?android:attr/textAppearanceButton"
             android:textColor="#FFFFFF"
@@ -277,7 +277,7 @@
             android:layout_marginStart="16dp"
             android:backgroundTint="@color/bg4"
             android:fontFamily="@font/roboto_light_italic"
-            android:text="Skills"
+            android:text="@string/skill"
             android:textAllCaps="false"
             android:textAppearance="?android:attr/textAppearanceButton"
             android:textColor="#FFFFFF"
@@ -329,7 +329,7 @@
             android:layout_marginStart="16dp"
             android:backgroundTint="@color/bg4"
             android:fontFamily="@font/roboto_light_italic"
-            android:text="Concepts"
+            android:text="@string/concept"
             android:textAllCaps="false"
             android:textAppearance="?android:attr/textAppearanceButton"
             android:textColor="#FFFFFF"
@@ -381,7 +381,7 @@
             android:layout_marginStart="16dp"
             android:backgroundTint="@color/bg4"
             android:fontFamily="@font/roboto_light_italic"
-            android:text="Concepts"
+            android:text="@string/concept"
             android:textAllCaps="false"
             android:textAppearance="?android:attr/textAppearanceButton"
             android:textColor="#FFFFFF"
@@ -424,7 +424,8 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.35"></TextView>
+            app:layout_constraintVertical_bias="0.35">
+        </TextView>
 
         <TextView
             android:layout_width="wrap_content"
@@ -432,7 +433,7 @@
             android:layout_marginStart="16dp"
             android:backgroundTint="@color/bg4"
             android:fontFamily="@font/roboto_light_italic"
-            android:text="Skills"
+            android:text="@string/skill"
             android:textAllCaps="false"
             android:textAppearance="?android:attr/textAppearanceButton"
             android:textColor="#FFFFFF"
@@ -440,7 +441,8 @@
             android:textSize="10sp"
             android:textStyle="normal"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/text8"></TextView>
+            app:layout_constraintTop_toBottomOf="@+id/text8">
+        </TextView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

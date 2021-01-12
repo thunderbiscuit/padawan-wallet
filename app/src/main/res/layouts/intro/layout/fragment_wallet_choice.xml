@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="70dp"
         android:fontFamily="@font/share_tech_mono"
-        android:text="@string/wallet_name"
+        android:text="@string/padawan"
         android:textColor="@color/bright_green"
         android:textSize="58sp"
         app:layout_constraintEnd_toEndOf="parent"

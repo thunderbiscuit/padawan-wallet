@@ -27,7 +27,7 @@
                 android:layout_gravity="start"
                 android:fontFamily="@font/share_tech_mono"
                 android:paddingEnd="21dp"
-                android:text="@string/wallet_name"
+                android:text="@string/padawan"
                 android:textColor="@color/bright_green"
                 android:textSize="28sp"
                 tools:layout_editor_absoluteX="354dp"

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/frameLayout"
@@ -14,7 +15,7 @@
         android:layout_height="100dp"
         android:background="@color/green"
         android:gravity="center"
-        android:text="Receive bitcoin (testnet)"
+        android:text="@string/receive_screen_title"
         android:textColor="@color/fg1"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -43,7 +44,7 @@
         android:height="80dp"
         android:backgroundTint="@color/bg2"
         android:fontFamily="@font/roboto"
-        android:text="Generate new address"
+        android:text="@string/generate_new_address"
         android:textAllCaps="false"
         android:textColor="@color/fg1"
         android:textSize="17sp"
@@ -59,10 +60,10 @@
         android:backgroundTint="@color/bg4"
         android:insetTop="0dp"
         android:insetBottom="0dp"
-        android:text="Back to wallet"
+        android:text="@string/back_to_wallet"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
