@@ -116,7 +116,7 @@
         android:layout_marginTop="42dp"
         android:backgroundTint="@color/bg1"
         android:fontFamily="@font/share_tech_mono"
-        android:text=""
+        android:text="@string/transaction_history_section"
         android:textColor="@color/fg1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/receiveButton" />
