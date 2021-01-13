@@ -14,15 +14,15 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import com.goldenraven.padawanwallet.R
-import com.goldenraven.padawanwallet.databinding.FragmentWalletSendBinding
+import com.goldenraven.padawanwallet.databinding.FragmentWalletBuildBinding
 import com.google.android.material.snackbar.BaseTransientBottomBar
 import com.google.android.material.snackbar.Snackbar
 import org.bitcoindevkit.bdkjni.Types.CreateTxResponse
 import timber.log.Timber
 
-class WalletSend : Fragment() {
+class WalletBuild : Fragment() {
 
-    private lateinit var binding: FragmentWalletSendBinding
+    private lateinit var binding: FragmentWalletBuildBinding
     private lateinit var transactionDetails: CreateTxResponse
     private lateinit var address: String
     private lateinit var amount: String
@@ -31,7 +31,7 @@ class WalletSend : Fragment() {
             inflater: LayoutInflater, container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentWalletSendBinding.inflate(inflater, container, false)
+        binding = FragmentWalletBuildBinding.inflate(inflater, container, false)
         val view: View = binding.root
         return view
     }

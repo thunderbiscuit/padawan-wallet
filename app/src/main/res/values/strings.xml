@@ -33,14 +33,14 @@
     <string name="receive_screen_title">Receive bitcoin (testnet)</string>
     <string name="generate_new_address">Generate new address</string>
     <string name="back_to_wallet">Back to wallet</string>
-    <string name="send_screen_title">Send bitcoin (testnet)</string>
+    <string name="send_screen_title">Build transaction (testnet)</string>
     <string name="send_to_address">Send to address:</string>
     <string name="fee_rate">Fee rate:</string>
     <string name="amount">Amount (satoshis):</string>
-    <string name="verify_transaction">Verify transaction</string>
+    <string name="verify_transaction">Verify and broadcast transaction</string>
     <string name="network_fee">Network fee</string>
     <string name="amount_transacted">Amount transacted (satoshis):</string>
-    <string name="broadcast_screen_title">Verify Send Transaction</string>
+    <string name="broadcast_screen_title">Broadcast transaction (testnet)</string>
     <string name="to_address">To the address:</string>
     <string name="total">Total:</string>
     <string name="broadcast_transaction_button">Broadcast transaction</string>

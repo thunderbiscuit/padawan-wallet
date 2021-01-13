@@ -42,9 +42,9 @@
 
     <fragment
         android:id="@+id/walletSend"
-        android:name="com.goldenraven.padawanwallet.home.wallet.WalletSend"
+        android:name="com.goldenraven.padawanwallet.home.wallet.WalletBuild"
         android:label="fragment_wallet_send"
-        tools:layout="@layout/fragment_wallet_send" >
+        tools:layout="@layout/fragment_wallet_build" >
         <action
             android:id="@+id/action_walletSend_to_walletHome"
             app:destination="@id/walletHome"
@@ -59,9 +59,9 @@
 
     <fragment
         android:id="@+id/walletVerify"
-        android:name="com.goldenraven.padawanwallet.home.wallet.WalletVerify"
+        android:name="com.goldenraven.padawanwallet.home.wallet.WalletBroadcast"
         android:label="WalletVerify"
-        tools:layout="@layout/fragment_wallet_verify" >
+        tools:layout="@layout/fragment_wallet_broadcast" >
         <action
             android:id="@+id/action_walletVerify_to_walletSend"
             app:destination="@id/walletSend"

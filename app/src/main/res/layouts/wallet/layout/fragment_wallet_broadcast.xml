@@ -7,7 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/bg0soft"
-    tools:context=".home.wallet.WalletVerify">
+    tools:context=".home.wallet.WalletBroadcast">
 
     <TextView
         android:id="@+id/textView13"
@@ -172,6 +172,7 @@
         android:minHeight="0dp"
         android:paddingVertical="0dp"
         android:text="@string/back_to_transaction_build"
+        android:textColor="@color/fg1"
         app:iconPadding="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

@@ -14,16 +14,16 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import com.goldenraven.padawanwallet.PadawanWalletApplication
 import com.goldenraven.padawanwallet.R
-import com.goldenraven.padawanwallet.databinding.FragmentWalletVerifyBinding
+import com.goldenraven.padawanwallet.databinding.FragmentWalletBroadcastBinding
 import org.bitcoindevkit.bdkjni.Types.CreateTxResponse
 import org.bitcoindevkit.bdkjni.Types.RawTransaction
 import org.bitcoindevkit.bdkjni.Types.SignResponse
 import org.bitcoindevkit.bdkjni.Types.Txid
 import timber.log.Timber
 
-class WalletVerify : Fragment() {
+class WalletBroadcast : Fragment() {
 
-    private lateinit var binding: FragmentWalletVerifyBinding
+    private lateinit var binding: FragmentWalletBroadcastBinding
     private lateinit var amount: String
     private lateinit var address: String
     private lateinit var transactionDetails: CreateTxResponse
@@ -35,7 +35,7 @@ class WalletVerify : Fragment() {
         amount = requireArguments().getString("amount", "No amount provided")
         address = requireArguments().getString("address", "No address provided")
 
-        binding = FragmentWalletVerifyBinding.inflate(inflater, container, false)
+        binding = FragmentWalletBroadcastBinding.inflate(inflater, container, false)
         val view: View = binding.root
         return view
     }
@@ -97,7 +97,7 @@ class WalletVerify : Fragment() {
 
     private fun showBroadcastSuccessToast(txid: String) {
         val text: String = "Transaction was broadcasted successfully\ntxid: $txid"
-        val toast: Toast = Toast.makeText(this@WalletVerify.context, text, Toast.LENGTH_LONG)
+        val toast: Toast = Toast.makeText(this@WalletBroadcast.context, text, Toast.LENGTH_LONG)
         toast.show()
     }
 }

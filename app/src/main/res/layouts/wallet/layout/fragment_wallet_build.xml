@@ -7,7 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/bg0soft"
-    tools:context=".home.wallet.WalletSend">
+    tools:context=".home.wallet.WalletBuild">
 
     <TextView
         android:id="@+id/textView"
@@ -110,7 +110,6 @@
         android:id="@+id/buttonVerify"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
         android:layout_marginBottom="90dp"
         android:width="320dp"
         android:height="80dp"
@@ -139,6 +138,7 @@
         android:minHeight="0dp"
         android:paddingVertical="0dp"
         android:text="@string/back_to_wallet"
+        android:textColor="@color/fg1"
         app:iconPadding="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
