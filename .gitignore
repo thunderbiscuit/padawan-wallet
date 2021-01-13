@@ -5,6 +5,7 @@
 .DS_Store
 /build
 /app/build
+/app/release
 output-metadata.json
 /captures
 .externalNativeBuild
