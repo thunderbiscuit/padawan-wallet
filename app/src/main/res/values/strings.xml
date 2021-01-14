@@ -51,6 +51,7 @@
     <string name="concept">Concept</string>
     <string name="skill">Skill</string>
     <string name="E1_title">What is the Bitcoin testnet?</string>
+    <string name="E2_title">Bitcoin Units</string>
     <string name="tutorial_done">Mark tutorial\nas done</string>
     <string name="back_to_list">Back to tutorials list</string>
 

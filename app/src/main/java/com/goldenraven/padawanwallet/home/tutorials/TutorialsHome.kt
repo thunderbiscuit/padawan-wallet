@@ -41,6 +41,7 @@ class TutorialsHome : Fragment() {
 
         viewModel.tutorialsDone.observe(viewLifecycleOwner, {
             if (viewModel.tutorialsDone.value?.get("e1") == true) binding.buttonTutorial1.setBackgroundResource(R.drawable.tutorial_button_done_background)
+            if (viewModel.tutorialsDone.value?.get("e2") == true) binding.buttonTutorial2.setBackgroundResource(R.drawable.tutorial_button_done_background)
         })
 
         // navigation
@@ -50,7 +51,7 @@ class TutorialsHome : Fragment() {
             navController.navigate(R.id.action_tutorialsHome_to_tutorialE1)
         }
         binding.buttonTutorial2.setOnClickListener {
-            showTutorialInDevelopmentSnackbar()
+            navController.navigate(R.id.action_tutorialsHome_to_tutorialE2)
         }
         binding.buttonTutorial3.setOnClickListener {
             showTutorialInDevelopmentSnackbar()
