@@ -57,6 +57,30 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
                 newTutorialsDoneMap?.set("e2", true)
                 tutorialsDone.postValue(newTutorialsDoneMap)
             }
+            3 -> {
+                newTutorialsDoneMap?.set("e3", true)
+                tutorialsDone.postValue(newTutorialsDoneMap)
+            }
+            4 -> {
+                newTutorialsDoneMap?.set("e4", true)
+                tutorialsDone.postValue(newTutorialsDoneMap)
+            }
+            5 -> {
+                newTutorialsDoneMap?.set("e5", true)
+                tutorialsDone.postValue(newTutorialsDoneMap)
+            }
+            6 -> {
+                newTutorialsDoneMap?.set("e6", true)
+                tutorialsDone.postValue(newTutorialsDoneMap)
+            }
+            7 -> {
+                newTutorialsDoneMap?.set("e7", true)
+                tutorialsDone.postValue(newTutorialsDoneMap)
+            }
+            8 -> {
+                newTutorialsDoneMap?.set("e8", true)
+                tutorialsDone.postValue(newTutorialsDoneMap)
+            }
             else -> Timber.i("[PADAWANLOGS] Tutorial number was invalid")
         }
     }
