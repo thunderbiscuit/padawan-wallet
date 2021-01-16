@@ -52,6 +52,12 @@
     <string name="skill">Skill</string>
     <string name="E1_title">What is the Bitcoin testnet?</string>
     <string name="E2_title">Bitcoin Units</string>
+    <string name="E3_title">Receiving Bitcoin</string>
+    <string name="E4_title">What is the Mempool?</string>
+    <string name="E5_title">Sending Bitcoin</string>
+    <string name="E6_title">What is the Mempool?</string>
+    <string name="E7_title">What is a Backup Seed?</string>
+    <string name="E8_title">Recovering your Wallet from a Backup Seed</string>
     <string name="tutorial_done">Mark tutorial\nas done</string>
     <string name="back_to_list">Back to tutorials list</string>
 
