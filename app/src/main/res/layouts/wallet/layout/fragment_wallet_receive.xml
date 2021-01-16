@@ -35,11 +35,27 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
+    <TextView
+        android:id="@+id/copyAddressButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:drawableLeft="@drawable/ic_copy_outline"
+        android:drawablePadding="2dp"
+        android:fontFamily="@font/roboto"
+        android:gravity="center"
+        android:text="copy address"
+        android:textColor="@color/fg1"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/viewLine4" />
+
     <Button
         android:id="@+id/buttonGenerateNewAddress"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_height="80dp"
+        android:layout_marginBottom="32dp"
         android:width="320dp"
         android:height="80dp"
         android:backgroundTint="@color/bg2"
@@ -49,9 +65,9 @@
         android:textColor="@color/fg1"
         android:textSize="17sp"
         app:cornerRadius="12dp"
+        app:layout_constraintBottom_toTopOf="@+id/button4"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/receiveAddress" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/button4"
@@ -61,9 +77,23 @@
         android:insetTop="0dp"
         android:insetBottom="0dp"
         android:text="@string/back_to_wallet"
+        android:textColor="@color/fg1"
+        android:textColorHighlight="@color/fg1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <View
+        android:id="@+id/viewLine4"
+        android:layout_width="0dp"
+        android:layout_height="0.5dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:background="@color/fg1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/receiveAddress" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

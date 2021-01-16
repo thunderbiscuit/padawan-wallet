@@ -5,6 +5,9 @@
 
 package com.goldenraven.padawanwallet.home.wallet
 
+import android.content.ClipData
+import android.content.ClipboardManager
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -39,14 +42,17 @@ class WalletReceive : Fragment() {
         }
 
         val app = requireActivity().application as PadawanWalletApplication
-//        val newAddress: String = app.getNewAddress()
-//        Timber.i("[PADAWANLOGS] New deposit address is $newAddress")
-//        binding.receiveAddress.text = newAddress
 
         binding.buttonGenerateNewAddress.setOnClickListener {
             val newGeneratedAddress: String = app.getNewAddress()
             Timber.i("[PADAWANLOGS] New deposit address is $newGeneratedAddress")
             binding.receiveAddress.text = newGeneratedAddress
+        }
+
+        binding.copyAddressButton.setOnClickListener {
+            val clipboard: ClipboardManager = activity?.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+            val clip: ClipData = ClipData.newPlainText("Copied address", binding.receiveAddress.text)
+            clipboard.setPrimaryClip(clip)
         }
     }
 }
