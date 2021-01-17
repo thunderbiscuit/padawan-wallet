@@ -23,7 +23,7 @@
             app:exitAnim="@android:anim/fade_out"/>
         <action
             android:id="@+id/action_walletHome_to_walletSend"
-            app:destination="@id/walletSend"
+            app:destination="@id/walletBuild"
             app:enterAnim="@anim/slide_in_bottom70"
             app:exitAnim="@android:anim/fade_out"/>
     </fragment>
@@ -41,9 +41,9 @@
     </fragment>
 
     <fragment
-        android:id="@+id/walletSend"
+        android:id="@+id/walletBuild"
         android:name="com.goldenraven.padawanwallet.home.wallet.WalletBuild"
-        android:label="fragment_wallet_send"
+        android:label="walletBuild"
         tools:layout="@layout/fragment_wallet_build" >
         <action
             android:id="@+id/action_walletSend_to_walletHome"
@@ -52,19 +52,19 @@
             app:exitAnim="@anim/slide_out_bottom70"/>
         <action
             android:id="@+id/action_walletSend_to_walletVerify"
-            app:destination="@id/walletVerify"
+            app:destination="@id/walletBroadcast"
             app:enterAnim="@anim/fragment_fade_enter"
             app:exitAnim="@anim/fragment_fade_exit"/>
     </fragment>
 
     <fragment
-        android:id="@+id/walletVerify"
+        android:id="@+id/walletBroadcast"
         android:name="com.goldenraven.padawanwallet.home.wallet.WalletBroadcast"
-        android:label="WalletVerify"
+        android:label="walletBroadcast"
         tools:layout="@layout/fragment_wallet_broadcast" >
         <action
             android:id="@+id/action_walletVerify_to_walletSend"
-            app:destination="@id/walletSend"
+            app:destination="@id/walletBuild"
             app:enterAnim="@anim/fragment_fade_enter"
             app:exitAnim="@anim/fragment_fade_exit" />
         <action
