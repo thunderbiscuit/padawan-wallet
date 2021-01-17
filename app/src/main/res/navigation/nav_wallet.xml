@@ -67,5 +67,10 @@
             app:destination="@id/walletSend"
             app:enterAnim="@anim/fragment_fade_enter"
             app:exitAnim="@anim/fragment_fade_exit" />
+        <action
+            android:id="@+id/action_walletVerify_to_walletHome"
+            app:destination="@id/walletHome"
+            app:enterAnim="@anim/fragment_fade_enter"
+            app:exitAnim="@anim/fragment_fade_exit" />
     </fragment>
 </navigation>
