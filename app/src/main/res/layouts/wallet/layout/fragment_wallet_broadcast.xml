@@ -19,7 +19,7 @@
         android:textColor="@color/fg1"
         android:textSize="12sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView14" />
+        app:layout_constraintTop_toBottomOf="@id/textView14" />
 
     <TextView
         android:id="@+id/textView14"
@@ -31,7 +31,7 @@
         android:textColor="@color/fg1"
         android:textSize="12sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toBottomOf="@id/textView" />
 
     <TextView
         android:id="@+id/textView"
@@ -56,7 +56,7 @@
         android:textColor="@color/fg1"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+        app:layout_constraintTop_toBottomOf="@id/textView3" />
 
     <TextView
         android:id="@+id/amountTransacted"
@@ -70,7 +70,7 @@
         android:textColor="@color/fg1"
         android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toBottomOf="@id/textView" />
 
     <TextView
         android:id="@+id/fees"
@@ -84,7 +84,7 @@
         android:textColor="@color/fg1"
         android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/amountTransacted" />
+        app:layout_constraintTop_toBottomOf="@id/amountTransacted" />
 
     <View
         android:id="@+id/view"
@@ -97,7 +97,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView13" />
+        app:layout_constraintTop_toBottomOf="@id/textView13" />
 
     <TextView
         android:id="@+id/total"
@@ -111,7 +111,7 @@
         android:textColor="@color/fg1"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view" />
+        app:layout_constraintTop_toBottomOf="@id/view" />
 
     <TextView
         android:id="@+id/textView3"
@@ -124,7 +124,7 @@
         android:textColor="@color/fg1"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view" />
+        app:layout_constraintTop_toBottomOf="@id/view" />
 
     <TextView
         android:id="@+id/sendToAddress"
@@ -139,7 +139,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+        app:layout_constraintTop_toBottomOf="@id/textView2" />
 
     <Button
         android:id="@+id/buttonBroadcastTransaction"
@@ -155,7 +155,7 @@
         android:textColor="@color/fg1"
         android:textSize="17sp"
         app:cornerRadius="12dp"
-        app:layout_constraintBottom_toTopOf="@+id/buttonBackTransactionBuilder"
+        app:layout_constraintBottom_toTopOf="@id/buttonBackTransactionBuilder"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 

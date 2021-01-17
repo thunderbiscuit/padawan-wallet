@@ -7,7 +7,7 @@
     android:background="@color/bg0soft">
 
     <TextView
-        android:id="@+id/textView1"
+        android:id="@+id/app_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="70dp"
@@ -20,7 +20,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/elevator_pitch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/roboto_light_italic"
@@ -28,12 +28,12 @@
         android:textColor="@color/fg1"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.664"
+        app:layout_constraintHorizontal_bias="0.65"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView1" />
+        app:layout_constraintTop_toBottomOf="@+id/app_name" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/intro_text"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
@@ -45,10 +45,10 @@
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView5" />
+        app:layout_constraintTop_toBottomOf="@+id/elevator_pitch" />
 
     <Button
-        android:id="@+id/button1"
+        android:id="@+id/lets_go_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:width="200dp"
@@ -62,6 +62,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+        app:layout_constraintTop_toBottomOf="@+id/intro_text" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

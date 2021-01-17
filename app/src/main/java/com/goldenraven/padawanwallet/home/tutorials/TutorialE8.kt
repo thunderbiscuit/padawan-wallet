@@ -36,11 +36,11 @@ class TutorialE8 : Fragment() {
         val navController = Navigation.findNavController(view)
         val viewModel = ViewModelProvider(requireActivity()).get(HomeViewModel::class.java)
 
-        binding.buttonMarkDone.setOnClickListener {
+        binding.buttonMarkDoneE8.setOnClickListener {
             viewModel.markAsDone(tutorialNumber = 8)
             navController.navigate(R.id.action_tutorialE8_to_tutorialsHome)
         }
-        binding.buttonBack.setOnClickListener {
+        binding.buttonBackE8.setOnClickListener {
             navController.navigate(R.id.action_tutorialE8_to_tutorialsHome)
         }
     }

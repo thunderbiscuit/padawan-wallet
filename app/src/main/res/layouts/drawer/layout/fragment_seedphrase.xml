@@ -7,7 +7,7 @@
     android:background="@color/bg0soft">
 
     <TextView
-        android:id="@+id/textView1"
+        android:id="@+id/seed_phrase_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="70dp"
@@ -29,6 +29,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textView1" />
+        app:layout_constraintTop_toBottomOf="@id/seed_phrase_title" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

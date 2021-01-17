@@ -9,7 +9,7 @@
     android:background="@color/bg0soft">
 
     <fragment
-        android:id="@+id/nav_host_intro"
+        android:id="@+id/navHostIntro"
         android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

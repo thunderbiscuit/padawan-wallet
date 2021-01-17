@@ -62,7 +62,7 @@ class IntroFragment : Fragment() {
 //                    }
 //        }
 
-        view.findViewById<Button>(R.id.button1).setOnClickListener {
+        view.findViewById<Button>(R.id.lets_go_button).setOnClickListener {
             Timber.i("[PADAWANLOGS] User is ready to go!")
             // testnetDialog?.show()
             testnetDialog.show()

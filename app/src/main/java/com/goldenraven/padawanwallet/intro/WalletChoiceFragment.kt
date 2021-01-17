@@ -42,13 +42,13 @@ class WalletChoiceFragment : Fragment() {
 
         val navController = Navigation.findNavController(view)
 
-        view.findViewById<Button>(R.id.button2).setOnClickListener {
+        view.findViewById<Button>(R.id.create_wallet_button).setOnClickListener {
             val intent: Intent = Intent(this@WalletChoiceFragment.context, HomeActivity::class.java)
             generateWallet()
             startActivity(intent)
         }
 
-        view.findViewById<Button>(R.id.button3).setOnClickListener {
+        view.findViewById<Button>(R.id.recover_wallet_button).setOnClickListener {
             navController.navigate(R.id.action_walletChoice_to_walletRecoveryFragment)
         }
     }

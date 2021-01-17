@@ -9,7 +9,7 @@
     android:background="@color/bg0soft">
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/app_name_wallet_choice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="70dp"
@@ -22,7 +22,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/tagline_wallet_choice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/roboto_light_italic"
@@ -32,10 +32,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.64"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+        app:layout_constraintTop_toBottomOf="@+id/app_name_wallet_choice" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/create_wallet_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="188dp"
@@ -50,10 +50,10 @@
         app:cornerRadius="12dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView5" />
+        app:layout_constraintTop_toBottomOf="@+id/tagline_wallet_choice" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/recover_wallet_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
@@ -68,6 +68,6 @@
         app:cornerRadius="12dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button2" />
+        app:layout_constraintTop_toBottomOf="@+id/create_wallet_button" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

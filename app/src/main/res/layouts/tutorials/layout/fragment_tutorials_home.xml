@@ -27,7 +27,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <View
-            android:id="@+id/view"
+            android:id="@+id/line_essential_tutorials"
             android:layout_width="0dp"
             android:layout_height="0.5dp"
             android:layout_marginStart="16dp"
@@ -50,10 +50,10 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/view">
+            app:layout_constraintTop_toBottomOf="@+id/line_essential_tutorials">
 
             <TextView
-                android:id="@+id/text1"
+                android:id="@+id/titleE1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -84,7 +84,7 @@
                 android:textSize="10sp"
                 android:textStyle="normal"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/text1">
+                app:layout_constraintTop_toBottomOf="@id/titleE1">
             </TextView>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -104,7 +104,7 @@
             app:layout_constraintTop_toBottomOf="@+id/buttonTutorial1">
 
             <TextView
-                android:id="@+id/text2"
+                android:id="@+id/titleE2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -135,7 +135,7 @@
                 android:textSize="10sp"
                 android:textStyle="normal"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/text2">
+                app:layout_constraintTop_toBottomOf="@+id/titleE2">
             </TextView>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -155,7 +155,7 @@
             app:layout_constraintTop_toBottomOf="@+id/buttonTutorial2">
 
             <TextView
-                android:id="@+id/text3"
+                android:id="@+id/titleE3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -186,7 +186,7 @@
                 android:textSize="10sp"
                 android:textStyle="normal"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/text3">
+                app:layout_constraintTop_toBottomOf="@id/titleE3">
             </TextView>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -203,10 +203,10 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/buttonTutorial3">
+            app:layout_constraintTop_toBottomOf="@id/buttonTutorial3">
 
             <TextView
-                android:id="@+id/text4"
+                android:id="@+id/titleE4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -237,7 +237,7 @@
                 android:textSize="10sp"
                 android:textStyle="normal"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/text4">
+                app:layout_constraintTop_toBottomOf="@id/titleE4">
             </TextView>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -257,7 +257,7 @@
             app:layout_constraintTop_toBottomOf="@+id/buttonTutorial4">
 
             <TextView
-                android:id="@+id/text5"
+                android:id="@+id/titleE5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -288,7 +288,7 @@
                 android:textSize="10sp"
                 android:textStyle="normal"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/text5">
+                app:layout_constraintTop_toBottomOf="@id/titleE5">
             </TextView>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -308,7 +308,7 @@
             app:layout_constraintTop_toBottomOf="@+id/buttonTutorial5">
 
             <TextView
-                android:id="@+id/text6"
+                android:id="@+id/titleE6"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -339,7 +339,7 @@
                 android:textSize="10sp"
                 android:textStyle="normal"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/text6">
+                app:layout_constraintTop_toBottomOf="@id/titleE6">
             </TextView>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -359,7 +359,7 @@
             app:layout_constraintTop_toBottomOf="@+id/buttonTutorial6">
 
             <TextView
-                android:id="@+id/text7"
+                android:id="@+id/titleE7"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -390,7 +390,7 @@
                 android:textSize="10sp"
                 android:textStyle="normal"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/text7">
+                app:layout_constraintTop_toBottomOf="@id/titleE7">
             </TextView>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -410,7 +410,7 @@
             app:layout_constraintTop_toBottomOf="@+id/buttonTutorial7">
 
             <TextView
-                android:id="@+id/text8"
+                android:id="@+id/titleE8"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -441,7 +441,7 @@
                 android:textSize="10sp"
                 android:textStyle="normal"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/text8">
+                app:layout_constraintTop_toBottomOf="@id/titleE8">
             </TextView>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
