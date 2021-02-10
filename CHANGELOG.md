@@ -5,8 +5,17 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).  
 <br/>
 
-## [v0.3.0](https://github.com/thunderbiscuit/padawan-wallet/releases/tag/v0.3.0) — Jan 5, 2020
+## [v0.4.0](https://github.com/thunderbiscuit/padawan-wallet/releases/tag/v0.4.0) — Jan 12, 2020
+### Added
++ Add tutorial fragments UI
++ Enable marking tutorials as done
++ Make tutorials list scrollable
 
+### Changed
++ Various improvements to the codebase
+<br/>
+
+## [v0.3.0](https://github.com/thunderbiscuit/padawan-wallet/releases/tag/v0.3.0) — Jan 5, 2020
 ### Added
 + Tutorial tab now handles fragments
 + Separate wallet and tutorials in their respective packages
@@ -26,7 +35,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 <br/>
 
 ## [v0.2.0](https://github.com/thunderbiscuit/padawan-wallet/releases/tag/v0.2.0) — Jan 3, 2020
-
 ### Added
 + Wallet sync functionality
 + Wallet can display wallet current balance upon sync
@@ -36,7 +44,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 <br/>
 
 ## [v0.1.0](https://github.com/thunderbiscuit/padawan-wallet/releases/tag/v0.1.0) — Dec 20, 2020
-
 ### Added
 + Draft UI for wallet generation
 + Draft UI for home activity (wallet and tutorials)
