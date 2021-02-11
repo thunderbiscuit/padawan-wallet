@@ -13,6 +13,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
+import com.goldenraven.padawanwallet.PadawanWalletApplication
 import com.goldenraven.padawanwallet.R
 import com.goldenraven.padawanwallet.databinding.FragmentWalletBuildBinding
 import com.google.android.material.snackbar.BaseTransientBottomBar
@@ -76,10 +77,21 @@ class WalletBuild : Fragment() {
             return false
         }
 
+        val app = requireActivity().application as PadawanWalletApplication
         val addresseesAndAmounts: List<Pair<String, String>> = listOf(Pair(address, amount))
         val feeRate = 1F
 
         Timber.i("[PADAWANLOGS] Send addresses are: $addresseesAndAmounts")
+
+        try {
+            app.createTransaction(feeRate, addresseesAndAmounts, false, null, null, null)
+            // Timber.i("[PADAWANLOGS] transactionDetails from WalletVerify fragment is: $transactionDetails")
+        } catch (e: Throwable) {
+            Timber.i("[PADAWANLOGS] Verify transaction failed: ${e.message}")
+            showErrorSnackbar(e.message!!)
+            return false
+        }
+
         return true
     }
 
@@ -89,6 +101,14 @@ class WalletBuild : Fragment() {
         emptyFieldSnackbar.view.background = resources.getDrawable(R.drawable.background_toast_warning, null)
         emptyFieldSnackbar.animationMode = BaseTransientBottomBar.ANIMATION_MODE_SLIDE
         emptyFieldSnackbar.show()
+    }
+
+    private fun showErrorSnackbar(errorMessage: String) {
+        val broadcastSuccessSnackbar = Snackbar.make(requireView(), "Error: $errorMessage", Snackbar.LENGTH_LONG)
+        broadcastSuccessSnackbar.setTextColor(ContextCompat.getColor(requireActivity(), R.color.fg1))
+        broadcastSuccessSnackbar.view.background = resources.getDrawable(R.drawable.background_toast_error, null)
+        broadcastSuccessSnackbar.animationMode = BaseTransientBottomBar.ANIMATION_MODE_SLIDE
+        broadcastSuccessSnackbar.show()
     }
 
     private fun showFeatureInDevelopmentSnackbar() {

@@ -59,7 +59,6 @@ class WalletBroadcast : Fragment() {
         val navController = Navigation.findNavController(view)
 
         binding.buttonBroadcastTransaction.setOnClickListener {
-            // verifyTransaction()
             broadcastTransaction()
             // TimeUnit.SECONDS.sleep(4)
             navController.navigate(R.id.action_walletVerify_to_walletHome)
@@ -75,15 +74,14 @@ class WalletBroadcast : Fragment() {
         val addresseesAndAmounts: List<Pair<String, String>> = listOf(Pair(address, amount))
         val feeRate = 1F
 
-        Timber.i("[PADAWANLOGS] Send addresses are: $addresseesAndAmounts")
+        Timber.i("[PADAWANLOGS] Send addresses are (from broadcast fragment): $addresseesAndAmounts")
 
         try {
             transactionDetails = app.createTransaction(feeRate, addresseesAndAmounts, false, null, null, null)
             // Timber.i("[PADAWANLOGS] transactionDetails from WalletVerify fragment is: $transactionDetails")
         } catch (e: Throwable) {
             Timber.i("[PADAWANLOGS] Verify transaction failed: ${e.message}")
-            // TODO: Show toast related to error
-            return
+            showErrorSnackbar(e.message!!)
         }
     }
 
@@ -108,6 +106,13 @@ class WalletBroadcast : Fragment() {
         val broadcastSuccessSnackbar = Snackbar.make(requireView(), "Transaction was broadcast successfully!", Snackbar.LENGTH_LONG)
         broadcastSuccessSnackbar.setTextColor(ContextCompat.getColor(requireActivity(), R.color.fg1))
         broadcastSuccessSnackbar.view.background = resources.getDrawable(R.drawable.background_toast, null)
+        broadcastSuccessSnackbar.animationMode = BaseTransientBottomBar.ANIMATION_MODE_SLIDE
+        broadcastSuccessSnackbar.show()
+    }
+    private fun showErrorSnackbar(errorMessage: String) {
+        val broadcastSuccessSnackbar = Snackbar.make(requireView(), "Error: $errorMessage", Snackbar.LENGTH_LONG)
+        broadcastSuccessSnackbar.setTextColor(ContextCompat.getColor(requireActivity(), R.color.fg1))
+        broadcastSuccessSnackbar.view.background = resources.getDrawable(R.drawable.background_toast_error, null)
         broadcastSuccessSnackbar.animationMode = BaseTransientBottomBar.ANIMATION_MODE_SLIDE
         broadcastSuccessSnackbar.show()
     }
