@@ -3,8 +3,7 @@
 /local.properties
 .idea
 .DS_Store
-/build
-/app/build
+build
 /app/release
 output-metadata.json
 /captures
