@@ -18,6 +18,6 @@ allprojects {
     }
 }
 
-task clean(type: Delete::class) {
-    delete(rootProject.buildDir)
-}
+// task clean(type: Delete::class) {
+//     delete(rootProject.buildDir)
+// }
