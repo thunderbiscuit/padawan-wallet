@@ -20,13 +20,15 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
-    sourceSets.getByName("main") {
-        resources.srcDir("src/main/res/layouts/intro")
-        resources.srcDir("src/main/res/layouts/home")
-        resources.srcDir("src/main/res/layouts/wallet")
-        resources.srcDir("src/main/res/layouts/tutorials")
-        resources.srcDir("src/main/res/layouts/drawer")
-        resources.srcDir("src/main/res")
+    sourceSets {
+        getByName("main").res.setSrcDirs(setOf(
+            file("src/main/res/layouts/intro"),
+            file("src/main/res/layouts/home"),
+            file("src/main/res/layouts/wallet"),
+            file("src/main/res/layouts/tutorials"),
+            file("src/main/res/layouts/drawer"),
+            file("src/main/res")
+        ))
     }
 
     buildTypes {
@@ -38,13 +40,13 @@ android {
             // minifyEnabled = true
             // shrinkResources = true
             debuggable(true)
-            // proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+            proguardFiles = mutableListOf(getDefaultProguardFile("proguard-android-optimize.txt"), file("proguard-rules.pro"))
         }
     }
 
     compileOptions {
-        sourceCompatibility(JavaVersion.VERSION_1_8)
-        targetCompatibility(JavaVersion.VERSION_1_8)
+        sourceCompatibility = org.gradle.api.JavaVersion.VERSION_1_8
+        targetCompatibility = org.gradle.api.JavaVersion.VERSION_1_8
     }
 
     kotlinOptions {
