@@ -41,7 +41,7 @@ class WalletRecoveryFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val filename = "bip39.txt"
+        val filename = "bip39-english.txt"
         val inputString: String = requireActivity().applicationContext.assets.open(filename).bufferedReader().use {
             it.readText()
         }
