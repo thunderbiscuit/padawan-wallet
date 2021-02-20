@@ -17,7 +17,8 @@
 
         <activity
             android:name=".DispatchActivity"
-            android:theme="@style/Theme.IntroPadawanWallet">
+            android:theme="@style/Theme.IntroPadawanWallet"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -26,16 +27,19 @@
 
         <activity
             android:name=".intro.IntroActivity"
-            android:theme="@style/Theme.IntroPadawanWallet">
+            android:theme="@style/Theme.IntroPadawanWallet"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
 
-        <activity android:name=".home.HomeActivity"
-                  android:parentActivityName=".intro.IntroActivity"
-                  android:windowSoftInputMode="adjustPan">
+        <activity
+            android:name=".home.HomeActivity"
+            android:parentActivityName=".intro.IntroActivity"
+            android:windowSoftInputMode="adjustPan"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -45,8 +49,10 @@
                 android:value=".intro.IntroActivity" />
         </activity>
 
-        <activity android:name=".drawer.DrawerActivity"
-            android:parentActivityName=".home.HomeActivity">
+        <activity
+            android:name=".drawer.DrawerActivity"
+            android:parentActivityName=".home.HomeActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
