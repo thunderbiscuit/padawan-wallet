@@ -38,7 +38,7 @@ You can download the apk for this app on the [`v0.4.0` release page](https://git
 <br />
 
 ## FAQ
-### Tutorials you say?
+### 🧐 Tutorials you say?
 The tutorials are broken down in two groups: _Essentials_ and _Advanced_, each of which contain _Concepts to understand_ and _Skills to master_. The currently planned tutorials are the following:
 
 **Essentials**
@@ -52,10 +52,13 @@ The tutorials are broken down in two groups: _Essentials_ and _Advanced_, each o
 8. Recovering a wallet from a backup seed (skill)  
 
 **Advanced**  
-9. Connect to your own node  
-10. Replace-by-fee  
-11. Address types  
-12. What are light clients?  
+1. Connect to your own node  
+2. Replace-by-fee  
+3. Address types  
+4. What are light clients?  
 
-### How can I contribute?
+### 🧐 Where can I get testnet coins?
+There are many bitcoin testnet faucets out there, but Padawan uses native segwit addresses uniquely (bech32), so you'll need a faucet that can send to those. We suggest [this one](https://testnet-faucet.mempool.co/).
+
+### 🧐 How can I contribute?
 If you think this project is interesting and would like to contribute, get access to the early release on the app store, or simply provide feedback and bounce ideas, check out [our discord group](https://discord.gg/qTysDfZ2gX). Users and devs welcome.
