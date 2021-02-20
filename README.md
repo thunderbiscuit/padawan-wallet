@@ -11,7 +11,8 @@
 ![Kotlin Version](https://img.shields.io/badge/kotlin-v1.4.21-orange) 
 [![Conventional Commits](https://img.shields.io/badge/conventional%20commits-1.0.0-yellow.svg)](https://conventionalcommits.org) 
 [![GitHub release (latest by date)](https://img.shields.io/github/v/release/thunderbiscuit/padawan-wallet)](https://github.com/thunderbiscuit/padawan-wallet/releases) 
-[![Support Server](https://img.shields.io/badge/discord-chat-7289da?label=Discord&logo=Discord&colorB=7289da&style=flat)](https://discord.gg/qTysDfZ2gX)
+[![Support Server](https://img.shields.io/badge/discord-chat-7289da?label=Discord&logo=Discord&colorB=7289da&style=flat)](https://discord.gg/qTysDfZ2gX) 
+[![Twitter](https://img.shields.io/badge/twitter-%40padawanwallet-b8bb26)](https://twitter.com/padawanwallet)
 
 A testnet-only bitcoin wallet full of tutorials on how to use bitcoin wallets.
 
