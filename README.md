@@ -17,7 +17,7 @@ A testnet-only bitcoin wallet full of tutorials on how to use bitcoin wallets.
 
 We're building the app you'll want to recommend to your teenage cousins at Christmas or to your dad that keeps asking questions about bitcoin. It aims to be a self-study tool, getting its users acquainted with the usual workflow and basic jargon of mobile wallets in an risk-free environment perfect for experimentation and learning (testnet).
 
-The builders of this wallet are of the opinion that testnet is an underused resource outside of software development circles, and believe it can be leveraged for bitcoin-curious people everywhere. Testnet offers all the complexity of mainnet, and one of the goal of this wallet is to eventually foray into these more advanced bitcoin features (multisig, DLCs, etc.) and offer a training/testing ground for users.
+We think testnet is an underused resource outside of software development circles, and believe it can be leveraged for bitcoin-curious people everywhere. Testnet offers all the complexity of mainnet, and one of the goal of this wallet is to eventually foray into these more advanced bitcoin features (output descriptors, multisig wallets, DLCs) and offer a training and testing ground for users.
 
 Join us on [discord](https://discord.gg/qTysDfZ2gX)!
 
@@ -57,5 +57,5 @@ The tutorials are broken down in two groups: _Essentials_ and _Advanced_, each o
 11. Address types  
 12. What are light clients?  
 
-#### How can I contribute?
-If you think this project is interesting and would like to contribute, get access to the early release on the app store, or simply provide feedback and bounce ideas, check out [our discord group](https://discord.gg/qTysDfZ2gX)!
+### How can I contribute?
+If you think this project is interesting and would like to contribute, get access to the early release on the app store, or simply provide feedback and bounce ideas, check out [our discord group](https://discord.gg/qTysDfZ2gX). Users and devs welcome.
