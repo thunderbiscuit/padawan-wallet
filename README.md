@@ -15,11 +15,11 @@
 
 A testnet-only bitcoin wallet full of tutorials on how to use bitcoin wallets.
 
-The goal of this project is to be the app you'd recommend to your teenage cousins at Christmas or your dad that keeps asking questions about bitcoin. It aims to be a self-study tool, getting its users acquainted with the usual workflow and basic jargon of mobile wallets in an risk-free environment perfect for experimentation and learning (testnet).
+We're building the app you'll want to recommend to your teenage cousins at Christmas or to your dad that keeps asking questions about bitcoin. It aims to be a self-study tool, getting its users acquainted with the usual workflow and basic jargon of mobile wallets in an risk-free environment perfect for experimentation and learning (testnet).
 
-The builders of this wallet are of the opinion that testnet is an underused resource outside of software development circles, and believe it can be leveraged for bitcoin-curious people everywhere. Testnet offers all the complexity of mainnet, and one of the goal of this wallet is to eventually foray into these more advanced bitcoin features (multisig, DLCs, etc.) and offer a trainning/testing ground for users.
+The builders of this wallet are of the opinion that testnet is an underused resource outside of software development circles, and believe it can be leveraged for bitcoin-curious people everywhere. Testnet offers all the complexity of mainnet, and one of the goal of this wallet is to eventually foray into these more advanced bitcoin features (multisig, DLCs, etc.) and offer a training/testing ground for users.
 
-If you think this project is interesting and would like to contribute, get access to the early release on the app store, or simply provide feedback and bounce ideas, check out [our discord group](https://discord.gg/qTysDfZ2gX)!
+Join us on [discord](https://discord.gg/qTysDfZ2gX)!
 
 <br/>
 
@@ -37,21 +37,25 @@ You can download the apk for this app on the [`v0.4.0` release page](https://git
 </div>
 <br />
 
-## Tutorials
+## FAQ
+### Tutorials you say?
 The tutorials are broken down in two groups: _Essentials_ and _Advanced_, each of which contain _Concepts to understand_ and _Skills to master_. The currently planned tutorials are the following:
 
-#### Essentials
-1. What is the bitcoin testnet?  
-2. Bitcoin units  
-3. Receiving bitcoin
-4. What is the mempool?  
-5. Sending bitcoin  
-6. What are transaction fees?
-7. What is a wallet backup seed?  
-8. Recovering a wallet from a backup seed  
+**Essentials**
+1. What is the bitcoin testnet? (concept)  
+2. Bitcoin units (concept)
+3. Receiving bitcoin (skill)
+4. What is the mempool? (concept)
+5. Sending bitcoin (skill)
+6. What are transaction fees? (concept)
+7. What is a wallet backup seed? (concept)
+8. Recovering a wallet from a backup seed (skill)  
 
-#### Advanced
+**Advanced**  
 9. Connect to your own node  
 10. Replace-by-fee  
 11. Address types  
 12. What are light clients?  
+
+#### How can I contribute?
+If you think this project is interesting and would like to contribute, get access to the early release on the app store, or simply provide feedback and bounce ideas, check out [our discord group](https://discord.gg/qTysDfZ2gX)!
