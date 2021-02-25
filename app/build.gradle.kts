@@ -5,7 +5,7 @@ plugins {
 
 android {
     compileSdkVersion(30)
-    buildToolsVersion = "30.0.1"
+    buildToolsVersion = "30.0.2"
 
     buildFeatures {
         viewBinding = true
@@ -46,13 +46,14 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility = org.gradle.api.JavaVersion.VERSION_1_8
-        targetCompatibility = org.gradle.api.JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
     }
 
     kotlinOptions {
         jvmTarget = "1.8"
     }
+    ndkVersion = "21.3.6528147"
 }
 
 dependencies {
