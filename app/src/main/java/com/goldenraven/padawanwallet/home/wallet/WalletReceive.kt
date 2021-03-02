@@ -12,6 +12,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidmads.library.qrgenearator.QRGContents
+import androidmads.library.qrgenearator.QRGEncoder
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import com.goldenraven.padawanwallet.PadawanWalletApplication
@@ -46,6 +48,16 @@ class WalletReceive : Fragment() {
         binding.buttonGenerateNewAddress.setOnClickListener {
             val newGeneratedAddress: String = app.getNewAddress()
             Timber.i("[PADAWANLOGS] New deposit address is $newGeneratedAddress")
+
+            val qrgEncoder: QRGEncoder = QRGEncoder(newGeneratedAddress, null, QRGContents.Type.TEXT, 1000)
+            qrgEncoder.colorBlack = resources.getColor(R.color.fg4)
+            qrgEncoder.colorWhite = resources.getColor(R.color.bg0soft)
+            try {
+                val bitmap = qrgEncoder.bitmap
+                binding.qrCode.setImageBitmap(bitmap)
+            } catch (e: Throwable) {
+                Timber.i("[PADAWANLOGS] Error with QRCode generator, ${e.toString()}")
+            }
             binding.receiveAddress.text = newGeneratedAddress
         }
 
