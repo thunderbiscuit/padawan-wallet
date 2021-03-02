@@ -66,9 +66,9 @@ dependencies {
     implementation("androidx.navigation:navigation-ui-ktx:2.2.2")
     implementation("androidx.legacy:legacy-support-v4:1.0.0")
     implementation("androidx.viewpager:viewpager:1.0.0")
-    testImplementation("junit:junit:4.+")
-    androidTestImplementation("androidx.test.ext:junit:1.1.2")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.3.0")
+
     implementation("org.bitcoindevkit.bdkjni:bdk-jni:0.1.0-beta.1")
     implementation("com.jakewharton.timber:timber:4.7.1")
+
+    testImplementation("junit:junit:4.+")
 }
