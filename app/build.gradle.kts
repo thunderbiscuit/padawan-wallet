@@ -69,6 +69,8 @@ dependencies {
 
     implementation("org.bitcoindevkit.bdkjni:bdk-jni:0.1.0-beta.1")
     implementation("com.jakewharton.timber:timber:4.7.1")
+    implementation("androidmads.library.qrgenearator:QRGenearator:1.0.4")
+    implementation("com.google.zxing:core:3.4.1")
 
     testImplementation("junit:junit:4.+")
 }
