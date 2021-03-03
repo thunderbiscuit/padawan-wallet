@@ -17,6 +17,7 @@ import androidmads.library.qrgenearator.QRGEncoder
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import com.goldenraven.padawanwallet.PadawanWalletApplication
+import com.goldenraven.padawanwallet.Wallet
 import com.goldenraven.padawanwallet.R
 import com.goldenraven.padawanwallet.databinding.FragmentWalletReceiveBinding
 import timber.log.Timber
@@ -46,6 +47,7 @@ class WalletReceive : Fragment() {
         val app = requireActivity().application as PadawanWalletApplication
 
         binding.buttonGenerateNewAddress.setOnClickListener {
+            Wallet.helloFrom("Receive Fragment")
             val newGeneratedAddress: String = app.getNewAddress()
             Timber.i("[PADAWANLOGS] New deposit address is $newGeneratedAddress")
 

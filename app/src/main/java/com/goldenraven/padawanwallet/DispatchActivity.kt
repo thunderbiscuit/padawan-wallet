@@ -10,13 +10,17 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.goldenraven.padawanwallet.intro.IntroActivity
 import com.goldenraven.padawanwallet.home.HomeActivity
+import com.goldenraven.padawanwallet.intro.IntroActivity
 import timber.log.Timber
 
 class DispatchActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        // initiate Wallet object
+        // val wallet: Wallet = Wallet
+        Wallet.helloFrom("DispatchActivity")
 
         // load wallet if it exists
         val currentWallet: SharedPreferences = getSharedPreferences("current_wallet", Context.MODE_PRIVATE)
