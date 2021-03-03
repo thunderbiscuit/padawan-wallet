@@ -44,11 +44,12 @@ class WalletReceive : Fragment() {
             navController.navigate(R.id.action_walletReceive_to_walletHome)
         }
 
-        val app = requireActivity().application as PadawanWalletApplication
+        // val app = requireActivity().application as PadawanWalletApplication
 
         binding.buttonGenerateNewAddress.setOnClickListener {
             Wallet.helloFrom("Receive Fragment")
-            val newGeneratedAddress: String = app.getNewAddress()
+            // val newGeneratedAddress: String = app.getNewAddress()
+            val newGeneratedAddress: String = Wallet.getNewAddress()
             Timber.i("[PADAWANLOGS] New deposit address is $newGeneratedAddress")
 
             val qrgEncoder: QRGEncoder = QRGEncoder(newGeneratedAddress, null, QRGContents.Type.TEXT, 1000)
