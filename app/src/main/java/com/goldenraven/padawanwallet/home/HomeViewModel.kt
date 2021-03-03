@@ -13,8 +13,6 @@ import timber.log.Timber
 
 class HomeViewModel(application: Application) : AndroidViewModel(application) {
 
-    // val app = application as PadawanWalletApplication
-
     public var balance: MutableLiveData<Long> = MutableLiveData(0)
     public var satoshiUnit: MutableLiveData<Boolean> = MutableLiveData(true)
     public var tutorialsDone: MutableLiveData<MutableMap<String, Boolean>> = MutableLiveData(
@@ -31,9 +29,7 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
     )
 
     public fun updateBalance() {
-        // app.sync(100)
         Wallet.sync(100)
-        // val newBalance = app.getBalance()
         val newBalance = Wallet.getBalance()
         balance.postValue(newBalance)
     }

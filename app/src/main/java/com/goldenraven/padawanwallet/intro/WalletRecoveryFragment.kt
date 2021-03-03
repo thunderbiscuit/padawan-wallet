@@ -91,8 +91,6 @@ class WalletRecoveryFragment : Fragment() {
     }
 
     private fun loadWallet() {
-        // val app = requireActivity().application as PadawanWalletApplication
-        // this.keys = app.createExtendedKeyFromMnemonic(this.mnemonicString)
         this.keys = Wallet.createExtendedKeyFromMnemonic(this.mnemonicString)
 
         // save seed phrase to shared preferences
@@ -102,12 +100,8 @@ class WalletRecoveryFragment : Fragment() {
         editor.apply()
 
         // generate new wallet
-        // val descriptor: String = app.createDescriptor(this.keys)
-        // val changeDescriptor: String = app.createChangeDescriptor(this.keys)
-
         val descriptor: String = Wallet.createDescriptor(this.keys)
         val changeDescriptor: String = Wallet.createChangeDescriptor(this.keys)
-        // app.createWallet(descriptor, changeDescriptor)
         val editor2: SharedPreferences.Editor = requireActivity().getSharedPreferences("current_wallet", Context.MODE_PRIVATE)!!.edit()
         Wallet.createWallet(descriptor, changeDescriptor, editor2)
     }
