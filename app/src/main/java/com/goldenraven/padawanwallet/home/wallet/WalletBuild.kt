@@ -13,19 +13,16 @@ import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
-import com.goldenraven.padawanwallet.PadawanWalletApplication
 import com.goldenraven.padawanwallet.R
 import com.goldenraven.padawanwallet.Wallet
 import com.goldenraven.padawanwallet.databinding.FragmentWalletBuildBinding
 import com.google.android.material.snackbar.BaseTransientBottomBar
 import com.google.android.material.snackbar.Snackbar
-import org.bitcoindevkit.bdkjni.Types.CreateTxResponse
 import timber.log.Timber
 
 class WalletBuild : Fragment() {
 
     private lateinit var binding: FragmentWalletBuildBinding
-    private lateinit var transactionDetails: CreateTxResponse
     private lateinit var address: String
     private lateinit var amount: String
 
@@ -78,16 +75,13 @@ class WalletBuild : Fragment() {
             return false
         }
 
-        // val app = requireActivity().application as PadawanWalletApplication
         val addresseesAndAmounts: List<Pair<String, String>> = listOf(Pair(address, amount))
         val feeRate = 1F
 
         Timber.i("[PADAWANLOGS] Send addresses are: $addresseesAndAmounts")
 
         try {
-            // app.createTransaction(feeRate, addresseesAndAmounts, false, null, null, null)
             Wallet.createTransaction(feeRate, addresseesAndAmounts, false, null, null, null)
-            // Timber.i("[PADAWANLOGS] transactionDetails from WalletVerify fragment is: $transactionDetails")
         } catch (e: Throwable) {
             Timber.i("[PADAWANLOGS] Verify transaction failed: ${e.message}")
             showErrorSnackbar(e.message!!)

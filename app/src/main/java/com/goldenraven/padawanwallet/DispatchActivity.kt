@@ -18,17 +18,14 @@ class DispatchActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        // initiate Wallet object
-        // val wallet: Wallet = Wallet
         Wallet.helloFrom("DispatchActivity")
-        // Wallet.setPath(applicationContext.filesDir.toString())
 
-        // load wallet if it exists
+        // check if a wallet already exists in shared preferences
         val currentWallet: SharedPreferences = getSharedPreferences("current_wallet", Context.MODE_PRIVATE)
-
         val currentWalletExists: Boolean = currentWallet.getBoolean("initialized", false)
         Timber.i("[PADAWANLOGS] Value of currentWalletExists at launch: $currentWalletExists")
 
+        // load wallet if it exists
         if (currentWalletExists) {
             val name: String = currentWallet.getString("name", null)!!
             val path: String = currentWallet.getString("path", null)!!
@@ -44,16 +41,6 @@ class DispatchActivity : AppCompatActivity() {
                 electrumURL = electrumURL,
                 electrumProxy = null,
             )
-
-//           val app = application as PadawanWalletApplication
-//           app.initialize(
-//               name = name,
-//               path = path,
-//               descriptor = descriptor,
-//               changeDescriptor = changeDescriptor,
-//               electrumURL = electrumURL,
-//               electrumProxy = null,
-//           )
         }
 
         // launch into wallet activity if user already has a padawan wallet on device

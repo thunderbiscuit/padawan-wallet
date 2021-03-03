@@ -70,7 +70,6 @@ class WalletBroadcast : Fragment() {
     }
 
     private fun verifyTransaction() {
-        // val app = requireActivity().application as PadawanWalletApplication
         val addresseesAndAmounts: List<Pair<String, String>> = listOf(Pair(address, amount))
         val feeRate = 1F
 
@@ -86,7 +85,6 @@ class WalletBroadcast : Fragment() {
     }
 
     private fun broadcastTransaction() {
-        // val app = requireActivity().application as PadawanWalletApplication
         var txidString: String = "string of txid"
 
         try {
@@ -98,7 +96,6 @@ class WalletBroadcast : Fragment() {
         } catch (e: Throwable) {
             Timber.i("[PADAWANLOGS] ${e.message}")
         }
-        // showBroadcastSuccessToast(txid = txidString)
         showBroadcastSuccessSnackbar(txid = txidString)
     }
 
