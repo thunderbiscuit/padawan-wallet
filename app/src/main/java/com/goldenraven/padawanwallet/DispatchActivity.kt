@@ -21,6 +21,7 @@ class DispatchActivity : AppCompatActivity() {
         // initiate Wallet object
         // val wallet: Wallet = Wallet
         Wallet.helloFrom("DispatchActivity")
+        // Wallet.setPath(applicationContext.filesDir.toString())
 
         // load wallet if it exists
         val currentWallet: SharedPreferences = getSharedPreferences("current_wallet", Context.MODE_PRIVATE)
@@ -29,21 +30,30 @@ class DispatchActivity : AppCompatActivity() {
         Timber.i("[PADAWANLOGS] Value of currentWalletExists at launch: $currentWalletExists")
 
         if (currentWalletExists) {
-           val name: String = currentWallet.getString("name", null)!!
-           val path: String = currentWallet.getString("path", null)!!
-           val descriptor: String = currentWallet.getString("descriptor", null)!!
-           val changeDescriptor: String = currentWallet.getString("changeDescriptor", null)!!
-           val electrumURL: String = currentWallet.getString("electrumURL", null)!!
+            val name: String = currentWallet.getString("name", null)!!
+            val path: String = currentWallet.getString("path", null)!!
+            val descriptor: String = currentWallet.getString("descriptor", null)!!
+            val changeDescriptor: String = currentWallet.getString("changeDescriptor", null)!!
+            val electrumURL: String = currentWallet.getString("electrumURL", null)!!
 
-           val app = application as PadawanWalletApplication
-           app.initialize(
-               name = name,
-               path = path,
-               descriptor = descriptor,
-               changeDescriptor = changeDescriptor,
-               electrumURL = electrumURL,
-               electrumProxy = null,
-           )
+            Wallet.initialize(
+                name = name,
+                path = path,
+                descriptor = descriptor,
+                changeDescriptor = changeDescriptor,
+                electrumURL = electrumURL,
+                electrumProxy = null,
+            )
+
+//           val app = application as PadawanWalletApplication
+//           app.initialize(
+//               name = name,
+//               path = path,
+//               descriptor = descriptor,
+//               changeDescriptor = changeDescriptor,
+//               electrumURL = electrumURL,
+//               electrumProxy = null,
+//           )
         }
 
         // launch into wallet activity if user already has a padawan wallet on device

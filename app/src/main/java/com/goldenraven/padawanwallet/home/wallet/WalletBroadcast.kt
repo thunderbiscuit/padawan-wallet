@@ -12,8 +12,8 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
-import com.goldenraven.padawanwallet.PadawanWalletApplication
 import com.goldenraven.padawanwallet.R
+import com.goldenraven.padawanwallet.Wallet
 import com.goldenraven.padawanwallet.databinding.FragmentWalletBroadcastBinding
 import com.google.android.material.snackbar.BaseTransientBottomBar
 import com.google.android.material.snackbar.Snackbar
@@ -70,14 +70,14 @@ class WalletBroadcast : Fragment() {
     }
 
     private fun verifyTransaction() {
-        val app = requireActivity().application as PadawanWalletApplication
+        // val app = requireActivity().application as PadawanWalletApplication
         val addresseesAndAmounts: List<Pair<String, String>> = listOf(Pair(address, amount))
         val feeRate = 1F
 
         Timber.i("[PADAWANLOGS] Send addresses are (from broadcast fragment): $addresseesAndAmounts")
 
         try {
-            transactionDetails = app.createTransaction(feeRate, addresseesAndAmounts, false, null, null, null)
+            transactionDetails = Wallet.createTransaction(feeRate, addresseesAndAmounts, false, null, null, null)
             // Timber.i("[PADAWANLOGS] transactionDetails from WalletVerify fragment is: $transactionDetails")
         } catch (e: Throwable) {
             Timber.i("[PADAWANLOGS] Verify transaction failed: ${e.message}")
@@ -86,13 +86,13 @@ class WalletBroadcast : Fragment() {
     }
 
     private fun broadcastTransaction() {
-        val app = requireActivity().application as PadawanWalletApplication
+        // val app = requireActivity().application as PadawanWalletApplication
         var txidString: String = "string of txid"
 
         try {
-            val signResponse: SignResponse = app.sign(transactionDetails.psbt)
-            val rawTx: RawTransaction = app.extractPsbt(signResponse.psbt)
-            val txid: Txid = app.broadcast(rawTx.transaction)
+            val signResponse: SignResponse = Wallet.sign(transactionDetails.psbt)
+            val rawTx: RawTransaction = Wallet.extractPsbt(signResponse.psbt)
+            val txid: Txid = Wallet.broadcast(rawTx.transaction)
             txidString = txid.toString()
             Timber.i("[PADAWANLOGS] Transaction was broadcast! txid: $txid, txidString: $txidString")
         } catch (e: Throwable) {
