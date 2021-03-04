@@ -2,8 +2,6 @@
     <style name="Theme.PadawanWallet" parent="Theme.MaterialComponents.NoActionBar">
         <item name="android:statusBarColor">@color/bg0soft</item>
         <item name="snackbarStyle">@style/CustomSnackbar</item>
-<!--        <item name="materialAlertDialogTheme">@style/CustomAlertDialogTheme</item>-->
-<!--        <item name="android:background">@color/bg0soft</item>-->
     </style>
 
     <style name="Theme.IntroPadawanWallet" parent="Theme.MaterialComponents.Light.NoActionBar">
@@ -15,18 +13,8 @@
         <item name="android:layout_margin">10dp</item>
     </style>
 
-<!--    <style name="MyCustomDialogTheme" parent="@style/ThemeOverlay.MaterialComponents.MaterialAlertDialog">-->
-<!--        <item name="buttonBarPositiveButtonStyle">@style/PositiveButtonStyle</item>-->
-<!--        <item name="buttonBarNegativeButtonStyle">@style/NegativeButtonStyle</item>-->
-<!--    </style>-->
-
-<!--    <style name="PositiveButtonStyle" parent="@style/Widget.MaterialComponents.Button.TextButton.Dialog">-->
-<!--        <item name="android:textColor">@color/aqua</item>-->
-<!--        <item name="backgroundTint">#00f</item>-->
-<!--    </style>-->
-
-<!--    <style name="NegativeButtonStyle" parent="@style/Widget.MaterialComponents.Button.TextButton.Dialog">-->
-<!--        <item name="android:textColor">@color/red</item>-->
-<!--        <item name="backgroundTint">@color/bg0hard</item>-->
-<!--    </style>-->
+    <style name="Theme.PadawanWallet.Launcher">
+        <item name="android:statusBarColor">@color/bg0soft_light</item>
+        <item name="android:windowBackground">@drawable/launch_screen</item>
+    </style>
 </resources>

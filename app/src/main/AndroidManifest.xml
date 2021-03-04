@@ -13,11 +13,11 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_logo_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.PadawanWallet">
+        android:theme="@style/Theme.PadawanWallet.Launcher">
 
         <activity
             android:name=".DispatchActivity"
-            android:theme="@style/Theme.IntroPadawanWallet"
+            android:theme="@style/Theme.PadawanWallet.Launcher"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -37,6 +37,7 @@
 
         <activity
             android:name=".home.HomeActivity"
+            android:theme="@style/Theme.PadawanWallet"
             android:parentActivityName=".intro.IntroActivity"
             android:windowSoftInputMode="adjustPan"
             android:screenOrientation="portrait">
