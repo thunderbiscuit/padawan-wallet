@@ -52,6 +52,7 @@
 
         <activity
             android:name=".drawer.DrawerActivity"
+            android:theme="@style/Theme.PadawanWallet"
             android:parentActivityName=".home.HomeActivity"
             android:screenOrientation="portrait">
             <intent-filter>
