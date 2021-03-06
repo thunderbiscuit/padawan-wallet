@@ -38,28 +38,28 @@ class DrawerActivity : AppCompatActivity() {
         // open the right fragment when starting the activity
         val drawerItem: String? = intent.getStringExtra("drawerItem")
         when(drawerItem) {
-            "about" -> supportFragmentManager.beginTransaction().replace(R.id.fragment_about, AboutFragment()).commit()
-            "settings" -> supportFragmentManager.beginTransaction().replace(R.id.fragment_about, SettingsFragment()).commit()
-            "seedphrase" -> supportFragmentManager.beginTransaction().replace(R.id.fragment_about, SeedPhraseFragment()).commit()
+            "about" -> supportFragmentManager.beginTransaction().replace(R.id.fragmentAbout, AboutFragment()).commit()
+            "settings" -> supportFragmentManager.beginTransaction().replace(R.id.fragmentAbout, SettingsFragment()).commit()
+            "seedphrase" -> supportFragmentManager.beginTransaction().replace(R.id.fragmentAbout, SeedPhraseFragment()).commit()
         }
 
         binding.navViewDrawerActivity.setNavigationItemSelectedListener {
             when(it.itemId) {
                 R.id.about -> {
                     Timber.i("[PADAWANLOGS] clicked about")
-                    supportFragmentManager.beginTransaction().replace(R.id.fragment_about, AboutFragment()).commit()
+                    supportFragmentManager.beginTransaction().replace(R.id.fragmentAbout, AboutFragment()).commit()
                     binding.drawerActivityLayout.closeDrawer(GravityCompat.START)
                     true
                 }
                 R.id.settings -> {
                     Timber.i("[PADAWANLOGS] clicked setting")
-                    supportFragmentManager.beginTransaction().replace(R.id.fragment_about, SettingsFragment()).commit()
+                    supportFragmentManager.beginTransaction().replace(R.id.fragmentAbout, SettingsFragment()).commit()
                     binding.drawerActivityLayout.closeDrawer(GravityCompat.START)
                     true
                 }
                 R.id.mnemonic -> {
                     Timber.i("[PADAWANLOGS] clicked seed phrase")
-                    supportFragmentManager.beginTransaction().replace(R.id.fragment_about, SeedPhraseFragment()).commit()
+                    supportFragmentManager.beginTransaction().replace(R.id.fragmentAbout, SeedPhraseFragment()).commit()
                     binding.drawerActivityLayout.closeDrawer(GravityCompat.START)
                     true
                 }
