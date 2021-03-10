@@ -73,7 +73,7 @@ class WalletChoiceFragment : Fragment() {
         val descriptor: String = Wallet.createDescriptor(keys)
         val changeDescriptor: String = Wallet.createChangeDescriptor(keys)
 
-        val editor2: SharedPreferences.Editor = this.requireActivity().getSharedPreferences("current_wallet", Context.MODE_PRIVATE)!!.edit()
-        Wallet.createWallet(descriptor, changeDescriptor, editor2)
+        // val editor2: SharedPreferences.Editor = this.requireActivity().getSharedPreferences("current_wallet", Context.MODE_PRIVATE)!!.edit()
+        Wallet.createWallet(descriptor, changeDescriptor, editor)
     }
 }
