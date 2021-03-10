@@ -102,8 +102,8 @@ class WalletRecoveryFragment : Fragment() {
         // generate new wallet
         val descriptor: String = Wallet.createDescriptor(this.keys)
         val changeDescriptor: String = Wallet.createChangeDescriptor(this.keys)
-        val editor2: SharedPreferences.Editor = requireActivity().getSharedPreferences("current_wallet", Context.MODE_PRIVATE)!!.edit()
-        Wallet.createWallet(descriptor, changeDescriptor, editor2)
+        // val editor2: SharedPreferences.Editor = requireActivity().getSharedPreferences("current_wallet", Context.MODE_PRIVATE)!!.edit()
+        Wallet.createWallet(descriptor, changeDescriptor, editor)
     }
 
     private fun showWordIsEmptySnackbar(wordNumber: Int) {
