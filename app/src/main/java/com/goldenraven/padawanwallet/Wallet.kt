@@ -31,22 +31,18 @@ object Wallet {
     }
 
     public fun initialize(
-        name: String,
-        path: String,
         descriptor: String,
         changeDescriptor: String,
-        electrumURL: String,
-        electrumProxy: String?,
     ): Unit {
         walletPtr = lib.constructor(
             WalletConstructor(
-                name = name,
+                name = this.name,
                 network = Network.testnet,
-                path = path,
+                path = this.path,
                 descriptor = descriptor,
                 change_descriptor = changeDescriptor,
-                electrum_url = electrumURL,
-                electrum_proxy = electrumProxy,
+                electrum_url = this.electrumURL,
+                electrum_proxy = null,
             )
         )
     }
@@ -56,12 +52,8 @@ object Wallet {
         Timber.i("[PADAWANLOGS] Descriptor: ${initialWalletData.descriptor}")
         Timber.i("[PADAWANLOGS] Change descriptor: ${initialWalletData.changeDescriptor}")
         this.initialize(
-            name = this.name,
-            path = this.path,
             descriptor = initialWalletData.descriptor,
             changeDescriptor = initialWalletData.changeDescriptor,
-            electrumURL = this.electrumURL,
-            electrumProxy = null,
         )
     }
 
@@ -70,14 +62,10 @@ object Wallet {
         val descriptor: String = createDescriptor(keys)
         val changeDescriptor: String = createChangeDescriptor(keys)
         this.initialize(
-            name = this.name,
-            path = this.path,
             descriptor = descriptor,
             changeDescriptor = changeDescriptor,
-            electrumURL = this.electrumURL,
-            electrumProxy = null,
         )
-        Repository.saveWallet(editor, path, descriptor, changeDescriptor)
+        Repository.saveWallet(editor, this.path, descriptor, changeDescriptor)
         Repository.saveMnemonic(editor, keys.mnemonic)
     }
 
@@ -86,14 +74,10 @@ object Wallet {
         val descriptor: String = createDescriptor(keys)
         val changeDescriptor: String = createChangeDescriptor(keys)
         this.initialize(
-            name = this.name,
-            path = this.path,
             descriptor = descriptor,
             changeDescriptor = changeDescriptor,
-            electrumURL = this.electrumURL,
-            electrumProxy = null,
         )
-        Repository.saveWallet(editor, path, descriptor, changeDescriptor)
+        Repository.saveWallet(editor, this.path, descriptor, changeDescriptor)
         Repository.saveMnemonic(editor, keys.mnemonic)
     }
 
