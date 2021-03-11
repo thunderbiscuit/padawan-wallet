@@ -5,6 +5,7 @@
 
 package com.goldenraven.padawanwallet
 
+import android.content.Context
 import android.content.SharedPreferences
 import org.bitcoindevkit.bdkjni.Lib
 import org.bitcoindevkit.bdkjni.Types.*
@@ -48,6 +49,18 @@ object Wallet {
                 electrum_url = electrumURL,
                 electrum_proxy = electrumProxy,
             )
+        )
+    }
+
+    public fun loadWallet(applicationContext: Context): Unit {
+        val initialWalletData: RequiredInitialWalletData = Repository.getInitialWalletData(applicationContext)
+        this.initialize(
+            name = this.name,
+            path = this.path,
+            electrumURL = this.electrumURL,
+            electrumProxy = null,
+            descriptor = initialWalletData.descriptor,
+            changeDescriptor = initialWalletData.changeDescriptor,
         )
     }
 
