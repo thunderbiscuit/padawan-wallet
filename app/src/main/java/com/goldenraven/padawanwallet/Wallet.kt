@@ -17,8 +17,6 @@ object Wallet {
     private val name: String = "Padawan Testnet 0"
     private val network: String = "testnet"
     private lateinit var path: String
-    // private lateinit var descriptor: String
-    // private lateinit var changeDescriptor: String
     private val electrumURL: String = "tcp://testnet.aranguren.org:51001"
 
     init {
@@ -27,17 +25,12 @@ object Wallet {
         this.lib = Lib()
     }
 
-    public fun helloFrom(location: String): Unit {
-        Timber.i("[PADAWANLOGS] New wallet is alive and well, reporting from $location")
-    }
-
-    // setting the path requires the application context and is done once
-    // by PadawanWalletApplication
+    // setting the path requires the application context and is done once by PadawanWalletApplication
     public fun setPath(path: String) {
         this.path = path
     }
 
-    fun initialize(
+    public fun initialize(
         name: String,
         path: String,
         descriptor: String,
@@ -45,12 +38,6 @@ object Wallet {
         electrumURL: String,
         electrumProxy: String?,
     ): Unit {
-        // this.name = name
-        // this.path = path
-        // this.descriptor = descriptor
-        // this.changeDescriptor = changeDescriptor
-        // this.electrumURL = electrumURL
-
         walletPtr = lib.constructor(
             WalletConstructor(
                 name = name,
@@ -64,7 +51,7 @@ object Wallet {
         )
     }
 
-    fun createWallet(descriptor: String, changeDescriptor: String, editor: SharedPreferences.Editor): Unit {
+    public fun createWallet(descriptor: String, changeDescriptor: String, editor: SharedPreferences.Editor): Unit {
         this.initialize(
             name = this.name,
             path = this.path,
@@ -78,9 +65,6 @@ object Wallet {
 
     // save wallet parameters so that the wallet can be reloaded upon starting the app
     private fun saveWallet(editor: SharedPreferences.Editor, descriptor: String, changeDescriptor: String): Unit {
-        // val editor: SharedPreferences.Editor = getSharedPreferences("current_wallet", Context.MODE_PRIVATE).edit()
-        // val editor = editor
-        // editor.edit()
         editor.putBoolean("initialized", true)
         editor.putString("name", this.name)
         editor.putString("network", this.network)
