@@ -18,8 +18,6 @@ class DispatchActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        Wallet.helloFrom("DispatchActivity")
-
         // check if a wallet already exists in shared preferences
         val currentWallet: SharedPreferences = getSharedPreferences("current_wallet", Context.MODE_PRIVATE)
         val currentWalletExists: Boolean = currentWallet.getBoolean("initialized", false)
