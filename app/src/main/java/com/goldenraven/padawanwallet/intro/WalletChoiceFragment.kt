@@ -15,8 +15,8 @@ import android.view.ViewGroup
 import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
-import com.goldenraven.padawanwallet.PadawanWalletApplication
 import com.goldenraven.padawanwallet.R
+import com.goldenraven.padawanwallet.Wallet
 import com.goldenraven.padawanwallet.databinding.FragmentWalletChoiceBinding
 import com.goldenraven.padawanwallet.home.HomeActivity
 import org.bitcoindevkit.bdkjni.Types.ExtendedKeys
@@ -54,9 +54,11 @@ class WalletChoiceFragment : Fragment() {
     }
 
     private fun generateWallet(): Unit {
-        val app = requireActivity().application as PadawanWalletApplication
+        // val app = requireActivity().application as PadawanWalletApplication
         // val app = activity.application as PadawanWalletApplication
-        this.keys = app.generateExtendedKey(12)
+        // this.keys = app.generateExtendedKey(12)
+
+        this.keys = Wallet.generateExtendedKey(12)
 
         // save seed phrase to shared preferences
         val editor: SharedPreferences.Editor = this.requireActivity().getSharedPreferences("current_wallet", Context.MODE_PRIVATE)!!.edit()
@@ -65,8 +67,13 @@ class WalletChoiceFragment : Fragment() {
         editor.apply()
 
         // generate new wallet
-        val descriptor: String = app.createDescriptor(keys)
-        val changeDescriptor: String = app.createChangeDescriptor(keys)
-        app.createWallet(descriptor, changeDescriptor)
+        // val descriptor: String = app.createDescriptor(keys)
+        // val changeDescriptor: String = app.createChangeDescriptor(keys)
+
+        val descriptor: String = Wallet.createDescriptor(keys)
+        val changeDescriptor: String = Wallet.createChangeDescriptor(keys)
+
+        // val editor2: SharedPreferences.Editor = this.requireActivity().getSharedPreferences("current_wallet", Context.MODE_PRIVATE)!!.edit()
+        Wallet.createWallet(descriptor, changeDescriptor, editor)
     }
 }

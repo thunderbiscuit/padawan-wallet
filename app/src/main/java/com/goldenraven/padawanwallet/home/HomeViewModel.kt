@@ -8,12 +8,10 @@ package com.goldenraven.padawanwallet.home
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
-import com.goldenraven.padawanwallet.PadawanWalletApplication
+import com.goldenraven.padawanwallet.Wallet
 import timber.log.Timber
 
 class HomeViewModel(application: Application) : AndroidViewModel(application) {
-
-    val app = application as PadawanWalletApplication
 
     public var balance: MutableLiveData<Long> = MutableLiveData(0)
     public var satoshiUnit: MutableLiveData<Boolean> = MutableLiveData(true)
@@ -31,8 +29,8 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
     )
 
     public fun updateBalance() {
-        app.sync(100)
-        val newBalance = app.getBalance()
+        Wallet.sync(100)
+        val newBalance = Wallet.getBalance()
         balance.postValue(newBalance)
     }
 

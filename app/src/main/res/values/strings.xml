@@ -45,6 +45,8 @@
     <string name="total">Total:</string>
     <string name="broadcast_transaction_button">Broadcast transaction</string>
     <string name="back_to_transaction_build">Back to transaction build</string>
+    <string name="bitcoin_sign">Ƀ</string>
+    <string name="copy_address">copy address</string>
 
     <!-- tutorials -->
     <string name="essentials_section_name">Essentials</string>

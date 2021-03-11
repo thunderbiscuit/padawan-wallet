@@ -10,19 +10,7 @@
     tools:context=".home.wallet.WalletBroadcast">
 
     <TextView
-        android:id="@+id/textView13"
-        android:layout_width="150dp"
-        android:layout_height="16dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:text="@string/network_fee"
-        android:textColor="@color/fg1"
-        android:textSize="12sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textView14" />
-
-    <TextView
-        android:id="@+id/textView14"
+        android:id="@+id/amountTransactedText"
         android:layout_width="150dp"
         android:layout_height="16dp"
         android:layout_marginStart="16dp"
@@ -31,10 +19,22 @@
         android:textColor="@color/fg1"
         android:textSize="12sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textView" />
+        app:layout_constraintTop_toBottomOf="@id/walletHeader" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/transactionFeeText"
+        android:layout_width="150dp"
+        android:layout_height="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/network_fee"
+        android:textColor="@color/fg1"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/amountTransactedText" />
+
+    <TextView
+        android:id="@+id/walletHeader"
         android:layout_width="0dp"
         android:layout_height="100dp"
         android:background="@color/orange"
@@ -47,7 +47,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/toAddressText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -56,7 +56,7 @@
         android:textColor="@color/fg1"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textView3" />
+        app:layout_constraintTop_toBottomOf="@id/totalAmountText" />
 
     <TextView
         android:id="@+id/amountTransacted"
@@ -70,7 +70,7 @@
         android:textColor="@color/fg1"
         android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textView" />
+        app:layout_constraintTop_toBottomOf="@id/walletHeader" />
 
     <TextView
         android:id="@+id/fees"
@@ -87,7 +87,7 @@
         app:layout_constraintTop_toBottomOf="@id/amountTransacted" />
 
     <View
-        android:id="@+id/view"
+        android:id="@+id/rule"
         android:layout_width="0dp"
         android:layout_height="0.5dp"
         android:layout_marginStart="16dp"
@@ -97,7 +97,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textView13" />
+        app:layout_constraintTop_toBottomOf="@id/transactionFeeText" />
 
     <TextView
         android:id="@+id/total"
@@ -111,10 +111,10 @@
         android:textColor="@color/fg1"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/view" />
+        app:layout_constraintTop_toBottomOf="@id/rule" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/totalAmountText"
         android:layout_width="150dp"
         android:layout_height="36dp"
         android:layout_marginStart="16dp"
@@ -124,7 +124,7 @@
         android:textColor="@color/fg1"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/view" />
+        app:layout_constraintTop_toBottomOf="@id/rule" />
 
     <TextView
         android:id="@+id/sendToAddress"
@@ -139,7 +139,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textView2" />
+        app:layout_constraintTop_toBottomOf="@id/toAddressText" />
 
     <Button
         android:id="@+id/buttonBroadcastTransaction"

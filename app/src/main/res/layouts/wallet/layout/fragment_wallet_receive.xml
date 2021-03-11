@@ -22,6 +22,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <ImageView
+        android:id="@+id/qrCode"
+        android:layout_width="270dp"
+        android:layout_height="270dp"
+        app:layout_constraintBottom_toTopOf="@+id/receiveAddress"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        tools:src="@tools:sample/avatars" />
+
     <TextView
         android:id="@+id/receiveAddress"
         android:layout_width="wrap_content"
@@ -33,7 +43,8 @@
         app:layout_constraintBottom_toTopOf="@+id/button4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintVertical_bias="0.6" />
 
     <TextView
         android:id="@+id/copyAddressButton"
@@ -41,15 +52,15 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
-        android:drawableLeft="@drawable/ic_copy_outline"
         android:drawablePadding="2dp"
         android:fontFamily="@font/roboto"
         android:gravity="center"
-        android:text="copy address"
+        android:text="@string/copy_address"
         android:textColor="@color/fg1"
         android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/viewLine4" />
+        app:layout_constraintTop_toBottomOf="@+id/viewLine4"
+        app:drawableStartCompat="@drawable/ic_copy_outline" />
 
     <Button
         android:id="@+id/buttonGenerateNewAddress"
