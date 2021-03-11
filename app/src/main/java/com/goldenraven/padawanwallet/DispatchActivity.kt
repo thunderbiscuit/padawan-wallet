@@ -20,7 +20,7 @@ class DispatchActivity : AppCompatActivity() {
 
         // load wallet if it exists
         if (currentWalletExists) {
-            Wallet.loadWallet(applicationContext)
+            Wallet.loadExistingWallet(applicationContext)
         }
 
         // launch into wallet activity if user already has a padawan wallet on device

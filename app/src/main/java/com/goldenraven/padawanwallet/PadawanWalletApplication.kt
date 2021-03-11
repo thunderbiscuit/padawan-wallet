@@ -19,6 +19,9 @@ class PadawanWalletApplication : Application() {
         // initialize Wallet object with path variable
         Wallet.setPath(applicationContext.filesDir.toString())
 
+        // initialize Repository object
+        Repository.initialize()
+
         // initialize Repository object with applicationContext
         // Repository.setApplicationContext(applicationContext)
     }
