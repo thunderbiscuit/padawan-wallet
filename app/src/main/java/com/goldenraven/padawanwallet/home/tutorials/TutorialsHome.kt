@@ -39,6 +39,7 @@ class TutorialsHome : Fragment() {
 
         // monitor done flags for tutorials
         val viewModel = ViewModelProvider(requireActivity()).get(HomeViewModel::class.java)
+        viewModel.retrieveDoneTutorials()
 
         viewModel.tutorialsDone.observe(viewLifecycleOwner, {
             Timber.i("[PADAWANLOGS] ${viewModel.tutorialsDone.value}")

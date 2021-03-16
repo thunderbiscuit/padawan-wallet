@@ -37,7 +37,7 @@ object Repository {
         return RequiredInitialWalletData(descriptor, changeDescriptor)
     }
 
-    public fun saveWallet(editor: SharedPreferences.Editor, path: String, descriptor: String, changeDescriptor: String) {
+    public fun saveWallet(editor: SharedPreferences.Editor, path: String, descriptor: String, changeDescriptor: String): Unit {
         Timber.i("[PADAWANLOGS] Saved wallet: path -> $path, descriptor -> $descriptor, change descriptor -> $changeDescriptor")
         editor.putBoolean("initialized", true)
         editor.putString("path", path)
@@ -46,9 +46,66 @@ object Repository {
         editor.apply()
     }
 
-    public fun saveMnemonic(editor: SharedPreferences.Editor, mnemonic: String) {
+    public fun saveMnemonic(editor: SharedPreferences.Editor, mnemonic: String): Unit {
         Timber.i("[PADAWANLOGS] The seed phrase is: ${mnemonic}")
         editor.putString("mnemonic", mnemonic)
         editor.apply()
+    }
+
+    public fun loadTutorialsDone(sharedPrefs: SharedPreferences): MutableMap<String, Boolean> {
+        val firstTimeTutorialsDone: Boolean = sharedPrefs.getBoolean("firstTimeTutorialsDone", true)
+        val editor = sharedPrefs.edit()
+
+        if (firstTimeTutorialsDone) {
+            editor.putBoolean("firstTimeTutorialsDone", false)
+            editor.putBoolean("e1", false)
+                .putBoolean("e2", false)
+                .putBoolean("e3", false)
+                .putBoolean("e4", false)
+                .putBoolean("e5", false)
+                .putBoolean("e6", false)
+                .putBoolean("e7", false)
+                .putBoolean("e8", false)
+                .apply()
+            return mutableMapOf(
+                    "e1" to false,
+                    "e2" to false,
+                    "e3" to false,
+                    "e4" to false,
+                    "e5" to false,
+                    "e6" to false,
+                    "e7" to false,
+                    "e8" to false,
+                )
+        } else {
+            return mutableMapOf(
+                    "e1" to sharedPrefs.getBoolean("e1", false),
+                    "e2" to sharedPrefs.getBoolean("e2", false),
+                    "e3" to sharedPrefs.getBoolean("e3", false),
+                    "e4" to sharedPrefs.getBoolean("e4", false),
+                    "e5" to sharedPrefs.getBoolean("e5", false),
+                    "e6" to sharedPrefs.getBoolean("e6", false),
+                    "e7" to sharedPrefs.getBoolean("e7", false),
+                    "e8" to sharedPrefs.getBoolean("e8", false),
+            )
+        }
+    }
+
+    public fun updateTutorialsDone(tutorialNumber: Int, editor: SharedPreferences.Editor): Unit {
+        editor.putBoolean("e$tutorialNumber", true)
+        editor.apply()
+    }
+
+    public fun resetTutorials(editor: SharedPreferences.Editor): Unit {
+        editor.putBoolean("e1", false)
+            .putBoolean("e2", false)
+            .putBoolean("e3", false)
+            .putBoolean("e4", false)
+            .putBoolean("e5", false)
+            .putBoolean("e6", false)
+            .putBoolean("e7", false)
+            .putBoolean("e8", false)
+            .apply()
+
     }
 }

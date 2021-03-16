@@ -25,4 +25,8 @@ class PadawanWalletApplication : Application() {
         // initialize Repository object with applicationContext
         // Repository.setApplicationContext(applicationContext)
     }
+
+//    public fun getAppContext(): Context {
+//        return applicationContext
+//    }
 }
