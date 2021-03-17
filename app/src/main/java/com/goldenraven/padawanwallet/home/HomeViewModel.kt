@@ -6,7 +6,6 @@
 package com.goldenraven.padawanwallet.home
 
 import android.app.Application
-import android.content.Context
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.goldenraven.padawanwallet.Repository
@@ -33,8 +32,7 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
     )
 
     public fun retrieveDoneTutorials() {
-        val editor = app.getSharedPreferences("current_wallet", Context.MODE_PRIVATE)!!
-        val newTutorialsDone = Repository.loadTutorialsDone(editor)
+        val newTutorialsDone = Repository.loadTutorialsDone()
         tutorialsDone.postValue(newTutorialsDone)
     }
 
@@ -56,45 +54,44 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
 
     public fun markAsDone(tutorialNumber: Int) {
         val newTutorialsDoneMap = tutorialsDone.value
-        val editor = app.getSharedPreferences("current_wallet", Context.MODE_PRIVATE)!!.edit()
         when (tutorialNumber) {
             1 -> {
-                Repository.updateTutorialsDone(1, editor)
+                Repository.updateTutorialsDone(1)
                 newTutorialsDoneMap?.set("e1", true)
                 tutorialsDone.postValue(newTutorialsDoneMap)
             }
             2 -> {
-                Repository.updateTutorialsDone(2, editor)
+                Repository.updateTutorialsDone(2)
                 newTutorialsDoneMap?.set("e2", true)
                 tutorialsDone.postValue(newTutorialsDoneMap)
             }
             3 -> {
-                Repository.updateTutorialsDone(3, editor)
+                Repository.updateTutorialsDone(3)
                 newTutorialsDoneMap?.set("e3", true)
                 tutorialsDone.postValue(newTutorialsDoneMap)
             }
             4 -> {
-                Repository.updateTutorialsDone(4, editor)
+                Repository.updateTutorialsDone(4)
                 newTutorialsDoneMap?.set("e4", true)
                 tutorialsDone.postValue(newTutorialsDoneMap)
             }
             5 -> {
-                Repository.updateTutorialsDone(5, editor)
+                Repository.updateTutorialsDone(5)
                 newTutorialsDoneMap?.set("e5", true)
                 tutorialsDone.postValue(newTutorialsDoneMap)
             }
             6 -> {
-                Repository.updateTutorialsDone(6, editor)
+                Repository.updateTutorialsDone(6)
                 newTutorialsDoneMap?.set("e6", true)
                 tutorialsDone.postValue(newTutorialsDoneMap)
             }
             7 -> {
-                Repository.updateTutorialsDone(7, editor)
+                Repository.updateTutorialsDone(7)
                 newTutorialsDoneMap?.set("e7", true)
                 tutorialsDone.postValue(newTutorialsDoneMap)
             }
             8 -> {
-                Repository.updateTutorialsDone(8, editor)
+                Repository.updateTutorialsDone(8)
                 newTutorialsDoneMap?.set("e8", true)
                 tutorialsDone.postValue(newTutorialsDoneMap)
             }

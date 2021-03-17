@@ -5,7 +5,6 @@
 
 package com.goldenraven.padawanwallet.drawer
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -32,7 +31,7 @@ class SettingsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.resetDoneTutorialsButton.setOnClickListener {
-            Repository.resetTutorials(requireActivity().getSharedPreferences("current_wallet", Context.MODE_PRIVATE)!!.edit())
+            Repository.resetTutorials()
         }
     }
 }

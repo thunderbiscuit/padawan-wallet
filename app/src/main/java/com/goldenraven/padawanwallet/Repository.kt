@@ -59,9 +59,9 @@ object Repository {
         editor.apply()
     }
 
-    public fun loadTutorialsDone(sharedPrefs: SharedPreferences): MutableMap<String, Boolean> {
-        val firstTimeTutorialsDone: Boolean = sharedPrefs.getBoolean("firstTimeTutorialsDone", true)
-        val editor = sharedPrefs.edit()
+    public fun loadTutorialsDone(): MutableMap<String, Boolean> {
+        val firstTimeTutorialsDone: Boolean = sharedPreferences.getBoolean("firstTimeTutorialsDone", true)
+        val editor = sharedPreferences.edit()
 
         if (firstTimeTutorialsDone) {
             editor.putBoolean("firstTimeTutorialsDone", false)
@@ -86,24 +86,26 @@ object Repository {
                 )
         } else {
             return mutableMapOf(
-                    "e1" to sharedPrefs.getBoolean("e1", false),
-                    "e2" to sharedPrefs.getBoolean("e2", false),
-                    "e3" to sharedPrefs.getBoolean("e3", false),
-                    "e4" to sharedPrefs.getBoolean("e4", false),
-                    "e5" to sharedPrefs.getBoolean("e5", false),
-                    "e6" to sharedPrefs.getBoolean("e6", false),
-                    "e7" to sharedPrefs.getBoolean("e7", false),
-                    "e8" to sharedPrefs.getBoolean("e8", false),
+                    "e1" to sharedPreferences.getBoolean("e1", false),
+                    "e2" to sharedPreferences.getBoolean("e2", false),
+                    "e3" to sharedPreferences.getBoolean("e3", false),
+                    "e4" to sharedPreferences.getBoolean("e4", false),
+                    "e5" to sharedPreferences.getBoolean("e5", false),
+                    "e6" to sharedPreferences.getBoolean("e6", false),
+                    "e7" to sharedPreferences.getBoolean("e7", false),
+                    "e8" to sharedPreferences.getBoolean("e8", false),
             )
         }
     }
 
-    public fun updateTutorialsDone(tutorialNumber: Int, editor: SharedPreferences.Editor): Unit {
+    public fun updateTutorialsDone(tutorialNumber: Int): Unit {
+        val editor = sharedPreferences.edit()
         editor.putBoolean("e$tutorialNumber", true)
         editor.apply()
     }
 
-    public fun resetTutorials(editor: SharedPreferences.Editor): Unit {
+    public fun resetTutorials(): Unit {
+        val editor = sharedPreferences.edit()
         editor.putBoolean("e1", false)
             .putBoolean("e2", false)
             .putBoolean("e3", false)
