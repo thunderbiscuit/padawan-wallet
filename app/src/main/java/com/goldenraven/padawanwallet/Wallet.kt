@@ -5,7 +5,6 @@
 
 package com.goldenraven.padawanwallet
 
-import android.content.SharedPreferences
 import org.bitcoindevkit.bdkjni.Lib
 import org.bitcoindevkit.bdkjni.Types.*
 import timber.log.Timber
@@ -14,81 +13,71 @@ object Wallet {
 
     private val lib: Lib
     private lateinit var walletPtr: WalletPtr
-    private val name: String = "Padawan Testnet 0"
-    private val network: String = "testnet"
+    private val name: String = "padawan-testnet-0"
     private lateinit var path: String
-    // private lateinit var descriptor: String
-    // private lateinit var changeDescriptor: String
-    private val electrumURL: String = "tcp://testnet.aranguren.org:51001"
-
+    // private val electrumURL: String = "tcp://testnet.aranguren.org:51001"
+    private val electrumURL: String = "ssl://electrum.blockstream.info:60002"
+    
     init {
         // load bitcoindevkit
         Lib.load()
         this.lib = Lib()
     }
 
-    public fun helloFrom(location: String): Unit {
-        Timber.i("[PADAWANLOGS] New wallet is alive and well, reporting from $location")
-    }
-
-    // setting the path requires the application context and is done once
-    // by PadawanWalletApplication
+    // setting the path requires the application context and is done once by PadawanWalletApplication
     public fun setPath(path: String) {
         this.path = path
     }
 
-    fun initialize(
-        name: String,
-        path: String,
+    public fun initialize(
         descriptor: String,
         changeDescriptor: String,
-        electrumURL: String,
-        electrumProxy: String?,
     ): Unit {
-        // this.name = name
-        // this.path = path
-        // this.descriptor = descriptor
-        // this.changeDescriptor = changeDescriptor
-        // this.electrumURL = electrumURL
-
         walletPtr = lib.constructor(
             WalletConstructor(
-                name = name,
+                name = this.name,
                 network = Network.testnet,
-                path = path,
+                path = this.path,
                 descriptor = descriptor,
                 change_descriptor = changeDescriptor,
-                electrum_url = electrumURL,
-                electrum_proxy = electrumProxy,
+                electrum_url = this.electrumURL,
+                electrum_proxy = null,
             )
         )
     }
 
-    fun createWallet(descriptor: String, changeDescriptor: String, editor: SharedPreferences.Editor): Unit {
+    public fun loadExistingWallet(): Unit {
+        val initialWalletData: RequiredInitialWalletData = Repository.getInitialWalletData()
+        Timber.i("[PADAWANLOGS] Descriptor: ${initialWalletData.descriptor}")
+        Timber.i("[PADAWANLOGS] Change descriptor: ${initialWalletData.changeDescriptor}")
         this.initialize(
-            name = this.name,
-            path = this.path,
-            descriptor = descriptor,
-            changeDescriptor = changeDescriptor,
-            electrumURL = this.electrumURL,
-            electrumProxy = null,
+            descriptor = initialWalletData.descriptor,
+            changeDescriptor = initialWalletData.changeDescriptor,
         )
-        this.saveWallet(editor, descriptor, changeDescriptor)
     }
 
-    // save wallet parameters so that the wallet can be reloaded upon starting the app
-    private fun saveWallet(editor: SharedPreferences.Editor, descriptor: String, changeDescriptor: String): Unit {
-        // val editor: SharedPreferences.Editor = getSharedPreferences("current_wallet", Context.MODE_PRIVATE).edit()
-        // val editor = editor
-        // editor.edit()
-        editor.putBoolean("initialized", true)
-        editor.putString("name", this.name)
-        editor.putString("network", this.network)
-        editor.putString("path", this.path)
-        editor.putString("descriptor", descriptor)
-        editor.putString("changeDescriptor", changeDescriptor)
-        editor.putString("electrumURL", this.electrumURL)
-        editor.apply()
+    public fun recoverWallet(mnemonic: String) {
+        val keys: ExtendedKeys = createExtendedKeyFromMnemonic(mnemonic)
+        val descriptor: String = createDescriptor(keys)
+        val changeDescriptor: String = createChangeDescriptor(keys)
+        this.initialize(
+            descriptor = descriptor,
+            changeDescriptor = changeDescriptor,
+        )
+        Repository.saveWallet(this.path, descriptor, changeDescriptor)
+        Repository.saveMnemonic(keys.mnemonic)
+    }
+
+    public fun createWallet(): Unit {
+        val keys: ExtendedKeys = generateExtendedKey(12)
+        val descriptor: String = createDescriptor(keys)
+        val changeDescriptor: String = createChangeDescriptor(keys)
+        this.initialize(
+            descriptor = descriptor,
+            changeDescriptor = changeDescriptor,
+        )
+        Repository.saveWallet(this.path, descriptor, changeDescriptor)
+        Repository.saveMnemonic(keys.mnemonic)
     }
 
     public fun generateExtendedKey(mnemonicWordCount: Int): ExtendedKeys {

@@ -44,7 +44,6 @@ class WalletReceive : Fragment() {
         }
 
         binding.buttonGenerateNewAddress.setOnClickListener {
-            Wallet.helloFrom("Receive Fragment")
             val newGeneratedAddress: String = Wallet.getNewAddress()
             Timber.i("[PADAWANLOGS] New deposit address is $newGeneratedAddress")
 

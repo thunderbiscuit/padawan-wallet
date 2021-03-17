@@ -6,6 +6,7 @@
 package com.goldenraven.padawanwallet
 
 import android.app.Application
+import android.content.Context
 import timber.log.Timber
 
 class PadawanWalletApplication : Application() {
@@ -18,5 +19,11 @@ class PadawanWalletApplication : Application() {
 
         // initialize Wallet object with path variable
         Wallet.setPath(applicationContext.filesDir.toString())
+
+        // initialize Repository object
+        // Repository.initialize()
+
+        // initialize Repository object with shared preferences
+        Repository.setSharedPreferences(applicationContext.getSharedPreferences("current_wallet", Context.MODE_PRIVATE))
     }
 }
