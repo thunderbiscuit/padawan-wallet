@@ -26,4 +26,8 @@ class PadawanWalletApplication : Application() {
         // initialize Repository object with shared preferences
         Repository.setSharedPreferences(applicationContext.getSharedPreferences("current_wallet", Context.MODE_PRIVATE))
     }
+
+//    public fun getAppContext(): Context {
+//        return applicationContext
+//    }
 }
