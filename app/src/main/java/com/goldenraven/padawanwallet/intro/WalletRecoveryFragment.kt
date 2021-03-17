@@ -5,9 +5,7 @@
 
 package com.goldenraven.padawanwallet.intro
 
-import android.content.Context
 import android.content.Intent
-import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -50,8 +48,8 @@ class WalletRecoveryFragment : Fragment() {
 
         view.findViewById<Button>(R.id.buttonRecoverWallet).setOnClickListener {
             if (checkWords()) {
-                val editor: SharedPreferences.Editor = requireActivity().getSharedPreferences("current_wallet", Context.MODE_PRIVATE)!!.edit()
-                Wallet.recoverWallet(editor, mnemonicString)
+                // val editor: SharedPreferences.Editor = requireActivity().getSharedPreferences("current_wallet", Context.MODE_PRIVATE)!!.edit()
+                Wallet.recoverWallet(mnemonicString)
 
                 // launch home activity
                 val intent: Intent = Intent(this@WalletRecoveryFragment.context, HomeActivity::class.java)

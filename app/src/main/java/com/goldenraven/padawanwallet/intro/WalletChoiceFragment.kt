@@ -5,9 +5,7 @@
 
 package com.goldenraven.padawanwallet.intro
 
-import android.content.Context
 import android.content.Intent
-import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -43,8 +41,8 @@ class WalletChoiceFragment : Fragment() {
         view.findViewById<Button>(R.id.create_wallet_button).setOnClickListener {
             val intent: Intent = Intent(this@WalletChoiceFragment.context, HomeActivity::class.java)
             // generateWallet()
-            val editor: SharedPreferences.Editor = this.requireActivity().getSharedPreferences("current_wallet", Context.MODE_PRIVATE)!!.edit()
-            Wallet.createWallet(editor)
+            // val editor: SharedPreferences.Editor = this.requireActivity().getSharedPreferences("current_wallet", Context.MODE_PRIVATE)!!.edit()
+            Wallet.createWallet()
             startActivity(intent)
         }
 
@@ -52,25 +50,4 @@ class WalletChoiceFragment : Fragment() {
             navController.navigate(R.id.action_walletChoice_to_walletRecoveryFragment)
         }
     }
-
-//    private fun generateWallet(): Unit {
-//
-//        // this.keys = Wallet.generateExtendedKey(12)
-//
-//        // save seed phrase to shared preferences
-////        val editor: SharedPreferences.Editor = this.requireActivity().getSharedPreferences("current_wallet", Context.MODE_PRIVATE)!!.edit()
-////        Timber.i("[PADAWANLOGS] The seed phrase is: ${keys.mnemonic}")
-////        editor.putString("seedphrase", keys.mnemonic)
-////        editor.apply()
-//
-//        // generate new wallet
-//        // val descriptor: String = app.createDescriptor(keys)
-//        // val changeDescriptor: String = app.createChangeDescriptor(keys)
-//
-////        val descriptor: String = Wallet.createDescriptor(keys)
-////        val changeDescriptor: String = Wallet.createChangeDescriptor(keys)
-//
-//        // val editor2: SharedPreferences.Editor = this.requireActivity().getSharedPreferences("current_wallet", Context.MODE_PRIVATE)!!.edit()
-////        Wallet.createWallet(descriptor, changeDescriptor, editor)
-//    }
 }
