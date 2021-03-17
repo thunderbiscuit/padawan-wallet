@@ -15,8 +15,9 @@ object Wallet {
     private lateinit var walletPtr: WalletPtr
     private val name: String = "padawan-testnet-0"
     private lateinit var path: String
-    private val electrumURL: String = "tcp://testnet.aranguren.org:51001"
-
+    // private val electrumURL: String = "tcp://testnet.aranguren.org:51001"
+    private val electrumURL: String = "ssl://electrum.blockstream.info:60002"
+    
     init {
         // load bitcoindevkit
         Lib.load()
