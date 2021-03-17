@@ -5,8 +5,6 @@
 
 package com.goldenraven.padawanwallet
 
-import android.content.Context
-import android.content.SharedPreferences
 import org.bitcoindevkit.bdkjni.Lib
 import org.bitcoindevkit.bdkjni.Types.*
 import timber.log.Timber
@@ -47,8 +45,8 @@ object Wallet {
         )
     }
 
-    public fun loadExistingWallet(applicationContext: Context): Unit {
-        val initialWalletData: RequiredInitialWalletData = Repository.getInitialWalletData(applicationContext)
+    public fun loadExistingWallet(): Unit {
+        val initialWalletData: RequiredInitialWalletData = Repository.getInitialWalletData()
         Timber.i("[PADAWANLOGS] Descriptor: ${initialWalletData.descriptor}")
         Timber.i("[PADAWANLOGS] Change descriptor: ${initialWalletData.changeDescriptor}")
         this.initialize(
@@ -57,7 +55,7 @@ object Wallet {
         )
     }
 
-    public fun recoverWallet(editor: SharedPreferences.Editor, mnemonic: String) {
+    public fun recoverWallet(mnemonic: String) {
         val keys: ExtendedKeys = createExtendedKeyFromMnemonic(mnemonic)
         val descriptor: String = createDescriptor(keys)
         val changeDescriptor: String = createChangeDescriptor(keys)
@@ -65,11 +63,11 @@ object Wallet {
             descriptor = descriptor,
             changeDescriptor = changeDescriptor,
         )
-        Repository.saveWallet(editor, this.path, descriptor, changeDescriptor)
-        Repository.saveMnemonic(editor, keys.mnemonic)
+        Repository.saveWallet(this.path, descriptor, changeDescriptor)
+        Repository.saveMnemonic(keys.mnemonic)
     }
 
-    public fun createWallet(editor: SharedPreferences.Editor): Unit {
+    public fun createWallet(): Unit {
         val keys: ExtendedKeys = generateExtendedKey(12)
         val descriptor: String = createDescriptor(keys)
         val changeDescriptor: String = createChangeDescriptor(keys)
@@ -77,8 +75,8 @@ object Wallet {
             descriptor = descriptor,
             changeDescriptor = changeDescriptor,
         )
-        Repository.saveWallet(editor, this.path, descriptor, changeDescriptor)
-        Repository.saveMnemonic(editor, keys.mnemonic)
+        Repository.saveWallet(this.path, descriptor, changeDescriptor)
+        Repository.saveMnemonic(keys.mnemonic)
     }
 
     public fun generateExtendedKey(mnemonicWordCount: Int): ExtendedKeys {
