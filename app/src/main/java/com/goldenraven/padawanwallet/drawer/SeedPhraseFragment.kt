@@ -32,13 +32,13 @@ class SeedPhraseFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        populateSeedPhrase()
+        populateMnemonic()
     }
 
-    fun populateSeedPhrase() {
+    fun populateMnemonic() {
         // retrieve seed phrase from shared preferences
         val sharedPref = this.getActivity()?.getSharedPreferences("current_wallet", Context.MODE_PRIVATE)
-        val seedphrase: String? = sharedPref?.getString("seedphrase", "No seed phrase")
+        val seedphrase: String? = sharedPref?.getString("mnemonic", "No seed phrase")
         Timber.i("[PADAWANLOGS] Seed phrase: $seedphrase")
         view?.findViewById<TextView>(R.id.seedPhraseText)?.text = seedphrase
     }

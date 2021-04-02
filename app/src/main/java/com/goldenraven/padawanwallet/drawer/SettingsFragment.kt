@@ -10,6 +10,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.goldenraven.padawanwallet.Repository
 import com.goldenraven.padawanwallet.databinding.FragmentSettingsBinding
 
 class SettingsFragment : Fragment() {
@@ -24,5 +25,13 @@ class SettingsFragment : Fragment() {
         binding = FragmentSettingsBinding.inflate(inflater, container, false)
         val view: View = binding.root
         return view
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        binding.resetDoneTutorialsButton.setOnClickListener {
+            Repository.resetTutorials()
+        }
     }
 }

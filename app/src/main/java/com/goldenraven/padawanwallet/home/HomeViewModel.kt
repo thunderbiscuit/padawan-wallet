@@ -8,10 +8,13 @@ package com.goldenraven.padawanwallet.home
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
+import com.goldenraven.padawanwallet.Repository
 import com.goldenraven.padawanwallet.Wallet
 import timber.log.Timber
 
 class HomeViewModel(application: Application) : AndroidViewModel(application) {
+
+    val app: Application = application
 
     public var balance: MutableLiveData<Long> = MutableLiveData(0)
     public var satoshiUnit: MutableLiveData<Boolean> = MutableLiveData(true)
@@ -27,6 +30,11 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
                     "e8" to false,
             )
     )
+
+    public fun retrieveDoneTutorials() {
+        val newTutorialsDone = Repository.loadTutorialsDone()
+        tutorialsDone.postValue(newTutorialsDone)
+    }
 
     public fun updateBalance() {
         Wallet.sync(100)
@@ -48,34 +56,42 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
         val newTutorialsDoneMap = tutorialsDone.value
         when (tutorialNumber) {
             1 -> {
+                Repository.updateTutorialsDone(1)
                 newTutorialsDoneMap?.set("e1", true)
                 tutorialsDone.postValue(newTutorialsDoneMap)
             }
             2 -> {
+                Repository.updateTutorialsDone(2)
                 newTutorialsDoneMap?.set("e2", true)
                 tutorialsDone.postValue(newTutorialsDoneMap)
             }
             3 -> {
+                Repository.updateTutorialsDone(3)
                 newTutorialsDoneMap?.set("e3", true)
                 tutorialsDone.postValue(newTutorialsDoneMap)
             }
             4 -> {
+                Repository.updateTutorialsDone(4)
                 newTutorialsDoneMap?.set("e4", true)
                 tutorialsDone.postValue(newTutorialsDoneMap)
             }
             5 -> {
+                Repository.updateTutorialsDone(5)
                 newTutorialsDoneMap?.set("e5", true)
                 tutorialsDone.postValue(newTutorialsDoneMap)
             }
             6 -> {
+                Repository.updateTutorialsDone(6)
                 newTutorialsDoneMap?.set("e6", true)
                 tutorialsDone.postValue(newTutorialsDoneMap)
             }
             7 -> {
+                Repository.updateTutorialsDone(7)
                 newTutorialsDoneMap?.set("e7", true)
                 tutorialsDone.postValue(newTutorialsDoneMap)
             }
             8 -> {
+                Repository.updateTutorialsDone(8)
                 newTutorialsDoneMap?.set("e8", true)
                 tutorialsDone.postValue(newTutorialsDoneMap)
             }

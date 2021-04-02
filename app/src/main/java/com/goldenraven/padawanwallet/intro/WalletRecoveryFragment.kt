@@ -5,9 +5,7 @@
 
 package com.goldenraven.padawanwallet.intro
 
-import android.content.Context
 import android.content.Intent
-import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -22,7 +20,6 @@ import com.goldenraven.padawanwallet.databinding.FragmentRecoverBinding
 import com.goldenraven.padawanwallet.home.HomeActivity
 import com.google.android.material.snackbar.BaseTransientBottomBar
 import com.google.android.material.snackbar.Snackbar
-import org.bitcoindevkit.bdkjni.Types.ExtendedKeys
 import timber.log.Timber
 
 class WalletRecoveryFragment : Fragment() {
@@ -30,7 +27,7 @@ class WalletRecoveryFragment : Fragment() {
     private lateinit var binding: FragmentRecoverBinding
     private lateinit var wordList: List<String>
     private lateinit var mnemonicString: String
-    private lateinit var keys: ExtendedKeys
+
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = FragmentRecoverBinding.inflate(inflater, container, false)
@@ -51,7 +48,10 @@ class WalletRecoveryFragment : Fragment() {
 
         view.findViewById<Button>(R.id.buttonRecoverWallet).setOnClickListener {
             if (checkWords()) {
-                this.loadWallet()
+                // val editor: SharedPreferences.Editor = requireActivity().getSharedPreferences("current_wallet", Context.MODE_PRIVATE)!!.edit()
+                Wallet.recoverWallet(mnemonicString)
+
+                // launch home activity
                 val intent: Intent = Intent(this@WalletRecoveryFragment.context, HomeActivity::class.java)
                 startActivity(intent)
             } else {
@@ -90,21 +90,21 @@ class WalletRecoveryFragment : Fragment() {
         return true
     }
 
-    private fun loadWallet() {
-        this.keys = Wallet.createExtendedKeyFromMnemonic(this.mnemonicString)
-
-        // save seed phrase to shared preferences
-        val editor: SharedPreferences.Editor = requireActivity().getSharedPreferences("current_wallet", Context.MODE_PRIVATE)!!.edit()
-        Timber.i("[PADAWANLOGS] The seed phrase for the recovered wallet is: ${keys.mnemonic}")
-        editor.putString("seedphrase", keys.mnemonic)
-        editor.apply()
-
-        // generate new wallet
-        val descriptor: String = Wallet.createDescriptor(this.keys)
-        val changeDescriptor: String = Wallet.createChangeDescriptor(this.keys)
-        // val editor2: SharedPreferences.Editor = requireActivity().getSharedPreferences("current_wallet", Context.MODE_PRIVATE)!!.edit()
-        Wallet.createWallet(descriptor, changeDescriptor, editor)
-    }
+//    private fun loadWallet() {
+//        this.keys = Wallet.createExtendedKeyFromMnemonic(this.mnemonicString)
+//
+//        // save seed phrase to shared preferences
+////        val editor: SharedPreferences.Editor = requireActivity().getSharedPreferences("current_wallet", Context.MODE_PRIVATE)!!.edit()
+////        Timber.i("[PADAWANLOGS] The seed phrase for the recovered wallet is: ${keys.mnemonic}")
+////        editor.putString("seedphrase", keys.mnemonic)
+////        editor.apply()
+//
+//        // generate new wallet
+//        val descriptor: String = Wallet.createDescriptor(this.keys)
+//        val changeDescriptor: String = Wallet.createChangeDescriptor(this.keys)
+//        // val editor2: SharedPreferences.Editor = requireActivity().getSharedPreferences("current_wallet", Context.MODE_PRIVATE)!!.edit()
+//        Wallet.createWallet(descriptor, changeDescriptor, editor)
+//    }
 
     private fun showWordIsEmptySnackbar(wordNumber: Int) {
         val wordIsEmptySnackbar = Snackbar.make(requireView(), "Word ${(wordNumber + 1).toString()} is empty!", Snackbar.LENGTH_LONG)
