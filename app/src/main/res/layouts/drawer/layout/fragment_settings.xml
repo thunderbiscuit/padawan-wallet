@@ -8,7 +8,7 @@
     android:background="@color/bg0soft">
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/settingsTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="140dp"
@@ -22,13 +22,28 @@
 
     <Button
         android:id="@+id/resetDoneTutorialsButton"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
         android:backgroundTint="@color/bright_yellow"
         android:text="@string/reset_tutorials"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+        app:layout_constraintTop_toBottomOf="@+id/settingsTitle" />
+
+    <Button
+        android:id="@+id/apiCallButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="32dp"
+        android:backgroundTint="@color/bright_yellow"
+        android:text="Call Tatooine API"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/resetDoneTutorialsButton" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

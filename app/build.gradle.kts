@@ -67,10 +67,19 @@ dependencies {
     implementation("androidx.legacy:legacy-support-v4:1.0.0")
     implementation("androidx.viewpager:viewpager:1.0.0")
 
+    // bitcoin
     implementation("org.bitcoindevkit.bdkjni:bdk-jni:0.1.0-beta.1")
+
+    // Ktor
+    implementation("io.ktor:ktor-client-cio:${Versions.ktor}")
+
+    // logging
     implementation("com.jakewharton.timber:timber:4.7.1")
+
+    // QR codes
     implementation("androidmads.library.qrgenearator:QRGenearator:1.0.4")
     implementation("com.google.zxing:core:3.4.1")
 
+    // testing
     testImplementation("junit:junit:4.+")
 }
