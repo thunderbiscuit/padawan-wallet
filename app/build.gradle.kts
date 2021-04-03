@@ -72,6 +72,7 @@ dependencies {
 
     // Ktor
     implementation("io.ktor:ktor-client-cio:${Versions.ktor}")
+    implementation("io.ktor:ktor-client-auth:${Versions.ktor}")
 
     // logging
     implementation("com.jakewharton.timber:timber:4.7.1")
