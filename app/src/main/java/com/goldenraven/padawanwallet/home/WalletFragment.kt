@@ -10,7 +10,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.goldenraven.padawanwallet.R
 import com.goldenraven.padawanwallet.databinding.FragmentWalletBinding
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import timber.log.Timber
 
 class WalletFragment : Fragment() {
 
@@ -24,5 +27,23 @@ class WalletFragment : Fragment() {
         binding = FragmentWalletBinding.inflate(inflater, container, false)
         val view: View = binding.root
         return view
+    }
+
+    private val dialogMessage: String = "We notice it is your first time opening this wallet. Would you like Padawan to send you some testnet coins to get your started?"
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val firstTimePadawanWalletDialog = MaterialAlertDialogBuilder(this@WalletFragment.requireContext(), R.style.MyCustomDialogTheme)
+            .setTitle("Hello there!")
+            .setMessage(dialogMessage)
+            .setPositiveButton("Yes please!") { _, _ ->
+                Timber.i("[PADAWANLOGS] User would appreciate some testnet coins!")
+                // requestCoinsTatooine()
+            }
+            .setNegativeButton("No thanks") { _, _ ->
+                Timber.i("[PADAWANLOGS] User doesn't need the coins right now.")
+            }
+        firstTimePadawanWalletDialog.show()
     }
 }
