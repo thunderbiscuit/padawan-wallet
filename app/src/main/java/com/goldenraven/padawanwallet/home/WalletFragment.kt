@@ -5,12 +5,14 @@
 
 package com.goldenraven.padawanwallet.home
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.goldenraven.padawanwallet.R
+import com.goldenraven.padawanwallet.Repository
 import com.goldenraven.padawanwallet.databinding.FragmentWalletBinding
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import timber.log.Timber
@@ -40,10 +42,21 @@ class WalletFragment : Fragment() {
             .setPositiveButton("Yes please!") { _, _ ->
                 Timber.i("[PADAWANLOGS] User would appreciate some testnet coins!")
                 // requestCoinsTatooine()
+                Repository.oneTimeFaucetCallDone()
             }
             .setNegativeButton("No thanks") { _, _ ->
                 Timber.i("[PADAWANLOGS] User doesn't need the coins right now.")
+                Repository.oneTimeFaucetCallDone()
             }
-        firstTimePadawanWalletDialog.show()
+
+        val oneTimeCallTatooine =
+            context?.getSharedPreferences("current_wallet", Context.MODE_PRIVATE)
+                ?.getBoolean("oneTimeFaucetCallDone", false)
+
+        Timber.i("[PADAWANLOGS] Value of oneTimeFaucetCallDone is $oneTimeCallTatooine")
+
+        if (oneTimeCallTatooine == false) {
+            firstTimePadawanWalletDialog.show()
+        }
     }
 }

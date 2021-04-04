@@ -19,15 +19,6 @@ object Repository {
         this.sharedPreferences = sharedPref
     }
 
-    // private lateinit var applicationContext: Context
-    // public fun setApplicationContext(applicationContext: Context) {
-    //     this.applicationContext = applicationContext
-    // }
-
-    // public fun initialize() {
-    //     Timber.i("[PADAWANLOGS]: Repository is initialized")
-    // }
-
     public fun doesWalletExist(): Boolean {
         // val currentWallet: SharedPreferences = applicationContext.getSharedPreferences("current_wallet", Context.MODE_PRIVATE)
         val currentWalletExists: Boolean = sharedPreferences.getBoolean("initialized", false)
@@ -56,6 +47,12 @@ object Repository {
         Timber.i("[PADAWANLOGS] The seed phrase is: ${mnemonic}")
         val editor = sharedPreferences.edit()
         editor.putString("mnemonic", mnemonic)
+        editor.apply()
+    }
+
+    public fun oneTimeFaucetCallDone(): Unit {
+        val editor = sharedPreferences.edit()
+        editor.putBoolean("oneTimeFaucetCallDone", true)
         editor.apply()
     }
 
