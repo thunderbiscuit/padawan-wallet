@@ -11,10 +11,21 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import com.goldenraven.padawanwallet.R
 import com.goldenraven.padawanwallet.Repository
+import com.goldenraven.padawanwallet.Wallet
 import com.goldenraven.padawanwallet.databinding.FragmentWalletBinding
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import io.ktor.client.*
+import io.ktor.client.engine.cio.*
+import io.ktor.client.features.auth.*
+import io.ktor.client.features.auth.providers.*
+import io.ktor.client.request.*
+import io.ktor.client.statement.*
+import io.ktor.content.*
+import io.ktor.http.*
+import kotlinx.coroutines.launch
 import timber.log.Timber
 
 class WalletFragment : Fragment() {
@@ -41,7 +52,8 @@ class WalletFragment : Fragment() {
             .setMessage(dialogMessage)
             .setPositiveButton("Yes please!") { _, _ ->
                 Timber.i("[PADAWANLOGS] User would appreciate some testnet coins!")
-                // requestCoinsTatooine()
+                val address: String = Wallet.getNewAddress()
+                callTatooineFaucet(address)
                 Repository.oneTimeFaucetCallDone()
             }
             .setNegativeButton("No thanks") { _, _ ->
@@ -57,6 +69,26 @@ class WalletFragment : Fragment() {
 
         if (oneTimeCallTatooine == false) {
             firstTimePadawanWalletDialog.show()
+        }
+    }
+
+    private fun callTatooineFaucet(address: String) {
+        lifecycleScope.launch {
+            val ktorClient = HttpClient(CIO) {
+                install(Auth) {
+                    basic {
+                        username = "padawan"
+                        password = "e6080674ac35c53f0dd3953e7689d3c2c6bcaccffcb3b95983f6db45977a072e"
+                    }
+                }
+            }
+
+            Timber.i("[PADAWANLOGS]: API call to Tatooine will request coins at $address")
+            val response: HttpResponse = ktorClient.post("http://172.105.14.49:8872/sendcoins") {
+                body = TextContent(address, ContentType.Text.Plain)
+            }
+            Timber.i("[PADAWANLOGS]: API call to Tatooine was performed. Response is ${response.status}, ${response.readText()}")
+            ktorClient.close()
         }
     }
 }
