@@ -5,6 +5,25 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).  
 <br/>
 
+## [v0.5.0](https://github.com/thunderbiscuit/padawan-wallet/releases/tag/v0.5.0) — Apr 7, 2020
+### Added
++ Add QR codes when displaying receive addresses
++ Shared preferences keep track of completed tutorials
++ All 8 essential tutorials
++ Added Discord community to readme
++ Add twitter badge
++ Prevent app from going into landscape mode
++ Add GitHub Actions basic CI workflow
++ Add splash screen
+
+### Changed
++ Better readme and docs
++ Move gradle build files to Kotlin DSL
++ Use Repository architecture element
++ Move the bitcoindevkit to Wallet Object
++ Point bdk to blockstream.info servers  
+<br/>  
+
 ## [v0.4.0](https://github.com/thunderbiscuit/padawan-wallet/releases/tag/v0.4.0) — Jan 12, 2020
 ### Added
 + Add tutorial fragments UI
@@ -12,8 +31,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 + Make tutorials list scrollable
 
 ### Changed
-+ Various improvements to the codebase
-<br/>
++ Various improvements to the codebase  
+<br/>  
 
 ## [v0.3.0](https://github.com/thunderbiscuit/padawan-wallet/releases/tag/v0.3.0) — Jan 5, 2020
 ### Added
