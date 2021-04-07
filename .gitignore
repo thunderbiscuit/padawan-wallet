@@ -7,6 +7,7 @@
 /buildSrc/build
 /app/build
 /app/release
+/app/gradle.properties
 output-metadata.json
 /captures
 .externalNativeBuild
