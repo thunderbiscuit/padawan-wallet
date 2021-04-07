@@ -3,6 +3,10 @@ plugins {
     id("kotlin-android")
 }
 
+val faucetUrl: String by project
+val faucetUsername: String by project
+val faucetPassword: String by project
+
 android {
     compileSdkVersion(30)
     buildToolsVersion = "30.0.2"
@@ -18,6 +22,9 @@ android {
         versionCode = 1
         versionName = "0.1.0"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        buildConfigField("String", "FAUCET_URL", faucetUrl)
+        buildConfigField("String", "FAUCET_USERNAME", faucetUsername)
+        buildConfigField("String", "FAUCET_PASSWORD", faucetPassword)
     }
 
     sourceSets {

@@ -12,6 +12,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import com.goldenraven.padawanwallet.BuildConfig
 import com.goldenraven.padawanwallet.R
 import com.goldenraven.padawanwallet.Repository
 import com.goldenraven.padawanwallet.Wallet
@@ -73,18 +74,22 @@ class WalletFragment : Fragment() {
     }
 
     private fun callTatooineFaucet(address: String) {
+        val faucetUrl: String = BuildConfig.FAUCET_URL
+        val faucetUsername: String = BuildConfig.FAUCET_USERNAME
+        val faucetPassword: String = BuildConfig.FAUCET_PASSWORD
+
         lifecycleScope.launch {
             val ktorClient = HttpClient(CIO) {
                 install(Auth) {
                     basic {
-                        username = "padawan"
-                        password = "e6080674ac35c53f0dd3953e7689d3c2c6bcaccffcb3b95983f6db45977a072e"
+                        username = faucetUsername
+                        password = faucetPassword
                     }
                 }
             }
 
             Timber.i("[PADAWANLOGS]: API call to Tatooine will request coins at $address")
-            val response: HttpResponse = ktorClient.post("http://172.105.14.49:8872/sendcoins") {
+            val response: HttpResponse = ktorClient.post(faucetUrl) {
                 body = TextContent(address, ContentType.Text.Plain)
             }
             Timber.i("[PADAWANLOGS]: API call to Tatooine was performed. Response is ${response.status}, ${response.readText()}")

@@ -10,17 +10,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.lifecycleScope
 import com.goldenraven.padawanwallet.Repository
 import com.goldenraven.padawanwallet.databinding.FragmentSettingsBinding
-import io.ktor.client.*
-import io.ktor.client.engine.cio.*
-import io.ktor.client.features.auth.*
-import io.ktor.client.features.auth.providers.*
-import io.ktor.client.request.*
-import io.ktor.client.statement.*
-import kotlinx.coroutines.launch
-import timber.log.Timber
 
 class SettingsFragment : Fragment() {
 
@@ -44,26 +35,7 @@ class SettingsFragment : Fragment() {
         }
 
         binding.apiCallButton.setOnClickListener {
-            callAPI()
-        }
-    }
-
-    private fun callAPI() {
-        lifecycleScope.launch {
-            val ktorClient = HttpClient(CIO) {
-                install(Auth) {
-                    basic {
-                        username = "padawan"
-                        password = "password"
-                    }
-                }
-            }
-            val response: HttpResponse = ktorClient.get("http://172.105.14.49:8080")
-            Timber.i("[PADAWANLOGS]: API response status is ${response.status}, ${response.readText()}")
-
-            val response2: HttpResponse = ktorClient.get("http://172.105.14.49:8080/protectedroute")
-            Timber.i("[PADAWANLOGS]: API response2 status is ${response2.status}, ${response2.readText()}")
-            ktorClient.close()
+            // callAPI()
         }
     }
 }
