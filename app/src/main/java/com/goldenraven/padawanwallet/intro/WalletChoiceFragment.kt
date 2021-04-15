@@ -21,7 +21,6 @@ import com.goldenraven.padawanwallet.home.HomeActivity
 class WalletChoiceFragment : Fragment() {
 
     private lateinit var binding: FragmentWalletChoiceBinding
-    // private lateinit var keys: ExtendedKeys
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -40,8 +39,6 @@ class WalletChoiceFragment : Fragment() {
 
         view.findViewById<Button>(R.id.create_wallet_button).setOnClickListener {
             val intent: Intent = Intent(this@WalletChoiceFragment.context, HomeActivity::class.java)
-            // generateWallet()
-            // val editor: SharedPreferences.Editor = this.requireActivity().getSharedPreferences("current_wallet", Context.MODE_PRIVATE)!!.edit()
             Wallet.createWallet()
             startActivity(intent)
         }

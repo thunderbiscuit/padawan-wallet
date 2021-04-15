@@ -44,11 +44,9 @@ class WalletRecoveryFragment : Fragment() {
         }
 
         this.wordList = inputString.split("\n").map { it.trim() }
-        // Timber.i("[PADAWANLOGS] Word list is $wordList")
 
         view.findViewById<Button>(R.id.buttonRecoverWallet).setOnClickListener {
             if (checkWords()) {
-                // val editor: SharedPreferences.Editor = requireActivity().getSharedPreferences("current_wallet", Context.MODE_PRIVATE)!!.edit()
                 Wallet.recoverWallet(mnemonicString)
 
                 // launch home activity
@@ -89,22 +87,6 @@ class WalletRecoveryFragment : Fragment() {
         this.mnemonicString = mnemonicWordList.joinToString(" ")
         return true
     }
-
-//    private fun loadWallet() {
-//        this.keys = Wallet.createExtendedKeyFromMnemonic(this.mnemonicString)
-//
-//        // save seed phrase to shared preferences
-////        val editor: SharedPreferences.Editor = requireActivity().getSharedPreferences("current_wallet", Context.MODE_PRIVATE)!!.edit()
-////        Timber.i("[PADAWANLOGS] The seed phrase for the recovered wallet is: ${keys.mnemonic}")
-////        editor.putString("seedphrase", keys.mnemonic)
-////        editor.apply()
-//
-//        // generate new wallet
-//        val descriptor: String = Wallet.createDescriptor(this.keys)
-//        val changeDescriptor: String = Wallet.createChangeDescriptor(this.keys)
-//        // val editor2: SharedPreferences.Editor = requireActivity().getSharedPreferences("current_wallet", Context.MODE_PRIVATE)!!.edit()
-//        Wallet.createWallet(descriptor, changeDescriptor, editor)
-//    }
 
     private fun showWordIsEmptySnackbar(wordNumber: Int) {
         val wordIsEmptySnackbar = Snackbar.make(requireView(), "Word ${(wordNumber + 1).toString()} is empty!", Snackbar.LENGTH_LONG)

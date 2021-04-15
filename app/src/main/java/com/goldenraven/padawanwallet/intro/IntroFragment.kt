@@ -46,25 +46,11 @@ class IntroFragment : Fragment() {
                                     navController.navigate(R.id.action_introFragment_to_walletChoice)
                                 }
                                 .setNegativeButton("Cancel") { _, _ ->
-                                    // Toast.makeText(this!!, "Read this page again!", Toast.LENGTH_LONG).show()
                                 }
 
-//        val testnetDialog = this@IntroFragment.context?.let {
-//            AlertDialog.Builder(it, R.style.MyDialogTheme)
-//                .setTitle("Be Careful!")
-//                    .setMessage(dialogMessage)
-//                    .setPositiveButton("I understand") { _, _ ->
-//                        Timber.i("[PADAWANLOGS] User confirms they understands it's a testnet only wallet")
-//                        navController.navigate(R.id.action_introFragment_to_walletChoice)
-//                    }
-//                    .setNegativeButton("Cancel") { _, _ ->
-//                        // Toast.makeText(this!!, "Read this page again!", Toast.LENGTH_LONG).show()
-//                    }
-//        }
 
         view.findViewById<Button>(R.id.lets_go_button).setOnClickListener {
             Timber.i("[PADAWANLOGS] User is ready to go!")
-            // testnetDialog?.show()
             testnetDialog.show()
         }
     }
