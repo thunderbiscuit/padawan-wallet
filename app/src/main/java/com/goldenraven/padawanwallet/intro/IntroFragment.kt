@@ -25,10 +25,9 @@ class IntroFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?,
-    ): View? {
+    ): View {
         binding = FragmentIntroBinding.inflate(inflater, container, false)
-        val view: View = binding.root
-        return view
+        return binding.root
     }
 
     private val dialogMessage: String = "It’s important you know that Padawan is not a bitcoin wallet that can handle normal bitcoins.\n\nThis wallet is built to help you learn and experiment with bitcoin wallets through a series of tutorials, and it uses testnet coins, a type of bitcoin that doesn't have any value.\n\nThe wallet can only handle testnet coins, so make sure you do not send it normal bitcoins!"
