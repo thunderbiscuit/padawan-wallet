@@ -9,7 +9,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import com.goldenraven.padawanwallet.R
@@ -47,9 +46,7 @@ class IntroFragment : Fragment() {
                                 .setNegativeButton("Cancel") { _, _ ->
                                 }
 
-
-        view.findViewById<Button>(R.id.lets_go_button).setOnClickListener {
-            Timber.i("[PADAWANLOGS] User is ready to go!")
+        binding.letsGoButton.setOnClickListener {
             testnetDialog.show()
         }
     }

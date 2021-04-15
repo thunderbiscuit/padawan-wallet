@@ -10,7 +10,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import com.goldenraven.padawanwallet.R
@@ -36,13 +35,13 @@ class WalletChoiceFragment : Fragment() {
 
         val navController = Navigation.findNavController(view)
 
-        view.findViewById<Button>(R.id.create_wallet_button).setOnClickListener {
+        binding.createWalletButton.setOnClickListener {
             val intent: Intent = Intent(this@WalletChoiceFragment.context, HomeActivity::class.java)
             Wallet.createWallet()
             startActivity(intent)
         }
 
-        view.findViewById<Button>(R.id.recover_wallet_button).setOnClickListener {
+        binding.recoverWalletButton.setOnClickListener {
             navController.navigate(R.id.action_walletChoice_to_walletRecoveryFragment)
         }
     }
