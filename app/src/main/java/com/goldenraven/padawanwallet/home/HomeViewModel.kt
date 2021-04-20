@@ -7,14 +7,31 @@ package com.goldenraven.padawanwallet.home
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import com.goldenraven.padawanwallet.Repository
 import com.goldenraven.padawanwallet.Wallet
+import com.goldenraven.padawanwallet.data.Tx
+import com.goldenraven.padawanwallet.data.TxDao
+import com.goldenraven.padawanwallet.data.TxDatabase
+import com.goldenraven.padawanwallet.data.TxRepository
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import timber.log.Timber
 
 class HomeViewModel(application: Application) : AndroidViewModel(application) {
 
     val app: Application = application
+
+    private val readAllData: LiveData<List<Tx>>
+    private val repository: TxRepository
+
+    init {
+        val txDao: TxDao = TxDatabase.getDatabase(application).txDao()
+        repository = TxRepository(txDao)
+        readAllData = repository.readAllData
+    }
 
     public var balance: MutableLiveData<Long> = MutableLiveData(0)
     public var satoshiUnit: MutableLiveData<Boolean> = MutableLiveData(true)
@@ -30,6 +47,12 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
                     "e8" to false,
             )
     )
+
+    public fun addTx(tx: Tx) {
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.addTx(tx)
+        }
+    }
 
     public fun retrieveDoneTutorials() {
         val newTutorialsDone = Repository.loadTutorialsDone()

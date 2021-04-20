@@ -1,6 +1,7 @@
 plugins {
     id("com.android.application")
     id("kotlin-android")
+    id("kotlin-kapt")
 }
 
 val faucetUrl: String by project
@@ -87,6 +88,11 @@ dependencies {
     // QR codes
     implementation("androidmads.library.qrgenearator:QRGenearator:1.0.4")
     implementation("com.google.zxing:core:3.4.1")
+
+    // Room
+    implementation("androidx.room:room-runtime:${Versions.room}")
+    implementation("androidx.room:room-ktx:${Versions.room}")
+    kapt("androidx.room:room-compiler:${Versions.room}")
 
     // testing
     testImplementation("junit:junit:4.+")

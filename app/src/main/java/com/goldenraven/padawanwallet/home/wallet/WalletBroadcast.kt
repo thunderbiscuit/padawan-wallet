@@ -11,10 +11,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import com.goldenraven.padawanwallet.R
 import com.goldenraven.padawanwallet.Wallet
+import com.goldenraven.padawanwallet.data.Tx
 import com.goldenraven.padawanwallet.databinding.FragmentWalletBroadcastBinding
+import com.goldenraven.padawanwallet.home.HomeViewModel
 import com.google.android.material.snackbar.BaseTransientBottomBar
 import com.google.android.material.snackbar.Snackbar
 import org.bitcoindevkit.bdkjni.Types.CreateTxResponse
@@ -25,6 +28,7 @@ import timber.log.Timber
 
 class WalletBroadcast : Fragment() {
 
+    private lateinit var viewModel: HomeViewModel
     private lateinit var binding: FragmentWalletBroadcastBinding
     private lateinit var amount: String
     private lateinit var address: String
@@ -44,6 +48,8 @@ class WalletBroadcast : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        viewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
 
         verifyTransaction()
         Timber.i("[PADAWANLOGS] transactionDetails from WalletVerify fragment is: $transactionDetails")
@@ -92,11 +98,31 @@ class WalletBroadcast : Fragment() {
             val rawTx: RawTransaction = Wallet.extractPsbt(signResponse.psbt)
             val txid: Txid = Wallet.broadcast(rawTx.transaction)
             txidString = txid.toString()
+
+            Timber.i("[PADAWANLOGS] Transaction was broadcast! Data added to database:")
+            Timber.i("[PADAWANLOGS] Transaction was broadcast! txid: ${transactionDetails.details.txid}")
+            Timber.i("[PADAWANLOGS] Transaction was broadcast! timestamp: ${transactionDetails.details.timestamp}")
+            Timber.i("[PADAWANLOGS] Transaction was broadcast! received: ${transactionDetails.details.received.toInt()}")
+            Timber.i("[PADAWANLOGS] Transaction was broadcast! sent: ${transactionDetails.details.sent.toInt()}")
+            Timber.i("[PADAWANLOGS] Transaction was broadcast! fees: ${transactionDetails.details.fees.toInt()}")
+            // add tx to database
+            addTxToDatabase(
+                transactionDetails.details.txid,
+                transactionDetails.details.timestamp.toString(),
+                transactionDetails.details.received.toInt(),
+                transactionDetails.details.sent.toInt(),
+                transactionDetails.details.fees.toInt(),
+            )
             Timber.i("[PADAWANLOGS] Transaction was broadcast! txid: $txid, txidString: $txidString")
         } catch (e: Throwable) {
             Timber.i("[PADAWANLOGS] ${e.message}")
         }
         showBroadcastSuccessSnackbar(txid = txidString)
+    }
+
+    private fun addTxToDatabase(txid: String, timestamp: String, valueIn: Int, valueOut: Int, fees: Int) {
+        val tx = Tx(txid, timestamp, valueIn, valueOut, fees)
+        viewModel.addTx(tx)
     }
 
     private fun showBroadcastSuccessSnackbar(txid: String) {

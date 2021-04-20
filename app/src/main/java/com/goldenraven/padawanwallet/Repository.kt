@@ -10,10 +10,6 @@ import timber.log.Timber
 
 object Repository {
 
-//    TODO should I provide context once (say in PadawanWalletApplication) or should context be provided on every method?
-//    TODO is it better to pass the application context or the shared preferences editor directly?
-
-
     private lateinit var sharedPreferences: SharedPreferences
     public fun setSharedPreferences(sharedPref: SharedPreferences) {
         this.sharedPreferences = sharedPref

@@ -1,0 +1,38 @@
+/*
+ * Copyright 2020 thunderbiscuit and contributors.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the ./LICENSE file.
+ */
+
+package com.goldenraven.padawanwallet.data
+
+import android.content.Context
+import androidx.room.Database
+import androidx.room.Room
+import androidx.room.RoomDatabase
+
+@Database(entities = [Tx::class], version = 1, exportSchema = false)
+abstract class TxDatabase: RoomDatabase() {
+
+    abstract fun txDao(): TxDao
+
+    companion object {
+        @Volatile
+        private var INSTANCE: TxDatabase? = null
+
+        fun getDatabase(context: Context): TxDatabase {
+            val tempInstance = INSTANCE
+            if(tempInstance != null) {
+                return tempInstance
+            }
+            synchronized(this) {
+                val instance = Room.databaseBuilder(
+                    context.applicationContext,
+                    TxDatabase::class.java,
+                    "transaction_history",
+                ).build()
+                INSTANCE = instance
+                return instance
+            }
+        }
+    }
+}
