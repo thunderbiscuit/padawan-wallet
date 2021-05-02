@@ -24,7 +24,7 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
 
     val app: Application = application
 
-    private val readAllData: LiveData<List<Tx>>
+    val readAllData: LiveData<List<Tx>>
     private val repository: TxRepository
 
     init {

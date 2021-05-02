@@ -11,34 +11,51 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
-import com.google.android.material.snackbar.BaseTransientBottomBar
-import com.google.android.material.snackbar.Snackbar
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.goldenraven.padawanwallet.R
 import com.goldenraven.padawanwallet.databinding.FragmentWalletHomeBinding
 import com.goldenraven.padawanwallet.home.HomeViewModel
+import com.goldenraven.padawanwallet.home.TxHistoryAdapter
+import com.google.android.material.snackbar.BaseTransientBottomBar
+import com.google.android.material.snackbar.Snackbar
 import timber.log.Timber
 import java.text.DecimalFormat
 
 class WalletHome : Fragment() {
 
+    private lateinit var viewModel: HomeViewModel
     private lateinit var binding: FragmentWalletHomeBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentWalletHomeBinding.inflate(inflater, container, false)
-        val view: View = binding.root
-        return view
+
+        // RecyclerView
+        val adapter = TxHistoryAdapter()
+        val recyclerView = binding.recyclerView
+        recyclerView.adapter = adapter
+        recyclerView.layoutManager = LinearLayoutManager(requireContext())
+
+        // ViewModel
+        viewModel = ViewModelProvider(requireActivity()).get(HomeViewModel::class.java)
+        viewModel.readAllData.observe(viewLifecycleOwner, Observer { tx ->
+            adapter.setData(tx)
+        })
+
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         // ViewModel
-        val viewModel = ViewModelProvider(requireActivity()).get(HomeViewModel::class.java)
+        // viewModel moved up in onCreateView
+        // val viewModel = ViewModelProvider(requireActivity()).get(HomeViewModel::class.java)
 
         viewModel.balance.observe(viewLifecycleOwner, {
             if (viewModel.satoshiUnit.value == true) {
