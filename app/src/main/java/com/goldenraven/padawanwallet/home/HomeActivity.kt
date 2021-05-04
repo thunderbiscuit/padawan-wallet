@@ -6,19 +6,25 @@
 package com.goldenraven.padawanwallet.home
 
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.MenuItem
+import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
 import androidx.viewpager2.widget.ViewPager2
-import com.google.android.material.tabs.TabLayout
-import com.google.android.material.tabs.TabLayoutMediator
 import com.goldenraven.padawanwallet.R
 import com.goldenraven.padawanwallet.databinding.ActivityHomeBinding
 import com.goldenraven.padawanwallet.drawer.DrawerActivity
+import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
 import timber.log.Timber
+
+private const val CAMERA_REQUEST_CODE = 101
 
 class HomeActivity : AppCompatActivity() {
 
@@ -29,6 +35,9 @@ class HomeActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        setupPermissions()
+
         binding = ActivityHomeBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
@@ -107,6 +116,41 @@ class HomeActivity : AppCompatActivity() {
             binding.drawerLayout.closeDrawer(GravityCompat.START)
         } else {
             super.onBackPressed()
+        }
+    }
+
+    private fun setupPermissions() {
+        Timber.i("[PADAWANLOGS] Requesting permission step 1")
+        val permission = ContextCompat.checkSelfPermission(this, android.Manifest.permission.CAMERA)
+        // val permission = checkSelfPermission(requireContext(), android.Manifest.permission.CAMERA)
+        Timber.i("[PADAWANLOGS] Requesting permission step 2: $permission")
+
+        if (permission != PackageManager.PERMISSION_GRANTED) {
+            Timber.i("[PADAWANLOGS] Requesting permission step 3, making request")
+            makeRequest()
+        }
+    }
+
+    private fun makeRequest() {
+        Timber.i("[PADAWANLOGS] Requesting permission step 5")
+        // requestPermissions(arrayOf(android.Manifest.permission.CAMERA), CAMERA_REQUEST_CODE)
+        ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.CAMERA), CAMERA_REQUEST_CODE)
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        when(requestCode) {
+            CAMERA_REQUEST_CODE -> {
+                if (grantResults.isEmpty() || grantResults[0] != PackageManager.PERMISSION_GRANTED) {
+                    Toast.makeText(this, "You need the camera permission to be able to use this feature", Toast.LENGTH_LONG).show()
+                } else {
+                    Toast.makeText(this, "Thank you!", Toast.LENGTH_LONG).show()
+                    Timber.i("[PADAWANLOGS] Camera permission successful")
+                }
+            }
         }
     }
 }

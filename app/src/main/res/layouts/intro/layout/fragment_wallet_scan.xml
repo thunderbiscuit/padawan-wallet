@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/frameScan"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg0soft"
+    tools:context=".home.wallet.WalletScan">
+
+    <TextView
+        android:id="@+id/walletHeader"
+        android:layout_width="0dp"
+        android:layout_height="100dp"
+        android:background="@color/orange"
+        android:gravity="center"
+        android:text="@string/broadcast_screen_title"
+        android:textColor="@color/fg1"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.budiyev.android.codescanner.CodeScannerView
+        android:id="@+id/scannerView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:autoFocusButtonColor="@color/fg1"
+        app:autoFocusButtonVisible="true"
+        app:flashButtonColor="@color/fg1"
+        app:flashButtonVisible="true"
+        app:frameColor="@color/fg1"
+        app:layout_constraintBottom_toTopOf="@id/buttonScan"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/walletHeader"
+        app:layout_constraintVertical_bias="0.0"
+        app:maskColor="#C432302F">
+    </com.budiyev.android.codescanner.CodeScannerView>
+
+    <Button
+        android:id="@+id/buttonScan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="Scan"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/buttonBackWalletBuild"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:text="Go Back"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

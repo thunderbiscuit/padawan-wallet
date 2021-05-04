@@ -55,6 +55,9 @@
             app:destination="@id/walletBroadcast"
             app:enterAnim="@anim/fragment_fade_enter"
             app:exitAnim="@anim/fragment_fade_exit"/>
+        <action
+            android:id="@+id/action_walletBuild_to_walletScan"
+            app:destination="@id/walletScan" />
     </fragment>
 
     <fragment
@@ -72,5 +75,14 @@
             app:destination="@id/walletHome"
             app:enterAnim="@anim/fragment_fade_enter"
             app:exitAnim="@anim/fragment_fade_exit" />
+    </fragment>
+    <fragment
+        android:id="@+id/walletScan"
+        android:name="com.goldenraven.padawanwallet.home.wallet.WalletScan"
+        android:label="fragment_wallet_scan"
+        tools:layout="@layout/fragment_wallet_scan" >
+        <action
+            android:id="@+id/action_walletScan_to_walletBuild"
+            app:destination="@id/walletBuild" />
     </fragment>
 </navigation>

@@ -88,6 +88,7 @@ dependencies {
     // QR codes
     implementation("androidmads.library.qrgenearator:QRGenearator:1.0.4")
     implementation("com.google.zxing:core:3.4.1")
+    implementation("com.budiyev.android:code-scanner:2.1.0")
 
     // Room
     implementation("androidx.room:room-runtime:${Versions.room}")
