@@ -36,7 +36,7 @@ class HomeActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        setupPermissions()
+        // setupPermissions()
 
         binding = ActivityHomeBinding.inflate(layoutInflater)
         val view = binding.root
