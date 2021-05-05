@@ -27,9 +27,10 @@ class WalletBuild : Fragment() {
     private lateinit var amount: String
 
     override fun onCreateView(
-            inflater: LayoutInflater, container: ViewGroup?,
+            inflater: LayoutInflater,
+            container: ViewGroup?,
             savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentWalletBuildBinding.inflate(inflater, container, false)
         val view: View = binding.root
         return view
@@ -39,6 +40,10 @@ class WalletBuild : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val navController = Navigation.findNavController(view)
+
+        binding.buttonScan.setOnClickListener {
+            navController.navigate(R.id.action_walletBuild_to_walletScan)
+        }
 
         binding.button5.setOnClickListener {
             navController.navigate(R.id.action_walletSend_to_walletHome)
