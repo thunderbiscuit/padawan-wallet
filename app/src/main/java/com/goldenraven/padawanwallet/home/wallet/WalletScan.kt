@@ -44,7 +44,6 @@ class WalletScan : Fragment() {
         val navController = Navigation.findNavController(view)
 
         binding.buttonScan.setOnClickListener {
-            Timber.i("[PADAWANLOGS] Start scanning from scan button")
             codeScanner.startPreview()
         }
         binding.buttonBackWalletBuild.setOnClickListener {
@@ -59,19 +58,19 @@ class WalletScan : Fragment() {
             camera = CodeScanner.CAMERA_BACK
             formats = CodeScanner.ALL_FORMATS
             autoFocusMode = AutoFocusMode.SAFE
-            scanMode = ScanMode.CONTINUOUS
+            scanMode = ScanMode.SINGLE
             isAutoFocusEnabled = true
             isFlashEnabled = false
 
             decodeCallback = DecodeCallback {
-                // requireActivity().runOnUiThread {
+                requireActivity().runOnUiThread {
                     Log.i("Main", "[PADAWANLOGS] Code scanner scanned ${it.text}")
                     Toast.makeText(
                         requireContext(),
                         "Address is ${it.text}",
                         Toast.LENGTH_LONG
                     ).show()
-                // }
+                }
             }
 
             errorCallback = ErrorCallback {
