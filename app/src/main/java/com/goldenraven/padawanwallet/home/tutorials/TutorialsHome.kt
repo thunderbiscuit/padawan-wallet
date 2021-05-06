@@ -9,15 +9,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import com.goldenraven.padawanwallet.R
 import com.goldenraven.padawanwallet.databinding.FragmentTutorialsHomeBinding
 import com.goldenraven.padawanwallet.home.HomeViewModel
-import com.google.android.material.snackbar.BaseTransientBottomBar
-import com.google.android.material.snackbar.Snackbar
 import timber.log.Timber
 
 class TutorialsHome : Fragment() {
@@ -80,13 +77,4 @@ class TutorialsHome : Fragment() {
             navController.navigate(R.id.action_tutorialsHome_to_tutorialE8)
         }
     }
-
-    private fun showTutorialInDevelopmentSnackbar() {
-        val tutorialInDevelopmentSnackbar = Snackbar.make(requireView(), "This tutorial is in development!", Snackbar.LENGTH_LONG)
-        tutorialInDevelopmentSnackbar.setTextColor(ContextCompat.getColor(requireActivity(), R.color.fg1))
-        tutorialInDevelopmentSnackbar.view.background = resources.getDrawable(R.drawable.background_toast, null)
-        tutorialInDevelopmentSnackbar.animationMode = BaseTransientBottomBar.ANIMATION_MODE_SLIDE
-        tutorialInDevelopmentSnackbar.show()
-    }
-
 }

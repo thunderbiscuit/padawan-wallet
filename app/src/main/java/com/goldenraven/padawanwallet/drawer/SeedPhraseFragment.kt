@@ -34,7 +34,7 @@ class SeedPhraseFragment : Fragment() {
         populateMnemonic()
     }
 
-    fun populateMnemonic() {
+    private fun populateMnemonic() {
         // retrieve seed phrase from shared preferences
         val sharedPref = this.getActivity()?.getSharedPreferences("current_wallet", Context.MODE_PRIVATE)
         val seedphrase: String? = sharedPref?.getString("mnemonic", "No seed phrase")

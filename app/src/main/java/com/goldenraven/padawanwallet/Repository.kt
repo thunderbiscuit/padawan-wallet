@@ -40,7 +40,7 @@ object Repository {
     }
 
     public fun saveMnemonic(mnemonic: String) {
-        Timber.i("[PADAWANLOGS] The seed phrase is: ${mnemonic}")
+        Timber.i("[PADAWANLOGS] The seed phrase is: $mnemonic")
         val editor = sharedPreferences.edit()
         editor.putString("mnemonic", mnemonic)
         editor.apply()
