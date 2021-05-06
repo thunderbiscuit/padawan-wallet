@@ -37,13 +37,12 @@ class WalletBroadcast : Fragment() {
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
             savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         amount = requireArguments().getString("amount", "No amount provided")
         address = requireArguments().getString("address", "No address provided")
 
         binding = FragmentWalletBroadcastBinding.inflate(inflater, container, false)
-        val view: View = binding.root
-        return view
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

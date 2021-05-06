@@ -37,10 +37,9 @@ class WalletFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?,
-    ): View? {
+    ): View {
         binding = FragmentWalletBinding.inflate(inflater, container, false)
-        val view: View = binding.root
-        return view
+        return binding.root
     }
 
     private val dialogMessage: String = "We notice it is your first time opening this wallet. Would you like Padawan to send you some testnet coins to get your started?"

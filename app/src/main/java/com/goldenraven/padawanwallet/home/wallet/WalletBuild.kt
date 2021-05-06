@@ -32,8 +32,7 @@ class WalletBuild : Fragment() {
             savedInstanceState: Bundle?
     ): View {
         binding = FragmentWalletBuildBinding.inflate(inflater, container, false)
-        val view: View = binding.root
-        return view
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
