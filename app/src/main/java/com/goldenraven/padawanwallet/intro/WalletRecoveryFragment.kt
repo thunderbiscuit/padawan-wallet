@@ -21,6 +21,7 @@ import com.goldenraven.padawanwallet.home.HomeActivity
 import com.google.android.material.snackbar.BaseTransientBottomBar
 import com.google.android.material.snackbar.Snackbar
 import timber.log.Timber
+import java.util.*
 
 class WalletRecoveryFragment : Fragment() {
 
@@ -69,7 +70,8 @@ class WalletRecoveryFragment : Fragment() {
         )
 
         for (word in 0..11) {
-            val mnemonicWord: String = requireView().findViewById<TextView>(mnemonicWordsTextViews[word]).text.toString().trim().toLowerCase()
+            val mnemonicWord: String = requireView().findViewById<TextView>(mnemonicWordsTextViews[word]).text.toString()
+                .trim().toLowerCase(Locale.getDefault())
             Timber.i("[PADAWANLOGS] Word $word: $mnemonicWord")
 
             if (mnemonicWord.isEmpty()) {
@@ -92,7 +94,7 @@ class WalletRecoveryFragment : Fragment() {
     }
 
     private fun showWordIsEmptySnackbar(wordNumber: Int) {
-        val wordIsEmptySnackbar = Snackbar.make(requireView(), "Word ${(wordNumber + 1).toString()} is empty!", Snackbar.LENGTH_LONG)
+        val wordIsEmptySnackbar = Snackbar.make(requireView(), "Word ${(wordNumber + 1)} is empty!", Snackbar.LENGTH_LONG)
         wordIsEmptySnackbar.setTextColor(ContextCompat.getColor(requireActivity(), R.color.fg1))
         wordIsEmptySnackbar.view.background = resources.getDrawable(R.drawable.background_toast_warning, null)
         wordIsEmptySnackbar.animationMode = BaseTransientBottomBar.ANIMATION_MODE_SLIDE
@@ -100,7 +102,7 @@ class WalletRecoveryFragment : Fragment() {
     }
 
     private fun showWordIsInvalidSnackbar(wordNumber: Int) {
-        val wordIsInvalid = Snackbar.make(requireView(), "Word ${(wordNumber + 1).toString()} is invalid!", Snackbar.LENGTH_LONG)
+        val wordIsInvalid = Snackbar.make(requireView(), "Word ${(wordNumber + 1)} is invalid!", Snackbar.LENGTH_LONG)
         wordIsInvalid.setTextColor(ContextCompat.getColor(requireActivity(), R.color.fg1))
         wordIsInvalid.view.background = resources.getDrawable(R.drawable.background_toast_warning, null)
         wordIsInvalid.animationMode = BaseTransientBottomBar.ANIMATION_MODE_SLIDE
