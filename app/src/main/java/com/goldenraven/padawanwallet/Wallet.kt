@@ -15,7 +15,6 @@ object Wallet {
     private lateinit var walletPtr: WalletPtr
     private val name: String = "padawan-testnet-0"
     private lateinit var path: String
-    // private val electrumURL: String = "tcp://testnet.aranguren.org:51001"
     private val electrumURL: String = "ssl://electrum.blockstream.info:60002"
     
     init {
@@ -29,7 +28,7 @@ object Wallet {
         this.path = path
     }
 
-    public fun initialize(
+    private fun initialize(
         descriptor: String,
         changeDescriptor: String,
     ): Unit {
@@ -69,7 +68,7 @@ object Wallet {
     }
 
     public fun createWallet(): Unit {
-        val keys: ExtendedKeys = generateExtendedKey(12)
+        val keys: ExtendedKeys = generateExtendedKey()
         val descriptor: String = createDescriptor(keys)
         val changeDescriptor: String = createChangeDescriptor(keys)
         this.initialize(
@@ -80,21 +79,21 @@ object Wallet {
         Repository.saveMnemonic(keys.mnemonic)
     }
 
-    public fun generateExtendedKey(mnemonicWordCount: Int): ExtendedKeys {
+    private fun generateExtendedKey(): ExtendedKeys {
         Timber.i("Extended keys generated")
-        return lib.generate_extended_key(Network.testnet, mnemonicWordCount)
+        return lib.generate_extended_key(Network.testnet, 12)
     }
 
     public fun createExtendedKeyFromMnemonic(mnemonic: String): ExtendedKeys {
         return lib.create_extended_keys(Network.testnet, mnemonic)
     }
 
-    public fun createDescriptor(keys: ExtendedKeys): String {
+    private fun createDescriptor(keys: ExtendedKeys): String {
         Timber.i("[PADAWANLOGS] Descriptor for receive addresses is wpkh(${keys.ext_priv_key}/84'/1'/0'/0/*)")
         return ("wpkh(" + keys.ext_priv_key + "/84'/1'/0'/0/*)")
     }
 
-    public fun createChangeDescriptor(keys: ExtendedKeys): String {
+    private fun createChangeDescriptor(keys: ExtendedKeys): String {
         Timber.i("[PADAWANLOGS] Descriptor for change addresses is wpkh(${keys.ext_priv_key}/84'/1'/0'/1/*)")
         return ("wpkh(" + keys.ext_priv_key + "/84'/1'/0'/1/*)")
     }
