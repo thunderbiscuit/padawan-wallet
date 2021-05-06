@@ -25,6 +25,7 @@ class WalletBuild : Fragment() {
     private lateinit var binding: FragmentWalletBuildBinding
     private lateinit var address: String
     private lateinit var amount: String
+    private lateinit var addressFromScanner: String
 
     override fun onCreateView(
             inflater: LayoutInflater,
@@ -32,6 +33,12 @@ class WalletBuild : Fragment() {
             savedInstanceState: Bundle?
     ): View {
         binding = FragmentWalletBuildBinding.inflate(inflater, container, false)
+        addressFromScanner = arguments?.getString("addressFromScanner", "0") ?: "0"
+        Timber.i("padawanlogs $addressFromScanner")
+        if (addressFromScanner != "0") {
+            binding.sendAddress.setText(addressFromScanner)
+        }
+
         return binding.root
     }
 

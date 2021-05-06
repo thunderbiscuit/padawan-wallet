@@ -14,7 +14,9 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.budiyev.android.codescanner.*
 import com.goldenraven.padawanwallet.R
@@ -26,6 +28,7 @@ private const val CAMERA_REQUEST_CODE = 101
 class WalletScan : Fragment() {
     private lateinit var binding: FragmentWalletScanBinding
     private lateinit var codeScanner: CodeScanner
+    private lateinit var navController: NavController
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -40,7 +43,7 @@ class WalletScan : Fragment() {
         setupPermissions()
         codeScanner()
 
-        val navController = Navigation.findNavController(view)
+        navController = Navigation.findNavController(view)
 
         binding.buttonScan.setOnClickListener {
             codeScanner.startPreview()
@@ -64,11 +67,8 @@ class WalletScan : Fragment() {
             decodeCallback = DecodeCallback {
                 requireActivity().runOnUiThread {
                     Timber.i("[PADAWANLOGS] Code scanner scanned ${it.text}")
-                    Toast.makeText(
-                        requireContext(),
-                        "Address is ${it.text}",
-                        Toast.LENGTH_LONG
-                    ).show()
+                    val bundle = bundleOf("addressFromScanner" to it.text)
+                    navController.navigate(R.id.action_walletScan_to_walletBuild, bundle)
                 }
             }
 
