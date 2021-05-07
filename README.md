@@ -26,7 +26,7 @@ Join us on [discord](https://discord.gg/qTysDfZ2gX)!
 
 ## Download
 
-You can download the apk for this app on the [`v0.4.0` release page](https://github.com/thunderbiscuit/padawan-wallet/releases/tag/v0.4.0).
+You can download the latest apk for this app on the [`v0.5.0` release page](https://github.com/thunderbiscuit/padawan-wallet/releases/tag/v0.5.0).
 
 <br/>
 
