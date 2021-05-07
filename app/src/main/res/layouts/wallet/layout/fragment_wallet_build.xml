@@ -41,11 +41,13 @@
 
     <Button
         android:id="@+id/buttonScan"
+        style="@style/Widget.MaterialComponents.Button.Icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
-        android:backgroundTint="@color/bg0soft_light"
-        android:text="Scan QR Code"
+        android:backgroundTint="@color/bg2_light"
+        android:text="Scan"
+        app:icon="@drawable/ic_camera"
         app:layout_constraintBottom_toTopOf="@+id/sendAddress"
         app:layout_constraintEnd_toEndOf="parent" />
 
