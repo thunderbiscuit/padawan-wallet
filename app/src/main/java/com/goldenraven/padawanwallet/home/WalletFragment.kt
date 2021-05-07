@@ -55,19 +55,20 @@ class WalletFragment : Fragment() {
                 val address: String = Wallet.getNewAddress()
                 callTatooineFaucet(address)
                 Repository.oneTimeFaucetCallDone()
+                Repository.offerFaucetCallDone()
             }
             .setNegativeButton("No thanks") { _, _ ->
                 Timber.i("[PADAWANLOGS] User doesn't need the coins right now.")
-                Repository.oneTimeFaucetCallDone()
+                Repository.offerFaucetCallDone()
             }
 
-        val oneTimeCallTatooine =
+        val offerFaucetCallDone =
             context?.getSharedPreferences("current_wallet", Context.MODE_PRIVATE)
-                ?.getBoolean("oneTimeFaucetCallDone", false)
+                ?.getBoolean("offerFaucetCallDone", false)
 
-        Timber.i("[PADAWANLOGS] Value of oneTimeFaucetCallDone is $oneTimeCallTatooine")
+        Timber.i("[PADAWANLOGS] Value of offerFaucetCallDone is $offerFaucetCallDone")
 
-        if (oneTimeCallTatooine == false) {
+        if (offerFaucetCallDone == false) {
             firstTimePadawanWalletDialog.show()
         }
     }

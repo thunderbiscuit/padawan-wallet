@@ -50,9 +50,19 @@ object Repository {
         return sharedPreferences.getString("mnemonic", "No seed phrase saved") ?: "Seed phrase not there"
     }
 
+    public fun wasOneTimeFaucetCallDone(): Boolean {
+        return sharedPreferences.getBoolean("oneTimeFaucetCallDone", false)
+    }
+
     public fun oneTimeFaucetCallDone(): Unit {
         val editor = sharedPreferences.edit()
         editor.putBoolean("oneTimeFaucetCallDone", true)
+        editor.apply()
+    }
+
+    public fun offerFaucetCallDone(): Unit {
+        val editor = sharedPreferences.edit()
+        editor.putBoolean("offerFaucetCallDone", true)
         editor.apply()
     }
 
