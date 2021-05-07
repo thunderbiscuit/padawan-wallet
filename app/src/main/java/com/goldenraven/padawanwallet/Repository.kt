@@ -46,6 +46,10 @@ object Repository {
         editor.apply()
     }
 
+    public fun getMnemonic(): String {
+        return sharedPreferences.getString("mnemonic", "No seed phrase saved") ?: "Seed phrase not there"
+    }
+
     public fun oneTimeFaucetCallDone(): Unit {
         val editor = sharedPreferences.edit()
         editor.putBoolean("oneTimeFaucetCallDone", true)

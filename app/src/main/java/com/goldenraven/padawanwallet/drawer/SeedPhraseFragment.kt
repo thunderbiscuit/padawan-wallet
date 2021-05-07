@@ -5,14 +5,13 @@
 
 package com.goldenraven.padawanwallet.drawer
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
-import com.goldenraven.padawanwallet.R
+import com.goldenraven.padawanwallet.Repository
 import com.goldenraven.padawanwallet.databinding.FragmentSeedphraseBinding
 import timber.log.Timber
 
@@ -35,10 +34,19 @@ class SeedPhraseFragment : Fragment() {
     }
 
     private fun populateMnemonic() {
-        // retrieve seed phrase from shared preferences
-        val sharedPref = this.getActivity()?.getSharedPreferences("current_wallet", Context.MODE_PRIVATE)
-        val seedphrase: String? = sharedPref?.getString("mnemonic", "No seed phrase")
-        Timber.i("[PADAWANLOGS] Seed phrase: $seedphrase")
-        view?.findViewById<TextView>(R.id.seedPhraseText)?.text = seedphrase
+        val seedPhrase: String = Repository.getMnemonic()
+        Timber.i("[PADAWANLOGS] The seed phrase from the seed phrase screen is $seedPhrase")
+        val wordList: List<String> = seedPhrase.split(" ")
+        val viewList: List<TextView> = listOfNotNull<TextView>(
+            binding.displayMnemonicWord1, binding.displayMnemonicWord2, binding.displayMnemonicWord3, binding.displayMnemonicWord4,
+            binding.displayMnemonicWord5, binding.displayMnemonicWord6, binding.displayMnemonicWord7, binding.displayMnemonicWord8,
+            binding.displayMnemonicWord9, binding.displayMnemonicWord10, binding.displayMnemonicWord11, binding.displayMnemonicWord12,
+        )
+        Timber.i("[PADAWANLOGS] The word list from the seed phrase screen is $wordList")
+
+        for (word in 0..11) {
+            val mnemonicWord: String = wordList[word]
+            viewList[word].text = ("${word + 1}. $mnemonicWord")
+        }
     }
 }

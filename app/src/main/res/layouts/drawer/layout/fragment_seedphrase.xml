@@ -20,15 +20,195 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/seedPhraseText"
-        android:layout_width="300dp"
+        android:id="@+id/displayMnemonicWord1"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="70dp"
+        android:width="170dp"
+        android:backgroundTint="@color/bg4"
+        android:ems="10"
         android:text=""
-        android:textColor="@color/bright_yellow"
-        android:textSize="21sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:textColor="@color/fg1"
+        android:textColorHint="@color/bg4"
+        android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/seed_phrase_title" />
+
+    <TextView
+        android:id="@+id/displayMnemonicWord3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        android:width="170dp"
+        android:backgroundTint="@color/bg4"
+        android:ems="10"
+        android:text=""
+        android:textColor="@color/fg1"
+        android:textColorHint="@color/bg4"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/displayMnemonicWord1" />
+
+    <TextView
+        android:id="@+id/displayMnemonicWord5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        android:width="170dp"
+        android:backgroundTint="@color/bg4"
+        android:ems="10"
+        android:text=""
+        android:textColor="@color/fg1"
+        android:textColorHint="@color/bg4"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/displayMnemonicWord3" />
+
+    <TextView
+        android:id="@+id/displayMnemonicWord7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        android:width="170dp"
+        android:backgroundTint="@color/bg4"
+        android:ems="10"
+        android:text=""
+        android:textColor="@color/fg1"
+        android:textColorHint="@color/bg4"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/displayMnemonicWord5" />
+
+    <TextView
+        android:id="@+id/displayMnemonicWord9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        android:width="170dp"
+        android:backgroundTint="@color/bg4"
+        android:ems="10"
+        android:text=""
+        android:textColor="@color/fg1"
+        android:textColorHint="@color/bg4"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/displayMnemonicWord7" />
+
+    <TextView
+        android:id="@+id/displayMnemonicWord11"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        android:width="170dp"
+        android:backgroundTint="@color/bg4"
+        android:ems="10"
+        android:text=""
+        android:textColor="@color/fg1"
+        android:textColorHint="@color/bg4"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/displayMnemonicWord9" />
+
+    <TextView
+        android:id="@+id/displayMnemonicWord2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="70dp"
+        android:layout_marginEnd="32dp"
+        android:width="170dp"
+        android:backgroundTint="@color/bg4"
+        android:ems="10"
+        android:text=""
+        android:textColor="@color/fg1"
+        android:textColorHint="@color/bg4"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/seed_phrase_title" />
+
+    <TextView
+        android:id="@+id/displayMnemonicWord4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="32dp"
+        android:width="170dp"
+        android:backgroundTint="@color/bg4"
+        android:ems="10"
+        android:text=""
+        android:textColor="@color/fg1"
+        android:textColorHint="@color/bg4"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/displayMnemonicWord2" />
+
+    <TextView
+        android:id="@+id/displayMnemonicWord6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="32dp"
+        android:width="170dp"
+        android:backgroundTint="@color/bg4"
+        android:ems="10"
+        android:text=""
+        android:textColor="@color/fg1"
+        android:textColorHint="@color/bg4"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/displayMnemonicWord4" />
+
+    <TextView
+        android:id="@+id/displayMnemonicWord8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="32dp"
+        android:width="170dp"
+        android:backgroundTint="@color/bg4"
+        android:ems="10"
+        android:text=""
+        android:textColor="@color/fg1"
+        android:textColorHint="@color/bg4"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/displayMnemonicWord6" />
+
+    <TextView
+        android:id="@+id/displayMnemonicWord10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="32dp"
+        android:width="170dp"
+        android:backgroundTint="@color/bg4"
+        android:ems="10"
+        android:text=""
+        android:textColor="@color/fg1"
+        android:textColorHint="@color/bg4"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/displayMnemonicWord8" />
+
+    <TextView
+        android:id="@+id/displayMnemonicWord12"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="32dp"
+        android:width="170dp"
+        android:backgroundTint="@color/bg4"
+        android:ems="10"
+        android:text=""
+        android:textColor="@color/fg1"
+        android:textColorHint="@color/bg4"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/displayMnemonicWord10" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
