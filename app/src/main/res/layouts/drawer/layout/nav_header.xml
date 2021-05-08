@@ -13,6 +13,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_yoda_v1_0_0" />
+        app:srcCompat="@drawable/ic_logo_v1_1_0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

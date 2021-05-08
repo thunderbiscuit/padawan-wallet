@@ -4,7 +4,7 @@
     <!-- The background color, preferably the same as your normal theme -->
     <item android:drawable="@color/bg0soft_light"/>
     <item
-        android:drawable="@drawable/ic_yoda_v1_0_0"
+        android:drawable="@drawable/ic_logo_v1_1_0"
         android:gravity="center"/>
 
 </layer-list>
