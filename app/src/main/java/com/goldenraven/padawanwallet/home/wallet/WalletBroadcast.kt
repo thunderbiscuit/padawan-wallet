@@ -14,9 +14,11 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import com.goldenraven.padawanwallet.R
+import com.goldenraven.padawanwallet.SnackbarLevel
 import com.goldenraven.padawanwallet.Wallet
 import com.goldenraven.padawanwallet.data.Tx
 import com.goldenraven.padawanwallet.databinding.FragmentWalletBroadcastBinding
+import com.goldenraven.padawanwallet.fireSnackbar
 import com.goldenraven.padawanwallet.home.HomeViewModel
 import com.google.android.material.snackbar.BaseTransientBottomBar
 import com.google.android.material.snackbar.Snackbar
@@ -85,7 +87,11 @@ class WalletBroadcast : Fragment() {
             // Timber.i("[PADAWANLOGS] transactionDetails from WalletVerify fragment is: $transactionDetails")
         } catch (e: Throwable) {
             Timber.i("[PADAWANLOGS] Verify transaction failed: ${e.message}")
-            showErrorSnackbar(e.message!!)
+            fireSnackbar(
+                requireView(),
+                SnackbarLevel.ERROR,
+                "Error: ${e.message}"
+            )
         }
     }
 
@@ -116,7 +122,11 @@ class WalletBroadcast : Fragment() {
         } catch (e: Throwable) {
             Timber.i("[PADAWANLOGS] ${e.message}")
         }
-        showBroadcastSuccessSnackbar(txid = txidString)
+        fireSnackbar(
+            requireView(),
+            SnackbarLevel.INFO,
+            "Transaction was broadcast successfully!"
+        )
     }
 
     private fun addTxToDatabase(txid: String, timestamp: String, valueIn: Int, valueOut: Int, fees: Int) {
@@ -124,13 +134,6 @@ class WalletBroadcast : Fragment() {
         viewModel.addTx(tx)
     }
 
-    private fun showBroadcastSuccessSnackbar(txid: String) {
-        val broadcastSuccessSnackbar = Snackbar.make(requireView(), "Transaction was broadcast successfully!", Snackbar.LENGTH_LONG)
-        broadcastSuccessSnackbar.setTextColor(ContextCompat.getColor(requireActivity(), R.color.fg1))
-        broadcastSuccessSnackbar.view.background = resources.getDrawable(R.drawable.background_toast, null)
-        broadcastSuccessSnackbar.animationMode = BaseTransientBottomBar.ANIMATION_MODE_SLIDE
-        broadcastSuccessSnackbar.show()
-    }
     private fun showErrorSnackbar(errorMessage: String) {
         val broadcastSuccessSnackbar = Snackbar.make(requireView(), "Error: $errorMessage", Snackbar.LENGTH_LONG)
         broadcastSuccessSnackbar.setTextColor(ContextCompat.getColor(requireActivity(), R.color.fg1))

@@ -15,7 +15,7 @@ public fun fireSnackbar(view: View, level: SnackbarLevel, message: String): Unit
 
     // set text colour
     when (level) {
-        SnackbarLevel.INFO -> snackBar.setTextColor(Color.argb(255, 29, 32, 33))
+        SnackbarLevel.INFO -> snackBar.setTextColor(Color.argb(255, 235, 219, 178))
         SnackbarLevel.WARNING -> snackBar.setTextColor(Color.argb(255, 235, 219, 178))
         SnackbarLevel.ERROR -> snackBar.setTextColor(Color.argb(255, 235, 219, 178))
     }

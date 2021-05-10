@@ -9,18 +9,17 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.goldenraven.padawanwallet.R
+import com.goldenraven.padawanwallet.SnackbarLevel
 import com.goldenraven.padawanwallet.databinding.FragmentWalletHomeBinding
+import com.goldenraven.padawanwallet.fireSnackbar
 import com.goldenraven.padawanwallet.home.HomeViewModel
 import com.goldenraven.padawanwallet.home.TxHistoryAdapter
-import com.google.android.material.snackbar.BaseTransientBottomBar
-import com.google.android.material.snackbar.Snackbar
 import timber.log.Timber
 import java.text.DecimalFormat
 
@@ -84,11 +83,11 @@ class WalletHome : Fragment() {
 
         binding.syncButton.setOnClickListener {
             viewModel.updateBalance()
-            val snackBar = Snackbar.make(view, "Wallet successfully synced", Snackbar.LENGTH_LONG)
-            snackBar.setTextColor(ContextCompat.getColor(requireActivity(), R.color.fg1))
-            snackBar.view.background = resources.getDrawable(R.drawable.background_toast, null)
-            snackBar.animationMode = BaseTransientBottomBar.ANIMATION_MODE_SLIDE
-            snackBar.show()
+            fireSnackbar(
+                requireView(),
+                SnackbarLevel.INFO,
+                "Wallet successfully synced!"
+            )
         }
 
         binding.unitToggleButton.setOnClickListener {

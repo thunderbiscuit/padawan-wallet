@@ -12,14 +12,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.goldenraven.padawanwallet.R
+import com.goldenraven.padawanwallet.SnackbarLevel
 import com.goldenraven.padawanwallet.Wallet
 import com.goldenraven.padawanwallet.databinding.FragmentRecoverBinding
+import com.goldenraven.padawanwallet.fireSnackbar
 import com.goldenraven.padawanwallet.home.HomeActivity
-import com.google.android.material.snackbar.BaseTransientBottomBar
-import com.google.android.material.snackbar.Snackbar
 import timber.log.Timber
 import java.util.*
 
@@ -76,11 +75,20 @@ class WalletRecoveryFragment : Fragment() {
 
             if (mnemonicWord.isEmpty()) {
                 Timber.i("[PADAWANLOGS] Word #$word is empty!")
-                showWordIsEmptySnackbar(word)
+                // val message: String = "Word #${word + 1} is empty!"
+                fireSnackbar(
+                    requireView(),
+                    SnackbarLevel.WARNING,
+                    "Word #${word + 1} is empty!"
+                )
                 return false
             } else if (mnemonicWord !in this.wordList) {
                 Timber.i("[PADAWANLOGS] Word #$word, $mnemonicWord, is not valid!")
-                showWordIsInvalidSnackbar(word)
+                fireSnackbar(
+                    requireView(),
+                    SnackbarLevel.WARNING,
+                    "Word #${word + 1} is invalid!"
+                )
                 return false
             } else {
                 mnemonicWordList.add(mnemonicWord)
@@ -91,21 +99,5 @@ class WalletRecoveryFragment : Fragment() {
         Timber.i("[PADAWANLOGS] The final mnemonic is $mnemonicWordList")
         this.mnemonicString = mnemonicWordList.joinToString(" ")
         return true
-    }
-
-    private fun showWordIsEmptySnackbar(wordNumber: Int) {
-        val wordIsEmptySnackbar = Snackbar.make(requireView(), "Word ${(wordNumber + 1)} is empty!", Snackbar.LENGTH_LONG)
-        wordIsEmptySnackbar.setTextColor(ContextCompat.getColor(requireActivity(), R.color.fg1))
-        wordIsEmptySnackbar.view.background = resources.getDrawable(R.drawable.background_toast_warning, null)
-        wordIsEmptySnackbar.animationMode = BaseTransientBottomBar.ANIMATION_MODE_SLIDE
-        wordIsEmptySnackbar.show()
-    }
-
-    private fun showWordIsInvalidSnackbar(wordNumber: Int) {
-        val wordIsInvalid = Snackbar.make(requireView(), "Word ${(wordNumber + 1)} is invalid!", Snackbar.LENGTH_LONG)
-        wordIsInvalid.setTextColor(ContextCompat.getColor(requireActivity(), R.color.fg1))
-        wordIsInvalid.view.background = resources.getDrawable(R.drawable.background_toast_warning, null)
-        wordIsInvalid.animationMode = BaseTransientBottomBar.ANIMATION_MODE_SLIDE
-        wordIsInvalid.show()
     }
 }

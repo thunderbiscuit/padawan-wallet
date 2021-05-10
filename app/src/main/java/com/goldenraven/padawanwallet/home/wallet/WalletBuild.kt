@@ -9,15 +9,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import com.goldenraven.padawanwallet.R
+import com.goldenraven.padawanwallet.SnackbarLevel
 import com.goldenraven.padawanwallet.Wallet
 import com.goldenraven.padawanwallet.databinding.FragmentWalletBuildBinding
-import com.google.android.material.snackbar.BaseTransientBottomBar
-import com.google.android.material.snackbar.Snackbar
+import com.goldenraven.padawanwallet.fireSnackbar
 import timber.log.Timber
 
 class WalletBuild : Fragment() {
@@ -67,7 +66,11 @@ class WalletBuild : Fragment() {
         }
 
         binding.feeRate.setOnClickListener {
-            showFeatureInDevelopmentSnackbar()
+            fireSnackbar(
+                requireView(),
+                SnackbarLevel.INFO,
+                "Choosing your fee rate is a feature currently in development!"
+            )
         }
     }
 
@@ -76,12 +79,20 @@ class WalletBuild : Fragment() {
         amount = binding.sendAmount.text.toString().trim()
 
         if (address == "") {
-            showEmptyField("Address")
+            fireSnackbar(
+                requireView(),
+                SnackbarLevel.WARNING,
+                "Address is missing!"
+            )
             Timber.i("[PADAWANLOGS] Address field was empty")
             return false
         }
         if (amount == "") {
-            showEmptyField("Amount")
+            fireSnackbar(
+                requireView(),
+                SnackbarLevel.WARNING,
+                "Amount is missing!"
+            )
             Timber.i("[PADAWANLOGS] Amount field was empty")
             return false
         }
@@ -95,34 +106,14 @@ class WalletBuild : Fragment() {
             Wallet.createTransaction(feeRate, addresseesAndAmounts, false, null, null, null)
         } catch (e: Throwable) {
             Timber.i("[PADAWANLOGS] Verify transaction failed: ${e.message}")
-            showErrorSnackbar(e.message!!)
+            fireSnackbar(
+                requireView(),
+                SnackbarLevel.ERROR,
+                "Error: ${e.message}"
+            )
             return false
         }
 
         return true
-    }
-
-    private fun showEmptyField(itemMissing: String) {
-        val emptyFieldSnackbar = Snackbar.make(requireView(), "$itemMissing is empty!", Snackbar.LENGTH_LONG)
-        emptyFieldSnackbar.setTextColor(ContextCompat.getColor(requireActivity(), R.color.bg0hard))
-        emptyFieldSnackbar.view.background = resources.getDrawable(R.drawable.background_toast_warning, null)
-        emptyFieldSnackbar.animationMode = BaseTransientBottomBar.ANIMATION_MODE_SLIDE
-        emptyFieldSnackbar.show()
-    }
-
-    private fun showErrorSnackbar(errorMessage: String) {
-        val broadcastSuccessSnackbar = Snackbar.make(requireView(), "Error: $errorMessage", Snackbar.LENGTH_LONG)
-        broadcastSuccessSnackbar.setTextColor(ContextCompat.getColor(requireActivity(), R.color.fg1))
-        broadcastSuccessSnackbar.view.background = resources.getDrawable(R.drawable.background_toast_error, null)
-        broadcastSuccessSnackbar.animationMode = BaseTransientBottomBar.ANIMATION_MODE_SLIDE
-        broadcastSuccessSnackbar.show()
-    }
-
-    private fun showFeatureInDevelopmentSnackbar() {
-        val featureInDevelopmentSnackbar = Snackbar.make(requireView(), "Choosing your fee rate is a feature currently in development!", Snackbar.LENGTH_LONG)
-        featureInDevelopmentSnackbar.setTextColor(ContextCompat.getColor(requireActivity(), R.color.fg1))
-        featureInDevelopmentSnackbar.view.background = resources.getDrawable(R.drawable.background_toast, null)
-        featureInDevelopmentSnackbar.animationMode = BaseTransientBottomBar.ANIMATION_MODE_SLIDE
-        featureInDevelopmentSnackbar.show()
     }
 }
