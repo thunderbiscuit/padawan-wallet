@@ -9,10 +9,10 @@
 
     <application
         android:name=".PadawanWalletApplication"
-        android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher_logo"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_logo_round"
+        android:icon="@mipmap/ic_launcher_light"
+        android:roundIcon="@mipmap/ic_launcher_light_round"
+        android:allowBackup="true"
         android:supportsRtl="true"
         android:theme="@style/Theme.PadawanWallet.Launcher">
 
