@@ -3,7 +3,7 @@
  * Use of this source code is governed by the Apache 2.0 license that can be found in the ./LICENSE file.
  */
 
-package com.goldenraven.padawanwallet.home
+package com.goldenraven.padawanwallet.wallet
 
 import android.content.Intent
 import android.os.Bundle
@@ -20,7 +20,7 @@ import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import timber.log.Timber
 
-class HomeActivity : AppCompatActivity() {
+class WalletActivity : AppCompatActivity() {
 
     // lateinit var toggle: ActionBarDrawerToggle
     lateinit var tabLayout: TabLayout
@@ -34,7 +34,7 @@ class HomeActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
-        binding.pager.adapter = HomePagerAdapter(this)
+        binding.pager.adapter = WalletPagerAdapter(this)
         tabLayout = binding.tabLayout
         viewPager = binding.pager
 

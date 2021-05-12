@@ -3,7 +3,7 @@
  * Use of this source code is governed by the Apache 2.0 license that can be found in the ./LICENSE file.
  */
 
-package com.goldenraven.padawanwallet.home.wallet
+package com.goldenraven.padawanwallet.wallet.wallet
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -18,7 +18,7 @@ import com.goldenraven.padawanwallet.utils.*
 import com.goldenraven.padawanwallet.Wallet
 import com.goldenraven.padawanwallet.data.Tx
 import com.goldenraven.padawanwallet.databinding.FragmentWalletBroadcastBinding
-import com.goldenraven.padawanwallet.home.HomeViewModel
+import com.goldenraven.padawanwallet.wallet.WalletViewModel
 import com.google.android.material.snackbar.BaseTransientBottomBar
 import com.google.android.material.snackbar.Snackbar
 import org.bitcoindevkit.bdkjni.Types.CreateTxResponse
@@ -29,7 +29,7 @@ import timber.log.Timber
 
 class WalletBroadcast : Fragment() {
 
-    private lateinit var viewModel: HomeViewModel
+    private lateinit var viewModel: WalletViewModel
     private lateinit var binding: FragmentWalletBroadcastBinding
     private lateinit var amount: String
     private lateinit var address: String
@@ -49,7 +49,7 @@ class WalletBroadcast : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(WalletViewModel::class.java)
 
         verifyTransaction()
         Timber.i("[PADAWANLOGS] transactionDetails from WalletVerify fragment is: $transactionDetails")

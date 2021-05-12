@@ -6,6 +6,7 @@
 package com.goldenraven.padawanwallet
 
 import android.content.SharedPreferences
+import com.goldenraven.padawanwallet.utils.RequiredInitialWalletData
 import timber.log.Timber
 
 object Repository {

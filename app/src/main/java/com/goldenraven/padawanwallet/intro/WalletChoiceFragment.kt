@@ -15,7 +15,7 @@ import androidx.navigation.Navigation
 import com.goldenraven.padawanwallet.R
 import com.goldenraven.padawanwallet.Wallet
 import com.goldenraven.padawanwallet.databinding.FragmentWalletChoiceBinding
-import com.goldenraven.padawanwallet.home.HomeActivity
+import com.goldenraven.padawanwallet.wallet.WalletActivity
 
 class WalletChoiceFragment : Fragment() {
 
@@ -36,7 +36,7 @@ class WalletChoiceFragment : Fragment() {
         val navController = Navigation.findNavController(view)
 
         binding.createWalletButton.setOnClickListener {
-            val intent: Intent = Intent(this@WalletChoiceFragment.context, HomeActivity::class.java)
+            val intent: Intent = Intent(this@WalletChoiceFragment.context, WalletActivity::class.java)
             Wallet.createWallet()
             startActivity(intent)
         }

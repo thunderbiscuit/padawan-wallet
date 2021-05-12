@@ -3,7 +3,7 @@
  * Use of this source code is governed by the Apache 2.0 license that can be found in the ./LICENSE file.
  */
 
-package com.goldenraven.padawanwallet.home.tutorials
+package com.goldenraven.padawanwallet.wallet.tutorials
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -14,7 +14,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import com.goldenraven.padawanwallet.R
 import com.goldenraven.padawanwallet.databinding.FragmentTutorialsHomeBinding
-import com.goldenraven.padawanwallet.home.HomeViewModel
+import com.goldenraven.padawanwallet.wallet.WalletViewModel
 import timber.log.Timber
 
 class TutorialsHome : Fragment() {
@@ -34,7 +34,7 @@ class TutorialsHome : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         // monitor done flags for tutorials
-        val viewModel = ViewModelProvider(requireActivity()).get(HomeViewModel::class.java)
+        val viewModel = ViewModelProvider(requireActivity()).get(WalletViewModel::class.java)
         viewModel.retrieveDoneTutorials()
 
         viewModel.tutorialsDone.observe(viewLifecycleOwner, {

@@ -3,7 +3,7 @@
  * Use of this source code is governed by the Apache 2.0 license that can be found in the ./LICENSE file.
  */
 
-package com.goldenraven.padawanwallet.home.tutorials
+package com.goldenraven.padawanwallet.wallet.tutorials
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -14,7 +14,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import com.goldenraven.padawanwallet.R
 import com.goldenraven.padawanwallet.databinding.FragmentTutorialE3Binding
-import com.goldenraven.padawanwallet.home.HomeViewModel
+import com.goldenraven.padawanwallet.wallet.WalletViewModel
 
 class TutorialE3 : Fragment() {
 
@@ -33,7 +33,7 @@ class TutorialE3 : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val navController = Navigation.findNavController(view)
-        val viewModel = ViewModelProvider(requireActivity()).get(HomeViewModel::class.java)
+        val viewModel = ViewModelProvider(requireActivity()).get(WalletViewModel::class.java)
 
         binding.buttonMarkDoneE3.setOnClickListener {
             viewModel.markAsDone(tutorialNumber = 3)

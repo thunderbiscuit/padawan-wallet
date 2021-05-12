@@ -17,7 +17,7 @@ import com.goldenraven.padawanwallet.R
 import com.goldenraven.padawanwallet.utils.*
 import com.goldenraven.padawanwallet.Wallet
 import com.goldenraven.padawanwallet.databinding.FragmentRecoverBinding
-import com.goldenraven.padawanwallet.home.HomeActivity
+import com.goldenraven.padawanwallet.wallet.WalletActivity
 import timber.log.Timber
 import java.util.*
 
@@ -52,7 +52,7 @@ class WalletRecoveryFragment : Fragment() {
                 Wallet.recoverWallet(mnemonicString)
 
                 // launch home activity
-                val intent: Intent = Intent(this@WalletRecoveryFragment.context, HomeActivity::class.java)
+                val intent: Intent = Intent(this@WalletRecoveryFragment.context, WalletActivity::class.java)
                 startActivity(intent)
             } else {
                 Timber.i("[PADAWANLOGS] Mnemonic seed phrase was not valid")

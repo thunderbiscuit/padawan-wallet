@@ -1,4 +1,4 @@
-package com.goldenraven.padawanwallet.home
+package com.goldenraven.padawanwallet.wallet
 
 import android.view.LayoutInflater
 import android.view.View

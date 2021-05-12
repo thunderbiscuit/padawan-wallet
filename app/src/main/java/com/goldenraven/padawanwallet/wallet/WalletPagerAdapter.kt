@@ -3,13 +3,13 @@
  * Use of this source code is governed by the Apache 2.0 license that can be found in the ./LICENSE file.
  */
 
-package com.goldenraven.padawanwallet.home
+package com.goldenraven.padawanwallet.wallet
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
 
-class HomePagerAdapter(fragmentactvity: FragmentActivity) : FragmentStateAdapter(fragmentactvity) {
+class WalletPagerAdapter(fragmentactvity: FragmentActivity) : FragmentStateAdapter(fragmentactvity) {
 
     override fun getItemCount(): Int = 2
 

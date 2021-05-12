@@ -3,7 +3,7 @@
  * Use of this source code is governed by the Apache 2.0 license that can be found in the ./LICENSE file.
  */
 
-package com.goldenraven.padawanwallet.home.tutorials
+package com.goldenraven.padawanwallet.wallet.tutorials
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -13,19 +13,19 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import com.goldenraven.padawanwallet.R
-import com.goldenraven.padawanwallet.databinding.FragmentTutorialE8Binding
-import com.goldenraven.padawanwallet.home.HomeViewModel
+import com.goldenraven.padawanwallet.databinding.FragmentTutorialE1Binding
+import com.goldenraven.padawanwallet.wallet.WalletViewModel
 
-class TutorialE8 : Fragment() {
+class TutorialE1 : Fragment() {
 
-    private lateinit var binding: FragmentTutorialE8Binding
+    private lateinit var binding: FragmentTutorialE1Binding
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
-        binding = FragmentTutorialE8Binding.inflate(inflater, container, false)
+        binding = FragmentTutorialE1Binding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -33,14 +33,14 @@ class TutorialE8 : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val navController = Navigation.findNavController(view)
-        val viewModel = ViewModelProvider(requireActivity()).get(HomeViewModel::class.java)
+        val viewModel = ViewModelProvider(requireActivity()).get(WalletViewModel::class.java)
 
-        binding.buttonMarkDoneE8.setOnClickListener {
-            viewModel.markAsDone(tutorialNumber = 8)
-            navController.navigate(R.id.action_tutorialE8_to_tutorialsHome)
+        binding.buttonMarkDoneE1.setOnClickListener {
+            viewModel.markAsDone(tutorialNumber = 1)
+            navController.navigate(R.id.action_tutorialE1_to_tutorialsHome)
         }
-        binding.buttonBackE8.setOnClickListener {
-            navController.navigate(R.id.action_tutorialE8_to_tutorialsHome)
+        binding.buttonBackE1.setOnClickListener {
+            navController.navigate(R.id.action_tutorialE1_to_tutorialsHome)
         }
     }
 }

@@ -3,7 +3,7 @@
  * Use of this source code is governed by the Apache 2.0 license that can be found in the ./LICENSE file.
  */
 
-package com.goldenraven.padawanwallet.home.wallet
+package com.goldenraven.padawanwallet.wallet.wallet
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -16,8 +16,8 @@ import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.goldenraven.padawanwallet.R
 import com.goldenraven.padawanwallet.databinding.FragmentWalletHomeBinding
-import com.goldenraven.padawanwallet.home.HomeViewModel
-import com.goldenraven.padawanwallet.home.TxHistoryAdapter
+import com.goldenraven.padawanwallet.wallet.WalletViewModel
+import com.goldenraven.padawanwallet.wallet.TxHistoryAdapter
 import com.goldenraven.padawanwallet.utils.SnackbarLevel
 import com.goldenraven.padawanwallet.utils.fireSnackbar
 import timber.log.Timber
@@ -25,7 +25,7 @@ import java.text.DecimalFormat
 
 class WalletHome : Fragment() {
 
-    private lateinit var viewModel: HomeViewModel
+    private lateinit var viewModel: WalletViewModel
     private lateinit var binding: FragmentWalletHomeBinding
 
     override fun onCreateView(
@@ -41,7 +41,7 @@ class WalletHome : Fragment() {
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
         // ViewModel
-        viewModel = ViewModelProvider(requireActivity()).get(HomeViewModel::class.java)
+        viewModel = ViewModelProvider(requireActivity()).get(WalletViewModel::class.java)
         viewModel.readAllData.observe(viewLifecycleOwner, Observer { tx ->
             adapter.setData(tx)
         })
