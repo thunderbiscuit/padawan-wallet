@@ -15,6 +15,9 @@ import androidx.navigation.Navigation
 import com.goldenraven.padawanwallet.R
 import com.goldenraven.padawanwallet.Wallet
 import com.goldenraven.padawanwallet.databinding.FragmentWalletChoiceBinding
+import com.goldenraven.padawanwallet.utils.SnackbarLevel
+import com.goldenraven.padawanwallet.utils.fireSnackbar
+import com.goldenraven.padawanwallet.utils.isNetworkAvailable
 import com.goldenraven.padawanwallet.wallet.WalletActivity
 
 class WalletChoiceFragment : Fragment() {
@@ -34,15 +37,40 @@ class WalletChoiceFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val navController = Navigation.findNavController(view)
+        val networkAvailable: Boolean = isNetworkAvailable(requireContext())
 
+        // create a new wallet
         binding.createWalletButton.setOnClickListener {
-            val intent: Intent = Intent(this@WalletChoiceFragment.context, WalletActivity::class.java)
-            Wallet.createWallet()
-            startActivity(intent)
+            when (networkAvailable) {
+                true -> {
+                    val intent: Intent = Intent(this@WalletChoiceFragment.context, WalletActivity::class.java)
+                    Wallet.createWallet()
+                    startActivity(intent)
+                }
+                false -> {
+                    fireSnackbar(
+                        requireView(),
+                        SnackbarLevel.ERROR,
+                        "Error: internet connection not currently available"
+                    )
+                }
+            }
         }
 
+        // recover wallet
         binding.recoverWalletButton.setOnClickListener {
-            navController.navigate(R.id.action_walletChoice_to_walletRecoveryFragment)
+            when (networkAvailable) {
+                true -> {
+                    navController.navigate(R.id.action_walletChoice_to_walletRecoveryFragment)
+                }
+                false -> {
+                    fireSnackbar(
+                        requireView(),
+                        SnackbarLevel.ERROR,
+                        "Error: internet connection not currently available"
+                    )
+                }
+            }
         }
     }
 }

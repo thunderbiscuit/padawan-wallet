@@ -17,6 +17,8 @@ import com.goldenraven.padawanwallet.R
 import com.goldenraven.padawanwallet.Repository
 import com.goldenraven.padawanwallet.Wallet
 import com.goldenraven.padawanwallet.databinding.FragmentWalletBinding
+import com.goldenraven.padawanwallet.utils.SnackbarLevel
+import com.goldenraven.padawanwallet.utils.fireSnackbar
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import io.ktor.client.*
 import io.ktor.client.engine.cio.*
@@ -54,7 +56,6 @@ class WalletFragment : Fragment() {
                 Timber.i("[PADAWANLOGS] User would appreciate some testnet coins!")
                 val address: String = Wallet.getNewAddress()
                 callTatooineFaucet(address)
-                Repository.oneTimeFaucetCallDone()
                 Repository.offerFaucetCallDone()
             }
             .setNegativeButton("No thanks") { _, _ ->
@@ -89,10 +90,20 @@ class WalletFragment : Fragment() {
             }
 
             Timber.i("[PADAWANLOGS]: API call to Tatooine will request coins at $address")
-            val response: HttpResponse = ktorClient.post(faucetUrl) {
-                body = TextContent(address, ContentType.Text.Plain)
+            try {
+                val response: HttpResponse = ktorClient.post(faucetUrl) {
+                    body = TextContent(address, ContentType.Text.Plain)
+                }
+                Repository.oneTimeFaucetCallDone()
+                Timber.i("[PADAWANLOGS]: API call to Tatooine was performed. Response is ${response.status}, ${response.readText()}")
+            } catch (cause: Throwable) {
+                Timber.i("[PADAWANLOGS] Tatooine call failed: $cause")
+                fireSnackbar(
+                    requireView(),
+                    SnackbarLevel.ERROR,
+                    "Error: Faucet Not Available"
+                )
             }
-            Timber.i("[PADAWANLOGS]: API call to Tatooine was performed. Response is ${response.status}, ${response.readText()}")
             ktorClient.close()
         }
     }
