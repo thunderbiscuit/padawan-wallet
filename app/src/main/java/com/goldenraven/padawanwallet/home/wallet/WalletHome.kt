@@ -15,11 +15,11 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.goldenraven.padawanwallet.R
-import com.goldenraven.padawanwallet.SnackbarLevel
 import com.goldenraven.padawanwallet.databinding.FragmentWalletHomeBinding
-import com.goldenraven.padawanwallet.fireSnackbar
 import com.goldenraven.padawanwallet.home.HomeViewModel
 import com.goldenraven.padawanwallet.home.TxHistoryAdapter
+import com.goldenraven.padawanwallet.utils.SnackbarLevel
+import com.goldenraven.padawanwallet.utils.fireSnackbar
 import timber.log.Timber
 import java.text.DecimalFormat
 

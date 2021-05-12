@@ -14,11 +14,10 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import com.goldenraven.padawanwallet.R
-import com.goldenraven.padawanwallet.SnackbarLevel
+import com.goldenraven.padawanwallet.utils.*
 import com.goldenraven.padawanwallet.Wallet
 import com.goldenraven.padawanwallet.data.Tx
 import com.goldenraven.padawanwallet.databinding.FragmentWalletBroadcastBinding
-import com.goldenraven.padawanwallet.fireSnackbar
 import com.goldenraven.padawanwallet.home.HomeViewModel
 import com.google.android.material.snackbar.BaseTransientBottomBar
 import com.google.android.material.snackbar.Snackbar
