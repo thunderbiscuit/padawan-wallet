@@ -9,7 +9,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.fragment.app.Fragment
+import com.goldenraven.padawanwallet.R
 import com.goldenraven.padawanwallet.databinding.FragmentAboutBinding
 
 class AboutFragment : Fragment() {
@@ -21,6 +23,9 @@ class AboutFragment : Fragment() {
             container: ViewGroup?,
             savedInstanceState: Bundle?,
     ): View {
+        val toolBarTitle = requireActivity().findViewById<TextView>(R.id.toolbarTitleDrawer)
+        toolBarTitle.text = getString(R.string.about_title)
+
         binding = FragmentAboutBinding.inflate(inflater, container, false)
         return binding.root
     }

@@ -10,9 +10,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import com.goldenraven.padawanwallet.BuildConfig
+import com.goldenraven.padawanwallet.R
 import com.goldenraven.padawanwallet.Repository
 import com.goldenraven.padawanwallet.Wallet
 import com.goldenraven.padawanwallet.databinding.FragmentSettingsBinding
@@ -38,6 +40,9 @@ class SettingsFragment : Fragment() {
             container: ViewGroup?,
             savedInstanceState: Bundle?,
     ): View {
+        val toolBarTitle = requireActivity().findViewById<TextView>(R.id.toolbarTitleDrawer)
+        toolBarTitle.text = getString(R.string.settings_title)
+
         binding = FragmentSettingsBinding.inflate(inflater, container, false)
         return binding.root
     }

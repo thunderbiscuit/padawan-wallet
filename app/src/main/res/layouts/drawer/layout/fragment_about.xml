@@ -7,16 +7,4 @@
     android:id="@+id/fragmentAbout"
     android:background="@color/bg0soft">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="70dp"
-        android:fontFamily="@font/share_tech_mono"
-        android:text="@string/about_title"
-        android:textColor="@color/bright_green"
-        android:textSize="32sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>

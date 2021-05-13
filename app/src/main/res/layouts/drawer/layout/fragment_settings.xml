@@ -6,19 +6,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/bg0soft">
 
-    <TextView
-        android:id="@+id/settingsTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="140dp"
-        android:fontFamily="@font/share_tech_mono"
-        android:text="@string/settings"
-        android:textColor="@color/bright_green"
-        android:textSize="32sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <Button
         android:id="@+id/resetDoneTutorialsButton"
         android:layout_width="0dp"
@@ -30,7 +17,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/settingsTitle" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/apiCallButton"

@@ -29,13 +29,11 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
                 android:fontFamily="@font/share_tech_mono"
-                android:paddingEnd="21dp"
-                android:text="Padawan Wallet"
-                android:textColor="@color/bright_green"
+                android:paddingEnd="16dp"
                 android:textSize="24sp"
-                android:textStyle="italic"
-                tools:layout_editor_absoluteX="178dp"
-                tools:layout_editor_absoluteY="13dp" />
+                android:text="@string/app_name"
+                android:textColor="@color/bright_green"
+                android:textStyle="italic" />
         </androidx.appcompat.widget.Toolbar>
 
         <com.google.android.material.tabs.TabLayout

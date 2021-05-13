@@ -22,16 +22,16 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <TextView
+                android:id="@+id/toolbarTitleDrawer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="start"
                 android:fontFamily="@font/share_tech_mono"
-                android:paddingEnd="21dp"
-                android:text="@string/padawan"
-                android:textColor="@color/bright_green"
-                android:textSize="28sp"
-                tools:layout_editor_absoluteX="354dp"
-                tools:layout_editor_absoluteY="18dp" />
+                android:paddingEnd="16dp"
+                android:text=""
+                android:layout_gravity="end"
+                android:textSize="24sp"
+                android:textStyle="italic"
+                android:textColor="@color/bright_green" />
 
         </androidx.appcompat.widget.Toolbar>
 
