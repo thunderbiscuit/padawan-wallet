@@ -27,21 +27,21 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="start"
+                android:layout_gravity="end"
                 android:fontFamily="@font/share_tech_mono"
                 android:paddingEnd="21dp"
-                android:text="@string/padawan"
+                android:text="Padawan Wallet"
                 android:textColor="@color/bright_green"
-                android:textSize="28sp"
-                tools:layout_editor_absoluteX="354dp"
-                tools:layout_editor_absoluteY="18dp" />
-
+                android:textSize="24sp"
+                android:textStyle="italic"
+                tools:layout_editor_absoluteX="178dp"
+                tools:layout_editor_absoluteY="13dp" />
         </androidx.appcompat.widget.Toolbar>
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tabLayout"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="50dp"
             android:background="@color/bg0soft"
             android:elevation="8dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -67,7 +67,6 @@
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/bg1"
                 android:text="@string/tab_tutorials" />
-
         </com.google.android.material.tabs.TabLayout>
 
         <androidx.viewpager2.widget.ViewPager2
@@ -79,7 +78,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tabLayout">
-
         </androidx.viewpager2.widget.ViewPager2>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -91,7 +89,7 @@
         android:fitsSystemWindows="true"
         app:headerLayout="@layout/nav_header"
         app:itemTextColor="@color/fg1"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
         app:menu="@menu/nav_drawer_menu">
     </com.google.android.material.navigation.NavigationView>
-
 </androidx.drawerlayout.widget.DrawerLayout>
