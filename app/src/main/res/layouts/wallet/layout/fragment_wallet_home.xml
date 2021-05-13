@@ -23,11 +23,10 @@
 
     <Button
         android:id="@+id/syncButton"
-        android:layout_width="90dp"
+        android:layout_width="70dp"
         android:layout_height="32dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="21dp"
         android:height="10dp"
         android:backgroundTint="@color/bg4"
         android:text="@string/sync"
