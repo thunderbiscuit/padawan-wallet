@@ -2,7 +2,7 @@
   <h1>Padawan Wallet</h1>
   <br/>
   <br/>
-  <img src="./images/logo-v1.1.0.svg" alt="Logo 1.1.0" width="400">
+  <img src="./images/logo-v1.0.0.svg" alt="Logo 1.0.0" width="400">
 </div>
 <br/>
 <br/>
@@ -16,18 +16,16 @@
 
 A testnet-only bitcoin wallet full of tutorials on how to use bitcoin wallets.
 
-We're building the app you'll want to recommend to your teenage cousins at Christmas or to your dad that keeps asking questions about bitcoin. It aims to be a self-study tool, getting its users acquainted with the usual workflow and basic jargon of mobile wallets in an risk-free environment perfect for experimentation and learning (testnet).
+We're building the app you'll want to recommend to your teenage cousins at Christmas or to your dad that keeps asking questions about bitcoin. It aims to be a self-study tool, getting its users acquainted with the usual workflow and basic jargon of mobile wallets in a risk-free environment perfect for experimentation and learning (testnet).
 
 We think testnet is an underused resource outside of software development circles, and believe it can be leveraged for bitcoin-curious people everywhere. Testnet offers all the complexity of mainnet, and one of the goal of this wallet is to eventually foray into these more advanced bitcoin features (output descriptors, multisig wallets, DLCs) and offer a training and testing ground for users.
 
-Join us on [discord](https://discord.gg/qTysDfZ2gX)!
-
+Join us on [discord](https://discord.gg/qTysDfZ2gX)!  
 <br/>
 
 ## Download
 
-You can download the latest apk for this app on the [`v0.5.0` release page](https://github.com/thunderbiscuit/padawan-wallet/releases/tag/v0.5.0).
-
+You can download the latest apk for this app on the [`v0.5.0` release page](https://github.com/thunderbiscuit/padawan-wallet/releases/tag/v0.5.0).  
 <br/>
 
 ## Screenshots
