@@ -13,7 +13,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_logo_v1_1_0" />
+        app:srcCompat="@drawable/ic_logo_v1_0_0" />
 
     <TextView
         android:layout_width="wrap_content"
