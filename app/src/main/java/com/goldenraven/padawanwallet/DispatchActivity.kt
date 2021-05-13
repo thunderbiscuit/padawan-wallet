@@ -8,8 +8,8 @@ package com.goldenraven.padawanwallet
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.goldenraven.padawanwallet.wallet.WalletActivity
 import com.goldenraven.padawanwallet.intro.IntroActivity
+import com.goldenraven.padawanwallet.wallet.WalletActivity
 
 class DispatchActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,8 +26,10 @@ class DispatchActivity : AppCompatActivity() {
         // launch into wallet activity if user already has a padawan wallet on device
         if (currentWalletExists) {
             startActivity(Intent(this, WalletActivity::class.java))
+            finish()
         } else {
             startActivity(Intent(this, IntroActivity::class.java))
+            finish()
         }
     }
 }
