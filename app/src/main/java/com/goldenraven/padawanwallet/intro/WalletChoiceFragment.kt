@@ -50,8 +50,8 @@ class WalletChoiceFragment : Fragment() {
                 false -> {
                     fireSnackbar(
                         requireView(),
-                        SnackbarLevel.ERROR,
-                        "Error: internet connection not currently available"
+                        SnackbarLevel.WARNING,
+                        "Error: network connection not currently available"
                     )
                 }
             }
@@ -66,8 +66,8 @@ class WalletChoiceFragment : Fragment() {
                 false -> {
                     fireSnackbar(
                         requireView(),
-                        SnackbarLevel.ERROR,
-                        "Error: internet connection not currently available"
+                        SnackbarLevel.WARNING,
+                        "Error: network connection not currently available"
                     )
                 }
             }
