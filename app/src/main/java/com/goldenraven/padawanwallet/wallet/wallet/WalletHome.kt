@@ -16,10 +16,11 @@ import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.goldenraven.padawanwallet.R
 import com.goldenraven.padawanwallet.databinding.FragmentWalletHomeBinding
-import com.goldenraven.padawanwallet.wallet.WalletViewModel
-import com.goldenraven.padawanwallet.wallet.TxHistoryAdapter
 import com.goldenraven.padawanwallet.utils.SnackbarLevel
 import com.goldenraven.padawanwallet.utils.fireSnackbar
+import com.goldenraven.padawanwallet.utils.isNetworkAvailable
+import com.goldenraven.padawanwallet.wallet.TxHistoryAdapter
+import com.goldenraven.padawanwallet.wallet.WalletViewModel
 import timber.log.Timber
 import java.text.DecimalFormat
 
@@ -82,12 +83,13 @@ class WalletHome : Fragment() {
         })
 
         binding.syncButton.setOnClickListener {
-            viewModel.updateBalance()
-            fireSnackbar(
-                requireView(),
-                SnackbarLevel.INFO,
-                "Wallet successfully synced!"
-            )
+            when (isNetworkAvailable(requireContext())) {
+                true -> {
+                    viewModel.updateBalance()
+                    fireSnackbar(requireView(), SnackbarLevel.INFO, "Wallet successfully synced!")
+                }
+                false -> fireSnackbar(requireView(), SnackbarLevel.WARNING, "Network connection currently not available")
+            }
         }
 
         binding.unitToggleButton.setOnClickListener {
