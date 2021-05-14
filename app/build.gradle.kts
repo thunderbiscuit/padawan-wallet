@@ -11,6 +11,7 @@ val faucetPassword: String by project
 android {
     compileSdkVersion(30)
     buildToolsVersion = "30.0.2"
+    ndkVersion = "21.4.7075529"
 
     buildFeatures {
         viewBinding = true
@@ -45,9 +46,8 @@ android {
             debuggable(true)
         }
         getByName("release") {
-            // isMinifyEnabled = true
-            minifyEnabled(true)
             // shrinkResources(true)
+            minifyEnabled(true)
             debuggable(true)
             proguardFiles = mutableListOf(getDefaultProguardFile("proguard-android-optimize.txt"), file("proguard-rules.pro"))
         }
@@ -61,7 +61,6 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
-    ndkVersion = "21.3.6528147"
 }
 
 dependencies {
@@ -76,7 +75,7 @@ dependencies {
     implementation("androidx.viewpager:viewpager:1.0.0")
 
     // bitcoin
-    implementation("org.bitcoindevkit.bdkjni:bdk-jni:0.1.0-beta.1")
+    implementation("org.bitcoindevkit.bdkjni:bdk-jni-debug:0.2.0")
 
     // Ktor
     implementation("io.ktor:ktor-client-cio:${Versions.ktor}")

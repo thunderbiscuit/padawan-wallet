@@ -57,7 +57,7 @@ object Wallet {
     }
 
     public fun recoverWallet(mnemonic: String) {
-        val keys: ExtendedKeys = createExtendedKeyFromMnemonic(mnemonic)
+        val keys: ExtendedKey = restoreExtendedKeyFromMnemonic(mnemonic)
         val descriptor: String = createDescriptor(keys)
         val changeDescriptor: String = createChangeDescriptor(keys)
         initialize(
@@ -69,7 +69,7 @@ object Wallet {
     }
 
     public fun createWallet(): Unit {
-        val keys: ExtendedKeys = generateExtendedKey()
+        val keys: ExtendedKey = generateExtendedKey()
         val descriptor: String = createDescriptor(keys)
         val changeDescriptor: String = createChangeDescriptor(keys)
         initialize(
@@ -80,23 +80,23 @@ object Wallet {
         Repository.saveMnemonic(keys.mnemonic)
     }
 
-    private fun generateExtendedKey(): ExtendedKeys {
+    private fun generateExtendedKey(): ExtendedKey {
         Timber.i("Extended keys generated")
-        return lib.generate_extended_key(Network.testnet, 12)
+        return lib.generate_extended_key(Network.testnet, 12, "")
     }
 
-    public fun createExtendedKeyFromMnemonic(mnemonic: String): ExtendedKeys {
-        return lib.create_extended_keys(Network.testnet, mnemonic)
+    public fun restoreExtendedKeyFromMnemonic(mnemonic: String): ExtendedKey {
+        return lib.restore_extended_key(Network.testnet, mnemonic, "")
     }
 
-    private fun createDescriptor(keys: ExtendedKeys): String {
-        Timber.i("[PADAWANLOGS] Descriptor for receive addresses is wpkh(${keys.ext_priv_key}/84'/1'/0'/0/*)")
-        return ("wpkh(" + keys.ext_priv_key + "/84'/1'/0'/0/*)")
+    private fun createDescriptor(keys: ExtendedKey): String {
+        Timber.i("[PADAWANLOGS] Descriptor for receive addresses is wpkh(${keys.xprv}/84'/1'/0'/0/*)")
+        return ("wpkh(" + keys.xprv + "/84'/1'/0'/0/*)")
     }
 
-    private fun createChangeDescriptor(keys: ExtendedKeys): String {
-        Timber.i("[PADAWANLOGS] Descriptor for change addresses is wpkh(${keys.ext_priv_key}/84'/1'/0'/1/*)")
-        return ("wpkh(" + keys.ext_priv_key + "/84'/1'/0'/1/*)")
+    private fun createChangeDescriptor(keys: ExtendedKey): String {
+        Timber.i("[PADAWANLOGS] Descriptor for change addresses is wpkh(${keys.xprv}/84'/1'/0'/1/*)")
+        return ("wpkh(" + keys.xprv + "/84'/1'/0'/1/*)")
     }
 
     public fun sync(max_address: Int?=null) {
