@@ -5,7 +5,24 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).  
 <br/>
 
-## [v0.5.0](https://github.com/thunderbiscuit/padawan-wallet/releases/tag/v0.5.0) — Apr 7, 2020
+## [v0.6.0](https://github.com/thunderbiscuit/padawan-wallet/releases/tag/v0.6.0) — May 14, 2021
+### Added
++ Allow new users to request testnet coins to Tatooine faucet
++ Add database to store transactions
++ Display transaction history in recyclerview
++ Use camera to scan QR code formatted bitcoin addresses
++ Add app version number to drawer
+
+### Changed
++ Upload new logo `v1.0.0`  
++ Bump Kotlin version to `1.5.0`
++ Better handling of network and API failures
++ Clean up UI for larger devices
++ Tons of small UI improvements
++ Streamline use of snackbars across the app  
+<br/>  
+
+## [v0.5.0](https://github.com/thunderbiscuit/padawan-wallet/releases/tag/v0.5.0) — Apr 7, 2021
 ### Added
 + Add QR codes when displaying receive addresses
 + Shared preferences keep track of completed tutorials
@@ -24,7 +41,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 + Point bdk to blockstream.info servers  
 <br/>  
 
-## [v0.4.0](https://github.com/thunderbiscuit/padawan-wallet/releases/tag/v0.4.0) — Jan 12, 2020
+## [v0.4.0](https://github.com/thunderbiscuit/padawan-wallet/releases/tag/v0.4.0) — Jan 12, 2021
 ### Added
 + Add tutorial fragments UI
 + Enable marking tutorials as done
@@ -34,7 +51,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 + Various improvements to the codebase  
 <br/>  
 
-## [v0.3.0](https://github.com/thunderbiscuit/padawan-wallet/releases/tag/v0.3.0) — Jan 5, 2020
+## [v0.3.0](https://github.com/thunderbiscuit/padawan-wallet/releases/tag/v0.3.0) — Jan 5, 2021
 ### Added
 + Tutorial tab now handles fragments
 + Separate wallet and tutorials in their respective packages
