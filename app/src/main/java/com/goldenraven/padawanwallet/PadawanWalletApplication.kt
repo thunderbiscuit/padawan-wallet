@@ -7,6 +7,8 @@ package com.goldenraven.padawanwallet
 
 import android.app.Application
 import android.content.Context
+import com.goldenraven.padawanwallet.data.Repository
+import com.goldenraven.padawanwallet.data.Wallet
 import timber.log.Timber
 
 class PadawanWalletApplication : Application() {

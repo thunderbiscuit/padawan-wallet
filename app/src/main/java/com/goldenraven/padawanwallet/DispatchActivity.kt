@@ -8,6 +8,8 @@ package com.goldenraven.padawanwallet
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.goldenraven.padawanwallet.data.Repository
+import com.goldenraven.padawanwallet.data.Wallet
 import com.goldenraven.padawanwallet.intro.IntroActivity
 import com.goldenraven.padawanwallet.wallet.WalletActivity
 

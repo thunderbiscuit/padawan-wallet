@@ -14,9 +14,9 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.goldenraven.padawanwallet.R
-import com.goldenraven.padawanwallet.utils.*
-import com.goldenraven.padawanwallet.Wallet
+import com.goldenraven.padawanwallet.data.Wallet
 import com.goldenraven.padawanwallet.databinding.FragmentRecoverBinding
+import com.goldenraven.padawanwallet.utils.*
 import com.goldenraven.padawanwallet.wallet.WalletActivity
 import timber.log.Timber
 import java.util.*

@@ -12,7 +12,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.goldenraven.padawanwallet.R
-import com.goldenraven.padawanwallet.Repository
+import com.goldenraven.padawanwallet.data.Repository
 import com.goldenraven.padawanwallet.databinding.FragmentSeedphraseBinding
 import timber.log.Timber
 

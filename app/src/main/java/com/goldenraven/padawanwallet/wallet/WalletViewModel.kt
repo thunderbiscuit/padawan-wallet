@@ -10,8 +10,8 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.goldenraven.padawanwallet.Repository
-import com.goldenraven.padawanwallet.Wallet
+import com.goldenraven.padawanwallet.data.Repository
+import com.goldenraven.padawanwallet.data.Wallet
 import com.goldenraven.padawanwallet.data.Tx
 import com.goldenraven.padawanwallet.data.TxDao
 import com.goldenraven.padawanwallet.data.TxDatabase

@@ -14,8 +14,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import com.goldenraven.padawanwallet.BuildConfig
 import com.goldenraven.padawanwallet.R
-import com.goldenraven.padawanwallet.Repository
-import com.goldenraven.padawanwallet.Wallet
+import com.goldenraven.padawanwallet.data.Repository
+import com.goldenraven.padawanwallet.data.Wallet
 import com.goldenraven.padawanwallet.databinding.FragmentWalletBinding
 import com.goldenraven.padawanwallet.utils.SnackbarLevel
 import com.goldenraven.padawanwallet.utils.fireSnackbar

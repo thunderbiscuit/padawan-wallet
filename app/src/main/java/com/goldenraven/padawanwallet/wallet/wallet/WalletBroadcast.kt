@@ -15,7 +15,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import com.goldenraven.padawanwallet.R
 import com.goldenraven.padawanwallet.utils.*
-import com.goldenraven.padawanwallet.Wallet
+import com.goldenraven.padawanwallet.data.Wallet
 import com.goldenraven.padawanwallet.data.Tx
 import com.goldenraven.padawanwallet.databinding.FragmentWalletBroadcastBinding
 import com.goldenraven.padawanwallet.wallet.WalletViewModel

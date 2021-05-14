@@ -3,7 +3,7 @@
  * Use of this source code is governed by the Apache 2.0 license that can be found in the ./LICENSE file.
  */
 
-package com.goldenraven.padawanwallet
+package com.goldenraven.padawanwallet.data
 
 import com.goldenraven.padawanwallet.utils.RequiredInitialWalletData
 import org.bitcoindevkit.bdkjni.Lib
@@ -21,12 +21,12 @@ object Wallet {
     init {
         // load bitcoindevkit
         Lib.load()
-        this.lib = Lib()
+        lib = Lib()
     }
 
     // setting the path requires the application context and is done once by PadawanWalletApplication
     public fun setPath(path: String) {
-        this.path = path
+        Wallet.path = path
     }
 
     private fun initialize(
@@ -35,12 +35,12 @@ object Wallet {
     ): Unit {
         walletPtr = lib.constructor(
             WalletConstructor(
-                name = this.name,
+                name = name,
                 network = Network.testnet,
-                path = this.path,
+                path = path,
                 descriptor = descriptor,
                 change_descriptor = changeDescriptor,
-                electrum_url = this.electrumURL,
+                electrum_url = electrumURL,
                 electrum_proxy = null,
             )
         )
@@ -50,7 +50,7 @@ object Wallet {
         val initialWalletData: RequiredInitialWalletData = Repository.getInitialWalletData()
         Timber.i("[PADAWANLOGS] Descriptor: ${initialWalletData.descriptor}")
         Timber.i("[PADAWANLOGS] Change descriptor: ${initialWalletData.changeDescriptor}")
-        this.initialize(
+        initialize(
             descriptor = initialWalletData.descriptor,
             changeDescriptor = initialWalletData.changeDescriptor,
         )
@@ -60,11 +60,11 @@ object Wallet {
         val keys: ExtendedKeys = createExtendedKeyFromMnemonic(mnemonic)
         val descriptor: String = createDescriptor(keys)
         val changeDescriptor: String = createChangeDescriptor(keys)
-        this.initialize(
+        initialize(
             descriptor = descriptor,
             changeDescriptor = changeDescriptor,
         )
-        Repository.saveWallet(this.path, descriptor, changeDescriptor)
+        Repository.saveWallet(path, descriptor, changeDescriptor)
         Repository.saveMnemonic(keys.mnemonic)
     }
 
@@ -72,11 +72,11 @@ object Wallet {
         val keys: ExtendedKeys = generateExtendedKey()
         val descriptor: String = createDescriptor(keys)
         val changeDescriptor: String = createChangeDescriptor(keys)
-        this.initialize(
+        initialize(
             descriptor = descriptor,
             changeDescriptor = changeDescriptor,
         )
-        Repository.saveWallet(this.path, descriptor, changeDescriptor)
+        Repository.saveWallet(path, descriptor, changeDescriptor)
         Repository.saveMnemonic(keys.mnemonic)
     }
 
