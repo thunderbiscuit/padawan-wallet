@@ -47,7 +47,7 @@ android {
         }
         getByName("release") {
             // shrinkResources(true)
-            minifyEnabled(true)
+            // minifyEnabled(true)
             debuggable(true)
             proguardFiles = mutableListOf(getDefaultProguardFile("proguard-android-optimize.txt"), file("proguard-rules.pro"))
         }
