@@ -11,9 +11,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 + Add database to store transactions
 + Display transaction history in recyclerview
 + Use camera to scan QR code formatted bitcoin addresses
-+ Add app version number to drawer
++ Add app version number to drawer  
 
 ### Changed
++ Update bitcoindevkit library to 0.2.0
 + Upload new logo `v1.0.0`  
 + Bump Kotlin version to `1.5.0`
 + Better handling of network and API failures
