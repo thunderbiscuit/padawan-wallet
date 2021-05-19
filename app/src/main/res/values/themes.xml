@@ -2,6 +2,7 @@
     <style name="Theme.PadawanWallet" parent="Theme.MaterialComponents.NoActionBar">
         <item name="android:statusBarColor">@color/bg0soft</item>
         <item name="snackbarStyle">@style/CustomSnackbar</item>
+        <!-- <item name="fontFamily">@font/nunito_sans</item> -->
     </style>
 
     <style name="Theme.IntroPadawanWallet" parent="Theme.MaterialComponents.Light.NoActionBar">

@@ -29,7 +29,7 @@
                 android:paddingEnd="16dp"
                 android:text=""
                 android:layout_gravity="end"
-                android:textSize="24sp"
+                android:textSize="26sp"
                 android:textStyle="italic"
                 android:textColor="@color/bright_green" />
 

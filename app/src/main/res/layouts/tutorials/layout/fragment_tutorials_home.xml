@@ -20,7 +20,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="24dp"
             android:backgroundTint="@color/bg1"
-            android:fontFamily="@font/share_tech_mono"
+            android:fontFamily="@font/nunito_sans"
             android:text="@string/essentials_section_name"
             android:textColor="@color/fg1"
             app:layout_constraintStart_toStartOf="parent"
@@ -58,7 +58,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:backgroundTint="@color/bg4"
-                android:fontFamily="sans-serif-medium"
+                android:fontFamily="@font/nunito_sans"
                 android:text="@string/E1_title"
                 android:textAllCaps="false"
                 android:textAppearance="?android:attr/textAppearanceButton"
@@ -67,15 +67,14 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.35">
-            </TextView>
+                app:layout_constraintVertical_bias="0.35"></TextView>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:backgroundTint="@color/bg4"
-                android:fontFamily="@font/roboto_light_italic"
+                android:fontFamily="@font/nunito_sans"
                 android:text="@string/concept"
                 android:textAllCaps="false"
                 android:textAppearance="?android:attr/textAppearanceButton"
@@ -84,8 +83,7 @@
                 android:textSize="10sp"
                 android:textStyle="normal"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/titleE1">
-            </TextView>
+                app:layout_constraintTop_toBottomOf="@id/titleE1"></TextView>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -109,7 +107,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:backgroundTint="@color/bg4"
-                android:fontFamily="sans-serif-medium"
+                android:fontFamily="@font/nunito_sans"
                 android:text="Bitcoin units"
                 android:textAllCaps="false"
                 android:textAppearance="?android:attr/textAppearanceButton"
@@ -118,15 +116,14 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.35">
-            </TextView>
+                app:layout_constraintVertical_bias="0.35"></TextView>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:backgroundTint="@color/bg4"
-                android:fontFamily="@font/roboto_light_italic"
+                android:fontFamily="@font/nunito_sans"
                 android:text="@string/concept"
                 android:textAllCaps="false"
                 android:textAppearance="?android:attr/textAppearanceButton"
@@ -135,8 +132,7 @@
                 android:textSize="10sp"
                 android:textStyle="normal"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/titleE2">
-            </TextView>
+                app:layout_constraintTop_toBottomOf="@+id/titleE2"></TextView>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -160,7 +156,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:backgroundTint="@color/bg4"
-                android:fontFamily="sans-serif-medium"
+                android:fontFamily="@font/nunito_sans"
                 android:text="Receiving bitcoin"
                 android:textAllCaps="false"
                 android:textAppearance="?android:attr/textAppearanceButton"
@@ -169,15 +165,14 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.35">
-            </TextView>
+                app:layout_constraintVertical_bias="0.35"></TextView>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:backgroundTint="@color/bg4"
-                android:fontFamily="@font/roboto_light_italic"
+                android:fontFamily="@font/nunito_sans"
                 android:text="@string/skill"
                 android:textAllCaps="false"
                 android:textAppearance="?android:attr/textAppearanceButton"
@@ -186,8 +181,7 @@
                 android:textSize="10sp"
                 android:textStyle="normal"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/titleE3">
-            </TextView>
+                app:layout_constraintTop_toBottomOf="@id/titleE3"></TextView>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -211,7 +205,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:backgroundTint="@color/bg4"
-                android:fontFamily="sans-serif-medium"
+                android:fontFamily="@font/nunito_sans"
                 android:text="What is the mempool?"
                 android:textAllCaps="false"
                 android:textAppearance="?android:attr/textAppearanceButton"
@@ -220,15 +214,14 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.35">
-            </TextView>
+                app:layout_constraintVertical_bias="0.35"></TextView>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:backgroundTint="@color/bg4"
-                android:fontFamily="@font/roboto_light_italic"
+                android:fontFamily="@font/nunito_sans"
                 android:text="@string/concept"
                 android:textAllCaps="false"
                 android:textAppearance="?android:attr/textAppearanceButton"
@@ -237,8 +230,7 @@
                 android:textSize="10sp"
                 android:textStyle="normal"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/titleE4">
-            </TextView>
+                app:layout_constraintTop_toBottomOf="@id/titleE4"></TextView>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -262,7 +254,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:backgroundTint="@color/bg4"
-                android:fontFamily="sans-serif-medium"
+                android:fontFamily="@font/nunito_sans"
                 android:text="Sending bitcoin"
                 android:textAllCaps="false"
                 android:textAppearance="?android:attr/textAppearanceButton"
@@ -271,15 +263,14 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.35">
-            </TextView>
+                app:layout_constraintVertical_bias="0.35"></TextView>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:backgroundTint="@color/bg4"
-                android:fontFamily="@font/roboto_light_italic"
+                android:fontFamily="@font/nunito_sans"
                 android:text="@string/skill"
                 android:textAllCaps="false"
                 android:textAppearance="?android:attr/textAppearanceButton"
@@ -288,8 +279,7 @@
                 android:textSize="10sp"
                 android:textStyle="normal"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/titleE5">
-            </TextView>
+                app:layout_constraintTop_toBottomOf="@id/titleE5"></TextView>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -313,7 +303,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:backgroundTint="@color/bg4"
-                android:fontFamily="sans-serif-medium"
+                android:fontFamily="@font/nunito_sans"
                 android:text="What are transaction fees?"
                 android:textAllCaps="false"
                 android:textAppearance="?android:attr/textAppearanceButton"
@@ -322,15 +312,14 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.35">
-            </TextView>
+                app:layout_constraintVertical_bias="0.35"></TextView>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:backgroundTint="@color/bg4"
-                android:fontFamily="@font/roboto_light_italic"
+                android:fontFamily="@font/nunito_sans"
                 android:text="@string/concept"
                 android:textAllCaps="false"
                 android:textAppearance="?android:attr/textAppearanceButton"
@@ -339,8 +328,7 @@
                 android:textSize="10sp"
                 android:textStyle="normal"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/titleE6">
-            </TextView>
+                app:layout_constraintTop_toBottomOf="@id/titleE6"></TextView>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -364,7 +352,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:backgroundTint="@color/bg4"
-                android:fontFamily="sans-serif-medium"
+                android:fontFamily="@font/nunito_sans"
                 android:text="What is a wallet backup seed?"
                 android:textAllCaps="false"
                 android:textAppearance="?android:attr/textAppearanceButton"
@@ -373,15 +361,14 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.35">
-            </TextView>
+                app:layout_constraintVertical_bias="0.35"></TextView>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:backgroundTint="@color/bg4"
-                android:fontFamily="@font/roboto_light_italic"
+                android:fontFamily="@font/nunito_sans"
                 android:text="@string/concept"
                 android:textAllCaps="false"
                 android:textAppearance="?android:attr/textAppearanceButton"
@@ -390,8 +377,7 @@
                 android:textSize="10sp"
                 android:textStyle="normal"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/titleE7">
-            </TextView>
+                app:layout_constraintTop_toBottomOf="@id/titleE7"></TextView>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -415,7 +401,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:backgroundTint="@color/bg4"
-                android:fontFamily="sans-serif-medium"
+                android:fontFamily="@font/nunito_sans"
                 android:text="Recovering your wallet from a backup seed"
                 android:textAllCaps="false"
                 android:textAppearance="?android:attr/textAppearanceButton"
@@ -424,15 +410,14 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.35">
-            </TextView>
+                app:layout_constraintVertical_bias="0.35"></TextView>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:backgroundTint="@color/bg4"
-                android:fontFamily="@font/roboto_light_italic"
+                android:fontFamily="@font/nunito_sans"
                 android:text="@string/skill"
                 android:textAllCaps="false"
                 android:textAppearance="?android:attr/textAppearanceButton"
@@ -441,8 +426,7 @@
                 android:textSize="10sp"
                 android:textStyle="normal"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/titleE8">
-            </TextView>
+                app:layout_constraintTop_toBottomOf="@id/titleE8"></TextView>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

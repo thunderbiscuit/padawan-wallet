@@ -30,14 +30,17 @@
                 android:layout_gravity="end"
                 android:fontFamily="@font/share_tech_mono"
                 android:paddingEnd="16dp"
-                android:textSize="24sp"
                 android:text="@string/app_name"
                 android:textColor="@color/bright_green"
-                android:textStyle="italic" />
+                android:textSize="26sp"
+                android:textStyle="italic"
+                tools:layout_editor_absoluteX="214dp"
+                tools:layout_editor_absoluteY="15dp" />
         </androidx.appcompat.widget.Toolbar>
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tabLayout"
+            app:tabTextAppearance="@style/TabTitles"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:background="@color/bg0soft"
