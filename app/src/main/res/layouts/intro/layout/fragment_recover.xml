@@ -31,9 +31,9 @@
         android:textColor="@color/fg1"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.65"
+        app:layout_constraintHorizontal_bias="0.64"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/app_name_wallet_recover"></TextView>
+        app:layout_constraintTop_toBottomOf="@id/app_name_wallet_recover" />
 
     <EditText
         android:id="@+id/mnemonicword1"
