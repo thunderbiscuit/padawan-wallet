@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true"
-    android:background="@color/bg1">
+    android:background="@color/fg2">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -32,10 +32,9 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
-            android:backgroundTint="@color/bg1"
             android:fontFamily="@font/nunito_sans"
             android:text="@string/E3_content"
-            android:textColor="@color/fg1"
+            android:textColor="@color/bg0hard"
             android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
