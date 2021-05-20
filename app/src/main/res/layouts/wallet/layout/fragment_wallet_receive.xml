@@ -14,6 +14,7 @@
         android:layout_width="0dp"
         android:layout_height="100dp"
         android:background="@color/green"
+        android:fontFamily="@font/nunito_sans"
         android:gravity="center"
         android:text="@string/receive_screen_title"
         android:textColor="@color/fg1"
@@ -53,14 +54,14 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
         android:drawablePadding="2dp"
-        android:fontFamily="@font/roboto"
+        android:fontFamily="@font/nunito_sans"
         android:gravity="center"
         android:text="@string/copy_address"
         android:textColor="@color/fg1"
         android:textSize="12sp"
+        app:drawableStartCompat="@drawable/ic_copy_outline"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/viewLine4"
-        app:drawableStartCompat="@drawable/ic_copy_outline" />
+        app:layout_constraintTop_toBottomOf="@+id/viewLine4" />
 
     <Button
         android:id="@+id/buttonGenerateNewAddress"
@@ -70,7 +71,7 @@
         android:width="320dp"
         android:height="80dp"
         android:backgroundTint="@color/bg2"
-        android:fontFamily="@font/roboto"
+        android:fontFamily="@font/nunito_sans"
         android:text="@string/generate_new_address"
         android:textAllCaps="false"
         android:textColor="@color/fg1"
@@ -85,6 +86,7 @@
         android:layout_width="0dp"
         android:layout_height="70dp"
         android:backgroundTint="@color/bg4"
+        android:fontFamily="@font/nunito_sans"
         android:insetTop="0dp"
         android:insetBottom="0dp"
         android:text="@string/back_to_wallet"
