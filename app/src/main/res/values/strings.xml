@@ -67,6 +67,7 @@
     <string name="about_title">About</string>
     <string name="seed_phrase_title">Seed Phrase</string>
     <string name="settings_title">Settings</string>
+    <string name="about_text">Padawan is a testnet-only bitcoin wallet full of tutorials on how to use bitcoin wallets. We\'re building the app we hope you will want to recommend to your curious teenage cousins or to your dad that keeps asking questions about bitcoin.\n\nPadawan aims to be a self-study tool, getting its users acquainted with the usual workflow and basic jargon of mobile wallets in a risk-free environment perfect for experimentation and learning (testnet). We think testnet is an underused resource outside of software development circles, and believe it can be leveraged for bitcoin-curious people everywhere.\n\nPadawan is an open source (Apache 2.0 licenced), free collaborative project. If you would like to get involved or have feedback for us, please join our Discord group!</string>
     <string name="open">Open drawer</string>
     <string name="close">Close drawer</string>
     <string name="reset_tutorials">Reset Done Tutorials</string>
