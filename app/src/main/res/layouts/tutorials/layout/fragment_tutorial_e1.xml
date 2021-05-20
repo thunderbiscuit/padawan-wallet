@@ -12,18 +12,18 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/E1_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:fontFamily="@font/roboto"
-                android:text="@string/E1_title"
-                android:textColor="@color/fg1"
-                android:textSize="24sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/E1_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="24dp"
+            android:fontFamily="@font/nunito_sans_bold"
+            android:text="@string/E1_title"
+            android:textColor="@color/bright_green"
+            android:textSize="24sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/E1_content"
@@ -34,8 +34,6 @@
             android:layout_marginEnd="16dp"
             android:backgroundTint="@color/bg0hard"
             android:fontFamily="@font/nunito_sans"
-            android:justificationMode="none"
-            android:lineSpacingExtra="0sp"
             android:text="@string/E1_content"
             android:textColor="@color/fg0"
             android:textSize="18sp"

@@ -27,7 +27,7 @@
     <string name="tab_tutorials">Tutorials</string>
     <string name="wallet_balance_section">Balance (testnet coins)</string>
     <string name="transaction_history_section">Transaction History</string>
-    <string name="sync">Sync</string>
+    <string name="sync">SYNC</string>
     <string name="send">Send</string>
     <string name="receive">Receive</string>
     <string name="receive_screen_title">Receive bitcoin (testnet)</string>
@@ -59,7 +59,7 @@
     <string name="E5_title">Sending Bitcoin</string>
     <string name="E6_title">What is the Mempool?</string>
     <string name="E7_title">What is a Backup Seed?</string>
-    <string name="E8_title">Recovering your Wallet from a Backup Seed</string>
+    <string name="E8_title">Recovering your Wallet</string>
     <string name="tutorial_done">Mark tutorial\nas done</string>
     <string name="back_to_list">Back to tutorials list</string>
 
