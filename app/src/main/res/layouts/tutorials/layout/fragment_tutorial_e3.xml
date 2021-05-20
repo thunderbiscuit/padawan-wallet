@@ -35,7 +35,7 @@
             android:fontFamily="@font/nunito_sans"
             android:text="@string/E3_content"
             android:textColor="@color/bg0hard"
-            android:textSize="18sp"
+            android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/E3_title" />
