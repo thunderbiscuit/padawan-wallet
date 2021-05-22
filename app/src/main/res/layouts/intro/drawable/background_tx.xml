@@ -1,12 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<shape
-    android:shape="rectangle"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="@color/orange" />
+        </shape>
+    </item>
+    <item
+        android:left="4dp">
+        <shape android:shape="rectangle">
+            <solid android:color="@color/bg2" />
+        </shape>
+    </item>
+</layer-list>
 
-    <solid android:color="@color/bg0" />
-    <corners android:radius="8dp" />
-    <stroke
-        android:color="@color/bright_green"
-        android:width="2dp"/>
 
-</shape>
+
+<!--<item>-->
+<!--<shape android:shape="rectangle">-->
+<!--    <solid android:color="@color/bg3" />-->
+<!--</shape>-->
+<!--</item>-->
+<!--<item-->
+<!--android:top="1dp"-->
+<!--android:bottom="1dp">-->
+<!--<shape android:shape="rectangle">-->
+<!--    <solid android:color="@color/orange" />-->
+<!--</shape>-->
+<!--</item>-->
+<!--<item-->
+<!--android:left="4dp"-->
+<!--android:top="1dp"-->
+<!--android:bottom="1dp">-->
+<!--<shape android:shape="rectangle">-->
+<!--    <solid android:color="@color/bg2" />-->
+<!--</shape>-->
+<!--</item>-->
+
+

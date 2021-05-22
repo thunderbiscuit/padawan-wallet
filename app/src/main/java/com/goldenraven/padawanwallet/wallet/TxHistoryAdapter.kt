@@ -25,11 +25,11 @@ class TxHistoryAdapter: RecyclerView.Adapter<TxHistoryAdapter.MyViewHolder>() {
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val currentItem = txList[position]
-        holder.itemView.findViewById<TextView>(R.id.satsReceivedString).text = currentItem.valueIn.toString()
-        holder.itemView.findViewById<TextView>(R.id.txIdString).text = currentItem.txid
+//        holder.itemView.findViewById<TextView>(R.id.satsReceivedString).text = currentItem.valueIn.toString()
+//        holder.itemView.findViewById<TextView>(R.id.txIdString).text = currentItem.txid
         holder.itemView.findViewById<TextView>(R.id.satsSentString).text = currentItem.valueOut.toString()
         holder.itemView.findViewById<TextView>(R.id.dateString).text = currentItem.date
-        holder.itemView.findViewById<TextView>(R.id.feesPaidString).text = currentItem.fees.toString()
+//        holder.itemView.findViewById<TextView>(R.id.feesPaidString).text = currentItem.fees.toString()
     }
 
     fun setData(tx: List<Tx>) {
