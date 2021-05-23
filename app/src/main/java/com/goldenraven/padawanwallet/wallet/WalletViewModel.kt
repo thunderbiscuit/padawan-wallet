@@ -10,12 +10,8 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.goldenraven.padawanwallet.data.Repository
-import com.goldenraven.padawanwallet.data.Wallet
-import com.goldenraven.padawanwallet.data.Tx
-import com.goldenraven.padawanwallet.data.TxDao
-import com.goldenraven.padawanwallet.data.TxDatabase
-import com.goldenraven.padawanwallet.data.TxRepository
+import com.goldenraven.padawanwallet.data.*
+import com.goldenraven.padawanwallet.utils.isSend
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import timber.log.Timber
@@ -63,6 +59,22 @@ class WalletViewModel(application: Application) : AndroidViewModel(application) 
         Wallet.sync(100)
         val newBalance = Wallet.getBalance()
         balance.postValue(newBalance)
+    }
+
+    public fun syncTransactionHistory() {
+        val txHistory = Wallet.listTransactions()
+        Timber.i("[PADAWANLOGS] Transactions history, number of transactions: ${txHistory.size}")
+        for (tx in txHistory) {
+            val transaction: Tx = Tx(
+                txid = tx.txid,
+                date = tx.timestamp.toString(),
+                valueIn = tx.received.toInt(),
+                valueOut = tx.sent.toInt(),
+                fees = tx.fees.toInt(),
+                isSend = isSend(sent = tx.sent.toInt(), received = tx.received.toInt())
+            )
+            addTx(transaction)
+        }
     }
 
     public fun changeUnit() {

@@ -71,6 +71,7 @@ dependencies {
     implementation("androidx.constraintlayout:constraintlayout:1.1.3")
     implementation("androidx.navigation:navigation-fragment-ktx:2.2.2")
     implementation("androidx.navigation:navigation-ui-ktx:2.2.2")
+    implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.2.0")
     implementation("androidx.legacy:legacy-support-v4:1.0.0")
     implementation("androidx.viewpager:viewpager:1.0.0")
 

@@ -4,9 +4,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.goldenraven.padawanwallet.R
 import com.goldenraven.padawanwallet.data.Tx
+import com.goldenraven.padawanwallet.utils.dateAsString
 
 class TxHistoryAdapter: RecyclerView.Adapter<TxHistoryAdapter.MyViewHolder>() {
 
@@ -28,8 +30,12 @@ class TxHistoryAdapter: RecyclerView.Adapter<TxHistoryAdapter.MyViewHolder>() {
 //        holder.itemView.findViewById<TextView>(R.id.satsReceivedString).text = currentItem.valueIn.toString()
 //        holder.itemView.findViewById<TextView>(R.id.txIdString).text = currentItem.txid
         holder.itemView.findViewById<TextView>(R.id.satsSentString).text = currentItem.valueOut.toString()
-        holder.itemView.findViewById<TextView>(R.id.dateString).text = currentItem.date
+        holder.itemView.findViewById<TextView>(R.id.dateString).text = dateAsString(currentItem.date.toInt())
 //        holder.itemView.findViewById<TextView>(R.id.feesPaidString).text = currentItem.fees.toString()
+        if (currentItem.isSend) {
+            val res = holder.itemView.context.resources
+            holder.itemView.background = ResourcesCompat.getDrawable(res, R.drawable.background_tx_send, null)
+        }
     }
 
     fun setData(tx: List<Tx>) {

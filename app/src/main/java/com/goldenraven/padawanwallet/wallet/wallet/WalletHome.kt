@@ -86,6 +86,7 @@ class WalletHome : Fragment() {
             when (isNetworkAvailable(requireContext())) {
                 true -> {
                     viewModel.updateBalance()
+                    viewModel.syncTransactionHistory()
                     fireSnackbar(requireView(), SnackbarLevel.INFO, "Wallet successfully synced!")
                 }
                 false -> fireSnackbar(requireView(), SnackbarLevel.WARNING, "Network connection currently not available")

@@ -122,6 +122,10 @@ object Wallet {
         return lib.create_tx(walletPtr, fee_rate, addressees, send_all, utxos, unspendable, policy)
     }
 
+    public fun listTransactions(): List<TransactionDetails> {
+        return lib.list_transactions(walletPtr, false)
+    }
+
     public fun sign(psbt: String, assume_height: Int? = null): SignResponse {
         return lib.sign(walletPtr, psbt, assume_height)
     }

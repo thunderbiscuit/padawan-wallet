@@ -14,10 +14,12 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import com.goldenraven.padawanwallet.R
-import com.goldenraven.padawanwallet.utils.*
-import com.goldenraven.padawanwallet.data.Wallet
 import com.goldenraven.padawanwallet.data.Tx
+import com.goldenraven.padawanwallet.data.Wallet
 import com.goldenraven.padawanwallet.databinding.FragmentWalletBroadcastBinding
+import com.goldenraven.padawanwallet.utils.SnackbarLevel
+import com.goldenraven.padawanwallet.utils.fireSnackbar
+import com.goldenraven.padawanwallet.utils.isSend
 import com.goldenraven.padawanwallet.wallet.WalletViewModel
 import com.google.android.material.snackbar.BaseTransientBottomBar
 import com.google.android.material.snackbar.Snackbar
@@ -129,7 +131,8 @@ class WalletBroadcast : Fragment() {
     }
 
     private fun addTxToDatabase(txid: String, timestamp: String, valueIn: Int, valueOut: Int, fees: Int) {
-        val tx = Tx(txid, timestamp, valueIn, valueOut, fees)
+        val isSend: Boolean = isSend(sent = valueOut, received = valueIn)
+        val tx = Tx(txid, timestamp, valueIn, valueOut, fees, isSend)
         viewModel.addTx(tx)
     }
 
