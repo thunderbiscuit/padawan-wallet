@@ -35,7 +35,12 @@ class TxHistoryAdapter: RecyclerView.Adapter<TxHistoryAdapter.MyViewHolder>() {
         holder.itemView.findViewById<TextView>(R.id.dateString).text = dateAsString(currentItem.date.toInt())
         if (currentItem.isSend) {
             holder.itemView.findViewById<TextView>(R.id.satsSentReceivedView).text = "Sent:"
-            holder.itemView.findViewById<TextView>(R.id.satsInOutString).text = currentItem.valueOut.toString()
+            if (currentItem.valueOut == 0) {
+                holder.itemView.findViewById<TextView>(R.id.satsInOutString).text = "0 (Self-Transfer)"
+            } else {
+                holder.itemView.findViewById<TextView>(R.id.satsInOutString).text =
+                    currentItem.valueOut.toString()
+            }
             val res = holder.itemView.context.resources
             holder.itemView.background = ResourcesCompat.getDrawable(res, R.drawable.background_tx_send, null)
         }
