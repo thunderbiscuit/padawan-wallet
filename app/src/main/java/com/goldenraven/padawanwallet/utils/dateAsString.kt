@@ -9,8 +9,8 @@ public fun dateAsString(unixTimestamp: Int): String {
     val year: String = "${instant.toLocalDateTime(TimeZone.UTC).year}"
     val month: String = "${instant.toLocalDateTime(TimeZone.UTC).month}"
     val day: String = "${instant.toLocalDateTime(TimeZone.UTC).dayOfMonth}"
-    val hour: String = "${instant.toLocalDateTime(TimeZone.UTC).hour}"
-    val minute: String = "${instant.toLocalDateTime(TimeZone.UTC).minute}"
+    val hour: String = "${instant.toLocalDateTime(TimeZone.UTC).hour.toString()}"
+    val minute: String = "${instant.toLocalDateTime(TimeZone.UTC).minute.toString()}"
 
     return "$month $day, $year — $hour:$minute"
 }

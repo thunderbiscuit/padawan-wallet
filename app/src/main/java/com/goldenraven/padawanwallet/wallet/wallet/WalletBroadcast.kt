@@ -20,6 +20,7 @@ import com.goldenraven.padawanwallet.databinding.FragmentWalletBroadcastBinding
 import com.goldenraven.padawanwallet.utils.SnackbarLevel
 import com.goldenraven.padawanwallet.utils.fireSnackbar
 import com.goldenraven.padawanwallet.utils.isSend
+import com.goldenraven.padawanwallet.utils.netSendWithoutFees
 import com.goldenraven.padawanwallet.wallet.WalletViewModel
 import com.google.android.material.snackbar.BaseTransientBottomBar
 import com.google.android.material.snackbar.Snackbar
@@ -130,10 +131,34 @@ class WalletBroadcast : Fragment() {
         )
     }
 
-    private fun addTxToDatabase(txid: String, timestamp: String, valueIn: Int, valueOut: Int, fees: Int) {
-        val isSend: Boolean = isSend(sent = valueOut, received = valueIn)
-        val tx = Tx(txid, timestamp, valueIn, valueOut, fees, isSend)
-        viewModel.addTx(tx)
+    private fun addTxToDatabase(txid: String, timestamp: String, txSatsIn: Int, txSatsOut: Int, fees: Int) {
+        // val isSend: Boolean = isSend(sent = valueOut, received = valueIn)
+        // val tx = Tx(txid, timestamp, valueIn, valueOut, fees, isSend)
+        val isSend: Boolean = isSend(sent = txSatsOut, received = txSatsIn)
+        var valueIn: Int = 0
+        var valueOut: Int = 0
+        when (isSend) {
+            true -> {
+                valueOut = netSendWithoutFees(
+                    txSatsOut = txSatsOut,
+                    txSatsIn = txSatsIn,
+                    fees = fees
+                )
+            }
+            false -> {
+                valueIn = txSatsIn
+            }
+        }
+        val transaction: Tx = Tx(
+            txid = txid,
+            date = timestamp,
+            valueIn = valueIn,
+            valueOut = valueOut,
+            fees = fees,
+            isSend = isSend
+        )
+        Timber.i("[PADAWANLOGS] From addTxToDatabase, the tx is $transaction")
+        viewModel.addTx(transaction)
     }
 
     private fun showErrorSnackbar(errorMessage: String) {

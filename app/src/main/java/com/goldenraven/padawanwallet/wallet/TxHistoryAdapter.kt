@@ -27,12 +27,15 @@ class TxHistoryAdapter: RecyclerView.Adapter<TxHistoryAdapter.MyViewHolder>() {
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val currentItem = txList[position]
-//        holder.itemView.findViewById<TextView>(R.id.satsReceivedString).text = currentItem.valueIn.toString()
-//        holder.itemView.findViewById<TextView>(R.id.txIdString).text = currentItem.txid
-        holder.itemView.findViewById<TextView>(R.id.satsSentString).text = currentItem.valueOut.toString()
+        // holder.itemView.findViewById<TextView>(R.id.satsReceivedString).text = currentItem.valueIn.toString()
+        // holder.itemView.findViewById<TextView>(R.id.txIdString).text = currentItem.txid
+        // holder.itemView.findViewById<TextView>(R.id.feesPaidString).text = currentItem.fees.toString()
+
+        holder.itemView.findViewById<TextView>(R.id.satsInOutString).text = currentItem.valueIn.toString()
         holder.itemView.findViewById<TextView>(R.id.dateString).text = dateAsString(currentItem.date.toInt())
-//        holder.itemView.findViewById<TextView>(R.id.feesPaidString).text = currentItem.fees.toString()
         if (currentItem.isSend) {
+            holder.itemView.findViewById<TextView>(R.id.satsSentReceivedView).text = "Sent:"
+            holder.itemView.findViewById<TextView>(R.id.satsInOutString).text = currentItem.valueOut.toString()
             val res = holder.itemView.context.resources
             holder.itemView.background = ResourcesCompat.getDrawable(res, R.drawable.background_tx_send, null)
         }

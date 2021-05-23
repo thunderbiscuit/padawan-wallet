@@ -9,26 +9,26 @@
     android:padding="4dp">
 
     <TextView
-        android:id="@+id/satsSentView"
+        android:id="@+id/satsSentReceivedView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:fontFamily="@font/nunito_sans"
-        android:text="Sent:"
+        android:text="Received:"
         android:textColor="@color/fg0"
         android:textSize="12sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/satsSentString"
+        android:id="@+id/satsInOutString"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="90dp"
         android:layout_marginTop="8dp"
         android:fontFamily="@font/share_tech_mono"
-        android:text="Sent"
+        android:text=""
         android:textColor="@color/fg0"
         android:textSize="12sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -47,20 +47,19 @@
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/satsSentView" />
+        app:layout_constraintTop_toBottomOf="@+id/satsInOutString" />
 
     <TextView
         android:id="@+id/dateString"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="90dp"
-        android:layout_marginTop="8dp"
         android:fontFamily="@font/nunito_sans"
         android:text="Date"
         android:textColor="@color/fg0"
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/satsSentString" />
+        app:layout_constraintTop_toBottomOf="@+id/satsInOutString" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

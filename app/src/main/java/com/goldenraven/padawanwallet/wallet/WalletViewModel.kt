@@ -12,6 +12,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.goldenraven.padawanwallet.data.*
 import com.goldenraven.padawanwallet.utils.isSend
+import com.goldenraven.padawanwallet.utils.netSendWithoutFees
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import timber.log.Timber
@@ -58,6 +59,7 @@ class WalletViewModel(application: Application) : AndroidViewModel(application) 
     public fun updateBalance() {
         Wallet.sync(100)
         val newBalance = Wallet.getBalance()
+        Timber.i("[PADAWANLOGS] New balance: $newBalance")
         balance.postValue(newBalance)
     }
 
@@ -65,13 +67,28 @@ class WalletViewModel(application: Application) : AndroidViewModel(application) 
         val txHistory = Wallet.listTransactions()
         Timber.i("[PADAWANLOGS] Transactions history, number of transactions: ${txHistory.size}")
         for (tx in txHistory) {
+            val isSend: Boolean = isSend(sent = tx.sent.toInt(), received = tx.received.toInt())
+            var valueIn: Int = 0
+            var valueOut: Int = 0
+            when (isSend) {
+                true -> {
+                    valueOut = netSendWithoutFees(
+                        txSatsOut = tx.sent.toInt(),
+                        txSatsIn = tx.received.toInt(),
+                        fees = tx.fees.toInt()
+                    )
+                }
+                false -> {
+                    valueIn = tx.received.toInt()
+                }
+            }
             val transaction: Tx = Tx(
                 txid = tx.txid,
                 date = tx.timestamp.toString(),
-                valueIn = tx.received.toInt(),
-                valueOut = tx.sent.toInt(),
+                valueIn = valueIn,
+                valueOut = valueOut,
                 fees = tx.fees.toInt(),
-                isSend = isSend(sent = tx.sent.toInt(), received = tx.received.toInt())
+                isSend = isSend
             )
             addTx(transaction)
         }
