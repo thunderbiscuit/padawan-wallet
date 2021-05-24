@@ -1,3 +1,5 @@
+import com.android.build.api.variant.FilterConfiguration.FilterType.ABI
+
 plugins {
     id("com.android.application")
     id("kotlin-android")
@@ -53,6 +55,15 @@ android {
         }
     }
 
+    splits {
+        abi {
+            isEnable = true
+            reset()
+            include("arm64-v8a", "x86", "armeabi-v7a", "x86_64")
+            isUniversalApk = false
+        }
+    }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
@@ -97,4 +108,29 @@ dependencies {
 
     // testing
     testImplementation("junit:junit:4.+")
+}
+
+val abiCodes = mapOf("armeabi-v7a" to 1, "x86" to 2, "x86_64" to 3, "arm64-v8a" to 4)
+
+androidComponents {
+    onVariants { variant ->
+
+        // Assigns a different version code for each output APK
+        // other than the universal APK.
+        variant.outputs.forEach { output ->
+            val name = output.filters.find { it.filterType == ABI }?.identifier
+
+            // Stores the value of abiCodes that is associated with the ABI for this variant.
+            val baseAbiCode = abiCodes[name]
+            // Because abiCodes.get() returns null for ABIs that are not mapped by ext.abiCodes,
+            // the following code does not override the version code for universal APKs.
+            // However, because we want universal APKs to have the lowest version code,
+            // this outcome is desirable.
+            if (baseAbiCode != null) {
+                // Assigns the new version code to output.versionCode, which changes the version code
+                // for only the output APK, not for the variant itself.
+                output.versionCode.set(baseAbiCode * 1000 + (output.versionCode.get() ?: 0))
+            }
+        }
+    }
 }
