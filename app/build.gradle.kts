@@ -24,7 +24,7 @@ android {
         minSdkVersion(26)
         targetSdkVersion(30)
         versionCode = 1
-        versionName = "v0.6.0"
+        versionName = "v0.7.0"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         buildConfigField("String", "FAUCET_URL", faucetUrl)
         buildConfigField("String", "FAUCET_USERNAME", faucetUsername)
