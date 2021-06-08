@@ -1,5 +1,5 @@
 # Readme
-This directory is a 1-to-1 mapping of the tutorials in the app. It is meant as an easy way for developers to visualize and consume what is in the tutorials and open PRs for bettering them. 
+This file is a 1-to-1 mapping of the tutorials in the app. It is meant as an easy way for developers to visualize and consume what is in the tutorials and open PRs for bettering them. 
 
 If you are not confortable opening a PR but have ideas on how to improve the tutorials, please propose changes through a GitHub issue, or join our [Discord channel] and come discuss your ideas there!
 
