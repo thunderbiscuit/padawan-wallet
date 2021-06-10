@@ -18,7 +18,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="v0.6.0"
+        android:text="v0.7.0"
         android:textColor="@color/bg0hard"
         android:textStyle="italic"
         app:layout_constraintEnd_toEndOf="parent"
