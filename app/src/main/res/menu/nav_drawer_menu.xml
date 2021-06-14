@@ -10,7 +10,10 @@
         android:title="Settings" />
     <item
         android:id="@+id/mnemonic"
-        android:title="Show Seed Phrase" />
+        android:title="Show seed phrase" />
+    <item
+        android:id="@+id/sendCoinsBack"
+        android:title="Send testnet coins back to us" />
     <item
         android:id="@+id/about"
         android:title="About" />

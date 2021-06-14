@@ -41,6 +41,7 @@ class DrawerActivity : AppCompatActivity() {
             "about" -> supportFragmentManager.beginTransaction().replace(R.id.fragmentAbout, AboutFragment()).commit()
             "settings" -> supportFragmentManager.beginTransaction().replace(R.id.fragmentAbout, SettingsFragment()).commit()
             "seedphrase" -> supportFragmentManager.beginTransaction().replace(R.id.fragmentAbout, SeedPhraseFragment()).commit()
+            "sendCoinsBack" -> supportFragmentManager.beginTransaction().replace(R.id.fragmentAbout, SendCoinsBackFragment()).commit()
         }
 
         binding.navViewDrawerActivity.setNavigationItemSelectedListener {
@@ -63,6 +64,12 @@ class DrawerActivity : AppCompatActivity() {
                     binding.drawerActivityLayout.closeDrawer(GravityCompat.START)
                     true
                 }
+                R.id.sendCoinsBack -> {
+                    Timber.i("[PADAWANLOGS] clicked navigate to send coins back to faucet")
+                    supportFragmentManager.beginTransaction().replace(R.id.fragmentAbout, SendCoinsBackFragment()).commit()
+                    binding.drawerActivityLayout.closeDrawer(GravityCompat.START)
+                    true
+                }
                 R.id.wallet -> {
                     Timber.i("[PADAWANLOGS] clicked navigate back to wallet")
                     // startActivity(Intent(this, HomeActivity::class.java))
@@ -71,7 +78,7 @@ class DrawerActivity : AppCompatActivity() {
                     true
                 }
                 else -> {
-                    Timber.i("[PADAWANLOGS] Drawer selection didn't work properly")
+                    Timber.i("[PADAWANLOGS] Drawer selection didn't work properly ${it.itemId} was item ID")
                     true
                 }
             }

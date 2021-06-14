@@ -58,6 +58,7 @@ class WalletActivity : AppCompatActivity() {
         val intentAbout: Intent = Intent(this, DrawerActivity::class.java).putExtra("drawerItem", "about")
         val intentSettings: Intent = Intent(this, DrawerActivity::class.java).putExtra("drawerItem", "settings")
         val intentSeedPhrase: Intent = Intent(this, DrawerActivity::class.java).putExtra("drawerItem", "seedphrase")
+        val intentSendCoinsBack: Intent = Intent(this, DrawerActivity::class.java).putExtra("drawerItem", "sendCoinsBack")
 
 
         binding.navView.setNavigationItemSelectedListener {
@@ -80,13 +81,19 @@ class WalletActivity : AppCompatActivity() {
                     binding.drawerLayout.closeDrawer(GravityCompat.START)
                     true
                 }
+                R.id.sendCoinsBack -> {
+                    Timber.i("[PADAWANLOGS] clicked navigate to send coins back to faucet from WalletActiv")
+                    startActivity(intentSendCoinsBack)
+                    binding.drawerLayout.closeDrawer(GravityCompat.START)
+                    true
+                }
                 R.id.wallet -> {
                     Timber.i("[PADAWANLOGS] clicked seed phrase")
                     binding.drawerLayout.closeDrawer(GravityCompat.START)
                     true
                 }
                 else -> {
-                    Timber.i("[PADAWANLOGS] Drawer selection didn't work properly")
+                    Timber.i("[PADAWANLOGS] Drawer selection from wallet activity didn't work properly")
                     true
                 }
             }

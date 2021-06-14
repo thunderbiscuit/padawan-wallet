@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/bg0soft">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.20"
+        app:srcCompat="@drawable/return_sats_faucet_address" />
+
+    <TextView
+        android:id="@+id/returnFaucetAddress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:fontFamily="@font/share_tech_mono"
+        android:text="tb1qet6a6jjdpmd45mxjcmhgje94txtehzxpmh7pxq"
+        android:textColor="@color/fg1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+    <View
+        android:id="@+id/viewLine4"
+        android:layout_width="0dp"
+        android:layout_height="0.2dp"
+        android:layout_marginTop="8dp"
+        android:background="@color/fg1"
+        app:layout_constraintLeft_toLeftOf="@id/returnFaucetAddress"
+        app:layout_constraintRight_toRightOf="@id/returnFaucetAddress"
+        app:layout_constraintTop_toBottomOf="@+id/returnFaucetAddress" />
+
+    <TextView
+        android:id="@+id/copyAddressFaucetButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:drawablePadding="2dp"
+        android:fontFamily="@font/nunito_sans"
+        android:gravity="center"
+        android:text="copy"
+        android:textColor="@color/fg1"
+        android:textSize="12sp"
+        app:drawableStartCompat="@drawable/ic_copy_outline"
+        app:layout_constraintRight_toRightOf="@id/returnFaucetAddress"
+        app:layout_constraintTop_toBottomOf="@id/viewLine4" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="70dp"
+        android:layout_marginEnd="16dp"
+        android:fontFamily="@font/nunito_sans"
+        android:text="@string/send_coins_back"
+        android:textColor="@color/fg1"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/returnFaucetAddress" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

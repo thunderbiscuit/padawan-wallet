@@ -20,4 +20,11 @@
         tools:layout="@layout/fragment_settings">
     </fragment>
 
+    <fragment
+        android:id="@+id/sendCoinsBackFragment"
+        android:name="com.goldenraven.padawanwallet.drawer.SendCoinsBackFragment"
+        android:label="fragment_send_coins_back"
+        tools:layout="@layout/fragment_send_coins_back">
+    </fragment>
+
 </navigation>
