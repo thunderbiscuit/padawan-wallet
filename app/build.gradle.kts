@@ -23,8 +23,8 @@ android {
         applicationId = "com.goldenraven.padawanwallet"
         minSdkVersion(26)
         targetSdkVersion(30)
-        versionCode = 2
-        versionName = "v0.7.0"
+        versionCode = 3
+        versionName = "v0.7.1-alpha"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         buildConfigField("String", "FAUCET_URL", faucetUrl)
         buildConfigField("String", "FAUCET_USERNAME", faucetUsername)
@@ -50,7 +50,7 @@ android {
         getByName("release") {
             // shrinkResources(true)
             // minifyEnabled(true)
-            debuggable(true)
+            debuggable(false)
             proguardFiles = mutableListOf(getDefaultProguardFile("proguard-android-optimize.txt"), file("proguard-rules.pro"))
         }
     }
