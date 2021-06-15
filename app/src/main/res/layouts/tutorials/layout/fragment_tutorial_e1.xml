@@ -13,20 +13,20 @@
             android:orientation="vertical">
 
         <TextView
-            android:id="@+id/E1_title"
+            android:id="@+id/t1_h1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="24dp"
             android:fontFamily="@font/nunito_sans_bold"
-            android:text="@string/E1_title"
+            android:text="@string/t1_h1"
             android:textColor="@color/bright_green"
             android:textSize="24sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/E1_content"
+            android:id="@+id/t1_p1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -34,14 +34,101 @@
             android:layout_marginEnd="16dp"
             android:backgroundTint="@color/bg0hard"
             android:fontFamily="@font/nunito_sans"
-            android:text="@string/E1_content"
+            android:text="@string/t1_p1"
             android:textColor="@color/fg0"
             android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/E1_title" />
+            app:layout_constraintTop_toBottomOf="@+id/t1_h1" />
 
-            <Button
+        <TextView
+            android:id="@+id/t1_h2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="32dp"
+            android:fontFamily="@font/nunito_sans_bold"
+            android:text="@string/t1_h2"
+            android:textColor="@color/bright_green"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/t1_p1" />
+
+        <TextView
+            android:id="@+id/t1_p2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:backgroundTint="@color/bg0hard"
+            android:fontFamily="@font/nunito_sans"
+            android:text="@string/t1_p2"
+            android:textColor="@color/fg0"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/t1_h2" />
+
+        <TextView
+            android:id="@+id/t1_h3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="32dp"
+            android:fontFamily="@font/nunito_sans_bold"
+            android:text="@string/t1_h3"
+            android:textColor="@color/bright_green"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/t1_p2" />
+
+        <TextView
+            android:id="@+id/t1_p3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:backgroundTint="@color/bg0hard"
+            android:fontFamily="@font/nunito_sans"
+            android:text="@string/t1_p3"
+            android:textColor="@color/fg0"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/t1_h3" />
+
+        <TextView
+            android:id="@+id/t1_h4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="32dp"
+            android:fontFamily="@font/nunito_sans_bold"
+            android:text="@string/t1_h4"
+            android:textColor="@color/bright_green"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/t1_p3" />
+
+        <TextView
+            android:id="@+id/t1_p4"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:backgroundTint="@color/bg0hard"
+            android:fontFamily="@font/nunito_sans"
+            android:text="@string/t1_p4"
+            android:textColor="@color/fg0"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/t1_h4" />
+
+        <Button
                 android:id="@+id/buttonMarkDoneE1"
                 android:layout_width="170dp"
                 android:layout_height="55dp"
@@ -56,9 +143,9 @@
                 android:textColorHighlight="@color/aqua"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/E1_content" />
+                app:layout_constraintTop_toBottomOf="@+id/t1_p4" />
 
-            <Button
+        <Button
                 android:id="@+id/buttonBackE1"
                 android:layout_width="0dp"
                 android:layout_height="55dp"
@@ -71,6 +158,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/buttonMarkDoneE1" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.core.widget.NestedScrollView>
