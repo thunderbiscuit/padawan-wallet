@@ -31,16 +31,16 @@ android {
         buildConfigField("String", "FAUCET_PASSWORD", faucetPassword)
     }
 
-    sourceSets {
-        getByName("main").res.setSrcDirs(setOf(
-            file("src/main/res/layouts/intro"),
-            file("src/main/res/layouts/home"),
-            file("src/main/res/layouts/wallet"),
-            file("src/main/res/layouts/tutorials"),
-            file("src/main/res/layouts/drawer"),
-            file("src/main/res")
-        ))
-    }
+//    sourceSets {
+//        getByName("main").res.setSrcDirs(setOf(
+//            file("src/main/res/layouts/intro"),
+//            file("src/main/res/layouts/home"),
+//            file("src/main/res/layouts/wallet"),
+//            file("src/main/res/layouts/tutorials"),
+//            file("src/main/res/layouts/drawer"),
+//            file("src/main/res")
+//        ))
+//    }
 
     buildTypes {
         getByName("debug") {
