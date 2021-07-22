@@ -75,7 +75,7 @@ class WalletViewModel(application: Application) : AndroidViewModel(application) 
                     valueOut = netSendWithoutFees(
                         txSatsOut = tx.sent.toInt(),
                         txSatsIn = tx.received.toInt(),
-                        fees = tx.fees.toInt()
+                        fees = tx.fee.toInt()
                     )
                 }
                 false -> {
@@ -84,10 +84,10 @@ class WalletViewModel(application: Application) : AndroidViewModel(application) 
             }
             val transaction: Tx = Tx(
                 txid = tx.txid,
-                date = tx.timestamp.toString(),
+                date = tx.confirmation_time?.timestamp.toString(),
                 valueIn = valueIn,
                 valueOut = valueOut,
-                fees = tx.fees.toInt(),
+                fees = tx.fee.toInt(),
                 isSend = isSend
             )
             addTx(transaction)

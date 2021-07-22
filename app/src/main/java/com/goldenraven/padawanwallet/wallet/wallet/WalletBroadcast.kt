@@ -57,7 +57,7 @@ class WalletBroadcast : Fragment() {
         verifyTransaction()
         Timber.i("[PADAWANLOGS] transactionDetails from WalletVerify fragment is: $transactionDetails")
 
-        val fees: Long = transactionDetails.details.fees
+        val fees: Long = transactionDetails.details.fee
         val total: String = (amount.toLong() + fees).toString()
 
         binding.amountTransacted.text = amount
@@ -108,17 +108,17 @@ class WalletBroadcast : Fragment() {
 
             Timber.i("[PADAWANLOGS] Transaction was broadcast! Data added to database:")
             Timber.i("[PADAWANLOGS] Transaction was broadcast! txid: ${transactionDetails.details.txid}")
-            Timber.i("[PADAWANLOGS] Transaction was broadcast! timestamp: ${transactionDetails.details.timestamp}")
+            Timber.i("[PADAWANLOGS] Transaction was broadcast! timestamp: ${transactionDetails.details.confirmation_time?.timestamp}")
             Timber.i("[PADAWANLOGS] Transaction was broadcast! received: ${transactionDetails.details.received.toInt()}")
             Timber.i("[PADAWANLOGS] Transaction was broadcast! sent: ${transactionDetails.details.sent.toInt()}")
-            Timber.i("[PADAWANLOGS] Transaction was broadcast! fees: ${transactionDetails.details.fees.toInt()}")
+            Timber.i("[PADAWANLOGS] Transaction was broadcast! fees: ${transactionDetails.details.fee.toInt()}")
             // add tx to database
             addTxToDatabase(
                 transactionDetails.details.txid,
-                transactionDetails.details.timestamp.toString(),
+                transactionDetails.details.confirmation_time?.timestamp.toString(),
                 transactionDetails.details.received.toInt(),
                 transactionDetails.details.sent.toInt(),
-                transactionDetails.details.fees.toInt(),
+                transactionDetails.details.fee.toInt(),
             )
             Timber.i("[PADAWANLOGS] Transaction was broadcast! txid: $txid, txidString: $txidString")
         } catch (e: Throwable) {
