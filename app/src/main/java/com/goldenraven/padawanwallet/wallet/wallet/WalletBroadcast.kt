@@ -24,10 +24,10 @@ import com.goldenraven.padawanwallet.utils.netSendWithoutFees
 import com.goldenraven.padawanwallet.wallet.WalletViewModel
 import com.google.android.material.snackbar.BaseTransientBottomBar
 import com.google.android.material.snackbar.Snackbar
-import org.bitcoindevkit.bdkjni.Types.CreateTxResponse
-import org.bitcoindevkit.bdkjni.Types.RawTransaction
-import org.bitcoindevkit.bdkjni.Types.SignResponse
-import org.bitcoindevkit.bdkjni.Types.Txid
+import org.bitcoindevkit.bdkjni.CreateTxResponse
+import org.bitcoindevkit.bdkjni.RawTransaction
+import org.bitcoindevkit.bdkjni.SignResponse
+import org.bitcoindevkit.bdkjni.Txid
 import timber.log.Timber
 
 class WalletBroadcast : Fragment() {

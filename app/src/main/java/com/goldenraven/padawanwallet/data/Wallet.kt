@@ -6,8 +6,7 @@
 package com.goldenraven.padawanwallet.data
 
 import com.goldenraven.padawanwallet.utils.RequiredInitialWalletData
-import org.bitcoindevkit.bdkjni.Lib
-import org.bitcoindevkit.bdkjni.Types.*
+import org.bitcoindevkit.bdkjni.*
 import timber.log.Timber
 
 object Wallet {
