@@ -5,7 +5,18 @@
 
 package com.goldenraven.padawanwallet.wallet.wallet
 
+import android.graphics.Color
+import android.graphics.Typeface
 import android.os.Bundle
+import android.text.Spannable
+import android.text.SpannableString
+import android.text.Spanned
+import android.text.Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
+import android.text.TextUtils
+import android.text.style.BackgroundColorSpan
+import android.text.style.ForegroundColorSpan
+import android.text.style.StyleSpan
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,10 +24,16 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import com.goldenraven.padawanwallet.R
+import com.goldenraven.padawanwallet.data.Tx
 import com.goldenraven.padawanwallet.data.Wallet
 import com.goldenraven.padawanwallet.databinding.FragmentWalletBuildBinding
 import com.goldenraven.padawanwallet.utils.SnackbarLevel
 import com.goldenraven.padawanwallet.utils.fireSnackbar
+import com.goldenraven.padawanwallet.utils.isSend
+import com.goldenraven.padawanwallet.utils.netSendWithoutFees
+import com.goldenraven.padawanwallet.wallet.WalletViewModel
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import org.bitcoindevkit.bdkjni.Types.*
 import timber.log.Timber
 
 class WalletBuild : Fragment() {
@@ -25,6 +42,8 @@ class WalletBuild : Fragment() {
     private lateinit var address: String
     private lateinit var amount: String
     private lateinit var addressFromScanner: String
+    private lateinit var transactionDetails: CreateTxResponse
+    private lateinit var viewModel: WalletViewModel
 
     override fun onCreateView(
             inflater: LayoutInflater,
@@ -58,8 +77,19 @@ class WalletBuild : Fragment() {
             val validInputs: Boolean = verifyTransaction()
 
             if (validInputs) {
-                val bundle = bundleOf("address" to address, "amount" to amount)
-                navController.navigate(R.id.action_walletSend_to_walletVerify, bundle)
+                var broadcastMessage =
+                        MaterialAlertDialogBuilder(this@WalletBuild.requireContext(), R.style.MyCustomDialogTheme)
+                                .setTitle("Broadcast Transaction")
+                                .setMessage(buildMessage())
+                                .setPositiveButton("Broadcast") { _, _ ->
+                                    Log.i("Padawan Wallet", "User is attempting to broadcast transaction")
+                                    broadcastTransaction()
+                                    navController.navigate(R.id.action_walletSend_to_walletHome)
+                                }
+                                .setNegativeButton("Go back") { _, _ ->
+                                    Log.i("Padawan Wallet", "User is not broadcasting")
+                                }
+                broadcastMessage.show()
             } else {
                 Timber.i("[PADAWANLOGS] Inputs were not valid")
             }
@@ -73,6 +103,21 @@ class WalletBuild : Fragment() {
             )
         }
     }
+
+    private fun buildMessage(): String {
+        val sendToAddress: String = binding.sendAddress.text.toString().trim()
+        val sendAmount: String = binding.sendAmount.text.toString().trim()
+        val fees: String = transactionDetails.details.fees.toString()
+
+        val address = "Send to address:\n$sendToAddress\n"
+        val amount = "\nAmount Transacted:  $sendAmount\n"
+        val feeRate = "Fee Rate:  $fees\n\n"
+        val total = "Total:  ${fees.toLong() + sendAmount.toLong()}\n\n"
+
+        Log.i("PadawanWallet", "Message has inputs $sendToAddress, $sendAmount, $fees")
+        return amount + feeRate + total + address
+    }
+
 
     private fun verifyTransaction(): Boolean {
         address = binding.sendAddress.text.toString().trim()
@@ -103,7 +148,7 @@ class WalletBuild : Fragment() {
         Timber.i("[PADAWANLOGS] Send addresses are: $addresseesAndAmounts")
 
         try {
-            Wallet.createTransaction(feeRate, addresseesAndAmounts, false, null, null, null)
+            transactionDetails = Wallet.createTransaction(feeRate, addresseesAndAmounts, false, null, null, null)
         } catch (e: Throwable) {
             Timber.i("[PADAWANLOGS] Verify transaction failed: ${e.message}")
             fireSnackbar(
@@ -116,4 +161,68 @@ class WalletBuild : Fragment() {
 
         return true
     }
+    private fun broadcastTransaction() {
+        var txidString: String = "string of txid"
+
+        try {
+            val signResponse: SignResponse = Wallet.sign(transactionDetails.psbt)
+            val rawTx: RawTransaction = Wallet.extractPsbt(signResponse.psbt)
+            val txid: Txid = Wallet.broadcast(rawTx.transaction)
+            txidString = txid.toString()
+
+            Timber.i("[PADAWANLOGS] Transaction was broadcast! Data added to database:")
+            Timber.i("[PADAWANLOGS] Transaction was broadcast! txid: ${transactionDetails.details.txid}")
+            Timber.i("[PADAWANLOGS] Transaction was broadcast! timestamp: ${transactionDetails.details.timestamp}")
+            Timber.i("[PADAWANLOGS] Transaction was broadcast! received: ${transactionDetails.details.received.toInt()}")
+            Timber.i("[PADAWANLOGS] Transaction was broadcast! sent: ${transactionDetails.details.sent.toInt()}")
+            Timber.i("[PADAWANLOGS] Transaction was broadcast! fees: ${transactionDetails.details.fees.toInt()}")
+            // add tx to database
+            addTxToDatabase(
+                    transactionDetails.details.txid,
+                    transactionDetails.details.timestamp.toString(),
+                    transactionDetails.details.received.toInt(),
+                    transactionDetails.details.sent.toInt(),
+                    transactionDetails.details.fees.toInt(),
+            )
+            Timber.i("[PADAWANLOGS] Transaction was broadcast! txid: $txid, txidString: $txidString")
+        } catch (e: Throwable) {
+            Timber.i("[PADAWANLOGS] ${e.message}")
+        }
+        fireSnackbar(
+                requireView(),
+                SnackbarLevel.INFO,
+                "Transaction was broadcast successfully!"
+        )
+    }
+
+    private fun addTxToDatabase(txid: String, timestamp: String, txSatsIn: Int, txSatsOut: Int, fees: Int) {
+        // val isSend: Boolean = isSend(sent = valueOut, received = valueIn)
+        // val tx = Tx(txid, timestamp, valueIn, valueOut, fees, isSend)
+        val isSend: Boolean = isSend(sent = txSatsOut, received = txSatsIn)
+        var valueIn: Int = 0
+        var valueOut: Int = 0
+        when (isSend) {
+            true -> {
+                valueOut = netSendWithoutFees(
+                        txSatsOut = txSatsOut,
+                        txSatsIn = txSatsIn,
+                        fees = fees
+                )
+            }
+            false -> {
+                valueIn = txSatsIn
+            }
+        }
+        val transaction: Tx = Tx(
+                txid = txid,
+                date = timestamp,
+                valueIn = valueIn,
+                valueOut = valueOut,
+                fees = fees,
+                isSend = isSend
+        )
+        Timber.i("[PADAWANLOGS] From addTxToDatabase, the tx is $transaction")
+        viewModel.addTx(transaction)
+    }
+
 }
