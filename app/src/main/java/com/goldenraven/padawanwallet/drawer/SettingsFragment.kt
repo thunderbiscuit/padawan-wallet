@@ -29,7 +29,7 @@ import io.ktor.client.statement.*
 import io.ktor.http.*
 import io.ktor.http.content.*
 import kotlinx.coroutines.launch
-import timber.log.Timber
+import android.util.Log
 
 class SettingsFragment : Fragment() {
 
@@ -84,15 +84,15 @@ class SettingsFragment : Fragment() {
                 }
             }
 
-            Timber.i("[PADAWANLOGS]: API call to Tatooine will request coins at $address")
+            Log.i("Padalogs","API call to Tatooine will request coins at $address")
             try {
                 val response: HttpResponse = ktorClient.post(faucetUrl) {
                     body = TextContent(address, ContentType.Text.Plain)
                 }
                 Repository.oneTimeFaucetCallDone()
-                Timber.i("[PADAWANLOGS]: API call to Tatooine was performed. Response is ${response.status}, ${response.readText()}")
+                Log.i("Padalogs","API call to Tatooine was performed. Response is ${response.status}, ${response.readText()}")
             } catch (cause: Throwable) {
-                Timber.i("[PADAWANLOGS] Tatooine call failed: $cause")
+                Log.i("Padalogs","Tatooine call failed: $cause")
                 fireSnackbar(
                     requireView(),
                     SnackbarLevel.ERROR,

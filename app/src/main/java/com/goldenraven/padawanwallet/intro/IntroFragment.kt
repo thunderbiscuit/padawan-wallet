@@ -14,7 +14,7 @@ import androidx.navigation.Navigation
 import com.goldenraven.padawanwallet.R
 import com.goldenraven.padawanwallet.databinding.FragmentIntroBinding
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import timber.log.Timber
+import android.util.Log
 
 class IntroFragment : Fragment() {
 
@@ -40,7 +40,7 @@ class IntroFragment : Fragment() {
                                 .setTitle("Be careful!")
                                 .setMessage(dialogMessage)
                                 .setPositiveButton("I understand") { _, _ ->
-                                    Timber.i("[PADAWANLOGS] User confirms they understands it's a testnet only wallet")
+                                    Log.i("Padalogs","User confirms they understands it's a testnet only wallet")
                                     navController.navigate(R.id.action_introFragment_to_walletChoice)
                                 }
                                 .setNegativeButton("Cancel") { _, _ ->
