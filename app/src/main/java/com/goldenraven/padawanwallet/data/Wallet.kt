@@ -8,7 +8,7 @@ package com.goldenraven.padawanwallet.data
 import com.goldenraven.padawanwallet.utils.RequiredInitialWalletData
 import org.bitcoindevkit.bdkjni.Lib
 import org.bitcoindevkit.bdkjni.Types.*
-import timber.log.Timber
+import android.util.Log
 
 object Wallet {
 
@@ -48,8 +48,8 @@ object Wallet {
 
     public fun loadExistingWallet(): Unit {
         val initialWalletData: RequiredInitialWalletData = Repository.getInitialWalletData()
-        Timber.i("[PADAWANLOGS] Descriptor: ${initialWalletData.descriptor}")
-        Timber.i("[PADAWANLOGS] Change descriptor: ${initialWalletData.changeDescriptor}")
+        Log.i("Padalogs","Descriptor: ${initialWalletData.descriptor}")
+        Log.i("Padalogs","Change descriptor: ${initialWalletData.changeDescriptor}")
         initialize(
             descriptor = initialWalletData.descriptor,
             changeDescriptor = initialWalletData.changeDescriptor,
@@ -81,7 +81,7 @@ object Wallet {
     }
 
     private fun generateExtendedKey(): ExtendedKey {
-        Timber.i("Extended keys generated")
+        Log.i("Padalogs","Extended keys generated")
         return lib.generate_extended_key(Network.testnet, 12, "")
     }
 
@@ -90,12 +90,12 @@ object Wallet {
     }
 
     private fun createDescriptor(keys: ExtendedKey): String {
-        Timber.i("[PADAWANLOGS] Descriptor for receive addresses is wpkh(${keys.xprv}/84'/1'/0'/0/*)")
+        Log.i("Padalogs","Descriptor for receive addresses is wpkh(${keys.xprv}/84'/1'/0'/0/*)")
         return ("wpkh(" + keys.xprv + "/84'/1'/0'/0/*)")
     }
 
     private fun createChangeDescriptor(keys: ExtendedKey): String {
-        Timber.i("[PADAWANLOGS] Descriptor for change addresses is wpkh(${keys.xprv}/84'/1'/0'/1/*)")
+        Log.i("Padalogs","Descriptor for change addresses is wpkh(${keys.xprv}/84'/1'/0'/1/*)")
         return ("wpkh(" + keys.xprv + "/84'/1'/0'/1/*)")
     }
 

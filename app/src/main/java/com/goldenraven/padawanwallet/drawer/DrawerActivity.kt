@@ -13,7 +13,7 @@ import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
 import com.goldenraven.padawanwallet.R
 import com.goldenraven.padawanwallet.databinding.ActivityDrawerBinding
-import timber.log.Timber
+import android.util.Log
 
 class DrawerActivity : AppCompatActivity() {
 
@@ -47,38 +47,38 @@ class DrawerActivity : AppCompatActivity() {
         binding.navViewDrawerActivity.setNavigationItemSelectedListener {
             when(it.itemId) {
                 R.id.about -> {
-                    Timber.i("[PADAWANLOGS] clicked about")
+                    Log.i("Padalogs","clicked about")
                     supportFragmentManager.beginTransaction().replace(R.id.fragmentAbout, AboutFragment()).commit()
                     binding.drawerActivityLayout.closeDrawer(GravityCompat.START)
                     true
                 }
                 R.id.settings -> {
-                    Timber.i("[PADAWANLOGS] clicked setting")
+                    Log.i("Padalogs","clicked setting")
                     supportFragmentManager.beginTransaction().replace(R.id.fragmentAbout, SettingsFragment()).commit()
                     binding.drawerActivityLayout.closeDrawer(GravityCompat.START)
                     true
                 }
                 R.id.mnemonic -> {
-                    Timber.i("[PADAWANLOGS] clicked seed phrase")
+                    Log.i("Padalogs","clicked seed phrase")
                     supportFragmentManager.beginTransaction().replace(R.id.fragmentAbout, SeedPhraseFragment()).commit()
                     binding.drawerActivityLayout.closeDrawer(GravityCompat.START)
                     true
                 }
                 R.id.sendCoinsBack -> {
-                    Timber.i("[PADAWANLOGS] clicked navigate to send coins back to faucet")
+                    Log.i("Padalogs","clicked navigate to send coins back to faucet")
                     supportFragmentManager.beginTransaction().replace(R.id.fragmentAbout, SendCoinsBackFragment()).commit()
                     binding.drawerActivityLayout.closeDrawer(GravityCompat.START)
                     true
                 }
                 R.id.wallet -> {
-                    Timber.i("[PADAWANLOGS] clicked navigate back to wallet")
+                    Log.i("Padalogs","clicked navigate back to wallet")
                     // startActivity(Intent(this, HomeActivity::class.java))
                     binding.drawerActivityLayout.closeDrawer(GravityCompat.START)
                     finish()
                     true
                 }
                 else -> {
-                    Timber.i("[PADAWANLOGS] Drawer selection didn't work properly ${it.itemId} was item ID")
+                    Log.i("Padalogs","Drawer selection didn't work properly ${it.itemId} was item ID")
                     true
                 }
             }

@@ -18,7 +18,7 @@ import com.goldenraven.padawanwallet.databinding.ActivityHomeBinding
 import com.goldenraven.padawanwallet.drawer.DrawerActivity
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
-import timber.log.Timber
+import android.util.Log
 
 class WalletActivity : AppCompatActivity() {
 
@@ -64,36 +64,36 @@ class WalletActivity : AppCompatActivity() {
         binding.navView.setNavigationItemSelectedListener {
             when(it.itemId) {
                 R.id.about -> {
-                    Timber.i("[PADAWANLOGS] clicked about")
+                    Log.i("Padalogs","clicked about")
                     startActivity(intentAbout)
                     binding.drawerLayout.closeDrawer(GravityCompat.START)
                     true
                 }
                 R.id.settings -> {
-                    Timber.i("[PADAWANLOGS] clicked setting")
+                    Log.i("Padalogs","clicked setting")
                     startActivity(intentSettings)
                     binding.drawerLayout.closeDrawer(GravityCompat.START)
                     true
                 }
                 R.id.mnemonic -> {
-                    Timber.i("[PADAWANLOGS] clicked seed phrase")
+                    Log.i("Padalogs","clicked seed phrase")
                     startActivity(intentSeedPhrase)
                     binding.drawerLayout.closeDrawer(GravityCompat.START)
                     true
                 }
                 R.id.sendCoinsBack -> {
-                    Timber.i("[PADAWANLOGS] clicked navigate to send coins back to faucet from WalletActiv")
+                    Log.i("Padalogs","clicked navigate to send coins back to faucet from WalletActiv")
                     startActivity(intentSendCoinsBack)
                     binding.drawerLayout.closeDrawer(GravityCompat.START)
                     true
                 }
                 R.id.wallet -> {
-                    Timber.i("[PADAWANLOGS] clicked seed phrase")
+                    Log.i("Padalogs","clicked seed phrase")
                     binding.drawerLayout.closeDrawer(GravityCompat.START)
                     true
                 }
                 else -> {
-                    Timber.i("[PADAWANLOGS] Drawer selection from wallet activity didn't work properly")
+                    Log.i("Padalogs","Drawer selection from wallet activity didn't work properly")
                     true
                 }
             }

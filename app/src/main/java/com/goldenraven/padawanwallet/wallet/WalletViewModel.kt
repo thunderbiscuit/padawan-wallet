@@ -17,7 +17,7 @@ import com.goldenraven.padawanwallet.utils.netSendWithoutFees
 import com.goldenraven.padawanwallet.utils.timestampToString
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import timber.log.Timber
+
 
 class WalletViewModel(application: Application) : AndroidViewModel(application) {
 
@@ -63,13 +63,13 @@ class WalletViewModel(application: Application) : AndroidViewModel(application) 
     public fun updateBalance() {
         Wallet.sync(100)
         val newBalance = Wallet.getBalance()
-        Timber.i("[PADAWANLOGS] New balance: $newBalance")
+        Log.i("Padalogs","New balance: $newBalance")
         balance.postValue(newBalance)
     }
 
     public fun syncTransactionHistory() {
         val txHistory = Wallet.listTransactions()
-        Timber.i("[PADAWANLOGS] Transactions history, number of transactions: ${txHistory.size}")
+        Log.i("Padalogs","Transactions history, number of transactions: ${txHistory.size}")
         for (tx in txHistory) {
             val isSend: Boolean = isSend(sent = tx.sent.toInt(), received = tx.received.toInt())
             var valueIn: Int = 0
@@ -154,7 +154,7 @@ class WalletViewModel(application: Application) : AndroidViewModel(application) 
                 newTutorialsDoneMap?.set("e8", true)
                 tutorialsDone.postValue(newTutorialsDoneMap)
             }
-            else -> Timber.i("[PADAWANLOGS] Tutorial number was invalid")
+            else -> Log.i("Padalogs","Tutorial number was invalid")
         }
     }
 }
