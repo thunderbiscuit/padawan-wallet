@@ -48,7 +48,7 @@ class SeedPhraseFragment : Fragment() {
         )
         Timber.i("[PADAWANLOGS] The word list from the seed phrase screen is $wordList")
 
-        for (word in 0..11) {
+        for (word in 0 until 12) {
             val mnemonicWord: String = wordList[word]
             viewList[word].text = ("${word + 1}. $mnemonicWord")
         }

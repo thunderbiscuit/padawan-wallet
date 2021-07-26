@@ -67,7 +67,7 @@ class WalletRecoveryFragment : Fragment() {
                 R.id.mnemonicword7, R.id.mnemonicword8, R.id.mnemonicword9, R.id.mnemonicword10, R.id.mnemonicword11, R.id.mnemonicword12,
         )
 
-        for (word in 0..11) {
+        for (word in 0 until 12) {
             val mnemonicWord: String = requireView().findViewById<TextView>(mnemonicWordsTextViews[word]).text.toString()
                 .trim().toLowerCase(Locale.getDefault())
             Timber.i("[PADAWANLOGS] Word $word: $mnemonicWord")
