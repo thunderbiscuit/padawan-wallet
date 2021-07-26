@@ -18,7 +18,7 @@ import com.goldenraven.padawanwallet.data.Wallet
 import com.goldenraven.padawanwallet.databinding.FragmentRecoverBinding
 import com.goldenraven.padawanwallet.utils.*
 import com.goldenraven.padawanwallet.wallet.WalletActivity
-import timber.log.Timber
+import android.util.Log
 import java.util.*
 
 class WalletRecoveryFragment : Fragment() {
@@ -55,7 +55,7 @@ class WalletRecoveryFragment : Fragment() {
                 val intent: Intent = Intent(this@WalletRecoveryFragment.context, WalletActivity::class.java)
                 startActivity(intent)
             } else {
-                Timber.i("[PADAWANLOGS] Mnemonic seed phrase was not valid")
+                Log.i("Padalogs","Mnemonic seed phrase was not valid")
             }
         }
     }
@@ -70,10 +70,10 @@ class WalletRecoveryFragment : Fragment() {
         for (word in 0..11) {
             val mnemonicWord: String = requireView().findViewById<TextView>(mnemonicWordsTextViews[word]).text.toString()
                 .trim().toLowerCase(Locale.getDefault())
-            Timber.i("[PADAWANLOGS] Word $word: $mnemonicWord")
+            Log.i("Padalogs","Word $word: $mnemonicWord")
 
             if (mnemonicWord.isEmpty()) {
-                Timber.i("[PADAWANLOGS] Word #$word is empty!")
+                Log.i("Padalogs","Word #$word is empty!")
                 // val message: String = "Word #${word + 1} is empty!"
                 fireSnackbar(
                     requireView(),
@@ -82,7 +82,7 @@ class WalletRecoveryFragment : Fragment() {
                 )
                 return false
             } else if (mnemonicWord !in this.wordList) {
-                Timber.i("[PADAWANLOGS] Word #$word, $mnemonicWord, is not valid!")
+                Log.i("Padalogs","Word #$word, $mnemonicWord, is not valid!")
                 fireSnackbar(
                     requireView(),
                     SnackbarLevel.WARNING,
@@ -91,11 +91,11 @@ class WalletRecoveryFragment : Fragment() {
                 return false
             } else {
                 mnemonicWordList.add(mnemonicWord)
-                Timber.i("[PADAWANLOGS] Word #$word, $mnemonicWord is valid")
+                Log.i("Padalogs","Word #$word, $mnemonicWord is valid")
             }
         }
 
-        Timber.i("[PADAWANLOGS] The final mnemonic is $mnemonicWordList")
+        Log.i("Padalogs","The final mnemonic is $mnemonicWordList")
         this.mnemonicString = mnemonicWordList.joinToString(" ")
         return true
     }

@@ -26,7 +26,7 @@ import com.goldenraven.padawanwallet.wallet.WalletViewModel
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import org.bitcoindevkit.bdkjni.Types.*
 import com.goldenraven.padawanwallet.utils.timestampToString
-import timber.log.Timber
+
 
 class WalletBuild : Fragment() {
 
@@ -45,7 +45,7 @@ class WalletBuild : Fragment() {
     ): View {
         binding = FragmentWalletBuildBinding.inflate(inflater, container, false)
         addressFromScanner = arguments?.getString("addressFromScanner", "0") ?: "0"
-        Timber.i("padawanlogs $addressFromScanner")
+        Log.i("Padalogs","$addressFromScanner")
         if (addressFromScanner != "0") {
             binding.sendAddress.setText(addressFromScanner)
         }
@@ -85,7 +85,7 @@ class WalletBuild : Fragment() {
                                 }
                 broadcastMessage.show()
             } else {
-                Timber.i("[PADAWANLOGS] Inputs were not valid")
+                Log.i("Padalogs","Inputs were not valid")
             }
         }
     }
@@ -119,7 +119,7 @@ class WalletBuild : Fragment() {
                 SnackbarLevel.WARNING,
                 "Address is missing!"
             )
-            Timber.i("[PADAWANLOGS] Address field was empty")
+            Log.i("Padalogs","Address field was empty")
             return false
         }
         if (amount == "") {
@@ -128,7 +128,7 @@ class WalletBuild : Fragment() {
                 SnackbarLevel.WARNING,
                 "Amount is missing!"
             )
-            Timber.i("[PADAWANLOGS] Amount field was empty")
+            Log.i("Padalogs","Amount field was empty")
             return false
         }
         if (feeRate <= 0 || feeRate > 200) {
@@ -137,7 +137,7 @@ class WalletBuild : Fragment() {
                 SnackbarLevel.WARNING,
                 "Please input a fee rate between 1 to 200"
             )
-            Timber.i("[PADAWANLOGS] Fee rate was invalid")
+            Log.i("Padalogs","Fee rate was invalid")
             return false
         }
         return true
@@ -152,12 +152,12 @@ class WalletBuild : Fragment() {
             val txid: Txid = Wallet.broadcast(rawTx.transaction)
             txidString = txid.toString()
 
-            Timber.i("[PADAWANLOGS] Transaction was broadcast! Data added to database:")
-            Timber.i("[PADAWANLOGS] Transaction was broadcast! txid: ${transactionDetails.details.txid}")
-            Timber.i("[PADAWANLOGS] Transaction was broadcast! timestamp: ${transactionDetails.details.confirmation_time?.timestampToString()}")
-            Timber.i("[PADAWANLOGS] Transaction was broadcast! received: ${transactionDetails.details.received.toInt()}")
-            Timber.i("[PADAWANLOGS] Transaction was broadcast! sent: ${transactionDetails.details.sent.toInt()}")
-            Timber.i("[PADAWANLOGS] Transaction was broadcast! fees: ${transactionDetails.details.fee.toInt()}")
+            Log.i("Padalogs","Transaction was broadcast! Data added to database:")
+            Log.i("Padalogs","Transaction was broadcast! txid: ${transactionDetails.details.txid}")
+            Log.i("Padalogs","Transaction was broadcast! timestamp: ${transactionDetails.details.confirmation_time?.timestampToString()}")
+            Log.i("Padalogs","Transaction was broadcast! received: ${transactionDetails.details.received.toInt()}")
+            Log.i("Padalogs","Transaction was broadcast! sent: ${transactionDetails.details.sent.toInt()}")
+            Log.i("Padalogs","Transaction was broadcast! fees: ${transactionDetails.details.fee.toInt()}")
             // add tx to database
             val time : String = if (transactionDetails.details.confirmation_time == null) "Pending" else transactionDetails.details.confirmation_time!!.timestampToString()
             val height : Int = if (transactionDetails.details.confirmation_time == null) 100000000 else transactionDetails.details.confirmation_time!!.height
@@ -169,14 +169,14 @@ class WalletBuild : Fragment() {
                     transactionDetails.details.fee.toInt(),
                     height
             )
-            Timber.i("[PADAWANLOGS] Transaction was broadcast! txid: $txid, txidString: $txidString")
+            Log.i("Padalogs","Transaction was broadcast! txid: $txid, txidString: $txidString")
             fireSnackbar(
                     requireView(),
                     SnackbarLevel.INFO,
                     "Transaction was broadcast successfully!"
             )
         } catch (e: Throwable) {
-            Timber.i("[PADAWANLOGS] ${e.message}")
+            Log.i("Padalogs","${e.message}")
             fireSnackbar(
                 requireView(),
                 SnackbarLevel.ERROR,
@@ -210,7 +210,7 @@ class WalletBuild : Fragment() {
                 isSend = isSend,
                 height = height,
         )
-        Timber.i("[PADAWANLOGS] From addTxToDatabase, the tx is $transaction")
+        Log.i("Padalogs","From addTxToDatabase, the tx is $transaction")
         viewModel.addTx(transaction)
     }
 }

@@ -19,7 +19,7 @@ import androidx.navigation.Navigation
 import com.goldenraven.padawanwallet.R
 import com.goldenraven.padawanwallet.data.Wallet
 import com.goldenraven.padawanwallet.databinding.FragmentWalletReceiveBinding
-import timber.log.Timber
+import android.util.Log
 
 class WalletReceive : Fragment() {
 
@@ -44,7 +44,7 @@ class WalletReceive : Fragment() {
 
         binding.buttonGenerateNewAddress.setOnClickListener {
             val newGeneratedAddress: String = Wallet.getNewAddress()
-            Timber.i("[PADAWANLOGS] New deposit address is $newGeneratedAddress")
+            Log.i("Padalogs","New deposit address is $newGeneratedAddress")
 
             val qrgEncoder: QRGEncoder = QRGEncoder(newGeneratedAddress, null, QRGContents.Type.TEXT, 1000)
             qrgEncoder.colorBlack = resources.getColor(R.color.fg4)
@@ -53,7 +53,7 @@ class WalletReceive : Fragment() {
                 val bitmap = qrgEncoder.bitmap
                 binding.qrCode.setImageBitmap(bitmap)
             } catch (e: Throwable) {
-                Timber.i("[PADAWANLOGS] Error with QRCode generator, ${e.toString()}")
+                Log.i("Padalogs","Error with QRCode generator, ${e.toString()}")
             }
             binding.receiveAddress.text = newGeneratedAddress
         }

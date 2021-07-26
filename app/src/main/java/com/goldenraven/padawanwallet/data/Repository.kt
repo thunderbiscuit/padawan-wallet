@@ -7,7 +7,7 @@ package com.goldenraven.padawanwallet.data
 
 import android.content.SharedPreferences
 import com.goldenraven.padawanwallet.utils.RequiredInitialWalletData
-import timber.log.Timber
+import android.util.Log
 
 object Repository {
 
@@ -19,7 +19,7 @@ object Repository {
     public fun doesWalletExist(): Boolean {
         // val currentWallet: SharedPreferences = applicationContext.getSharedPreferences("current_wallet", Context.MODE_PRIVATE)
         val currentWalletExists: Boolean = sharedPreferences.getBoolean("initialized", false)
-        Timber.i("[PADAWANLOGS] Value of currentWalletExists at launch: $currentWalletExists")
+        Log.i("Padalogs","Value of currentWalletExists at launch: $currentWalletExists")
         return currentWalletExists
     }
 
@@ -31,7 +31,7 @@ object Repository {
     }
 
     public fun saveWallet(path: String, descriptor: String, changeDescriptor: String) {
-        Timber.i("[PADAWANLOGS] Saved wallet: path -> $path, descriptor -> $descriptor, change descriptor -> $changeDescriptor")
+        Log.i("Padalogs","Saved wallet: path -> $path, descriptor -> $descriptor, change descriptor -> $changeDescriptor")
         val editor = sharedPreferences.edit()
         editor.putBoolean("initialized", true)
         editor.putString("path", path)
@@ -41,7 +41,7 @@ object Repository {
     }
 
     public fun saveMnemonic(mnemonic: String) {
-        Timber.i("[PADAWANLOGS] The seed phrase is: $mnemonic")
+        Log.i("Padalogs","The seed phrase is: $mnemonic")
         val editor = sharedPreferences.edit()
         editor.putString("mnemonic", mnemonic)
         editor.apply()

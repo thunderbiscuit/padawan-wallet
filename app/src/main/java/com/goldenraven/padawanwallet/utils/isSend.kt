@@ -5,9 +5,9 @@
 
 package com.goldenraven.padawanwallet.utils
 
-import timber.log.Timber
+import android.util.Log
 
 public fun isSend(sent: Int, received: Int): Boolean {
-    Timber.i("[PADAWANLOGS] isSend value is ${received - sent}")
+    Log.i("Padalogs","isSend value is ${received - sent}")
     return received - sent < 0
 }

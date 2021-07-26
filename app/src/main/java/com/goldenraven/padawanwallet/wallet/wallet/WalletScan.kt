@@ -21,7 +21,7 @@ import androidx.navigation.Navigation
 import com.budiyev.android.codescanner.*
 import com.goldenraven.padawanwallet.R
 import com.goldenraven.padawanwallet.databinding.FragmentWalletScanBinding
-import timber.log.Timber
+import android.util.Log
 
 private const val CAMERA_REQUEST_CODE = 101
 
@@ -66,7 +66,7 @@ class WalletScan : Fragment() {
 
             decodeCallback = DecodeCallback {
                 requireActivity().runOnUiThread {
-                    Timber.i("[PADAWANLOGS] Code scanner scanned ${it.text}")
+                    Log.i("Padalogs","Code scanner scanned ${it.text}")
                     val bundle = bundleOf("addressFromScanner" to it.text)
                     navController.navigate(R.id.action_walletScan_to_walletBuild, bundle)
                 }
@@ -74,7 +74,7 @@ class WalletScan : Fragment() {
 
             errorCallback = ErrorCallback {
                 requireActivity().runOnUiThread {
-                    Timber.i("[PADAWANLOGS] Camera initialization error: ${it.message}")
+                    Log.i("Padalogs","Camera initialization error: ${it.message}")
                 }
             }
         }
@@ -90,19 +90,19 @@ class WalletScan : Fragment() {
     }
 
     private fun setupPermissions() {
-        Timber.i("[PADAWANLOGS] Requesting permission step 1")
+        Log.i("Padalogs","Requesting permission step 1")
         val permission =
             ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.CAMERA)
-        Timber.i("[PADAWANLOGS] Requesting permission step 2: $permission")
+        Log.i("Padalogs","Requesting permission step 2: $permission")
 
         if (permission != PackageManager.PERMISSION_GRANTED) {
-            Timber.i("[PADAWANLOGS] Requesting permission step 3, making request")
+            Log.i("Padalogs","Requesting permission step 3, making request")
             makeRequest()
         }
     }
 
     private fun makeRequest() {
-        Timber.i("[PADAWANLOGS] Requesting permission step 3")
+        Log.i("Padalogs","Requesting permission step 3")
         ActivityCompat.requestPermissions(
             requireActivity(),
             arrayOf(Manifest.permission.CAMERA),
@@ -124,7 +124,7 @@ class WalletScan : Fragment() {
                         Toast.LENGTH_LONG
                     ).show()
                 } else {
-                    Timber.i("[PADAWANLOGS] Camera permission granted")
+                    Log.i("Padalogs","Camera permission granted")
                 }
             }
         }

@@ -15,7 +15,7 @@ import androidx.navigation.Navigation
 import com.goldenraven.padawanwallet.R
 import com.goldenraven.padawanwallet.databinding.FragmentTutorialsHomeBinding
 import com.goldenraven.padawanwallet.wallet.WalletViewModel
-import timber.log.Timber
+import android.util.Log
 
 class TutorialsHome : Fragment() {
 
@@ -38,7 +38,7 @@ class TutorialsHome : Fragment() {
         viewModel.retrieveDoneTutorials()
 
         viewModel.tutorialsDone.observe(viewLifecycleOwner, {
-            Timber.i("[PADAWANLOGS] ${viewModel.tutorialsDone.value}")
+            Log.i("Padalogs","${viewModel.tutorialsDone.value}")
             if (viewModel.tutorialsDone.value?.get("e1") == true) binding.buttonTutorial1.setBackgroundResource(R.drawable.tutorial_button_done_background)
             if (viewModel.tutorialsDone.value?.get("e2") == true) binding.buttonTutorial2.setBackgroundResource(R.drawable.tutorial_button_done_background)
             if (viewModel.tutorialsDone.value?.get("e3") == true) binding.buttonTutorial3.setBackgroundResource(R.drawable.tutorial_button_done_background)

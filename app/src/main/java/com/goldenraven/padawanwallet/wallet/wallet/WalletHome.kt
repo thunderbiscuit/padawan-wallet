@@ -21,9 +21,8 @@ import com.goldenraven.padawanwallet.utils.fireSnackbar
 import com.goldenraven.padawanwallet.utils.isNetworkAvailable
 import com.goldenraven.padawanwallet.wallet.TxHistoryAdapter
 import com.goldenraven.padawanwallet.wallet.WalletViewModel
-import timber.log.Timber
 import java.text.DecimalFormat
-
+import android.util.Log
 class WalletHome : Fragment() {
 
     private lateinit var viewModel: WalletViewModel
@@ -94,7 +93,7 @@ class WalletHome : Fragment() {
         }
 
         binding.unitToggleButton.setOnClickListener {
-            Timber.i("[PADAWANLOGS] Toggle unit button was pressed")
+            Log.i("Padalogs","Toggle unit button was pressed")
             viewModel.changeUnit()
         }
 

@@ -81,9 +81,6 @@ dependencies {
     implementation("io.ktor:ktor-client-cio:${Versions.ktor}")
     implementation("io.ktor:ktor-client-auth:${Versions.ktor}")
 
-    // logging
-    implementation("com.jakewharton.timber:timber:4.7.1")
-
     // QR codes
     implementation("androidmads.library.qrgenearator:QRGenearator:1.0.4")
     implementation("com.google.zxing:core:3.4.1")

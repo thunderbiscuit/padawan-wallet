@@ -9,7 +9,7 @@ import android.app.Application
 import android.content.Context
 import com.goldenraven.padawanwallet.data.Repository
 import com.goldenraven.padawanwallet.data.Wallet
-import timber.log.Timber
+import android.util.Log
 
 class PadawanWalletApplication : Application() {
 
@@ -17,7 +17,7 @@ class PadawanWalletApplication : Application() {
         super.onCreate()
 
         // logs
-        Timber.plant(Timber.DebugTree())
+       
 
         // initialize Wallet object with path variable
         Wallet.setPath(applicationContext.filesDir.toString())
