@@ -32,7 +32,7 @@ class WalletBuild : Fragment() {
     private lateinit var binding: FragmentWalletBuildBinding
     private lateinit var address: String
     private lateinit var amount: String
-    var feeRate : Float = 1F
+    private var feeRate : Float = 0F
     private lateinit var addressFromScanner: String
     private lateinit var transactionDetails: CreateTxResponse
     private lateinit var viewModel: WalletViewModel
@@ -67,10 +67,10 @@ class WalletBuild : Fragment() {
         }
 
         binding.buttonVerify.setOnClickListener {
-            val validInputs: Boolean = verifyTransaction()
+            val validInputs: Boolean = verifyInputs()
 
             if (validInputs) {
-                var broadcastMessage =
+                val broadcastMessage =
                         MaterialAlertDialogBuilder(this@WalletBuild.requireContext(), R.style.MyCustomDialogTheme)
                                 .setTitle("Broadcast Transaction")
                                 .setMessage(buildMessage())
@@ -92,22 +92,25 @@ class WalletBuild : Fragment() {
     private fun buildMessage(): String {
         val sendToAddress: String = binding.sendAddress.text.toString().trim()
         val sendAmount: String = binding.sendAmount.text.toString().trim()
+
+        val addresseesAndAmounts: List<Pair<String, String>> = listOf(Pair(address, amount))
+        transactionDetails = Wallet.createTransaction(feeRate, addresseesAndAmounts, false, null, null, null)
         val fees: String = transactionDetails.details.fees.toString()
 
-        val address = "Send to address:\n$sendToAddress\n"
-        val amount = "\nAmount Transacted:  $sendAmount\n"
-        val feeRate = "Fee Rate:  $fees\n\n"
-        val total = "Total:  ${fees.toLong() + sendAmount.toLong()}\n\n"
+        val address = "Send to:\n$sendToAddress\n"
+        val amount = "\nAmount: $sendAmount satoshis\n"
+        val feeRate = "Fees: $fees satoshis\n"
+        val total = "Total: ${fees.toLong() + sendAmount.toLong()} satoshis"
 
         Log.i("PadawanWallet", "Message has inputs $sendToAddress, $sendAmount, $fees")
-        return amount + feeRate + total + address
+        return "$address$amount$feeRate$total"
     }
 
 
-    private fun verifyTransaction(): Boolean {
+    private fun verifyInputs(): Boolean {
         address = binding.sendAddress.text.toString().trim()
         amount = binding.sendAmount.text.toString().trim()
-        feeRate = binding.feeRate.text.toString().toFloat()
+        feeRate = if (binding.feeRate.text.toString().isEmpty()) 0F else binding.feeRate.text.toString().toFloat()
 
         if (address == "") {
             fireSnackbar(
@@ -129,30 +132,16 @@ class WalletBuild : Fragment() {
         }
         if (feeRate <= 0 || feeRate > 200) {
             fireSnackbar(
-                    requireView(),
-                    SnackbarLevel.WARNING,
-                    "Please input fee rate between 1 to 200"
-            )
-            return false
-        }
-        val addresseesAndAmounts: List<Pair<String, String>> = listOf(Pair(address, amount))
-
-        Timber.i("[PADAWANLOGS] Send addresses are: $addresseesAndAmounts")
-
-        try {
-            transactionDetails = Wallet.createTransaction(feeRate, addresseesAndAmounts, false, null, null, null)
-        } catch (e: Throwable) {
-            Timber.i("[PADAWANLOGS] Verify transaction failed: ${e.message}")
-            fireSnackbar(
                 requireView(),
-                SnackbarLevel.ERROR,
-                "Error: ${e.message}"
+                SnackbarLevel.WARNING,
+                "Please input a fee rate between 1 to 200"
             )
+            Timber.i("[PADAWANLOGS] Fee rate was invalid")
             return false
         }
-
         return true
     }
+
     private fun broadcastTransaction() {
         var txidString: String = "string of txid"
 
@@ -193,8 +182,6 @@ class WalletBuild : Fragment() {
     }
 
     private fun addTxToDatabase(txid: String, timestamp: String, txSatsIn: Int, txSatsOut: Int, fees: Int) {
-        // val isSend: Boolean = isSend(sent = valueOut, received = valueIn)
-        // val tx = Tx(txid, timestamp, valueIn, valueOut, fees, isSend)
         val isSend: Boolean = isSend(sent = txSatsOut, received = txSatsIn)
         var valueIn: Int = 0
         var valueOut: Int = 0
