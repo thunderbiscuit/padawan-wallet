@@ -65,7 +65,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
-    <TextView
+    <EditText
         android:id="@+id/feeRate"
         android:layout_width="0dp"
         android:layout_height="40dp"
@@ -76,7 +76,7 @@
         android:fontFamily="@font/share_tech_mono"
         android:gravity="center|fill_horizontal"
         android:inputType="number"
-        android:text="1 satoshi/vByte"
+        android:hint="1 satoshi/vByte"
         android:textColor="@color/fg1"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
