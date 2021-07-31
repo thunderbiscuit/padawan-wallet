@@ -175,14 +175,19 @@ class WalletBuild : Fragment() {
                     transactionDetails.details.fees.toInt(),
             )
             Timber.i("[PADAWANLOGS] Transaction was broadcast! txid: $txid, txidString: $txidString")
+            fireSnackbar(
+                    requireView(),
+                    SnackbarLevel.INFO,
+                    "Transaction was broadcast successfully!"
+            )
         } catch (e: Throwable) {
             Timber.i("[PADAWANLOGS] ${e.message}")
-        }
-        fireSnackbar(
+            fireSnackbar(
                 requireView(),
-                SnackbarLevel.INFO,
-                "Transaction was broadcast successfully!"
-        )
+                SnackbarLevel.ERROR,
+                "Error: ${e.message}"
+            )
+        }
     }
 
     private fun addTxToDatabase(txid: String, timestamp: String, txSatsIn: Int, txSatsOut: Int, fees: Int) {
@@ -214,5 +219,4 @@ class WalletBuild : Fragment() {
         Timber.i("[PADAWANLOGS] From addTxToDatabase, the tx is $transaction")
         viewModel.addTx(transaction)
     }
-
 }
