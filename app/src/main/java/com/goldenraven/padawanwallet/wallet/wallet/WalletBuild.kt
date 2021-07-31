@@ -31,6 +31,7 @@ class WalletBuild : Fragment() {
     private lateinit var binding: FragmentWalletBuildBinding
     private lateinit var address: String
     private lateinit var amount: String
+    var feeRate : Float = 1F
     private lateinit var addressFromScanner: String
     private lateinit var transactionDetails: CreateTxResponse
     private lateinit var viewModel: WalletViewModel
@@ -84,14 +85,6 @@ class WalletBuild : Fragment() {
                 Timber.i("[PADAWANLOGS] Inputs were not valid")
             }
         }
-
-        binding.feeRate.setOnClickListener {
-            fireSnackbar(
-                requireView(),
-                SnackbarLevel.INFO,
-                "Choosing your fee rate is a feature currently in development!"
-            )
-        }
     }
 
     private fun buildMessage(): String {
@@ -112,6 +105,7 @@ class WalletBuild : Fragment() {
     private fun verifyTransaction(): Boolean {
         address = binding.sendAddress.text.toString().trim()
         amount = binding.sendAmount.text.toString().trim()
+        feeRate = binding.feeRate.text.toString().toFloat()
 
         if (address == "") {
             fireSnackbar(
@@ -131,9 +125,15 @@ class WalletBuild : Fragment() {
             Timber.i("[PADAWANLOGS] Amount field was empty")
             return false
         }
-
+        if (feeRate <= 0 || feeRate > 200) {
+            fireSnackbar(
+                    requireView(),
+                    SnackbarLevel.WARNING,
+                    "Please input fee rate between 1 to 200"
+            )
+            return false
+        }
         val addresseesAndAmounts: List<Pair<String, String>> = listOf(Pair(address, amount))
-        val feeRate = 1F
 
         Timber.i("[PADAWANLOGS] Send addresses are: $addresseesAndAmounts")
 
