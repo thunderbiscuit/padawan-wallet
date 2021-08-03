@@ -75,7 +75,7 @@ dependencies {
     implementation("androidx.viewpager:viewpager:1.0.0")
 
     // bitcoin
-    implementation("org.bitcoindevkit.bdkjni:bdk-jni-debug:0.2.1-dev")
+    implementation("org.bitcoindevkit.bdkjni:bdk-jni-debug:0.3.0-rc1")
 
     // Ktor
     implementation("io.ktor:ktor-client-cio:${Versions.ktor}")
