@@ -13,7 +13,7 @@ import androidx.room.Query
 
 @Dao
 interface TxDao {
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun addTx(tx: Tx)
 
     @Query("SELECT * FROM transaction_history ORDER BY date DESC")
