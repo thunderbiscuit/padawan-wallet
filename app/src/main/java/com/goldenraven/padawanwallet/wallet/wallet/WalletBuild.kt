@@ -25,6 +25,7 @@ import com.goldenraven.padawanwallet.utils.netSendWithoutFees
 import com.goldenraven.padawanwallet.wallet.WalletViewModel
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import org.bitcoindevkit.bdkjni.Types.*
+import com.goldenraven.padawanwallet.utils.timestampToString
 import timber.log.Timber
 
 class WalletBuild : Fragment() {
@@ -95,7 +96,7 @@ class WalletBuild : Fragment() {
 
         val addresseesAndAmounts: List<Pair<String, String>> = listOf(Pair(address, amount))
         transactionDetails = Wallet.createTransaction(feeRate, addresseesAndAmounts, false, null, null, null)
-        val fees: String = transactionDetails.details.fees.toString()
+        val fees: String = transactionDetails.details.fee.toString()
 
         val address = "Send to:\n$sendToAddress\n"
         val amount = "\nAmount: $sendAmount satoshis\n"
@@ -153,17 +154,18 @@ class WalletBuild : Fragment() {
 
             Timber.i("[PADAWANLOGS] Transaction was broadcast! Data added to database:")
             Timber.i("[PADAWANLOGS] Transaction was broadcast! txid: ${transactionDetails.details.txid}")
-            Timber.i("[PADAWANLOGS] Transaction was broadcast! timestamp: ${transactionDetails.details.timestamp}")
+            Timber.i("[PADAWANLOGS] Transaction was broadcast! timestamp: ${transactionDetails.details.confirmation_time?.timestampToString()}")
             Timber.i("[PADAWANLOGS] Transaction was broadcast! received: ${transactionDetails.details.received.toInt()}")
             Timber.i("[PADAWANLOGS] Transaction was broadcast! sent: ${transactionDetails.details.sent.toInt()}")
-            Timber.i("[PADAWANLOGS] Transaction was broadcast! fees: ${transactionDetails.details.fees.toInt()}")
+            Timber.i("[PADAWANLOGS] Transaction was broadcast! fees: ${transactionDetails.details.fee.toInt()}")
             // add tx to database
+            val time : String = if (transactionDetails.details.confirmation_time == null) "Pending" else transactionDetails.details.confirmation_time!!.timestampToString()
             addTxToDatabase(
                     transactionDetails.details.txid,
-                    transactionDetails.details.timestamp.toString(),
+                    time,
                     transactionDetails.details.received.toInt(),
                     transactionDetails.details.sent.toInt(),
-                    transactionDetails.details.fees.toInt(),
+                    transactionDetails.details.fee.toInt(),
             )
             Timber.i("[PADAWANLOGS] Transaction was broadcast! txid: $txid, txidString: $txidString")
             fireSnackbar(
