@@ -6,6 +6,7 @@
 package com.goldenraven.padawanwallet.wallet
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -13,6 +14,7 @@ import androidx.lifecycle.viewModelScope
 import com.goldenraven.padawanwallet.data.*
 import com.goldenraven.padawanwallet.utils.isSend
 import com.goldenraven.padawanwallet.utils.netSendWithoutFees
+import com.goldenraven.padawanwallet.utils.timestampToString
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import timber.log.Timber
@@ -31,6 +33,7 @@ class WalletViewModel(application: Application) : AndroidViewModel(application) 
     }
 
     public var balance: MutableLiveData<Long> = MutableLiveData(0)
+    public var timestamp: MutableLiveData<String> = MutableLiveData("Pending")
     public var satoshiUnit: MutableLiveData<Boolean> = MutableLiveData(true)
     public var tutorialsDone: MutableLiveData<MutableMap<String, Boolean>> = MutableLiveData(
             mutableMapOf(
@@ -47,6 +50,7 @@ class WalletViewModel(application: Application) : AndroidViewModel(application) 
 
     public fun addTx(tx: Tx) {
         viewModelScope.launch(Dispatchers.IO) {
+            Log.i("smallP", "tx: ${tx}")
             repository.addTx(tx)
         }
     }
@@ -75,19 +79,20 @@ class WalletViewModel(application: Application) : AndroidViewModel(application) 
                     valueOut = netSendWithoutFees(
                         txSatsOut = tx.sent.toInt(),
                         txSatsIn = tx.received.toInt(),
-                        fees = tx.fees.toInt()
+                        fees = tx.fee.toInt()
                     )
                 }
                 false -> {
                     valueIn = tx.received.toInt()
                 }
             }
+            val time : String = if (tx.confirmation_time == null) "Pending" else tx.confirmation_time!!.timestampToString()
             val transaction: Tx = Tx(
                 txid = tx.txid,
-                date = tx.timestamp.toString(),
+                date = time,
                 valueIn = valueIn,
                 valueOut = valueOut,
-                fees = tx.fees.toInt(),
+                fees = tx.fee.toInt(),
                 isSend = isSend
             )
             addTx(transaction)
