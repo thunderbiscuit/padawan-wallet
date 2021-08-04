@@ -37,7 +37,7 @@ class TxHistoryAdapter: RecyclerView.Adapter<TxHistoryAdapter.MyViewHolder>() {
         // holder.itemView.findViewById<TextView>(R.id.feesPaidString).text = currentItem.fees.toString()
 
         holder.itemView.findViewById<TextView>(R.id.satsInOutString).text = currentItem.valueIn.toString()
-        holder.itemView.findViewById<TextView>(R.id.dateString).text = dateAsString(currentItem.date.toInt())
+        holder.itemView.findViewById<TextView>(R.id.dateString).text = currentItem.date
         if (currentItem.isSend) {
             holder.itemView.findViewById<TextView>(R.id.satsSentReceivedView).text = "Sent:"
             if (currentItem.valueOut == 0) {
