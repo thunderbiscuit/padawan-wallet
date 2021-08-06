@@ -87,13 +87,15 @@ class WalletViewModel(application: Application) : AndroidViewModel(application) 
                 }
             }
             val time : String = if (tx.confirmation_time == null) "Pending" else tx.confirmation_time!!.timestampToString()
+            val height : Int = if (tx.confirmation_time == null) 100000000 else tx.confirmation_time!!.height
             val transaction: Tx = Tx(
-                txid = tx.txid,
-                date = time,
-                valueIn = valueIn,
-                valueOut = valueOut,
-                fees = tx.fee.toInt(),
-                isSend = isSend
+                    txid = tx.txid,
+                    date = time,
+                    valueIn = valueIn,
+                    valueOut = valueOut,
+                    fees = tx.fee.toInt(),
+                    isSend = isSend,
+                    height = height
             )
             addTx(transaction)
         }
