@@ -17,4 +17,5 @@ data class Tx(
     val valueOut: Int,
     val fees: Int,
     val isSend: Boolean,
+    val height: Int,
 )

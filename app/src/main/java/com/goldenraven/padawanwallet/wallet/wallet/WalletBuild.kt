@@ -160,12 +160,14 @@ class WalletBuild : Fragment() {
             Timber.i("[PADAWANLOGS] Transaction was broadcast! fees: ${transactionDetails.details.fee.toInt()}")
             // add tx to database
             val time : String = if (transactionDetails.details.confirmation_time == null) "Pending" else transactionDetails.details.confirmation_time!!.timestampToString()
+            val height : Int = if (transactionDetails.details.confirmation_time == null) 100000000 else transactionDetails.details.confirmation_time!!.height
             addTxToDatabase(
                     transactionDetails.details.txid,
                     time,
                     transactionDetails.details.received.toInt(),
                     transactionDetails.details.sent.toInt(),
                     transactionDetails.details.fee.toInt(),
+                    height
             )
             Timber.i("[PADAWANLOGS] Transaction was broadcast! txid: $txid, txidString: $txidString")
             fireSnackbar(
@@ -183,7 +185,7 @@ class WalletBuild : Fragment() {
         }
     }
 
-    private fun addTxToDatabase(txid: String, timestamp: String, txSatsIn: Int, txSatsOut: Int, fees: Int) {
+    private fun addTxToDatabase(txid: String, timestamp: String, txSatsIn: Int, txSatsOut: Int, fees: Int, height : Int) {
         val isSend: Boolean = isSend(sent = txSatsOut, received = txSatsIn)
         var valueIn: Int = 0
         var valueOut: Int = 0
@@ -205,7 +207,8 @@ class WalletBuild : Fragment() {
                 valueIn = valueIn,
                 valueOut = valueOut,
                 fees = fees,
-                isSend = isSend
+                isSend = isSend,
+                height = height,
         )
         Timber.i("[PADAWANLOGS] From addTxToDatabase, the tx is $transaction")
         viewModel.addTx(transaction)
