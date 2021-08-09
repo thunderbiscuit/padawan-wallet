@@ -13,7 +13,7 @@
         android:id="@+id/info"
         android:layout_width="16dp"
         android:layout_height="16dp"
-        android:src="@drawable/information"
+        android:src="@drawable/ic_info"
         android:background="@color/bg2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -48,7 +48,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
+        android:paddingBottom="8dp"
         android:fontFamily="@font/nunito_sans"
         android:text="Status:"
         android:textColor="@color/fg0"
@@ -61,23 +61,24 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
+        android:layout_marginBottom="16dp"
         android:layout_marginStart="90dp"
         android:fontFamily="@font/nunito_sans"
         android:textColor="@color/fg0"
         android:text="status"
         android:textSize="12sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/satsInOutString"/>
+        app:layout_constraintTop_toBottomOf="@+id/satsInOutString" />
 
     <TextView
         android:id="@+id/txDateView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
         android:fontFamily="@font/nunito_sans"
         android:text="Date:"
+        android:visibility="gone"
         android:textColor="@color/fg0"
         android:textSize="12sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -87,11 +88,11 @@
         android:id="@+id/dateString"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
         android:layout_marginStart="90dp"
         android:fontFamily="@font/nunito_sans"
         android:textColor="@color/fg0"
         android:text="date"
+        android:visibility="gone"
         android:textSize="12sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/status"/>
@@ -104,6 +105,7 @@
         android:layout_marginBottom="8dp"
         android:fontFamily="@font/nunito_sans"
         android:text="Tx id:"
+        android:visibility="gone"
         android:textColor="@color/fg0"
         android:textSize="12sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -116,7 +118,7 @@
         android:layout_marginTop="8dp"
         android:fontFamily="@font/nunito_sans"
         android:textColor="@color/fg0"
-        android:text="Tx id"
+        android:visibility="gone"
         android:textSize="12sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/dateString" />
@@ -129,10 +131,12 @@
         android:layout_marginBottom="8dp"
         android:fontFamily="@font/nunito_sans"
         android:text="Height:"
+        android:visibility="gone"
         android:textColor="@color/fg0"
         android:textSize="12sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txvalue" />
+        app:layout_constraintTop_toBottomOf="@+id/txvalue"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
     <TextView
         android:id="@+id/heightval"
@@ -142,6 +146,7 @@
         android:layout_marginTop="8dp"
         android:fontFamily="@font/nunito_sans"
         android:text="height"
+        android:visibility="gone"
         android:textColor="@color/fg0"
         android:textSize="12sp"
         app:layout_constraintStart_toStartOf="parent"
