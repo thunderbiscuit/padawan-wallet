@@ -24,7 +24,7 @@ android {
         minSdkVersion(26)
         targetSdkVersion(30)
         versionCode = 3
-        versionName = "v0.7.1-SNAPSHOT"
+        versionName = "v0.7.2-SNAPSHOT"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         buildConfigField("String", "FAUCET_URL", faucetUrl)
         buildConfigField("String", "FAUCET_USERNAME", faucetUsername)
@@ -37,6 +37,7 @@ android {
             debuggable(true)
         }
         getByName("release") {
+            // ndk.debugSymbolLevel = "FULL"
             // shrinkResources(true)
             // minifyEnabled(true)
             debuggable(false)
