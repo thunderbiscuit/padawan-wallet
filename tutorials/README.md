@@ -1,9 +1,9 @@
 # Readme
 This file is a 1-to-1 mapping of the tutorials in the app. It is meant as an easy way for developers to visualize and consume what is in the tutorials and open PRs for bettering them. 
 
-If you are not confortable opening a PR but have ideas on how to improve the tutorials, please propose changes through a GitHub issue, or join our [Discord channel] and come discuss your ideas there!
+If you are not comfortable opening a PR but have ideas on how to improve the tutorials, please propose changes through a GitHub issue, or join our [Discord channel] and come discuss your ideas there!
 
-The tutorials are currently capped at an arbitary 5000 characters per. This is not a technical requirement of the app but simply a way to keep the tutorials light and quickly digestible. Please consider the cap when opening pull requests.  
+The tutorials are currently capped at an arbitrary 5000 characters per. This is not a technical requirement of the app but simply a way to keep the tutorials light and quickly digestible. Please consider the cap when opening pull requests.  
 <br/>
 
 # Tutorial 1: What is the Bitcoin testnet? — Concept
@@ -85,7 +85,7 @@ Padawan uses this standard to allow users to create backups for its wallet. You'
 <br/>
 
 # Tutorial 8: Recovering your wallet from a backup seed — Skill
-Recovering a wallet from a mnemonic is usually fairly easy. Menmonics use a standard called BIP39, which usually provides a common way to recover coins between different wallet implementations. The usual pattern for backing up and recovering a wallet is the following:\n
+Recovering a wallet from a mnemonic is usually fairly easy. Mnemonics use a standard called BIP39, which usually provides a common way to recover coins between different wallet implementations. The usual pattern for backing up and recovering a wallet is the following:\n
 
 1. We create a wallet and the software will provide us with either 12 or 24 words to write down and keep. The order of the words is important, so make sure you write them in the right order. In Padawan, you can see those 12 words at any time by going into the "Show Seed Phrase" screen. In most other wallet implementations, you will only get a chance to see those words once, SO MAKE SURE YOU WRITE THEM DOWN AND TREAT THEM LIKE THE MONEY THEY REPRESENT. Upon creating a new wallet, you can always try to send a tiny amount of bitcoin to the wallet, delete the wallet, and attempt a full recovery using the words provided by the wallet. If all goes well and you backed up your wallet correctly, you will be able to re-enter the same wallet and the coins will be there.
 
