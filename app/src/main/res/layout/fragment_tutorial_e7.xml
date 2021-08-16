@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true"
-    android:background="@color/bg1">
+    android:background="@color/fg2">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -35,7 +35,7 @@
             android:backgroundTint="@color/bg1"
             android:fontFamily="@font/nunito_sans"
             android:text="@string/E7_content"
-            android:textColor="@color/fg1"
+            android:textColor="@color/bg0hard"
             android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

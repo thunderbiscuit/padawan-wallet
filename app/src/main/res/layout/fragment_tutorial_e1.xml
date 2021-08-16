@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true"
-    android:background="@color/bg0hard">
+    android:background="@color/fg2">
 
     <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -35,7 +35,7 @@
             android:backgroundTint="@color/bg0hard"
             android:fontFamily="@font/nunito_sans"
             android:text="@string/t1_p1"
-            android:textColor="@color/fg0"
+            android:textColor="@color/bg0hard"
             android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -64,7 +64,7 @@
             android:backgroundTint="@color/bg0hard"
             android:fontFamily="@font/nunito_sans"
             android:text="@string/t1_p2"
-            android:textColor="@color/fg0"
+            android:textColor="@color/bg0hard"
             android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -93,7 +93,7 @@
             android:backgroundTint="@color/bg0hard"
             android:fontFamily="@font/nunito_sans"
             android:text="@string/t1_p3"
-            android:textColor="@color/fg0"
+            android:textColor="@color/bg0hard"
             android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -122,7 +122,7 @@
             android:backgroundTint="@color/bg0hard"
             android:fontFamily="@font/nunito_sans"
             android:text="@string/t1_p4"
-            android:textColor="@color/fg0"
+            android:textColor="@color/bg0hard"
             android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
