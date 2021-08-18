@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--  string names for tutorials are defined as such:  -->
+    <!--  t1: tutorial 1  -->
+    <!--  h1: header 1  -->
+    <!--  p1: paragraph 1  -->
+
+    <string name="t5_h1">
+        Sending bitcoin
+    </string>
+
+    <string name="t5_p1">
+        We send bitcoins by paying to a bitcoin address. On mobile phones, the most common way to do that is to use your phone\'s camera to scan a QR code of the person or service you wish to pay. Another way is to have that person or service send you the address directly, and copy/pasting that address in the address field of the transaction builder.\n\nOnce we have an address, we also specify the amount of bitcoin to send (either in bitcoin units or in satoshis), and broadcast the transaction to the network!
+    </string>
+</resources>
