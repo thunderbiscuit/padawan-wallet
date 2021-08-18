@@ -26,7 +26,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:fontFamily="@font/share_tech_mono"
-        android:text="tb1qet6a6jjdpmd45mxjcmhgje94txtehzxpmh7pxq"
+        android:text="@string/send_coins_back_address"
         android:textColor="@color/fg1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
