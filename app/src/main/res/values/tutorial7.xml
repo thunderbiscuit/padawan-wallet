@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--  string names for tutorials are defined as such:  -->
+    <!--  t1: tutorial 1  -->
+    <!--  h1: header 1  -->
+    <!--  p1: paragraph 1  -->
+
+    <string name="t7_h1">
+        What is a backup phrase?
+    </string>
+
+    <string name="t7_p1">
+        Modern bitcoin wallets almost all use a process called <i>deterministic key generation</i>, where every new address is generated in a non-random fashion. This gives them the property of being very flexible in terms of generating new addresses (you\'ll notice that every bitcoin receive transaction uses a new address), while not having to remember them all (you do not have to make individual backups for all the addresses to which you received bitcoin). In fact the process looks a little bit like in the following diagram, where each "branch" of the tree is a process known in advance and shared across all bitcoin wallets:\n\nimage\n\nThe number of addresses that can be generated from this tree is infinite, yet because the process to generate new keys (the path the branches need to follow) is predetermined, the <i>only</i> necessary part of backing up such a "tree of addresses" is to remember the root of the tree!\n\nThe real word for this \"root\" of your wallet is the _wallet seed_. This wallet seed is simply a really, really big number, but numbers are notoriously hard to remember, and humans are usually really bad at writing them down properly without making mistakes or typos. Instead, a standard for how to encode these really big numbers has emerged in the bitcoin ecosystem. This standard uses a series of 12 or 24 words in a specific order, which together can always be used to recreate the wallet seed.\n\nPadawan uses this standard to allow users to create backups for its wallet. You\'ll find the 12 words (we call those your seedphrase) on a separate screen under the drawer options. Those words should be treated with the <i>utmost</i> care. They hold the key to all the bitcoin stored in a wallet.
+    </string>
+</resources>
