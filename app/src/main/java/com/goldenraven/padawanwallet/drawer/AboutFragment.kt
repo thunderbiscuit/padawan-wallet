@@ -6,6 +6,7 @@
 package com.goldenraven.padawanwallet.drawer
 
 import android.os.Bundle
+import android.text.method.LinkMovementMethod
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -28,5 +29,11 @@ class AboutFragment : Fragment() {
 
         binding = FragmentAboutBinding.inflate(inflater, container, false)
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        binding.privacyPolicyLink.movementMethod = LinkMovementMethod.getInstance()
     }
 }
