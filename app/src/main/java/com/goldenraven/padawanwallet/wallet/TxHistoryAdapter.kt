@@ -15,8 +15,6 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.goldenraven.padawanwallet.R
 import com.goldenraven.padawanwallet.data.Tx
-import com.goldenraven.padawanwallet.utils.dateAsString
-import com.goldenraven.padawanwallet.utils.timestampToString
 
 class TxHistoryAdapter: RecyclerView.Adapter<TxHistoryAdapter.MyViewHolder>() {
 
