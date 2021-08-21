@@ -6,14 +6,17 @@
 package com.goldenraven.padawanwallet.drawer
 
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
+import android.view.View
+import android.widget.TextView
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
+import com.goldenraven.padawanwallet.BuildConfig
 import com.goldenraven.padawanwallet.R
 import com.goldenraven.padawanwallet.databinding.ActivityDrawerBinding
-import android.util.Log
 
 class DrawerActivity : AppCompatActivity() {
 
@@ -27,7 +30,17 @@ class DrawerActivity : AppCompatActivity() {
 
         val toolbar: Toolbar = findViewById(R.id.toolbarDrawerActivity)
         setSupportActionBar(toolbar)
-        val drawerToggle = ActionBarDrawerToggle(this, binding.drawerActivityLayout, R.string.open, R.string.close)
+        val drawerToggle: ActionBarDrawerToggle = object : ActionBarDrawerToggle(
+            this,
+            binding.drawerActivityLayout,
+            R.string.open,
+            R.string.close,
+        ) {
+            override fun onDrawerSlide(drawerView: View, slideOffset: Float) {
+                super.onDrawerSlide(drawerView, slideOffset)
+                findViewById<TextView>(R.id.versionName).text = BuildConfig.VERSION_NAME
+            }
+        }
         binding.drawerActivityLayout.addDrawerListener(drawerToggle)
         drawerToggle.syncState()
 

@@ -16,9 +16,10 @@
         app:srcCompat="@drawable/ic_logo_v1_0_0" />
 
     <TextView
+        android:id="@+id/versionName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="v0.7.1-SNAPSHOT"
+        android:text=""
         android:textColor="@color/bg0hard"
         android:textStyle="italic"
         app:layout_constraintEnd_toEndOf="parent"
