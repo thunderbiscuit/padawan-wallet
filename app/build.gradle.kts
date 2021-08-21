@@ -23,8 +23,8 @@ android {
         applicationId = "com.goldenraven.padawanwallet"
         minSdkVersion(26)
         targetSdkVersion(30)
-        versionCode = 6
-        versionName = "v0.7.2-rc3"
+        versionCode = 8
+        versionName = "v0.7.3-SNAPSHOT"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         buildConfigField("String", "FAUCET_URL", faucetUrl)
         buildConfigField("String", "FAUCET_USERNAME", faucetUsername)
