@@ -65,12 +65,12 @@ android {
 }
 
 dependencies {
-    implementation("androidx.core:core-ktx:1.3.2")
-    implementation("androidx.appcompat:appcompat:1.2.0")
-    implementation("com.google.android.material:material:1.2.1")
-    implementation("androidx.constraintlayout:constraintlayout:1.1.3")
-    implementation("androidx.navigation:navigation-fragment-ktx:2.2.2")
-    implementation("androidx.navigation:navigation-ui-ktx:2.2.2")
+    implementation("androidx.core:core-ktx:1.6.0")
+    implementation("androidx.appcompat:appcompat:1.3.1")
+    implementation("com.google.android.material:material:1.4.0")
+    implementation("androidx.constraintlayout:constraintlayout:2.1.0")
+    implementation("androidx.navigation:navigation-fragment-ktx:2.3.5")
+    implementation("androidx.navigation:navigation-ui-ktx:2.3.5")
     implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.2.0")
     implementation("androidx.legacy:legacy-support-v4:1.0.0")
     implementation("androidx.viewpager:viewpager:1.0.0")
@@ -93,7 +93,7 @@ dependencies {
     kapt("androidx.room:room-compiler:${Versions.room}")
 
     // testing
-    testImplementation("junit:junit:4.+")
+    testImplementation("junit:junit:4.13.2")
 }
 
 val abiCodes = mapOf("armeabi-v7a" to 1, "x86" to 2, "x86_64" to 3, "arm64-v8a" to 4)

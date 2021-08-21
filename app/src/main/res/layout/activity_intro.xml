@@ -8,7 +8,7 @@
     tools:context=".intro.IntroActivity"
     android:background="@color/bg0soft">
 
-    <fragment
+    <androidx.fragment.app.FragmentContainerView
         android:id="@+id/navHostIntro"
         android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
