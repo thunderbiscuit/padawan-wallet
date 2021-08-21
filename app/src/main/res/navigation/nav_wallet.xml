@@ -51,31 +51,10 @@
             app:enterAnim="@anim/fade_in_slow"
             app:exitAnim="@anim/slide_out_bottom70"/>
         <action
-            android:id="@+id/action_walletSend_to_walletVerify"
-            app:destination="@id/walletBroadcast"
-            app:enterAnim="@anim/fragment_fade_enter"
-            app:exitAnim="@anim/fragment_fade_exit"/>
-        <action
             android:id="@+id/action_walletBuild_to_walletScan"
             app:destination="@id/walletScan" />
     </fragment>
 
-    <fragment
-        android:id="@+id/walletBroadcast"
-        android:name="com.goldenraven.padawanwallet.wallet.wallet.WalletBroadcast"
-        android:label="walletBroadcast"
-        tools:layout="@layout/fragment_wallet_broadcast" >
-        <action
-            android:id="@+id/action_walletVerify_to_walletSend"
-            app:destination="@id/walletBuild"
-            app:enterAnim="@anim/fragment_fade_enter"
-            app:exitAnim="@anim/fragment_fade_exit" />
-        <action
-            android:id="@+id/action_walletVerify_to_walletHome"
-            app:destination="@id/walletHome"
-            app:enterAnim="@anim/fragment_fade_enter"
-            app:exitAnim="@anim/fragment_fade_exit" />
-    </fragment>
     <fragment
         android:id="@+id/walletScan"
         android:name="com.goldenraven.padawanwallet.wallet.wallet.WalletScan"
