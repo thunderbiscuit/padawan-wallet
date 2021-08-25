@@ -1,6 +1,6 @@
 <resources>
     <!-- meta -->
-    <string name="app_name">Padawan Wallet</string>
+    <!-- <string name="app_name">Padawan Wallet</string> -->
     <string name="padawan">Padawan</string>
     <string name="elevator_pitch">the bitcoin wallet trainer</string>
 

@@ -26,6 +26,12 @@ android {
         versionCode = 8
         versionName = "v0.7.3-SNAPSHOT"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        resValue(
+            type = "string",
+            name = "app_name",
+            value = "Padawan Wallet",
+        )
         buildConfigField("String", "FAUCET_URL", faucetUrl)
         buildConfigField("String", "FAUCET_USERNAME", faucetUsername)
         buildConfigField("String", "FAUCET_PASSWORD", faucetPassword)
@@ -33,7 +39,12 @@ android {
 
     buildTypes {
         getByName("debug") {
-            // applicationIdSuffix ".debug"
+            applicationIdSuffix = ".debug"
+            resValue(
+                type = "string",
+                name = "app_name",
+                value = "Padawan Wallet DEBUG",
+            )
             debuggable(true)
         }
         getByName("release") {
