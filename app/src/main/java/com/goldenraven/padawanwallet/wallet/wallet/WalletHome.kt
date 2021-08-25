@@ -6,12 +6,14 @@
 package com.goldenraven.padawanwallet.wallet.wallet
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.goldenraven.padawanwallet.R
@@ -21,8 +23,10 @@ import com.goldenraven.padawanwallet.utils.fireSnackbar
 import com.goldenraven.padawanwallet.utils.isNetworkAvailable
 import com.goldenraven.padawanwallet.wallet.TxHistoryAdapter
 import com.goldenraven.padawanwallet.wallet.WalletViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.text.DecimalFormat
-import android.util.Log
 class WalletHome : Fragment() {
 
     private lateinit var viewModel: WalletViewModel
@@ -84,9 +88,13 @@ class WalletHome : Fragment() {
         binding.syncButton.setOnClickListener {
             when (isNetworkAvailable(requireContext())) {
                 true -> {
-                    viewModel.updateBalance()
-                    viewModel.syncTransactionHistory()
-                    fireSnackbar(requireView(), SnackbarLevel.INFO, "Wallet successfully synced!")
+                    viewLifecycleOwner.lifecycleScope.launch(Dispatchers.IO) {
+                        viewModel.updateBalance()
+                        viewModel.syncTransactionHistory()
+                        withContext(Dispatchers.Main) {
+                            fireSnackbar(requireView(), SnackbarLevel.INFO, "Wallet successfully synced!")
+                        }
+                    }
                 }
                 false -> fireSnackbar(requireView(), SnackbarLevel.WARNING, "Network connection currently not available")
             }
