@@ -98,6 +98,11 @@ dependencies {
     implementation("com.google.zxing:core:3.4.1")
     implementation("com.budiyev.android:code-scanner:2.1.0")
 
+    //Tour Guide
+    implementation("com.github.worker8:tourguide:1.0.13-SNAPSHOT@aar"){
+        isTransitive = true
+    }
+
     // Room
     implementation("androidx.room:room-runtime:${Versions.room}")
     implementation("androidx.room:room-ktx:${Versions.room}")
