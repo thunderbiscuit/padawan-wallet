@@ -5,6 +5,8 @@
 
 package com.goldenraven.padawanwallet.wallet.wallet
 
+import android.content.Context
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -26,10 +28,17 @@ import com.goldenraven.padawanwallet.wallet.WalletViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import tourguide.tourguide.Overlay
+import tourguide.tourguide.ToolTip
+import tourguide.tourguide.TourGuide
+import android.widget.Button
+import android.widget.TextView
 import java.text.DecimalFormat
 class WalletHome : Fragment() {
 
     private lateinit var viewModel: WalletViewModel
+    private lateinit var tour : TourGuide
+    private lateinit var tourG : TourGuide
     private lateinit var binding: FragmentWalletHomeBinding
 
     override fun onCreateView(
@@ -85,6 +94,14 @@ class WalletHome : Fragment() {
             }
         })
 
+        val offerFaucetCallDone =
+            context?.getSharedPreferences("current_wallet", Context.MODE_PRIVATE)
+                ?.getBoolean("offerFaucetCallDone", false)
+
+        //TourGuide beginning
+        if (offerFaucetCallDone == false)
+            createTour("Sync Balance", "Click on sync button to view current balance and transaction history", binding.syncButton)
+
         binding.syncButton.setOnClickListener {
             when (isNetworkAvailable(requireContext())) {
                 true -> {
@@ -98,13 +115,20 @@ class WalletHome : Fragment() {
                 }
                 false -> fireSnackbar(requireView(), SnackbarLevel.WARNING, "Network connection currently not available")
             }
+            if (offerFaucetCallDone == false) {
+                tour.cleanUp()
+                createTourText("Change Unit", "You can always change Santoshi unit to bitcoin and vice versa", binding.unitToggleButton)
+            }
         }
 
         binding.unitToggleButton.setOnClickListener {
             Log.i("Padalogs","Toggle unit button was pressed")
             viewModel.changeUnit()
+            if (offerFaucetCallDone == false) {
+                tourG.cleanUp()
+                createTour("Send Coins", "Click on send button to give testnet coins to your family and friends or you can also give the testnet coins back to us(checkout the menu to find our address)", binding.sendButton)
+            }
         }
-
         // navigation
         val navController = Navigation.findNavController(view)
 
@@ -113,7 +137,33 @@ class WalletHome : Fragment() {
         }
 
         binding.sendButton.setOnClickListener {
+            if (offerFaucetCallDone == false)
+                tour.cleanUp()
             navController.navigate(R.id.action_walletHome_to_walletSend)
         }
+
+    }
+
+    private fun createTour(heading : String, message : String, button : Button) {
+        tour = TourGuide.init(activity)
+            .setToolTip(ToolTip()
+                .setTitle(heading)
+                .setDescription(message)
+                .setBackgroundColor(Color.parseColor("#7c6f64"))
+                .setTextColor(Color.parseColor("#d5c4a1"))
+                )
+            .setOverlay(Overlay())
+            .playOn(button)
+    }
+    private fun createTourText(heading : String, message : String, button : TextView) {
+        tourG = TourGuide.init(activity)
+            .setToolTip(ToolTip()
+                .setTitle(heading)
+                .setDescription(message)
+                .setBackgroundColor(Color.parseColor("#7c6f64"))
+                .setTextColor(Color.parseColor("#d5c4a1"))
+            )
+            .setOverlay(Overlay())
+            .playOn(button)
     }
 }
