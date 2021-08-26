@@ -47,6 +47,10 @@
     <string name="back_to_transaction_build">Back to transaction build</string>
     <string name="bitcoin_sign">Ƀ</string>
     <string name="copy_address">copy address</string>
+    <string name="satoshi_vbyte">satoshi/vbyte</string>
+    <string name="in_satoshis">(in satoshis)</string>
+    <string name="scan">Scan</string>
+    <string name="address">address</string>
 
     <!-- tutorials -->
     <string name="essentials_section_name">Essentials</string>
@@ -69,7 +73,7 @@
     <string name="settings_title">Settings</string>
     <string name="send_coins_back_title">Send Coins Back</string>
     <string name="about_text">Padawan is a testnet-only bitcoin wallet full of tutorials on how to use bitcoin wallets. We\'re building the app you will want to recommend to your friends that keep asking you questions about bitcoin!\n\nPadawan is for people of all ages and aims to be a self-study tool, getting its users acquainted with the usual workflow and basic jargon of mobile wallets in a risk-free environment perfect for experimentation and learning (testnet). We think testnet is an underused resource outside of software development circles, and believe it can be leveraged for bitcoin-curious people everywhere.\n\nPadawan is an open source (Apache 2.0 licenced), free collaborative project. If you would like to get involved or have feedback for us, please join our Discord group!</string>
-    <string name="send_coins_back">Testnet coins can hard to acquire, and even though they have no market value, we should be careful not to waste them or let them get lost!\n\nOnce you are done with your testnet coins, please consider sending them back to the Padawan project so that we can continue sending coins to new users. Use the address above to send your coins back to us.</string>
+    <string name="send_coins_back">Testnet coins can be hard to acquire, and even though they have no market value, we should be careful not to waste them or let them get lost!\n\nOnce you are done with your testnet coins, please consider sending them back to the Padawan project so that we can continue sending coins to new users. Use the address above to send your coins back to us.</string>
     <string name="open">Open drawer</string>
     <string name="close">Close drawer</string>
     <string name="reset_tutorials">Reset Done Tutorials</string>
@@ -77,8 +81,4 @@
     <string name="privacyText">Padawan Wallet does not collect any information on its users, and does not use Firebase Crashlytics. Read our full privacy policy here:</string>
     <string name="privacyLink">https://github.com/thunderbiscuit/padawan-wallet/blob/dev/PRIVACY</string>
     <string name="send_coins_back_address">tb1qk5238eluqllq2wps67lkxme3x43wll4k282s8q</string>
-    <string name="satoshi_vbyte">satoshi/vbyte</string>
-    <string name="in_satoshis">(in satoshis)</string>
-    <string name="scan">Scan</string>
-    <string name="address">address</string>
 </resources>
