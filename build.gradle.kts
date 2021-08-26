@@ -3,7 +3,6 @@ buildscript {
         mavenLocal()
         google()
         mavenCentral()
-        jcenter()
     }
     dependencies {
         classpath("com.android.tools.build:gradle:${Versions.androidGradlePlugin}")
@@ -14,6 +13,7 @@ buildscript {
 allprojects {
     repositories {
         mavenLocal()
+        maven("https://oss.sonatype.org/content/repositories/snapshots")
         google()
         mavenCentral()
         jcenter()
