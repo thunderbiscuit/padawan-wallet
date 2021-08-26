@@ -5,18 +5,18 @@
 
 package com.goldenraven.padawanwallet.data
 
+import android.util.Log
 import com.goldenraven.padawanwallet.utils.RequiredInitialWalletData
 import org.bitcoindevkit.bdkjni.Lib
 import org.bitcoindevkit.bdkjni.Types.*
-import android.util.Log
 
 object Wallet {
 
     private val lib: Lib
     private lateinit var walletPtr: WalletPtr
-    private val name: String = "padawan-testnet-0"
+    private const val name: String = "padawan-testnet-0"
     private lateinit var path: String
-    private val electrumURL: String = "ssl://electrum.blockstream.info:60002"
+    private const val electrumURL: String = "ssl://electrum.blockstream.info:60002"
     
     init {
         // load bitcoindevkit
