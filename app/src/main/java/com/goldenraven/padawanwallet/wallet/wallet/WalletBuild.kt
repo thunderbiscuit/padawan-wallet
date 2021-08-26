@@ -18,14 +18,10 @@ import com.goldenraven.padawanwallet.R
 import com.goldenraven.padawanwallet.data.Tx
 import com.goldenraven.padawanwallet.data.Wallet
 import com.goldenraven.padawanwallet.databinding.FragmentWalletBuildBinding
-import com.goldenraven.padawanwallet.utils.SnackbarLevel
-import com.goldenraven.padawanwallet.utils.fireSnackbar
-import com.goldenraven.padawanwallet.utils.isSend
-import com.goldenraven.padawanwallet.utils.netSendWithoutFees
+import com.goldenraven.padawanwallet.utils.*
 import com.goldenraven.padawanwallet.wallet.WalletViewModel
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import org.bitcoindevkit.bdkjni.Types.*
-import com.goldenraven.padawanwallet.utils.timestampToString
 
 
 class WalletBuild : Fragment() {
@@ -45,7 +41,7 @@ class WalletBuild : Fragment() {
     ): View {
         binding = FragmentWalletBuildBinding.inflate(inflater, container, false)
         addressFromScanner = arguments?.getString("addressFromScanner", "0") ?: "0"
-        Log.i("Padalogs","$addressFromScanner")
+        Log.i("Padalogs", addressFromScanner)
         if (addressFromScanner != "0") {
             binding.sendAddress.setText(addressFromScanner)
         }
@@ -70,7 +66,21 @@ class WalletBuild : Fragment() {
         binding.buttonVerify.setOnClickListener {
             val validInputs: Boolean = verifyInputs()
 
-            if (validInputs) {
+            val addresseesAndAmounts: List<Pair<String, String>> = listOf(Pair(address, amount))
+
+            // create transaction if possible, otherwise show snackbar with error
+            try {
+                transactionDetails = Wallet.createTransaction(feeRate, addresseesAndAmounts, false, null, null, null)
+            } catch (e: Throwable) {
+                Log.i("Padalogs","${e.message}")
+                fireSnackbar(
+                    requireView(),
+                    SnackbarLevel.ERROR,
+                    "Error: ${e.message}"
+                )
+            }
+
+            if (validInputs && this::transactionDetails.isInitialized) {
                 val broadcastMessage =
                         MaterialAlertDialogBuilder(this@WalletBuild.requireContext(), R.style.MyCustomDialogTheme)
                                 .setTitle("Broadcast Transaction")
@@ -93,11 +103,7 @@ class WalletBuild : Fragment() {
     private fun buildMessage(): String {
         val sendToAddress: String = binding.sendAddress.text.toString().trim()
         val sendAmount: String = binding.sendAmount.text.toString().trim()
-
-        val addresseesAndAmounts: List<Pair<String, String>> = listOf(Pair(address, amount))
-        transactionDetails = Wallet.createTransaction(feeRate, addresseesAndAmounts, false, null, null, null)
         val fees: String = transactionDetails.details.fee.toString()
-
         val address = "Send to:\n$sendToAddress\n"
         val amount = "\nAmount: $sendAmount satoshis\n"
         val feeRate = "Fees: $fees satoshis\n"

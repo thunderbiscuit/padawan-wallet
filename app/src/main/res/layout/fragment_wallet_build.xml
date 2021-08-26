@@ -23,23 +23,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/sendAddress"
-        android:layout_width="0dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:backgroundTint="@color/fg1"
-        android:ems="10"
-        android:fontFamily="@font/share_tech_mono"
-        android:inputType="text"
-        android:textColor="@color/fg1"
-        android:textColorHint="@color/bg4"
-        android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toAddressText" />
-
     <Button
         android:id="@+id/buttonScan"
         style="@style/Widget.MaterialComponents.Button.Icon"
@@ -48,7 +31,7 @@
         android:layout_marginEnd="16dp"
         android:backgroundTint="@color/bg2_light"
         android:fontFamily="@font/nunito_sans"
-        android:text="Scan"
+        android:text="@string/scan"
         app:icon="@drawable/ic_camera"
         app:layout_constraintBottom_toTopOf="@+id/sendAddress"
         app:layout_constraintEnd_toEndOf="parent" />
@@ -60,68 +43,96 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="100dp"
         android:fontFamily="@font/nunito_sans"
+        android:textSize="16sp"
         android:text="@string/send_to_address"
         android:textColor="@color/fg1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <EditText
-        android:id="@+id/feeRate"
+        android:id="@+id/sendAddress"
         android:layout_width="0dp"
-        android:layout_height="40dp"
+        android:layout_height="60dp"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
-        android:backgroundTint="@color/fg1"
-        android:ems="10"
+        android:background="@color/bg0"
         android:fontFamily="@font/share_tech_mono"
-        android:gravity="center|fill_horizontal"
-        android:inputType="number"
-        android:hint="1 satoshi/vByte"
+        android:gravity="center"
+        android:hint="@string/address"
+        android:inputType="text"
+        android:text=""
         android:textColor="@color/fg1"
-        android:textSize="18sp"
+        android:textColorHint="@color/fg2"
+        android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView6" />
-
-    <EditText
-        android:id="@+id/sendAmount"
-        android:layout_width="0dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:backgroundTint="@color/fg1"
-        android:ems="10"
-        android:fontFamily="@font/share_tech_mono"
-        android:inputType="number"
-        android:textColor="@color/fg1"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView9" />
+        app:layout_constraintTop_toBottomOf="@+id/toAddressText"
+        android:importantForAutofill="no" />
 
     <TextView
-        android:id="@+id/textView6"
+        android:id="@+id/amountText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="32dp"
         android:fontFamily="@font/nunito_sans"
+        android:textSize="16sp"
+        android:text="@string/amount"
+        android:textColor="@color/fg1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sendAddress" />
+
+    <EditText
+        android:id="@+id/sendAmount"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="@color/bg0"
+        android:fontFamily="@font/share_tech_mono"
+        android:gravity="center"
+        android:hint="@string/in_satoshis"
+        android:inputType="phone"
+        android:textColor="@color/fg1"
+        android:textColorHint="@color/fg2"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/amountText"
+        android:importantForAutofill="no" />
+
+    <TextView
+        android:id="@+id/feeText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
+        android:fontFamily="@font/nunito_sans"
+        android:textSize="16sp"
         android:text="@string/fee_rate"
         android:textColor="@color/fg1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/sendAmount" />
 
-    <TextView
-        android:id="@+id/textView9"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <EditText
+        android:id="@+id/feeRate"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="32dp"
-        android:fontFamily="@font/nunito_sans"
-        android:text="@string/amount"
+        android:layout_marginEnd="16dp"
+        android:background="@color/bg0"
+        android:fontFamily="@font/share_tech_mono"
+        android:gravity="center"
+        android:hint="@string/satoshi_vbyte"
+        android:inputType="phone"
+        android:text=""
         android:textColor="@color/fg1"
+        android:textColorHint="@color/fg2"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sendAddress" />
+        app:layout_constraintTop_toBottomOf="@+id/feeText"
+        android:importantForAutofill="no" />
 
     <Button
         android:id="@+id/buttonVerify"

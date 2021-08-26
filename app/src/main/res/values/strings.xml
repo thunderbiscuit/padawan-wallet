@@ -34,9 +34,9 @@
     <string name="generate_new_address">Generate new address</string>
     <string name="back_to_wallet">Back to wallet</string>
     <string name="send_screen_title">Build transaction (testnet)</string>
-    <string name="send_to_address">Send to address:</string>
+    <string name="send_to_address">Send to</string>
     <string name="fee_rate">Fee rate:</string>
-    <string name="amount">Amount (satoshis):</string>
+    <string name="amount">Amount</string>
     <string name="verify_transaction">Verify and broadcast transaction</string>
     <string name="network_fee">Network fee</string>
     <string name="amount_transacted">Amount transacted (satoshis):</string>
@@ -77,4 +77,8 @@
     <string name="privacyText">Padawan Wallet does not collect any information on its users, and does not use Firebase Crashlytics. Read our full privacy policy here:</string>
     <string name="privacyLink">https://github.com/thunderbiscuit/padawan-wallet/blob/dev/PRIVACY</string>
     <string name="send_coins_back_address">tb1qk5238eluqllq2wps67lkxme3x43wll4k282s8q</string>
+    <string name="satoshi_vbyte">satoshi/vbyte</string>
+    <string name="in_satoshis">(in satoshis)</string>
+    <string name="scan">Scan</string>
+    <string name="address">address</string>
 </resources>
