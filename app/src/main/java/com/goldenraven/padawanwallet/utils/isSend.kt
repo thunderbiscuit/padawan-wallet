@@ -5,9 +5,6 @@
 
 package com.goldenraven.padawanwallet.utils
 
-import android.util.Log
-
-public fun isSend(sent: Int, received: Int): Boolean {
-    Log.i("Padalogs","isSend value is ${received - sent}")
-    return received - sent < 0
+fun isSend(sent: Int, received: Int): Boolean {
+    return (received - sent) < 0
 }
