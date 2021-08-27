@@ -34,17 +34,21 @@ class TxHistoryAdapter: RecyclerView.Adapter<TxHistoryAdapter.MyViewHolder>() {
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val currentItem = txList[position]
         val status : String = if (currentItem.date == "Pending") "Pending" else "Confirmed"
+        val fees : String = currentItem.fees.toString()
         val height : String = if (currentItem.height == 100000000) "Pending" else currentItem.height.toString()
         holder.itemView.findViewById<TextView>(R.id.satsInOutString).text = currentItem.valueIn.toString()
         holder.itemView.findViewById<TextView>(R.id.dateString).text = currentItem.date
         holder.itemView.findViewById<TextView>(R.id.statusvalue).text = status
         holder.itemView.findViewById<TextView>(R.id.txvalue).text = currentItem.txid
         holder.itemView.findViewById<TextView>(R.id.heightval).text = height
+        holder.itemView.findViewById<TextView>(R.id.feevalue).text = fees
         holder.itemView.findViewById<ImageButton>(R.id.info).setOnClickListener {
             holder.itemView.findViewById<TextView>(R.id.txDateView).visibility = if (holder.itemView.findViewById<TextView>(R.id.txDateView).isVisible) View.GONE else View.VISIBLE
             holder.itemView.findViewById<TextView>(R.id.dateString).visibility = if (holder.itemView.findViewById<TextView>(R.id.dateString).isVisible) View.GONE else View.VISIBLE
             holder.itemView.findViewById<TextView>(R.id.txid).visibility = if (holder.itemView.findViewById<TextView>(R.id.txid).isVisible) View.GONE else View.VISIBLE
             holder.itemView.findViewById<TextView>(R.id.txvalue).visibility = if (holder.itemView.findViewById<TextView>(R.id.txvalue).isVisible) View.GONE else View.VISIBLE
+            holder.itemView.findViewById<TextView>(R.id.fee).visibility = if (holder.itemView.findViewById<TextView>(R.id.fee).isVisible) View.GONE else View.VISIBLE
+            holder.itemView.findViewById<TextView>(R.id.feevalue).visibility = if (holder.itemView.findViewById<TextView>(R.id.feevalue).isVisible) View.GONE else View.VISIBLE
             holder.itemView.findViewById<TextView>(R.id.height).visibility = if (holder.itemView.findViewById<TextView>(R.id.height).isVisible) View.GONE else View.VISIBLE
             holder.itemView.findViewById<TextView>(R.id.heightval).visibility = if (holder.itemView.findViewById<TextView>(R.id.heightval).isVisible) View.GONE else View.VISIBLE
         }
