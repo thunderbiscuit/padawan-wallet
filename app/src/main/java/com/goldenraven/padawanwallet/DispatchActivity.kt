@@ -18,15 +18,9 @@ class DispatchActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         // ask Repository if a wallet already exists
-        val currentWalletExists: Boolean = Repository.doesWalletExist()
-
-        // load wallet if it exists
-        if (currentWalletExists) {
+        // if so, load it and launch into wallet activity, otherwise go to intro
+        if (Repository.doesWalletExist()) {
             Wallet.loadExistingWallet()
-        }
-
-        // launch into wallet activity if user already has a padawan wallet on device
-        if (currentWalletExists) {
             startActivity(Intent(this, WalletActivity::class.java))
             finish()
         } else {
