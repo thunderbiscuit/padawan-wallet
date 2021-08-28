@@ -14,7 +14,6 @@ import androidx.fragment.app.Fragment
 import com.goldenraven.padawanwallet.R
 import com.goldenraven.padawanwallet.data.Repository
 import com.goldenraven.padawanwallet.databinding.FragmentSeedphraseBinding
-import android.util.Log
 
 class SeedPhraseFragment : Fragment() {
 
@@ -39,14 +38,12 @@ class SeedPhraseFragment : Fragment() {
 
     private fun populateMnemonic() {
         val seedPhrase: String = Repository.getMnemonic()
-        Log.i("Padalogs","The seed phrase from the seed phrase screen is $seedPhrase")
         val wordList: List<String> = seedPhrase.split(" ")
         val viewList: List<TextView> = listOfNotNull<TextView>(
             binding.displayMnemonicWord1, binding.displayMnemonicWord2, binding.displayMnemonicWord3, binding.displayMnemonicWord4,
             binding.displayMnemonicWord5, binding.displayMnemonicWord6, binding.displayMnemonicWord7, binding.displayMnemonicWord8,
             binding.displayMnemonicWord9, binding.displayMnemonicWord10, binding.displayMnemonicWord11, binding.displayMnemonicWord12,
         )
-        Log.i("Padalogs","The word list from the seed phrase screen is $wordList")
 
         for (word in 0..11) {
             val mnemonicWord: String = wordList[word]
