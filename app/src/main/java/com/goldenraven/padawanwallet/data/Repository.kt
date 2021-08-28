@@ -6,32 +6,34 @@
 package com.goldenraven.padawanwallet.data
 
 import android.content.SharedPreferences
-import com.goldenraven.padawanwallet.utils.RequiredInitialWalletData
 import android.util.Log
+import com.goldenraven.padawanwallet.utils.RequiredInitialWalletData
+
+private const val TAG = "Repository"
 
 object Repository {
 
     private lateinit var sharedPreferences: SharedPreferences
-    public fun setSharedPreferences(sharedPref: SharedPreferences) {
+    fun setSharedPreferences(sharedPref: SharedPreferences) {
         sharedPreferences = sharedPref
     }
 
-    public fun doesWalletExist(): Boolean {
+    fun doesWalletExist(): Boolean {
         // val currentWallet: SharedPreferences = applicationContext.getSharedPreferences("current_wallet", Context.MODE_PRIVATE)
         val currentWalletExists: Boolean = sharedPreferences.getBoolean("initialized", false)
-        Log.i("Padalogs","Value of currentWalletExists at launch: $currentWalletExists")
+        Log.i(TAG, "Value of currentWalletExists at launch: $currentWalletExists")
         return currentWalletExists
     }
 
-    public fun getInitialWalletData(): RequiredInitialWalletData {
+    fun getInitialWalletData(): RequiredInitialWalletData {
         // val currentWallet: SharedPreferences = applicationContext.getSharedPreferences("current_wallet", Context.MODE_PRIVATE)
         val descriptor: String = sharedPreferences.getString("descriptor", null)!!
         val changeDescriptor: String = sharedPreferences.getString("changeDescriptor", null)!!
         return RequiredInitialWalletData(descriptor, changeDescriptor)
     }
 
-    public fun saveWallet(path: String, descriptor: String, changeDescriptor: String) {
-        Log.i("Padalogs","Saved wallet: path -> $path, descriptor -> $descriptor, change descriptor -> $changeDescriptor")
+    fun saveWallet(path: String, descriptor: String, changeDescriptor: String) {
+        Log.i(TAG, "Saved wallet: path -> $path, descriptor -> $descriptor, change descriptor -> $changeDescriptor")
         val editor = sharedPreferences.edit()
         editor.putBoolean("initialized", true)
         editor.putString("path", path)
@@ -40,34 +42,34 @@ object Repository {
         editor.apply()
     }
 
-    public fun saveMnemonic(mnemonic: String) {
-        Log.i("Padalogs","The seed phrase is: $mnemonic")
+    fun saveMnemonic(mnemonic: String) {
+        Log.i(TAG,"The seed phrase is: $mnemonic")
         val editor = sharedPreferences.edit()
         editor.putString("mnemonic", mnemonic)
         editor.apply()
     }
 
-    public fun getMnemonic(): String {
+    fun getMnemonic(): String {
         return sharedPreferences.getString("mnemonic", "No seed phrase saved") ?: "Seed phrase not there"
     }
 
-    public fun wasOneTimeFaucetCallDone(): Boolean {
+    fun wasOneTimeFaucetCallDone(): Boolean {
         return sharedPreferences.getBoolean("oneTimeFaucetCallDone", false)
     }
 
-    public fun oneTimeFaucetCallDone(): Unit {
+    fun oneTimeFaucetCallDone(): Unit {
         val editor = sharedPreferences.edit()
         editor.putBoolean("oneTimeFaucetCallDone", true)
         editor.apply()
     }
 
-    public fun offerFaucetCallDone(): Unit {
+    fun offerFaucetCallDone(): Unit {
         val editor = sharedPreferences.edit()
         editor.putBoolean("offerFaucetCallDone", true)
         editor.apply()
     }
 
-    public fun loadTutorialsDone(): MutableMap<String, Boolean> {
+    fun loadTutorialsDone(): MutableMap<String, Boolean> {
         val firstTimeTutorialsDone: Boolean = sharedPreferences.getBoolean("firstTimeTutorialsDone", true)
         val editor = sharedPreferences.edit()
 
@@ -106,13 +108,13 @@ object Repository {
         }
     }
 
-    public fun updateTutorialsDone(tutorialNumber: Int): Unit {
+    fun updateTutorialsDone(tutorialNumber: Int): Unit {
         val editor = sharedPreferences.edit()
         editor.putBoolean("e$tutorialNumber", true)
         editor.apply()
     }
 
-    public fun resetTutorials(): Unit {
+    fun resetTutorials(): Unit {
         val editor = sharedPreferences.edit()
         editor.putBoolean("e1", false)
             .putBoolean("e2", false)
@@ -123,6 +125,5 @@ object Repository {
             .putBoolean("e7", false)
             .putBoolean("e8", false)
             .apply()
-
     }
 }
