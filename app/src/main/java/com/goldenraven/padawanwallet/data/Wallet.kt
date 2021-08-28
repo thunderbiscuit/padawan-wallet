@@ -10,6 +10,8 @@ import com.goldenraven.padawanwallet.utils.RequiredInitialWalletData
 import org.bitcoindevkit.bdkjni.Lib
 import org.bitcoindevkit.bdkjni.Types.*
 
+private const val TAG = "Wallet"
+
 object Wallet {
 
     private val lib: Lib
@@ -25,7 +27,7 @@ object Wallet {
     }
 
     // setting the path requires the application context and is done once by PadawanWalletApplication
-    public fun setPath(path: String) {
+    fun setPath(path: String) {
         Wallet.path = path
     }
 
@@ -46,17 +48,17 @@ object Wallet {
         )
     }
 
-    public fun loadExistingWallet(): Unit {
+    fun loadExistingWallet(): Unit {
         val initialWalletData: RequiredInitialWalletData = Repository.getInitialWalletData()
-        Log.i("Padalogs","Descriptor: ${initialWalletData.descriptor}")
-        Log.i("Padalogs","Change descriptor: ${initialWalletData.changeDescriptor}")
+        Log.i(TAG, "Loading existing wallet with descriptor: ${initialWalletData.descriptor}")
+        Log.i(TAG, "Loading existing wallet with change descriptor: ${initialWalletData.changeDescriptor}")
         initialize(
             descriptor = initialWalletData.descriptor,
             changeDescriptor = initialWalletData.changeDescriptor,
         )
     }
 
-    public fun recoverWallet(mnemonic: String) {
+    fun recoverWallet(mnemonic: String): Unit {
         val keys: ExtendedKey = restoreExtendedKeyFromMnemonic(mnemonic)
         val descriptor: String = createDescriptor(keys)
         val changeDescriptor: String = createChangeDescriptor(keys)
@@ -68,7 +70,7 @@ object Wallet {
         Repository.saveMnemonic(keys.mnemonic)
     }
 
-    public fun createWallet(): Unit {
+    fun createWallet(): Unit {
         val keys: ExtendedKey = generateExtendedKey()
         val descriptor: String = createDescriptor(keys)
         val changeDescriptor: String = createChangeDescriptor(keys)
@@ -81,37 +83,36 @@ object Wallet {
     }
 
     private fun generateExtendedKey(): ExtendedKey {
-        Log.i("Padalogs","Extended keys generated")
         return lib.generate_extended_key(Network.testnet, 12, "")
     }
 
-    public fun restoreExtendedKeyFromMnemonic(mnemonic: String): ExtendedKey {
+    private fun restoreExtendedKeyFromMnemonic(mnemonic: String): ExtendedKey {
         return lib.restore_extended_key(Network.testnet, mnemonic, "")
     }
 
     private fun createDescriptor(keys: ExtendedKey): String {
-        Log.i("Padalogs","Descriptor for receive addresses is wpkh(${keys.xprv}/84'/1'/0'/0/*)")
+        Log.i(TAG,"Descriptor for receive addresses is wpkh(${keys.xprv}/84'/1'/0'/0/*)")
         return ("wpkh(" + keys.xprv + "/84'/1'/0'/0/*)")
     }
 
     private fun createChangeDescriptor(keys: ExtendedKey): String {
-        Log.i("Padalogs","Descriptor for change addresses is wpkh(${keys.xprv}/84'/1'/0'/1/*)")
+        Log.i(TAG, "Descriptor for change addresses is wpkh(${keys.xprv}/84'/1'/0'/1/*)")
         return ("wpkh(" + keys.xprv + "/84'/1'/0'/1/*)")
     }
 
-    public fun sync(max_address: Int?=null) {
+    fun sync(max_address: Int?=null) {
         lib.sync(walletPtr, max_address)
     }
 
-    public fun getBalance(): Long {
+    fun getBalance(): Long {
         return lib.get_balance(walletPtr)
     }
 
-    public fun getNewAddress(): String {
+    fun getNewAddress(): String {
         return lib.get_new_address(walletPtr)
     }
 
-    public fun createTransaction(
+    fun createTransaction(
         fee_rate: Float,
         addressees: List<Pair<String, String>>,
         send_all: Boolean? = false,
@@ -122,19 +123,19 @@ object Wallet {
         return lib.create_tx(walletPtr, fee_rate, addressees, send_all, utxos, unspendable, policy)
     }
 
-    public fun listTransactions(): List<TransactionDetails> {
+    fun listTransactions(): List<TransactionDetails> {
         return lib.list_transactions(walletPtr, false)
     }
 
-    public fun sign(psbt: String, assume_height: Int? = null): SignResponse {
+    fun sign(psbt: String, assume_height: Int? = null): SignResponse {
         return lib.sign(walletPtr, psbt, assume_height)
     }
 
-    public fun extractPsbt(psbt: String): RawTransaction {
+    fun extractPsbt(psbt: String): RawTransaction {
         return lib.extract_psbt(walletPtr, psbt)
     }
 
-    public fun broadcast(raw_tx: String): Txid {
+    fun broadcast(raw_tx: String): Txid {
         return lib.broadcast(walletPtr, raw_tx)
     }
 }
