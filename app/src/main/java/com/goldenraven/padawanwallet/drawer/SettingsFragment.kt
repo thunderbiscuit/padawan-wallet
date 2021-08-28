@@ -7,6 +7,7 @@ package com.goldenraven.padawanwallet.drawer
 
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -29,7 +30,8 @@ import io.ktor.client.statement.*
 import io.ktor.http.*
 import io.ktor.http.content.*
 import kotlinx.coroutines.launch
-import android.util.Log
+
+private const val TAG = "SettingsFragment"
 
 class SettingsFragment : Fragment() {
 
@@ -84,15 +86,15 @@ class SettingsFragment : Fragment() {
                 }
             }
 
-            Log.i("Padalogs","API call to Tatooine will request coins at $address")
+            Log.i(TAG, "API call to Tatooine will request coins at $address")
             try {
                 val response: HttpResponse = ktorClient.post(faucetUrl) {
                     body = TextContent(address, ContentType.Text.Plain)
                 }
                 Repository.oneTimeFaucetCallDone()
-                Log.i("Padalogs","API call to Tatooine was performed. Response is ${response.status}, ${response.readText()}")
+                Log.i(TAG, "API call to Tatooine was performed. Response is ${response.status}, ${response.readText()}")
             } catch (cause: Throwable) {
-                Log.i("Padalogs","Tatooine call failed: $cause")
+                Log.i(TAG, "Tatooine call failed: $cause")
                 fireSnackbar(
                     requireView(),
                     SnackbarLevel.ERROR,
