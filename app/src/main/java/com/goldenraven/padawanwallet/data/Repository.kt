@@ -62,6 +62,12 @@ object Repository {
         editor.putBoolean("oneTimeFaucetCallDone", true)
         editor.apply()
     }
+    
+    public fun homeTutorialDone(): Unit {
+        val editor = sharedPreferences.edit()
+        editor.putBoolean("homeTourDone", true)
+        editor.apply()
+    }
 
     fun offerFaucetCallDone(): Unit {
         val editor = sharedPreferences.edit()
