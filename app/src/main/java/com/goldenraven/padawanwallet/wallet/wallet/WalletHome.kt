@@ -34,6 +34,8 @@ import tourguide.tourguide.TourGuide
 import android.widget.Button
 import android.widget.TextView
 import com.goldenraven.padawanwallet.data.Repository
+=======
+>>>>>>> 507d6c573617951002fe0a7db9ad537da1255e70
 import java.text.DecimalFormat
 class WalletHome : Fragment() {
 
@@ -147,6 +149,10 @@ class WalletHome : Fragment() {
         val homeTourDone =
                 context?.getSharedPreferences("current_wallet", Context.MODE_PRIVATE)
                         ?.getBoolean("homeTourDone", false)
+            if (offerFaucetCallDone == false)
+                tour.cleanUp()
+            navController.navigate(R.id.action_walletHome_to_walletSend)
+        }
 
     }
 
