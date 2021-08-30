@@ -33,6 +33,7 @@ import tourguide.tourguide.ToolTip
 import tourguide.tourguide.TourGuide
 import android.widget.Button
 import android.widget.TextView
+import com.goldenraven.padawanwallet.data.Repository
 import java.text.DecimalFormat
 class WalletHome : Fragment() {
 
@@ -137,10 +138,15 @@ class WalletHome : Fragment() {
         }
 
         binding.sendButton.setOnClickListener {
-            if (offerFaucetCallDone == false)
+            if (offerFaucetCallDone == false) {
                 tour.cleanUp()
+                Repository.homeTutorialDone()
+            }
             navController.navigate(R.id.action_walletHome_to_walletSend)
         }
+        val homeTourDone =
+                context?.getSharedPreferences("current_wallet", Context.MODE_PRIVATE)
+                        ?.getBoolean("homeTourDone", false)
 
     }
 
