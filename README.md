@@ -59,5 +59,31 @@ The tutorials are broken down in two groups: _Essentials_ and _Advanced_, each o
 ### 🧐 Where can I get testnet coins?
 There are many bitcoin testnet faucets out there, but Padawan uses native segwit addresses uniquely (bech32), so you'll need a faucet that can send to those. We suggest [this one](https://testnet-faucet.mempool.co/).
 
+### Building and Running Padawan
+To accomplish the two tasks above you will need:
+
+- Android Studio
+- A phone with Android 6 OS or above (Android Marshmallow, API level 23) with USB debugging activated OR an emulator on your development machine
+- The bitcoindevkit library
+
+#### **Bitcoindevkit library**
+The bitcoindevkit library for Android bdk-jni is not yet available on public repositories of Android libraries. This means that in order to acquire it, one must either (a) build it from source, or (b) find a pre-built version provided elsewhere.
+
+#### To build it from source
+Head to https://github.com/bitcoindevkit/bdk-jni
+- Run `rustup target add x86_64-apple-darwin x86_64-unknown-linux-gnu x86_64-linux-android aarch64-linux-android armv7-linux-androideabi i686-linux-android`
+- `export ANDROID_NDK_HOME=/home/<user>/Android/Sdk/ndk/<NDK version, ie. 21.4.7075529>`
+- `./gradlew build`
+- `export ANDROID_SDK_ROOT=</home/<user>/Android/Sdk or where ever your Sdk is installed>`
+- `./gradlew publishToMavenLocal`
+
+For details have a look on the bdk-jni [readme](https://github.com/bitcoindevkit/bdk-jni#readme)
+
+If you have a prebuilt downloaded library, you'll need to copy it in a place called your local maven repository, located at ~/.m2/repository (create it if it doesn't exist). (~/.m2/repository/org/bitcoindevkit/bdkjni/bdk)
+
+Once you are done with above steps load the project in android studio, build and run it!!!
+
+
+
 ### 🧐 How can I contribute?
 If you think this project is interesting and would like to contribute, get access to the early release on the app store, or simply provide feedback and bounce ideas, check out [our discord group](https://discord.gg/qTysDfZ2gX). Users and devs welcome.
