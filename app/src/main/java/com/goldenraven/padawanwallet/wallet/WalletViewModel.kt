@@ -17,6 +17,7 @@ import com.goldenraven.padawanwallet.utils.netSendWithoutFees
 import com.goldenraven.padawanwallet.utils.timestampToString
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import org.bitcoindevkit.Transaction
 
 
 class WalletViewModel(application: Application) : AndroidViewModel(application) {
@@ -32,7 +33,7 @@ class WalletViewModel(application: Application) : AndroidViewModel(application) 
         readAllData = repository.readAllData
     }
 
-    public var balance: MutableLiveData<Long> = MutableLiveData(0)
+    public var balance: MutableLiveData<ULong> = MutableLiveData(0u)
     public var timestamp: MutableLiveData<String> = MutableLiveData("Pending")
     public var satoshiUnit: MutableLiveData<Boolean> = MutableLiveData(true)
     public var tutorialsDone: MutableLiveData<MutableMap<String, Boolean>> = MutableLiveData(
@@ -61,7 +62,7 @@ class WalletViewModel(application: Application) : AndroidViewModel(application) 
     }
 
     public fun updateBalance() {
-        Wallet.sync(100)
+        Wallet.sync(100u)
         val newBalance = Wallet.getBalance()
         Log.i("Padalogs","New balance: $newBalance")
         balance.postValue(newBalance)
@@ -71,31 +72,41 @@ class WalletViewModel(application: Application) : AndroidViewModel(application) 
         val txHistory = Wallet.listTransactions()
         Log.i("Padalogs","Transactions history, number of transactions: ${txHistory.size}")
         for (tx in txHistory) {
-            val isSend: Boolean = isSend(sent = tx.sent.toInt(), received = tx.received.toInt())
+            val details = when (tx) {
+                is Transaction.Confirmed -> tx.details
+                is Transaction.Unconfirmed -> tx.details
+            }
+            val isSend: Boolean = isSend(sent = details.sent.toInt(), received = details.received.toInt())
             var valueIn: Int = 0
             var valueOut: Int = 0
             when (isSend) {
                 true -> {
                     valueOut = netSendWithoutFees(
-                        txSatsOut = tx.sent.toInt(),
-                        txSatsIn = tx.received.toInt(),
-                        fees = tx.fee.toInt()
+                        txSatsOut = details.sent.toInt(),
+                        txSatsIn = details.received.toInt(),
+                        fees = details.fees?.toInt() ?: 0
                     )
                 }
                 false -> {
-                    valueIn = tx.received.toInt()
+                    valueIn = details.received.toInt()
                 }
             }
-            val time : String = if (tx.confirmation_time == null) "Pending" else tx.confirmation_time!!.timestampToString()
-            val height : Int = if (tx.confirmation_time == null) 100000000 else tx.confirmation_time!!.height
+            val time : String = when (tx) {
+                is Transaction.Confirmed -> tx.confirmation.timestamp.timestampToString()
+                else -> "Pending"
+            }
+            val height : UInt = when (tx) {
+                is Transaction.Confirmed -> tx.confirmation.height
+                else -> 100_000_000u
+            }
             val transaction: Tx = Tx(
-                    txid = tx.txid,
+                    txid = details.id,
                     date = time,
                     valueIn = valueIn,
                     valueOut = valueOut,
-                    fees = tx.fee.toInt(),
+                    fees = details.fees?.toInt() ?: 0,
                     isSend = isSend,
-                    height = height
+                    height = height.toInt()
             )
             addTx(transaction)
         }

@@ -21,7 +21,8 @@ import com.goldenraven.padawanwallet.databinding.FragmentWalletBuildBinding
 import com.goldenraven.padawanwallet.utils.*
 import com.goldenraven.padawanwallet.wallet.WalletViewModel
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import org.bitcoindevkit.bdkjni.Types.*
+import org.bitcoindevkit.PartiallySignedBitcoinTransaction
+import org.bitcoindevkit.Transaction
 
 
 class WalletBuild : Fragment() {
@@ -31,7 +32,7 @@ class WalletBuild : Fragment() {
     private lateinit var amount: String
     private var feeRate : Float = 0F
     private lateinit var addressFromScanner: String
-    private lateinit var transactionDetails: CreateTxResponse
+    private lateinit var psbt: PartiallySignedBitcoinTransaction
     private lateinit var viewModel: WalletViewModel
 
     override fun onCreateView(
@@ -70,7 +71,7 @@ class WalletBuild : Fragment() {
 
             // create transaction if possible, otherwise show snackbar with error
             try {
-                transactionDetails = Wallet.createTransaction(feeRate, addresseesAndAmounts, false, null, null, null)
+                psbt = Wallet.createTransaction(address, amount.toULong(), null)
             } catch (e: Throwable) {
                 Log.i("Padalogs","${e.message}")
                 fireSnackbar(
@@ -80,11 +81,11 @@ class WalletBuild : Fragment() {
                 )
             }
 
-            if (validInputs && this::transactionDetails.isInitialized) {
+            if (validInputs && this::psbt.isInitialized) {
                 val broadcastMessage =
                         MaterialAlertDialogBuilder(this@WalletBuild.requireContext(), R.style.MyCustomDialogTheme)
                                 .setTitle("Broadcast Transaction")
-                                .setMessage(buildMessage())
+                                .setMessage(buildMessage(1f))
                                 .setPositiveButton("Broadcast") { _, _ ->
                                     Log.i("Padawan Wallet", "User is attempting to broadcast transaction")
                                     broadcastTransaction()
@@ -100,14 +101,14 @@ class WalletBuild : Fragment() {
         }
     }
 
-    private fun buildMessage(): String {
+    private fun buildMessage(fees: Float): String {
         val sendToAddress: String = binding.sendAddress.text.toString().trim()
         val sendAmount: String = binding.sendAmount.text.toString().trim()
-        val fees: String = transactionDetails.details.fee.toString()
+        val fees: String = fees.toString()
         val address = "Send to:\n$sendToAddress\n"
         val amount = "\nAmount: $sendAmount satoshis\n"
         val feeRate = "Fees: $fees satoshis\n"
-        val total = "Total: ${fees.toLong() + sendAmount.toLong()} satoshis"
+        val total = "Total: ${fees.toDouble().toLong() + sendAmount.toLong()} satoshis"
 
         Log.i("PadawanWallet", "Message has inputs $sendToAddress, $sendAmount, $fees")
         return "$address$amount$feeRate$total"
@@ -153,29 +154,39 @@ class WalletBuild : Fragment() {
         var txidString: String = "string of txid"
 
         try {
-            val signResponse: SignResponse = Wallet.sign(transactionDetails.psbt)
-            val rawTx: RawTransaction = Wallet.extractPsbt(signResponse.psbt)
-            val txid: Txid = Wallet.broadcast(rawTx.transaction)
-            txidString = txid.toString()
-
+            Wallet.sign(psbt)
+            val transaction = Wallet.broadcast(psbt)
+            val details = when (transaction) {
+                is Transaction.Confirmed -> transaction.details
+                is Transaction.Unconfirmed -> transaction.details
+            }
+            txidString = details.id
+            val time : String = when(transaction) {
+                is Transaction.Unconfirmed -> "Pending"
+                is Transaction.Confirmed -> transaction.confirmation.timestamp.timestampToString()
+            }
+            val height : UInt = when(transaction) {
+                is Transaction.Unconfirmed -> 100_000_000u
+                is Transaction.Confirmed -> transaction.confirmation.height
+            }
+            val fees : ULong = details.fees ?: 0u
             Log.i("Padalogs","Transaction was broadcast! Data added to database:")
-            Log.i("Padalogs","Transaction was broadcast! txid: ${transactionDetails.details.txid}")
-            Log.i("Padalogs","Transaction was broadcast! timestamp: ${transactionDetails.details.confirmation_time?.timestampToString()}")
-            Log.i("Padalogs","Transaction was broadcast! received: ${transactionDetails.details.received.toInt()}")
-            Log.i("Padalogs","Transaction was broadcast! sent: ${transactionDetails.details.sent.toInt()}")
-            Log.i("Padalogs","Transaction was broadcast! fees: ${transactionDetails.details.fee.toInt()}")
-            // add tx to database
-            val time : String = if (transactionDetails.details.confirmation_time == null) "Pending" else transactionDetails.details.confirmation_time!!.timestampToString()
-            val height : Int = if (transactionDetails.details.confirmation_time == null) 100000000 else transactionDetails.details.confirmation_time!!.height
+            Log.i("Padalogs","Transaction was broadcast! txid: ${details.id}")
+            Log.i("Padalogs","Transaction was broadcast! timestamp: ${time}")
+            Log.i("Padalogs","Transaction was broadcast! height: ${height}")
+            Log.i("Padalogs","Transaction was broadcast! received: ${details.received}")
+            Log.i("Padalogs","Transaction was broadcast! sent: ${details.sent}")
+            Log.i("Padalogs","Transaction was broadcast! fees: ${details.fees}")
+
             addTxToDatabase(
-                    transactionDetails.details.txid,
+                    details.id,
                     time,
-                    transactionDetails.details.received.toInt(),
-                    transactionDetails.details.sent.toInt(),
-                    transactionDetails.details.fee.toInt(),
-                    height
+                    details.received.toInt(),
+                    details.sent.toInt(),
+                    fees.toInt(),
+                    height.toInt()
             )
-            Log.i("Padalogs","Transaction was broadcast! txid: $txid, txidString: $txidString")
+            Log.i("Padalogs","Transaction was broadcast! txid: $details.id, txidString: $txidString")
             fireSnackbar(
                     requireView(),
                     SnackbarLevel.INFO,
