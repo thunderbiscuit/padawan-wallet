@@ -7,24 +7,24 @@ package com.goldenraven.padawanwallet.data
 
 import android.util.Log
 import com.goldenraven.padawanwallet.utils.RequiredInitialWalletData
-import org.bitcoindevkit.bdkjni.Lib
-import org.bitcoindevkit.bdkjni.Types.*
+import org.bitcoindevkit.*
 
 private const val TAG = "Wallet"
 
 object Wallet {
 
-    private val lib: Lib
-    private lateinit var walletPtr: WalletPtr
+    private lateinit var wallet: OnlineWallet
     private const val name: String = "padawan-testnet-0"
     private lateinit var path: String
     private const val electrumURL: String = "ssl://electrum.blockstream.info:60002"
-    
-    init {
-        // load bitcoindevkit
-        Lib.load()
-        lib = Lib()
+
+    object LogProgress: BdkProgress {
+        override fun update(progress: Float, message: String?) {
+            Log.d(TAG, "updating wallet $progress $message")
+        }
     }
+
+    fun getWallet(): OnlineWallet = wallet
 
     // setting the path requires the application context and is done once by PadawanWalletApplication
     fun setPath(path: String) {
@@ -35,16 +35,14 @@ object Wallet {
         descriptor: String,
         changeDescriptor: String,
     ): Unit {
-        walletPtr = lib.constructor(
-            WalletConstructor(
-                name = name,
-                network = Network.testnet,
-                path = path,
-                descriptor = descriptor,
-                change_descriptor = changeDescriptor,
-                electrum_url = electrumURL,
-                electrum_proxy = null,
-            )
+        val database = DatabaseConfig.Sled(SledDbConfiguration(path, name))
+        val blockchain = BlockchainConfig.Electrum(ElectrumConfig(electrumURL, null, 5u, null, 10u))
+        wallet = OnlineWallet(
+            descriptor,
+            changeDescriptor,
+            Network.TESTNET,
+            database,
+            blockchain
         )
     }
 
@@ -59,7 +57,7 @@ object Wallet {
     }
 
     fun recoverWallet(mnemonic: String): Unit {
-        val keys: ExtendedKey = restoreExtendedKeyFromMnemonic(mnemonic)
+        val keys = restoreExtendedKeyFromMnemonic(mnemonic)
         val descriptor: String = createDescriptor(keys)
         val changeDescriptor: String = createChangeDescriptor(keys)
         initialize(
@@ -71,7 +69,7 @@ object Wallet {
     }
 
     fun createWallet(): Unit {
-        val keys: ExtendedKey = generateExtendedKey()
+        val keys = generateExtendedKey()
         val descriptor: String = createDescriptor(keys)
         val changeDescriptor: String = createChangeDescriptor(keys)
         initialize(
@@ -82,60 +80,49 @@ object Wallet {
         Repository.saveMnemonic(keys.mnemonic)
     }
 
-    private fun generateExtendedKey(): ExtendedKey {
-        return lib.generate_extended_key(Network.testnet, 12, "")
+    private fun generateExtendedKey(): ExtendedKeyInfo {
+        return generateExtendedKey(Network.TESTNET, MnemonicType.WORDS12, null)
     }
 
-    private fun restoreExtendedKeyFromMnemonic(mnemonic: String): ExtendedKey {
-        return lib.restore_extended_key(Network.testnet, mnemonic, "")
+    private fun restoreExtendedKeyFromMnemonic(mnemonic: String): ExtendedKeyInfo {
+        return restoreExtendedKey(Network.TESTNET, mnemonic, null)
     }
 
-    private fun createDescriptor(keys: ExtendedKey): String {
+    private fun createDescriptor(keys: ExtendedKeyInfo): String {
         Log.i(TAG,"Descriptor for receive addresses is wpkh(${keys.xprv}/84'/1'/0'/0/*)")
         return ("wpkh(" + keys.xprv + "/84'/1'/0'/0/*)")
     }
 
-    private fun createChangeDescriptor(keys: ExtendedKey): String {
+    private fun createChangeDescriptor(keys: ExtendedKeyInfo): String {
         Log.i(TAG, "Descriptor for change addresses is wpkh(${keys.xprv}/84'/1'/0'/1/*)")
         return ("wpkh(" + keys.xprv + "/84'/1'/0'/1/*)")
     }
 
-    fun sync(max_address: Int?=null) {
-        lib.sync(walletPtr, max_address)
+    fun sync(max_address: UInt?=null) {
+        wallet.sync(LogProgress, max_address)
     }
 
-    fun getBalance(): Long {
-        return lib.get_balance(walletPtr)
+    fun getBalance(): ULong {
+        return wallet.getBalance()
     }
 
     fun getNewAddress(): String {
-        return lib.get_new_address(walletPtr)
+        return wallet.getNewAddress()
     }
 
-    fun createTransaction(
-        fee_rate: Float,
-        addressees: List<Pair<String, String>>,
-        send_all: Boolean? = false,
-        utxos: List<String>? = null,
-        unspendable: List<String>? = null,
-        policy: Map<String, List<String>>? = null,
-    ): CreateTxResponse {
-        return lib.create_tx(walletPtr, fee_rate, addressees, send_all, utxos, unspendable, policy)
+    fun createTransaction(recipient: String, amount: ULong, fee_rate: Float?): PartiallySignedBitcoinTransaction {
+        return PartiallySignedBitcoinTransaction(wallet, recipient, amount, fee_rate)
     }
 
-    fun listTransactions(): List<TransactionDetails> {
-        return lib.list_transactions(walletPtr, false)
+    fun listTransactions(): List<Transaction> {
+        return wallet.getTransactions()
     }
 
-    fun sign(psbt: String, assume_height: Int? = null): SignResponse {
-        return lib.sign(walletPtr, psbt, assume_height)
+    fun sign(psbt: PartiallySignedBitcoinTransaction): Unit {
+        wallet.sign(psbt)
     }
 
-    fun extractPsbt(psbt: String): RawTransaction {
-        return lib.extract_psbt(walletPtr, psbt)
-    }
-
-    fun broadcast(raw_tx: String): Txid {
-        return lib.broadcast(walletPtr, raw_tx)
+    fun broadcast(psbt: PartiallySignedBitcoinTransaction): Transaction {
+        return wallet.broadcast(psbt)
     }
 }

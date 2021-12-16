@@ -63,7 +63,7 @@ class WalletHome : Fragment() {
         viewModel.balance.observe(viewLifecycleOwner, {
             if (viewModel.satoshiUnit.value == true) {
                 val balanceInSatoshis = it
-                val humanReadableBalance = DecimalFormat("###,###,###").format(balanceInSatoshis).replace(",", "\u2008")
+                val humanReadableBalance = DecimalFormat("###,###,###").format(balanceInSatoshis.toLong()).replace(",", "\u2008")
                 binding.balance.text = humanReadableBalance
                 // binding.unitToggleButton.text = "sat"
                 // binding.unitToggleButton.textSize = 28F
@@ -72,7 +72,7 @@ class WalletHome : Fragment() {
                 binding.unitToggleButton.background = resources.getDrawable(R.drawable.background_unit_satoshi, null)
             } else {
                 var balanceInBitcoin: Float
-                if (it == 0L) {
+                if (it == 0uL) {
                     balanceInBitcoin = 0F
                 } else {
                     balanceInBitcoin = it.toFloat().div(100_000_000)
