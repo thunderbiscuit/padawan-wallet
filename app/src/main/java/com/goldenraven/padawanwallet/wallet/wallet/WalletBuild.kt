@@ -160,7 +160,7 @@ class WalletBuild : Fragment() {
                 is Transaction.Confirmed -> transaction.details
                 is Transaction.Unconfirmed -> transaction.details
             }
-            txidString = details.id
+            txidString = details.txid
             val time : String = when(transaction) {
                 is Transaction.Unconfirmed -> "Pending"
                 is Transaction.Confirmed -> transaction.confirmation.timestamp.timestampToString()
@@ -171,7 +171,7 @@ class WalletBuild : Fragment() {
             }
             val fees : ULong = details.fees ?: 0u
             Log.i("Padalogs","Transaction was broadcast! Data added to database:")
-            Log.i("Padalogs","Transaction was broadcast! txid: ${details.id}")
+            Log.i("Padalogs","Transaction was broadcast! txid: ${details.txid}")
             Log.i("Padalogs","Transaction was broadcast! timestamp: ${time}")
             Log.i("Padalogs","Transaction was broadcast! height: ${height}")
             Log.i("Padalogs","Transaction was broadcast! received: ${details.received}")
@@ -179,14 +179,14 @@ class WalletBuild : Fragment() {
             Log.i("Padalogs","Transaction was broadcast! fees: ${details.fees}")
 
             addTxToDatabase(
-                    details.id,
+                    details.txid,
                     time,
                     details.received.toInt(),
                     details.sent.toInt(),
                     fees.toInt(),
                     height.toInt()
             )
-            Log.i("Padalogs","Transaction was broadcast! txid: $details.id, txidString: $txidString")
+            Log.i("Padalogs","Transaction was broadcast! txid: $details.txid, txidString: $txidString")
             fireSnackbar(
                     requireView(),
                     SnackbarLevel.INFO,

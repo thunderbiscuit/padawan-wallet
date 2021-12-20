@@ -100,7 +100,7 @@ class WalletViewModel(application: Application) : AndroidViewModel(application) 
                 else -> 100_000_000u
             }
             val transaction: Tx = Tx(
-                    txid = details.id,
+                    txid = details.txid,
                     date = time,
                     valueIn = valueIn,
                     valueOut = valueOut,

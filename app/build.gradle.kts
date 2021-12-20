@@ -11,7 +11,7 @@ val faucetUsername: String by project
 val faucetPassword: String by project
 
 android {
-    compileSdkVersion(30)
+    compileSdk = 30
     buildToolsVersion = "30.0.2"
     ndkVersion = "21.4.7075529"
 
@@ -21,8 +21,8 @@ android {
 
     defaultConfig {
         applicationId = "com.goldenraven.padawanwallet"
-        minSdkVersion(26)
-        targetSdkVersion(30)
+        minSdk = 26
+        targetSdk = 30
         versionCode = 8
         versionName = "v0.7.3-SNAPSHOT"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -45,14 +45,15 @@ android {
                 name = "app_name",
                 value = "Padawan Wallet DEBUG",
             )
-            debuggable(true)
+            // debuggable(true)
+            isDebuggable = true
         }
         getByName("release") {
             // ndk.debugSymbolLevel = "FULL"
             // shrinkResources(true)
             // minifyEnabled(true)
-            debuggable(false)
-            proguardFiles = mutableListOf(getDefaultProguardFile("proguard-android-optimize.txt"), file("proguard-rules.pro"))
+            isDebuggable = false
+            // proguardFiles = mutableListOf(getDefaultProguardFile("proguard-android-optimize.txt"), file("proguard-rules.pro"))
         }
     }
 
@@ -76,22 +77,22 @@ android {
 }
 
 dependencies {
-    implementation("androidx.core:core-ktx:1.6.0")
-    implementation("androidx.appcompat:appcompat:1.3.1")
+    implementation("androidx.core:core-ktx:1.7.0")
+    implementation("androidx.appcompat:appcompat:1.4.0")
     implementation("com.google.android.material:material:1.4.0")
-    implementation("androidx.constraintlayout:constraintlayout:2.1.0")
+    implementation("androidx.constraintlayout:constraintlayout:2.1.2")
     implementation("androidx.navigation:navigation-fragment-ktx:2.3.5")
     implementation("androidx.navigation:navigation-ui-ktx:2.3.5")
-    implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.2.0")
+    implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.3.1")
     implementation("androidx.legacy:legacy-support-v4:1.0.0")
     implementation("androidx.viewpager:viewpager:1.0.0")
 
     // bitcoin
-    implementation("org.bitcoindevkit:bdk-android:0.1.1")
+    implementation("org.bitcoindevkit:bdk-android:0.2.2")
 
     // Ktor
-    implementation("io.ktor:ktor-client-cio:${Versions.ktor}")
-    implementation("io.ktor:ktor-client-auth:${Versions.ktor}")
+    implementation("io.ktor:ktor-client-cio:1.6.7")
+    implementation("io.ktor:ktor-client-auth:1.6.7")
 
     // QR codes
     implementation("androidmads.library.qrgenearator:QRGenearator:1.0.4")
@@ -99,9 +100,9 @@ dependencies {
     implementation("com.budiyev.android:code-scanner:2.1.0")
 
     // Room
-    implementation("androidx.room:room-runtime:${Versions.room}")
-    implementation("androidx.room:room-ktx:${Versions.room}")
-    kapt("androidx.room:room-compiler:${Versions.room}")
+    implementation("androidx.room:room-runtime:2.4.0")
+    implementation("androidx.room:room-ktx:2.4.0")
+    kapt("androidx.room:room-compiler:2.4.0")
 
     // testing
     testImplementation("junit:junit:4.13.2")
