@@ -55,7 +55,7 @@ It\'s very important that the _exact_ right address be used by the person trying
 <br/>
 
 # Tutorial 4: What is the mempool? — Concept
-Mempool stands for memory pool, and you can think of it as the place where transactions go before they get mined and become "official". When you send a transaction on the bitcoin network, your transaction get propagated across all computers that comprise the bitcoin network all over the world in about 2 to 5 seconds. But at this point your transaction is not really done, i.e. included in the blockchain. Instead, it sorts of waits in this "in-between" space where it is acknowledged by the network, but not yet made official.
+The word _mempool_ stands for memory pool, and you can think of it as the place where transactions go before they get mined and become "official". When you send a transaction on the bitcoin network, your transaction get propagated across all computers that comprise the bitcoin network all over the world in about 2 to 5 seconds. But at this point your transaction is not really done, i.e. included in the blockchain. Instead, it sorts of waits in this "in-between" space where it is acknowledged by the network, but not yet made official.
 
 We can think of this space (the mempool) as a theoretical place where transactions all come together and form a lineup, waiting for the next block to be mined to include many of them. Imagine an bus that comes by a lineup of people waiting to go to their part of town every 10 minutes or so. This bus can take only a certain number of pounds on board, and because everyone weights a different weight, the exact number of people who can fit in the bus at every run is different.
 
