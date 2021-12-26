@@ -63,9 +63,11 @@ The mempool is the area where transactions wait for their turn to be mined. One 
 <br/>
 
 # Tutorial 5: Sending Bitcoin — Skill
-We send bitcoins by paying to a bitcoin address. On mobile phones, the most common way to do that is to use your phone\'s camera to scan a QR code of the person or service you wish to pay. Another way is to have that person or service send you the address directly, and copy/pasting that address in the address field of the transaction builder.
+We send bitcoins by paying to a bitcoin address. On mobile phones, the most common way to do that is to use your phone\'s camera to scan a QR code provided by the person or service you wish to pay. Another way is to have that person or service send you the address directly in text format, and copy/pasting that address in the address field of the transaction builder.
 
-Once we have an address, we also specify the amount of bitcoin to send (either in bitcoin units or in satoshis), and broadcast the transaction to the network!  
+Once we have an address, we specify the amount of bitcoin to send (either in bitcoin units or in satoshis), and broadcast the transaction to the network!
+
+[GIF of sending bitcoin]
 <br/>
 
 # Tutorials 6: What are transaction fees? — Concept
