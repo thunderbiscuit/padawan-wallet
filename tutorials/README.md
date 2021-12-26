@@ -23,19 +23,21 @@ Padawan uses testnet _uniquely_. You cannot receive or send normal (mainnet) bit
 # Tutorials 2: Bitcoin units — Concept
 It is unfortunate but the word "bitcoin" has two completely different meanings. We speak of _Bitcoin_ the network, the protocol, the open source project, and we also use the word "bitcoin" as one of the units of value when transacting on that network.
 
-A bitcoin is a unit of value that can easily be broken down in smaller parts. Just like the kilometer can be broken down into meters and centimeters and the dollar can be broken down into quarters, dimes, and pennies, bitcoin can be broken into smaller units.
+A bitcoin is a unit of value that can easily be broken down in smaller parts. Just like the kilometer can be broken down into meters and centimeters and the dollar can be broken down into quarters, dimes, and pennies, bitcoin can be broken into smaller units. While there are many units to describe bitcoin, only two of those are really important: the _bitcoin_ and the _satoshi_. There are one hundred million (100,000,000) satoshis in a bitcoin.
 
-While there are many units to describe bitcoin, we believe only two of those to be important: the _bitcoin_ and the _satoshi_. There are one hundred million (100,000,000) satoshis in a bitcoin.
+100,000,000 satoshis = 1 bitcoin  
+1 satoshi = 0.00000001 bitcoin
 
-100,000,000 satoshis = 1 bitcoin\n1 satoshi = 0.00000001 bitcoin
+The symbols used to represent those units of value are not always the same. There is no central authority to dictate what should be the "official" symbol. Instead this choice is a matter of emergent consensus, and will eventually solidify over time around one symbol for each unit. Here are some of the symbols for bitcoin and satoshis you might see around in applications:
 
+[include different symbols for bitcoin and satoshi units]
+
+## Both units are useful
 Depending on the size of a transaction, it is often more appropriate to think of the amount transacted as being in bitcoin or in satoshis. A brand new car might be worth 1.7 bitcoins (1,700,000,000 sats is not as easy for the eye to quickly understand), whereas a candy might be worth 250 satoshis (0.00000250 bitcoin is harder to read).
 
-The ability to use both units is an important skill to develop. A lot of transactions are denominated in bitcoin, but their _network fee_ (tutorial #4) is almost always written in satoshis.
+The ability to use both units is an important skill to develop. A lot of transactions are denominated in bitcoin, but their _network fee_ (tutorial #4) is almost always written using the satoshis unit. You can switch between the two units in the main wallet display page by touching the bitcoin/satoshi symbol.
 
-You can switch between the two units in the main wallet display page by touching the bitcoin/satoshi symbol.
-
-[include image bitcoin and image satoshi]  
+[GIF of unit switch in wallet]  
 <br/>
 
 # Tutorial 3: Receiving Bitcoin — Skill
