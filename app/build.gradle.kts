@@ -11,7 +11,7 @@ val faucetUsername: String by project
 val faucetPassword: String by project
 
 android {
-    compileSdk = 30
+    compileSdk = 31
     buildToolsVersion = "30.0.2"
     ndkVersion = "21.4.7075529"
 
@@ -77,7 +77,7 @@ android {
 }
 
 dependencies {
-    implementation("androidx.core:core-ktx:1.7.0")
+    implementation("androidx.core:core-ktx:1.6.0")
     implementation("androidx.appcompat:appcompat:1.4.0")
     implementation("com.google.android.material:material:1.4.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.2")
@@ -101,7 +101,7 @@ dependencies {
 
     // Room
     implementation("androidx.room:room-runtime:2.4.0")
-    implementation("androidx.room:room-ktx:2.4.0")
+    implementation("androidx.room:room-ktx:2.3.0")
     kapt("androidx.room:room-compiler:2.4.0")
 
     // testing
