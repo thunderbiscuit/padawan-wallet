@@ -25,7 +25,7 @@ class SeedPhraseFragment : Fragment() {
             savedInstanceState: Bundle?,
     ): View {
         val toolBarTitle = requireActivity().findViewById<TextView>(R.id.toolbarTitleDrawer)
-        toolBarTitle.text = getString(R.string.seed_phrase_title)
+        toolBarTitle.text = getString(R.string.recovery_phrase_title)
 
         binding = FragmentSeedphraseBinding.inflate(inflater, container, false)
         return binding.root

@@ -46,8 +46,8 @@ The tutorials are broken down in two groups: _Essentials_ and _Advanced_, each o
 4. What is the mempool? (concept)
 5. Sending bitcoin (skill)
 6. What are transaction fees? (concept)
-7. What is a wallet backup seed? (concept)
-8. Recovering a wallet from a backup seed (skill)  
+7. What is a wallet recovery phrase? (concept)
+8. Recovering a wallet from a recovery phrase (skill)  
 
 **Advanced**  
 1. Connect to your own node  

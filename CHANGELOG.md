@@ -86,6 +86,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 + Draft UI for home activity (wallet and tutorials)
 + Drawer activity (settings, about, etc.)
 + Navigation drawer
-+ Option to display wallet backup seed
++ Option to display wallet recovery phrase
 + Wallet is BIP84 compatible
-+ Wallet recovery funtionality
++ Wallet recovery functionality
