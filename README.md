@@ -24,7 +24,6 @@ Join us on [discord](https://discord.gg/qTysDfZ2gX)!
 <br/>
 
 ## Download
-
 You can download the latest apk for this app on the [`v0.7.0` release page](https://github.com/thunderbiscuit/padawan-wallet/releases/tag/v0.7.0).  
 <br/>
 
@@ -71,5 +70,6 @@ The bitcoindevkit library for Android (`bdk-jni`) is not yet available on public
 To build it from source, head to the [bdk-jni library repository](https://github.com/bitcoindevkit/bdk-jni) and follow the instructions to build and publish to your local Maven repository.
 
 Once you have the library available locally, you can build and run the app just like any other Android application!
+
 ### 🧐 How can I contribute?
-If you think this project is interesting and would like to contribute, get access to the early release on the app store, or simply provide feedback and bounce ideas, check out [our discord group](https://discord.gg/qTysDfZ2gX). Users and devs welcome.
+If you think this project is interesting and would like to contribute, get access to the early release on the app store, or simply provide feedback and bounce ideas, check out [our Discord server](https://discord.gg/3QggDUbCj9). Users and devs welcome.
