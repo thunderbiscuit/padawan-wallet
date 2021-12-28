@@ -78,16 +78,16 @@ The ability of the network to stay synchronized and distributed (which are prope
 Because the space is limited in terms of bytes per block and there is only 1 new block being mined every 10 minutes or so, bitcoin users compete for space on the blockchain by providing a fee for their transaction. The transactions with the highest fees are prioritized by the miners when building blocks.  
 <br/>
 
-# Tutorial 7: What is a wallet backup seed? — Concept
-Modern bitcoin wallets almost all use a process called _deterministic key generation_, where every new address is generated in a non-random fashion. This gives them the property of being very flexible in terms of generating new addresses (you\'ll notice that every bitcoin receive transaction uses a new address), while not having to remember them all (you do not have to make individual backups for all the addresses to which you received bitcoin). In fact the process looks a little bit like in the following diagram, where each "branch" of the tree is a process known in advance and shared across all bitcoin wallets:
+# Tutorial 7: What is a wallet recovery phrase? — Concept
+Modern bitcoin wallets use a process called _deterministic key generation_, where every new address your wallet produces is generated in a non-random fashion. This gives them the property of being very flexible in terms of generating new addresses while not having to remember them all individually (you do not have to make individual backups for all the addresses to which you received bitcoin). In fact the process looks a little bit like in the following diagram, where generating each "branch" of the tree is a process defined in advance and shared across all bitcoin wallets:
 
-image
+[image of HD wallet derivation tree]
 
-The number of addresses that can be generated from this tree is infinite, yet because the process to generate new keys (the path the branches need to follow) is predetermined, the _only_ necessary part of backing up such a "tree of addresses" is to remember the root of the tree!
+The number of addresses that can be generated from this tree is near-infinite, yet because the process (the path the branches need to follow) is predetermined, the _only_ necessary part of backing up such a "tree of addresses" is to remember the root of the tree! Each new root will generate a completely new tree, but any wallet can recreate the whole tree simply by starting with the root.
 
 The real word for this "root" of your wallet is the _wallet seed_. This wallet seed is simply a really, really big number, but numbers are notoriously hard to remember, and humans are usually really bad at writing them down properly without making mistakes or typos. Instead, a standard for how to encode these really big numbers has emerged in the bitcoin ecosystem. This standard uses a series of 12 or 24 words in a specific order, which together can always be used to recreate the wallet seed.
 
-Padawan uses this standard to allow users to create backups for its wallet. You'll find the 12 words (we call those your seedphrase) on a separate screen under the drawer options. Those words should be treated with the _utmost_ care. They hold the key to all the bitcoin stored in a wallet.  
+Padawan uses this standard to allow users to create backups for its wallet. You'll find the 12 words (often referred to as a backup phrase) on a separate screen under the drawer options. Those words should be treated with the _utmost_ care. They hold the key to all the bitcoin stored in a wallet, and they are indeed the _only_ thing required to access all funds. This is a blessing and a curse (but mostly a blessing!), because it means you can loose the phone your wallet is on or delete the application and yet not loose any funds simply by recovering your wallet using the 12-word backup phrase.  
 <br/>
 
 # Tutorial 8: Recovering your wallet from a backup seed — Skill

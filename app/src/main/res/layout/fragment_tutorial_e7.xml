@@ -26,7 +26,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/E7_content"
+            android:id="@+id/t7_p1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -40,6 +40,33 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/E7_title" />
+
+        <ImageView
+            android:id="@+id/t7_f1"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/t7_p1"
+            app:srcCompat="@drawable/diagram_wip" />
+
+        <TextView
+            android:id="@+id/t7_p2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:backgroundTint="@color/bg1"
+            android:fontFamily="@font/nunito_sans"
+            android:text="@string/t7_p1"
+            android:textColor="@color/bg0hard"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/t7_f1" />
 
         <Button
             android:id="@+id/buttonMarkDoneE7"
@@ -56,7 +83,7 @@
             android:textColorHighlight="@color/aqua"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/E7_content" />
+            app:layout_constraintTop_toBottomOf="@+id/t7_p2" />
 
         <Button
             android:id="@+id/buttonBackE7"
