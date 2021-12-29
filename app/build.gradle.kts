@@ -23,8 +23,8 @@ android {
         applicationId = "com.goldenraven.padawanwallet"
         minSdk = 26
         targetSdk = 30
-        versionCode = 8
-        versionName = "v0.7.3-SNAPSHOT"
+        versionCode = 9
+        versionName = "v0.7.3"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
         resValue(
@@ -112,7 +112,6 @@ val abiCodes = mapOf("armeabi-v7a" to 1, "x86" to 2, "x86_64" to 3, "arm64-v8a" 
 
 androidComponents {
     onVariants { variant ->
-
         // Assigns a different version code for each output APK
         // other than the universal APK.
         variant.outputs.forEach { output ->
