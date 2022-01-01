@@ -21,24 +21,16 @@
     </string>
 
     <string name="t1_h3">
-        Regtest
-    </string>
-
-    <string name="t1_p3">The regtest network is a sort of "micro" bitcoin network software developers use to start an instance of a bitcoin network locally (on a single computer, for example, or between a few computer under a single person\'s control). It is useful because one can control all aspects of the network and nodes (mining new blocks, creating and deleting nodes, etc.). It is a network that is almost uniquely used by software developers. The biggest of those "testing" networks is called <i>testnet</i> (short for <i>test network</i>), and is the one that Padawan leverages.
-    </string>
-
-    <string name="t1_h4">
         Testnet
     </string>
 
-    <string name="t1_p4">The testnet consists of a full-fledged bitcoin network that is available worldwide, and connects thousands of nodes (just like mainnet). The bitcoins on this network are called <i>testnet coins</i>, and look and behave most identically to normal bitcoin, except that they have no value! This feature is extremely useful for testing applications in the real world. It also allows curious minds to explore bitcoin in a real way, make transactions, back up wallets, and understand the foundational building blocks of the network without having to touch real bitcoin before they get comfortable with the basic set of heuristics that bitcoin requires users to understand in order to use it safely and effectively.
+    <string name="t1_p3">The testnet consists of a full-fledged bitcoin network that is available worldwide, and connects thousands of nodes (just like mainnet). The bitcoins on this network are called <i>testnet coins</i>, and look and behave most identically to normal bitcoin, except that they have no value! This feature is extremely useful for testing applications in the real world. It also allows curious minds to explore bitcoin in a real way, make transactions, back up wallets, and understand the foundational building blocks of the network without having to touch real bitcoin before they get comfortable with the basic set of heuristics that bitcoin requires users to understand in order to use it safely and effectively.
     </string>
 
-    <string name="t1_h5">
+    <string name="t1_h4">
         Padawan
     </string>
 
-    <string name="t1_p5">
-        Padawan uses testnet <i>uniquely</i>. You cannot receive or send normal (mainnet) bitcoins to/from Padawan, and this is a feature! You can rely on Padawan never holding anything of great value other than the knowledge and experience you build with it. Any coins you have on balance or send to friends are testnet coins.
+    <string name="t1_p4">Padawan uses testnet <i>uniquely</i>. You cannot receive or send normal (mainnet) bitcoins to/from Padawan, and this is a feature! You can rely on Padawan never holding anything of great value other than the knowledge and experience you build with it. Any coins you have on balance or send to friends are testnet coins.
     </string>
 </resources>

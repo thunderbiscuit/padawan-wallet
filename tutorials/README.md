@@ -9,9 +9,8 @@ The tutorials are currently capped at an arbitrary 5000 characters per. This is 
 # Tutorial 1: What is the Bitcoin testnet? — Concept
 You can think of the Bitcoin network as thousands of computers who speak a common language and communicate directly with each other over the internet. Even though the biggest and most well known of these computer networks is the one you're most familiar with and the one most people speak of when they say "the Bitcoin network", there are in fact a few different types of Bitcoin networks one might use.
 
+## Mainnet
 The most well known of those is called _mainnet_, and refers to the bitcoins that have monetary value and can be traded on exchanges. The other networks are built for testing and training, and are used by software developers who need to develop and test their software, and by people who wish to learn how to use Bitcoin without the worry of protecting and sending around "real" (mainnet) bitcoins.
-
-The biggest of those "testing" networks is called _testnet_ (short for _test network_), and is the one that Padawan leverages.
 
 ### Testnet
 The testnet consists of a full-fledged bitcoin network that is available worldwide, and connects thousands of nodes (just like mainnet). The bitcoins on this network are called _testnet coins_, and look and behave most identically to normal bitcoin, except that they have no value! This feature is useful for testing applications in the real world. It also allows curious minds to explore bitcoin in a real way, make transactions, back up wallets, and understand the foundational building blocks of the network without having to touch real bitcoin before they get comfortable with the basic set of heuristics that bitcoin requires users to understand in order to use safely and effectively.
