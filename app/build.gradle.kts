@@ -17,6 +17,7 @@ android {
 
     buildFeatures {
         viewBinding = true
+        compose = true
     }
 
     defaultConfig {
@@ -74,6 +75,10 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.2.0-alpha01"
+    }
 }
 
 dependencies {
@@ -86,6 +91,14 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.3.1")
     implementation("androidx.legacy:legacy-support-v4:1.0.0")
     implementation("androidx.viewpager:viewpager:1.0.0")
+
+    // compose
+    implementation("androidx.activity:activity-compose:1.4.0")
+    implementation("androidx.compose.material:material:1.0.5")
+    implementation("androidx.compose.animation:animation:1.0.5")
+    implementation("androidx.compose.ui:ui-tooling:1.0.5")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.4.0")
+
 
     // bitcoin
     implementation("org.bitcoindevkit:bdk-android:0.5.1")
