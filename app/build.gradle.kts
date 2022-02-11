@@ -77,7 +77,7 @@ android {
     }
 
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.2.0-alpha01"
+        kotlinCompilerExtensionVersion = "1.1.1"
     }
 }
 
@@ -94,11 +94,13 @@ dependencies {
 
     // compose
     implementation("androidx.activity:activity-compose:1.4.0")
-    implementation("androidx.compose.material:material:1.1.0")
-    implementation("androidx.compose.animation:animation:1.1.0")
-    implementation("androidx.compose.ui:ui-tooling:1.1.0")
+    implementation("androidx.compose.material:material:1.1.1")
+    implementation("androidx.compose.animation:animation:1.1.1")
+    implementation("androidx.compose.ui:ui-tooling:1.1.1")
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.4.1")
-
+    implementation("androidx.navigation:navigation-compose:2.4.1")
+    implementation("androidx.compose.ui:ui:1.1.1")
+    implementation("androidx.compose.material3:material3:1.0.0-alpha06")
 
     // bitcoin
     implementation("org.bitcoindevkit:bdk-android:0.5.1")

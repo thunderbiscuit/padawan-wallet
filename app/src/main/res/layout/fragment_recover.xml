@@ -300,7 +300,7 @@
         android:layout_marginBottom="20dp"
         android:backgroundTint="@color/green"
         android:fontFamily="@font/nunito_sans"
-        android:text="Recover Wallet"
+        android:text="@string/recover_wallet"
         android:textAllCaps="false"
         android:textColor="@color/fg1"
         android:textSize="18sp"

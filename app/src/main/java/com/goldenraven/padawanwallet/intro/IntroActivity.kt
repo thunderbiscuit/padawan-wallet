@@ -6,12 +6,15 @@
 package com.goldenraven.padawanwallet.intro
 
 import android.os.Bundle
+import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
-import com.goldenraven.padawanwallet.R
 
 class IntroActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_intro)
+
+        setContent {
+            IntroNavigation()
+        }
     }
 }

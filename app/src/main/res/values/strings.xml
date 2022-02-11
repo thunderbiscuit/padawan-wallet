@@ -13,6 +13,7 @@
     <string name="intro_dialog_title">Be careful!</string>
     <string name="intro_dialog_positive">I understand</string>
     <string name="intro_dialog_negative">Cancel</string>
+    <string name="recover_wallet">Recover Wallet</string>
     <string name="word1">word 1</string>
     <string name="word2">word 2</string>
     <string name="word3">word 3</string>
