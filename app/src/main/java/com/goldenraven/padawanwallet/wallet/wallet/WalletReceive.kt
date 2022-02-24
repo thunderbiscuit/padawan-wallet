@@ -12,14 +12,17 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidmads.library.qrgenearator.QRGContents
-import androidmads.library.qrgenearator.QRGEncoder
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import com.goldenraven.padawanwallet.R
 import com.goldenraven.padawanwallet.data.Wallet
 import com.goldenraven.padawanwallet.databinding.FragmentWalletReceiveBinding
 import android.util.Log
+import androidx.core.content.ContextCompat
+import androidx.core.graphics.createBitmap
+import com.google.zxing.BarcodeFormat
+import com.google.zxing.common.BitMatrix
+import com.google.zxing.qrcode.QRCodeWriter
 
 class WalletReceive : Fragment() {
 
@@ -46,14 +49,18 @@ class WalletReceive : Fragment() {
             val newGeneratedAddress: String = Wallet.getNewAddress()
             Log.i("Padalogs","New deposit address is $newGeneratedAddress")
 
-            val qrgEncoder: QRGEncoder = QRGEncoder(newGeneratedAddress, null, QRGContents.Type.TEXT, 1000)
-            qrgEncoder.colorBlack = resources.getColor(R.color.fg4)
-            qrgEncoder.colorWhite = resources.getColor(R.color.bg0soft)
             try {
-                val bitmap = qrgEncoder.bitmap
-                binding.qrCode.setImageBitmap(bitmap)
+                val qrCodeWriter: QRCodeWriter = QRCodeWriter()
+                val bitMatrix: BitMatrix = qrCodeWriter.encode(newGeneratedAddress, BarcodeFormat.QR_CODE, 1000, 1000)
+                val bitMap = createBitmap(1000, 1000)
+                for (x in 0 until 1000) {
+                    for (y in 0 until 1000) {
+                        bitMap.setPixel(x, y, if (bitMatrix[x, y]) ContextCompat.getColor(requireContext(), R.color.fg4) else ContextCompat.getColor(requireContext(), R.color.bg0soft))
+                    }
+                }
+                binding.qrCode.setImageBitmap(bitMap)
             } catch (e: Throwable) {
-                Log.i("Padalogs","Error with QRCode generator, ${e.toString()}")
+                Log.i("Padalogs", "Error with QRCode generation, $e")
             }
             binding.receiveAddress.text = newGeneratedAddress
         }
