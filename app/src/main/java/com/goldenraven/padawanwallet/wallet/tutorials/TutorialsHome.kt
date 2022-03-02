@@ -6,6 +6,7 @@
 package com.goldenraven.padawanwallet.wallet.tutorials
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,7 +16,7 @@ import androidx.navigation.Navigation
 import com.goldenraven.padawanwallet.R
 import com.goldenraven.padawanwallet.databinding.FragmentTutorialsHomeBinding
 import com.goldenraven.padawanwallet.wallet.WalletViewModel
-import android.util.Log
+import com.goldenraven.padawanwallet.data.Repository
 
 class TutorialsHome : Fragment() {
 
@@ -75,6 +76,23 @@ class TutorialsHome : Fragment() {
         }
         binding.buttonTutorial8.setOnClickListener {
             navController.navigate(R.id.action_tutorialsHome_to_tutorialE8)
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if (Repository.checkResetTutorial()){
+            val viewModel = ViewModelProvider(requireActivity()).get(WalletViewModel::class.java)
+            viewModel.retrieveDoneTutorials()
+
+            binding.buttonTutorial1.setBackgroundResource(R.drawable.tutorial_button_background)
+            binding.buttonTutorial2.setBackgroundResource(R.drawable.tutorial_button_background)
+            binding.buttonTutorial3.setBackgroundResource(R.drawable.tutorial_button_background)
+            binding.buttonTutorial4.setBackgroundResource(R.drawable.tutorial_button_background)
+            binding.buttonTutorial5.setBackgroundResource(R.drawable.tutorial_button_background)
+            binding.buttonTutorial6.setBackgroundResource(R.drawable.tutorial_button_background)
+            binding.buttonTutorial7.setBackgroundResource(R.drawable.tutorial_button_background)
+            binding.buttonTutorial8.setBackgroundResource(R.drawable.tutorial_button_background)
         }
     }
 }

@@ -14,6 +14,7 @@ private const val TAG = "Repository"
 object Repository {
 
     private lateinit var sharedPreferences: SharedPreferences
+    private var resetTutorial : Boolean = false
     fun setSharedPreferences(sharedPref: SharedPreferences) {
         sharedPreferences = sharedPref
     }
@@ -125,5 +126,14 @@ object Repository {
             .putBoolean("e7", false)
             .putBoolean("e8", false)
             .apply()
+        resetTutorial = true
+    }
+
+    fun checkResetTutorial(): Boolean {
+        return if (resetTutorial) {
+            resetTutorial = false
+            true
+        } else
+            false
     }
 }
