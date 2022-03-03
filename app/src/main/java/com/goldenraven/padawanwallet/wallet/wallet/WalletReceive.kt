@@ -20,6 +20,8 @@ import com.goldenraven.padawanwallet.databinding.FragmentWalletReceiveBinding
 import android.util.Log
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.createBitmap
+import com.goldenraven.padawanwallet.utils.SnackbarLevel
+import com.goldenraven.padawanwallet.utils.fireSnackbar
 import com.google.zxing.BarcodeFormat
 import com.google.zxing.common.BitMatrix
 import com.google.zxing.qrcode.QRCodeWriter
@@ -66,9 +68,22 @@ class WalletReceive : Fragment() {
         }
 
         binding.copyAddressButton.setOnClickListener {
-            val clipboard: ClipboardManager = activity?.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-            val clip: ClipData = ClipData.newPlainText("Copied address", binding.receiveAddress.text)
-            clipboard.setPrimaryClip(clip)
+            if (binding.receiveAddress.text.toString() != "") {
+                val clipboard: ClipboardManager = activity?.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+                val clip: ClipData = ClipData.newPlainText("Copied address", binding.receiveAddress.text)
+                clipboard.setPrimaryClip(clip)
+                fireSnackbar(
+                    requireView(),
+                    SnackbarLevel.INFO,
+                    "Copied address to clipboard!"
+                )
+            } else {
+                fireSnackbar(
+                    requireView(),
+                    SnackbarLevel.INFO,
+                    "Generate new address first!"
+                )
+            }
         }
     }
 }
