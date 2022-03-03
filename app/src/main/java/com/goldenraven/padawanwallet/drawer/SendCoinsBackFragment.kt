@@ -16,6 +16,8 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.goldenraven.padawanwallet.R
 import com.goldenraven.padawanwallet.databinding.FragmentSendCoinsBackBinding
+import com.goldenraven.padawanwallet.utils.SnackbarLevel
+import com.goldenraven.padawanwallet.utils.fireSnackbar
 
 class SendCoinsBackFragment : Fragment() {
 
@@ -39,6 +41,11 @@ class SendCoinsBackFragment : Fragment() {
             val clipboard: ClipboardManager = activity?.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
             val clip: ClipData = ClipData.newPlainText("Copied address", binding.returnFaucetAddress.text)
             clipboard.setPrimaryClip(clip)
+            fireSnackbar(
+                requireView(),
+                SnackbarLevel.INFO,
+                "Copied address to clipboard!"
+            )
         }
     }
 }
