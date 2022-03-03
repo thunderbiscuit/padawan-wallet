@@ -31,6 +31,7 @@ class WalletHome : Fragment() {
 
     private lateinit var viewModel: WalletViewModel
     private lateinit var binding: FragmentWalletHomeBinding
+    private lateinit var rootView: View
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -49,7 +50,7 @@ class WalletHome : Fragment() {
         viewModel.readAllData.observe(viewLifecycleOwner, Observer { tx ->
             adapter.setData(tx)
         })
-
+        rootView = container?.rootView!!
         return binding.root
     }
 
@@ -92,7 +93,7 @@ class WalletHome : Fragment() {
                         viewModel.updateBalance()
                         viewModel.syncTransactionHistory()
                         withContext(Dispatchers.Main) {
-                            fireSnackbar(requireView(), SnackbarLevel.INFO, "Wallet successfully synced!")
+                            fireSnackbar(rootView, SnackbarLevel.INFO, "Wallet successfully synced!")
                         }
                     }
                 }
