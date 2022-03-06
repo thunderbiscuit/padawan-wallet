@@ -30,7 +30,7 @@ class WalletBuild : Fragment() {
     private lateinit var binding: FragmentWalletBuildBinding
     private lateinit var address: String
     private lateinit var amount: String
-    private var feeRate : Float = 0F
+    private var feeRate : Float = 1F
     private lateinit var addressFromScanner: String
     private lateinit var psbt: PartiallySignedBitcoinTransaction
     private lateinit var viewModel: WalletViewModel
@@ -71,7 +71,7 @@ class WalletBuild : Fragment() {
 
             // create transaction if possible, otherwise show snackbar with error
             try {
-                psbt = Wallet.createTransaction(address, amount.toULong(), null)
+                psbt = Wallet.createTransaction(address, amount.toULong(), feeRate)
             } catch (e: Throwable) {
                 Log.i("Padalogs","${e.message}")
                 fireSnackbar(
@@ -85,7 +85,7 @@ class WalletBuild : Fragment() {
                 val broadcastMessage =
                         MaterialAlertDialogBuilder(this@WalletBuild.requireContext(), R.style.MyCustomDialogTheme)
                                 .setTitle("Broadcast Transaction")
-                                .setMessage(buildMessage(1f))
+                                .setMessage(buildMessage(feeRate))
                                 .setPositiveButton("Broadcast") { _, _ ->
                                     Log.i("Padawan Wallet", "User is attempting to broadcast transaction")
                                     broadcastTransaction()
@@ -138,11 +138,11 @@ class WalletBuild : Fragment() {
             Log.i("Padalogs","Amount field was empty")
             return false
         }
-        if (feeRate <= 0 || feeRate > 200) {
+        if (feeRate <= 1 || feeRate > 200) {
             fireSnackbar(
                 requireView(),
                 SnackbarLevel.WARNING,
-                "Please input a fee rate between 1 to 200"
+                "Please input a fee rate between 1 and 200"
             )
             Log.i("Padalogs","Fee rate was invalid")
             return false
