@@ -19,6 +19,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import org.bitcoindevkit.Transaction
 
+private const val TAG = "WalletViewModel"
 
 class WalletViewModel(application: Application) : AndroidViewModel(application) {
 
@@ -51,7 +52,7 @@ class WalletViewModel(application: Application) : AndroidViewModel(application) 
 
     public fun addTx(tx: Tx) {
         viewModelScope.launch(Dispatchers.IO) {
-            Log.i("smallP", "tx: ${tx}")
+            Log.i(TAG, "tx: ${tx}")
             repository.addTx(tx)
         }
     }
@@ -64,13 +65,13 @@ class WalletViewModel(application: Application) : AndroidViewModel(application) 
     public fun updateBalance() {
         Wallet.sync(100u)
         val newBalance = Wallet.getBalance()
-        Log.i("Padalogs","New balance: $newBalance")
+        Log.i(TAG,"New balance: $newBalance")
         balance.postValue(newBalance)
     }
 
     public fun syncTransactionHistory() {
         val txHistory = Wallet.listTransactions()
-        Log.i("Padalogs","Transactions history, number of transactions: ${txHistory.size}")
+        Log.i(TAG,"Transactions history, number of transactions: ${txHistory.size}")
         for (tx in txHistory) {
             val details = when (tx) {
                 is Transaction.Confirmed -> tx.details
@@ -165,7 +166,7 @@ class WalletViewModel(application: Application) : AndroidViewModel(application) 
                 newTutorialsDoneMap?.set("e8", true)
                 tutorialsDone.postValue(newTutorialsDoneMap)
             }
-            else -> Log.i("Padalogs","Tutorial number was invalid")
+            else -> Log.i(TAG,"Tutorial number was invalid")
         }
     }
 }
