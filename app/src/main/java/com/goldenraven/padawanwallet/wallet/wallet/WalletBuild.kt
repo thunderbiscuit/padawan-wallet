@@ -24,6 +24,7 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import org.bitcoindevkit.PartiallySignedBitcoinTransaction
 import org.bitcoindevkit.Transaction
 
+private const val TAG = "WalletBuildFragment"
 
 class WalletBuild : Fragment() {
 
@@ -42,7 +43,7 @@ class WalletBuild : Fragment() {
     ): View {
         binding = FragmentWalletBuildBinding.inflate(inflater, container, false)
         addressFromScanner = arguments?.getString("addressFromScanner", "0") ?: "0"
-        Log.i("Padalogs", addressFromScanner)
+        Log.i(TAG, addressFromScanner)
         if (addressFromScanner != "0") {
             binding.sendAddress.setText(addressFromScanner)
         }
@@ -73,7 +74,7 @@ class WalletBuild : Fragment() {
             try {
                 psbt = Wallet.createTransaction(address, amount.toULong(), feeRate)
             } catch (e: Throwable) {
-                Log.i("Padalogs","${e.message}")
+                Log.i(TAG,"${e.message}")
                 fireSnackbar(
                     requireView(),
                     SnackbarLevel.ERROR,
@@ -87,16 +88,16 @@ class WalletBuild : Fragment() {
                                 .setTitle("Broadcast Transaction")
                                 .setMessage(buildMessage(feeRate))
                                 .setPositiveButton("Broadcast") { _, _ ->
-                                    Log.i("Padawan Wallet", "User is attempting to broadcast transaction")
+                                    Log.i(TAG, "User is attempting to broadcast transaction")
                                     broadcastTransaction()
                                     navController.navigate(R.id.action_walletSend_to_walletHome)
                                 }
                                 .setNegativeButton("Go back") { _, _ ->
-                                    Log.i("Padawan Wallet", "User is not broadcasting")
+                                    Log.i(TAG, "User is not broadcasting")
                                 }
                 broadcastMessage.show()
             } else {
-                Log.i("Padalogs","Inputs were not valid")
+                Log.i(TAG,"Inputs were not valid")
             }
         }
     }
@@ -110,7 +111,7 @@ class WalletBuild : Fragment() {
         val feeRate = "Fees: $fees satoshis\n"
         val total = "Total: ${fees.toDouble().toLong() + sendAmount.toLong()} satoshis"
 
-        Log.i("PadawanWallet", "Message has inputs $sendToAddress, $sendAmount, $fees")
+        Log.i(TAG, "Message has inputs $sendToAddress, $sendAmount, $fees")
         return "$address$amount$feeRate$total"
     }
 
@@ -126,7 +127,7 @@ class WalletBuild : Fragment() {
                 SnackbarLevel.WARNING,
                 "Address is missing!"
             )
-            Log.i("Padalogs","Address field was empty")
+            Log.i(TAG,"Address field was empty")
             return false
         }
         if (amount == "") {
@@ -135,7 +136,7 @@ class WalletBuild : Fragment() {
                 SnackbarLevel.WARNING,
                 "Amount is missing!"
             )
-            Log.i("Padalogs","Amount field was empty")
+            Log.i(TAG,"Amount field was empty")
             return false
         }
         if (feeRate <= 1 || feeRate > 200) {
@@ -144,7 +145,7 @@ class WalletBuild : Fragment() {
                 SnackbarLevel.WARNING,
                 "Please input a fee rate between 1 and 200"
             )
-            Log.i("Padalogs","Fee rate was invalid")
+            Log.i(TAG,"Fee rate was invalid")
             return false
         }
         return true
@@ -170,13 +171,13 @@ class WalletBuild : Fragment() {
                 is Transaction.Confirmed -> transaction.confirmation.height
             }
             val fees : ULong = details.fees ?: 0u
-            Log.i("Padalogs","Transaction was broadcast! Data added to database:")
-            Log.i("Padalogs","Transaction was broadcast! txid: ${details.txid}")
-            Log.i("Padalogs","Transaction was broadcast! timestamp: ${time}")
-            Log.i("Padalogs","Transaction was broadcast! height: ${height}")
-            Log.i("Padalogs","Transaction was broadcast! received: ${details.received}")
-            Log.i("Padalogs","Transaction was broadcast! sent: ${details.sent}")
-            Log.i("Padalogs","Transaction was broadcast! fees: ${details.fees}")
+            Log.i(TAG,"Transaction was broadcast! Data added to database:")
+            Log.i(TAG,"Transaction was broadcast! txid: ${details.txid}")
+            Log.i(TAG,"Transaction was broadcast! timestamp: ${time}")
+            Log.i(TAG,"Transaction was broadcast! height: ${height}")
+            Log.i(TAG,"Transaction was broadcast! received: ${details.received}")
+            Log.i(TAG,"Transaction was broadcast! sent: ${details.sent}")
+            Log.i(TAG,"Transaction was broadcast! fees: ${details.fees}")
 
             addTxToDatabase(
                     details.txid,
@@ -186,14 +187,14 @@ class WalletBuild : Fragment() {
                     fees.toInt(),
                     height.toInt()
             )
-            Log.i("Padalogs","Transaction was broadcast! txid: $details.txid, txidString: $txidString")
+            Log.i(TAG,"Transaction was broadcast! txid: $details.txid, txidString: $txidString")
             fireSnackbar(
                     requireView(),
                     SnackbarLevel.INFO,
                     "Transaction was broadcast successfully!"
             )
         } catch (e: Throwable) {
-            Log.i("Padalogs","${e.message}")
+            Log.i(TAG,"${e.message}")
             fireSnackbar(
                 requireView(),
                 SnackbarLevel.ERROR,
@@ -227,7 +228,7 @@ class WalletBuild : Fragment() {
                 isSend = isSend,
                 height = height,
         )
-        Log.i("Padalogs","From addTxToDatabase, the tx is $transaction")
+        Log.i(TAG,"From addTxToDatabase, the tx is $transaction")
         viewModel.addTx(transaction)
     }
 }
