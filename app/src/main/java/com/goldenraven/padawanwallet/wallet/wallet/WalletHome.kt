@@ -27,6 +27,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.text.DecimalFormat
+
+
 class WalletHome : Fragment() {
 
     private lateinit var viewModel: WalletViewModel

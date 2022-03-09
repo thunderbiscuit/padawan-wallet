@@ -8,13 +8,20 @@ package com.goldenraven.padawanwallet.intro
 import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
+import com.goldenraven.padawanwallet.theme.PadawanTheme
 
 class IntroActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        val activityShutDown: () -> Unit = {
+            this.finish()
+        }
+
         setContent {
-            IntroNavigation()
+            PadawanTheme {
+                IntroNavigation(activityShutDown)
+            }
         }
     }
 }

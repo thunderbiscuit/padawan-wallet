@@ -3,11 +3,18 @@ package com.goldenraven.padawanwallet.intro
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.*
+import androidx.compose.material.AlertDialog
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Button
+import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Devices
@@ -21,35 +28,41 @@ import com.goldenraven.padawanwallet.theme.*
 
 @Composable
 internal fun IntroScreen(navController: NavController) {
-    PadawanTheme {
-        Column(
-            modifier = Modifier
-                .background(color = md_theme_light_background)
-                .fillMaxSize(1f),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.SpaceAround,
-        ) {
-            AppName()
-            IntroText()
-            LetsGoButton(navController)
-        }
+
+    val (showDialog, setShowDialog) =  remember { mutableStateOf(false) }
+
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.SpaceAround,
+        modifier = Modifier
+            .background(color = md_theme_dark_background)
+            .fillMaxSize(1f),
+    ) {
+        AppName()
+        IntroText()
+        LetsGoButton(setShowDialog)
+        Dialog(
+            showDialog = showDialog,
+            setShowDialog = setShowDialog,
+            navController
+        )
     }
 }
 
 @Composable
 fun AppName() {
-    Column(modifier = Modifier.padding(20.dp, 20.dp)) {
+    Column {
         Text(
             text = stringResource(R.string.padawan),
-            color = md_theme_light_onBackground,
+            color = md_theme_dark_primary,
             fontSize = 70.sp,
             fontFamily = shareTechMono,
         )
         Text(
             stringResource(R.string.elevator_pitch),
-            color = md_theme_light_onBackground,
-            fontSize = 14.sp,
-            fontFamily = rubik,
+            color = md_theme_dark_onBackground,
+            fontSize = 16.sp,
+            fontFamily = jost,
             fontStyle = FontStyle.Italic,
             fontWeight = FontWeight.Light,
             modifier = Modifier.align(Alignment.End)
@@ -58,36 +71,79 @@ fun AppName() {
 }
 
 @Composable
+fun Dialog(showDialog: Boolean, setShowDialog: (Boolean) -> Unit, navController: NavController) {
+    if (showDialog) {
+        AlertDialog(
+            // modifier = Modifier.background(md_theme_dark_lightBackground),
+            backgroundColor = md_theme_dark_lightBackground,
+            onDismissRequest = {},
+            title = {
+                Text(
+                    "Be careful!",
+                    style = MaterialTheme.typography.headlineMedium,
+                    color = md_theme_dark_onLightBackground
+                )
+            },
+            text = {
+                Text(
+                    "It’s important you know that Padawan is not a bitcoin wallet that can handle normal bitcoins.\n\nThis wallet is built to help you learn and experiment with bitcoin wallets through a series of tutorials, and it uses testnet coins, a type of bitcoin that doesn't have any value.\n\nThe wallet can only handle testnet coins, which are not compatible with normal bitcoins!",
+                    color = md_theme_dark_onLightBackground
+                )
+            },
+            confirmButton = {
+                TextButton(
+                    onClick = {
+                        setShowDialog(false)
+                        navController.navigate(Screen.WalletChoiceScreen.route)
+                    },
+                ) {
+                    Text(
+                        "I understand",
+                        color = md_theme_dark_onLightBackground
+                    )
+                }
+            },
+            dismissButton = {
+                TextButton(
+                    onClick = {
+                        setShowDialog(false)
+                    },
+                ) {
+                    Text(
+                        "Cancel",
+                        color = md_theme_dark_onLightBackground
+                    )
+                }
+            },
+        )
+    }
+}
+
+@Composable
 internal fun IntroText() {
     Text(
         stringResource(R.string.welcome_statement),
-        color = md_theme_light_onBackground,
-        fontSize = 16.sp,
-        fontFamily = rubik,
+        color = md_theme_dark_onBackground,
+        fontSize = 20.sp,
+        fontFamily = jost,
         fontWeight = FontWeight.Light,
         modifier = Modifier.padding(horizontal = 24.dp)
     )
 }
 
 @Composable
-internal fun LetsGoButton(navController: NavController) {
+internal fun LetsGoButton(setShowDialog: (Boolean) -> Unit) {
     Button(
-        onClick = {
-            navController.navigate(Screen.WalletChoiceScreen.route)
-        },
-        colors = ButtonDefaults.buttonColors(
-            backgroundColor = md_theme_light_primary,
-        ),
+        onClick = { setShowDialog(true) },
         shape = RoundedCornerShape(16.dp),
         modifier = Modifier
             .size(width = 200.dp, height = 100.dp)
-            .padding(top = 20.dp)
+            .padding(top = 24.dp)
     ) {
         Text(
             stringResource(R.string.entry_button),
-            color = md_theme_light_onPrimary,
-            fontSize = 18.sp,
-            fontFamily = rubik,
+            fontSize = 22.sp,
+            fontFamily = jost,
         )
     }
 }
@@ -95,5 +151,7 @@ internal fun LetsGoButton(navController: NavController) {
 @Preview(device = Devices.PIXEL_4, showBackground = true)
 @Composable
 internal fun PreviewIntroScreen() {
-   IntroScreen(rememberNavController())
+    PadawanTheme {
+        IntroScreen(rememberNavController())
+    }
 }

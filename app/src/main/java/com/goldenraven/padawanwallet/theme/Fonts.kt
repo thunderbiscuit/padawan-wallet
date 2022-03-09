@@ -14,6 +14,13 @@ val rubik: FontFamily = FontFamily(
     Font(R.font.rubik_light_italic, FontWeight.Light, FontStyle.Italic)
 )
 
+val jost: FontFamily = FontFamily(
+    Font(R.font.jost_regular, FontWeight.Normal),
+    Font(R.font.jost_regular_italic, FontWeight.Normal, FontStyle.Italic),
+    Font(R.font.jost_light, FontWeight.Light),
+    Font(R.font.jost_light_italic, FontWeight.Light, FontStyle.Italic),
+)
+
 val shareTechMono = FontFamily(
     Font(R.font.share_tech_mono, FontWeight.Normal),
 )

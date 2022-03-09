@@ -29,7 +29,6 @@
 
         <activity
             android:name=".intro.IntroActivity"
-            android:theme="@style/Theme.IntroPadawanWallet"
             android:screenOrientation="portrait"
             android:exported="true">
             <intent-filter>
