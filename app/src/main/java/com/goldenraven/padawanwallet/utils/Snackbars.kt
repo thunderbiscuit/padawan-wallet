@@ -6,33 +6,37 @@
 package com.goldenraven.padawanwallet.utils
 
 import android.graphics.Color
+import android.graphics.drawable.Drawable
 import android.view.View
 import androidx.core.content.res.ResourcesCompat
 import com.goldenraven.padawanwallet.R
 import com.google.android.material.snackbar.BaseTransientBottomBar
 import com.google.android.material.snackbar.Snackbar
 
-fun fireSnackbar(view: View, level: SnackbarLevel, message: String, duration: Int = Snackbar.LENGTH_LONG): Unit {
+fun fireSnackbar(
+    view: View,
+    level: SnackbarLevel,
+    message: String,
+    duration: Int = Snackbar.LENGTH_LONG
+): Unit {
 
-    // set text colour
-    val color = when (level) {
+    val color: Int = when (level) {
         SnackbarLevel.INFO -> Color.argb(255, 235, 219, 178)
         SnackbarLevel.WARNING -> Color.argb(255, 235, 219, 178)
         SnackbarLevel.ERROR -> Color.argb(255, 235, 219, 178)
     }
 
-    // set background
-    val background = when (level) {
+    val background: Drawable? = when (level) {
         SnackbarLevel.INFO -> ResourcesCompat.getDrawable(view.resources, R.drawable.background_toast, null)
         SnackbarLevel.WARNING -> ResourcesCompat.getDrawable(view.resources, R.drawable.background_toast_warning, null)
         SnackbarLevel.ERROR -> ResourcesCompat.getDrawable(view.resources, R.drawable.background_toast_error, null)
     }
 
-    val snackBar = Snackbar.make(view, message, duration)
-    snackBar.setTextColor(color)
-    snackBar.view.background = background
-    snackBar.animationMode = BaseTransientBottomBar.ANIMATION_MODE_SLIDE
-    snackBar.show()
+    Snackbar.make(view, message, duration).also {
+        it.setTextColor(color)
+        it.view.background = background
+        it.animationMode = BaseTransientBottomBar.ANIMATION_MODE_SLIDE
+    }.show()
 }
 
 enum class SnackbarLevel {
