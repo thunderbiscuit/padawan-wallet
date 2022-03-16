@@ -35,7 +35,7 @@ import com.goldenraven.padawanwallet.wallet.WalletActivity
 @Composable
 internal fun WalletChoiceScreen(
     navController: NavController,
-    onBuildWalletButtonClicked: (WalletCreateType, String?) -> Unit
+    onBuildWalletButtonClicked: (WalletCreateType) -> Unit
 ) {
     ConstraintLayout {
         val (appName, elevatorPitch, create, alreadyHave) = createRefs()
@@ -70,7 +70,7 @@ internal fun WalletChoiceScreen(
         }
 
         Button(
-            onClick = { onBuildWalletButtonClicked(WalletCreateType.FROMSCRATCH, null) },
+            onClick = { onBuildWalletButtonClicked(WalletCreateType.FROMSCRATCH()) },
             colors = ButtonDefaults.buttonColors(md_theme_dark_surfaceLight),
             shape = RoundedCornerShape(16.dp),
             modifier = Modifier

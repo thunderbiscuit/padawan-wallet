@@ -65,6 +65,7 @@ val md_theme_dark_surfaceLight = Color(0xFF504945)
 val md_theme_dark_onBackgroundFaded = Color(0x80ebdbb2)
 val md_theme_dark_lightBackground = Color(0xFFf2e5bc)
 val md_theme_dark_onLightBackground = Color(0xFF282828)
+val md_theme_dark_warning = Color(0xFFfabd2f)
 
 
 // below are themes I looked into implementing

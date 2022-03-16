@@ -16,7 +16,7 @@ import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
-fun IntroNavigation(onBuildWalletButtonClicked: (WalletCreateType, String?) -> Unit) {
+fun IntroNavigation(onBuildWalletButtonClicked: (WalletCreateType) -> Unit) {
     val navController: NavHostController = rememberAnimatedNavController()
     val animationDuration = 400
 

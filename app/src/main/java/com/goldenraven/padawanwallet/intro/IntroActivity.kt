@@ -32,22 +32,19 @@ class IntroActivity : AppCompatActivity() {
         } else {
             // this function is used in composables that navigate to the wallet activity
             // to ensure we destroy the intro activity once the wallet starts
-            val onBuildWalletButtonClicked : (WalletCreateType, String?) -> Unit = { walletCreateType, recoveryPhrase ->
+            val onBuildWalletButtonClicked : (WalletCreateType) -> Unit = { walletCreateType ->
                 try {
                     // load up a wallet either from scratch or using a BIP39 recovery phrase
                     when (walletCreateType) {
                         // if we create a wallet from scratch we don't need a recovery phrase
-                        WalletCreateType.FROMSCRATCH -> Wallet.createWallet()
+                        is WalletCreateType.FROMSCRATCH -> Wallet.createWallet()
 
-                        WalletCreateType.RECOVER -> recoveryPhrase?.let { recoveryPhrase ->
-                            Wallet.recoverWallet(recoveryPhrase)
-                        } ?: Log.i(TAG, "Error: Attempting to recover using an empty recovery phrase")
+                        is WalletCreateType.RECOVER -> Wallet.recoverWallet(walletCreateType.recoveryPhrase)
                     }
                     startActivity(Intent(this, WalletActivity::class.java))
                     finish()
                 } catch (e: Throwable) {
                     Log.i(TAG, "Could not build wallet: $e")
-                    // display snackbar with error
                     fireSnackbar(
                         view = findViewById(android.R.id.content),
                         level = SnackbarLevel.ERROR,
@@ -65,7 +62,7 @@ class IntroActivity : AppCompatActivity() {
     }
 }
 
-enum class WalletCreateType {
-    RECOVER,
-    FROMSCRATCH
+sealed class WalletCreateType() {
+    class FROMSCRATCH : WalletCreateType()
+    class RECOVER(val recoveryPhrase: String) : WalletCreateType()
 }

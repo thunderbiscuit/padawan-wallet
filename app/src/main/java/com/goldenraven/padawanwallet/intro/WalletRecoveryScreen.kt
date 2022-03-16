@@ -9,25 +9,24 @@ import android.content.Context
 import android.content.Intent
 import android.nfc.Tag
 import android.util.Log
-import androidx.compose.foundation.background
+import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.TextFieldDefaults
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Notifications
+import androidx.compose.material.rememberScaffoldState
+import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.focus.FocusDirection
 import androidx.compose.ui.focus.FocusManager
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.stringResource
@@ -45,115 +44,146 @@ import androidx.constraintlayout.compose.Dimension
 import com.goldenraven.padawanwallet.R
 import com.goldenraven.padawanwallet.data.Wallet
 import com.goldenraven.padawanwallet.theme.*
-import com.goldenraven.padawanwallet.utils.buildRecoveryPhrase
-import com.goldenraven.padawanwallet.utils.checkWords
+import com.goldenraven.padawanwallet.utils.*
 import com.goldenraven.padawanwallet.wallet.WalletActivity
+import kotlinx.coroutines.launch
 
 private const val TAG = "WalletRecoveryScreen"
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-internal fun WalletRecoveryScreen(onBuildWalletButtonClicked: (WalletCreateType, String?) -> Unit) {
-    val context: Context = LocalContext.current
+internal fun WalletRecoveryScreen(onBuildWalletButtonClicked: (WalletCreateType) -> Unit) {
 
-    // the screen is broken into 3 parts
-    // the app name, the body, and the button
-    ConstraintLayout(modifier = Modifier.fillMaxHeight(1f)) {
+    val snackbarHostState = remember { SnackbarHostState() }
+    val scope = rememberCoroutineScope()
 
-        val (appName, body, button) = createRefs()
-
-        val emptyRecoveryPhrase: Map<Int, String> = mapOf(
-            1 to "", 2 to "", 3 to "", 4 to "", 5 to "", 6 to "",
-            7 to "", 8 to "", 9 to "", 10 to "", 11 to "", 12 to ""
-        )
-        val (recoveryPhraseWordMap, setRecoveryPhraseWordMap) = remember { mutableStateOf(emptyRecoveryPhrase) }
-
-
-        // the app name
-        Column(
-            horizontalAlignment = Alignment.CenterHorizontally,
-            modifier = Modifier
-                .fillMaxWidth(1f)
-                .background(MaterialTheme.colorScheme.background)
-                .constrainAs(appName) {
-                    top.linkTo(parent.top)
-                }
-        ) {
-            Column {
-                Text(
-                    text = stringResource(R.string.padawan),
-                    color = md_theme_dark_primary,
-                    fontSize = 70.sp,
-                    fontFamily = shareTechMono,
+    Scaffold(
+        // snackbarHost = { SnackbarHost(snackbarHostState) }
+        snackbarHost = {
+            // reuse default SnackbarHost to have default animation and timing handling
+            SnackbarHost(snackbarHostState) { data ->
+                Snackbar(
                     modifier = Modifier
-                        .padding(top = 70.dp)
-                        .align(Alignment.CenterHorizontally)
-                )
-                Text(
-                    stringResource(R.string.elevator_pitch),
-                    color = md_theme_dark_onBackground,
-                    fontSize = 14.sp,
-                    fontFamily = rubik,
-                    fontStyle = FontStyle.Italic,
-                    fontWeight = FontWeight.Light,
-                    modifier = Modifier.align(Alignment.End)
-                )
-            }
-        }
+                        .padding(12.dp)
+                        .background(md_theme_dark_warning),
+                    containerColor = md_theme_dark_warning,
 
-
-        // the body
-        MyList(
-            recoveryPhraseWordMap,
-            setRecoveryPhraseWordMap,
-            modifier = Modifier
-            .constrainAs(body) {
-                top.linkTo(appName.bottom)
-                bottom.linkTo(button.top)
-                height = Dimension.fillToConstraints
-        })
-
-
-        // the button
-        Column(
-            horizontalAlignment = Alignment.CenterHorizontally,
-            modifier = Modifier
-                .fillMaxWidth()
-                .background(MaterialTheme.colorScheme.background)
-                .constrainAs(button) {
-                    bottom.linkTo(parent.bottom)
-                    start.linkTo(parent.start)
-                    end.linkTo(parent.end)
-                }
-        ) {
-            Column {
-                Button(
-                    onClick = {
-                        when (checkWords(recoveryPhraseWordMap)) {
-                            true -> {
-                                val recoveryPhrase: String = buildRecoveryPhrase(recoveryPhraseWordMap)
-                                Log.i(TAG, "All words valid!")
-                                Log.i(TAG, "Recovery phrase is \"$recoveryPhrase\"")
-                                onBuildWalletButtonClicked(WalletCreateType.RECOVER, recoveryPhrase)
-                            }
-                            false -> {
-                                Log.i(TAG, "Not all words are valid")
-                            }
-                        }
-                    },
-                    colors = ButtonDefaults.buttonColors(md_theme_dark_primary),
-                    shape = RoundedCornerShape(16.dp),
-                    modifier = Modifier
-                        .size(width = 300.dp, height = 100.dp)
-                        .padding(vertical = 8.dp, horizontal = 8.dp)
-                        .shadow(elevation = 8.dp, shape = RoundedCornerShape(16.dp))
                 ) {
                     Text(
-                        stringResource(R.string.recover_wallet),
-                        fontSize = 20.sp,
-                        fontFamily = rubik,
-                        textAlign = TextAlign.Center,
-                        lineHeight = 28.sp,
+                        text = data.visuals.message,
+                        style = TextStyle(md_theme_dark_onLightBackground)
                     )
+                }
+            }
+        },
+    ) {
+        val context: Context = LocalContext.current
+
+        // the screen is broken into 3 parts
+        // the app name, the body, and the button
+        ConstraintLayout(modifier = Modifier.fillMaxHeight(1f)) {
+
+            val (appName, body, button) = createRefs()
+
+            val emptyRecoveryPhrase: Map<Int, String> = mapOf(
+                1 to "", 2 to "", 3 to "", 4 to "", 5 to "", 6 to "",
+                7 to "", 8 to "", 9 to "", 10 to "", 11 to "", 12 to ""
+            )
+            val (recoveryPhraseWordMap, setRecoveryPhraseWordMap) = remember { mutableStateOf(emptyRecoveryPhrase) }
+
+
+            // the app name
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally,
+                modifier = Modifier
+                    .fillMaxWidth(1f)
+                    .background(MaterialTheme.colorScheme.background)
+                    .constrainAs(appName) {
+                        top.linkTo(parent.top)
+                    }
+            ) {
+                Column {
+                    Text(
+                        text = stringResource(R.string.padawan),
+                        color = md_theme_dark_primary,
+                        fontSize = 70.sp,
+                        fontFamily = shareTechMono,
+                        modifier = Modifier
+                            .padding(top = 70.dp)
+                            .align(Alignment.CenterHorizontally)
+                    )
+                    Text(
+                        stringResource(R.string.elevator_pitch),
+                        color = md_theme_dark_onBackground,
+                        fontSize = 14.sp,
+                        fontFamily = rubik,
+                        fontStyle = FontStyle.Italic,
+                        fontWeight = FontWeight.Light,
+                        modifier = Modifier.align(Alignment.End)
+                    )
+                }
+            }
+
+
+            // the body
+            MyList(
+                recoveryPhraseWordMap,
+                setRecoveryPhraseWordMap,
+                modifier = Modifier
+                .constrainAs(body) {
+                    top.linkTo(appName.bottom)
+                    bottom.linkTo(button.top)
+                    height = Dimension.fillToConstraints
+            })
+
+
+            // the button
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .background(MaterialTheme.colorScheme.background)
+                    .constrainAs(button) {
+                        bottom.linkTo(parent.bottom)
+                        start.linkTo(parent.start)
+                        end.linkTo(parent.end)
+                    }
+            ) {
+                Column {
+                    Button(
+                        onClick = {
+                            when (val wordCheck = checkWords(recoveryPhraseWordMap)) {
+                                 is WordCheckResult.SUCCESS -> {
+                                    Log.i(TAG, "All words passed the first check")
+                                    Log.i(TAG, "Recovery phrase is \"${wordCheck.recoveryPhrase}\"")
+                                    onBuildWalletButtonClicked(WalletCreateType.RECOVER(wordCheck.recoveryPhrase))
+                                }
+                                is WordCheckResult.FAILURE -> {
+                                    Log.i(TAG, "Not all words are valid")
+                                    scope.launch {
+                                        snackbarHostState.showSnackbar(
+                                            message = wordCheck.errorMessage,
+                                            duration = SnackbarDuration.Short
+                                        )
+                                    }
+                                }
+                            }
+                        },
+                        colors = ButtonDefaults.buttonColors(md_theme_dark_primary),
+                        shape = RoundedCornerShape(16.dp),
+                        modifier = Modifier
+                            .size(width = 300.dp, height = 100.dp)
+                            .padding(vertical = 8.dp, horizontal = 8.dp)
+                            .shadow(elevation = 8.dp, shape = RoundedCornerShape(16.dp))
+                    ) {
+                        Text(
+                            stringResource(R.string.recover_wallet),
+                            fontSize = 20.sp,
+                            fontFamily = rubik,
+                            textAlign = TextAlign.Center,
+                            lineHeight = 28.sp,
+                        )
+                    }
                 }
             }
         }
