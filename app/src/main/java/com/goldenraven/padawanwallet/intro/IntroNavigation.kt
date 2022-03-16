@@ -16,7 +16,7 @@ import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
-fun IntroNavigation(activityShutdown: () -> Unit) {
+fun IntroNavigation(onBuildWalletButtonClicked: (WalletCreateType, String?) -> Unit) {
     val navController: NavHostController = rememberAnimatedNavController()
     val animationDuration = 400
 
@@ -53,7 +53,7 @@ fun IntroNavigation(activityShutdown: () -> Unit) {
             popExitTransition = {
                 slideOutOfContainer(AnimatedContentScope.SlideDirection.End, animationSpec = tween(animationDuration))
             }
-        ) { WalletChoiceScreen(navController = navController, activityShutdown) }
+        ) { WalletChoiceScreen(navController = navController, onBuildWalletButtonClicked) }
 
         composable(
             route = Screen.WalletRecoveryScreen.route,
@@ -63,8 +63,6 @@ fun IntroNavigation(activityShutdown: () -> Unit) {
             popExitTransition = {
                 slideOutOfContainer(AnimatedContentScope.SlideDirection.End, animationSpec = tween(animationDuration))
             }
-        ) {
-            WalletRecoveryScreen(activityShutdown)
-        }
+        ) { WalletRecoveryScreen(onBuildWalletButtonClicked) }
     }
 }

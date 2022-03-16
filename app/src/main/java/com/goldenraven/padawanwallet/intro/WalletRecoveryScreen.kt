@@ -7,6 +7,7 @@ package com.goldenraven.padawanwallet.intro
 
 import android.content.Context
 import android.content.Intent
+import android.nfc.Tag
 import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -48,8 +49,10 @@ import com.goldenraven.padawanwallet.utils.buildRecoveryPhrase
 import com.goldenraven.padawanwallet.utils.checkWords
 import com.goldenraven.padawanwallet.wallet.WalletActivity
 
+private const val TAG = "WalletRecoveryScreen"
+
 @Composable
-internal fun WalletRecoveryScreen(activityShutdown: () -> Unit) {
+internal fun WalletRecoveryScreen(onBuildWalletButtonClicked: (WalletCreateType, String?) -> Unit) {
     val context: Context = LocalContext.current
 
     // the screen is broken into 3 parts
@@ -128,17 +131,12 @@ internal fun WalletRecoveryScreen(activityShutdown: () -> Unit) {
                         when (checkWords(recoveryPhraseWordMap)) {
                             true -> {
                                 val recoveryPhrase: String = buildRecoveryPhrase(recoveryPhraseWordMap)
-                                Log.i("WalletRecoveryScreen", "All words valid!")
-                                Log.i("WalletRecoveryScreen", "Recovery phrase is \"$recoveryPhrase\"")
-                                try {
-                                    Wallet.recoverWallet(recoveryPhrase)
-                                    context.startActivity(Intent(context, WalletActivity::class.java))
-                                } catch(error: Throwable) {
-                                    Log.i("WalletRecoveryScreen", "Could not load wallet: $error")
-                                }
+                                Log.i(TAG, "All words valid!")
+                                Log.i(TAG, "Recovery phrase is \"$recoveryPhrase\"")
+                                onBuildWalletButtonClicked(WalletCreateType.RECOVER, recoveryPhrase)
                             }
                             false -> {
-                                Log.i("WalletRecoveryScreen", "Not all words are valid")
+                                Log.i(TAG, "Not all words are valid")
                             }
                         }
                     },
@@ -228,10 +226,10 @@ fun WordField(
     )
 }
 
-@Preview(device = Devices.PIXEL_4, showBackground = true)
-@Composable
-internal fun PreviewWalletRecoveryScreen() {
-    PadawanTheme {
-        WalletRecoveryScreen({ })
-    }
-}
+// @Preview(device = Devices.PIXEL_4, showBackground = true)
+// @Composable
+// internal fun PreviewWalletRecoveryScreen() {
+//     PadawanTheme {
+//         WalletRecoveryScreen({ })
+//     }
+// }

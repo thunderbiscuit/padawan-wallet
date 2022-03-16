@@ -23,12 +23,6 @@ import com.google.accompanist.systemuicontroller.rememberSystemUiController
 @Composable
 internal fun SplashScreen(navController: NavController) {
 
-    // val systemUiController = rememberSystemUiController().apply {
-    //     this.isSystemBarsVisible = false
-    //     this.isNavigationBarVisible = false
-    //     this.isSystemBarsVisible = false
-    // }
-
     HideBars()
 
     LaunchedEffect(key1 = true) {
