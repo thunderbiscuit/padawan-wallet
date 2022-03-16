@@ -17,23 +17,13 @@
         android:theme="@style/Theme.PadawanWallet.Launcher">
 
         <activity
-            android:name=".DispatchActivity"
-            android:theme="@style/Theme.PadawanWallet.Launcher"
-            android:screenOrientation="portrait"
-            android:exported="true" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-
-        <activity
             android:name=".intro.IntroActivity"
+            android:theme="@style/Theme.PadawanWallet"
             android:screenOrientation="portrait"
             android:exported="true">
             <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-                <category android:name="android.intent.category.DEFAULT" />
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 

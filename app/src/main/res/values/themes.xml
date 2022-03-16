@@ -15,7 +15,8 @@
     </style>
 
     <style name="Theme.PadawanWallet.Launcher">
-<!--        <item name="android:statusBarColor">@color/bg0soft_light</item>-->
-        <item name="android:windowBackground">@drawable/launch_screen</item>
+        <item name="android:statusBarColor">@color/bg0soft_light</item>
+        <item name="android:windowBackground">@color/bg0soft_light</item>
+<!--        <item name="android:windowBackground">@drawable/launch_screen</item>-->
     </style>
 </resources>

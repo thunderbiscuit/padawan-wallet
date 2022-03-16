@@ -1,3 +1,8 @@
+/*
+ * Copyright 2020-2022 thunderbiscuit and contributors.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the ./LICENSE file.
+ */
+
 package com.goldenraven.padawanwallet.intro
 
 import androidx.compose.foundation.background
@@ -25,9 +30,14 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.goldenraven.padawanwallet.R
 import com.goldenraven.padawanwallet.theme.*
+import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
 @Composable
 internal fun IntroScreen(navController: NavController) {
+
+    // the splash screen hides the system bars
+    // we need to bring them back on before continuing
+    ShowBars()
 
     val (showDialog, setShowDialog) =  remember { mutableStateOf(false) }
 
@@ -145,6 +155,15 @@ internal fun LetsGoButton(setShowDialog: (Boolean) -> Unit) {
             fontSize = 22.sp,
             fontFamily = jost,
         )
+    }
+}
+
+@Composable
+internal fun ShowBars() {
+    rememberSystemUiController().apply {
+        this.isSystemBarsVisible = true
+        this.isNavigationBarVisible = true
+        this.isStatusBarVisible = true
     }
 }
 

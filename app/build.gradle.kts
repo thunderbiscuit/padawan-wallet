@@ -105,6 +105,7 @@ dependencies {
     implementation("androidx.compose.material3:material3:1.0.0-alpha07")
     implementation("androidx.constraintlayout:constraintlayout-compose:1.0.0")
     implementation("com.google.accompanist:accompanist-navigation-animation:0.23.1")
+    implementation("com.google.accompanist:accompanist-systemuicontroller:0.23.1")
 
     // bitcoin
     implementation("org.bitcoindevkit:bdk-android:0.5.1")

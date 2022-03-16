@@ -1,6 +1,10 @@
+/*
+ * Copyright 2020-2022 thunderbiscuit and contributors.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the ./LICENSE file.
+ */
+
 package com.goldenraven.padawanwallet.intro
 
-import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import androidx.compose.foundation.background
@@ -27,7 +31,6 @@ import com.goldenraven.padawanwallet.R
 import com.goldenraven.padawanwallet.data.Wallet
 import com.goldenraven.padawanwallet.theme.*
 import com.goldenraven.padawanwallet.wallet.WalletActivity
-
 
 @Composable
 internal fun WalletChoiceScreen(
