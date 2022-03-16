@@ -1,4 +1,6 @@
 import com.android.build.api.variant.FilterConfiguration.FilterType.ABI
+import org.gradle.api.tasks.testing.logging.TestExceptionFormat.*
+import org.gradle.api.tasks.testing.logging.TestLogEvent.*
 
 plugins {
     id("com.android.application")
@@ -122,6 +124,19 @@ dependencies {
 
     // testing
     testImplementation("junit:junit:4.13.2")
+    testRuntimeOnly("org.junit.vintage:junit-vintage-engine:5.8.2")
+}
+
+tasks.withType<Test> {
+    useJUnitPlatform()
+
+    testLogging {
+        events(PASSED, SKIPPED, FAILED, STANDARD_OUT, STANDARD_ERROR)
+        exceptionFormat = FULL
+        showExceptions = true
+        showCauses = true
+        showStackTraces = true
+    }
 }
 
 val abiCodes = mapOf("armeabi-v7a" to 1, "x86" to 2, "x86_64" to 3, "arm64-v8a" to 4)
