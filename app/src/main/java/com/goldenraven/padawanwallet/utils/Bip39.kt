@@ -14,7 +14,7 @@ fun checkWords(recoveryPhraseWordMap: Map<Int, String>): WordCheckResult {
     recoveryPhraseWordMap.forEach() { it ->
         if (it.value.isBlank()) {
             Log.i("Utils/checkWords", "Word ${it.key} was empty")
-            return WordCheckResult.FAILURE(errorMessage = "Word ${it.key} was empty")
+            return WordCheckResult.FAILURE(errorMessage = "Word ${it.key} is empty")
         }
         if (it.value.trim().lowercase() !in validWords) {
             Log.i("Utils/checkWords", "Word ${it.key} is not valid")
