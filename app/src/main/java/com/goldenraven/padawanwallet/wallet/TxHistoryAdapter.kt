@@ -52,7 +52,7 @@ class TxHistoryAdapter: RecyclerView.Adapter<TxHistoryAdapter.MyViewHolder>() {
             holder.itemView.findViewById<TextView>(R.id.height).visibility = if (holder.itemView.findViewById<TextView>(R.id.height).isVisible) View.GONE else View.VISIBLE
             holder.itemView.findViewById<TextView>(R.id.heightval).visibility = if (holder.itemView.findViewById<TextView>(R.id.heightval).isVisible) View.GONE else View.VISIBLE
         }
-        if (currentItem.isSend) {
+        if (currentItem.isPayment) {
             holder.itemView.findViewById<TextView>(R.id.satsSentReceivedView).text = "Sent:"
             if (currentItem.valueOut == 0) {
                 holder.itemView.findViewById<TextView>(R.id.satsInOutString).text = "0 (Self-Transfer)"

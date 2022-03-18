@@ -152,46 +152,45 @@ class WalletBuild : Fragment() {
     }
 
     private fun broadcastTransaction() {
-        var txidString: String = "string of txid"
+        // var txidString: String = "string of txid"
 
         try {
             Wallet.sign(psbt)
-            val transaction = Wallet.broadcast(psbt)
-            val details = when (transaction) {
-                is Transaction.Confirmed -> transaction.details
-                is Transaction.Unconfirmed -> transaction.details
-            }
-            txidString = details.txid
-            val time : String = when(transaction) {
-                is Transaction.Unconfirmed -> "Pending"
-                is Transaction.Confirmed -> transaction.confirmation.timestamp.timestampToString()
-            }
-            val height : UInt = when(transaction) {
-                is Transaction.Unconfirmed -> 100_000_000u
-                is Transaction.Confirmed -> transaction.confirmation.height
-            }
-            val fees : ULong = details.fees ?: 0u
-            Log.i(TAG,"Transaction was broadcast! Data added to database:")
-            Log.i(TAG,"Transaction was broadcast! txid: ${details.txid}")
-            Log.i(TAG,"Transaction was broadcast! timestamp: ${time}")
-            Log.i(TAG,"Transaction was broadcast! height: ${height}")
-            Log.i(TAG,"Transaction was broadcast! received: ${details.received}")
-            Log.i(TAG,"Transaction was broadcast! sent: ${details.sent}")
-            Log.i(TAG,"Transaction was broadcast! fees: ${details.fees}")
+            val txid = Wallet.broadcast(psbt)
+            // val details = when (transaction) {
+            //     is Transaction.Confirmed -> transaction.details
+            //     is Transaction.Unconfirmed -> transaction.details
+            // }
+            // txidString = details.txid
+            // val time : String = when(transaction) {
+            //     is Transaction.Unconfirmed -> "Pending"
+            //     is Transaction.Confirmed -> transaction.confirmation.timestamp.timestampToString()
+            // }
+            // val height : UInt = when(transaction) {
+            //     is Transaction.Unconfirmed -> 100_000_000u
+            //     is Transaction.Confirmed -> transaction.confirmation.height
+            // }
+            // val fees : ULong = details.fees ?: 0u
+            // Log.i(TAG,"Transaction was broadcast! Data added to database:")
+            Log.i(TAG,"Transaction was broadcast! txid: $txid")
+            // Log.i(TAG,"Transaction was broadcast! timestamp: ${time}")
+            // Log.i(TAG,"Transaction was broadcast! height: ${height}")
+            // Log.i(TAG,"Transaction was broadcast! received: ${details.received}")
+            // Log.i(TAG,"Transaction was broadcast! sent: ${details.sent}")
+            // Log.i(TAG,"Transaction was broadcast! fees: ${details.fees}")
 
-            addTxToDatabase(
-                    details.txid,
-                    time,
-                    details.received.toInt(),
-                    details.sent.toInt(),
-                    fees.toInt(),
-                    height.toInt()
-            )
-            Log.i(TAG,"Transaction was broadcast! txid: $details.txid, txidString: $txidString")
+            // addTxToDatabase(
+            //         details.txid,
+            //         time,
+            //         details.received.toInt(),
+            //         details.sent.toInt(),
+            //         fees.toInt(),
+            //         height.toInt()
+            // )
             fireSnackbar(
-                    requireView(),
-                    SnackbarLevel.INFO,
-                    "Transaction was broadcast successfully!"
+                requireView(),
+                SnackbarLevel.INFO,
+                "Transaction was broadcast successfully!"
             )
         } catch (e: Throwable) {
             Log.i(TAG,"${e.message}")
@@ -203,32 +202,32 @@ class WalletBuild : Fragment() {
         }
     }
 
-    private fun addTxToDatabase(txid: String, timestamp: String, txSatsIn: Int, txSatsOut: Int, fees: Int, height : Int) {
-        val isSend: Boolean = isSend(sent = txSatsOut, received = txSatsIn)
-        var valueIn: Int = 0
-        var valueOut: Int = 0
-        when (isSend) {
-            true -> {
-                valueOut = netSendWithoutFees(
-                        txSatsOut = txSatsOut,
-                        txSatsIn = txSatsIn,
-                        fees = fees
-                )
-            }
-            false -> {
-                valueIn = txSatsIn
-            }
-        }
-        val transaction: Tx = Tx(
-                txid = txid,
-                date = timestamp,
-                valueIn = valueIn,
-                valueOut = valueOut,
-                fees = fees,
-                isSend = isSend,
-                height = height,
-        )
-        Log.i(TAG,"From addTxToDatabase, the tx is $transaction")
-        viewModel.addTx(transaction)
-    }
+    // private fun addTxToDatabase(txid: String, timestamp: String, txSatsIn: Int, txSatsOut: Int, fees: Int, height : Int) {
+    //     val isSend: Boolean = isSend(sent = txSatsOut, received = txSatsIn)
+    //     var valueIn: Int = 0
+    //     var valueOut: Int = 0
+    //     when (isSend) {
+    //         true -> {
+    //             valueOut = netSendWithoutFees(
+    //                     txSatsOut = txSatsOut,
+    //                     txSatsIn = txSatsIn,
+    //                     fees = fees
+    //             )
+    //         }
+    //         false -> {
+    //             valueIn = txSatsIn
+    //         }
+    //     }
+    //     val transaction: Tx = Tx(
+    //             txid = txid,
+    //             date = timestamp,
+    //             valueIn = valueIn,
+    //             valueOut = valueOut,
+    //             fees = fees,
+    //             isSend = isSend,
+    //             height = height,
+    //     )
+    //     Log.i(TAG,"From addTxToDatabase, the tx is $transaction")
+    //     viewModel.addTx(transaction)
+    // }
 }
