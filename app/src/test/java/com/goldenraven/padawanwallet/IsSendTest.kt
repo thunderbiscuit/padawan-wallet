@@ -5,20 +5,27 @@
 
 package com.goldenraven.padawanwallet
 
-import com.goldenraven.padawanwallet.utils.isSend
+import com.goldenraven.padawanwallet.utils.SatoshisIn
+import com.goldenraven.padawanwallet.utils.SatoshisOut
+import com.goldenraven.padawanwallet.utils.isPayment
 import org.junit.Test
 import org.junit.Assert.*
 
 class IsSendTest {
+
+    private val satoshisOut300 = SatoshisOut(300)
+    private val satoshisIn20 = SatoshisIn(20)
+    private val satoshisOut0 = SatoshisOut(0)
+
     @Test
-    fun `transaction is a send`() {
-        val isSend: Boolean = isSend(sent = 300, received = 20)
-        assertEquals(isSend, true)
+    fun `Transaction is a payment`() {
+        val isPayment: Boolean = isPayment(sent = satoshisOut300, received = satoshisIn20)
+        assertEquals(isPayment, true)
     }
 
     @Test
-    fun `transaction is a receive`() {
-        val isSend: Boolean = isSend(sent = 0, received = 2000)
-        assertEquals(isSend, false)
+    fun `Transaction is a receive`() {
+        val isPayment: Boolean = isPayment(sent = satoshisOut0, received = satoshisIn20)
+        assertEquals(isPayment, false)
     }
 }

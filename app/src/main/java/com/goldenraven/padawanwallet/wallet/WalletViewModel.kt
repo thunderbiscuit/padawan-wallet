@@ -12,9 +12,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.goldenraven.padawanwallet.data.*
-import com.goldenraven.padawanwallet.utils.isSend
-import com.goldenraven.padawanwallet.utils.netSendWithoutFees
-import com.goldenraven.padawanwallet.utils.timestampToString
+import com.goldenraven.padawanwallet.utils.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import org.bitcoindevkit.Transaction
@@ -34,10 +32,10 @@ class WalletViewModel(application: Application) : AndroidViewModel(application) 
         readAllData = repository.readAllData
     }
 
-    public var balance: MutableLiveData<ULong> = MutableLiveData(0u)
-    public var timestamp: MutableLiveData<String> = MutableLiveData("Pending")
-    public var satoshiUnit: MutableLiveData<Boolean> = MutableLiveData(true)
-    public var tutorialsDone: MutableLiveData<MutableMap<String, Boolean>> = MutableLiveData(
+    var balance: MutableLiveData<ULong> = MutableLiveData(0u)
+    var timexstamp: MutableLiveData<String> = MutableLiveData("Pending")
+    var satoshiUnit: MutableLiveData<Boolean> = MutableLiveData(true)
+    var tutorialsDone: MutableLiveData<MutableMap<String, Boolean>> = MutableLiveData(
             mutableMapOf(
                     "e1" to false,
                     "e2" to false,
@@ -50,41 +48,37 @@ class WalletViewModel(application: Application) : AndroidViewModel(application) 
             )
     )
 
-    public fun addTx(tx: Tx) {
-        viewModelScope.launch(Dispatchers.IO) {
-            Log.i(TAG, "tx: ${tx}")
-            repository.addTx(tx)
-        }
-    }
-
-    public fun retrieveDoneTutorials() {
+    fun retrieveDoneTutorials() {
         val newTutorialsDone = Repository.loadTutorialsDone()
         tutorialsDone.postValue(newTutorialsDone)
     }
 
-    public fun updateBalance() {
+    fun updateBalance() {
         Wallet.sync(100u)
         val newBalance = Wallet.getBalance()
         Log.i(TAG,"New balance: $newBalance")
         balance.postValue(newBalance)
     }
 
-    public fun syncTransactionHistory() {
+    fun syncTransactionHistory() {
         val txHistory = Wallet.listTransactions()
         Log.i(TAG,"Transactions history, number of transactions: ${txHistory.size}")
+
         for (tx in txHistory) {
             val details = when (tx) {
                 is Transaction.Confirmed -> tx.details
                 is Transaction.Unconfirmed -> tx.details
             }
-            val isSend: Boolean = isSend(sent = details.sent.toInt(), received = details.received.toInt())
             var valueIn: Int = 0
             var valueOut: Int = 0
-            when (isSend) {
+            val satoshisIn = SatoshisIn(details.sent.toInt())
+            val satoshisOut = SatoshisOut(details.sent.toInt())
+            val isPayment = isPayment(satoshisOut, satoshisIn)
+            when (isPayment) {
                 true -> {
                     valueOut = netSendWithoutFees(
-                        txSatsOut = details.sent.toInt(),
-                        txSatsIn = details.received.toInt(),
+                        txSatsOut = satoshisOut,
+                        txSatsIn = satoshisIn,
                         fees = details.fees?.toInt() ?: 0
                     )
                 }
@@ -92,11 +86,11 @@ class WalletViewModel(application: Application) : AndroidViewModel(application) 
                     valueIn = details.received.toInt()
                 }
             }
-            val time : String = when (tx) {
+            val time: String = when (tx) {
                 is Transaction.Confirmed -> tx.confirmation.timestamp.timestampToString()
                 else -> "Pending"
             }
-            val height : UInt = when (tx) {
+            val height: UInt = when (tx) {
                 is Transaction.Confirmed -> tx.confirmation.height
                 else -> 100_000_000u
             }
@@ -106,14 +100,21 @@ class WalletViewModel(application: Application) : AndroidViewModel(application) 
                     valueIn = valueIn,
                     valueOut = valueOut,
                     fees = details.fees?.toInt() ?: 0,
-                    isSend = isSend,
+                    isPayment = isPayment,
                     height = height.toInt()
             )
             addTx(transaction)
         }
     }
 
-    public fun changeUnit() {
+    private fun addTx(tx: Tx) {
+        viewModelScope.launch(Dispatchers.IO) {
+            Log.i(TAG, "Adding transaction to DB: $tx")
+            repository.addTx(tx)
+        }
+    }
+
+    fun changeUnit() {
         if (satoshiUnit.value == true) {
             satoshiUnit.value = false
             balance.postValue(balance.value)
@@ -123,7 +124,7 @@ class WalletViewModel(application: Application) : AndroidViewModel(application) 
         }
     }
 
-    public fun markAsDone(tutorialNumber: Int) {
+    fun markAsDone(tutorialNumber: Int) {
         val newTutorialsDoneMap = tutorialsDone.value
         when (tutorialNumber) {
             1 -> {

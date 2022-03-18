@@ -16,6 +16,6 @@ data class Tx(
     val valueIn: Int,
     val valueOut: Int,
     val fees: Int,
-    val isSend: Boolean,
+    val isPayment: Boolean,
     val height: Int,
 )

@@ -8,12 +8,13 @@ package com.goldenraven.padawanwallet.data
 import android.util.Log
 import com.goldenraven.padawanwallet.utils.RequiredInitialWalletData
 import org.bitcoindevkit.*
+import org.bitcoindevkit.Wallet as BdkWallet
 
 private const val TAG = "Wallet"
 
 object Wallet {
 
-    private lateinit var wallet: OnlineWallet
+    private lateinit var wallet: BdkWallet
     private const val name: String = "padawan-testnet-0"
     private lateinit var path: String
     private const val electrumURL: String = "ssl://electrum.blockstream.info:60002"
@@ -24,7 +25,7 @@ object Wallet {
         }
     }
 
-    fun getWallet(): OnlineWallet = wallet
+    fun getWallet(): BdkWallet = wallet
 
     // setting the path requires the application context and is done once by PadawanWalletApplication
     fun setPath(path: String) {
@@ -35,9 +36,9 @@ object Wallet {
         descriptor: String,
         changeDescriptor: String,
     ): Unit {
-        val database = DatabaseConfig.Sled(SledDbConfiguration(path, name))
+        val database = DatabaseConfig.Sqlite(SqliteDbConfiguration("$path/bdk-sqlite"))
         val blockchain = BlockchainConfig.Electrum(ElectrumConfig(electrumURL, null, 5u, null, 10u))
-        wallet = OnlineWallet(
+        wallet = BdkWallet(
             descriptor,
             changeDescriptor,
             Network.TESTNET,
@@ -81,7 +82,7 @@ object Wallet {
     }
 
     private fun generateExtendedKey(): ExtendedKeyInfo {
-        return generateExtendedKey(Network.TESTNET, MnemonicType.WORDS12, null)
+        return generateExtendedKey(Network.TESTNET, WordCount.WORDS12, null)
     }
 
     private fun restoreExtendedKeyFromMnemonic(mnemonic: String): ExtendedKeyInfo {
@@ -122,7 +123,7 @@ object Wallet {
         wallet.sign(psbt)
     }
 
-    fun broadcast(psbt: PartiallySignedBitcoinTransaction): Transaction {
+    fun broadcast(psbt: PartiallySignedBitcoinTransaction): String {
         return wallet.broadcast(psbt)
     }
 }

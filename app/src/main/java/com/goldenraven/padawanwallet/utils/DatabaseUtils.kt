@@ -5,6 +5,16 @@
 
 package com.goldenraven.padawanwallet.utils
 
-public fun netSendWithoutFees(txSatsOut: Int, txSatsIn: Int, fees: Int): Int {
-    return txSatsOut - (txSatsIn + fees)
+fun netSendWithoutFees(txSatsOut: SatoshisOut, txSatsIn: SatoshisIn, fees: Int): Int {
+    return txSatsOut.satoshis - (txSatsIn.satoshis + fees)
 }
+
+fun isPayment(sent: SatoshisOut, received: SatoshisIn): Boolean {
+    return (received.satoshis - sent.satoshis) < 0
+}
+
+@JvmInline
+value class SatoshisIn(val satoshis: Int)
+
+@JvmInline
+value class SatoshisOut(val satoshis: Int)
