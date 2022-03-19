@@ -29,7 +29,9 @@ abstract class TxDatabase: RoomDatabase() {
                     context.applicationContext,
                     TxDatabase::class.java,
                     "transaction_history",
-                ).build()
+                )
+                    .fallbackToDestructiveMigration()
+                    .build()
                 INSTANCE = instance
                 return instance
             }
