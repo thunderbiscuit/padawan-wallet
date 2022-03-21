@@ -89,14 +89,14 @@ fun Dialog(showDialog: Boolean, setShowDialog: (Boolean) -> Unit, navController:
             onDismissRequest = {},
             title = {
                 Text(
-                    "Be careful!",
+                    text = stringResource(R.string.intro_dialog_title),
                     style = MaterialTheme.typography.headlineMedium,
                     color = md_theme_dark_onLightBackground
                 )
             },
             text = {
                 Text(
-                    "It’s important you know that Padawan is not a bitcoin wallet that can handle normal bitcoins.\n\nThis wallet is built to help you learn and experiment with bitcoin wallets through a series of tutorials, and it uses testnet coins, a type of bitcoin that doesn't have any value.\n\nThe wallet can only handle testnet coins, which are not compatible with normal bitcoins!",
+                    text = stringResource(R.string.intro_dialog_message),
                     color = md_theme_dark_onLightBackground
                 )
             },
@@ -108,7 +108,7 @@ fun Dialog(showDialog: Boolean, setShowDialog: (Boolean) -> Unit, navController:
                     },
                 ) {
                     Text(
-                        "I understand",
+                        text = stringResource(R.string.intro_dialog_positive),
                         color = md_theme_dark_onLightBackground
                     )
                 }
@@ -120,7 +120,7 @@ fun Dialog(showDialog: Boolean, setShowDialog: (Boolean) -> Unit, navController:
                     },
                 ) {
                     Text(
-                        "Cancel",
+                        text = stringResource(R.string.intro_dialog_negative),
                         color = md_theme_dark_onLightBackground
                     )
                 }
