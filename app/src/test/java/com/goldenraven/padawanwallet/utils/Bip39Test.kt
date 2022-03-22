@@ -3,10 +3,8 @@
  * Use of this source code is governed by the Apache 2.0 license that can be found in the ./LICENSE file.
  */
 
-package com.goldenraven.padawanwallet
+package com.goldenraven.padawanwallet.utils
 
-import com.goldenraven.padawanwallet.utils.WordCheckResult
-import com.goldenraven.padawanwallet.utils.checkWords
 import org.junit.Test
 import org.junit.Assert.*
 
@@ -35,7 +33,7 @@ class CheckWords {
         )
         val words: WordCheckResult = checkWords(wrongRecoveryPhraseMap)
         words as WordCheckResult.FAILURE
-        assertEquals(words.errorMessage, "Word 8 is empty")
+        assertEquals("Word 8 is empty", words.errorMessage)
     }
 
     @Test
@@ -46,13 +44,13 @@ class CheckWords {
         )
         val words: WordCheckResult = checkWords(wrongRecoveryPhraseMap)
         words as WordCheckResult.FAILURE
-        assertEquals(words.errorMessage, "Word 2 is not valid")
+        assertEquals("Word 2 is not valid", words.errorMessage)
     }
 
     @Test
     fun `Correct recovery phrase passes the checkWord() function`() {
         val words = checkWords(correctRecoveryPhraseMap)
-        assertEquals(words is WordCheckResult.SUCCESS, true)
+        assertEquals(true, words is WordCheckResult.SUCCESS)
     }
 
     @Test
@@ -63,6 +61,6 @@ class CheckWords {
         )
         val wordCheckResult: WordCheckResult = checkWords(wrongRecoveryPhrase)
         wordCheckResult as WordCheckResult.SUCCESS
-        assertEquals(wordCheckResult.recoveryPhrase, correctRecoveryPhraseString)
+        assertEquals(correctRecoveryPhraseString, wordCheckResult.recoveryPhrase)
     }
 }
