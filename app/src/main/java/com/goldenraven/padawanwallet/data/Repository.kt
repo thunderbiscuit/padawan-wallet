@@ -35,12 +35,12 @@ object Repository {
 
     fun saveWallet(path: String, descriptor: String, changeDescriptor: String) {
         Log.i(TAG, "Saved wallet: path -> $path, descriptor -> $descriptor, change descriptor -> $changeDescriptor")
-        val editor = sharedPreferences.edit()
-        editor.putBoolean("initialized", true)
-        editor.putString("path", path)
-        editor.putString("descriptor", descriptor)
-        editor.putString("changeDescriptor", changeDescriptor)
-        editor.apply()
+        sharedPreferences.edit().apply {
+            putBoolean("initialized", true)
+            putString("path", path)
+            putString("descriptor", descriptor)
+            putString("changeDescriptor", changeDescriptor)
+        }.apply()
     }
 
     fun saveMnemonic(mnemonic: String) {
@@ -71,20 +71,18 @@ object Repository {
     }
 
     fun loadTutorialsDone(): MutableMap<String, Boolean> {
-        val firstTimeTutorialsDone: Boolean = sharedPreferences.getBoolean("firstTimeTutorialsDone", true)
-        val editor = sharedPreferences.edit()
-
-        if (firstTimeTutorialsDone) {
-            editor.putBoolean("firstTimeTutorialsDone", false)
-            editor.putBoolean("e1", false)
-                .putBoolean("e2", false)
-                .putBoolean("e3", false)
-                .putBoolean("e4", false)
-                .putBoolean("e5", false)
-                .putBoolean("e6", false)
-                .putBoolean("e7", false)
-                .putBoolean("e8", false)
-                .apply()
+        if (sharedPreferences.getBoolean("firstTimeTutorialsDone", true)) {
+            sharedPreferences.edit().apply {
+                putBoolean("firstTimeTutorialsDone", false)
+                putBoolean("e1", false)
+                putBoolean("e2", false)
+                putBoolean("e3", false)
+                putBoolean("e4", false)
+                putBoolean("e5", false)
+                putBoolean("e6", false)
+                putBoolean("e7", false)
+                putBoolean("e8", false)
+            }.apply()
             return mutableMapOf(
                     "e1" to false,
                     "e2" to false,
@@ -116,16 +114,16 @@ object Repository {
     }
 
     fun resetTutorials(): Unit {
-        val editor = sharedPreferences.edit()
-        editor.putBoolean("e1", false)
-            .putBoolean("e2", false)
-            .putBoolean("e3", false)
-            .putBoolean("e4", false)
-            .putBoolean("e5", false)
-            .putBoolean("e6", false)
-            .putBoolean("e7", false)
-            .putBoolean("e8", false)
-            .apply()
+        sharedPreferences.edit().apply {
+            putBoolean("e1", false)
+            putBoolean("e2", false)
+            putBoolean("e3", false)
+            putBoolean("e4", false)
+            putBoolean("e5", false)
+            putBoolean("e6", false)
+            putBoolean("e7", false)
+            putBoolean("e8", false)
+        }.apply()
         resetTutorial = true
     }
 
