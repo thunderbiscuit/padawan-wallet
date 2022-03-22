@@ -26,6 +26,8 @@ import com.google.zxing.BarcodeFormat
 import com.google.zxing.common.BitMatrix
 import com.google.zxing.qrcode.QRCodeWriter
 
+private const val TAG = "WalletReceive"
+
 class WalletReceive : Fragment() {
 
     private lateinit var binding: FragmentWalletReceiveBinding
@@ -49,7 +51,7 @@ class WalletReceive : Fragment() {
 
         binding.buttonGenerateNewAddress.setOnClickListener {
             val newGeneratedAddress: String = Wallet.getNewAddress()
-            Log.i("Padalogs","New deposit address is $newGeneratedAddress")
+            Log.i(TAG,"New deposit address is $newGeneratedAddress")
 
             try {
                 val qrCodeWriter: QRCodeWriter = QRCodeWriter()
@@ -62,7 +64,7 @@ class WalletReceive : Fragment() {
                 }
                 binding.qrCode.setImageBitmap(bitMap)
             } catch (e: Throwable) {
-                Log.i("Padalogs", "Error with QRCode generation, $e")
+                Log.i(TAG, "Error with QRCode generation, $e")
             }
             binding.receiveAddress.text = newGeneratedAddress
         }

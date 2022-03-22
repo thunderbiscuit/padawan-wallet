@@ -28,6 +28,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.text.DecimalFormat
 
+private const val TAG = "WalletHome"
 
 class WalletHome : Fragment() {
 
@@ -106,7 +107,7 @@ class WalletHome : Fragment() {
         }
 
         binding.unitToggleButton.setOnClickListener {
-            Log.i("Padalogs","Toggle unit button was pressed")
+            Log.i(TAG,"Toggle unit button was pressed")
             viewModel.changeUnit()
         }
 

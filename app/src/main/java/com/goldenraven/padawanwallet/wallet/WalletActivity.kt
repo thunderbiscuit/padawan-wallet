@@ -23,6 +23,8 @@ import com.goldenraven.padawanwallet.drawer.DrawerActivity
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 
+private const val TAG = "WalletActivity"
+
 class WalletActivity : AppCompatActivity() {
 
     // lateinit var toggle: ActionBarDrawerToggle
@@ -78,36 +80,36 @@ class WalletActivity : AppCompatActivity() {
         binding.navView.setNavigationItemSelectedListener {
             when(it.itemId) {
                 R.id.about -> {
-                    Log.i("Padalogs","clicked about")
+                    Log.i(TAG,"clicked about")
                     startActivity(intentAbout)
                     binding.drawerLayout.closeDrawer(GravityCompat.START)
                     true
                 }
                 R.id.settings -> {
-                    Log.i("Padalogs","clicked setting")
+                    Log.i(TAG,"clicked setting")
                     startActivity(intentSettings)
                     binding.drawerLayout.closeDrawer(GravityCompat.START)
                     true
                 }
                 R.id.mnemonic -> {
-                    Log.i("Padalogs","clicked seed phrase")
+                    Log.i(TAG,"clicked seed phrase")
                     startActivity(intentSeedPhrase)
                     binding.drawerLayout.closeDrawer(GravityCompat.START)
                     true
                 }
                 R.id.sendCoinsBack -> {
-                    Log.i("Padalogs","clicked navigate to send coins back to faucet from WalletActiv")
+                    Log.i(TAG,"clicked navigate to send coins back to faucet from WalletActiv")
                     startActivity(intentSendCoinsBack)
                     binding.drawerLayout.closeDrawer(GravityCompat.START)
                     true
                 }
                 R.id.wallet -> {
-                    Log.i("Padalogs","clicked seed phrase")
+                    Log.i(TAG,"clicked seed phrase")
                     binding.drawerLayout.closeDrawer(GravityCompat.START)
                     true
                 }
                 else -> {
-                    Log.i("Padalogs","Drawer selection from wallet activity didn't work properly")
+                    Log.i(TAG,"Drawer selection from wallet activity didn't work properly")
                     true
                 }
             }

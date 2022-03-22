@@ -31,6 +31,8 @@ import io.ktor.http.*
 import kotlinx.coroutines.launch
 import android.util.Log
 
+private const val TAG = "WalletFragment"
+
 class WalletFragment : Fragment() {
 
     private lateinit var binding: FragmentWalletBinding
@@ -53,13 +55,13 @@ class WalletFragment : Fragment() {
             .setTitle("Hello there!")
             .setMessage(dialogMessage)
             .setPositiveButton("Yes please!") { _, _ ->
-                Log.i("Padalogs","User would appreciate some testnet coins!")
+                Log.i(TAG,"User would appreciate some testnet coins!")
                 val address: String = Wallet.getNewAddress()
                 callTatooineFaucet(address)
                 Repository.offerFaucetCallDone()
             }
             .setNegativeButton("No thanks") { _, _ ->
-                Log.i("Padalogs","User doesn't need the coins right now.")
+                Log.i(TAG,"User doesn't need the coins right now.")
                 Repository.offerFaucetCallDone()
             }
 
@@ -67,7 +69,7 @@ class WalletFragment : Fragment() {
             context?.getSharedPreferences("current_wallet", Context.MODE_PRIVATE)
                 ?.getBoolean("offerFaucetCallDone", false)
 
-        Log.i("Padalogs","Value of offerFaucetCallDone is $offerFaucetCallDone")
+        Log.i(TAG,"Value of offerFaucetCallDone is $offerFaucetCallDone")
 
         if (offerFaucetCallDone == false) {
             firstTimePadawanWalletDialog.show()
@@ -89,15 +91,15 @@ class WalletFragment : Fragment() {
                 }
             }
 
-            Log.i("Padalogs","API call to Tatooine will request coins at $address")
+            Log.i(TAG,"API call to Tatooine will request coins at $address")
             try {
                 val response: HttpResponse = ktorClient.post(faucetUrl) {
                     body = TextContent(address, ContentType.Text.Plain)
                 }
                 Repository.oneTimeFaucetCallDone()
-                Log.i("Padalogs","API call to Tatooine was performed. Response is ${response.status}, ${response.readText()}")
+                Log.i(TAG,"API call to Tatooine was performed. Response is ${response.status}, ${response.readText()}")
             } catch (cause: Throwable) {
-                Log.i("Padalogs","Tatooine call failed: $cause")
+                Log.i(TAG,"Tatooine call failed: $cause")
                 fireSnackbar(
                     requireView(),
                     SnackbarLevel.ERROR,
