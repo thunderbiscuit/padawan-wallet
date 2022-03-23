@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/tutorialsHome"
-        android:name="com.goldenraven.padawanwallet.wallet.tutorials.TutorialsHome"
+        android:name="com.goldenraven.padawanwallet.wallet2.wallet.tutorials.TutorialsHome"
         android:label="TutorialsHome"
         tools:layout="@layout/fragment_tutorials_home">
         <action
@@ -54,7 +54,7 @@
 
     <fragment
         android:id="@+id/tutorialE1"
-        android:name="com.goldenraven.padawanwallet.wallet.tutorials.TutorialE1"
+        android:name="com.goldenraven.padawanwallet.wallet2.wallet.tutorials.TutorialE1"
         android:label="Tutorial1" >
         <action
             android:id="@+id/action_tutorialE1_to_tutorialsHome"
@@ -65,7 +65,7 @@
 
     <fragment
         android:id="@+id/tutorialE2"
-        android:name="com.goldenraven.padawanwallet.wallet.tutorials.TutorialE2"
+        android:name="com.goldenraven.padawanwallet.wallet2.wallet.tutorials.TutorialE2"
         android:label="Tutorial2" >
         <action
             android:id="@+id/action_tutorialE2_to_tutorialsHome"
@@ -76,7 +76,7 @@
 
     <fragment
         android:id="@+id/tutorialE3"
-        android:name="com.goldenraven.padawanwallet.wallet.tutorials.TutorialE3"
+        android:name="com.goldenraven.padawanwallet.wallet2.wallet.tutorials.TutorialE3"
         android:label="Tutorial3" >
         <action
             android:id="@+id/action_tutorialE3_to_tutorialsHome"
@@ -87,7 +87,7 @@
 
     <fragment
         android:id="@+id/tutorialE4"
-        android:name="com.goldenraven.padawanwallet.wallet.tutorials.TutorialE4"
+        android:name="com.goldenraven.padawanwallet.wallet2.wallet.tutorials.TutorialE4"
         android:label="Tutorial4" >
         <action
             android:id="@+id/action_tutorialE4_to_tutorialsHome"
@@ -98,7 +98,7 @@
 
     <fragment
         android:id="@+id/tutorialE5"
-        android:name="com.goldenraven.padawanwallet.wallet.tutorials.TutorialE5"
+        android:name="com.goldenraven.padawanwallet.wallet2.wallet.tutorials.TutorialE5"
         android:label="Tutorial5" >
         <action
             android:id="@+id/action_tutorialE5_to_tutorialsHome"
@@ -109,7 +109,7 @@
 
     <fragment
         android:id="@+id/tutorialE6"
-        android:name="com.goldenraven.padawanwallet.wallet.tutorials.TutorialE6"
+        android:name="com.goldenraven.padawanwallet.wallet2.wallet.tutorials.TutorialE6"
         android:label="Tutorial6" >
         <action
             android:id="@+id/action_tutorialE6_to_tutorialsHome"
@@ -120,7 +120,7 @@
 
     <fragment
         android:id="@+id/tutorialE7"
-        android:name="com.goldenraven.padawanwallet.wallet.tutorials.TutorialE7"
+        android:name="com.goldenraven.padawanwallet.wallet2.wallet.tutorials.TutorialE7"
         android:label="Tutorial7" >
         <action
             android:id="@+id/action_tutorialE7_to_tutorialsHome"
@@ -131,7 +131,7 @@
 
     <fragment
         android:id="@+id/tutorialE8"
-        android:name="com.goldenraven.padawanwallet.wallet.tutorials.TutorialE8"
+        android:name="com.goldenraven.padawanwallet.wallet2.wallet.tutorials.TutorialE8"
         android:label="Tutorial8" >
         <action
             android:id="@+id/action_tutorialE8_to_tutorialsHome"

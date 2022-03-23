@@ -6,7 +6,6 @@
 package com.goldenraven.padawanwallet.intro
 
 import android.content.Context
-import android.content.Intent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -20,17 +19,12 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Devices
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
 import com.goldenraven.padawanwallet.R
-import com.goldenraven.padawanwallet.data.Wallet
 import com.goldenraven.padawanwallet.theme.*
-import com.goldenraven.padawanwallet.wallet.WalletActivity
 
 @Composable
 internal fun WalletChoiceScreen(

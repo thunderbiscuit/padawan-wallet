@@ -3,7 +3,7 @@
  * Use of this source code is governed by the Apache 2.0 license that can be found in the ./LICENSE file.
  */
 
-package com.goldenraven.padawanwallet.wallet.wallet
+package com.goldenraven.padawanwallet.wallet2.wallet.wallet
 
 
 import android.os.Bundle
@@ -15,14 +15,12 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import com.goldenraven.padawanwallet.R
-import com.goldenraven.padawanwallet.data.Tx
 import com.goldenraven.padawanwallet.data.Wallet
 import com.goldenraven.padawanwallet.databinding.FragmentWalletBuildBinding
 import com.goldenraven.padawanwallet.utils.*
-import com.goldenraven.padawanwallet.wallet.WalletViewModel
+import com.goldenraven.padawanwallet.wallet2.wallet.WalletViewModel
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import org.bitcoindevkit.PartiallySignedBitcoinTransaction
-import org.bitcoindevkit.Transaction
 
 private const val TAG = "WalletBuildFragment"
 

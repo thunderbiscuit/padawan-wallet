@@ -3,7 +3,7 @@
  * Use of this source code is governed by the Apache 2.0 license that can be found in the ./LICENSE file.
  */
 
-package com.goldenraven.padawanwallet.wallet.wallet
+package com.goldenraven.padawanwallet.wallet2.wallet.wallet
 
 import android.os.Bundle
 import android.util.Log
@@ -21,8 +21,8 @@ import com.goldenraven.padawanwallet.databinding.FragmentWalletHomeBinding
 import com.goldenraven.padawanwallet.utils.SnackbarLevel
 import com.goldenraven.padawanwallet.utils.fireSnackbar
 import com.goldenraven.padawanwallet.utils.isNetworkAvailable
-import com.goldenraven.padawanwallet.wallet.TxHistoryAdapter
-import com.goldenraven.padawanwallet.wallet.WalletViewModel
+import com.goldenraven.padawanwallet.wallet2.wallet.TxHistoryAdapter
+import com.goldenraven.padawanwallet.wallet2.wallet.WalletViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
