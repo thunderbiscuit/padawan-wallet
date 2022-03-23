@@ -10,8 +10,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [v0.7.2 to v0.8.0](https://github.com/thunderbiscuit/padawan-wallet/compare/v0.7.2...v0.8.0) — March 23, 2022
 ### Added
++ Wallet sync is now done in a coroutine
++ Add transaction fees in transaction history card
++ Add tests
++ Sync wallet on startup
+
+### Fixed
++ Bug of tutorials done requiring restart
++ Database corruption when data not flushed to disk
 
 ### Changed
++ Intro screens UI is now written in Jetpack Compose
++ Migrate to [bdk-android](https://github.com/bitcoindevkit/bdk-kotlin)
+
+### Removed
++ Navigation broadcast fragment  
++ Remove dependency on androidmads QR code library  
 <br/>
 
 ## [v0.7.0 to v0.7.2](https://github.com/thunderbiscuit/padawan-wallet/compare/v0.7.0...v0.7.2) — August 26, 2021
