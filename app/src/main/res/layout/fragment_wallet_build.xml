@@ -7,7 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/bg0soft"
-    tools:context=".wallet.wallet.WalletBuild">
+    tools:context=".wallet2.wallet.wallet.WalletBuild">
 
     <TextView
         android:id="@+id/textView"

@@ -3,7 +3,7 @@
  * Use of this source code is governed by the Apache 2.0 license that can be found in the ./LICENSE file.
  */
 
-package com.goldenraven.padawanwallet.wallet.tutorials
+package com.goldenraven.padawanwallet.wallet2.wallet.tutorials
 
 import android.os.Bundle
 import android.util.Log
@@ -15,7 +15,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import com.goldenraven.padawanwallet.R
 import com.goldenraven.padawanwallet.databinding.FragmentTutorialsHomeBinding
-import com.goldenraven.padawanwallet.wallet.WalletViewModel
+import com.goldenraven.padawanwallet.wallet2.wallet.WalletViewModel
 import com.goldenraven.padawanwallet.data.Repository
 
 private const val TAG = "TutorialsHome"

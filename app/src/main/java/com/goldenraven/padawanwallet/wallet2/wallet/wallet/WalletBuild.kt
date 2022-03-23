@@ -3,7 +3,7 @@
  * Use of this source code is governed by the Apache 2.0 license that can be found in the ./LICENSE file.
  */
 
-package com.goldenraven.padawanwallet.wallet.wallet
+package com.goldenraven.padawanwallet.wallet2.wallet.wallet
 
 
 import android.os.Bundle
@@ -17,9 +17,8 @@ import androidx.navigation.Navigation
 import com.goldenraven.padawanwallet.R
 import com.goldenraven.padawanwallet.data.Wallet
 import com.goldenraven.padawanwallet.databinding.FragmentWalletBuildBinding
-import com.goldenraven.padawanwallet.utils.SnackbarLevel
-import com.goldenraven.padawanwallet.utils.fireSnackbar
-import com.goldenraven.padawanwallet.wallet.WalletViewModel
+import com.goldenraven.padawanwallet.utils.*
+import com.goldenraven.padawanwallet.wallet2.wallet.WalletViewModel
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import org.bitcoindevkit.PartiallySignedBitcoinTransaction
 
@@ -118,7 +117,7 @@ class WalletBuild : Fragment() {
     private fun verifyInputs(): Boolean {
         address = binding.sendAddress.text.toString().trim()
         amount = binding.sendAmount.text.toString().trim()
-        feeRate = binding.feeRate.value
+        feeRate = if (binding.feeRate.text.toString().isEmpty()) 0F else binding.feeRate.text.toString().toFloat()
 
         if (address == "") {
             fireSnackbar(

@@ -15,11 +15,12 @@ import com.goldenraven.padawanwallet.data.Wallet
 import com.goldenraven.padawanwallet.theme.PadawanTheme
 import com.goldenraven.padawanwallet.utils.SnackbarLevel
 import com.goldenraven.padawanwallet.utils.fireSnackbar
-import com.goldenraven.padawanwallet.wallet.WalletActivity
+import com.goldenraven.padawanwallet.wallet.WalletNavigation
+import com.goldenraven.padawanwallet.wallet2.wallet.WalletActivity
 
 private const val TAG = "IntroActivity"
 
-class IntroActivity : AppCompatActivity() {
+class PadawanActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -27,8 +28,14 @@ class IntroActivity : AppCompatActivity() {
         // if so, load it and launch into wallet activity, otherwise go to intro
         if (Repository.doesWalletExist()) {
             Wallet.loadExistingWallet()
-            startActivity(Intent(this, WalletActivity::class.java))
-            finish()
+            Log.i(TAG, "Wallet already exists!")
+            setContent {
+                PadawanTheme {
+                    WalletNavigation()
+                }
+            }
+            // startActivity(Intent(this, WalletActivity::class.java))
+            // finish()
         } else {
             // this function is used in composables that navigate to the wallet activity
             // to ensure we destroy the intro activity once the wallet starts
