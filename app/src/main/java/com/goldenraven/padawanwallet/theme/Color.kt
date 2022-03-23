@@ -2,63 +2,35 @@ package com.goldenraven.padawanwallet.theme
 
 import androidx.compose.ui.graphics.Color
 
-val md_theme_light_primary = Color(0xFF032562) // done
-val md_theme_light_onPrimary = Color(0xFFffffff)
-// val md_theme_light_primaryContainer = Color(0xFFd0e4ff)
-// val md_theme_light_onPrimaryContainer = Color(0xFF001c37)
-val md_theme_light_secondary = Color(0xFF3463c7) // done
-val md_theme_light_onSecondary = Color(0xFFffffff) // done
-// val md_theme_light_secondaryContainer = Color(0xFFffd9e2)
-// val md_theme_light_onSecondaryContainer = Color(0xFF3f0019)
-val md_theme_light_tertiary = Color(0xFF66e2fc) // done
-val md_theme_light_onTertiary = Color(0xFF000000) // done
-// val md_theme_light_tertiaryContainer = Color(0xFFb1ecff)
-// val md_theme_light_onTertiaryContainer = Color(0xFF001f28)
-// val md_theme_light_error = Color(0xFFba1b1b)
-// val md_theme_light_errorContainer = Color(0xFFffdad4)
-// val md_theme_light_onError = Color(0xFFffffff)
-// val md_theme_light_onErrorContainer = Color(0xFF410001)
-val md_theme_light_background = Color(0xFFf8fbfe) // done
-val md_theme_light_onBackground = Color(0xFF000000) // done
-// val md_theme_light_surface = Color(0xFFfbfdfd)
-// val md_theme_light_onSurface = Color(0xFF191c1d)
-// val md_theme_light_surfaceVariant = Color(0xFFdfe3ec)
-// val md_theme_light_onSurfaceVariant = Color(0xFF43474e)
-// val md_theme_light_outline = Color(0xFF73777f)
-// val md_theme_light_inverseOnSurface = Color(0xFFeff1f1)
-// val md_theme_light_inverseSurface = Color(0xFF2d3132)
-// val md_theme_light_inversePrimary = Color(0xFF9ecaff)
-// val md_theme_light_shadow = Color(0xFF000000)
-
 val md_theme_dark_primary = Color(0xFFb8bb26)
 val md_theme_dark_onPrimary = Color(0xFFebdbb2)
-val md_theme_dark_primaryContainer = Color(0xFFf50057) // pink
-val md_theme_dark_onPrimaryContainer = Color(0xFFf50057) // pink
-val md_theme_dark_secondary = Color(0xFFf50057) // pink
-val md_theme_dark_onSecondary = Color(0xFFf50057) // pink
-val md_theme_dark_secondaryContainer = Color(0xFFf50057) // pink
-val md_theme_dark_onSecondaryContainer = Color(0xFFf50057) // pink
-val md_theme_dark_tertiary = Color(0xFFf50057) // pink
-val md_theme_dark_onTertiary = Color(0xFFf50057) // pink
-val md_theme_dark_tertiaryContainer = Color(0xFFf50057) // pink
-val md_theme_dark_onTertiaryContainer = Color(0xFFf50057) // pink
-val md_theme_dark_error = Color(0xFFcc241d)
-val md_theme_dark_errorContainer = Color(0xFFf50057) // pink
-val md_theme_dark_onError = Color(0xFFf50057) // pink
-val md_theme_dark_onErrorContainer = Color(0xFFf50057) // pink
+// val md_theme_dark_primaryContainer = Color(0xFFf50057) // pink
+// val md_theme_dark_onPrimaryContainer = Color(0xFFf50057) // pink
+// val md_theme_dark_secondary = Color(0xFFf50057) // pink
+// val md_theme_dark_onSecondary = Color(0xFFf50057) // pink
+// val md_theme_dark_secondaryContainer = Color(0xFFf50057) // pink
+// val md_theme_dark_onSecondaryContainer = Color(0xFFf50057) // pink
+// val md_theme_dark_tertiary = Color(0xFFf50057) // pink
+// val md_theme_dark_onTertiary = Color(0xFFf50057) // pink
+// val md_theme_dark_tertiaryContainer = Color(0xFFf50057) // pink
+// val md_theme_dark_onTertiaryContainer = Color(0xFFf50057) // pink
+// val md_theme_dark_error = Color(0xFFcc241d)
+// val md_theme_dark_errorContainer = Color(0xFFf50057) // pink
+// val md_theme_dark_onError = Color(0xFFf50057) // pink
+// val md_theme_dark_onErrorContainer = Color(0xFFf50057) // pink
 val md_theme_dark_background = Color(0xFF32302f)
 val md_theme_dark_onBackground = Color(0xFFebdbb2)
 val md_theme_dark_surface = Color(0xFF504945)
-val md_theme_dark_onSurface = Color(0xFFf50057) // pink
-val md_theme_dark_surfaceVariant = Color(0xFFf50057) // pink
-val md_theme_dark_onSurfaceVariant = Color(0xFFf50057) // pink
-val md_theme_dark_outline = Color(0xFFf50057) // pink
-val md_theme_dark_inverseOnSurface = Color(0xFFf50057) // pink
-val md_theme_dark_inverseSurface = Color(0xFFf50057) // pink
-val md_theme_dark_inversePrimary = Color(0xFFf50057) // pink
-val md_theme_dark_shadow = Color(0xFFf50057) // pink
-
-val seed = Color(0xFFf50057) // pink
+// val md_theme_dark_onSurface = Color(0xFFf50057) // pink
+// val md_theme_dark_surfaceVariant = Color(0xFFf50057) // pink
+// val md_theme_dark_onSurfaceVariant = Color(0xFFf50057) // pink
+// val md_theme_dark_outline = Color(0xFFf50057) // pink
+// val md_theme_dark_inverseOnSurface = Color(0xFFf50057) // pink
+// val md_theme_dark_inverseSurface = Color(0xFFf50057) // pink
+// val md_theme_dark_inversePrimary = Color(0xFFf50057) // pink
+// val md_theme_dark_shadow = Color(0xFFf50057) // pink
+//
+// val seed = Color(0xFFf50057) // pink
 val error = Color(0xFFcc241d)
 
 val md_theme_dark_surfaceLight = Color(0xFF504945)

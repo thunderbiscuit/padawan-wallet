@@ -1,24 +1,25 @@
 package com.goldenraven.padawanwallet.wallet
 
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.*
+import androidx.compose.material.BottomNavigation
+import com.goldenraven.padawanwallet.R
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.Face
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material3.*
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.material3.rememberDrawerState
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
-import com.goldenraven.padawanwallet.theme.jost
-import com.goldenraven.padawanwallet.theme.shareTechMono
+import com.goldenraven.padawanwallet.theme.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
@@ -32,10 +33,11 @@ internal fun WalletScreen() {
 
     Scaffold(
         topBar = { PadawanAppBar(scope, drawerState) },
+        bottomBar = { BottomNavigationBar() },
         ) {
-        // icons to mimic drawer destinations
         val items = listOf(Icons.Default.Favorite, Icons.Default.Face, Icons.Default.Email)
         val selectedItem = remember { mutableStateOf(items[0]) }
+
         ModalNavigationDrawer(
             drawerState = drawerState,
             drawerContent = {
@@ -59,13 +61,53 @@ internal fun WalletScreen() {
                         .padding(16.dp),
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-                    Text(text = if (drawerState.isClosed) ">>> Swipe >>>" else "<<< Swipe <<<")
-                    Spacer(Modifier.height(20.dp))
-                    Button(onClick = { scope.launch { drawerState.open() } }) {
-                        Text("Click to open")
-                    }
+
                 }
             }
+        )
+    }
+}
+
+
+@Composable
+internal fun BottomNavigationBar() {
+    var selectedItem by remember { mutableStateOf(0) }
+    val items = listOf("Wallet", "Tutorials")
+
+    NavigationBar(
+        containerColor = md_theme_dark_surfaceLight,
+        tonalElevation = 0.dp
+    ) {
+        NavigationBarItem(
+            icon = { Icon(painterResource(id = R.drawable.ic_bitcoin_logo), contentDescription = null) },
+            label = { Text(items[0]) },
+            selected = selectedItem == 0,
+            onClick = { selectedItem = 0 },
+            colors = NavigationBarItemDefaults.colors(
+                selectedIconColor = MaterialTheme.colorScheme.primary,
+                selectedTextColor = MaterialTheme.colorScheme.primary,
+                unselectedIconColor = md_theme_dark_onBackgroundFaded,
+                unselectedTextColor = md_theme_dark_onBackgroundFaded,
+                indicatorColor = md_theme_dark_surfaceLight
+            )
+        )
+        // val interactionSource = remember { MutableInteractionSource() }
+        NavigationBarItem(
+            icon = { Icon(painterResource(id = R.drawable.school), contentDescription = null) },
+            label = { Text(items[1]) },
+            selected = selectedItem == 1,
+            onClick = { selectedItem = 1 },
+            colors = NavigationBarItemDefaults.colors(
+                selectedIconColor = MaterialTheme.colorScheme.primary,
+                selectedTextColor = MaterialTheme.colorScheme.primary,
+                unselectedIconColor = md_theme_dark_onBackgroundFaded,
+                unselectedTextColor = md_theme_dark_onBackgroundFaded,
+                indicatorColor = md_theme_dark_surfaceLight
+            ),
+            // modifier = Modifier.clickable(
+            //     interactionSource = interactionSource,
+            //     indication = null
+            // )
         )
     }
 }
@@ -79,7 +121,7 @@ internal fun PadawanAppBar(scope: CoroutineScope, drawerState: DrawerState) {
             IconButton(onClick = { scope.launch { drawerState.open() } }) {
                 Icon(
                     imageVector = Icons.Filled.Menu,
-                    contentDescription = "Localized description",
+                    contentDescription = "Open drawer",
                     tint = MaterialTheme.colorScheme.onBackground
                 )
             }
