@@ -48,8 +48,13 @@ class PadawanActivity : AppCompatActivity() {
 
                         is WalletCreateType.RECOVER -> Wallet.recoverWallet(walletCreateType.recoveryPhrase)
                     }
-                    startActivity(Intent(this, WalletActivity::class.java))
-                    finish()
+                    setContent {
+                        PadawanTheme {
+                            WalletNavigation()
+                        }
+                    }
+                    // startActivity(Intent(this, WalletActivity::class.java))
+                    // finish()
                 } catch (e: Throwable) {
                     Log.i(TAG, "Could not build wallet: $e")
                     fireSnackbar(
