@@ -19,7 +19,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Devices
@@ -30,7 +29,8 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.goldenraven.padawanwallet.R
 import com.goldenraven.padawanwallet.theme.*
-import com.google.accompanist.systemuicontroller.rememberSystemUiController
+import com.goldenraven.padawanwallet.ui.Screen
+import com.goldenraven.padawanwallet.ui.ShowBars
 
 @Composable
 internal fun IntroScreen(navController: NavController) {
@@ -155,15 +155,6 @@ internal fun LetsGoButton(setShowDialog: (Boolean) -> Unit) {
             fontSize = 22.sp,
             fontFamily = jost,
         )
-    }
-}
-
-@Composable
-internal fun ShowBars() {
-    rememberSystemUiController().apply {
-        this.isSystemBarsVisible = true
-        this.isNavigationBarVisible = true
-        this.isStatusBarVisible = true
     }
 }
 

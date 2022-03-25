@@ -24,7 +24,9 @@ import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.navigation.NavController
 import com.goldenraven.padawanwallet.R
+import com.goldenraven.padawanwallet.WalletCreateType
 import com.goldenraven.padawanwallet.theme.*
+import com.goldenraven.padawanwallet.ui.Screen
 
 @Composable
 internal fun WalletChoiceScreen(

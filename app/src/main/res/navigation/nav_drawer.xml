@@ -8,21 +8,21 @@
 
     <fragment
         android:id="@+id/aboutFragment"
-        android:name="com.goldenraven.padawanwallet.drawer.AboutFragment"
+        android:name="com.goldenraven.padawanwallet.drawer2.AboutFragment"
         android:label="fragment_about"
         tools:layout="@layout/fragment_about">
     </fragment>
 
     <fragment
         android:id="@+id/settingsFragment"
-        android:name="com.goldenraven.padawanwallet.drawer.SettingsFragment"
+        android:name="com.goldenraven.padawanwallet.drawer2.SettingsFragment"
         android:label="fragment_settings"
         tools:layout="@layout/fragment_settings">
     </fragment>
 
     <fragment
         android:id="@+id/sendCoinsBackFragment"
-        android:name="com.goldenraven.padawanwallet.drawer.SendCoinsBackFragment"
+        android:name="com.goldenraven.padawanwallet.drawer2.SendCoinsBackFragment"
         android:label="fragment_send_coins_back"
         tools:layout="@layout/fragment_send_coins_back">
     </fragment>

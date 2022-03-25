@@ -3,7 +3,7 @@
  * Use of this source code is governed by the Apache 2.0 license that can be found in the ./LICENSE file.
  */
 
-package com.goldenraven.padawanwallet.intro
+package com.goldenraven.padawanwallet.ui
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -17,18 +17,25 @@ import androidx.compose.ui.res.painterResource
 import androidx.navigation.NavController
 import com.goldenraven.padawanwallet.R
 import com.goldenraven.padawanwallet.theme.md_theme_dark_lightBackground
+import com.goldenraven.padawanwallet.ui.Screen
 import kotlinx.coroutines.delay
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
 @Composable
-internal fun SplashScreen(navController: NavController) {
+internal fun SplashScreen(navController: NavController, moveToIntro: Boolean) {
 
     HideBars()
 
     LaunchedEffect(key1 = true) {
         delay(1000)
-        navController.navigate(Screen.IntroScreen.route) {
-            popUpTo(0)
+        if (moveToIntro) {
+            navController.navigate(Screen.IntroScreen.route) {
+                popUpTo(0)
+            }
+        } else {
+            navController.navigate(Screen.HomeScreen.route) {
+                popUpTo(0)
+            }
         }
     }
 

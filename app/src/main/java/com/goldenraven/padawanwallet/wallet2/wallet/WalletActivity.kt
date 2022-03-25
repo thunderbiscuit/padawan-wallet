@@ -19,7 +19,7 @@ import androidx.viewpager2.widget.ViewPager2
 import com.goldenraven.padawanwallet.BuildConfig
 import com.goldenraven.padawanwallet.R
 import com.goldenraven.padawanwallet.databinding.ActivityHomeBinding
-import com.goldenraven.padawanwallet.drawer.DrawerActivity
+import com.goldenraven.padawanwallet.drawer2.DrawerActivity
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 

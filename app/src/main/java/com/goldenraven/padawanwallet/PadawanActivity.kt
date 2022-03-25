@@ -3,22 +3,21 @@
  * Use of this source code is governed by the Apache 2.0 license that can be found in the ./LICENSE file.
  */
 
-package com.goldenraven.padawanwallet.intro
+package com.goldenraven.padawanwallet
 
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
 import com.goldenraven.padawanwallet.data.Repository
 import com.goldenraven.padawanwallet.data.Wallet
+import com.goldenraven.padawanwallet.intro.IntroNavigation
 import com.goldenraven.padawanwallet.theme.PadawanTheme
 import com.goldenraven.padawanwallet.utils.SnackbarLevel
 import com.goldenraven.padawanwallet.utils.fireSnackbar
-import com.goldenraven.padawanwallet.wallet.WalletNavigation
-import com.goldenraven.padawanwallet.wallet2.wallet.WalletActivity
+import com.goldenraven.padawanwallet.wallet.HomeNavigation
 
-private const val TAG = "IntroActivity"
+private const val TAG = "PadawanActivity"
 
 class PadawanActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,7 +30,7 @@ class PadawanActivity : AppCompatActivity() {
             Log.i(TAG, "Wallet already exists!")
             setContent {
                 PadawanTheme {
-                    WalletNavigation()
+                   HomeNavigation()
                 }
             }
             // startActivity(Intent(this, WalletActivity::class.java))
@@ -50,7 +49,7 @@ class PadawanActivity : AppCompatActivity() {
                     }
                     setContent {
                         PadawanTheme {
-                            WalletNavigation()
+                            HomeNavigation()
                         }
                     }
                     // startActivity(Intent(this, WalletActivity::class.java))
