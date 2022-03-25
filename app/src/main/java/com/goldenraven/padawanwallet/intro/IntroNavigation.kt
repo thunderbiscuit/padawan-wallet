@@ -10,6 +10,9 @@ import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.core.tween
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
+import com.goldenraven.padawanwallet.WalletCreateType
+import com.goldenraven.padawanwallet.ui.Screen
+import com.goldenraven.padawanwallet.ui.SplashScreen
 import com.google.accompanist.navigation.animation.AnimatedNavHost
 import com.google.accompanist.navigation.animation.composable
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
@@ -27,7 +30,7 @@ fun IntroNavigation(onBuildWalletButtonClicked: (WalletCreateType) -> Unit) {
 
         composable(
             route = Screen.SplashScreen.route
-        ) { SplashScreen(navController = navController) }
+        ) { SplashScreen(navController = navController, moveToIntro = true) }
 
         composable(
             route = Screen.IntroScreen.route,

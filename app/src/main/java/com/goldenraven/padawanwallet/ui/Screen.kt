@@ -3,7 +3,7 @@
  * Use of this source code is governed by the Apache 2.0 license that can be found in the ./LICENSE file.
  */
 
-package com.goldenraven.padawanwallet.intro
+package com.goldenraven.padawanwallet.ui
 
 sealed class Screen(val route: String) {
     // intro screens
@@ -13,5 +13,11 @@ sealed class Screen(val route: String) {
     object WalletRecoveryScreen : Screen("wallet_recovery_screen")
 
     // wallet screens
-    object WalletScreen : Screen("wallet_screen")
+    object HomeScreen : Screen("home_screen")
+
+    // drawer screens
+    object AboutScreen : Screen("about_screen")
+    object SettingsScreen : Screen("settings_screen")
+    object RecoveryPhrase : Screen("backup_screen")
+    object SendCoinsBackScreen : Screen("send_coins_back_screen")
 }

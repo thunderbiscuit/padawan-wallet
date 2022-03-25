@@ -17,7 +17,7 @@
         android:theme="@style/Theme.PadawanWallet.Launcher">
 
         <activity
-            android:name=".intro.PadawanActivity"
+            android:name=".PadawanActivity"
             android:theme="@style/Theme.PadawanWallet"
             android:screenOrientation="portrait"
             android:exported="true">
