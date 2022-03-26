@@ -1,27 +1,29 @@
 package com.goldenraven.padawanwallet.wallet
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import com.goldenraven.padawanwallet.R
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Email
-import androidx.compose.material.icons.filled.Face
-import androidx.compose.material.icons.filled.Favorite
-import androidx.compose.material.icons.filled.Menu
+import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.*
 import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import androidx.navigation.NavHostController
+import com.goldenraven.padawanwallet.BuildConfig
 import com.goldenraven.padawanwallet.ui.Screen
 import com.goldenraven.padawanwallet.theme.*
 import com.goldenraven.padawanwallet.ui.ShowBars
+import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
-@OptIn(ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalMaterial3Api::class, androidx.compose.animation.ExperimentalAnimationApi::class)
 @Composable
 internal fun HomeScreen(navController: NavController) {
 
@@ -34,64 +36,110 @@ internal fun HomeScreen(navController: NavController) {
     @OptIn(ExperimentalMaterial3Api::class)
     val drawerState = rememberDrawerState(DrawerValue.Closed)
 
-    val items = listOf(Icons.Default.Favorite, Icons.Default.Face, Icons.Default.Email, Icons.Default.Favorite)
+    val items = listOf(Icons.Default.Favorite, Icons.Default.Face, Icons.Default.Email, Icons.Default.Face)
     val selectedItem = remember { mutableStateOf(items[0]) }
+
+    val navControllerWalletNavigation: NavHostController = rememberAnimatedNavController()
 
     ModalNavigationDrawer(
         drawerState = drawerState,
         drawerContainerColor = MaterialTheme.colorScheme.background,
         drawerContent = {
+            Column(
+                Modifier
+                    .background(color = md_theme_dark_lightBackground)
+                    .height(200.dp)
+                    .fillMaxWidth(),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center
+            ) {
+                Icon(
+                    painter = painterResource(id = R.drawable.ic_logo_v1_0_0),
+                    tint = md_theme_dark_background,
+                    contentDescription = "Padawan logo",
+                    modifier = Modifier.width(200.dp)
+                )
+                Spacer(Modifier.height(24.dp))
+                Text(
+                    BuildConfig.VERSION_NAME,
+                    color = md_theme_dark_background,
+                    fontFamily = jost,
+                    // fontStyle = FontStyle.Italic
+                )
+            }
+            Spacer(modifier = Modifier.height(16.dp))
             NavigationDrawerItem(
+                // icon = { Icon(Icons.Default.Face, contentDescription = null) },
                 label = { Text("About") },
                 selected = items[0] == selectedItem.value,
                 onClick = { navController.navigate(Screen.AboutScreen.route) },
-                modifier = Modifier.padding(NavigationDrawerItemDefaults.ItemPadding)
+                modifier = Modifier.padding(NavigationDrawerItemDefaults.ItemPadding),
+                colors = NavigationDrawerItemDefaults.colors(
+                    selectedContainerColor = MaterialTheme.colorScheme.background,
+                    unselectedContainerColor = MaterialTheme.colorScheme.background,
+                )
             )
             NavigationDrawerItem(
+                // icon = { painterResource(id = R.drawable.ic_baseline_tune_24) },
                 label = { Text("Settings") },
                 selected = items[1] == selectedItem.value,
                 onClick = { navController.navigate(Screen.SettingsScreen.route) },
-                modifier = Modifier.padding(NavigationDrawerItemDefaults.ItemPadding)
+                modifier = Modifier.padding(NavigationDrawerItemDefaults.ItemPadding),
+                colors = NavigationDrawerItemDefaults.colors(
+                    selectedContainerColor = MaterialTheme.colorScheme.background,
+                    unselectedContainerColor = MaterialTheme.colorScheme.background,
+                    )
             )
             NavigationDrawerItem(
                 label = { Text("Recovery Phrase") },
                 selected = items[2] == selectedItem.value,
                 onClick = { navController.navigate(Screen.RecoveryPhrase.route) },
-                modifier = Modifier.padding(NavigationDrawerItemDefaults.ItemPadding)
+                modifier = Modifier.padding(NavigationDrawerItemDefaults.ItemPadding),
+                colors = NavigationDrawerItemDefaults.colors(
+                    selectedContainerColor = MaterialTheme.colorScheme.background,
+                    unselectedContainerColor = MaterialTheme.colorScheme.background,
+                )
             )
             NavigationDrawerItem(
-                label = { Text("Send Coins Back") },
+                label = { Text("Send Testnet Coins Back") },
                 selected = items[3] == selectedItem.value,
                 onClick = { navController.navigate(Screen.SendCoinsBackScreen.route) },
-                modifier = Modifier.padding(NavigationDrawerItemDefaults.ItemPadding)
+                modifier = Modifier.padding(NavigationDrawerItemDefaults.ItemPadding),
+                colors = NavigationDrawerItemDefaults.colors(
+                    selectedContainerColor = MaterialTheme.colorScheme.background,
+                    unselectedContainerColor = MaterialTheme.colorScheme.background,
+                )
             )
         },
         content = {
             Scaffold(
                 topBar = { PadawanAppBar(scope, drawerState) },
-                bottomBar = { BottomNavigationBar() },
+                bottomBar = { BottomNavigationBar(navControllerWalletNavigation) },
             ) {
-
+                WalletNavigation(navControllerWalletNavigation)
             }
         }
     )
 }
 
-
 @Composable
-internal fun BottomNavigationBar() {
+internal fun BottomNavigationBar(navControllerWalletNavigation: NavController) {
     var selectedItem by remember { mutableStateOf(0) }
     val items = listOf("Wallet", "Tutorials")
 
     NavigationBar(
         containerColor = md_theme_dark_surfaceLight,
+        // containerColor = md_theme_dark_background,
         tonalElevation = 0.dp
     ) {
         NavigationBarItem(
             icon = { Icon(painterResource(id = R.drawable.ic_bitcoin_logo), contentDescription = null) },
             label = { Text(items[0]) },
             selected = selectedItem == 0,
-            onClick = { selectedItem = 0 },
+            onClick = {
+                selectedItem = 0
+                navControllerWalletNavigation.navigate(Screen.WalletScreen.route)
+            },
             colors = NavigationBarItemDefaults.colors(
                 selectedIconColor = MaterialTheme.colorScheme.primary,
                 selectedTextColor = MaterialTheme.colorScheme.primary,
@@ -104,7 +152,10 @@ internal fun BottomNavigationBar() {
             icon = { Icon(painterResource(id = R.drawable.school), contentDescription = null) },
             label = { Text(items[1]) },
             selected = selectedItem == 1,
-            onClick = { selectedItem = 1 },
+            onClick = {
+                selectedItem = 1
+                navControllerWalletNavigation.navigate(Screen.TutorialsScreen.route)
+            },
             colors = NavigationBarItemDefaults.colors(
                 selectedIconColor = MaterialTheme.colorScheme.primary,
                 selectedTextColor = MaterialTheme.colorScheme.primary,
@@ -121,6 +172,7 @@ internal fun BottomNavigationBar() {
 internal fun PadawanAppBar(scope: CoroutineScope, drawerState: DrawerState) {
     SmallTopAppBar(
         title = { AppTitle() },
+        colors = TopAppBarDefaults.smallTopAppBarColors(containerColor = md_theme_dark_surfaceLight),
         navigationIcon = {
             IconButton(onClick = { scope.launch { drawerState.open() } }) {
                 Icon(
