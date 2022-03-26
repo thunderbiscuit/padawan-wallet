@@ -48,11 +48,11 @@ fun HomeNavigation() {
         // About
         composable(
             route = Screen.AboutScreen.route,
-            exitTransition = {
-                slideOutOfContainer(AnimatedContentScope.SlideDirection.Start, animationSpec = tween(animationDuration))
-            },
             popEnterTransition = {
                 slideIntoContainer(AnimatedContentScope.SlideDirection.End, animationSpec = tween(animationDuration))
+            },
+            exitTransition = {
+                slideOutOfContainer(AnimatedContentScope.SlideDirection.Down, animationSpec = tween(animationDuration))
             },
         ) { AboutScreen(navController = navController) }
 

@@ -12,8 +12,12 @@ sealed class Screen(val route: String) {
     object WalletChoiceScreen : Screen("wallet_choice_screen")
     object WalletRecoveryScreen : Screen("wallet_recovery_screen")
 
-    // wallet screens
+    // home screen
     object HomeScreen : Screen("home_screen")
+
+    // wallet screens
+    object WalletScreen : Screen("wallet_screen")
+    object TutorialsScreen : Screen("tutorials_screen")
 
     // drawer screens
     object AboutScreen : Screen("about_screen")
