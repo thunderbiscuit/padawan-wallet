@@ -11,11 +11,11 @@ import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
 import com.goldenraven.padawanwallet.data.Repository
 import com.goldenraven.padawanwallet.data.Wallet
-import com.goldenraven.padawanwallet.intro.IntroNavigation
+import com.goldenraven.padawanwallet.ui.intro.IntroNavigation
 import com.goldenraven.padawanwallet.theme.PadawanTheme
 import com.goldenraven.padawanwallet.utils.SnackbarLevel
 import com.goldenraven.padawanwallet.utils.fireSnackbar
-import com.goldenraven.padawanwallet.wallet.HomeNavigation
+import com.goldenraven.padawanwallet.ui.wallet.HomeNavigation
 
 private const val TAG = "PadawanActivity"
 

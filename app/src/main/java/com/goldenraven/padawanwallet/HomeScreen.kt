@@ -1,4 +1,4 @@
-package com.goldenraven.padawanwallet.wallet
+package com.goldenraven.padawanwallet.ui.wallet
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -11,7 +11,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
@@ -189,7 +189,7 @@ internal fun PadawanAppBar(scope: CoroutineScope, drawerState: DrawerState) {
 @Composable
 internal fun AppTitle() {
     Text(
-        text = "Padawan Wallet",
+        text = stringResource(R.string.app_name),
         style = MaterialTheme.typography.headlineMedium,
         color = MaterialTheme.colorScheme.primary
     )

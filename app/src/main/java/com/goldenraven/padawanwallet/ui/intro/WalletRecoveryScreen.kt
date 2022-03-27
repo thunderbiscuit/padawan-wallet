@@ -3,7 +3,7 @@
  * Use of this source code is governed by the Apache 2.0 license that can be found in the ./LICENSE file.
  */
 
-package com.goldenraven.padawanwallet.intro
+package com.goldenraven.padawanwallet.ui.intro
 
 import android.content.Context
 import android.util.Log
