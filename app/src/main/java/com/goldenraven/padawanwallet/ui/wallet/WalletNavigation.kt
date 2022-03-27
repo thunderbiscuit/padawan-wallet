@@ -3,69 +3,60 @@
  * Use of this source code is governed by the Apache 2.0 license that can be found in the ./LICENSE file.
  */
 
-package com.goldenraven.padawanwallet.intro
+package com.goldenraven.padawanwallet.ui.wallet
 
 import androidx.compose.animation.AnimatedContentScope
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.core.tween
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
-import com.goldenraven.padawanwallet.WalletCreateType
 import com.goldenraven.padawanwallet.ui.Screen
-import com.goldenraven.padawanwallet.ui.SplashScreen
 import com.google.accompanist.navigation.animation.AnimatedNavHost
 import com.google.accompanist.navigation.animation.composable
-import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
-fun IntroNavigation(onBuildWalletButtonClicked: (WalletCreateType) -> Unit) {
-    val navController: NavHostController = rememberAnimatedNavController()
+fun WalletNavigation(navControllerWalletNavigation: NavHostController) {
     val animationDuration = 400
 
     AnimatedNavHost(
-        navController = navController,
-        startDestination = Screen.SplashScreen.route,
+        navController = navControllerWalletNavigation,
+        startDestination = Screen.WalletScreen.route,
     ) {
 
+        // Wallet
         composable(
-            route = Screen.SplashScreen.route
-        ) { SplashScreen(navController = navController, moveToIntro = true) }
-
-        composable(
-            route = Screen.IntroScreen.route,
-            exitTransition = {
-                slideOutOfContainer(AnimatedContentScope.SlideDirection.Start, animationSpec = tween(animationDuration))
+            route = Screen.WalletScreen.route,
+            enterTransition = {
+                slideIntoContainer(AnimatedContentScope.SlideDirection.End, animationSpec = tween(animationDuration))
             },
             popEnterTransition = {
                 slideIntoContainer(AnimatedContentScope.SlideDirection.End, animationSpec = tween(animationDuration))
             },
-        ) { IntroScreen(navController = navController) }
-
-        composable(
-            route = Screen.WalletChoiceScreen.route,
-            enterTransition = {
-                slideIntoContainer(AnimatedContentScope.SlideDirection.Start, animationSpec = tween(animationDuration))
-            },
             exitTransition = {
                 slideOutOfContainer(AnimatedContentScope.SlideDirection.Start, animationSpec = tween(animationDuration))
             },
-            popEnterTransition = {
-                slideIntoContainer(AnimatedContentScope.SlideDirection.End, animationSpec = tween(animationDuration))
-            },
             popExitTransition = {
                 slideOutOfContainer(AnimatedContentScope.SlideDirection.End, animationSpec = tween(animationDuration))
             }
-        ) { WalletChoiceScreen(navController = navController, onBuildWalletButtonClicked) }
+        ) { WalletScreen() }
 
+
+        // Tutorials
         composable(
-            route = Screen.WalletRecoveryScreen.route,
+            route = Screen.TutorialsScreen.route,
             enterTransition = {
                 slideIntoContainer(AnimatedContentScope.SlideDirection.Start, animationSpec = tween(animationDuration))
             },
+            popEnterTransition = {
+                slideIntoContainer(AnimatedContentScope.SlideDirection.Start, animationSpec = tween(animationDuration))
+            },
+            exitTransition = {
+                slideOutOfContainer(AnimatedContentScope.SlideDirection.End, animationSpec = tween(animationDuration))
+            },
             popExitTransition = {
                 slideOutOfContainer(AnimatedContentScope.SlideDirection.End, animationSpec = tween(animationDuration))
             }
-        ) { WalletRecoveryScreen(onBuildWalletButtonClicked) }
+        ) { TutorialsScreen() }
     }
 }

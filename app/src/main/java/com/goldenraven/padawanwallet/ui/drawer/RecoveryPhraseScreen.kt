@@ -1,4 +1,4 @@
-package com.goldenraven.padawanwallet.wallet
+package com.goldenraven.padawanwallet.ui.wallet
 
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
@@ -8,8 +8,8 @@ import com.goldenraven.padawanwallet.ui.DrawerAppBar
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-internal fun SendCoinsBackScreen(navController: NavController) {
+internal fun RecoveryPhraseScreen(navController: NavController) {
     Scaffold(
-        topBar = { DrawerAppBar(navController, title = "Send Coins Back") },
+        topBar = { DrawerAppBar(navController, title = "Wallet Recovery Phrase") },
     ) { }
 }

@@ -8,6 +8,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
 import com.goldenraven.padawanwallet.theme.md_theme_dark_background2
+import com.goldenraven.padawanwallet.theme.md_theme_dark_surfaceLight
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
 @Composable
@@ -24,7 +25,7 @@ internal fun ShowBars() {
 internal fun DrawerAppBar(navController: NavController, title: String) {
     SmallTopAppBar(
         title = { DrawerScreenAppBarTitle(title) },
-        colors = TopAppBarDefaults.smallTopAppBarColors(containerColor = md_theme_dark_background2),
+        colors = TopAppBarDefaults.smallTopAppBarColors(containerColor = md_theme_dark_surfaceLight),
         // modifier = Modifier.background(color = md_theme_dark_background2),
         navigationIcon = {
             IconButton(onClick = { navController.navigate(Screen.HomeScreen.route) }) {
