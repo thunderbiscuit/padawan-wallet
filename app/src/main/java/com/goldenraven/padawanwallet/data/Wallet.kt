@@ -99,7 +99,7 @@ object Wallet {
         return ("wpkh(" + keys.xprv + "/84'/1'/0'/1/*)")
     }
 
-    fun sync(max_address: UInt?=null) {
+    fun sync(max_address: UInt? = null) {
         wallet.sync(LogProgress, max_address)
     }
 
