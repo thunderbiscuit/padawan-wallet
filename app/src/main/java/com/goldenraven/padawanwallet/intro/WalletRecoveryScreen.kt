@@ -5,47 +5,47 @@
 
 package com.goldenraven.padawanwallet.intro
 
-import android.content.Context
-import android.content.Intent
-import android.nfc.Tag
 import android.util.Log
-import androidx.compose.foundation.*
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.TextFieldDefaults
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Notifications
-import androidx.compose.material.rememberScaffoldState
+import androidx.compose.material.icons.filled.Clear
 import androidx.compose.material3.*
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.focus.FocusDirection
 import androidx.compose.ui.focus.FocusManager
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.platform.LocalFocusManager
+import androidx.compose.ui.focus.FocusState
+import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Devices
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
 import com.goldenraven.padawanwallet.R
-import com.goldenraven.padawanwallet.data.Wallet
 import com.goldenraven.padawanwallet.theme.*
-import com.goldenraven.padawanwallet.utils.*
-import com.goldenraven.padawanwallet.wallet.WalletActivity
+import com.goldenraven.padawanwallet.utils.AutoCompleteMnemonic
+import com.goldenraven.padawanwallet.utils.WordCheckResult
+import com.goldenraven.padawanwallet.utils.checkWords
+import com.goldenraven.padawanwallet.utils.validWords
 import kotlinx.coroutines.launch
 
 private const val TAG = "WalletRecoveryScreen"
@@ -68,7 +68,7 @@ internal fun WalletRecoveryScreen(onBuildWalletButtonClicked: (WalletCreateType)
                         .background(md_theme_dark_warning),
                     containerColor = md_theme_dark_warning,
 
-                ) {
+                    ) {
                     Text(
                         text = data.visuals.message,
                         style = TextStyle(md_theme_dark_onLightBackground)
@@ -77,7 +77,6 @@ internal fun WalletRecoveryScreen(onBuildWalletButtonClicked: (WalletCreateType)
             }
         },
     ) {
-        val context: Context = LocalContext.current
 
         // the screen is broken into 3 parts
         // the app name, the body, and the button
@@ -89,7 +88,11 @@ internal fun WalletRecoveryScreen(onBuildWalletButtonClicked: (WalletCreateType)
                 1 to "", 2 to "", 3 to "", 4 to "", 5 to "", 6 to "",
                 7 to "", 8 to "", 9 to "", 10 to "", 11 to "", 12 to ""
             )
-            val (recoveryPhraseWordMap, setRecoveryPhraseWordMap) = remember { mutableStateOf(emptyRecoveryPhrase) }
+            val (recoveryPhraseWordMap) = remember {
+                mutableStateOf(
+                    emptyRecoveryPhrase
+                )
+            }
 
 
             // the app name
@@ -127,14 +130,12 @@ internal fun WalletRecoveryScreen(onBuildWalletButtonClicked: (WalletCreateType)
 
             // the body
             MyList(
-                recoveryPhraseWordMap,
-                setRecoveryPhraseWordMap,
                 modifier = Modifier
-                .constrainAs(body) {
-                    top.linkTo(appName.bottom)
-                    bottom.linkTo(button.top)
-                    height = Dimension.fillToConstraints
-            })
+                    .constrainAs(body) {
+                        top.linkTo(appName.bottom)
+                        bottom.linkTo(button.top)
+                        height = Dimension.fillToConstraints
+                    })
 
 
             // the button
@@ -153,7 +154,7 @@ internal fun WalletRecoveryScreen(onBuildWalletButtonClicked: (WalletCreateType)
                     Button(
                         onClick = {
                             when (val wordCheck = checkWords(recoveryPhraseWordMap)) {
-                                 is WordCheckResult.SUCCESS -> {
+                                is WordCheckResult.SUCCESS -> {
                                     Log.i(TAG, "All words passed the first check")
                                     Log.i(TAG, "Recovery phrase is \"${wordCheck.recoveryPhrase}\"")
                                     onBuildWalletButtonClicked(WalletCreateType.RECOVER(wordCheck.recoveryPhrase))
@@ -192,8 +193,6 @@ internal fun WalletRecoveryScreen(onBuildWalletButtonClicked: (WalletCreateType)
 
 @Composable
 fun MyList(
-    recoveryPhraseWordMap: Map<Int, String>,
-    setRecoveryPhraseWordMap: (Map<Int, String>) -> Unit,
     modifier: Modifier
 ) {
     val scrollState = rememberScrollState()
@@ -204,9 +203,8 @@ fun MyList(
             .verticalScroll(state = scrollState),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        val focusManager = LocalFocusManager.current
         for (i in 1..12) {
-            WordField(wordNumber = i, recoveryPhraseWordMap, setRecoveryPhraseWordMap, focusManager)
+            AutoCompleteMnemonic(validWords)
         }
     }
 }
@@ -253,6 +251,41 @@ fun WordField(
             onDone = { focusManager.clearFocus() }
         ),
         singleLine = true,
+    )
+}
+
+
+@Composable
+fun SearchText(
+    modifier: Modifier = Modifier,
+    value: String,
+    label: String,
+    onDoneActionClick: () -> Unit = {},
+    onClearClick: () -> Unit = {},
+    onFocusChanged: (FocusState) -> (Unit) = {},
+    onValueChanged: (String) -> Unit
+) {
+    OutlinedTextField(
+        value = value,
+        onValueChange = { query ->
+            onValueChanged(query)
+        },
+        modifier = modifier
+            .fillMaxWidth()
+            .onFocusChanged { onFocusChanged(it) },
+        label = { Text(text = label) },
+        textStyle = MaterialTheme.typography.headlineSmall,
+        singleLine = true,
+        trailingIcon = {
+            IconButton(onClick = { onClearClick() }) {
+                Icon(Icons.Filled.Clear, "Clear")
+            }
+        },
+        keyboardActions = KeyboardActions({ onDoneActionClick() }),
+        keyboardOptions = KeyboardOptions(
+            imeAction = ImeAction.Done,
+            keyboardType = KeyboardType.Text
+        )
     )
 }
 
