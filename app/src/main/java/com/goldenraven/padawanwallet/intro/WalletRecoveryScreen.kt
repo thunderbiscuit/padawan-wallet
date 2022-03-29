@@ -30,6 +30,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.semantics.testTag
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -65,7 +67,8 @@ internal fun WalletRecoveryScreen(onBuildWalletButtonClicked: (WalletCreateType)
                 Snackbar(
                     modifier = Modifier
                         .padding(12.dp)
-                        .background(md_theme_dark_warning),
+                        .background(md_theme_dark_warning)
+                        .semantics { testTag = "Intro WalletRecoveryScreen Snackbar" },
                     containerColor = md_theme_dark_warning,
 
                 ) {
@@ -175,6 +178,7 @@ internal fun WalletRecoveryScreen(onBuildWalletButtonClicked: (WalletCreateType)
                             .size(width = 300.dp, height = 100.dp)
                             .padding(vertical = 8.dp, horizontal = 8.dp)
                             .shadow(elevation = 8.dp, shape = RoundedCornerShape(16.dp))
+                            .semantics { testTag = "Intro EnterRecoveryPhrase Button" }
                     ) {
                         Text(
                             stringResource(R.string.recover_wallet),

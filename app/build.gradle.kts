@@ -81,6 +81,16 @@ android {
     composeOptions {
         kotlinCompilerExtensionVersion = "1.1.1"
     }
+
+    packagingOptions {
+        // for JNA and JNA-platform
+        resources.excludes.add("META-INF/AL2.0")
+        resources.excludes.add("META-INF/LGPL2.1")
+        // for byte-buddy
+        resources.excludes.add("META-INF/licenses/ASM")
+        resources.pickFirsts.add("win32-x86-64/attach_hotspot_windows.dll")
+        resources.pickFirsts.add("win32-x86/attach_hotspot_windows.dll")
+    }
 }
 
 dependencies {
@@ -102,7 +112,7 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.4.1")
     implementation("androidx.navigation:navigation-compose:2.4.1")
     implementation("androidx.compose.ui:ui:1.1.1")
-    implementation("androidx.compose.material3:material3:1.0.0-alpha07")
+    implementation("androidx.compose.material3:material3:1.0.0-alpha08")
     implementation("androidx.constraintlayout:constraintlayout-compose:1.0.0")
     implementation("com.google.accompanist:accompanist-navigation-animation:0.23.1")
     implementation("com.google.accompanist:accompanist-systemuicontroller:0.23.1")
@@ -123,10 +133,14 @@ dependencies {
     implementation("androidx.room:room-ktx:2.4.2")
     kapt("androidx.room:room-compiler:2.4.2")
 
-    // testing
+    // Unit testing
     testImplementation("junit:junit:4.13.2")
     testRuntimeOnly("org.junit.vintage:junit-vintage-engine:5.8.2")
     testImplementation("org.mockito:mockito-core:4.4.0")
+
+    // Instrumentation testing
+    androidTestImplementation("androidx.compose.ui:ui-test-junit4:1.1.1")
+    debugImplementation("androidx.compose.ui:ui-test-manifest:1.1.1")
 }
 
 tasks.withType<Test> {
