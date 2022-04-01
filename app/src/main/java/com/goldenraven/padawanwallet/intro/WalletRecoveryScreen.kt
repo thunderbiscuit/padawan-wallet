@@ -10,13 +10,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.text.KeyboardActions
-import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.OutlinedTextField
-import androidx.compose.material.TextFieldDefaults
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Clear
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
@@ -25,16 +19,10 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
-import androidx.compose.ui.focus.FocusDirection
-import androidx.compose.ui.focus.FocusManager
-import androidx.compose.ui.focus.FocusState
-import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.input.ImeAction
-import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -209,85 +197,6 @@ fun MyList(
     }
 }
 
-// @OptIn(ExperimentalComposeUiApi::class)
-@Composable
-fun WordField(
-    wordNumber: Int,
-    recoveryWordMap: Map<Int, String>,
-    setRecoveryPhraseWordMap: (Map<Int, String>) -> Unit,
-    focusManager: FocusManager
-) {
-    OutlinedTextField(
-        value = recoveryWordMap[wordNumber] ?: "elvis is here",
-        onValueChange = { newText ->
-            val newMap: MutableMap<Int, String> = recoveryWordMap.toMutableMap()
-            newMap[wordNumber] = newText
-
-            val updatedMap = newMap.toMap()
-            setRecoveryPhraseWordMap(updatedMap)
-        },
-        label = {
-            Text(
-                text = "Word $wordNumber",
-                color = md_theme_dark_onBackgroundFaded,
-            )
-        },
-        textStyle = TextStyle(
-            fontSize = 18.sp,
-            color = MaterialTheme.colorScheme.onBackground
-        ),
-        colors = TextFieldDefaults.outlinedTextFieldColors(
-            focusedBorderColor = MaterialTheme.colorScheme.primary,
-            unfocusedBorderColor = md_theme_dark_onBackgroundFaded,
-        ),
-        modifier = Modifier
-            .padding(8.dp),
-        keyboardOptions = when (wordNumber) {
-            12 -> KeyboardOptions(imeAction = ImeAction.Done)
-            else -> KeyboardOptions(imeAction = ImeAction.Next)
-        },
-        keyboardActions = KeyboardActions(
-            onNext = { focusManager.moveFocus(FocusDirection.Down) },
-            onDone = { focusManager.clearFocus() }
-        ),
-        singleLine = true,
-    )
-}
-
-
-@Composable
-fun SearchText(
-    modifier: Modifier = Modifier,
-    value: String,
-    label: String,
-    onDoneActionClick: () -> Unit = {},
-    onClearClick: () -> Unit = {},
-    onFocusChanged: (FocusState) -> (Unit) = {},
-    onValueChanged: (String) -> Unit
-) {
-    OutlinedTextField(
-        value = value,
-        onValueChange = { query ->
-            onValueChanged(query)
-        },
-        modifier = modifier
-            .fillMaxWidth()
-            .onFocusChanged { onFocusChanged(it) },
-        label = { Text(text = label) },
-        textStyle = MaterialTheme.typography.headlineSmall,
-        singleLine = true,
-        trailingIcon = {
-            IconButton(onClick = { onClearClick() }) {
-                Icon(Icons.Filled.Clear, "Clear")
-            }
-        },
-        keyboardActions = KeyboardActions({ onDoneActionClick() }),
-        keyboardOptions = KeyboardOptions(
-            imeAction = ImeAction.Done,
-            keyboardType = KeyboardType.Text
-        )
-    )
-}
 
 // @Preview(device = Devices.PIXEL_4, showBackground = true)
 // @Composable
