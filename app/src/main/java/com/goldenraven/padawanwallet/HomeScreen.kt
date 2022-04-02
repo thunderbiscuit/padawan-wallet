@@ -33,7 +33,6 @@ internal fun HomeScreen(navController: NavController) {
 
     val scope = rememberCoroutineScope()
 
-    @OptIn(ExperimentalMaterial3Api::class)
     val drawerState = rememberDrawerState(DrawerValue.Closed)
 
     val items = listOf(Icons.Default.Favorite, Icons.Default.Face, Icons.Default.Email, Icons.Default.Face)
@@ -115,8 +114,12 @@ internal fun HomeScreen(navController: NavController) {
             Scaffold(
                 topBar = { PadawanAppBar(scope, drawerState) },
                 bottomBar = { BottomNavigationBar(navControllerWalletNavigation) },
-            ) {
-                WalletNavigation(navControllerWalletNavigation)
+            ) { innerPadding ->
+                Box(
+                    modifier = Modifier.padding(innerPadding)
+                ) {
+                    WalletNavigation(navControllerWalletNavigation)
+                }
             }
         }
     )
@@ -154,7 +157,7 @@ internal fun BottomNavigationBar(navControllerWalletNavigation: NavController) {
             selected = selectedItem == 1,
             onClick = {
                 selectedItem = 1
-                navControllerWalletNavigation.navigate(Screen.TutorialsScreen.route)
+                navControllerWalletNavigation.navigate(Screen.TutorialsHomeScreen.route)
             },
             colors = NavigationBarItemDefaults.colors(
                 selectedIconColor = MaterialTheme.colorScheme.primary,
