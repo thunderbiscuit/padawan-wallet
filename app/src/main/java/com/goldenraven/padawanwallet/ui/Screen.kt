@@ -18,6 +18,7 @@ sealed class Screen(val route: String) {
     // wallet screens
     object WalletScreen : Screen("wallet_screen")
     object TutorialsScreen : Screen("tutorials_screen")
+    object TutorialsHomeScreen : Screen("tutorials_home_screen")
 
     // drawer screens
     object AboutScreen : Screen("about_screen")

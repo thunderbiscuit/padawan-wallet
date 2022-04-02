@@ -10,7 +10,11 @@ import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.core.tween
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
+import androidx.navigation.NavType
+import androidx.navigation.navArgument
 import com.goldenraven.padawanwallet.ui.Screen
+import com.goldenraven.padawanwallet.ui.tutorials.TutorialsHomeScreen
+import com.goldenraven.padawanwallet.ui.tutorials.TutorialsScreen
 import com.google.accompanist.navigation.animation.AnimatedNavHost
 import com.google.accompanist.navigation.animation.composable
 
@@ -44,7 +48,7 @@ fun WalletNavigation(navControllerWalletNavigation: NavHostController) {
 
         // Tutorials
         composable(
-            route = Screen.TutorialsScreen.route,
+            route = Screen.TutorialsHomeScreen.route,
             enterTransition = {
                 slideIntoContainer(AnimatedContentScope.SlideDirection.Start, animationSpec = tween(animationDuration))
             },
@@ -57,6 +61,30 @@ fun WalletNavigation(navControllerWalletNavigation: NavHostController) {
             popExitTransition = {
                 slideOutOfContainer(AnimatedContentScope.SlideDirection.End, animationSpec = tween(animationDuration))
             }
-        ) { TutorialsScreen() }
+        ) { TutorialsHomeScreen(navController = navControllerWalletNavigation) }
+
+        composable(
+            route = Screen.TutorialsScreen.route + "/{tutorialId}",
+            arguments = listOf(navArgument("tutorialId") { type = NavType.StringType }),
+            enterTransition = {
+                slideIntoContainer(AnimatedContentScope.SlideDirection.Start, animationSpec = tween(animationDuration))
+            },
+            popEnterTransition = {
+                slideIntoContainer(AnimatedContentScope.SlideDirection.Start, animationSpec = tween(animationDuration))
+            },
+            exitTransition = {
+                slideOutOfContainer(AnimatedContentScope.SlideDirection.End, animationSpec = tween(animationDuration))
+            },
+            popExitTransition = {
+                slideOutOfContainer(AnimatedContentScope.SlideDirection.End, animationSpec = tween(animationDuration))
+            }
+        ) { backStackEntry ->
+            backStackEntry.arguments?.getString("tutorialId")?.let {
+                TutorialsScreen(
+                    navController = navControllerWalletNavigation,
+                    tutorialId = it
+                )
+            }
+        }
     }
 }
