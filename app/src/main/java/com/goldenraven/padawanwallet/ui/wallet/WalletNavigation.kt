@@ -13,6 +13,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.navArgument
 import com.goldenraven.padawanwallet.ui.Screen
+import com.goldenraven.padawanwallet.ui.tutorials.Tutorial
 import com.goldenraven.padawanwallet.ui.tutorials.TutorialsHomeScreen
 import com.goldenraven.padawanwallet.ui.tutorials.TutorialsScreen
 import com.google.accompanist.navigation.animation.AnimatedNavHost
@@ -65,7 +66,7 @@ fun WalletNavigation(navControllerWalletNavigation: NavHostController) {
 
         composable(
             route = Screen.TutorialsScreen.route + "/{tutorialId}",
-            arguments = listOf(navArgument("tutorialId") { type = NavType.StringType }),
+            arguments = listOf(navArgument("tutorialId") { type = NavType.IntType }),
             enterTransition = {
                 slideIntoContainer(AnimatedContentScope.SlideDirection.Start, animationSpec = tween(animationDuration))
             },
@@ -79,12 +80,11 @@ fun WalletNavigation(navControllerWalletNavigation: NavHostController) {
                 slideOutOfContainer(AnimatedContentScope.SlideDirection.End, animationSpec = tween(animationDuration))
             }
         ) { backStackEntry ->
-            backStackEntry.arguments?.getString("tutorialId")?.let {
-                TutorialsScreen(
-                    navController = navControllerWalletNavigation,
-                    tutorialId = it
-                )
-            }
+                backStackEntry.arguments?.getInt("tutorialId")?.let {
+                    // use the id to reverse-lookup the correct enum variant and provide it to the composable
+                    val tutorial = Tutorial.fromId(it) ?: throw Exception("Cannot find requested tutorial")
+                    TutorialsScreen(tutorial = tutorial)
+                }
         }
     }
 }
