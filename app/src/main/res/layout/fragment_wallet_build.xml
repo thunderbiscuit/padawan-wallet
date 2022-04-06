@@ -126,7 +126,7 @@
         app:trackColor="@color/bg2"
         app:thumbColor="@color/fg1"
         app:tickColor="@color/bg2"
-        android:valueFrom="0"
+        android:valueFrom="1"
         android:valueTo="20"
         android:stepSize="0.1"
         tools:layout_editor_absoluteX="157dp"
