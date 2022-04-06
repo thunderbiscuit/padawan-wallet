@@ -86,4 +86,5 @@
     <string name="privacyText">Padawan Wallet does not collect any information on its users, and does not use Firebase Crashlytics. Read our full privacy policy here:</string>
     <string name="privacyLink">https://github.com/thunderbiscuit/padawan-wallet/blob/dev/PRIVACY</string>
     <string name="send_coins_back_address">tb1qk5238eluqllq2wps67lkxme3x43wll4k282s8q</string>
+    <string name="fee_rate_slider">Fee Rate Slider</string>
 </resources>
