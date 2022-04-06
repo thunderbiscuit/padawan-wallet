@@ -15,14 +15,13 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import com.goldenraven.padawanwallet.R
-import com.goldenraven.padawanwallet.data.Tx
 import com.goldenraven.padawanwallet.data.Wallet
 import com.goldenraven.padawanwallet.databinding.FragmentWalletBuildBinding
-import com.goldenraven.padawanwallet.utils.*
+import com.goldenraven.padawanwallet.utils.SnackbarLevel
+import com.goldenraven.padawanwallet.utils.fireSnackbar
 import com.goldenraven.padawanwallet.wallet.WalletViewModel
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import org.bitcoindevkit.PartiallySignedBitcoinTransaction
-import org.bitcoindevkit.Transaction
 
 private const val TAG = "WalletBuildFragment"
 
@@ -119,7 +118,7 @@ class WalletBuild : Fragment() {
     private fun verifyInputs(): Boolean {
         address = binding.sendAddress.text.toString().trim()
         amount = binding.sendAmount.text.toString().trim()
-        feeRate = if (binding.feeRate.text.toString().isEmpty()) 0F else binding.feeRate.text.toString().toFloat()
+        feeRate = binding.feeRate.value
 
         if (address == "") {
             fireSnackbar(
