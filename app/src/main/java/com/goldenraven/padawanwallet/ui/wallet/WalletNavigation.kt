@@ -68,16 +68,16 @@ fun WalletNavigation(navControllerWalletNavigation: NavHostController) {
             route = Screen.TutorialsScreen.route + "/{tutorialId}",
             arguments = listOf(navArgument("tutorialId") { type = NavType.IntType }),
             enterTransition = {
-                slideIntoContainer(AnimatedContentScope.SlideDirection.Start, animationSpec = tween(animationDuration))
+                slideIntoContainer(AnimatedContentScope.SlideDirection.Up, animationSpec = tween(animationDuration))
             },
             popEnterTransition = {
-                slideIntoContainer(AnimatedContentScope.SlideDirection.Start, animationSpec = tween(animationDuration))
+                slideIntoContainer(AnimatedContentScope.SlideDirection.Up, animationSpec = tween(animationDuration))
             },
             exitTransition = {
-                slideOutOfContainer(AnimatedContentScope.SlideDirection.End, animationSpec = tween(animationDuration))
+                slideOutOfContainer(AnimatedContentScope.SlideDirection.Down, animationSpec = tween(animationDuration))
             },
             popExitTransition = {
-                slideOutOfContainer(AnimatedContentScope.SlideDirection.End, animationSpec = tween(animationDuration))
+                slideOutOfContainer(AnimatedContentScope.SlideDirection.Down, animationSpec = tween(animationDuration))
             }
         ) { backStackEntry ->
                 backStackEntry.arguments?.getInt("tutorialId")?.let {
