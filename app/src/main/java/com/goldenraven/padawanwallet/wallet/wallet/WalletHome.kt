@@ -70,16 +70,13 @@ class WalletHome : Fragment() {
         viewModel.balance.observe(viewLifecycleOwner, {
             if (viewModel.satoshiUnit.value == true) {
                 val balanceInSatoshis = it
-                val humanReadableBalance =
-                    DecimalFormat("###,###,###").format(balanceInSatoshis.toLong())
-                        .replace(",", "\u2008")
+                val humanReadableBalance = DecimalFormat("###,###,###").format(balanceInSatoshis.toLong()).replace(",", "\u2008")
                 binding.balance.text = humanReadableBalance
                 // binding.unitToggleButton.text = "sat"
                 // binding.unitToggleButton.textSize = 28F
                 // binding.unitToggleButton.setTypeface()
                 binding.unitToggleButton.text = ""
-                binding.unitToggleButton.background =
-                    resources.getDrawable(R.drawable.background_unit_satoshi, null)
+                binding.unitToggleButton.background = resources.getDrawable(R.drawable.background_unit_satoshi, null)
             } else {
                 var balanceInBitcoin: Float
                 if (it == 0uL) {
@@ -89,8 +86,7 @@ class WalletHome : Fragment() {
                 }
                 val humanReadableBalance = DecimalFormat("0.00000000").format(balanceInBitcoin)
                 binding.balance.text = humanReadableBalance
-                binding.unitToggleButton.background =
-                    resources.getDrawable(R.drawable.background_unit_bitcoin, null)
+                binding.unitToggleButton.background = resources.getDrawable(R.drawable.background_unit_bitcoin, null)
                 binding.unitToggleButton.textSize = 42F
                 binding.unitToggleButton.text = "Ƀ"
             }
@@ -114,7 +110,7 @@ class WalletHome : Fragment() {
         }
 
         binding.unitToggleButton.setOnClickListener {
-            Log.i(TAG, "Toggle unit button was pressed")
+            Log.i(TAG,"Toggle unit button was pressed")
             viewModel.changeUnit()
         }
 
