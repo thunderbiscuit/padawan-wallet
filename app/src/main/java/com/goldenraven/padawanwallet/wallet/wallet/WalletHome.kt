@@ -34,7 +34,6 @@ class WalletHome : Fragment() {
 
     private lateinit var viewModel: WalletViewModel
     private lateinit var binding: FragmentWalletHomeBinding
-    private lateinit var rootView: View
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -53,8 +52,6 @@ class WalletHome : Fragment() {
         viewModel.readAllData.observe(viewLifecycleOwner, Observer { tx ->
             adapter.setData(tx)
         })
-
-        rootView = binding.root
 
         viewLifecycleOwner.lifecycleScope.launch(Dispatchers.IO) {
             syncWallet()
@@ -102,7 +99,13 @@ class WalletHome : Fragment() {
                         syncWallet()
                     }
                 }
-                false -> fireSnackbar(requireView(), SnackbarLevel.WARNING, "Network connection currently not available")
+                false -> if (requireView().parent != null)
+
+                    fireSnackbar(
+                        requireView(),
+                        SnackbarLevel.WARNING,
+                        "Network connection currently not available"
+                    )
             }
         }
 
@@ -126,6 +129,7 @@ class WalletHome : Fragment() {
     private suspend fun syncWallet() = withContext(Dispatchers.IO) {
         viewModel.updateBalance()
         viewModel.syncTransactionHistory()
-        fireSnackbar(rootView, SnackbarLevel.INFO, "Wallet successfully synced!")
+        if (requireView().parent != null)
+            fireSnackbar(requireView(), SnackbarLevel.INFO, "Wallet successfully synced!")
     }
 }
