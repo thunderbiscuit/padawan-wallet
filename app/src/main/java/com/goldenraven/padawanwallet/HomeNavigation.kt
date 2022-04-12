@@ -36,11 +36,11 @@ fun HomeNavigation() {
         // Home
         composable(
             route = Screen.HomeScreen.route,
-            exitTransition = {
-                slideOutOfContainer(AnimatedContentScope.SlideDirection.Start, animationSpec = tween(animationDuration))
-            },
             popEnterTransition = {
                 slideIntoContainer(AnimatedContentScope.SlideDirection.End, animationSpec = tween(animationDuration))
+            },
+            exitTransition = {
+                slideOutOfContainer(AnimatedContentScope.SlideDirection.Start, animationSpec = tween(animationDuration))
             },
         ) { HomeScreen(navController = navController) }
 
@@ -60,11 +60,11 @@ fun HomeNavigation() {
         // Settings
         composable(
             route = Screen.SettingsScreen.route,
-            exitTransition = {
-                slideOutOfContainer(AnimatedContentScope.SlideDirection.Start, animationSpec = tween(animationDuration))
-            },
             popEnterTransition = {
                 slideIntoContainer(AnimatedContentScope.SlideDirection.End, animationSpec = tween(animationDuration))
+            },
+            exitTransition = {
+                slideOutOfContainer(AnimatedContentScope.SlideDirection.Down, animationSpec = tween(animationDuration))
             },
         ) { SettingsScreen(navController = navController) }
 
@@ -72,11 +72,11 @@ fun HomeNavigation() {
         // Recovery Phrase
         composable(
             route = Screen.RecoveryPhrase.route,
-            exitTransition = {
-                slideOutOfContainer(AnimatedContentScope.SlideDirection.Start, animationSpec = tween(animationDuration))
-            },
             popEnterTransition = {
                 slideIntoContainer(AnimatedContentScope.SlideDirection.End, animationSpec = tween(animationDuration))
+            },
+            exitTransition = {
+                slideOutOfContainer(AnimatedContentScope.SlideDirection.Down, animationSpec = tween(animationDuration))
             },
         ) { RecoveryPhraseScreen(navController = navController) }
 
@@ -84,11 +84,11 @@ fun HomeNavigation() {
         // Send your coins back
         composable(
             route = Screen.SendCoinsBackScreen.route,
-            exitTransition = {
-                slideOutOfContainer(AnimatedContentScope.SlideDirection.Start, animationSpec = tween(animationDuration))
-            },
             popEnterTransition = {
                 slideIntoContainer(AnimatedContentScope.SlideDirection.End, animationSpec = tween(animationDuration))
+            },
+            exitTransition = {
+                slideOutOfContainer(AnimatedContentScope.SlideDirection.Down, animationSpec = tween(animationDuration))
             },
         ) { SendCoinsBackScreen(navController = navController) }
     }
