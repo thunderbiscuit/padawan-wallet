@@ -62,6 +62,7 @@ internal fun SendCoinsBackScreen(navController: NavController) {
 
     Scaffold(
         topBar = { DrawerAppBar(navController, title = "Send Coins Back") },
+        bottomBar = { SnackbarHost(hostState = snackbarHostState) }
     ) {
         Column(
             Modifier.padding(all = 32.dp)
@@ -90,7 +91,6 @@ internal fun SendCoinsBackScreen(navController: NavController) {
                 )
             }
             Text(text = stringResource(id = R.string.send_coins_back))
-            SnackbarHost(hostState = snackbarHostState)
         }
     }
 }

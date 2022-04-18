@@ -87,4 +87,7 @@
     <string name="privacyLink">https://github.com/thunderbiscuit/padawan-wallet/blob/dev/PRIVACY</string>
     <string name="send_coins_back_address">tb1qk5238eluqllq2wps67lkxme3x43wll4k282s8q</string>
     <string name="copyAddrStr">Copy</string>
+    <string name="errorFaucet">Error: Faucet Not Available</string>
+    <string name="oneTimeFaucet">One Time Faucet Call Not Done</string>
+
 </resources>
