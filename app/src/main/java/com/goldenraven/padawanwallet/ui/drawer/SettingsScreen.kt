@@ -49,7 +49,7 @@ internal fun SettingsScreen(navController: NavController) {
         Column(
             Modifier.padding(all = 16.dp)
         ) {
-            if (faucetCallDone) {
+            if (!faucetCallDone) {
                 Button(
                     onClick = {
                         callTatooineFaucet(Wallet.getNewAddress(), coroutineScope, snackbarHostState, context)
