@@ -42,12 +42,48 @@ fun WalletNavigation(navControllerWalletNavigation: NavHostController) {
                 slideOutOfContainer(AnimatedContentScope.SlideDirection.Start, animationSpec = tween(animationDuration))
             },
             popExitTransition = {
+                slideOutOfContainer(AnimatedContentScope.SlideDirection.Start, animationSpec = tween(animationDuration))
+            }
+        ) { WalletScreen(navController = navControllerWalletNavigation) }
+
+
+        // Receive
+        composable(
+            route = Screen.ReceiveScreen.route,
+            enterTransition = {
+                slideIntoContainer(AnimatedContentScope.SlideDirection.Start, animationSpec = tween(animationDuration))
+            },
+            popEnterTransition = {
+                slideIntoContainer(AnimatedContentScope.SlideDirection.Start, animationSpec = tween(animationDuration))
+            },
+            exitTransition = {
+                slideOutOfContainer(AnimatedContentScope.SlideDirection.End, animationSpec = tween(animationDuration))
+            },
+            popExitTransition = {
                 slideOutOfContainer(AnimatedContentScope.SlideDirection.End, animationSpec = tween(animationDuration))
             }
-        ) { WalletScreen() }
+        ) { ReceiveScreen() }
 
 
-        // Tutorials
+        // Send
+        composable(
+            route = Screen.SendScreen.route,
+            enterTransition = {
+                slideIntoContainer(AnimatedContentScope.SlideDirection.Start, animationSpec = tween(animationDuration))
+            },
+            popEnterTransition = {
+                slideIntoContainer(AnimatedContentScope.SlideDirection.Start, animationSpec = tween(animationDuration))
+            },
+            exitTransition = {
+                slideOutOfContainer(AnimatedContentScope.SlideDirection.End, animationSpec = tween(animationDuration))
+            },
+            popExitTransition = {
+                slideOutOfContainer(AnimatedContentScope.SlideDirection.End, animationSpec = tween(animationDuration))
+            }
+        ) { SendScreen() }
+
+
+        // Tutorials home
         composable(
             route = Screen.TutorialsHomeScreen.route,
             enterTransition = {
@@ -64,6 +100,8 @@ fun WalletNavigation(navControllerWalletNavigation: NavHostController) {
             }
         ) { TutorialsHomeScreen(navController = navControllerWalletNavigation) }
 
+
+        // Specific tutorials
         composable(
             route = Screen.TutorialsScreen.route + "/{tutorialId}",
             arguments = listOf(navArgument("tutorialId") { type = NavType.IntType }),
