@@ -14,11 +14,14 @@ import com.goldenraven.padawanwallet.theme.md_theme_dark_background
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.lifecycle.LiveData
+import androidx.navigation.NavHostController
 import com.goldenraven.padawanwallet.data.Wallet
+import com.goldenraven.padawanwallet.ui.Screen
 
 @Composable
 internal fun WalletScreen(
-    walletViewModel: WalletViewModel = viewModel()
+    walletViewModel: WalletViewModel = viewModel(),
+    navController: NavHostController
 ) {
     val balance by walletViewModel.balance.observeAsState()
     Column(
@@ -31,6 +34,16 @@ internal fun WalletScreen(
             onClick = { walletViewModel.updateBalance() },
         ) {
             Text(text = "Balance")
+        }
+        Button(
+            onClick = { navController.navigate(Screen.SendScreen.route) },
+        ) {
+            Text(text = "Send")
+        }
+        Button(
+            onClick = { navController.navigate(Screen.ReceiveScreen.route) },
+        ) {
+            Text(text = "Receive")
         }
     }
 }

@@ -17,6 +17,8 @@ sealed class Screen(val route: String) {
 
     // wallet screens
     object WalletScreen : Screen("wallet_screen")
+    object ReceiveScreen : Screen("receive_screen")
+    object SendScreen : Screen("send_screen")
     object TutorialsScreen : Screen("tutorials_screen")
     object TutorialsHomeScreen : Screen("tutorials_home_screen")
 
