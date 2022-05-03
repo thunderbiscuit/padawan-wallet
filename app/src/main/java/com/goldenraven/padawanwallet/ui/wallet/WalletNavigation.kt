@@ -8,6 +8,8 @@ package com.goldenraven.padawanwallet.ui.wallet
 import androidx.compose.animation.AnimatedContentScope
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
@@ -33,16 +35,36 @@ fun WalletNavigation(navControllerWalletNavigation: NavHostController) {
         composable(
             route = Screen.WalletScreen.route,
             enterTransition = {
-                slideIntoContainer(AnimatedContentScope.SlideDirection.End, animationSpec = tween(animationDuration))
+                when (initialState.destination.route) {
+                    "receive_screen" -> fadeIn(animationSpec = tween(1000))
+                    "send_screen" -> fadeIn(animationSpec = tween(1000))
+                    "wallet_screen" -> null
+                    else -> slideIntoContainer(AnimatedContentScope.SlideDirection.End, animationSpec = tween(animationDuration))
+                }
             },
             popEnterTransition = {
-                slideIntoContainer(AnimatedContentScope.SlideDirection.End, animationSpec = tween(animationDuration))
+                when (initialState.destination.route) {
+                    "receive_screen" -> fadeIn(animationSpec = tween(1000))
+                    "send_screen" -> fadeIn(animationSpec = tween(1000))
+                    "wallet_screen" -> null
+                    else -> slideIntoContainer(AnimatedContentScope.SlideDirection.End, animationSpec = tween(animationDuration))
+                }
             },
             exitTransition = {
-                slideOutOfContainer(AnimatedContentScope.SlideDirection.Start, animationSpec = tween(animationDuration))
+                when (targetState.destination.route) {
+                    "receive_screen" -> fadeOut(animationSpec = tween(300))
+                    "send_screen" -> fadeOut(animationSpec = tween(300))
+                    "wallet_screen" -> null
+                    else -> slideOutOfContainer(AnimatedContentScope.SlideDirection.Start, animationSpec = tween(animationDuration))
+                }
             },
             popExitTransition = {
-                slideOutOfContainer(AnimatedContentScope.SlideDirection.Start, animationSpec = tween(animationDuration))
+                when (targetState.destination.route) {
+                    "receive_screen" -> fadeOut(animationSpec = tween(300))
+                    "send_screen" -> fadeOut(animationSpec = tween(300))
+                    "wallet_screen" -> null
+                    else -> slideOutOfContainer(AnimatedContentScope.SlideDirection.Start, animationSpec = tween(animationDuration))
+                }
             }
         ) { WalletScreen(navController = navControllerWalletNavigation) }
 
@@ -51,16 +73,16 @@ fun WalletNavigation(navControllerWalletNavigation: NavHostController) {
         composable(
             route = Screen.ReceiveScreen.route,
             enterTransition = {
-                slideIntoContainer(AnimatedContentScope.SlideDirection.Start, animationSpec = tween(animationDuration))
+                slideIntoContainer(AnimatedContentScope.SlideDirection.Up, animationSpec = tween(animationDuration))
             },
             popEnterTransition = {
-                slideIntoContainer(AnimatedContentScope.SlideDirection.Start, animationSpec = tween(animationDuration))
+                slideIntoContainer(AnimatedContentScope.SlideDirection.Up, animationSpec = tween(animationDuration))
             },
             exitTransition = {
-                slideOutOfContainer(AnimatedContentScope.SlideDirection.End, animationSpec = tween(animationDuration))
+                slideOutOfContainer(AnimatedContentScope.SlideDirection.Down, animationSpec = tween(animationDuration))
             },
             popExitTransition = {
-                slideOutOfContainer(AnimatedContentScope.SlideDirection.End, animationSpec = tween(animationDuration))
+                slideOutOfContainer(AnimatedContentScope.SlideDirection.Down, animationSpec = tween(animationDuration))
             }
         ) { ReceiveScreen() }
 
@@ -69,16 +91,16 @@ fun WalletNavigation(navControllerWalletNavigation: NavHostController) {
         composable(
             route = Screen.SendScreen.route,
             enterTransition = {
-                slideIntoContainer(AnimatedContentScope.SlideDirection.Start, animationSpec = tween(animationDuration))
+                slideIntoContainer(AnimatedContentScope.SlideDirection.Up, animationSpec = tween(animationDuration))
             },
             popEnterTransition = {
-                slideIntoContainer(AnimatedContentScope.SlideDirection.Start, animationSpec = tween(animationDuration))
+                slideIntoContainer(AnimatedContentScope.SlideDirection.Up, animationSpec = tween(animationDuration))
             },
             exitTransition = {
-                slideOutOfContainer(AnimatedContentScope.SlideDirection.End, animationSpec = tween(animationDuration))
+                slideOutOfContainer(AnimatedContentScope.SlideDirection.Down, animationSpec = tween(animationDuration))
             },
             popExitTransition = {
-                slideOutOfContainer(AnimatedContentScope.SlideDirection.End, animationSpec = tween(animationDuration))
+                slideOutOfContainer(AnimatedContentScope.SlideDirection.Down, animationSpec = tween(animationDuration))
             }
         ) { SendScreen() }
 
@@ -87,16 +109,28 @@ fun WalletNavigation(navControllerWalletNavigation: NavHostController) {
         composable(
             route = Screen.TutorialsHomeScreen.route,
             enterTransition = {
-                slideIntoContainer(AnimatedContentScope.SlideDirection.Start, animationSpec = tween(animationDuration))
+                when (initialState.destination.route) {
+                    "wallet_screen" -> slideIntoContainer(AnimatedContentScope.SlideDirection.Start, animationSpec = tween(animationDuration))
+                    else -> fadeIn(animationSpec = tween(1000))
+                }
             },
             popEnterTransition = {
-                slideIntoContainer(AnimatedContentScope.SlideDirection.Start, animationSpec = tween(animationDuration))
+                when (initialState.destination.route) {
+                    "wallet_screen" -> slideIntoContainer(AnimatedContentScope.SlideDirection.Start, animationSpec = tween(animationDuration))
+                    else -> fadeIn(animationSpec = tween(1000))
+                }
             },
             exitTransition = {
-                slideOutOfContainer(AnimatedContentScope.SlideDirection.End, animationSpec = tween(animationDuration))
+                when (targetState.destination.route) {
+                    "wallet_screen" -> slideOutOfContainer(AnimatedContentScope.SlideDirection.End, animationSpec = tween(animationDuration))
+                    else -> fadeOut(animationSpec = tween(300))
+                }
             },
             popExitTransition = {
-                slideOutOfContainer(AnimatedContentScope.SlideDirection.End, animationSpec = tween(animationDuration))
+                when (targetState.destination.route) {
+                    "wallet_screen" -> slideOutOfContainer(AnimatedContentScope.SlideDirection.End, animationSpec = tween(animationDuration))
+                    else -> fadeOut(animationSpec = tween(300))
+                }
             }
         ) { TutorialsHomeScreen(navController = navControllerWalletNavigation) }
 
