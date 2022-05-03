@@ -111,6 +111,9 @@ object Wallet {
         return wallet.getNewAddress()
     }
 
+    // fun getLastUnusedAddress(): String {
+    // }
+
     fun createTransaction(recipient: String, amount: ULong, fee_rate: Float?): PartiallySignedBitcoinTransaction {
         return PartiallySignedBitcoinTransaction(wallet, recipient, amount, fee_rate)
     }
