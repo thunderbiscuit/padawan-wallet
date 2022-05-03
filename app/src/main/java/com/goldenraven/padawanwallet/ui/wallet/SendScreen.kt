@@ -24,8 +24,10 @@ import androidx.constraintlayout.compose.Dimension
 import androidx.lifecycle.LiveData
 import com.goldenraven.padawanwallet.data.Wallet
 import com.goldenraven.padawanwallet.theme.*
+import kotlinx.coroutines.launch
 import org.bitcoindevkit.PartiallySignedBitcoinTransaction
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 internal fun SendScreen() {
 
@@ -35,74 +37,107 @@ internal fun SendScreen() {
     val amount: MutableState<String> = remember { mutableStateOf("") }
     val feeRate: MutableState<String> = remember { mutableStateOf("") }
 
-    ConstraintLayout(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(md_theme_dark_background)
-    ) {
-        val (screenTitle, transactionInputs, bottomButtons) = createRefs()
-        Text(
-            text = "Send Bitcoin",
-            fontSize = 28.sp,
-            textAlign = TextAlign.Center,
-            modifier = Modifier
-                .constrainAs(screenTitle) {
-                    top.linkTo(parent.top)
-                    start.linkTo(parent.start)
-                    end.linkTo(parent.end)
-                }
-                .padding(top = 70.dp)
-        )
+    val snackbarHostState = remember { SnackbarHostState() }
+    val scope = rememberCoroutineScope()
 
-        Column(
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center,
-            modifier = Modifier.constrainAs(transactionInputs) {
-                top.linkTo(screenTitle.bottom)
-                bottom.linkTo(bottomButtons.top)
-                start.linkTo(parent.start)
-                end.linkTo(parent.end)
-                height = Dimension.fillToConstraints
+    Scaffold(
+        snackbarHost = {
+            SnackbarHost(snackbarHostState) { data ->
+                Snackbar(
+                    modifier = Modifier
+                        .padding(12.dp)
+                        .background(md_theme_dark_warning),
+                    containerColor = md_theme_dark_warning,
+
+                    ) {
+                    Text(
+                        text = data.visuals.message,
+                        style = TextStyle(md_theme_dark_onLightBackground)
+                    )
+                }
             }
+        },
+    ) {
+        ConstraintLayout(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(md_theme_dark_background)
         ) {
-            TransactionRecipientInput(recipientAddress)
-            TransactionAmountInput(amount)
-            TransactionFeeInput(feeRate)
-            Dialog(
-                recipientAddress = recipientAddress.value,
-                amount = amount.value,
-                feeRate = feeRate.value,
-                showDialog = showDialog,
-                setShowDialog = setShowDialog
+            val (screenTitle, transactionInputs, bottomButtons) = createRefs()
+            Text(
+                text = "Send Bitcoin",
+                fontSize = 28.sp,
+                textAlign = TextAlign.Center,
+                modifier = Modifier
+                    .constrainAs(screenTitle) {
+                        top.linkTo(parent.top)
+                        start.linkTo(parent.start)
+                        end.linkTo(parent.end)
+                    }
+                    .padding(top = 70.dp)
             )
-        }
 
-        Column(
-            Modifier
-                .constrainAs(bottomButtons) {
-                    bottom.linkTo(parent.bottom)
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center,
+                modifier = Modifier.constrainAs(transactionInputs) {
+                    top.linkTo(screenTitle.bottom)
+                    bottom.linkTo(bottomButtons.top)
                     start.linkTo(parent.start)
                     end.linkTo(parent.end)
+                    height = Dimension.fillToConstraints
                 }
-                .padding(bottom = 24.dp)
-        ) {
-            Button(
-                onClick = { setShowDialog(true) },
-                colors = ButtonDefaults.buttonColors(md_theme_dark_secondary),
-                shape = RoundedCornerShape(16.dp),
-                modifier = Modifier
-                    .height(80.dp)
-                    .fillMaxWidth(0.9f)
-                    .padding(vertical = 8.dp, horizontal = 8.dp)
-                    .shadow(elevation = 4.dp, shape = RoundedCornerShape(16.dp))
             ) {
-                Text(
-                    text = "broadcast transaction",
-                    fontFamily = jost,
-                    fontSize = 18.sp,
-                    textAlign = TextAlign.Center,
-                    lineHeight = 28.sp,
+                TransactionRecipientInput(recipientAddress)
+                TransactionAmountInput(amount)
+                TransactionFeeInput(feeRate)
+                Dialog(
+                    recipientAddress = recipientAddress.value,
+                    amount = amount.value,
+                    feeRate = feeRate.value,
+                    showDialog = showDialog,
+                    setShowDialog = setShowDialog
                 )
+            }
+
+            Column(
+                Modifier
+                    .constrainAs(bottomButtons) {
+                        bottom.linkTo(parent.bottom)
+                        start.linkTo(parent.start)
+                        end.linkTo(parent.end)
+                    }
+                    .padding(bottom = 24.dp)
+            ) {
+                Button(
+                    onClick = {
+                        if (recipientAddress.value == "" || amount.value == "" || feeRate.value == "") {
+                            scope.launch {
+                                snackbarHostState.showSnackbar(
+                                    message = "One or more field is invalid!",
+                                    duration = SnackbarDuration.Short
+                                )
+                            }
+                        } else {
+                            setShowDialog(true)
+                        }
+                    },
+                    colors = ButtonDefaults.buttonColors(md_theme_dark_secondary),
+                    shape = RoundedCornerShape(16.dp),
+                    modifier = Modifier
+                        .height(80.dp)
+                        .fillMaxWidth(0.9f)
+                        .padding(vertical = 8.dp, horizontal = 8.dp)
+                        .shadow(elevation = 4.dp, shape = RoundedCornerShape(16.dp))
+                ) {
+                    Text(
+                        text = "broadcast transaction",
+                        fontFamily = jost,
+                        fontSize = 18.sp,
+                        textAlign = TextAlign.Center,
+                        lineHeight = 28.sp,
+                    )
+                }
             }
         }
     }
