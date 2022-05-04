@@ -82,5 +82,4 @@ internal fun TutorialsHomeScreen(navController: NavController) {
             }
         }
     }
-
 }

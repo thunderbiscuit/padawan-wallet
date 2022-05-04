@@ -2,7 +2,9 @@ package com.goldenraven.padawanwallet.ui.wallet
 
 import android.util.Log
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.TextFieldDefaults
@@ -16,6 +18,8 @@ import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -24,6 +28,7 @@ import androidx.constraintlayout.compose.Dimension
 import androidx.lifecycle.LiveData
 import com.goldenraven.padawanwallet.data.Wallet
 import com.goldenraven.padawanwallet.theme.*
+import com.goldenraven.padawanwallet.ui.Screen
 import kotlinx.coroutines.launch
 import org.bitcoindevkit.PartiallySignedBitcoinTransaction
 
