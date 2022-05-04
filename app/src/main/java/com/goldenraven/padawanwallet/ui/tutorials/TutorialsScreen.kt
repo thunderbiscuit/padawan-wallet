@@ -25,7 +25,6 @@ fun TutorialsScreen(tutorial: Tutorial) {
         Tutorial.T1 -> {
             title = stringResource(R.string.E1_title)
             content = listOf(
-                listOf("h1", stringResource(R.string.t1_h1)),
                 listOf("p1", stringResource(R.string.t1_p1)),
                 listOf("h2", stringResource(R.string.t1_h2)),
                 listOf("p2", stringResource(R.string.t1_p2)),
@@ -38,11 +37,10 @@ fun TutorialsScreen(tutorial: Tutorial) {
         Tutorial.T2 -> {
             title = stringResource(R.string.E2_title)
             content = listOf(
-                listOf("h1", stringResource(R.string.t2_h1)),
                 listOf("p1", stringResource(R.string.t2_p1)),
                 listOf("p2", stringResource(R.string.t2_p2)),
-                listOf("p3", stringResource(R.string.t2_p2)),
-                listOf("p4", stringResource(R.string.t2_p2)),
+                listOf("p3", stringResource(R.string.t2_p3)),
+                listOf("p4", stringResource(R.string.t2_p4)),
                 listOf("h2", stringResource(R.string.t2_h2)),
                 listOf("p5", stringResource(R.string.t2_p5)),
                 listOf("p6", stringResource(R.string.t2_p6))
@@ -51,7 +49,6 @@ fun TutorialsScreen(tutorial: Tutorial) {
         Tutorial.T3 -> {
             title = stringResource(R.string.E3_title)
             content = listOf(
-                listOf("h1", stringResource(R.string.t3_h1)),
                 listOf("p1", stringResource(R.string.t3_p1)),
                 listOf("p2", stringResource(R.string.t3_p2))
             )
@@ -59,28 +56,24 @@ fun TutorialsScreen(tutorial: Tutorial) {
         Tutorial.T4 -> {
             title = stringResource(R.string.E4_title)
             content = listOf(
-                listOf("h1", stringResource(R.string.t4_h1)),
                 listOf("p1", stringResource(R.string.t4_p1))
             )
         }
         Tutorial.T5 -> {
             title = stringResource(R.string.E5_title)
             content = listOf(
-                listOf("h1", stringResource(R.string.t5_h1)),
                 listOf("p1", stringResource(R.string.t5_p1))
             )
         }
         Tutorial.T6 -> {
             title = stringResource(R.string.E6_title)
             content = listOf(
-                listOf("h1", stringResource(R.string.t6_h1)),
                 listOf("p1", stringResource(R.string.t6_p1))
             )
         }
         Tutorial.T7 -> {
             title = stringResource(R.string.E7_title)
             content = listOf(
-                listOf("h1", stringResource(R.string.t7_h1)),
                 listOf("p1", stringResource(R.string.t7_p1)),
                 listOf("p2", stringResource(R.string.t7_p2))
             )
@@ -88,7 +81,6 @@ fun TutorialsScreen(tutorial: Tutorial) {
         Tutorial.T8 -> {
             title = stringResource(R.string.E8_title)
             content = listOf(
-                listOf("h1", stringResource(R.string.t8_h1)),
                 listOf("p1", stringResource(R.string.t8_p1))
             )
         }
@@ -110,7 +102,7 @@ fun TutorialsScreen(tutorial: Tutorial) {
             modifier = Modifier
                 .align(
                     alignment = Alignment.CenterHorizontally
-                )
+                ).padding(bottom = 16.dp)
         )
         for (i in content) {
             if ("h" in i[0]) {
@@ -130,6 +122,7 @@ fun TutorialsScreen(tutorial: Tutorial) {
                 Text(
                     text = i[1],
                     fontSize = 16.sp,
+                    modifier = Modifier.padding(bottom = 16.dp)
                 )
             }
         }
