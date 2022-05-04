@@ -220,16 +220,9 @@ fun ExpandableCard(tx: Tx) {
                 horizontalAlignment = Alignment.End
             ) {
                 Text(
-                    text = "Time: ${tx.date}",
+                    text = tx.date,
                     fontFamily = jost,
                     textAlign = TextAlign.Center,
-                    fontSize = 12.sp,
-                    modifier = Modifier
-                        .padding(horizontal = 8.dp)
-                )
-                Text(
-                    text = "Fees: ${tx.fees} sats",
-                    fontFamily = jost,
                     fontSize = 12.sp,
                     modifier = Modifier
                         .padding(horizontal = 8.dp)
@@ -241,11 +234,26 @@ fun ExpandableCard(tx: Tx) {
                         fontSize = 12.sp,
                         modifier = Modifier
                             .padding(horizontal = 8.dp)
-                            .padding(bottom = 16.dp)
                     )
                 } else {
                     Text(
                         text = "Received: ${tx.valueIn} sats",
+                        fontFamily = jost,
+                        fontSize = 12.sp,
+                        modifier = Modifier
+                            .padding(horizontal = 8.dp)
+                    )
+                }
+                Text(
+                    text = "Network fees: ${tx.fees} sats",
+                    fontFamily = jost,
+                    fontSize = 12.sp,
+                    modifier = Modifier
+                        .padding(horizontal = 8.dp)
+                )
+                if (tx.date != "Pending") {
+                    Text(
+                        text = "Block height: ${tx.height}",
                         fontFamily = jost,
                         fontSize = 12.sp,
                         modifier = Modifier
