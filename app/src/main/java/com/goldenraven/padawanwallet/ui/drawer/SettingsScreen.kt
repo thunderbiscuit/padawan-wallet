@@ -37,7 +37,7 @@ import kotlinx.coroutines.launch
 @Composable
 internal fun SettingsScreen(navController: NavController) {
 
-    val faucetCallDone = Repository.wasOneTimeFaucetCallDone()
+    val faucetCallDone = Repository.wasFaucetCallDone()
     val coroutineScope = rememberCoroutineScope()
     val snackbarHostState = remember { SnackbarHostState() }
     val context = LocalContext.current
@@ -62,7 +62,7 @@ internal fun SettingsScreen(navController: NavController) {
                 Button(
                     onClick = {
                         coroutineScope.launch {
-                            snackbarHostState.showSnackbar(context.resources.getString(R.string.errorFaucet))
+                            snackbarHostState.showSnackbar("Error: You have already gotten testnet coins before.")
                         }
                     },
                     modifier = Modifier.fillMaxWidth(),
@@ -105,7 +105,7 @@ private fun callTatooineFaucet(
             val response: HttpResponse = ktorClient.post(faucetUrl) {
                 body = TextContent(address, ContentType.Text.Plain)
             }
-            Repository.oneTimeFaucetCallDone()
+            Repository.faucetCallDone()
             Log.i("SettingsFragment", "API call to Tatooine was performed. Response is ${response.status}, ${response.readText()}")
         } catch (cause: Throwable) {
             Log.i("SettingsFragment", "Tatooine call failed: $cause")

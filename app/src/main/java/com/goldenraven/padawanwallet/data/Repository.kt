@@ -54,20 +54,24 @@ object Repository {
         return sharedPreferences.getString("mnemonic", "No seed phrase saved") ?: "Seed phrase not there"
     }
 
-    fun wasOneTimeFaucetCallDone(): Boolean {
-        return sharedPreferences.getBoolean("oneTimeFaucetCallDone", false)
+    fun wasFaucetCallDone(): Boolean {
+        return sharedPreferences.getBoolean("faucetCallDone", false)
     }
 
-    fun oneTimeFaucetCallDone(): Unit {
+    fun faucetCallDone(): Unit {
         val editor = sharedPreferences.edit()
-        editor.putBoolean("oneTimeFaucetCallDone", true)
+        editor.putBoolean("faucetCallDone", true)
         editor.apply()
     }
 
-    fun offerFaucetCallDone(): Unit {
+    fun offerFaucetDone(): Unit {
         val editor = sharedPreferences.edit()
-        editor.putBoolean("offerFaucetCallDone", true)
+        editor.putBoolean("offerFaucetDone", true)
         editor.apply()
+    }
+
+    fun didWeOfferFaucet(): Boolean {
+        return sharedPreferences.getBoolean("offerFaucetDone", false)
     }
 
     fun loadTutorialsDone(): MutableMap<String, Boolean> {
