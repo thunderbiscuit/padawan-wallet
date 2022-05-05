@@ -18,21 +18,32 @@ import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.font.FontStyle
-import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
 import androidx.lifecycle.*
 import androidx.navigation.NavHostController
+import com.goldenraven.padawanwallet.BuildConfig
 import com.goldenraven.padawanwallet.data.*
 import com.goldenraven.padawanwallet.theme.*
 import com.goldenraven.padawanwallet.ui.Screen
 import com.goldenraven.padawanwallet.utils.*
 import com.google.accompanist.swiperefresh.SwipeRefresh
 import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
+import io.ktor.client.*
+import io.ktor.client.engine.cio.*
+import io.ktor.client.features.auth.*
+import io.ktor.client.features.auth.providers.*
+import io.ktor.client.request.*
+import io.ktor.client.statement.*
+import io.ktor.content.*
+import io.ktor.http.*
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -49,10 +60,19 @@ internal fun WalletScreen(
     navController: NavHostController
 ) {
     val balance by walletViewModel.balance.observeAsState()
-    // walletViewModel.updateBalance()
-
-    // val refreshViewModel: RefreshViewModel = viewModel()
     val isRefreshing by walletViewModel.isRefreshing.collectAsState()
+
+    val openFaucetDialog = remember { mutableStateOf(false) }
+    // do we really need to make a call to shared preferences on every recomposition?
+    // probably a better way to do this
+    openFaucetDialog.value = !walletViewModel.didWeOfferFaucet()
+
+    if (openFaucetDialog.value) {
+        FaucetDialog(
+            openFaucetDialog = openFaucetDialog,
+            walletViewModel = walletViewModel
+        )
+    }
 
     SwipeRefresh(
         state = rememberSwipeRefreshState(isRefreshing),
@@ -75,12 +95,13 @@ internal fun WalletScreen(
                     Modifier
                         .fillMaxWidth()
                         .background(color = md_theme_dark_background2)
-                        .height(110.dp),
+                        .height(110.dp)
+                        .padding(horizontal = 48.dp),
                     verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.SpaceEvenly
+                    horizontalArrangement = Arrangement.SpaceBetween
                 ) {
                     Image(
-                        painter = painterResource(id = R.drawable.sat),
+                        painter = painterResource(id = R.drawable.ic_satoshi),
                         contentDescription = "Bitcoin testnet logo",
                         Modifier
                             .align(Alignment.CenterVertically)
@@ -89,7 +110,7 @@ internal fun WalletScreen(
                     Text(
                         balance.toString(),
                         fontFamily = shareTechMono,
-                        fontSize = 32.sp,
+                        fontSize = 40.sp,
                     )
                 }
                 Row(
@@ -112,7 +133,7 @@ internal fun WalletScreen(
                         Text(
                             text = "Send",
                             fontFamily = jost,
-                            fontSize = 18.sp,
+                            fontSize = 20.sp,
                             textAlign = TextAlign.Center,
                             lineHeight = 28.sp,
                             modifier = Modifier
@@ -131,7 +152,7 @@ internal fun WalletScreen(
                         Text(
                             text = "Receive",
                             fontFamily = jost,
-                            fontSize = 18.sp,
+                            fontSize = 20.sp,
                             textAlign = TextAlign.Center,
                             lineHeight = 28.sp,
                             modifier = Modifier
@@ -157,6 +178,7 @@ internal fun WalletScreen(
             LazyColumn(
                 modifier = Modifier
                     .background(md_theme_dark_background)
+                    .padding(bottom = 8.dp)
                     .constrainAs(part2) {
                         top.linkTo(part1.bottom)
                         bottom.linkTo(parent.bottom)
@@ -207,29 +229,46 @@ fun ExpandableCard(tx: Tx) {
                 )
             }
             Text(
-                text = "${tx.txid.take(8)}...${tx.txid.takeLast(8)}",
-                fontFamily = shareTechMono,
-                fontSize = 12.sp,
+                text = tx.date,
+                fontFamily = jost,
+                textAlign = TextAlign.Center,
+                fontSize = 14.sp,
                 modifier = Modifier
-                    .padding(vertical = 16.dp)
+                    .padding(horizontal = 8.dp, vertical = 16.dp)
             )
         }
         if (expandedState) {
+            Divider(
+                color = md_theme_dark_surfaceLight,
+                thickness = 1.dp,
+                modifier = Modifier
+                    .padding(horizontal = 8.dp)
+                    .padding(bottom = 8.dp)
+            )
             Column(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalAlignment = Alignment.End
             ) {
                 Text(
-                    text = tx.date,
+                    text = buildAnnotatedString {
+                        append("TxId: ")
+                        withStyle(style = SpanStyle(fontFamily = shareTechMono)) {
+                            append("${tx.txid.take(8)}...${tx.txid.takeLast(8)}")
+                        }
+                    },
                     fontFamily = jost,
-                    textAlign = TextAlign.Center,
                     fontSize = 12.sp,
                     modifier = Modifier
                         .padding(horizontal = 8.dp)
                 )
                 if (tx.isPayment) {
                     Text(
-                        text = "Sent: ${tx.valueOut} sats",
+                        text = buildAnnotatedString {
+                            append("Sent: ")
+                            withStyle(style = SpanStyle(fontFamily = shareTechMono)) {
+                                append("${tx.valueOut} sat")
+                            }
+                        },
                         fontFamily = jost,
                         fontSize = 12.sp,
                         modifier = Modifier
@@ -237,7 +276,12 @@ fun ExpandableCard(tx: Tx) {
                     )
                 } else {
                     Text(
-                        text = "Received: ${tx.valueIn} sats",
+                        text = buildAnnotatedString {
+                            append("Received: ")
+                            withStyle(style = SpanStyle(fontFamily = shareTechMono)) {
+                                append("${tx.valueIn} sat")
+                            }
+                        },
                         fontFamily = jost,
                         fontSize = 12.sp,
                         modifier = Modifier
@@ -245,15 +289,39 @@ fun ExpandableCard(tx: Tx) {
                     )
                 }
                 Text(
-                    text = "Network fees: ${tx.fees} sats",
+                    text = buildAnnotatedString {
+                        append("Network fees: ")
+                        withStyle(style = SpanStyle(fontFamily = shareTechMono)) {
+                            append("${tx.fees} sat")
+                        }
+                    },
                     fontFamily = jost,
                     fontSize = 12.sp,
                     modifier = Modifier
                         .padding(horizontal = 8.dp)
                 )
-                if (tx.date != "Pending") {
+                if (tx.date == "Pending") {
                     Text(
-                        text = "Block height: ${tx.height}",
+                        text = buildAnnotatedString {
+                            append("Block height: ")
+                            withStyle(style = SpanStyle(fontFamily = shareTechMono)) {
+                                append("Pending")
+                            }
+                        },
+                        fontFamily = jost,
+                        fontSize = 12.sp,
+                        modifier = Modifier
+                            .padding(horizontal = 8.dp)
+                            .padding(bottom = 16.dp)
+                    )
+                } else {
+                    Text(
+                        text = buildAnnotatedString {
+                            append("Block height: ")
+                            withStyle(style = SpanStyle(fontFamily = shareTechMono)) {
+                                append("${tx.height}")
+                            }
+                        },
                         fontFamily = jost,
                         fontSize = 12.sp,
                         modifier = Modifier
@@ -266,6 +334,56 @@ fun ExpandableCard(tx: Tx) {
     }
 }
 
+@Composable
+private fun FaucetDialog(openFaucetDialog: MutableState<Boolean>, walletViewModel: WalletViewModel) {
+    // if (showDialog) {
+        androidx.compose.material.AlertDialog(
+            backgroundColor = md_theme_dark_lightBackground,
+            onDismissRequest = {},
+            title = {
+                Text(
+                    text = "Hello there!",
+                    style = MaterialTheme.typography.headlineMedium,
+                    color = md_theme_dark_onLightBackground
+                )
+            },
+            text = {
+                Text(
+                    text = "We notice it is your first time opening Padawan wallet. Would you like Padawan to send you some testnet coins to get your started?",
+                    color = md_theme_dark_onLightBackground
+                )
+            },
+            confirmButton = {
+                TextButton(
+                    onClick = {
+                        walletViewModel.faucetCallDone()
+                        callTatooineFaucet(walletViewModel.getLastUnusedAddress())
+                        openFaucetDialog.value = false
+                    },
+                ) {
+                    Text(
+                        text = "Yes please!",
+                        color = md_theme_dark_onLightBackground
+                    )
+                }
+            },
+            dismissButton = {
+                TextButton(
+                    onClick = {
+                        openFaucetDialog.value = false
+                        walletViewModel.faucetOfferWasMade()
+                    },
+                ) {
+                    Text(
+                        text = "Not right now",
+                        color = md_theme_dark_onLightBackground
+                    )
+                }
+            },
+        )
+    // }
+}
+
 internal class WalletViewModel(application: Application) : AndroidViewModel(application) {
 
     val app: Application = application
@@ -276,6 +394,26 @@ internal class WalletViewModel(application: Application) : AndroidViewModel(appl
         val txDao: TxDao = TxDatabase.getDatabase(application).txDao()
         repository = TxRepository(txDao)
         readAllData = repository.readAllData
+    }
+
+    // looking at logs this gets called at least 3 times on startup before we do anything else
+    fun didWeOfferFaucet(): Boolean {
+        val faucetOfferDone = Repository.didWeOfferFaucet()
+        Log.i("WalletScreen", "We have already asked if they wanted testnet coins: $faucetOfferDone")
+        return faucetOfferDone
+    }
+
+    fun faucetOfferWasMade() {
+        Log.i("WalletScreen", "The offer to call the faucet was made")
+        Repository.offerFaucetDone()
+    }
+
+    fun getLastUnusedAddress(): String {
+        return Wallet.getLastUnusedAddress()
+    }
+
+    fun faucetCallDone() {
+        Repository.faucetCallDone()
     }
 
     private var _balance: MutableLiveData<ULong> = MutableLiveData(0u)
@@ -304,7 +442,7 @@ internal class WalletViewModel(application: Application) : AndroidViewModel(appl
         }
     }
 
-    fun syncTransactionHistory() {
+    private fun syncTransactionHistory() {
         val txHistory = Wallet.listTransactions()
         Log.i("WalletScreen","Transactions history, number of transactions: ${txHistory.size}")
 
@@ -313,8 +451,8 @@ internal class WalletViewModel(application: Application) : AndroidViewModel(appl
                 is Transaction.Confirmed -> tx.details
                 is Transaction.Unconfirmed -> tx.details
             }
-            var valueIn: Int = 0
-            var valueOut: Int = 0
+            var valueIn = 0
+            var valueOut = 0
             val satoshisIn = SatoshisIn(details.received.toInt())
             val satoshisOut = SatoshisOut(details.sent.toInt())
             val isPayment = isPayment(satoshisOut, satoshisIn)
@@ -359,3 +497,34 @@ internal class WalletViewModel(application: Application) : AndroidViewModel(appl
     }
 }
 
+private fun callTatooineFaucet(address: String) {
+    val faucetUrl: String = BuildConfig.FAUCET_URL
+    val faucetUsername: String = BuildConfig.FAUCET_USERNAME
+    val faucetPassword: String = BuildConfig.FAUCET_PASSWORD
+
+    // used to be a lifecycleScope.launch because it was in a fragment
+    // now simply using a background thread untied to the lifecycle of the composable
+    val faucetScope = CoroutineScope(Dispatchers.IO)
+    faucetScope.launch {
+        val ktorClient = HttpClient(CIO) {
+            install(Auth) {
+                basic {
+                    username = faucetUsername
+                    password = faucetPassword
+                }
+            }
+        }
+
+        Log.i("WalletScreen","API call to Tatooine will request coins at $address")
+        try {
+            val response: HttpResponse = ktorClient.post(faucetUrl) {
+                body = TextContent(address, ContentType.Text.Plain)
+            }
+            Repository.faucetCallDone()
+            Log.i("WalletScreen","API call to Tatooine was performed. Response is ${response.status}, ${response.readText()}")
+        } catch (cause: Throwable) {
+            Log.i("WalletScreen","Tatooine call failed: $cause")
+        }
+        ktorClient.close()
+    }
+}
