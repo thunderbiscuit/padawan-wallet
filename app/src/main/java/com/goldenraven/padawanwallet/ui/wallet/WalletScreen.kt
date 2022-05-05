@@ -102,12 +102,13 @@ internal fun WalletScreen(
                 ) {
                     Image(
                         painter = painterResource(id = R.drawable.ic_satoshi),
-                        contentDescription = "Bitcoin testnet logo",
+                        contentDescription = "Satoshi icon",
                         Modifier
                             .align(Alignment.CenterVertically)
                             .size(60.dp)
                     )
                     Text(
+                        // DecimalFormat("###,###,###").format(balanceInSatoshis.toLong()).replace(",", "\u2008")
                         balance.toString(),
                         fontFamily = shareTechMono,
                         fontSize = 40.sp,

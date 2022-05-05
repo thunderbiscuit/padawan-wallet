@@ -32,6 +32,8 @@ import com.goldenraven.padawanwallet.ui.Screen
 import kotlinx.coroutines.launch
 import org.bitcoindevkit.PartiallySignedBitcoinTransaction
 
+// input verification was in the WalletBuild file before the move to Compose
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 internal fun SendScreen() {
