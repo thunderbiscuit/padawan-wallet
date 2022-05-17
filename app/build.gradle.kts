@@ -128,7 +128,9 @@ dependencies {
 
     // QR codes
     implementation("com.google.zxing:core:3.4.1")
-    implementation("com.github.yuriy-budiyev:code-scanner:2.1.1")
+    implementation("androidx.camera:camera-camera2:1.1.0-rc01")
+    implementation("androidx.camera:camera-lifecycle:1.1.0-rc01")
+    implementation("androidx.camera:camera-view:1.1.0-rc01")
 
     // Room
     implementation("androidx.room:room-runtime:2.4.2")

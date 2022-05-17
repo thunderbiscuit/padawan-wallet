@@ -8,17 +8,23 @@ import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.TextFieldDefaults
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
-import androidx.compose.ui.Modifier
+import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
+import androidx.navigation.NavHostController
+import com.goldenraven.padawanwallet.R
 import com.goldenraven.padawanwallet.data.Wallet
 import com.goldenraven.padawanwallet.theme.*
+import com.goldenraven.padawanwallet.ui.Screen
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 import org.bitcoindevkit.PartiallySignedBitcoinTransaction
@@ -27,13 +33,13 @@ import org.bitcoindevkit.PartiallySignedBitcoinTransaction
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-internal fun SendScreen() {
+internal fun SendScreen(navController: NavHostController) {
 
-    val (showDialog, setShowDialog) =  remember { mutableStateOf(false) }
+    val (showDialog, setShowDialog) = rememberSaveable { mutableStateOf(false) }
 
-    val recipientAddress: MutableState<String> = remember { mutableStateOf("") }
-    val amount: MutableState<String> = remember { mutableStateOf("") }
-    val feeRate: MutableState<String> = remember { mutableStateOf("") }
+    val recipientAddress: MutableState<String> = rememberSaveable { mutableStateOf("") }
+    val amount: MutableState<String> = rememberSaveable { mutableStateOf("") }
+    val feeRate: MutableState<String> = rememberSaveable { mutableStateOf("") }
 
     val snackbarHostState = remember { SnackbarHostState() }
     val scope = rememberCoroutineScope()
@@ -46,7 +52,6 @@ internal fun SendScreen() {
                         .padding(12.dp)
                         .background(md_theme_dark_warning),
                     containerColor = md_theme_dark_warning,
-
                     ) {
                     Text(
                         text = data.visuals.message,
@@ -86,6 +91,7 @@ internal fun SendScreen() {
                     height = Dimension.fillToConstraints
                 }
             ) {
+                ScanQRCode(navController = navController, recipientAddress = recipientAddress)
                 TransactionRecipientInput(recipientAddress)
                 TransactionAmountInput(amount)
                 TransactionFeeInput(feeRate)
@@ -137,6 +143,47 @@ internal fun SendScreen() {
                         lineHeight = 28.sp,
                     )
                 }
+            }
+        }
+    }
+}
+
+@Composable
+fun ScanQRCode(navController: NavHostController, recipientAddress: MutableState<String>) {
+    val qrCodeScanner = navController.currentBackStackEntry
+        ?.savedStateHandle
+        ?.getLiveData<String>("BTC_Address")?.observeAsState()
+
+    qrCodeScanner?.value.let {
+        if (it != null)
+            recipientAddress.value = it
+
+        navController.currentBackStackEntry
+            ?.savedStateHandle
+            ?.remove<String>("BTC_Address")
+    }
+
+    Row(
+        modifier = Modifier.fillMaxWidth(0.8f),
+        horizontalArrangement = Arrangement.End,
+    ) {
+        IconButton(onClick = {
+            navController.navigate(Screen.QRScanScreen.route) {
+                launchSingleTop = true
+            }
+        }) {
+            Row {
+                Icon(
+                    contentDescription = null,
+                    painter = painterResource(id = R.drawable.ic_camera),
+                )
+                Spacer(modifier = Modifier.width(8.dp))
+                Text(
+                    text = "Scan",
+                    fontFamily = jost,
+                    fontSize = 18.sp,
+                    textAlign = TextAlign.Center,
+                )
             }
         }
     }

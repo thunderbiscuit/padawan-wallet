@@ -102,7 +102,24 @@ fun WalletNavigation(navControllerWalletNavigation: NavHostController) {
             popExitTransition = {
                 slideOutOfContainer(AnimatedContentScope.SlideDirection.Down, animationSpec = tween(animationDuration))
             }
-        ) { SendScreen() }
+        ) { SendScreen(navController = navControllerWalletNavigation) }
+
+        // QR Scanner Screen
+        composable(
+            route = Screen.QRScanScreen.route,
+            enterTransition = {
+                slideIntoContainer(AnimatedContentScope.SlideDirection.Up, animationSpec = tween(animationDuration))
+            },
+            popEnterTransition = {
+                slideIntoContainer(AnimatedContentScope.SlideDirection.Up, animationSpec = tween(animationDuration))
+            },
+            exitTransition = {
+                slideOutOfContainer(AnimatedContentScope.SlideDirection.Down, animationSpec = tween(animationDuration))
+            },
+            popExitTransition = {
+                slideOutOfContainer(AnimatedContentScope.SlideDirection.Down, animationSpec = tween(animationDuration))
+            }
+        ) { QRScanScreen(navController = navControllerWalletNavigation) }
 
 
         // Tutorials home
