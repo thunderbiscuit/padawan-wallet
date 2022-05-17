@@ -21,6 +21,7 @@ sealed class Screen(val route: String) {
     object SendScreen : Screen("send_screen")
     object TutorialsScreen : Screen("tutorials_screen")
     object TutorialsHomeScreen : Screen("tutorials_home_screen")
+    object QRScanScreen : Screen("qr_scan_screen")
 
     // drawer screens
     object AboutScreen : Screen("about_screen")
