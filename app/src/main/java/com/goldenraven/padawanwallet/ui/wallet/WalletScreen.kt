@@ -51,6 +51,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import org.bitcoindevkit.Transaction
+import androidx.compose.material.AlertDialog
 import androidx.compose.material3.Card as Card
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -61,15 +62,10 @@ internal fun WalletScreen(
 ) {
     val balance by walletViewModel.balance.observeAsState()
     val isRefreshing by walletViewModel.isRefreshing.collectAsState()
+    val openFaucetDialog by walletViewModel.openFaucetDialog
 
-    val openFaucetDialog = remember { mutableStateOf(false) }
-    // do we really need to make a call to shared preferences on every recomposition?
-    // probably a better way to do this
-    openFaucetDialog.value = !walletViewModel.didWeOfferFaucet()
-
-    if (openFaucetDialog.value) {
+    if (openFaucetDialog) {
         FaucetDialog(
-            openFaucetDialog = openFaucetDialog,
             walletViewModel = walletViewModel
         )
     }
@@ -336,53 +332,48 @@ fun ExpandableCard(tx: Tx) {
 }
 
 @Composable
-private fun FaucetDialog(openFaucetDialog: MutableState<Boolean>, walletViewModel: WalletViewModel) {
-    // if (showDialog) {
-        androidx.compose.material.AlertDialog(
-            backgroundColor = md_theme_dark_lightBackground,
-            onDismissRequest = {},
-            title = {
+private fun FaucetDialog(walletViewModel: WalletViewModel) {
+    AlertDialog(
+        backgroundColor = md_theme_dark_lightBackground,
+        onDismissRequest = {},
+        title = {
+            Text(
+                text = "Hello there!",
+                style = MaterialTheme.typography.headlineMedium,
+                color = md_theme_dark_onLightBackground
+            )
+        },
+        text = {
+            Text(
+                text = "We notice it is your first time opening Padawan wallet. Would you like Padawan to send you some testnet coins to get your started?",
+                color = md_theme_dark_onLightBackground
+            )
+        },
+        confirmButton = {
+            TextButton(
+                onClick = {
+                    walletViewModel.onPositiveDialogClick()
+                },
+            ) {
                 Text(
-                    text = "Hello there!",
-                    style = MaterialTheme.typography.headlineMedium,
+                    text = "Yes please!",
                     color = md_theme_dark_onLightBackground
                 )
-            },
-            text = {
+            }
+        },
+        dismissButton = {
+            TextButton(
+                onClick = {
+                    walletViewModel.onNegativeDialogClick()
+                },
+            ) {
                 Text(
-                    text = "We notice it is your first time opening Padawan wallet. Would you like Padawan to send you some testnet coins to get your started?",
+                    text = "Not right now",
                     color = md_theme_dark_onLightBackground
                 )
-            },
-            confirmButton = {
-                TextButton(
-                    onClick = {
-                        walletViewModel.faucetCallDone()
-                        callTatooineFaucet(walletViewModel.getLastUnusedAddress())
-                        openFaucetDialog.value = false
-                    },
-                ) {
-                    Text(
-                        text = "Yes please!",
-                        color = md_theme_dark_onLightBackground
-                    )
-                }
-            },
-            dismissButton = {
-                TextButton(
-                    onClick = {
-                        openFaucetDialog.value = false
-                        walletViewModel.faucetOfferWasMade()
-                    },
-                ) {
-                    Text(
-                        text = "Not right now",
-                        color = md_theme_dark_onLightBackground
-                    )
-                }
-            },
-        )
-    // }
+            }
+        },
+    )
 }
 
 internal class WalletViewModel(application: Application) : AndroidViewModel(application) {
@@ -390,31 +381,44 @@ internal class WalletViewModel(application: Application) : AndroidViewModel(appl
     val app: Application = application
     val readAllData: LiveData<List<Tx>>
     private val repository: TxRepository
+    var openFaucetDialog: MutableState<Boolean> = mutableStateOf(!didWeOfferFaucet())
 
     init {
+        Log.i("WalletScreen", "The WalletScreen viewmodel is being initialized...")
         val txDao: TxDao = TxDatabase.getDatabase(application).txDao()
         repository = TxRepository(txDao)
         readAllData = repository.readAllData
     }
 
-    // looking at logs this gets called at least 3 times on startup before we do anything else
-    fun didWeOfferFaucet(): Boolean {
+    fun onPositiveDialogClick(): Unit {
+        faucetOfferWasMade()
+        callTatooineFaucet(getLastUnusedAddress())
+        faucetCallDone()
+        openFaucetDialog.value = false
+    }
+
+    fun onNegativeDialogClick(): Unit {
+        faucetOfferWasMade()
+        openFaucetDialog.value = false
+    }
+
+    private fun didWeOfferFaucet(): Boolean {
         val faucetOfferDone = Repository.didWeOfferFaucet()
         Log.i("WalletScreen", "We have already asked if they wanted testnet coins: $faucetOfferDone")
         return faucetOfferDone
     }
 
-    fun faucetOfferWasMade() {
+    private fun faucetOfferWasMade() {
         Log.i("WalletScreen", "The offer to call the faucet was made")
         Repository.offerFaucetDone()
     }
 
-    fun getLastUnusedAddress(): String {
-        return Wallet.getLastUnusedAddress()
+    private fun faucetCallDone() {
+        Repository.faucetCallDone()
     }
 
-    fun faucetCallDone() {
-        Repository.faucetCallDone()
+    private fun getLastUnusedAddress(): String {
+        return Wallet.getLastUnusedAddress()
     }
 
     private var _balance: MutableLiveData<ULong> = MutableLiveData(0u)
