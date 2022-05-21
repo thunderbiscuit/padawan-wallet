@@ -2,33 +2,24 @@ package com.goldenraven.padawanwallet.ui.wallet
 
 import android.util.Log
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.TextFieldDefaults
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewmodel.compose.viewModel
-import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.FontStyle
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
-import androidx.lifecycle.LiveData
 import com.goldenraven.padawanwallet.data.Wallet
 import com.goldenraven.padawanwallet.theme.*
-import com.goldenraven.padawanwallet.ui.Screen
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 import org.bitcoindevkit.PartiallySignedBitcoinTransaction
 
@@ -103,7 +94,9 @@ internal fun SendScreen() {
                     amount = amount.value,
                     feeRate = feeRate.value,
                     showDialog = showDialog,
-                    setShowDialog = setShowDialog
+                    setShowDialog = setShowDialog,
+                    snackbarHostState = snackbarHostState,
+                    scope = scope,
                 )
             }
 
@@ -118,16 +111,15 @@ internal fun SendScreen() {
             ) {
                 Button(
                     onClick = {
-                        if (recipientAddress.value == "" || amount.value == "" || feeRate.value == "") {
-                            scope.launch {
-                                snackbarHostState.showSnackbar(
-                                    message = "One or more field is invalid!",
-                                    duration = SnackbarDuration.Short
-                                )
-                            }
-                        } else {
+                        val inputVerified = verifyInput(
+                            address = recipientAddress.value,
+                            amount = amount.value,
+                            feeRate = feeRate.value,
+                            snackbarHostState = snackbarHostState,
+                            scope = scope
+                        )
+                        if (inputVerified)
                             setShowDialog(true)
-                        }
                     },
                     colors = ButtonDefaults.buttonColors(md_theme_dark_secondary),
                     shape = RoundedCornerShape(16.dp),
@@ -153,13 +145,12 @@ internal fun SendScreen() {
 @Composable
 private fun TransactionRecipientInput(recipientAddress: MutableState<String>) {
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
-
         OutlinedTextField(
             modifier = Modifier
                 .padding(vertical = 8.dp)
                 .fillMaxWidth(0.9f),
             value = recipientAddress.value,
-            onValueChange = { recipientAddress.value = it },
+            onValueChange = { recipientAddress.value = it.trim() },
             label = {
                 Text(
                     text = "Recipient address",
@@ -239,6 +230,8 @@ fun Dialog(
     feeRate: String,
     showDialog: Boolean,
     setShowDialog: (Boolean) -> Unit,
+    snackbarHostState: SnackbarHostState,
+    scope: CoroutineScope,
 ) {
     if (showDialog) {
         AlertDialog(
@@ -257,7 +250,13 @@ fun Dialog(
             confirmButton = {
                 TextButton(
                     onClick = {
-                        broadcastTransaction(recipientAddress, amount.toULong(), feeRate.toFloat())
+                        broadcastTransaction(
+                            recipientAddress = recipientAddress,
+                            amount = amount.toULong(),
+                            feeRate = feeRate.toFloat(),
+                            snackbarHostState = snackbarHostState,
+                            scope = scope,
+                        )
                         setShowDialog(false)
                     },
                 ) {
@@ -281,15 +280,60 @@ fun Dialog(
     }
 }
 
-private fun broadcastTransaction(recipientAddress: String, amount: ULong, feeRate: Float = 1F) {
+fun verifyInput(
+    address: String,
+    amount: String,
+    feeRate: String,
+    snackbarHostState: SnackbarHostState,
+    scope: CoroutineScope,
+): Boolean {
+    if (address.isBlank()) {
+        scope.launch {
+            snackbarHostState.showSnackbar(message = "Address is missing!", duration = SnackbarDuration.Short)
+        }
+        return false
+    }
+    if (amount.isBlank()) {
+        scope.launch {
+            snackbarHostState.showSnackbar(message = "Amount is missing!", duration = SnackbarDuration.Short)
+        }
+        return false
+    }
+    if (feeRate.isBlank()) {
+        scope.launch {
+            snackbarHostState.showSnackbar(message = "Fee rate is missing!", duration = SnackbarDuration.Short)
+        }
+        return false
+    } else if (feeRate.toInt() < 1 || feeRate.toInt() > 200) {
+        scope.launch {
+            snackbarHostState.showSnackbar(message = "Please input a fee rate between 1 and 200", duration = SnackbarDuration.Short)
+        }
+        return false
+    }
+    return true
+}
+
+private fun broadcastTransaction(
+    recipientAddress: String,
+    amount: ULong,
+    feeRate: Float = 1F,
+    snackbarHostState: SnackbarHostState,
+    scope: CoroutineScope,
+) {
     Log.i("SendScreen", "Attempting to broadcast transaction with inputs: recipient: $recipientAddress, amount: $amount, fee rate: $feeRate")
+    var snackbarMsg = ""
     try {
         // create, sign, and broadcast
         val psbt: PartiallySignedBitcoinTransaction = Wallet.createTransaction(recipientAddress, amount, feeRate)
         Wallet.sign(psbt)
         val txid: String = Wallet.broadcast(psbt)
+        snackbarMsg = "Transaction was broadcast successfully"
         Log.i("SendScreen", "Transaction was broadcast! txid: $txid")
     } catch (e: Throwable) {
         Log.i("SendScreen", "Broadcast error: ${e.message}")
+        snackbarMsg = "Error : ${e.message}"
+    }
+    scope.launch {
+        snackbarHostState.showSnackbar(message = snackbarMsg, duration = SnackbarDuration.Short)
     }
 }
