@@ -157,11 +157,36 @@ internal fun WalletScreen(
                         )
                     }
                 }
-                Text(
-                    text = "Transaction history",
-                    fontFamily = jost,
-                    modifier = Modifier.padding(horizontal = 16.dp)
-                )
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp)
+                ) {
+                    Text(
+                        text = "Transaction history",
+                        fontFamily = jost,
+                    )
+                    Button(
+                        onClick = { walletViewModel.refresh() },
+                        colors = ButtonDefaults.buttonColors(md_theme_dark_surface),
+                        shape = RoundedCornerShape(8.dp),
+                        contentPadding = PaddingValues(horizontal = 8.dp, vertical = 2.dp),
+                        modifier = Modifier.defaultMinSize(
+                            minHeight = 10.dp
+                        )
+                    ) {
+                        Text(
+                            text = "Sync",
+                            fontFamily = jost,
+                            fontSize = 14.sp,
+                            textAlign = TextAlign.Center,
+                        )
+                        Icon(
+                            painter = painterResource(id = R.drawable.ic_refresh),
+                            contentDescription = "Sync wallet"
+                        )
+                    }
+                }
                 Divider(
                     color = md_theme_dark_surfaceLight,
                     thickness = 1.dp,
