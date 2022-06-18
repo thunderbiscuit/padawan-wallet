@@ -1,6 +1,9 @@
 package com.goldenraven.padawanwallet.ui.wallet
 
 import android.app.Application
+import android.content.Context
+import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
 import android.util.Log
 import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.tween
@@ -52,9 +55,10 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import org.bitcoindevkit.Transaction
 import androidx.compose.material.AlertDialog
+import androidx.compose.ui.platform.LocalContext
+import org.bitcoindevkit.AddressInfo
 import androidx.compose.material3.Card as Card
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 internal fun WalletScreen(
     walletViewModel: WalletViewModel = viewModel(),
@@ -69,6 +73,9 @@ internal fun WalletScreen(
             walletViewModel = walletViewModel
         )
     }
+
+    if (isOnline(LocalContext.current) && !Wallet.isBlockChainCreated())
+        Wallet.createBlockchain()
 
     SwipeRefresh(
         state = rememberSwipeRefreshState(isRefreshing),
@@ -403,7 +410,6 @@ private fun FaucetDialog(walletViewModel: WalletViewModel) {
 
 internal class WalletViewModel(application: Application) : AndroidViewModel(application) {
 
-    val app: Application = application
     val readAllData: LiveData<List<Tx>>
     private val repository: TxRepository
     var openFaucetDialog: MutableState<Boolean> = mutableStateOf(!didWeOfferFaucet())
@@ -415,14 +421,14 @@ internal class WalletViewModel(application: Application) : AndroidViewModel(appl
         readAllData = repository.readAllData
     }
 
-    fun onPositiveDialogClick(): Unit {
+    fun onPositiveDialogClick() {
         faucetOfferWasMade()
         callTatooineFaucet(getLastUnusedAddress())
         faucetCallDone()
         openFaucetDialog.value = false
     }
 
-    fun onNegativeDialogClick(): Unit {
+    fun onNegativeDialogClick() {
         faucetOfferWasMade()
         openFaucetDialog.value = false
     }
@@ -442,7 +448,7 @@ internal class WalletViewModel(application: Application) : AndroidViewModel(appl
         Repository.faucetCallDone()
     }
 
-    private fun getLastUnusedAddress(): String {
+    private fun getLastUnusedAddress(): AddressInfo {
         return Wallet.getLastUnusedAddress()
     }
 
@@ -491,7 +497,7 @@ internal class WalletViewModel(application: Application) : AndroidViewModel(appl
                     valueOut = netSendWithoutFees(
                         txSatsOut = satoshisOut,
                         txSatsIn = satoshisIn,
-                        fees = details.fees?.toInt() ?: 0
+                        fees = details.fee?.toInt() ?: 0
                     )
                 }
                 false -> {
@@ -506,12 +512,12 @@ internal class WalletViewModel(application: Application) : AndroidViewModel(appl
                 is Transaction.Confirmed -> tx.confirmation.height
                 else -> 100_000_000u
             }
-            val transaction: Tx = Tx(
+            val transaction = Tx(
                 txid = details.txid,
                 date = time,
                 valueIn = valueIn,
                 valueOut = valueOut,
-                fees = details.fees?.toInt() ?: 0,
+                fees = details.fee?.toInt() ?: 0,
                 isPayment = isPayment,
                 height = height.toInt()
             )
@@ -527,7 +533,7 @@ internal class WalletViewModel(application: Application) : AndroidViewModel(appl
     }
 }
 
-private fun callTatooineFaucet(address: String) {
+private fun callTatooineFaucet(address: AddressInfo) {
     val faucetUrl: String = BuildConfig.FAUCET_URL
     val faucetUsername: String = BuildConfig.FAUCET_USERNAME
     val faucetPassword: String = BuildConfig.FAUCET_PASSWORD
@@ -548,7 +554,7 @@ private fun callTatooineFaucet(address: String) {
         Log.i("WalletScreen","API call to Tatooine will request coins at $address")
         try {
             val response: HttpResponse = ktorClient.post(faucetUrl) {
-                body = TextContent(address, ContentType.Text.Plain)
+                body = TextContent(address.address, ContentType.Text.Plain)
             }
             Repository.faucetCallDone()
             Log.i("WalletScreen","API call to Tatooine was performed. Response is ${response.status}, ${response.readText()}")
@@ -557,4 +563,28 @@ private fun callTatooineFaucet(address: String) {
         }
         ktorClient.close()
     }
+}
+
+fun isOnline(context: Context): Boolean {
+    val connectivityManager =
+        context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+    val capabilities =
+        connectivityManager.getNetworkCapabilities(connectivityManager.activeNetwork)
+    if (capabilities != null) {
+        when {
+            capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> {
+                Log.i("Internet", "NetworkCapabilities.TRANSPORT_CELLULAR")
+                return true
+            }
+            capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) -> {
+                Log.i("Internet", "NetworkCapabilities.TRANSPORT_WIFI")
+                return true
+            }
+            capabilities.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET) -> {
+                Log.i("Internet", "NetworkCapabilities.TRANSPORT_ETHERNET")
+                return true
+            }
+        }
+    }
+    return false
 }

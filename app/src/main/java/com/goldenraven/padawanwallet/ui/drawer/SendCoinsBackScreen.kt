@@ -1,4 +1,4 @@
-package com.goldenraven.padawanwallet.ui.wallet
+package com.goldenraven.padawanwallet.ui.drawer
 
 import android.content.ClipData
 import android.content.ClipboardManager

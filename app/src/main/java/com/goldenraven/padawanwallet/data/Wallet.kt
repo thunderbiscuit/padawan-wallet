@@ -14,12 +14,14 @@ private const val TAG = "Wallet"
 
 object Wallet {
 
-    private lateinit var wallet: BdkWallet
     private const val name: String = "padawan-testnet-0"
-    private lateinit var path: String
     private const val electrumURL: String = "ssl://electrum.blockstream.info:60002"
+    private lateinit var wallet: BdkWallet
+    private lateinit var path: String
+    private lateinit var blockchainConfig: BlockchainConfig
+    private lateinit var blockchain: Blockchain
 
-    object LogProgress: BdkProgress {
+    object LogProgress: Progress {
         override fun update(progress: Float, message: String?) {
             Log.d(TAG, "updating wallet $progress $message")
         }
@@ -35,19 +37,22 @@ object Wallet {
     private fun initialize(
         descriptor: String,
         changeDescriptor: String,
-    ): Unit {
+    ) {
         val database = DatabaseConfig.Sqlite(SqliteDbConfiguration("$path/bdk-sqlite"))
-        val blockchain = BlockchainConfig.Electrum(ElectrumConfig(electrumURL, null, 5u, null, 10u))
         wallet = BdkWallet(
             descriptor,
             changeDescriptor,
             Network.TESTNET,
-            database,
-            blockchain
+            database
         )
     }
 
-    fun loadExistingWallet(): Unit {
+    fun createBlockchain() {
+        blockchainConfig = BlockchainConfig.Electrum(ElectrumConfig(electrumURL, null, 5u, null, 10u))
+        blockchain = Blockchain(blockchainConfig)
+    }
+
+    fun loadExistingWallet() {
         val initialWalletData: RequiredInitialWalletData = Repository.getInitialWalletData()
         Log.i(TAG, "Loading existing wallet with descriptor: ${initialWalletData.descriptor}")
         Log.i(TAG, "Loading existing wallet with change descriptor: ${initialWalletData.changeDescriptor}")
@@ -57,7 +62,7 @@ object Wallet {
         )
     }
 
-    fun recoverWallet(mnemonic: String): Unit {
+    fun recoverWallet(mnemonic: String) {
         val keys = restoreExtendedKeyFromMnemonic(mnemonic)
         val descriptor: String = createDescriptor(keys)
         val changeDescriptor: String = createChangeDescriptor(keys)
@@ -69,7 +74,7 @@ object Wallet {
         Repository.saveMnemonic(keys.mnemonic)
     }
 
-    fun createWallet(): Unit {
+    fun createWallet() {
         val keys = generateExtendedKey()
         val descriptor: String = createDescriptor(keys)
         val changeDescriptor: String = createChangeDescriptor(keys)
@@ -91,32 +96,35 @@ object Wallet {
 
     private fun createDescriptor(keys: ExtendedKeyInfo): String {
         Log.i(TAG,"Descriptor for receive addresses is wpkh(${keys.xprv}/84'/1'/0'/0/*)")
-        return ("wpkh(" + keys.xprv + "/84'/1'/0'/0/*)")
+        return ("wpkh(${keys.xprv}/84'/1'/0'/0/*)")
     }
 
     private fun createChangeDescriptor(keys: ExtendedKeyInfo): String {
         Log.i(TAG, "Descriptor for change addresses is wpkh(${keys.xprv}/84'/1'/0'/1/*)")
-        return ("wpkh(" + keys.xprv + "/84'/1'/0'/1/*)")
+        return ("wpkh(${keys.xprv}/84'/1'/0'/1/*)")
     }
 
-    fun sync(max_address: UInt? = null) {
-        wallet.sync(LogProgress, max_address)
+    fun sync() {
+        wallet.sync(blockchain = blockchain, progress = LogProgress)
     }
 
     fun getBalance(): ULong {
         return wallet.getBalance()
     }
 
-    fun getNewAddress(): String {
-        return wallet.getNewAddress()
+    fun getNewAddress(): AddressInfo {
+        return wallet.getAddress(AddressIndex.NEW)
     }
 
-    fun getLastUnusedAddress(): String {
-        return wallet.getLastUnusedAddress()
+    fun getLastUnusedAddress(): AddressInfo {
+        return wallet.getAddress(AddressIndex.LAST_UNUSED)
     }
 
-    fun createTransaction(recipient: String, amount: ULong, fee_rate: Float?): PartiallySignedBitcoinTransaction {
-        return PartiallySignedBitcoinTransaction(wallet, recipient, amount, fee_rate)
+    fun createTransaction(recipient: String, amount: ULong, fee_rate: Float): PartiallySignedBitcoinTransaction {
+        return TxBuilder()
+            .addRecipient(recipient, amount)
+            .feeRate(satPerVbyte = fee_rate)
+            .finish(wallet)
     }
 
     fun listTransactions(): List<Transaction> {
@@ -127,7 +135,10 @@ object Wallet {
         wallet.sign(psbt)
     }
 
-    fun broadcast(psbt: PartiallySignedBitcoinTransaction): String {
-        return wallet.broadcast(psbt)
+    fun broadcast(signedPsbt: PartiallySignedBitcoinTransaction): String {
+        blockchain.broadcast(signedPsbt)
+        return signedPsbt.txid()
     }
+
+    fun isBlockChainCreated() = ::blockchain.isInitialized
 }

@@ -141,13 +141,17 @@ private fun addressToQR(address: String): ImageBitmap? {
     return null
 }
 
-internal class AddressViewModel() : ViewModel() {
+internal class AddressViewModel : ViewModel() {
 
     private var _address: MutableLiveData<String> = MutableLiveData("No address yet")
+    private var _addressIndex: MutableLiveData<UInt> = MutableLiveData(0u)
     val address: LiveData<String>
         get() = _address
+    val addressIndex: LiveData<UInt>
+        get() = _addressIndex
 
     fun updateAddress() {
-        _address.value = Wallet.getNewAddress()
+        _address.value = Wallet.getLastUnusedAddress().address
+        _addressIndex.value = Wallet.getLastUnusedAddress().index
     }
 }

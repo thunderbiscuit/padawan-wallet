@@ -1,4 +1,4 @@
-package com.goldenraven.padawanwallet.ui.wallet
+package com.goldenraven.padawanwallet.ui.drawer
 
 import android.content.Context
 import android.util.Log
@@ -32,6 +32,7 @@ import io.ktor.http.*
 import io.ktor.http.content.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
+import org.bitcoindevkit.AddressInfo
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -77,7 +78,7 @@ internal fun SettingsScreen(navController: NavController) {
 
 
 private fun callTatooineFaucet(
-    address: String,
+    address: AddressInfo,
     coroutineScope: CoroutineScope,
     snackbarHostState: SnackbarHostState,
     context: Context
@@ -103,7 +104,7 @@ private fun callTatooineFaucet(
         Log.i("SettingsFragment", "API call to Tatooine will request coins at $address")
         try {
             val response: HttpResponse = ktorClient.post(faucetUrl) {
-                body = TextContent(address, ContentType.Text.Plain)
+                body = TextContent(address.address, ContentType.Text.Plain)
             }
             Repository.faucetCallDone()
             Log.i("SettingsFragment", "API call to Tatooine was performed. Response is ${response.status}, ${response.readText()}")

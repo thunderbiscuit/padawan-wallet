@@ -120,7 +120,7 @@ dependencies {
     implementation("com.google.accompanist:accompanist-swiperefresh:0.23.1")
 
     // bitcoin
-    implementation("org.bitcoindevkit:bdk-android:0.5.1")
+    implementation("org.bitcoindevkit:bdk-android:0.7.0")
 
     // Ktor
     implementation("io.ktor:ktor-client-cio:1.6.7")

@@ -1,4 +1,4 @@
-package com.goldenraven.padawanwallet.ui.wallet
+package com.goldenraven.padawanwallet.ui.drawer
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
