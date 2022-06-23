@@ -12,6 +12,10 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import com.goldenraven.padawanwallet.ui.Screen
 import com.goldenraven.padawanwallet.ui.SplashScreen
+import com.goldenraven.padawanwallet.ui.drawer.AboutScreen
+import com.goldenraven.padawanwallet.ui.drawer.RecoveryPhraseScreen
+import com.goldenraven.padawanwallet.ui.drawer.SendCoinsBackScreen
+import com.goldenraven.padawanwallet.ui.drawer.SettingsScreen
 import com.google.accompanist.navigation.animation.AnimatedNavHost
 import com.google.accompanist.navigation.animation.composable
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController

@@ -65,14 +65,14 @@ class RepositoryTest {
 
     @Test
     fun `Check if faucet was called before`() {
-        `when`(sharedPrefsMock.getBoolean("oneTimeFaucetCallDone", false)).thenReturn(true)
-        assertEquals("Faucet call is wrong", true, repo.wasOneTimeFaucetCallDone())
+        `when`(sharedPrefsMock.getBoolean("faucetCallDone", false)).thenReturn(true)
+        assertEquals("Faucet call is wrong", true, repo.wasFaucetCallDone())
     }
 
     @Test
     fun `Check if faucet done call is correct`() {
-        repo.offerFaucetCallDone()
-        verify(editorMock, times(1)).putBoolean("offerFaucetCallDone", true)
+        repo.offerFaucetDone()
+        verify(editorMock, times(1)).putBoolean("offerFaucetDone", true)
     }
 
     @Test
