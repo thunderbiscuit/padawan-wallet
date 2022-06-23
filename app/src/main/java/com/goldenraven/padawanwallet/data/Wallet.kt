@@ -18,7 +18,6 @@ object Wallet {
     private const val electrumURL: String = "ssl://electrum.blockstream.info:60002"
     private lateinit var wallet: BdkWallet
     private lateinit var path: String
-    private lateinit var blockchainConfig: BlockchainConfig
     private lateinit var blockchain: Blockchain
 
     object LogProgress: Progress {
@@ -48,7 +47,7 @@ object Wallet {
     }
 
     fun createBlockchain() {
-        blockchainConfig = BlockchainConfig.Electrum(ElectrumConfig(electrumURL, null, 5u, null, 10u))
+        val blockchainConfig = BlockchainConfig.Electrum(ElectrumConfig(electrumURL, null, 5u, null, 10u))
         blockchain = Blockchain(blockchainConfig)
     }
 
@@ -120,10 +119,10 @@ object Wallet {
         return wallet.getAddress(AddressIndex.LAST_UNUSED)
     }
 
-    fun createTransaction(recipient: String, amount: ULong, fee_rate: Float): PartiallySignedBitcoinTransaction {
+    fun createTransaction(recipient: String, amount: ULong, feeRate: Float): PartiallySignedBitcoinTransaction {
         return TxBuilder()
             .addRecipient(recipient, amount)
-            .feeRate(satPerVbyte = fee_rate)
+            .feeRate(satPerVbyte = feeRate)
             .finish(wallet)
     }
 

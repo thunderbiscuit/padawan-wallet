@@ -144,14 +144,15 @@ private fun addressToQR(address: String): ImageBitmap? {
 internal class AddressViewModel : ViewModel() {
 
     private var _address: MutableLiveData<String> = MutableLiveData("No address yet")
-    private var _addressIndex: MutableLiveData<UInt> = MutableLiveData(0u)
     val address: LiveData<String>
         get() = _address
-    val addressIndex: LiveData<UInt>
-        get() = _addressIndex
+
+    //private var _addressIndex: MutableLiveData<UInt> = MutableLiveData(0u)
+    //val addressIndex: LiveData<UInt>
+    //    get() = _addressIndex
 
     fun updateAddress() {
         _address.value = Wallet.getLastUnusedAddress().address
-        _addressIndex.value = Wallet.getLastUnusedAddress().index
+        //_addressIndex.value = Wallet.getLastUnusedAddress().index
     }
 }
