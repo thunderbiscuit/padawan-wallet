@@ -136,7 +136,7 @@ internal fun WalletScreen(
                     ) {
                         Text(
                             text = "Send",
-                            fontFamily = jost,
+                            fontFamily = sofiaPro,
                             fontSize = 20.sp,
                             textAlign = TextAlign.Center,
                             lineHeight = 28.sp,
@@ -155,7 +155,7 @@ internal fun WalletScreen(
                     ) {
                         Text(
                             text = "Receive",
-                            fontFamily = jost,
+                            fontFamily = sofiaPro,
                             fontSize = 20.sp,
                             textAlign = TextAlign.Center,
                             lineHeight = 28.sp,
@@ -171,7 +171,7 @@ internal fun WalletScreen(
                 ) {
                     Text(
                         text = "Transaction history",
-                        fontFamily = jost,
+                        fontFamily = sofiaPro,
                     )
                     Button(
                         onClick = { walletViewModel.refresh() },
@@ -184,7 +184,7 @@ internal fun WalletScreen(
                     ) {
                         Text(
                             text = "Sync",
-                            fontFamily = jost,
+                            fontFamily = sofiaPro,
                             fontSize = 14.sp,
                             textAlign = TextAlign.Center,
                         )
@@ -259,7 +259,7 @@ fun ExpandableCard(tx: Tx) {
             }
             Text(
                 text = tx.date,
-                fontFamily = jost,
+                fontFamily = sofiaPro,
                 textAlign = TextAlign.Center,
                 fontSize = 14.sp,
                 modifier = Modifier
@@ -285,7 +285,7 @@ fun ExpandableCard(tx: Tx) {
                             append("${tx.txid.take(8)}...${tx.txid.takeLast(8)}")
                         }
                     },
-                    fontFamily = jost,
+                    fontFamily = sofiaPro,
                     fontSize = 12.sp,
                     modifier = Modifier
                         .padding(horizontal = 8.dp)
@@ -298,7 +298,7 @@ fun ExpandableCard(tx: Tx) {
                                 append("${tx.valueOut} sat")
                             }
                         },
-                        fontFamily = jost,
+                        fontFamily = sofiaPro,
                         fontSize = 12.sp,
                         modifier = Modifier
                             .padding(horizontal = 8.dp)
@@ -311,7 +311,7 @@ fun ExpandableCard(tx: Tx) {
                                 append("${tx.valueIn} sat")
                             }
                         },
-                        fontFamily = jost,
+                        fontFamily = sofiaPro,
                         fontSize = 12.sp,
                         modifier = Modifier
                             .padding(horizontal = 8.dp)
@@ -324,7 +324,7 @@ fun ExpandableCard(tx: Tx) {
                             append("${tx.fees} sat")
                         }
                     },
-                    fontFamily = jost,
+                    fontFamily = sofiaPro,
                     fontSize = 12.sp,
                     modifier = Modifier
                         .padding(horizontal = 8.dp)
@@ -337,7 +337,7 @@ fun ExpandableCard(tx: Tx) {
                                 append("Pending")
                             }
                         },
-                        fontFamily = jost,
+                        fontFamily = sofiaPro,
                         fontSize = 12.sp,
                         modifier = Modifier
                             .padding(horizontal = 8.dp)
@@ -351,7 +351,7 @@ fun ExpandableCard(tx: Tx) {
                                 append("${tx.height}")
                             }
                         },
-                        fontFamily = jost,
+                        fontFamily = sofiaPro,
                         fontSize = 12.sp,
                         modifier = Modifier
                             .padding(horizontal = 8.dp)

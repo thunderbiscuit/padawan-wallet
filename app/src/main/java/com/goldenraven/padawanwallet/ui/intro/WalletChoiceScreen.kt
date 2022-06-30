@@ -57,7 +57,7 @@ internal fun WalletChoiceScreen(
                     stringResource(R.string.elevator_pitch),
                     color = md_theme_dark_onBackground,
                     fontSize = 14.sp,
-                    fontFamily = jost,
+                    fontFamily = sofiaPro,
                     fontStyle = FontStyle.Italic,
                     fontWeight = FontWeight.Light,
                     modifier = Modifier.align(Alignment.End)
@@ -82,7 +82,7 @@ internal fun WalletChoiceScreen(
             Text(
                 stringResource(R.string.create_new_wallet),
                 fontSize = 22.sp,
-                fontFamily = jost,
+                fontFamily = sofiaPro,
                 textAlign = TextAlign.Center,
                 lineHeight = 28.sp,
             )
@@ -105,7 +105,7 @@ internal fun WalletChoiceScreen(
             Text(
                 stringResource(R.string.already_have_a_wallet),
                 fontSize = 22.sp,
-                fontFamily = jost,
+                fontFamily = sofiaPro,
                 textAlign = TextAlign.Center,
                 lineHeight = 28.sp,
             )

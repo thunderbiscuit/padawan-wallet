@@ -62,7 +62,7 @@ internal fun HomeScreen(navController: NavController) {
                 Text(
                     BuildConfig.VERSION_NAME,
                     color = md_theme_dark_background,
-                    fontFamily = jost,
+                    fontFamily = sofiaPro,
                     // fontStyle = FontStyle.Italic
                 )
             }

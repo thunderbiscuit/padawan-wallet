@@ -8,14 +8,14 @@ import androidx.compose.ui.unit.sp
 
 val PadawanTypography = Typography(
 	bodyLarge = TextStyle(
-		fontFamily = jost,
+		fontFamily = sofiaPro,
 		fontWeight = FontWeight.Normal,
 		fontSize = 16.sp,
 		lineHeight = 24.sp,
 		letterSpacing = 0.5.sp,
 	),
 	headlineMedium = TextStyle(
-		fontFamily = jost,
+		fontFamily = sofiaPro,
 		fontWeight = FontWeight.Normal,
 		fontSize = 24.sp,
 	)

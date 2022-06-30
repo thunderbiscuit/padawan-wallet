@@ -29,8 +29,6 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 import org.bitcoindevkit.PartiallySignedBitcoinTransaction
 
-// input verification was in the WalletBuild file before the move to Compose
-
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 internal fun SendScreen(navController: NavHostController) {
@@ -137,7 +135,7 @@ internal fun SendScreen(navController: NavHostController) {
                 ) {
                     Text(
                         text = "broadcast transaction",
-                        fontFamily = jost,
+                        fontFamily = sofiaPro,
                         fontSize = 18.sp,
                         textAlign = TextAlign.Center,
                         lineHeight = 28.sp,
@@ -180,7 +178,7 @@ fun ScanQRCode(navController: NavHostController, recipientAddress: MutableState<
                 Spacer(modifier = Modifier.width(8.dp))
                 Text(
                     text = "Scan",
-                    fontFamily = jost,
+                    fontFamily = sofiaPro,
                     fontSize = 18.sp,
                     textAlign = TextAlign.Center,
                 )

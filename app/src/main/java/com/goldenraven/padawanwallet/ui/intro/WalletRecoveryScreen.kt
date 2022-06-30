@@ -110,7 +110,7 @@ internal fun WalletRecoveryScreen(onBuildWalletButtonClicked: (WalletCreateType)
                         stringResource(R.string.elevator_pitch),
                         color = md_theme_dark_onBackground,
                         fontSize = 14.sp,
-                        fontFamily = rubik,
+                        fontFamily = sofiaPro,
                         fontStyle = FontStyle.Italic,
                         fontWeight = FontWeight.Light,
                         modifier = Modifier.align(Alignment.End)
@@ -174,7 +174,7 @@ internal fun WalletRecoveryScreen(onBuildWalletButtonClicked: (WalletCreateType)
                         Text(
                             stringResource(R.string.recover_wallet),
                             fontSize = 20.sp,
-                            fontFamily = rubik,
+                            fontFamily = sofiaPro,
                             textAlign = TextAlign.Center,
                             lineHeight = 28.sp,
                         )

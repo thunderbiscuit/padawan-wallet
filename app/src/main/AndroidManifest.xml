@@ -27,40 +27,5 @@
             </intent-filter>
         </activity>
 
-<!--        <activity-->
-<!--            android:name=".wallet.WalletActivity"-->
-<!--            android:theme="@style/Theme.PadawanWallet"-->
-<!--            android:parentActivityName=".intro.IntroActivity"-->
-<!--            android:windowSoftInputMode="adjustPan"-->
-<!--            android:screenOrientation="portrait"-->
-<!--            android:exported="true">-->
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.VIEW" />-->
-<!--                <category android:name="android.intent.category.DEFAULT" />-->
-<!--            </intent-filter>-->
-<!--            <meta-data-->
-<!--                android:name="android.support.PARENT_ACTIVITY"-->
-<!--                android:value=".intro.IntroActivity" />-->
-<!--        </activity>-->
-
-<!--        <activity-->
-<!--            android:name=".drawer.DrawerActivity"-->
-<!--            android:theme="@style/Theme.PadawanWallet"-->
-<!--            android:parentActivityName=".wallet.WalletActivity"-->
-<!--            android:screenOrientation="portrait"-->
-<!--            android:exported="true">-->
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.VIEW" />-->
-<!--                <category android:name="android.intent.category.DEFAULT" />-->
-<!--            </intent-filter>-->
-<!--            <meta-data-->
-<!--                android:name="android.support.PARENT_ACTIVITY"-->
-<!--                android:value=".wallet.WalletActivity" />-->
-<!--        </activity>-->
-
-        <meta-data
-            android:name="preloaded_fonts"
-            android:resource="@array/preloaded_fonts" />
-
     </application>
 </manifest>

@@ -72,7 +72,7 @@ fun AppName() {
             stringResource(R.string.elevator_pitch),
             color = md_theme_dark_onBackground,
             fontSize = 16.sp,
-            fontFamily = jost,
+            fontFamily = sofiaPro,
             fontStyle = FontStyle.Italic,
             fontWeight = FontWeight.Light,
             modifier = Modifier.align(Alignment.End)
@@ -135,7 +135,7 @@ internal fun IntroText() {
         stringResource(R.string.welcome_statement),
         color = md_theme_dark_onBackground,
         fontSize = 20.sp,
-        fontFamily = jost,
+        fontFamily = sofiaPro,
         fontWeight = FontWeight.Light,
         modifier = Modifier.padding(horizontal = 24.dp)
     )
@@ -153,7 +153,7 @@ internal fun LetsGoButton(setShowDialog: (Boolean) -> Unit) {
         Text(
             stringResource(R.string.entry_button),
             fontSize = 22.sp,
-            fontFamily = jost,
+            fontFamily = sofiaPro,
         )
     }
 }
