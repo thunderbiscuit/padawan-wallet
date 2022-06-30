@@ -8,6 +8,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased](https://github.com/thunderbiscuit/padawan-wallet/compare/v0.8.0...master)
 <br/>
 
+## [v0.8.0 to v0.9.0](https://github.com/thunderbiscuit/padawan-wallet/compare/v0.8.0...v0.9.0) — March 23, 2022
+### Added
++ Complete re-write of the user interface in Jetpack Compose.
++ Many more tests
+<br/>
+
 ## [v0.7.2 to v0.8.0](https://github.com/thunderbiscuit/padawan-wallet/compare/v0.7.2...v0.8.0) — March 23, 2022
 ### Added
 + Wallet sync is now done in a coroutine
