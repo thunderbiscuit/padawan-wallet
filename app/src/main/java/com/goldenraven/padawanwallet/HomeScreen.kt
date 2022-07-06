@@ -10,6 +10,7 @@ import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -53,8 +54,9 @@ internal fun HomeScreen(navController: NavController) {
                 verticalArrangement = Arrangement.Center
             ) {
                 Icon(
-                    painter = painterResource(id = R.drawable.ic_logo_v1_0_0),
-                    tint = md_theme_dark_background,
+                    painter = painterResource(id = R.drawable.ic_logo_v2_0_0),
+                    tint = Color.Unspecified,
+                    // tint = md_theme_dark_lightBackground,
                     contentDescription = "Padawan logo",
                     modifier = Modifier.width(200.dp)
                 )

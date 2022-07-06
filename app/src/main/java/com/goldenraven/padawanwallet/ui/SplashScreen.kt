@@ -9,11 +9,13 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.goldenraven.padawanwallet.R
 import com.goldenraven.padawanwallet.theme.md_theme_dark_lightBackground
@@ -45,7 +47,11 @@ internal fun SplashScreen(navController: NavController, moveToIntro: Boolean) {
             .fillMaxSize()
             .background(md_theme_dark_lightBackground)
     ) {
-        Image(painter = painterResource(id = R.drawable.ic_logo_v1_0_0), contentDescription = "Padawan Logo")
+        Image(
+            painter = painterResource(id = R.drawable.ic_logo_v2_0_0),
+            contentDescription = "Padawan Logo",
+            Modifier.size(200.dp)
+        )
     }
 }
 
