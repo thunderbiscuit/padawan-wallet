@@ -8,16 +8,30 @@ import androidx.compose.ui.unit.sp
 val PadawanTypography = Typography(
 	bodyLarge = TextStyle(
 		fontFamily = sofiaPro,
-		fontWeight = FontWeight.Normal,
+		fontWeight = FontWeight.Light,
 		fontSize = 16.sp,
 		lineHeight = 24.sp,
 		letterSpacing = 0.5.sp,
 	),
+	labelLarge = TextStyle(
+		fontFamily = sofiaPro,
+		fontWeight = FontWeight.Normal,
+		fontSize = 20.sp,
+		lineHeight = 28.sp
+	),
+	bodyMedium = TextStyle(
+		fontFamily = sofiaPro,
+		fontWeight = FontWeight.Light,
+		color = md_theme_dark_onBackground,
+		fontSize = 16.sp,
+		lineHeight = 20.sp,
+		letterSpacing = 0.25.sp,
+	),
 	headlineMedium = TextStyle(
 		fontFamily = sofiaPro,
 		fontWeight = FontWeight.Normal,
-		fontSize = 24.sp,
-	)
+		fontSize = 18.sp,
+	),
 )
 
 //Replace with your font locations

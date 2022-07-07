@@ -171,7 +171,7 @@ internal fun WalletScreen(
                 ) {
                     Text(
                         text = "Transaction history",
-                        fontFamily = sofiaPro,
+                        style = PadawanTypography.headlineMedium
                     )
                     Button(
                         onClick = { walletViewModel.refresh() },

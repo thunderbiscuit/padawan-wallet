@@ -97,6 +97,7 @@ fun Dialog(showDialog: Boolean, setShowDialog: (Boolean) -> Unit, navController:
             text = {
                 Text(
                     text = stringResource(R.string.intro_dialog_message),
+                    style = PadawanTypography.bodyMedium,
                     color = md_theme_dark_onLightBackground
                 )
             },
@@ -109,6 +110,7 @@ fun Dialog(showDialog: Boolean, setShowDialog: (Boolean) -> Unit, navController:
                 ) {
                     Text(
                         text = stringResource(R.string.intro_dialog_positive),
+                        style = PadawanTypography.bodyMedium,
                         color = md_theme_dark_onLightBackground
                     )
                 }
@@ -121,6 +123,8 @@ fun Dialog(showDialog: Boolean, setShowDialog: (Boolean) -> Unit, navController:
                 ) {
                     Text(
                         text = stringResource(R.string.intro_dialog_negative),
+                        style = PadawanTypography.bodyMedium,
+
                         color = md_theme_dark_onLightBackground
                     )
                 }
@@ -133,11 +137,8 @@ fun Dialog(showDialog: Boolean, setShowDialog: (Boolean) -> Unit, navController:
 internal fun IntroText() {
     Text(
         stringResource(R.string.welcome_statement),
-        color = md_theme_dark_onBackground,
-        fontSize = 20.sp,
-        fontFamily = sofiaPro,
-        fontWeight = FontWeight.Light,
-        modifier = Modifier.padding(horizontal = 24.dp)
+        modifier = Modifier.padding(horizontal = 24.dp),
+        style = PadawanTypography.bodyMedium
     )
 }
 

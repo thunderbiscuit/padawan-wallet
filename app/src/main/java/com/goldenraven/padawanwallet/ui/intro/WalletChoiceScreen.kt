@@ -81,10 +81,8 @@ internal fun WalletChoiceScreen(
         ) {
             Text(
                 stringResource(R.string.create_new_wallet),
-                fontSize = 22.sp,
-                fontFamily = sofiaPro,
-                textAlign = TextAlign.Center,
-                lineHeight = 28.sp,
+                style = PadawanTypography.labelLarge,
+                textAlign = TextAlign.Center
             )
         }
 
@@ -104,10 +102,8 @@ internal fun WalletChoiceScreen(
         ) {
             Text(
                 stringResource(R.string.already_have_a_wallet),
-                fontSize = 22.sp,
-                fontFamily = sofiaPro,
+                style = PadawanTypography.labelLarge,
                 textAlign = TextAlign.Center,
-                lineHeight = 28.sp,
             )
         }
     }
