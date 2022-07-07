@@ -147,6 +147,10 @@ dependencies {
     debugImplementation("androidx.compose.ui:ui-test-manifest:1.1.1")
 }
 
+tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach {
+    kotlinOptions.freeCompilerArgs += "-opt-in=kotlin.RequiresOptIn"
+}
+
 tasks.withType<Test> {
     useJUnitPlatform()
 
