@@ -28,13 +28,12 @@ class PadawanActivity : AppCompatActivity() {
         if (Repository.doesWalletExist()) {
             Wallet.loadExistingWallet()
             Log.i(TAG, "Wallet already exists!")
+
             setContent {
                 PadawanTheme {
                    HomeNavigation()
                 }
             }
-            // startActivity(Intent(this, WalletActivity::class.java))
-            // finish()
         } else {
             // this function is used in composables that navigate to the wallet activity
             // to ensure we destroy the intro activity once the wallet starts
@@ -44,16 +43,14 @@ class PadawanActivity : AppCompatActivity() {
                     when (walletCreateType) {
                         // if we create a wallet from scratch we don't need a recovery phrase
                         is WalletCreateType.FROMSCRATCH -> Wallet.createWallet()
-
                         is WalletCreateType.RECOVER -> Wallet.recoverWallet(walletCreateType.recoveryPhrase)
                     }
+
                     setContent {
                         PadawanTheme {
                             HomeNavigation()
                         }
                     }
-                    // startActivity(Intent(this, WalletActivity::class.java))
-                    // finish()
                 } catch (e: Throwable) {
                     Log.i(TAG, "Could not build wallet: $e")
                     fireSnackbar(
