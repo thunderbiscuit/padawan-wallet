@@ -31,6 +31,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.goldenraven.padawanwallet.R
+import com.goldenraven.padawanwallet.theme.ShareTechMono
 import com.goldenraven.padawanwallet.ui.DrawerAppBar
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
@@ -78,7 +79,11 @@ internal fun SendCoinsBackScreen(navController: NavController) {
                     .clickable(onClick = { copyToClipboard(context, scope, snackbarHostState) })
                     .padding(bottom = 20.dp)
             ) {
-                Text(text = stringResource(id = R.string.send_coins_back_address))
+                Text(
+                    text = stringResource(R.string.send_coins_back_address),
+                    fontFamily = ShareTechMono,
+                    fontSize = 12.sp
+                )
                 Divider(
                     color = colorResource(id = R.color.fg1),
                     thickness = 1.dp,
