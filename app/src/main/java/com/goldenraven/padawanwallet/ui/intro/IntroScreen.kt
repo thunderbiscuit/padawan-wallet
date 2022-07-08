@@ -66,13 +66,13 @@ fun AppName() {
             text = stringResource(R.string.padawan),
             color = md_theme_dark_primary,
             fontSize = 70.sp,
-            fontFamily = shareTechMono,
+            fontFamily = ShareTechMono,
         )
         Text(
             stringResource(R.string.elevator_pitch),
             color = md_theme_dark_onBackground,
             fontSize = 16.sp,
-            fontFamily = sofiaPro,
+            fontFamily = SofiaPro,
             fontStyle = FontStyle.Italic,
             fontWeight = FontWeight.Light,
             modifier = Modifier.align(Alignment.End)
@@ -154,7 +154,7 @@ internal fun LetsGoButton(setShowDialog: (Boolean) -> Unit) {
         Text(
             stringResource(R.string.entry_button),
             fontSize = 22.sp,
-            fontFamily = sofiaPro,
+            fontFamily = SofiaPro,
         )
     }
 }

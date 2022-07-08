@@ -23,7 +23,7 @@ import com.goldenraven.padawanwallet.R
 import com.goldenraven.padawanwallet.theme.connection_available
 import com.goldenraven.padawanwallet.theme.connection_unavailable
 import com.goldenraven.padawanwallet.theme.md_theme_dark_surfaceLight
-import com.goldenraven.padawanwallet.theme.sofiaPro
+import com.goldenraven.padawanwallet.theme.SofiaPro
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import kotlinx.coroutines.delay
 

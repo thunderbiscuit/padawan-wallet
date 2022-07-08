@@ -135,7 +135,7 @@ internal fun SendScreen(navController: NavHostController) {
                 ) {
                     Text(
                         text = "broadcast transaction",
-                        fontFamily = sofiaPro,
+                        fontFamily = SofiaPro,
                         fontSize = 18.sp,
                         textAlign = TextAlign.Center,
                         lineHeight = 28.sp,
@@ -178,7 +178,7 @@ fun ScanQRCode(navController: NavHostController, recipientAddress: MutableState<
                 Spacer(modifier = Modifier.width(8.dp))
                 Text(
                     text = "Scan",
-                    fontFamily = sofiaPro,
+                    fontFamily = SofiaPro,
                     fontSize = 18.sp,
                     textAlign = TextAlign.Center,
                 )
@@ -202,7 +202,7 @@ private fun TransactionRecipientInput(recipientAddress: MutableState<String>) {
                 )
             },
             singleLine = true,
-            textStyle = TextStyle(fontFamily = shareTechMono, color = md_theme_dark_onBackground),
+            textStyle = TextStyle(fontFamily = ShareTechMono, color = md_theme_dark_onBackground),
             colors = TextFieldDefaults.outlinedTextFieldColors(
                 focusedBorderColor = MaterialTheme.colorScheme.primary,
                 unfocusedBorderColor = md_theme_dark_onBackgroundFaded,
@@ -225,7 +225,7 @@ private fun TransactionAmountInput(amount: MutableState<String>) {
                 amount.value = value.filter { it.isDigit() }
             },
             singleLine = true,
-            textStyle = TextStyle(fontFamily = shareTechMono, color = md_theme_dark_onBackground),
+            textStyle = TextStyle(fontFamily = ShareTechMono, color = md_theme_dark_onBackground),
             label = {
                 Text(
                     text = "Amount (satoshis)",
@@ -253,7 +253,7 @@ private fun TransactionFeeInput(feeRate: MutableState<String>) {
                 feeRate.value = newValue.filter { it.isDigit() }
             },
             singleLine = true,
-            textStyle = TextStyle(fontFamily = shareTechMono, color = md_theme_dark_onBackground),
+            textStyle = TextStyle(fontFamily = ShareTechMono, color = md_theme_dark_onBackground),
             label = {
                 Text(
                     text = "Fee rate",

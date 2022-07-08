@@ -95,7 +95,7 @@ internal fun WalletScreen(
                     Text(
                         // DecimalFormat("###,###,###").format(balanceInSatoshis.toLong()).replace(",", "\u2008")
                         balance.toString(),
-                        fontFamily = shareTechMono,
+                        fontFamily = ShareTechMono,
                         fontSize = 40.sp,
                     )
                 }
@@ -118,7 +118,7 @@ internal fun WalletScreen(
                             .fillMaxWidth(fraction = 0.5f),
                         enabled = walletViewModel.isOnline(context = context)
                     ) {
-                        buttonText(content = "Send")
+                        ButtonText(content = "Send")
                     }
                     Button(
                         onClick = { navController.navigate(Screen.ReceiveScreen.route) },
@@ -129,9 +129,9 @@ internal fun WalletScreen(
                             .padding(vertical = 8.dp, horizontal = 8.dp)
                             .shadow(elevation = 4.dp, shape = RoundedCornerShape(16.dp))
                             .fillMaxWidth(),
-                        enabled = walletViewModel.isOnline(context = context)
+                        // enabled = walletViewModel.isOnline(context = context)
                     ) {
-                        buttonText(content = "Receive")
+                        ButtonText(content = "Receive")
                     }
                 }
                 Row(
@@ -156,9 +156,7 @@ internal fun WalletScreen(
                     ) {
                         Text(
                             text = "Sync",
-                            fontFamily = sofiaPro,
-                            fontSize = 14.sp,
-                            textAlign = TextAlign.Center,
+                            style = PadawanTypography.labelSmall
                         )
                         Icon(
                             painter = painterResource(id = R.drawable.ic_refresh),
@@ -197,13 +195,10 @@ internal fun WalletScreen(
 }
 
 @Composable
-internal fun buttonText(content: String) {
+internal fun ButtonText(content: String) {
     Text(
         text = content,
-        fontFamily = sofiaPro,
-        fontSize = 20.sp,
-        textAlign = TextAlign.Center,
-        lineHeight = 28.sp,
+        style = PadawanTypography.labelLarge
     )
 }
 
@@ -242,7 +237,7 @@ internal fun ExpandableCard(tx: Tx) {
             }
             Text(
                 text = tx.date,
-                fontFamily = sofiaPro,
+                fontFamily = SofiaPro,
                 textAlign = TextAlign.Center,
                 fontSize = 14.sp,
                 modifier = Modifier
@@ -286,11 +281,11 @@ internal fun expandableCardText(title: String, content: String) {
     Text(
         text = buildAnnotatedString {
             append(title)
-            withStyle(style = SpanStyle(fontFamily = shareTechMono)) {
+            withStyle(style = SpanStyle(fontFamily = ShareTechMono)) {
                 append(content)
             }
         },
-        fontFamily = sofiaPro,
+        fontFamily = SofiaPro,
         fontSize = 12.sp,
         modifier = Modifier
             .padding(horizontal = 8.dp)
@@ -303,11 +298,11 @@ internal fun expandableCardTextBottom(title: String, content: String) {
     Text(
         text = buildAnnotatedString {
             append(title)
-            withStyle(style = SpanStyle(fontFamily = shareTechMono)) {
+            withStyle(style = SpanStyle(fontFamily = ShareTechMono)) {
                 append(content)
             }
         },
-        fontFamily = sofiaPro,
+        fontFamily = SofiaPro,
         fontSize = 12.sp,
         modifier = Modifier
             .padding(horizontal = 8.dp)
