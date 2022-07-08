@@ -134,12 +134,15 @@ internal fun BottomNavigationBar(navControllerWalletNavigation: NavController) {
 
     NavigationBar(
         containerColor = md_theme_dark_surfaceLight,
-        // containerColor = md_theme_dark_background,
         tonalElevation = 0.dp
     ) {
         NavigationBarItem(
             icon = { Icon(painterResource(id = R.drawable.ic_bitcoin_logo), contentDescription = null) },
-            label = { Text(items[0]) },
+            label = {
+                Text(
+                    text = items[0],
+                )
+            },
             selected = selectedItem == 0,
             onClick = {
                 selectedItem = 0
@@ -155,7 +158,11 @@ internal fun BottomNavigationBar(navControllerWalletNavigation: NavController) {
         )
         NavigationBarItem(
             icon = { Icon(painterResource(id = R.drawable.school), contentDescription = null) },
-            label = { Text(items[1]) },
+            label = {
+                Text(
+                    text = items[1],
+                )
+            },
             selected = selectedItem == 1,
             onClick = {
                 selectedItem = 1

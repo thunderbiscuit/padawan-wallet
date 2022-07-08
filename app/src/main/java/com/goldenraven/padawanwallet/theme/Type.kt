@@ -6,8 +6,9 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 
 // by default
-// Buttons use 		Label Large
-// App Bar uses		Title Large
+// Buttons use 			Label Large
+// App Bar uses			Title Large
+// Bottom bar items use Label Medium
 
 val PadawanTypography = Typography(
 	titleLarge = TextStyle(
@@ -40,12 +41,17 @@ val PadawanTypography = Typography(
 		fontSize = 20.sp,
 		lineHeight = 28.sp
 	),
+	labelMedium = TextStyle(
+		fontFamily = SofiaPro,
+		fontWeight = FontWeight.Normal,
+		fontSize = 12.sp,
+		lineHeight = 20.sp,
+	),
 	labelSmall = TextStyle(
 		fontFamily = SofiaPro,
-		fontWeight = FontWeight.Medium,
+		fontWeight = FontWeight.Normal,
 		fontSize = 11.sp,
 		lineHeight = 16.sp,
-		letterSpacing = 0.5.sp,
 	),
 
 	headlineLarge = TextStyle(
