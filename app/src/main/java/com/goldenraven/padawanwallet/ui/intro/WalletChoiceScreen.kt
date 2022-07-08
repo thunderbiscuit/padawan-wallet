@@ -5,7 +5,6 @@
 
 package com.goldenraven.padawanwallet.ui.intro
 
-import android.content.Context
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -34,8 +33,7 @@ internal fun WalletChoiceScreen(
     onBuildWalletButtonClicked: (WalletCreateType) -> Unit
 ) {
     ConstraintLayout {
-        val (appName, elevatorPitch, create, alreadyHave) = createRefs()
-        val context: Context = LocalContext.current
+        val (create, alreadyHave) = createRefs()
 
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
@@ -48,7 +46,7 @@ internal fun WalletChoiceScreen(
                     text = stringResource(R.string.padawan),
                     color = md_theme_dark_primary,
                     fontSize = 70.sp,
-                    fontFamily = shareTechMono,
+                    fontFamily = ShareTechMono,
                     modifier = Modifier
                         .padding(top = 70.dp)
                         .align(Alignment.CenterHorizontally)
@@ -57,7 +55,7 @@ internal fun WalletChoiceScreen(
                     stringResource(R.string.elevator_pitch),
                     color = md_theme_dark_onBackground,
                     fontSize = 14.sp,
-                    fontFamily = sofiaPro,
+                    fontFamily = SofiaPro,
                     fontStyle = FontStyle.Italic,
                     fontWeight = FontWeight.Light,
                     modifier = Modifier.align(Alignment.End)

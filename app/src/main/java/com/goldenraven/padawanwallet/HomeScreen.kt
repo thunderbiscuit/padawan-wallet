@@ -64,7 +64,7 @@ internal fun HomeScreen(navController: NavController) {
                 Text(
                     BuildConfig.VERSION_NAME,
                     color = md_theme_dark_background,
-                    fontFamily = sofiaPro,
+                    fontFamily = SofiaPro,
                     // fontStyle = FontStyle.Italic
                 )
             }
@@ -195,7 +195,6 @@ internal fun PadawanAppBar(scope: CoroutineScope, drawerState: DrawerState) {
 internal fun AppTitle() {
     Text(
         text = stringResource(R.string.app_name),
-        style = MaterialTheme.typography.headlineMedium,
         color = MaterialTheme.colorScheme.primary
     )
 }

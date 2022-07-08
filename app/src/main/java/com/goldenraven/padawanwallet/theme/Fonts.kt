@@ -13,11 +13,11 @@ import com.goldenraven.padawanwallet.R
 //     Font(R.font.jost_light_italic, FontWeight.Light, FontStyle.Italic),
 // )
 
-val shareTechMono = FontFamily(
+val ShareTechMono = FontFamily(
     Font(R.font.share_tech_mono, FontWeight.Normal),
 )
 
-val sofiaPro: FontFamily = FontFamily(
+val SofiaPro: FontFamily = FontFamily(
     Font(R.font.sofia_pro_regular, FontWeight.Normal),
     Font(R.font.sofia_pro_regular_italic, FontWeight.Normal, FontStyle.Italic),
     Font(R.font.sofia_pro_light, FontWeight.Light),

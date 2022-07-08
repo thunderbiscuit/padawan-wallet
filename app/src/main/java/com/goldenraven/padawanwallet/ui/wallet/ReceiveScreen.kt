@@ -30,8 +30,8 @@ import androidx.constraintlayout.compose.Dimension
 import androidx.core.graphics.createBitmap
 import androidx.lifecycle.LiveData
 import com.goldenraven.padawanwallet.data.Wallet
-import com.goldenraven.padawanwallet.theme.shareTechMono
-import com.goldenraven.padawanwallet.theme.sofiaPro
+import com.goldenraven.padawanwallet.theme.ShareTechMono
+import com.goldenraven.padawanwallet.theme.SofiaPro
 import com.google.zxing.BarcodeFormat
 import com.google.zxing.common.BitMatrix
 import com.google.zxing.qrcode.QRCodeWriter
@@ -50,7 +50,7 @@ internal fun ReceiveScreen(
         Text(
             text = "Receive Bitcoin",
             fontSize = 28.sp,
-            fontFamily = sofiaPro,
+            fontFamily = SofiaPro,
             textAlign = TextAlign.Center,
             modifier = Modifier
                 .constrainAs(screenTitle) {
@@ -84,7 +84,7 @@ internal fun ReceiveScreen(
                 SelectionContainer {
                     Text(
                         text = address,
-                        fontFamily = shareTechMono,
+                        fontFamily = ShareTechMono,
                         fontSize = 12.sp
                     )
                 }
@@ -112,7 +112,7 @@ internal fun ReceiveScreen(
                 Text(
                     text = "generate new address",
                     fontSize = 18.sp,
-                    fontFamily = sofiaPro,
+                    fontFamily = SofiaPro,
                     textAlign = TextAlign.Center,
                     lineHeight = 28.sp,
                 )

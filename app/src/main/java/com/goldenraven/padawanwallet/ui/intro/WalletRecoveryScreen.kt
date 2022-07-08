@@ -71,8 +71,6 @@ internal fun WalletRecoveryScreen(onBuildWalletButtonClicked: (WalletCreateType)
             }
         },
     ) {
-        val context: Context = LocalContext.current
-
         // the screen is broken into 3 parts
         // the app name, the body, and the button
         ConstraintLayout(modifier = Modifier.fillMaxHeight(1f)) {
@@ -101,7 +99,7 @@ internal fun WalletRecoveryScreen(onBuildWalletButtonClicked: (WalletCreateType)
                         text = stringResource(R.string.padawan),
                         color = md_theme_dark_primary,
                         fontSize = 70.sp,
-                        fontFamily = shareTechMono,
+                        fontFamily = ShareTechMono,
                         modifier = Modifier
                             .padding(top = 70.dp)
                             .align(Alignment.CenterHorizontally)
@@ -110,7 +108,7 @@ internal fun WalletRecoveryScreen(onBuildWalletButtonClicked: (WalletCreateType)
                         stringResource(R.string.elevator_pitch),
                         color = md_theme_dark_onBackground,
                         fontSize = 14.sp,
-                        fontFamily = sofiaPro,
+                        fontFamily = SofiaPro,
                         fontStyle = FontStyle.Italic,
                         fontWeight = FontWeight.Light,
                         modifier = Modifier.align(Alignment.End)
@@ -174,7 +172,7 @@ internal fun WalletRecoveryScreen(onBuildWalletButtonClicked: (WalletCreateType)
                         Text(
                             stringResource(R.string.recover_wallet),
                             fontSize = 20.sp,
-                            fontFamily = sofiaPro,
+                            fontFamily = SofiaPro,
                             textAlign = TextAlign.Center,
                             lineHeight = 28.sp,
                         )

@@ -27,7 +27,7 @@ import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.navigation.NavHostController
 import com.goldenraven.padawanwallet.theme.md_theme_dark_background
-import com.goldenraven.padawanwallet.theme.sofiaPro
+import com.goldenraven.padawanwallet.theme.SofiaPro
 import com.goldenraven.padawanwallet.utils.QRCodeAnalyzer
 
 @Composable
@@ -126,7 +126,7 @@ internal fun QRScanScreen(navController: NavHostController) {
             ) {
                 Text(
                     text = "Cancel",
-                    fontFamily = sofiaPro,
+                    fontFamily = SofiaPro,
                     fontSize = 18.sp,
                     textAlign = TextAlign.Center,
                 )
