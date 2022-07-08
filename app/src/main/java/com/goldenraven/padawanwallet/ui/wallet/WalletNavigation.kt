@@ -5,6 +5,7 @@
 
 package com.goldenraven.padawanwallet.ui.wallet
 
+import android.util.Log
 import androidx.compose.animation.AnimatedContentScope
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.core.tween
@@ -171,7 +172,7 @@ fun WalletNavigation(navControllerWalletNavigation: NavHostController) {
         ) { backStackEntry ->
                 backStackEntry.arguments?.getInt("tutorialId")?.let {
                     // use the id to reverse-lookup the correct enum variant and provide it to the composable
-                    val tutorial = Tutorial.fromId(it) ?: throw Exception("Cannot find requested tutorial")
+                    val tutorial = Tutorial.fromId(it + 1) ?: throw Exception("Cannot find requested tutorial")
                     TutorialsScreen(tutorial = tutorial)
                 }
         }
