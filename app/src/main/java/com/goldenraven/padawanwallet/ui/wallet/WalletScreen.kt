@@ -1,25 +1,23 @@
 package com.goldenraven.padawanwallet.ui.wallet
 
-import android.app.Application
-import android.content.Context
-import android.net.ConnectivityManager
-import android.net.NetworkCapabilities
-import android.util.Log
 import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.tween
-import androidx.compose.foundation.*
-import com.goldenraven.padawanwallet.R
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.AlertDialog
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
-import androidx.compose.ui.Modifier
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
@@ -29,35 +27,16 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
-import androidx.lifecycle.*
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
-import com.goldenraven.padawanwallet.BuildConfig
-import com.goldenraven.padawanwallet.data.*
+import com.goldenraven.padawanwallet.R
+import com.goldenraven.padawanwallet.data.Tx
+import com.goldenraven.padawanwallet.data.Wallet
 import com.goldenraven.padawanwallet.theme.*
+import com.goldenraven.padawanwallet.ui.ConnectivityStatus
 import com.goldenraven.padawanwallet.ui.Screen
-import com.goldenraven.padawanwallet.utils.*
 import com.google.accompanist.swiperefresh.SwipeRefresh
 import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
-import io.ktor.client.*
-import io.ktor.client.engine.cio.*
-import io.ktor.client.features.auth.*
-import io.ktor.client.features.auth.providers.*
-import io.ktor.client.request.*
-import io.ktor.client.statement.*
-import io.ktor.content.*
-import io.ktor.http.*
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.launch
-import org.bitcoindevkit.Transaction
-import androidx.compose.material.AlertDialog
-import androidx.compose.ui.platform.LocalContext
-import org.bitcoindevkit.AddressInfo
-import androidx.compose.material3.Card as Card
 
 @Composable
 internal fun WalletScreen(
@@ -67,6 +46,7 @@ internal fun WalletScreen(
     val balance by walletViewModel.balance.observeAsState()
     val isRefreshing by walletViewModel.isRefreshing.collectAsState()
     val openFaucetDialog by walletViewModel.openFaucetDialog
+    val context = LocalContext.current
 
     if (openFaucetDialog) {
         FaucetDialog(
@@ -74,12 +54,13 @@ internal fun WalletScreen(
         )
     }
 
-    if (isOnline(LocalContext.current) && !Wallet.isBlockChainCreated())
+    if (walletViewModel.isOnline(context = context) && !Wallet.isBlockChainCreated()) {
         Wallet.createBlockchain()
+    }
 
     SwipeRefresh(
         state = rememberSwipeRefreshState(isRefreshing),
-        onRefresh = { walletViewModel.refresh() },
+        onRefresh = { walletViewModel.refresh(context = context) },
     ) {
         ConstraintLayout(modifier = Modifier.fillMaxHeight(1f)) {
             val (part1, part2) = createRefs()
@@ -93,6 +74,7 @@ internal fun WalletScreen(
                         top.linkTo(parent.top)
                     }
             ) {
+                ConnectivityStatus(walletViewModel.isOnline(context = context))
                 Spacer(Modifier.padding(24.dp))
                 Row(
                     Modifier
@@ -133,16 +115,10 @@ internal fun WalletScreen(
                             .height(80.dp)
                             .padding(vertical = 8.dp, horizontal = 8.dp)
                             .shadow(elevation = 4.dp, shape = RoundedCornerShape(16.dp))
+                            .fillMaxWidth(fraction = 0.5f),
+                        enabled = walletViewModel.isOnline(context = context)
                     ) {
-                        Text(
-                            text = "Send",
-                            fontFamily = sofiaPro,
-                            fontSize = 20.sp,
-                            textAlign = TextAlign.Center,
-                            lineHeight = 28.sp,
-                            modifier = Modifier
-                                .fillMaxWidth(0.4f)
-                        )
+                        buttonText(content = "Send")
                     }
                     Button(
                         onClick = { navController.navigate(Screen.ReceiveScreen.route) },
@@ -152,29 +128,25 @@ internal fun WalletScreen(
                             .height(80.dp)
                             .padding(vertical = 8.dp, horizontal = 8.dp)
                             .shadow(elevation = 4.dp, shape = RoundedCornerShape(16.dp))
+                            .fillMaxWidth(),
+                        enabled = walletViewModel.isOnline(context = context)
                     ) {
-                        Text(
-                            text = "Receive",
-                            fontFamily = sofiaPro,
-                            fontSize = 20.sp,
-                            textAlign = TextAlign.Center,
-                            lineHeight = 28.sp,
-                            modifier = Modifier
-                                .fillMaxWidth()
-                        )
+                        buttonText(content = "Receive")
                     }
                 }
                 Row(
                     verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.SpaceBetween,
-                    modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp)
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 16.dp)
                 ) {
                     Text(
                         text = "Transaction history",
                         style = PadawanTypography.headlineMedium
                     )
                     Button(
-                        onClick = { walletViewModel.refresh() },
+                        onClick = { walletViewModel.refresh(context = context) },
                         colors = ButtonDefaults.buttonColors(md_theme_dark_surface),
                         shape = RoundedCornerShape(8.dp),
                         contentPadding = PaddingValues(horizontal = 8.dp, vertical = 2.dp),
@@ -224,9 +196,20 @@ internal fun WalletScreen(
     }
 }
 
+@Composable
+internal fun buttonText(content: String) {
+    Text(
+        text = content,
+        fontFamily = sofiaPro,
+        fontSize = 20.sp,
+        textAlign = TextAlign.Center,
+        lineHeight = 28.sp,
+    )
+}
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ExpandableCard(tx: Tx) {
+internal fun ExpandableCard(tx: Tx) {
     var expandedState by remember { mutableStateOf(false) }
 
     Card(
@@ -278,89 +261,58 @@ fun ExpandableCard(tx: Tx) {
                 modifier = Modifier.fillMaxWidth(),
                 horizontalAlignment = Alignment.End
             ) {
-                Text(
-                    text = buildAnnotatedString {
-                        append("TxId: ")
-                        withStyle(style = SpanStyle(fontFamily = shareTechMono)) {
-                            append("${tx.txid.take(8)}...${tx.txid.takeLast(8)}")
-                        }
-                    },
-                    fontFamily = sofiaPro,
-                    fontSize = 12.sp,
-                    modifier = Modifier
-                        .padding(horizontal = 8.dp)
-                )
+                expandableCardText("TxId: ", "${tx.txid.take(8)}...${tx.txid.takeLast(8)}")
+
                 if (tx.isPayment) {
-                    Text(
-                        text = buildAnnotatedString {
-                            append("Sent: ")
-                            withStyle(style = SpanStyle(fontFamily = shareTechMono)) {
-                                append("${tx.valueOut} sat")
-                            }
-                        },
-                        fontFamily = sofiaPro,
-                        fontSize = 12.sp,
-                        modifier = Modifier
-                            .padding(horizontal = 8.dp)
-                    )
+                    expandableCardText("Sent: ", "${tx.valueOut} sat")
                 } else {
-                    Text(
-                        text = buildAnnotatedString {
-                            append("Received: ")
-                            withStyle(style = SpanStyle(fontFamily = shareTechMono)) {
-                                append("${tx.valueIn} sat")
-                            }
-                        },
-                        fontFamily = sofiaPro,
-                        fontSize = 12.sp,
-                        modifier = Modifier
-                            .padding(horizontal = 8.dp)
-                    )
+                    expandableCardText("Received: ", "${tx.valueIn} sat")
                 }
-                Text(
-                    text = buildAnnotatedString {
-                        append("Network fees: ")
-                        withStyle(style = SpanStyle(fontFamily = shareTechMono)) {
-                            append("${tx.fees} sat")
-                        }
-                    },
-                    fontFamily = sofiaPro,
-                    fontSize = 12.sp,
-                    modifier = Modifier
-                        .padding(horizontal = 8.dp)
-                )
+
+                expandableCardText("Network fees: ", "${tx.fees} sat")
+
                 if (tx.date == "Pending") {
-                    Text(
-                        text = buildAnnotatedString {
-                            append("Block height: ")
-                            withStyle(style = SpanStyle(fontFamily = shareTechMono)) {
-                                append("Pending")
-                            }
-                        },
-                        fontFamily = sofiaPro,
-                        fontSize = 12.sp,
-                        modifier = Modifier
-                            .padding(horizontal = 8.dp)
-                            .padding(bottom = 16.dp)
-                    )
+                    expandableCardTextBottom("Block height: ", "Pending")
                 } else {
-                    Text(
-                        text = buildAnnotatedString {
-                            append("Block height: ")
-                            withStyle(style = SpanStyle(fontFamily = shareTechMono)) {
-                                append("${tx.height}")
-                            }
-                        },
-                        fontFamily = sofiaPro,
-                        fontSize = 12.sp,
-                        modifier = Modifier
-                            .padding(horizontal = 8.dp)
-                            .padding(bottom = 16.dp)
-                    )
+                    expandableCardTextBottom("Block height: ", "${tx.height}")
                 }
             }
         }
     }
+}
+
+@Composable
+internal fun expandableCardText(title: String, content: String) {
+    Text(
+        text = buildAnnotatedString {
+            append(title)
+            withStyle(style = SpanStyle(fontFamily = shareTechMono)) {
+                append(content)
+            }
+        },
+        fontFamily = sofiaPro,
+        fontSize = 12.sp,
+        modifier = Modifier
+            .padding(horizontal = 8.dp)
+    )
+}
+
+
+@Composable
+internal fun expandableCardTextBottom(title: String, content: String) {
+    Text(
+        text = buildAnnotatedString {
+            append(title)
+            withStyle(style = SpanStyle(fontFamily = shareTechMono)) {
+                append(content)
+            }
+        },
+        fontFamily = sofiaPro,
+        fontSize = 12.sp,
+        modifier = Modifier
+            .padding(horizontal = 8.dp)
+            .padding(bottom = 16.dp)
+    )
 }
 
 @Composable
@@ -406,185 +358,4 @@ private fun FaucetDialog(walletViewModel: WalletViewModel) {
             }
         },
     )
-}
-
-internal class WalletViewModel(application: Application) : AndroidViewModel(application) {
-
-    val readAllData: LiveData<List<Tx>>
-    private val repository: TxRepository
-    var openFaucetDialog: MutableState<Boolean> = mutableStateOf(!didWeOfferFaucet())
-
-    init {
-        Log.i("WalletScreen", "The WalletScreen viewmodel is being initialized...")
-        val txDao: TxDao = TxDatabase.getDatabase(application).txDao()
-        repository = TxRepository(txDao)
-        readAllData = repository.readAllData
-    }
-
-    fun onPositiveDialogClick() {
-        faucetOfferWasMade()
-        callTatooineFaucet(getLastUnusedAddress())
-        faucetCallDone()
-        openFaucetDialog.value = false
-    }
-
-    fun onNegativeDialogClick() {
-        faucetOfferWasMade()
-        openFaucetDialog.value = false
-    }
-
-    private fun didWeOfferFaucet(): Boolean {
-        val faucetOfferDone = Repository.didWeOfferFaucet()
-        Log.i("WalletScreen", "We have already asked if they wanted testnet coins: $faucetOfferDone")
-        return faucetOfferDone
-    }
-
-    private fun faucetOfferWasMade() {
-        Log.i("WalletScreen", "The offer to call the faucet was made")
-        Repository.offerFaucetDone()
-    }
-
-    private fun faucetCallDone() {
-        Repository.faucetCallDone()
-    }
-
-    private fun getLastUnusedAddress(): AddressInfo {
-        return Wallet.getLastUnusedAddress()
-    }
-
-    private var _balance: MutableLiveData<ULong> = MutableLiveData(0u)
-    val balance: LiveData<ULong>
-        get() = _balance
-
-    private fun updateBalance() {
-        Wallet.sync()
-        _balance.value = Wallet.getBalance()
-    }
-
-    private val _isRefreshing = MutableStateFlow(false)
-
-    val isRefreshing: StateFlow<Boolean>
-        get() = _isRefreshing.asStateFlow()
-
-    fun refresh() {
-        // This doesn't handle multiple 'refreshing' tasks, don't use this
-        viewModelScope.launch {
-            // A fake 2 second 'refresh'
-            _isRefreshing.emit(true)
-            updateBalance()
-            syncTransactionHistory()
-            delay(300)
-            _isRefreshing.emit(false)
-        }
-    }
-
-    private fun syncTransactionHistory() {
-        val txHistory = Wallet.listTransactions()
-        Log.i("WalletScreen","Transactions history, number of transactions: ${txHistory.size}")
-
-        for (tx in txHistory) {
-            val details = when (tx) {
-                is Transaction.Confirmed -> tx.details
-                is Transaction.Unconfirmed -> tx.details
-            }
-            var valueIn = 0
-            var valueOut = 0
-            val satoshisIn = SatoshisIn(details.received.toInt())
-            val satoshisOut = SatoshisOut(details.sent.toInt())
-            val isPayment = isPayment(satoshisOut, satoshisIn)
-            when (isPayment) {
-                true -> {
-                    valueOut = netSendWithoutFees(
-                        txSatsOut = satoshisOut,
-                        txSatsIn = satoshisIn,
-                        fees = details.fee?.toInt() ?: 0
-                    )
-                }
-                false -> {
-                    valueIn = details.received.toInt()
-                }
-            }
-            val time: String = when (tx) {
-                is Transaction.Confirmed -> tx.confirmation.timestamp.timestampToString()
-                else -> "Pending"
-            }
-            val height: UInt = when (tx) {
-                is Transaction.Confirmed -> tx.confirmation.height
-                else -> 100_000_000u
-            }
-            val transaction = Tx(
-                txid = details.txid,
-                date = time,
-                valueIn = valueIn,
-                valueOut = valueOut,
-                fees = details.fee?.toInt() ?: 0,
-                isPayment = isPayment,
-                height = height.toInt()
-            )
-            addTx(transaction)
-        }
-    }
-
-    private fun addTx(tx: Tx) {
-        viewModelScope.launch(Dispatchers.IO) {
-            Log.i("WalletScreen", "Adding transaction to DB: $tx")
-            repository.addTx(tx)
-        }
-    }
-}
-
-private fun callTatooineFaucet(address: AddressInfo) {
-    val faucetUrl: String = BuildConfig.FAUCET_URL
-    val faucetUsername: String = BuildConfig.FAUCET_USERNAME
-    val faucetPassword: String = BuildConfig.FAUCET_PASSWORD
-
-    // used to be a lifecycleScope.launch because it was in a fragment
-    // now simply using a background thread untied to the lifecycle of the composable
-    val faucetScope = CoroutineScope(Dispatchers.IO)
-    faucetScope.launch {
-        val ktorClient = HttpClient(CIO) {
-            install(Auth) {
-                basic {
-                    username = faucetUsername
-                    password = faucetPassword
-                }
-            }
-        }
-
-        Log.i("WalletScreen","API call to Tatooine will request coins at $address")
-        try {
-            val response: HttpResponse = ktorClient.post(faucetUrl) {
-                body = TextContent(address.address, ContentType.Text.Plain)
-            }
-            Repository.faucetCallDone()
-            Log.i("WalletScreen","API call to Tatooine was performed. Response is ${response.status}, ${response.readText()}")
-        } catch (cause: Throwable) {
-            Log.i("WalletScreen","Tatooine call failed: $cause")
-        }
-        ktorClient.close()
-    }
-}
-
-fun isOnline(context: Context): Boolean {
-    val connectivityManager =
-        context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-    val capabilities =
-        connectivityManager.getNetworkCapabilities(connectivityManager.activeNetwork)
-    if (capabilities != null) {
-        when {
-            capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> {
-                Log.i("Internet", "NetworkCapabilities.TRANSPORT_CELLULAR")
-                return true
-            }
-            capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) -> {
-                Log.i("Internet", "NetworkCapabilities.TRANSPORT_WIFI")
-                return true
-            }
-            capabilities.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET) -> {
-                Log.i("Internet", "NetworkCapabilities.TRANSPORT_ETHERNET")
-                return true
-            }
-        }
-    }
-    return false
 }

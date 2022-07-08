@@ -39,3 +39,6 @@ val md_theme_dark_lightBackground = Color(0xFFf2e5bc)
 val md_theme_dark_onLightBackground = Color(0xFF282828)
 val md_theme_dark_warning = Color(0xFFfabd2f)
 val md_theme_dark_background2 = Color(0xFF3c3836)
+
+val connection_available = Color(0xff6FCF97)
+val connection_unavailable = Color(0xffEB5757)
