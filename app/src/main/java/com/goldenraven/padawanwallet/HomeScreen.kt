@@ -56,7 +56,6 @@ internal fun HomeScreen(navController: NavController) {
                 Icon(
                     painter = painterResource(id = R.drawable.ic_logo_v2_0_0),
                     tint = Color.Unspecified,
-                    // tint = md_theme_dark_lightBackground,
                     contentDescription = "Padawan logo",
                     modifier = Modifier.width(200.dp)
                 )
@@ -64,13 +63,10 @@ internal fun HomeScreen(navController: NavController) {
                 Text(
                     BuildConfig.VERSION_NAME,
                     color = md_theme_dark_background,
-                    fontFamily = SofiaPro,
-                    // fontStyle = FontStyle.Italic
                 )
             }
             Spacer(modifier = Modifier.height(16.dp))
             NavigationDrawerItem(
-                // icon = { Icon(Icons.Default.Face, contentDescription = null) },
                 label = { Text("About") },
                 selected = items[0] == selectedItem.value,
                 onClick = { navController.navigate(Screen.AboutScreen.route) },

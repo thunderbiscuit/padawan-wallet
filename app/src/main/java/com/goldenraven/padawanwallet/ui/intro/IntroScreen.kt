@@ -71,8 +71,7 @@ fun AppName() {
         Text(
             stringResource(R.string.elevator_pitch),
             color = md_theme_dark_onBackground,
-            fontSize = 16.sp,
-            fontFamily = SofiaPro,
+            style = PadawanTypography.headlineMedium,
             fontStyle = FontStyle.Italic,
             fontWeight = FontWeight.Light,
             modifier = Modifier.align(Alignment.End)
@@ -109,7 +108,7 @@ fun Dialog(showDialog: Boolean, setShowDialog: (Boolean) -> Unit, navController:
                 ) {
                     Text(
                         text = stringResource(R.string.intro_dialog_positive),
-                        style = PadawanTypography.labelMedium,
+                        style = PadawanTypography.labelLarge,
                         color = md_theme_dark_onLightBackground
                     )
                 }
@@ -122,7 +121,7 @@ fun Dialog(showDialog: Boolean, setShowDialog: (Boolean) -> Unit, navController:
                 ) {
                     Text(
                         text = stringResource(R.string.intro_dialog_negative),
-                        style = PadawanTypography.labelMedium,
+                        style = PadawanTypography.labelLarge,
                         color = md_theme_dark_onLightBackground
                     )
                 }
@@ -136,7 +135,8 @@ internal fun IntroText() {
     Text(
         stringResource(R.string.welcome_statement),
         modifier = Modifier.padding(horizontal = 24.dp),
-        style = PadawanTypography.bodyLarge
+        style = PadawanTypography.bodyLarge,
+        color = md_theme_dark_onBackground,
     )
 }
 
@@ -151,6 +151,7 @@ internal fun LetsGoButton(setShowDialog: (Boolean) -> Unit) {
     ) {
         Text(
             stringResource(R.string.entry_button),
+            style = PadawanTypography.labelLarge
         )
     }
 }

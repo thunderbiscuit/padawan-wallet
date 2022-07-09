@@ -107,8 +107,7 @@ internal fun WalletRecoveryScreen(onBuildWalletButtonClicked: (WalletCreateType)
                     Text(
                         stringResource(R.string.elevator_pitch),
                         color = md_theme_dark_onBackground,
-                        fontSize = 14.sp,
-                        fontFamily = SofiaPro,
+                        style = PadawanTypography.headlineMedium,
                         fontStyle = FontStyle.Italic,
                         fontWeight = FontWeight.Light,
                         modifier = Modifier.align(Alignment.End)
@@ -171,10 +170,9 @@ internal fun WalletRecoveryScreen(onBuildWalletButtonClicked: (WalletCreateType)
                     ) {
                         Text(
                             stringResource(R.string.recover_wallet),
-                            fontSize = 20.sp,
-                            fontFamily = SofiaPro,
+                            style = PadawanTypography.labelLarge,
+                            fontSize = 21.sp,
                             textAlign = TextAlign.Center,
-                            lineHeight = 28.sp,
                         )
                     }
                 }

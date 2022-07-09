@@ -54,8 +54,7 @@ internal fun WalletChoiceScreen(
                 Text(
                     stringResource(R.string.elevator_pitch),
                     color = md_theme_dark_onBackground,
-                    fontSize = 14.sp,
-                    fontFamily = SofiaPro,
+                    style = PadawanTypography.headlineMedium,
                     fontStyle = FontStyle.Italic,
                     fontWeight = FontWeight.Light,
                     modifier = Modifier.align(Alignment.End)
@@ -80,6 +79,8 @@ internal fun WalletChoiceScreen(
             Text(
                 stringResource(R.string.create_new_wallet),
                 style = PadawanTypography.labelLarge,
+                fontSize = 21.sp,
+                lineHeight = 28.sp,
                 textAlign = TextAlign.Center
             )
         }
@@ -101,6 +102,8 @@ internal fun WalletChoiceScreen(
             Text(
                 stringResource(R.string.already_have_a_wallet),
                 style = PadawanTypography.labelLarge,
+                fontSize = 21.sp,
+                lineHeight = 28.sp,
                 textAlign = TextAlign.Center,
             )
         }
