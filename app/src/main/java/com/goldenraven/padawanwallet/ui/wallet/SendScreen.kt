@@ -135,10 +135,7 @@ internal fun SendScreen(navController: NavHostController) {
                 ) {
                     Text(
                         text = "broadcast transaction",
-                        fontFamily = SofiaPro,
-                        fontSize = 18.sp,
                         textAlign = TextAlign.Center,
-                        lineHeight = 28.sp,
                     )
                 }
             }
@@ -178,8 +175,6 @@ fun ScanQRCode(navController: NavHostController, recipientAddress: MutableState<
                 Spacer(modifier = Modifier.width(8.dp))
                 Text(
                     text = "Scan",
-                    fontFamily = SofiaPro,
-                    fontSize = 18.sp,
                     textAlign = TextAlign.Center,
                 )
             }

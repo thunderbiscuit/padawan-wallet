@@ -20,10 +20,7 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavController
 import com.goldenraven.padawanwallet.R
-import com.goldenraven.padawanwallet.theme.connection_available
-import com.goldenraven.padawanwallet.theme.connection_unavailable
-import com.goldenraven.padawanwallet.theme.md_theme_dark_surfaceLight
-import com.goldenraven.padawanwallet.theme.SofiaPro
+import com.goldenraven.padawanwallet.theme.*
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import kotlinx.coroutines.delay
 
@@ -59,11 +56,10 @@ internal fun DrawerAppBar(navController: NavController, title: String) {
 internal fun DrawerScreenAppBarTitle(title: String) {
     Text(
         text = title,
-        style = MaterialTheme.typography.headlineMedium,
+        style = PadawanTypography.titleLarge,
         color = MaterialTheme.colorScheme.primary
     )
 }
-
 
 @Composable
 fun ConnectivityStatus(isConnected: Boolean) {

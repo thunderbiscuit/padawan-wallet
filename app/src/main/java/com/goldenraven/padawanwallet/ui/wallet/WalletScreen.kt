@@ -237,9 +237,8 @@ internal fun ExpandableCard(tx: Tx) {
             }
             Text(
                 text = tx.date,
-                fontFamily = SofiaPro,
+                style = PadawanTypography.labelLarge,
                 textAlign = TextAlign.Center,
-                fontSize = 14.sp,
                 modifier = Modifier
                     .padding(horizontal = 8.dp, vertical = 16.dp)
             )
@@ -285,8 +284,7 @@ internal fun expandableCardText(title: String, content: String) {
                 append(content)
             }
         },
-        fontFamily = SofiaPro,
-        fontSize = 12.sp,
+        style = PadawanTypography.labelMedium,
         modifier = Modifier
             .padding(horizontal = 8.dp)
     )
@@ -302,8 +300,7 @@ internal fun expandableCardTextBottom(title: String, content: String) {
                 append(content)
             }
         },
-        fontFamily = SofiaPro,
-        fontSize = 12.sp,
+        style = PadawanTypography.labelMedium,
         modifier = Modifier
             .padding(horizontal = 8.dp)
             .padding(bottom = 16.dp)
@@ -318,7 +315,7 @@ private fun FaucetDialog(walletViewModel: WalletViewModel) {
         title = {
             Text(
                 text = "Hello there!",
-                style = MaterialTheme.typography.headlineMedium,
+                style = PadawanTypography.headlineMedium,
                 color = md_theme_dark_onLightBackground
             )
         },

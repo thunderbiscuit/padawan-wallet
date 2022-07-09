@@ -11,6 +11,33 @@ import androidx.compose.ui.unit.sp
 // Bottom bar items use Label Medium
 
 val PadawanTypography = Typography(
+	displayLarge = TextStyle(
+		fontFamily = SofiaPro,
+		fontWeight = FontWeight.Normal,
+		fontSize = 57.sp,
+		lineHeight = 64.sp,
+	),
+	displayMedium = TextStyle(
+		fontFamily = SofiaPro,
+		fontWeight = FontWeight.Normal,
+		fontSize = 45.sp,
+		lineHeight = 52.sp,
+		letterSpacing = 0.sp,
+	),
+
+	headlineLarge = TextStyle(
+		fontFamily = SofiaPro,
+		fontWeight = FontWeight.Normal,
+		fontSize = 32.sp,
+		lineHeight = 40.sp,
+		letterSpacing = 0.sp,
+	),
+	headlineMedium = TextStyle(
+		fontFamily = SofiaPro,
+		fontWeight = FontWeight.Normal,
+		fontSize = 18.sp,
+	),
+
 	titleLarge = TextStyle(
 		fontFamily = SofiaPro,
 		fontWeight = FontWeight.Normal,
@@ -38,8 +65,7 @@ val PadawanTypography = Typography(
 	labelLarge = TextStyle(
 		fontFamily = SofiaPro,
 		fontWeight = FontWeight.Normal,
-		fontSize = 20.sp,
-		lineHeight = 28.sp
+		fontSize = 16.sp,
 	),
 	labelMedium = TextStyle(
 		fontFamily = SofiaPro,
@@ -53,35 +79,6 @@ val PadawanTypography = Typography(
 		fontSize = 11.sp,
 		lineHeight = 16.sp,
 	),
-
-	headlineLarge = TextStyle(
-		fontFamily = SofiaPro,
-		fontWeight = FontWeight.Normal,
-		fontSize = 32.sp,
-		lineHeight = 40.sp,
-		letterSpacing = 0.sp,
-	),
-	headlineMedium = TextStyle(
-		fontFamily = SofiaPro,
-		fontWeight = FontWeight.Normal,
-		fontSize = 18.sp,
-	),
-
-	displayLarge = TextStyle(
-		fontFamily = SofiaPro,
-		fontWeight = FontWeight.Normal,
-		fontSize = 57.sp,
-		lineHeight = 64.sp,
-		letterSpacing = -0.25.sp,
-	),
-	displayMedium = TextStyle(
-		fontFamily = SofiaPro,
-		fontWeight = FontWeight.Normal,
-		fontSize = 45.sp,
-		lineHeight = 52.sp,
-		letterSpacing = 0.sp,
-	),
-
 )
 
 //Replace with your font locations
