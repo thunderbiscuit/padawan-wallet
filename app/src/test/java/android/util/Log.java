@@ -20,5 +20,4 @@ public class Log {
         System.out.println("ERROR: " + tag + ": " + msg);
         return 0;
     }
-
 }

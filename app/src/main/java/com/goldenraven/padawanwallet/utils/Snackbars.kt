@@ -18,7 +18,7 @@ fun fireSnackbar(
     level: SnackbarLevel,
     message: String,
     duration: Int = Snackbar.LENGTH_LONG
-): Unit {
+) {
 
     val color: Int = when (level) {
         SnackbarLevel.INFO -> Color.argb(255, 235, 219, 178)

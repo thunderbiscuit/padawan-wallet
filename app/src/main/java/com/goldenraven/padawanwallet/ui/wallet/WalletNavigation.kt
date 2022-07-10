@@ -5,7 +5,6 @@
 
 package com.goldenraven.padawanwallet.ui.wallet
 
-import android.util.Log
 import androidx.compose.animation.AnimatedContentScope
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.core.tween
