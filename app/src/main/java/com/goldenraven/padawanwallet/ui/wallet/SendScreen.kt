@@ -6,6 +6,8 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.TextFieldDefaults
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.runtime.livedata.observeAsState
@@ -32,7 +34,6 @@ import org.bitcoindevkit.PartiallySignedBitcoinTransaction
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 internal fun SendScreen(navController: NavHostController) {
-
     val (showDialog, setShowDialog) = rememberSaveable { mutableStateOf(false) }
 
     val recipientAddress: MutableState<String> = rememberSaveable { mutableStateOf("") }
@@ -41,6 +42,15 @@ internal fun SendScreen(navController: NavHostController) {
 
     val snackbarHostState = remember { SnackbarHostState() }
     val scope = rememberCoroutineScope()
+
+    val transactionOptions = remember {
+        listOf(
+            TransactionType.DEFAULT,
+            TransactionType.SEND_ALL,
+        )
+    }
+    val transactionOption: MutableState<TransactionType> = rememberSaveable { mutableStateOf(transactionOptions[0]) }
+    val showMenu: MutableState<Boolean> = remember { mutableStateOf(false) }
 
     Scaffold(
         snackbarHost = {
@@ -64,7 +74,7 @@ internal fun SendScreen(navController: NavHostController) {
                 .fillMaxSize()
                 .background(md_theme_dark_background)
         ) {
-            val (screenTitle, transactionInputs, bottomButtons) = createRefs()
+            val (screenTitle, transactionInputs, bottomButtons, dropDownMenu) = createRefs()
             Text(
                 text = "Send Bitcoin",
                 fontSize = 28.sp,
@@ -78,6 +88,53 @@ internal fun SendScreen(navController: NavHostController) {
                     .padding(top = 70.dp)
             )
 
+
+            Column(
+                modifier = Modifier
+                    .constrainAs(dropDownMenu) {
+                        start.linkTo(screenTitle.end)
+                    }
+                    .padding(top = 67.dp),
+            ) {
+                IconButton(onClick = { showMenu.value = !showMenu.value }) {
+                    Icon(
+                        imageVector = Icons.Default.Settings,
+                        contentDescription = "More transaction options",
+                    )
+                }
+                DropdownMenu(
+                    expanded = showMenu.value,
+                    onDismissRequest = { showMenu.value = false }
+                ) {
+                    DropdownMenuItem(
+                        onClick = {
+                            transactionOption.value = TransactionType.DEFAULT
+                            showMenu.value = false
+                        },
+                        text = {
+                            if (transactionOption.value == TransactionType.DEFAULT) {
+                                Text("Default ✓")
+                            } else {
+                                Text(text = "Default")
+                            }
+                        }
+                    )
+                    DropdownMenuItem(
+                        onClick = {
+                            transactionOption.value = TransactionType.SEND_ALL
+                            showMenu.value = false
+                        },
+                        text = {
+                            if (transactionOption.value == TransactionType.SEND_ALL) {
+                                Text(text = "Send All ✓")
+                            } else {
+                                Text(text = "Send All")
+                            }
+                        }
+                    )
+                }
+            }
+
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Center,
@@ -90,13 +147,14 @@ internal fun SendScreen(navController: NavHostController) {
                 }
             ) {
                 ScanQRCode(navController = navController, recipientAddress = recipientAddress)
-                TransactionRecipientInput(recipientAddress)
-                TransactionAmountInput(amount)
-                TransactionFeeInput(feeRate)
+                TransactionRecipientInput(recipientAddress = recipientAddress)
+                TransactionAmountInput(amount = amount, transactionOption = transactionOption.value)
+                TransactionFeeInput(feeRate = feeRate)
                 Dialog(
                     recipientAddress = recipientAddress.value,
                     amount = amount.value,
                     feeRate = feeRate.value,
+                    transactionOption = transactionOption.value,
                     showDialog = showDialog,
                     setShowDialog = setShowDialog,
                     snackbarHostState = snackbarHostState,
@@ -116,9 +174,10 @@ internal fun SendScreen(navController: NavHostController) {
                 Button(
                     onClick = {
                         val inputVerified = verifyInput(
-                            address = recipientAddress.value,
+                            recipientAddress = recipientAddress.value,
                             amount = amount.value,
                             feeRate = feeRate.value,
+                            transactionOption = transactionOption.value,
                             snackbarHostState = snackbarHostState,
                             scope = scope
                         )
@@ -208,9 +267,11 @@ private fun TransactionRecipientInput(recipientAddress: MutableState<String>) {
 }
 
 @Composable
-private fun TransactionAmountInput(amount: MutableState<String>) {
+private fun TransactionAmountInput(
+    amount: MutableState<String>,
+    transactionOption: TransactionType
+) {
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
-
         OutlinedTextField(
             modifier = Modifier
                 .padding(vertical = 8.dp)
@@ -222,15 +283,26 @@ private fun TransactionAmountInput(amount: MutableState<String>) {
             singleLine = true,
             textStyle = TextStyle(fontFamily = ShareTechMono, color = md_theme_dark_onBackground),
             label = {
-                Text(
-                    text = "Amount (satoshis)",
-                )
+                when (transactionOption) {
+                    TransactionType.SEND_ALL -> {
+                        Text(text = "Amount (Send All)")
+                    }
+                    else -> {
+                        Text(text = "Amount (satoshis)")
+                    }
+                }
             },
             colors = TextFieldDefaults.outlinedTextFieldColors(
                 focusedBorderColor = MaterialTheme.colorScheme.primary,
                 unfocusedBorderColor = md_theme_dark_onBackgroundFaded,
                 cursorColor = MaterialTheme.colorScheme.primary,
             ),
+            enabled = (
+                when (transactionOption) {
+                    TransactionType.SEND_ALL -> false
+                    else -> true
+                }
+            )
         )
     }
 }
@@ -268,6 +340,7 @@ fun Dialog(
     recipientAddress: String,
     amount: String,
     feeRate: String,
+    transactionOption: TransactionType,
     showDialog: Boolean,
     setShowDialog: (Boolean) -> Unit,
     snackbarHostState: SnackbarHostState,
@@ -284,7 +357,7 @@ fun Dialog(
             },
             text = {
                 Text(
-                    text = "Send: $amount satoshis \nto: $recipientAddress\nFee rate: ${feeRate.toFloat()}",
+                    text = "Send: $amount satoshis \nto: $recipientAddress\nFee rate: $feeRate",
                 )
             },
             confirmButton = {
@@ -292,8 +365,9 @@ fun Dialog(
                     onClick = {
                         broadcastTransaction(
                             recipientAddress = recipientAddress,
-                            amount = amount.toULong(),
-                            feeRate = feeRate.toFloat(),
+                            amount = amount,
+                            feeRate = feeRate,
+                            transactionOption = transactionOption,
                             snackbarHostState = snackbarHostState,
                             scope = scope,
                         )
@@ -321,19 +395,20 @@ fun Dialog(
 }
 
 fun verifyInput(
-    address: String,
+    recipientAddress: String,
     amount: String,
     feeRate: String,
-    snackbarHostState: SnackbarHostState,
+    transactionOption: TransactionType,
     scope: CoroutineScope,
+    snackbarHostState: SnackbarHostState,
 ): Boolean {
-    if (address.isBlank()) {
+    if (recipientAddress.isBlank()) {
         scope.launch {
             snackbarHostState.showSnackbar(message = "Address is missing!", duration = SnackbarDuration.Short)
         }
         return false
     }
-    if (amount.isBlank()) {
+    if (transactionOption == TransactionType.DEFAULT && amount.isBlank()) {
         scope.launch {
             snackbarHostState.showSnackbar(message = "Amount is missing!", duration = SnackbarDuration.Short)
         }
@@ -341,10 +416,11 @@ fun verifyInput(
     }
     if (feeRate.isBlank()) {
         scope.launch {
-            snackbarHostState.showSnackbar(message = "Fee rate is missing!", duration = SnackbarDuration.Short)
+            snackbarHostState.showSnackbar(message = "Fee Rate is missing!", duration = SnackbarDuration.Short)
         }
         return false
-    } else if (feeRate.toInt() < 1 || feeRate.toInt() > 200) {
+    }
+    if (feeRate.toInt() < 1 || feeRate.toInt() > 200) {
         scope.launch {
             snackbarHostState.showSnackbar(message = "Please input a fee rate between 1 and 200", duration = SnackbarDuration.Short)
         }
@@ -355,16 +431,20 @@ fun verifyInput(
 
 private fun broadcastTransaction(
     recipientAddress: String,
-    amount: ULong,
-    feeRate: Float = 1F,
+    amount: String,
+    feeRate: String,
+    transactionOption: TransactionType,
     snackbarHostState: SnackbarHostState,
     scope: CoroutineScope,
 ) {
-    Log.i("SendScreen", "Attempting to broadcast transaction with inputs: recipient: $recipientAddress, amount: $amount, fee rate: $feeRate")
-    var snackbarMsg = ""
+    Log.i("SendScreen", "Attempting to broadcast transaction with inputs: recipient: ${recipientAddress}, amount: ${amount}, fee rate: $feeRate")
+    var snackbarMsg: String
     try {
         // create, sign, and broadcast
-        val psbt: PartiallySignedBitcoinTransaction = Wallet.createTransaction(recipientAddress, amount, feeRate)
+        val psbt: PartiallySignedBitcoinTransaction = when (transactionOption) {
+            TransactionType.DEFAULT -> Wallet.createTransaction(recipientAddress, amount.toULong(), feeRate.toFloat())
+            TransactionType.SEND_ALL -> Wallet.createSendAllTransaction(recipientAddress, feeRate.toFloat())
+        }
         Wallet.sign(psbt)
         val txid: String = Wallet.broadcast(psbt)
         snackbarMsg = "Transaction was broadcast successfully"
@@ -376,4 +456,9 @@ private fun broadcastTransaction(
     scope.launch {
         snackbarHostState.showSnackbar(message = snackbarMsg, duration = SnackbarDuration.Short)
     }
+}
+
+enum class TransactionType {
+    DEFAULT,
+    SEND_ALL,
 }

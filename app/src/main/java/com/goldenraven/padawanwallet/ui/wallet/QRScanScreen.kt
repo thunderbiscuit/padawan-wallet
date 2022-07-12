@@ -11,6 +11,7 @@ import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.camera.view.PreviewView
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.*
 import androidx.compose.material3.Button
@@ -21,7 +22,6 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.core.content.ContextCompat
@@ -73,46 +73,48 @@ internal fun QRScanScreen(navController: NavHostController) {
                         absoluteRight.linkTo(parent.absoluteRight)
                         bottom.linkTo(parent.bottom)
                     }
-
             ) {
-                if (hasCameraPermission) {
-                    AndroidView(
-                        factory = { context ->
-                            val previewView = PreviewView(context)
-                            val preview = Preview.Builder().build()
-                            val selector = CameraSelector.Builder()
-                                .requireLensFacing(CameraSelector.LENS_FACING_BACK)
-                                .build()
-                            preview.setSurfaceProvider(previewView.surfaceProvider)
-                            val imageAnalysis = ImageAnalysis.Builder()
-                                .setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST)
-                                .build()
-                            imageAnalysis.setAnalyzer(
-                                ContextCompat.getMainExecutor(context),
-                                QRCodeAnalyzer { result ->
-                                    result?.let {
-                                        navController.previousBackStackEntry
-                                            ?.savedStateHandle
-                                            ?.set("BTC_Address", it)
-                                        navController.popBackStack()
+                Column {
+                    if (hasCameraPermission) {
+                        AndroidView(
+                            factory = { context ->
+                                val previewView = PreviewView(context)
+                                val preview = Preview.Builder().build()
+                                val selector = CameraSelector.Builder()
+                                    .requireLensFacing(CameraSelector.LENS_FACING_BACK)
+                                    .build()
+                                preview.setSurfaceProvider(previewView.surfaceProvider)
+                                val imageAnalysis = ImageAnalysis.Builder()
+                                    .setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST)
+                                    .build()
+                                imageAnalysis.setAnalyzer(
+                                    ContextCompat.getMainExecutor(context),
+                                    QRCodeAnalyzer { result ->
+                                        result?.let {
+                                            navController.previousBackStackEntry
+                                                ?.savedStateHandle
+                                                ?.set("BTC_Address", it)
+                                            navController.popBackStack()
+                                        }
                                     }
-                                }
-                            )
-
-                            try {
-                                cameraProviderFuture.get().bindToLifecycle(
-                                    lifecycleOwner,
-                                    selector,
-                                    preview,
-                                    imageAnalysis
                                 )
-                            } catch (e: Exception) {
-                                e.printStackTrace()
-                            }
 
-                            return@AndroidView previewView
-                        },
-                    )
+                                try {
+                                    cameraProviderFuture.get().bindToLifecycle(
+                                        lifecycleOwner,
+                                        selector,
+                                        preview,
+                                        imageAnalysis
+                                    )
+                                } catch (e: Exception) {
+                                    e.printStackTrace()
+                                }
+
+                                return@AndroidView previewView
+                            },
+                            modifier = Modifier.weight(weight = 1f)
+                        )
+                    }
                 }
             }
 

@@ -1,8 +1,7 @@
-package com.goldenraven.padawanwallet.ui.wallet
+package com.goldenraven.padawanwallet
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import com.goldenraven.padawanwallet.R
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.*
@@ -16,10 +15,10 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
-import com.goldenraven.padawanwallet.BuildConfig
 import com.goldenraven.padawanwallet.ui.Screen
 import com.goldenraven.padawanwallet.theme.*
 import com.goldenraven.padawanwallet.ui.ShowBars
+import com.goldenraven.padawanwallet.ui.wallet.WalletNavigation
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
