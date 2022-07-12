@@ -1,3 +1,8 @@
+/*
+ * Copyright 2020-2022 thunderbiscuit and contributors.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the ./LICENSE file.
+ */
+
 package com.goldenraven.padawanwallet.ui.drawer
 
 import androidx.compose.foundation.layout.Column
@@ -11,7 +16,6 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.goldenraven.padawanwallet.data.Repository
 import com.goldenraven.padawanwallet.ui.DrawerAppBar
-
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

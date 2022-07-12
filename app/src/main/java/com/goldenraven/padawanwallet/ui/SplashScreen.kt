@@ -19,7 +19,6 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.goldenraven.padawanwallet.R
 import com.goldenraven.padawanwallet.theme.md_theme_dark_lightBackground
-import com.goldenraven.padawanwallet.ui.Screen
 import kotlinx.coroutines.delay
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 

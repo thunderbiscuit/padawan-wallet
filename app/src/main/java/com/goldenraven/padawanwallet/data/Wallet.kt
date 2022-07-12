@@ -138,7 +138,7 @@ object Wallet {
         return wallet.getTransactions()
     }
 
-    fun sign(psbt: PartiallySignedBitcoinTransaction): Unit {
+    fun sign(psbt: PartiallySignedBitcoinTransaction) {
         wallet.sign(psbt)
     }
 

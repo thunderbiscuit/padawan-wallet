@@ -58,13 +58,13 @@ object Repository {
         return sharedPreferences.getBoolean("faucetCallDone", false)
     }
 
-    fun faucetCallDone(): Unit {
+    fun faucetCallDone() {
         val editor = sharedPreferences.edit()
         editor.putBoolean("faucetCallDone", true)
         editor.apply()
     }
 
-    fun offerFaucetDone(): Unit {
+    fun offerFaucetDone() {
         val editor = sharedPreferences.edit()
         editor.putBoolean("offerFaucetDone", true)
         editor.apply()
@@ -111,13 +111,13 @@ object Repository {
         }
     }
 
-    fun updateTutorialsDone(tutorialNumber: Int): Unit {
+    fun updateTutorialsDone(tutorialNumber: Int) {
         val editor = sharedPreferences.edit()
         editor.putBoolean("e$tutorialNumber", true)
         editor.apply()
     }
 
-    fun resetTutorials(): Unit {
+    fun resetTutorials() {
         sharedPreferences.edit().apply {
             putBoolean("e1", false)
             putBoolean("e2", false)
