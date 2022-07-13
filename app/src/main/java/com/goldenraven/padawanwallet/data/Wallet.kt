@@ -126,6 +126,14 @@ object Wallet {
             .finish(wallet)
     }
 
+    fun createSendAllTransaction(recipient: String, feeRate: Float): PartiallySignedBitcoinTransaction {
+        return TxBuilder()
+            .drainWallet()
+            .drainTo(address = recipient)
+            .feeRate(satPerVbyte = feeRate)
+            .finish(wallet)
+    }
+
     fun listTransactions(): List<Transaction> {
         return wallet.getTransactions()
     }

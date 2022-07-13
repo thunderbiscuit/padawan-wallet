@@ -3,15 +3,14 @@
  * Use of this source code is governed by the Apache 2.0 license that can be found in the ./LICENSE file.
  */
 
-package com.goldenraven.padawanwallet.ui.wallet
+package com.goldenraven.padawanwallet.ui
 
 import androidx.compose.animation.AnimatedContentScope
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.core.tween
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
-import com.goldenraven.padawanwallet.ui.Screen
-import com.goldenraven.padawanwallet.ui.SplashScreen
+import com.goldenraven.padawanwallet.HomeScreen
 import com.goldenraven.padawanwallet.ui.drawer.AboutScreen
 import com.goldenraven.padawanwallet.ui.drawer.RecoveryPhraseScreen
 import com.goldenraven.padawanwallet.ui.drawer.SendCoinsBackScreen
