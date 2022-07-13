@@ -13,7 +13,7 @@ val faucetUsername: String by project
 val faucetPassword: String by project
 
 android {
-    compileSdk = 31
+    compileSdk = 32
     buildToolsVersion = "30.0.3"
     ndkVersion = "21.4.7075529"
 
@@ -25,7 +25,7 @@ android {
     defaultConfig {
         applicationId = "com.goldenraven.padawanwallet"
         minSdk = 26
-        targetSdk = 30
+        targetSdk = 32
         versionCode = 10
         versionName = "v0.10.0-SNAPSHOT"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -182,7 +182,7 @@ androidComponents {
             if (baseAbiCode != null) {
                 // Assigns the new version code to output.versionCode, which changes the version code
                 // for only the output APK, not for the variant itself.
-                output.versionCode.set(baseAbiCode * 1000 + (output.versionCode.get() ?: 0))
+                output.versionCode.set(baseAbiCode * 1000 + (output.versionCode.get()  ?: 0))
             }
         }
     }
