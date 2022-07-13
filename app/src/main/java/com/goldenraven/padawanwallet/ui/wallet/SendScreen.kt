@@ -281,7 +281,7 @@ private fun TransactionAmountInput(
             modifier = Modifier
                 .padding(vertical = 8.dp)
                 .fillMaxWidth(0.9f),
-            value = amount.value,
+            value = if (transactionOption == TransactionType.DEFAULT) amount.value else "${Wallet.getBalance()} (Before Fees)",
             onValueChange = { value: String ->
                 amount.value = value.filter { it.isDigit() }
             },
@@ -361,8 +361,12 @@ fun Dialog(
                 )
             },
             text = {
+                val confirmationText = when (transactionOption) {
+                    TransactionType.DEFAULT -> "Send: $amount satoshis \nto: $recipientAddress\nFee rate: $feeRate"
+                    TransactionType.SEND_ALL -> "Send: ${Wallet.getBalance()} satoshis \n" + "to: $recipientAddress\n" + "Fee rate: $feeRate"
+                }
                 Text(
-                    text = "Send: $amount satoshis \nto: $recipientAddress\nFee rate: $feeRate",
+                    text = confirmationText
                 )
             },
             confirmButton = {
