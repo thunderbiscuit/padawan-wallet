@@ -75,56 +75,56 @@ class RepositoryTest {
         verify(editorMock, times(1)).putBoolean("offerFaucetDone", true)
     }
 
-    @Test
-    fun `Check if load first time tutorials is correct`() {
-        `when`(sharedPrefsMock.getBoolean("firstTimeTutorialsDone", true)).thenReturn(true)
-        val loadTutorialDoneTest = repo.loadTutorialsDone()
-        verify(editorMock, times(9)).putBoolean(anyString(), anyBoolean())
-        assertEquals(mutableMapOf(
-            "e1" to false,
-            "e2" to false,
-            "e3" to false,
-            "e4" to false,
-            "e5" to false,
-            "e6" to false,
-            "e7" to false,
-            "e8" to false,
-        ), loadTutorialDoneTest)
-    }
+    // @Test
+    // fun `Check if load first time tutorials is correct`() {
+    //     `when`(sharedPrefsMock.getBoolean("firstTimeTutorialsDone", true)).thenReturn(true)
+    //     val loadTutorialDoneTest = repo.loadTutorialsDone()
+    //     verify(editorMock, times(9)).putBoolean(anyString(), anyBoolean())
+    //     assertEquals(mutableMapOf(
+    //         "e1" to false,
+    //         "e2" to false,
+    //         "e3" to false,
+    //         "e4" to false,
+    //         "e5" to false,
+    //         "e6" to false,
+    //         "e7" to false,
+    //         "e8" to false,
+    //     ), loadTutorialDoneTest)
+    // }
 
-    @Test
-    fun `Check if load future tutorials is correct`() {
-        `when`(sharedPrefsMock.getBoolean("firstTimeTutorialsDone", true)).thenReturn(false)
-        `when`(sharedPrefsMock.getBoolean("e1", false)).thenReturn(true)
-        `when`(sharedPrefsMock.getBoolean("e2", false)).thenReturn(true)
-        `when`(sharedPrefsMock.getBoolean("e3", false)).thenReturn(true)
-        `when`(sharedPrefsMock.getBoolean("e4", false)).thenReturn(true)
-        `when`(sharedPrefsMock.getBoolean("e5", false)).thenReturn(true)
-        `when`(sharedPrefsMock.getBoolean("e6", false)).thenReturn(true)
-        `when`(sharedPrefsMock.getBoolean("e7", false)).thenReturn(true)
-        `when`(sharedPrefsMock.getBoolean("e8", false)).thenReturn(true)
-        val loadTutorialDoneTest = repo.loadTutorialsDone()
-        assertEquals(mutableMapOf(
-            "e1" to true,
-            "e2" to true,
-            "e3" to true,
-            "e4" to true,
-            "e5" to true,
-            "e6" to true,
-            "e7" to true,
-            "e8" to true,
-        ), loadTutorialDoneTest)
-    }
+    // @Test
+    // fun `Check if load future tutorials is correct`() {
+    //     `when`(sharedPrefsMock.getBoolean("firstTimeTutorialsDone", true)).thenReturn(false)
+    //     `when`(sharedPrefsMock.getBoolean("e1", false)).thenReturn(true)
+    //     `when`(sharedPrefsMock.getBoolean("e2", false)).thenReturn(true)
+    //     `when`(sharedPrefsMock.getBoolean("e3", false)).thenReturn(true)
+    //     `when`(sharedPrefsMock.getBoolean("e4", false)).thenReturn(true)
+    //     `when`(sharedPrefsMock.getBoolean("e5", false)).thenReturn(true)
+    //     `when`(sharedPrefsMock.getBoolean("e6", false)).thenReturn(true)
+    //     `when`(sharedPrefsMock.getBoolean("e7", false)).thenReturn(true)
+    //     `when`(sharedPrefsMock.getBoolean("e8", false)).thenReturn(true)
+    //     val loadTutorialDoneTest = repo.loadTutorialsDone()
+    //     assertEquals(mutableMapOf(
+    //         "e1" to true,
+    //         "e2" to true,
+    //         "e3" to true,
+    //         "e4" to true,
+    //         "e5" to true,
+    //         "e6" to true,
+    //         "e7" to true,
+    //         "e8" to true,
+    //     ), loadTutorialDoneTest)
+    // }
 
-    @Test
-    fun `Check if updating tutorials is correct`() {
-        repo.updateTutorialsDone(tutorialNumber = 1)
-        verify(editorMock, times(1)).putBoolean("e1", true)
-    }
+    // @Test
+    // fun `Check if updating tutorials is correct`() {
+    //     repo.updateTutorialsDone(tutorialNumber = 1)
+    //     verify(editorMock, times(1)).putBoolean("e1", true)
+    // }
 
-    @Test
-    fun `Check if resetting tutorials is correct`() {
-        repo.resetTutorials()
-        verify(editorMock, times(8)).putBoolean(anyString(), anyBoolean())
-    }
+    // @Test
+    // fun `Check if resetting tutorials is correct`() {
+    //     repo.resetTutorials()
+    //     verify(editorMock, times(8)).putBoolean(anyString(), anyBoolean())
+    // }
 }
