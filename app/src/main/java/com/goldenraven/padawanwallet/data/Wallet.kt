@@ -14,7 +14,6 @@ private const val TAG = "Wallet"
 
 object Wallet {
 
-    private const val name: String = "padawan-testnet-0"
     private const val electrumURL: String = "ssl://electrum.blockstream.info:60002"
     private lateinit var wallet: BdkWallet
     private lateinit var path: String
@@ -25,8 +24,6 @@ object Wallet {
             Log.d(TAG, "updating wallet $progress $message")
         }
     }
-
-    fun getWallet(): BdkWallet = wallet
 
     // setting the path requires the application context and is done once by PadawanWalletApplication
     fun setPath(path: String) {
