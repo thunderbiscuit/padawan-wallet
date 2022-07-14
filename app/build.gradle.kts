@@ -101,8 +101,8 @@ dependencies {
     // implementation("androidx.navigation:navigation-fragment-ktx:2.4.1")
     // implementation("androidx.navigation:navigation-ui-ktx:2.4.1")
     implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.3.1")
-    implementation("androidx.legacy:legacy-support-v4:1.0.0")
-    implementation("androidx.viewpager:viewpager:1.0.0")
+    // implementation("androidx.legacy:legacy-support-v4:1.0.0")
+    // implementation("androidx.viewpager:viewpager:1.0.0")
 
     // compose
     implementation("androidx.activity:activity-compose:1.5.0")
