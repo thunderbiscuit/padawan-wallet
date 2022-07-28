@@ -36,6 +36,19 @@ val md_theme_dark_surface = Color(0xFF504945)
 // val md_theme_dark_shadow = Color(0xFFf50057) // pink
 //
 // val seed = Color(0xFFf50057) // pink
+val padawan_theme_primary = Color(0xFF76dab3)
+val padawan_theme_onPrimary = Color(0xFF000000)
+val padawan_theme_background = Color(0xFF76dab3)
+val padawan_theme_onBackground = Color(0xFF8480e5)
+val padawan_theme_background_secondary = Color(0xFFf3f4ff)
+val padawan_theme_onBackground_secondary = Color(0xFFdadeff)
+
+val padawan_theme_lazyColumn_background = Color(0xFFfee7e0)
+
+val padawan_theme_button_primary = Color(0xFFff6022)
+val padawan_theme_button_secondary = Color(0xFFffd1bf)
+val white = Color(0xFFFFFFFF)
+
 val error = Color(0xFFcc241d)
 
 val md_theme_dark_surfaceLight = Color(0xFF504945)
