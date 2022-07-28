@@ -5,20 +5,25 @@
 
 package com.goldenraven.padawanwallet.ui.wallet
 
-import androidx.compose.foundation.*
+import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.AlertDialog
-import androidx.compose.material.Switch
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.geometry.*
-import androidx.compose.ui.graphics.*
+import androidx.compose.ui.geometry.Rect
+import androidx.compose.ui.geometry.Size
+import androidx.compose.ui.graphics.Outline
+import androidx.compose.ui.graphics.Path
+import androidx.compose.ui.graphics.Shape
+import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
@@ -35,6 +40,7 @@ import com.goldenraven.padawanwallet.data.Tx
 import com.goldenraven.padawanwallet.data.Wallet
 import com.goldenraven.padawanwallet.theme.*
 import com.goldenraven.padawanwallet.ui.Screen
+import com.goldenraven.padawanwallet.ui.noRippleClickable
 import com.goldenraven.padawanwallet.ui.shadowModifier
 import com.goldenraven.padawanwallet.ui.shadowModifierButton
 
@@ -87,7 +93,7 @@ fun MainBox(navController: NavHostController, balance: String) {
             .padding(horizontal = 16.dp, vertical = 24.dp)
             .fillMaxWidth()) {
             val (cardName, currencyToggle, balanceText, currencyText, buttonRow) = createRefs()
-            val currencyToggleState = remember { mutableStateOf(value = true) }
+            val currencyToggleState = remember { mutableStateOf(value = false) }
             Text(
                 text = "bitcoin testnet",
                 modifier = Modifier.constrainAs(cardName) {
@@ -95,14 +101,40 @@ fun MainBox(navController: NavHostController, balance: String) {
                     start.linkTo(parent.start)
                 }
             )
-            Switch(
-                checked = currencyToggleState.value,
-                onCheckedChange = { currencyToggleState.value = it },
-                modifier = Modifier.constrainAs(currencyToggle) {
+            Box(modifier = Modifier
+                .constrainAs(currencyToggle) {
                     top.linkTo(parent.top)
                     end.linkTo(parent.end)
                 }
-            )
+                .background(color = padawan_theme_button_secondary, shape = RoundedCornerShape(size = 10.dp))
+                .noRippleClickable { currencyToggleState.value = !currencyToggleState.value }
+            ) {
+                Row(
+                    modifier = Modifier
+                        .height(IntrinsicSize.Min)
+                        .padding(horizontal = 8.dp)
+                ) {
+                    Text(
+                        text = "btc",
+                        textAlign = TextAlign.Center,
+                        modifier = Modifier.padding(all = 8.dp),
+                        color = if (!currencyToggleState.value) padawan_theme_disabled else padawan_theme_onPrimary
+                    )
+                    Divider(
+                        color = padawan_theme_disabled,
+                        modifier = Modifier
+                            .fillMaxHeight()
+                            .width(3.dp)
+                            .padding(vertical = 8.dp)
+                    )
+                    Text(
+                        text = "sats",
+                        textAlign = TextAlign.Center,
+                        modifier = Modifier.padding(all = 8.dp),
+                        color = if (currencyToggleState.value) padawan_theme_disabled else padawan_theme_onPrimary
+                    )
+                }
+            }
             Text(
                 text = balance,
                 modifier = Modifier.constrainAs(balanceText) {
@@ -221,7 +253,6 @@ fun TransactionListBox(transactionList: List<Tx>) {
                 modifier = Modifier
                     .background(color = padawan_theme_lazyColumn_background)
                     .padding(all = 24.dp)
-                    .height(125.dp)
             ) {
                 items(transactionList) { txn ->
                     Column {

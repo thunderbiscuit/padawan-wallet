@@ -5,6 +5,8 @@ import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.expandVertically
 import androidx.compose.animation.shrinkVertically
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
@@ -18,6 +20,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.composed
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.geometry.CornerRadius
 import androidx.compose.ui.geometry.Offset
@@ -76,6 +79,14 @@ val shadowModifierButton = Modifier
             topLeft = Offset(x = 0f, y = size.height / 2)
         )
     }
+
+inline fun Modifier.noRippleClickable(crossinline onClick: () -> Unit): Modifier = composed {
+    clickable(
+        indication = null,
+        interactionSource = remember { MutableInteractionSource() }) {
+        onClick()
+    }
+}
 
 @Composable
 internal fun ShowBars() {
