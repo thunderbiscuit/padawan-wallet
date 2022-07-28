@@ -2,6 +2,7 @@ package com.goldenraven.padawanwallet.theme
 
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.darkColorScheme
+import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 
 private val DarkThemeColors = darkColorScheme(
@@ -35,12 +36,17 @@ private val DarkThemeColors = darkColorScheme(
     // shadow = md_theme_dark_shadow,
 )
 
+private val PadawanThemeColors = lightColorScheme(
+    primary = padawan_theme_primary,
+    onPrimary = padawan_theme_onPrimary,
+    background = padawan_theme_background,
+    onBackground = padawan_theme_onBackground,
+)
+
 @Composable
-fun PadawanTheme(
-    content: @Composable() () -> Unit
-) {
+fun PadawanTheme(content: @Composable () -> Unit) {
     MaterialTheme(
-        colorScheme = DarkThemeColors,
+        colorScheme = PadawanThemeColors,
         typography = PadawanTypography,
         content = content
     )

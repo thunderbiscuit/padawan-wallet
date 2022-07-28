@@ -10,7 +10,6 @@ import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.core.tween
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
-import com.goldenraven.padawanwallet.HomeScreen
 import com.goldenraven.padawanwallet.ui.drawer.AboutScreen
 import com.goldenraven.padawanwallet.ui.drawer.RecoveryPhraseScreen
 import com.goldenraven.padawanwallet.ui.drawer.SendCoinsBackScreen
@@ -45,7 +44,7 @@ fun HomeNavigation() {
             exitTransition = {
                 slideOutOfContainer(AnimatedContentScope.SlideDirection.Start, animationSpec = tween(animationDuration))
             },
-        ) { HomeScreen(navController = navController) }
+        ) { HomeScreen() }
 
 
         // About

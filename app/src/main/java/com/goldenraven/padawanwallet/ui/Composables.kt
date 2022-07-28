@@ -18,11 +18,64 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.draw.drawBehind
+import androidx.compose.ui.geometry.CornerRadius
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.geometry.Size
 import androidx.navigation.NavController
 import com.goldenraven.padawanwallet.R
 import com.goldenraven.padawanwallet.theme.*
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import kotlinx.coroutines.delay
+
+val shadowModifier = Modifier
+    .drawBehind {
+        drawRoundRect(
+            color = padawan_theme_onPrimary,
+            size = Size(
+                width = size.width,
+                height = size.height / 2 + 20f,
+            ),
+            topLeft = Offset(x = 0f, y = size.height / 2),
+            cornerRadius = CornerRadius(
+                x = 20.dp.toPx(),
+                y = 20.dp.toPx()
+            )
+        )
+        drawRect(
+            color = padawan_theme_onPrimary,
+            size = Size(
+                width = size.width,
+                height = size.height / 4 + 10f,
+            ),
+            topLeft = Offset(x = 0f, y = size.height / 2)
+        )
+    }
+
+val shadowModifierButton = Modifier
+    .padding(all = 8.dp)
+    .drawBehind {
+        drawRoundRect(
+            color = padawan_theme_onPrimary,
+            size = Size(
+                width = size.width,
+                height = size.height / 2 + 10f,
+            ),
+            topLeft = Offset(x = 0f, y = size.height / 2),
+            cornerRadius = CornerRadius(
+                x = 40.dp.toPx(),
+                y = 40.dp.toPx()
+            )
+        )
+        drawRect(
+            color = padawan_theme_onPrimary,
+            size = Size(
+                width = size.width,
+                height = size.height / 4 + 5f,
+            ),
+            topLeft = Offset(x = 0f, y = size.height / 2)
+        )
+    }
 
 @Composable
 internal fun ShowBars() {

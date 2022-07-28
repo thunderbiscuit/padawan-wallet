@@ -5,43 +5,38 @@
 
 package com.goldenraven.padawanwallet.ui.wallet
 
-import androidx.compose.animation.animateContentSize
-import androidx.compose.animation.core.tween
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
+import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.AlertDialog
+import androidx.compose.material.Switch
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.geometry.*
+import androidx.compose.ui.graphics.*
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.SpanStyle
-import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.text.withStyle
+import androidx.compose.ui.unit.Density
+import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
-import androidx.constraintlayout.compose.Dimension
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import com.goldenraven.padawanwallet.R
 import com.goldenraven.padawanwallet.data.Tx
 import com.goldenraven.padawanwallet.data.Wallet
 import com.goldenraven.padawanwallet.theme.*
-import com.goldenraven.padawanwallet.ui.ConnectivityStatus
 import com.goldenraven.padawanwallet.ui.Screen
-import com.google.accompanist.swiperefresh.SwipeRefresh
-import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
+import com.goldenraven.padawanwallet.ui.shadowModifier
+import com.goldenraven.padawanwallet.ui.shadowModifierButton
 
 @Composable
 internal fun WalletScreen(
@@ -51,6 +46,7 @@ internal fun WalletScreen(
     val balance by walletViewModel.balance.observeAsState()
     val isRefreshing by walletViewModel.isRefreshing.collectAsState()
     val openFaucetDialog by walletViewModel.openFaucetDialog
+    val transactionList by walletViewModel.readAllData.observeAsState(initial = emptyList())
     val context = LocalContext.current
 
     if (openFaucetDialog) {
@@ -63,253 +59,241 @@ internal fun WalletScreen(
         Wallet.createBlockchain()
     }
 
-    SwipeRefresh(
-        state = rememberSwipeRefreshState(isRefreshing),
-        onRefresh = { walletViewModel.refresh(context = context) },
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(padawan_theme_background_secondary, shape = BackgroundShape())
+            .padding(all = 32.dp)
     ) {
-        ConstraintLayout(modifier = Modifier.fillMaxHeight(1f)) {
-            val (part1, part2) = createRefs()
-
-            Column(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .background(md_theme_dark_background)
-                    .verticalScroll(rememberScrollState())
-                    .constrainAs(part1) {
-                        top.linkTo(parent.top)
-                    }
-            ) {
-                ConnectivityStatus(walletViewModel.isOnline(context = context))
-                Spacer(Modifier.padding(24.dp))
-                Row(
-                    Modifier
-                        .fillMaxWidth()
-                        .background(color = md_theme_dark_background2)
-                        .height(110.dp)
-                        .padding(horizontal = 48.dp),
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.SpaceBetween
-                ) {
-                    Image(
-                        painter = painterResource(id = R.drawable.ic_satoshi),
-                        contentDescription = "Satoshi icon",
-                        Modifier
-                            .align(Alignment.CenterVertically)
-                            .size(60.dp)
-                    )
-                    Text(
-                        // DecimalFormat("###,###,###").format(balanceInSatoshis.toLong()).replace(",", "\u2008")
-                        balance.toString(),
-                        fontFamily = ShareTechMono,
-                        fontSize = 40.sp,
-                    )
-                }
-                Row(
-                    horizontalArrangement = Arrangement.SpaceBetween,
-                    verticalAlignment = Alignment.CenterVertically,
-                    modifier = Modifier
-                        .height(140.dp)
-                        .fillMaxWidth()
-                        .padding(horizontal = 16.dp)
-                ) {
-                    Button(
-                        onClick = { navController.navigate(Screen.SendScreen.route) },
-                        colors = ButtonDefaults.buttonColors(MaterialTheme.colorScheme.secondary),
-                        shape = RoundedCornerShape(16.dp),
-                        modifier = Modifier
-                            .height(80.dp)
-                            .padding(vertical = 8.dp, horizontal = 8.dp)
-                            .shadow(elevation = 4.dp, shape = RoundedCornerShape(16.dp))
-                            .fillMaxWidth(fraction = 0.5f),
-                        enabled = walletViewModel.isOnline(context = context)
-                    ) {
-                        ButtonText(content = "Send")
-                    }
-                    Button(
-                        onClick = { navController.navigate(Screen.ReceiveScreen.route) },
-                        colors = ButtonDefaults.buttonColors(MaterialTheme.colorScheme.primary),
-                        shape = RoundedCornerShape(16.dp),
-                        modifier = Modifier
-                            .height(80.dp)
-                            .padding(vertical = 8.dp, horizontal = 8.dp)
-                            .shadow(elevation = 4.dp, shape = RoundedCornerShape(16.dp))
-                            .fillMaxWidth(),
-                        // enabled = walletViewModel.isOnline(context = context)
-                    ) {
-                        ButtonText(content = "Receive")
-                    }
-                }
-                Row(
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.SpaceBetween,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(horizontal = 16.dp)
-                ) {
-                    Text(
-                        text = "Transaction history",
-                        style = PadawanTypography.headlineMedium
-                    )
-                    Button(
-                        onClick = { walletViewModel.refresh(context = context) },
-                        colors = ButtonDefaults.buttonColors(md_theme_dark_surface),
-                        shape = RoundedCornerShape(8.dp),
-                        contentPadding = PaddingValues(horizontal = 8.dp, vertical = 2.dp),
-                        modifier = Modifier.defaultMinSize(
-                            minHeight = 10.dp
-                        )
-                    ) {
-                        Text(
-                            text = "Sync",
-                            style = PadawanTypography.labelSmall
-                        )
-                        Icon(
-                            painter = painterResource(id = R.drawable.ic_refresh),
-                            contentDescription = "Sync wallet"
-                        )
-                    }
-                }
-                Divider(
-                    color = md_theme_dark_surfaceLight,
-                    thickness = 1.dp,
-                    modifier = Modifier
-                        .padding(horizontal = 16.dp)
-                        .padding(bottom = 8.dp)
-                )
-            }
-            Spacer(Modifier.padding(24.dp))
-            val transactionList by walletViewModel.readAllData.observeAsState(initial = emptyList())
-            LazyColumn(
-                modifier = Modifier
-                    .background(md_theme_dark_background)
-                    .padding(bottom = 8.dp)
-                    .constrainAs(part2) {
-                        top.linkTo(part1.bottom)
-                        bottom.linkTo(parent.bottom)
-                        height = Dimension.fillToConstraints
-                    }
-            ) {
-                items(
-                    items = transactionList
-                ) { tx ->
-                    ExpandableCard(tx)
-                }
-            }
+        Column(
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            MainBox(navController = navController, balance = balance.toString())
+            TransactionListBox(transactionList = transactionList)
         }
     }
-}
-
-@Composable
-internal fun ButtonText(content: String) {
-    Text(
-        text = content,
-        style = PadawanTypography.labelLarge
-    )
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-internal fun ExpandableCard(tx: Tx) {
-    var expandedState by remember { mutableStateOf(false) }
-
+fun MainBox(navController: NavHostController, balance: String) {
     Card(
-        onClick = { expandedState = !expandedState },
-        shape = RoundedCornerShape(8.dp),
-        containerColor = md_theme_dark_background2,
-        modifier = Modifier
-            .padding(horizontal = 16.dp, vertical = 8.dp)
-            .fillMaxWidth()
-            .animateContentSize(animationSpec = tween(300)),
+        modifier = shadowModifier.fillMaxWidth(),
+        border = BorderStroke(2.dp, SolidColor(padawan_theme_onPrimary)),
+        shape = RoundedCornerShape(20.dp),
+        containerColor = padawan_theme_onBackground_secondary
     ) {
-        Row(
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.SpaceBetween,
-            modifier = Modifier
-                .padding(horizontal = 8.dp)
-                .fillMaxWidth()
-        ) {
-            if (tx.isPayment) {
-                Image(
-                    painter = painterResource(R.drawable.ic_send),
-                    contentDescription = "Send icon",
-                    Modifier.size(24.dp)
-                )
-            } else {
-                Image(
-                    painter = painterResource(R.drawable.ic_receive),
-                    contentDescription = "Receive icon"
-                )
-            }
+        ConstraintLayout(modifier = Modifier
+            .padding(horizontal = 16.dp, vertical = 24.dp)
+            .fillMaxWidth()) {
+            val (cardName, currencyToggle, balanceText, currencyText, buttonRow) = createRefs()
+            val currencyToggleState = remember { mutableStateOf(value = true) }
             Text(
-                text = tx.date,
-                style = PadawanTypography.labelLarge,
-                textAlign = TextAlign.Center,
-                modifier = Modifier
-                    .padding(horizontal = 8.dp, vertical = 16.dp)
-            )
-        }
-        if (expandedState) {
-            Divider(
-                color = md_theme_dark_surfaceLight,
-                thickness = 1.dp,
-                modifier = Modifier
-                    .padding(horizontal = 8.dp)
-                    .padding(bottom = 8.dp)
-            )
-            Column(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalAlignment = Alignment.End
-            ) {
-                expandableCardText("TxId: ", "${tx.txid.take(8)}...${tx.txid.takeLast(8)}")
-
-                if (tx.isPayment) {
-                    expandableCardText("Sent: ", "${tx.valueOut} sat")
-                } else {
-                    expandableCardText("Received: ", "${tx.valueIn} sat")
+                text = "bitcoin testnet",
+                modifier = Modifier.constrainAs(cardName) {
+                    top.linkTo(parent.top)
+                    start.linkTo(parent.start)
                 }
-
-                expandableCardText("Network fees: ", "${tx.fees} sat")
-
-                if (tx.date == "Pending") {
-                    expandableCardTextBottom("Block height: ", "Pending")
-                } else {
-                    expandableCardTextBottom("Block height: ", "${tx.height}")
+            )
+            Switch(
+                checked = currencyToggleState.value,
+                onCheckedChange = { currencyToggleState.value = it },
+                modifier = Modifier.constrainAs(currencyToggle) {
+                    top.linkTo(parent.top)
+                    end.linkTo(parent.end)
+                }
+            )
+            Text(
+                text = balance,
+                modifier = Modifier.constrainAs(balanceText) {
+                    top.linkTo(cardName.bottom)
+                    start.linkTo(parent.start)
+                },
+                fontSize = 40.sp,
+                fontWeight = FontWeight.Bold,
+            )
+            Text(
+                text = "sats",
+                modifier = Modifier
+                    .padding(all = 8.dp)
+                    .constrainAs(currencyText) {
+                        start.linkTo(balanceText.end)
+                        bottom.linkTo(balanceText.bottom)
+                    }
+            )
+            Row(
+                modifier = Modifier
+                    .constrainAs(buttonRow) {
+                        top.linkTo(balanceText.bottom)
+                        start.linkTo(parent.start)
+                        end.linkTo(parent.end)
+                    }
+                    .padding(top = 16.dp)
+            ) {
+                Button(
+                    onClick = { navController.navigate(Screen.ReceiveScreen.route) },
+                    modifier = shadowModifierButton.weight(weight = 0.5f),
+                    colors = ButtonDefaults.buttonColors(containerColor = padawan_theme_button_secondary),
+                    shape = RoundedCornerShape(20.dp),
+                    border = BorderStroke(2.dp, SolidColor(padawan_theme_onPrimary))
+                ) {
+                    Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.padding(vertical = 8.dp)) {
+                        Text(text = "Receive")
+                        Icon(painter = painterResource(id = R.drawable.ic_receive), contentDescription = "Receive Icon")
+                    }
+                }
+                Button(
+                    onClick = { navController.navigate(Screen.SendScreen.route) },
+                    modifier = shadowModifierButton.weight(weight = 0.5f),
+                    colors = ButtonDefaults.buttonColors(containerColor = padawan_theme_button_primary),
+                    shape = RoundedCornerShape(20.dp),
+                    border = BorderStroke(2.dp, SolidColor(padawan_theme_onPrimary))
+                ) {
+                    Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.padding(vertical = 8.dp)) {
+                        Text(text = "Send")
+                        Icon(painter = painterResource(id = R.drawable.ic_send), contentDescription = "Send Icon")
+                    }
                 }
             }
         }
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-internal fun expandableCardText(title: String, content: String) {
-    Text(
-        text = buildAnnotatedString {
-            append(title)
-            withStyle(style = SpanStyle(fontFamily = ShareTechMono)) {
-                append(content)
+fun TransactionListBox(transactionList: List<Tx>) {
+    Row(modifier = Modifier.padding(top = 16.dp, bottom = 8.dp)) {
+        Text(
+            text = "Transactions",
+            fontWeight = FontWeight.Bold,
+            textAlign = TextAlign.Start,
+            fontSize = 20.sp,
+            modifier = Modifier
+                .weight(weight = 0.5f)
+                .align(Alignment.Bottom)
+        )
+        Text(
+            text = "View all transactions",
+            textAlign = TextAlign.End,
+            modifier = Modifier
+                .weight(weight = 0.5f)
+                .align(Alignment.Bottom)
+        )
+    }
+
+    Card(
+        modifier = Modifier.fillMaxWidth(),
+        border = BorderStroke(2.dp, SolidColor(padawan_theme_onPrimary)),
+        shape = RoundedCornerShape(20.dp),
+        containerColor = padawan_theme_background_secondary
+    ) {
+        if (transactionList.isEmpty()) {
+            Row(modifier = Modifier.padding(all = 32.dp)) {
+                Column(modifier = Modifier.weight(weight = 0.70f)) {
+                    Text(
+                        text = "Hey! Your transaction list is empty, get some coins so you can fill it up.",
+                        fontSize = 14.sp,
+                        modifier = Modifier.padding(all = 8.dp)
+                    )
+                    Button(
+                        onClick = {  },
+                        modifier = shadowModifierButton,
+                        colors = ButtonDefaults.buttonColors(containerColor = padawan_theme_button_primary),
+                        shape = RoundedCornerShape(20.dp),
+                        border = BorderStroke(2.dp, SolidColor(padawan_theme_onPrimary))
+                    ) {
+                        Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.padding(vertical = 8.dp)) {
+                            Text(text = "Get coins")
+                            Icon(painter = painterResource(id = R.drawable.ic_receive), contentDescription = "Get Coins Icon")
+                        }
+                    }
+                }
+                Image(
+                    painter = painterResource(id = R.drawable.diagram_wip),
+                    contentDescription = "No Transactions Diagram",
+                    modifier = Modifier
+                        .weight(weight = 0.30f)
+                        .align(Alignment.CenterVertically)
+                )
             }
-        },
-        style = PadawanTypography.labelMedium,
-        modifier = Modifier
-            .padding(horizontal = 8.dp)
-    )
+        } else {
+            LazyColumn(
+                modifier = Modifier
+                    .background(color = padawan_theme_lazyColumn_background)
+                    .padding(all = 24.dp)
+                    .height(125.dp)
+            ) {
+                items(transactionList) { txn ->
+                    Column {
+                        Row {
+                            Text(
+                                text = "${txn.txid.take(n = 5)}.....${txn.txid.takeLast(n = 5)}",
+                                textAlign = TextAlign.Start,
+                                maxLines = 1,
+                                modifier = Modifier
+                                    .weight(weight = 0.5f)
+                                    .align(Alignment.Bottom)
+                            )
+                            Text(
+                                text = "${if (txn.isPayment) txn.valueOut.toString() else txn.valueIn.toString()} sats",
+                                textAlign = TextAlign.End,
+                                modifier = Modifier
+                                    .weight(weight = 0.5f)
+                                    .align(Alignment.Bottom)
+                            )
+                        }
+                        Row {
+                            Text(
+                                text = txn.date,
+                                textAlign = TextAlign.Start,
+                                maxLines = 1,
+                                modifier = Modifier
+                                    .weight(weight = 0.5f)
+                                    .align(Alignment.Bottom)
+                            )
+                            Text(
+                                text = if (txn.isPayment) "Send" else "Receive",
+                                textAlign = TextAlign.End,
+                                modifier = Modifier
+                                    .weight(weight = 0.5f)
+                                    .align(Alignment.Bottom)
+                            )
+                        }
+                        Divider(modifier = Modifier.padding(vertical = 8.dp))
+                    }
+                }
+            }
+        }
+    }
 }
 
-
-@Composable
-internal fun expandableCardTextBottom(title: String, content: String) {
-    Text(
-        text = buildAnnotatedString {
-            append(title)
-            withStyle(style = SpanStyle(fontFamily = ShareTechMono)) {
-                append(content)
+class BackgroundShape() : Shape {
+    override fun createOutline(
+        size: Size,
+        layoutDirection: LayoutDirection,
+        density: Density
+    ): Outline {
+        return Outline.Generic(
+            path = Path().apply {
+                reset()
+                addOval(oval = Rect(
+                    top = size.height / 5,
+                    bottom = size.height / 2,
+                    left = size.width / -6,
+                    right = size.width + size.width / 6,
+                    )
+                )
+                addRect(rect = Rect(
+                    top = (size.height / 20) * 7,
+                    bottom = size.height,
+                    left = 0f,
+                    right = size.width,
+                    )
+                )
+                close()
             }
-        },
-        style = PadawanTypography.labelMedium,
-        modifier = Modifier
-            .padding(horizontal = 8.dp)
-            .padding(bottom = 16.dp)
-    )
+        )
+    }
 }
 
 @Composable
