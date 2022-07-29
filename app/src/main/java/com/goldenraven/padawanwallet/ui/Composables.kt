@@ -14,77 +14,82 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-import androidx.compose.runtime.Composable
 import androidx.compose.ui.composed
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.geometry.CornerRadius
 import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.geometry.Size
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Outline
+import androidx.compose.ui.graphics.Path
+import androidx.compose.ui.graphics.Shape
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.unit.Density
+import androidx.compose.ui.unit.LayoutDirection
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.goldenraven.padawanwallet.R
 import com.goldenraven.padawanwallet.theme.*
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import kotlinx.coroutines.delay
 
-val shadowModifier = Modifier
-    .drawBehind {
-        drawRoundRect(
-            color = padawan_theme_onPrimary,
-            size = Size(
-                width = size.width,
-                height = size.height / 2 + 20f,
-            ),
-            topLeft = Offset(x = 0f, y = size.height / 2),
-            cornerRadius = CornerRadius(
-                x = 20.dp.toPx(),
-                y = 20.dp.toPx()
+fun Modifier.shadowModifier(shadowHeight: Float): Modifier = this.then(
+    Modifier
+        .drawBehind {
+            drawRoundRect(
+                color = padawan_theme_onPrimary,
+                size = Size(
+                    width = size.width,
+                    height = size.height / 2 + shadowHeight,
+                ),
+                topLeft = Offset(x = 0f, y = size.height / 2),
+                cornerRadius = CornerRadius(
+                    x = 20.dp.toPx(),
+                    y = 20.dp.toPx()
+                )
             )
-        )
-        drawRect(
-            color = padawan_theme_onPrimary,
-            size = Size(
-                width = size.width,
-                height = size.height / 4 + 10f,
-            ),
-            topLeft = Offset(x = 0f, y = size.height / 2)
-        )
-    }
-
-val shadowModifierButton = Modifier
-    .padding(all = 8.dp)
-    .drawBehind {
-        drawRoundRect(
-            color = padawan_theme_onPrimary,
-            size = Size(
-                width = size.width,
-                height = size.height / 2 + 10f,
-            ),
-            topLeft = Offset(x = 0f, y = size.height / 2),
-            cornerRadius = CornerRadius(
-                x = 40.dp.toPx(),
-                y = 40.dp.toPx()
+            drawRect(
+                color = padawan_theme_onPrimary,
+                size = Size(
+                    width = size.width,
+                    height = size.height / 4 + shadowHeight / 2,
+                ),
+                topLeft = Offset(x = 0f, y = size.height / 2)
             )
-        )
-        drawRect(
-            color = padawan_theme_onPrimary,
-            size = Size(
-                width = size.width,
-                height = size.height / 4 + 5f,
-            ),
-            topLeft = Offset(x = 0f, y = size.height / 2)
-        )
-    }
+        }
+)
 
 inline fun Modifier.noRippleClickable(crossinline onClick: () -> Unit): Modifier = composed {
     clickable(
         indication = null,
-        interactionSource = remember { MutableInteractionSource() }) {
+        interactionSource = remember { MutableInteractionSource() }
+    ) {
         onClick()
+    }
+}
+
+class BackgroundShape : Shape {
+    override fun createOutline(
+        size: Size,
+        layoutDirection: LayoutDirection,
+        density: Density
+    ): Outline {
+        return Outline.Generic(
+            path = Path().apply {
+                reset()
+                moveTo(x = 0f, y = (size.height / 12) * 3)
+                quadraticBezierTo(x1 = size.width / 2, y1 = size.height / 12, x2 = size.width, y2 = size.height / 4)
+                addRect(rect = Rect(
+                    top = size.height / 4,
+                    bottom = size.height,
+                    left = 0f,
+                    right = size.width,
+                ))
+                close()
+            }
+        )
     }
 }
 

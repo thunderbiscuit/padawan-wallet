@@ -11,6 +11,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
+import com.goldenraven.padawanwallet.theme.padawan_theme_navigation_bar_unselected
 import com.goldenraven.padawanwallet.theme.padawan_theme_onBackground
 import com.goldenraven.padawanwallet.theme.white
 import com.goldenraven.padawanwallet.utils.NavigationItem
@@ -67,8 +68,8 @@ internal fun BottomNavigationBar(navControllerWalletNavigation: NavController) {
                 colors = NavigationBarItemDefaults.colors(
                     selectedIconColor = padawan_theme_onBackground,
                     selectedTextColor = padawan_theme_onBackground,
-                    unselectedIconColor = padawan_theme_onBackground,
-                    unselectedTextColor = padawan_theme_onBackground,
+                    unselectedIconColor = padawan_theme_navigation_bar_unselected,
+                    unselectedTextColor = padawan_theme_navigation_bar_unselected,
                     indicatorColor = white,
                 )
             )

@@ -18,18 +18,12 @@ import androidx.compose.runtime.*
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.geometry.Rect
-import androidx.compose.ui.geometry.Size
-import androidx.compose.ui.graphics.Outline
-import androidx.compose.ui.graphics.Path
-import androidx.compose.ui.graphics.Shape
+import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.Density
-import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
@@ -39,10 +33,8 @@ import com.goldenraven.padawanwallet.R
 import com.goldenraven.padawanwallet.data.Tx
 import com.goldenraven.padawanwallet.data.Wallet
 import com.goldenraven.padawanwallet.theme.*
-import com.goldenraven.padawanwallet.ui.Screen
-import com.goldenraven.padawanwallet.ui.noRippleClickable
-import com.goldenraven.padawanwallet.ui.shadowModifier
-import com.goldenraven.padawanwallet.ui.shadowModifierButton
+import com.goldenraven.padawanwallet.ui.*
+import com.goldenraven.padawanwallet.utils.getDateDifference
 
 @Composable
 internal fun WalletScreen(
@@ -65,18 +57,14 @@ internal fun WalletScreen(
         Wallet.createBlockchain()
     }
 
-    Box(
+    Column(
         modifier = Modifier
             .fillMaxSize()
             .background(padawan_theme_background_secondary, shape = BackgroundShape())
             .padding(all = 32.dp)
     ) {
-        Column(
-            modifier = Modifier.fillMaxWidth()
-        ) {
-            MainBox(navController = navController, balance = balance.toString())
-            TransactionListBox(transactionList = transactionList)
-        }
+        MainBox(navController = navController, balance = balance.toString())
+        TransactionListBox(transactionList = transactionList)
     }
 }
 
@@ -84,14 +72,16 @@ internal fun WalletScreen(
 @Composable
 fun MainBox(navController: NavHostController, balance: String) {
     Card(
-        modifier = shadowModifier.fillMaxWidth(),
+        modifier = Modifier.shadowModifier(shadowHeight = 20f).fillMaxWidth(),
         border = BorderStroke(2.dp, SolidColor(padawan_theme_onPrimary)),
         shape = RoundedCornerShape(20.dp),
         containerColor = padawan_theme_onBackground_secondary
     ) {
-        ConstraintLayout(modifier = Modifier
-            .padding(horizontal = 16.dp, vertical = 24.dp)
-            .fillMaxWidth()) {
+        ConstraintLayout(
+            modifier = Modifier
+                .padding(horizontal = 16.dp, vertical = 24.dp)
+                .fillMaxWidth()
+        ) {
             val (cardName, currencyToggle, balanceText, currencyText, buttonRow) = createRefs()
             val currencyToggleState = remember { mutableStateOf(value = false) }
             Text(
@@ -106,7 +96,10 @@ fun MainBox(navController: NavHostController, balance: String) {
                     top.linkTo(parent.top)
                     end.linkTo(parent.end)
                 }
-                .background(color = padawan_theme_button_secondary, shape = RoundedCornerShape(size = 10.dp))
+                .background(
+                    color = padawan_theme_button_secondary,
+                    shape = RoundedCornerShape(size = 10.dp)
+                )
                 .noRippleClickable { currencyToggleState.value = !currencyToggleState.value }
             ) {
                 Row(
@@ -118,10 +111,10 @@ fun MainBox(navController: NavHostController, balance: String) {
                         text = "btc",
                         textAlign = TextAlign.Center,
                         modifier = Modifier.padding(all = 8.dp),
-                        color = if (!currencyToggleState.value) padawan_theme_disabled else padawan_theme_onPrimary
+                        color = if (!currencyToggleState.value) padawan_theme_primary_faded else padawan_theme_onPrimary
                     )
                     Divider(
-                        color = padawan_theme_disabled,
+                        color = padawan_theme_primary_faded,
                         modifier = Modifier
                             .fillMaxHeight()
                             .width(3.dp)
@@ -131,7 +124,7 @@ fun MainBox(navController: NavHostController, balance: String) {
                         text = "sats",
                         textAlign = TextAlign.Center,
                         modifier = Modifier.padding(all = 8.dp),
-                        color = if (currencyToggleState.value) padawan_theme_disabled else padawan_theme_onPrimary
+                        color = if (currencyToggleState.value) padawan_theme_primary_faded else padawan_theme_onPrimary
                     )
                 }
             }
@@ -164,7 +157,7 @@ fun MainBox(navController: NavHostController, balance: String) {
             ) {
                 Button(
                     onClick = { navController.navigate(Screen.ReceiveScreen.route) },
-                    modifier = shadowModifierButton.weight(weight = 0.5f),
+                    modifier = Modifier.padding(all = 8.dp).shadowModifier(shadowHeight = 10f).weight(weight = 0.5f),
                     colors = ButtonDefaults.buttonColors(containerColor = padawan_theme_button_secondary),
                     shape = RoundedCornerShape(20.dp),
                     border = BorderStroke(2.dp, SolidColor(padawan_theme_onPrimary))
@@ -176,7 +169,7 @@ fun MainBox(navController: NavHostController, balance: String) {
                 }
                 Button(
                     onClick = { navController.navigate(Screen.SendScreen.route) },
-                    modifier = shadowModifierButton.weight(weight = 0.5f),
+                    modifier = Modifier.padding(all = 8.dp).shadowModifier(shadowHeight = 10f).weight(weight = 0.5f),
                     colors = ButtonDefaults.buttonColors(containerColor = padawan_theme_button_primary),
                     shape = RoundedCornerShape(20.dp),
                     border = BorderStroke(2.dp, SolidColor(padawan_theme_onPrimary))
@@ -229,7 +222,7 @@ fun TransactionListBox(transactionList: List<Tx>) {
                     )
                     Button(
                         onClick = {  },
-                        modifier = shadowModifierButton,
+                        modifier = Modifier.padding(all = 8.dp).shadowModifier(shadowHeight = 10f),
                         colors = ButtonDefaults.buttonColors(containerColor = padawan_theme_button_primary),
                         shape = RoundedCornerShape(20.dp),
                         border = BorderStroke(2.dp, SolidColor(padawan_theme_onPrimary))
@@ -273,57 +266,51 @@ fun TransactionListBox(transactionList: List<Tx>) {
                                     .align(Alignment.Bottom)
                             )
                         }
-                        Row {
+                        Row(
+                            modifier = Modifier.padding(vertical = 4.dp)
+                        ) {
                             Text(
-                                text = txn.date,
+                                text = "${getDateDifference(date = txn.date)} ago",
                                 textAlign = TextAlign.Start,
+                                fontSize = 14.sp,
                                 maxLines = 1,
                                 modifier = Modifier
                                     .weight(weight = 0.5f)
                                     .align(Alignment.Bottom)
                             )
-                            Text(
-                                text = if (txn.isPayment) "Send" else "Receive",
-                                textAlign = TextAlign.End,
+                            Box(
                                 modifier = Modifier
                                     .weight(weight = 0.5f)
                                     .align(Alignment.Bottom)
-                            )
+                            ) {
+                                Row(
+                                    modifier = Modifier
+                                        .align(Alignment.CenterEnd)
+                                        .background(
+                                            color = if (txn.isPayment) padawan_theme_send_primary else padawan_theme_receive_primary,
+                                            shape = RoundedCornerShape(size = 5.dp)
+                                        )
+                                        .padding(horizontal = 8.dp)
+                                ) {
+                                    Text(
+                                        text = if (txn.isPayment) "Sent" else "Receive",
+                                        fontSize = 14.sp,
+                                        modifier = Modifier.align(Alignment.CenterVertically)
+                                    )
+                                    Icon(
+                                        painter = if (txn.isPayment) painterResource(id = R.drawable.ic_send_secondary) else painterResource(id = R.drawable.ic_receive_secondary),
+                                        contentDescription = if (txn.isPayment) "Send Icon" else "Receive Icon",
+                                        modifier = Modifier.scale(scale = 0.75f),
+                                        tint = padawan_disabled
+                                    )
+                                }
+                            }
                         }
                         Divider(modifier = Modifier.padding(vertical = 8.dp))
                     }
                 }
             }
         }
-    }
-}
-
-class BackgroundShape() : Shape {
-    override fun createOutline(
-        size: Size,
-        layoutDirection: LayoutDirection,
-        density: Density
-    ): Outline {
-        return Outline.Generic(
-            path = Path().apply {
-                reset()
-                addOval(oval = Rect(
-                    top = size.height / 5,
-                    bottom = size.height / 2,
-                    left = size.width / -6,
-                    right = size.width + size.width / 6,
-                    )
-                )
-                addRect(rect = Rect(
-                    top = (size.height / 20) * 7,
-                    bottom = size.height,
-                    left = 0f,
-                    right = size.width,
-                    )
-                )
-                close()
-            }
-        )
     }
 }
 
