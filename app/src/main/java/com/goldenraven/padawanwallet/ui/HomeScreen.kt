@@ -5,8 +5,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.shadow
-import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
@@ -16,11 +14,12 @@ import com.goldenraven.padawanwallet.theme.padawan_theme_onBackground
 import com.goldenraven.padawanwallet.theme.white
 import com.goldenraven.padawanwallet.utils.NavigationItem
 import com.goldenraven.padawanwallet.ui.wallet.WalletNavigation
+import com.goldenraven.padawanwallet.ui.wallet.WalletViewModel
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 
 @OptIn(ExperimentalMaterial3Api::class, androidx.compose.animation.ExperimentalAnimationApi::class)
 @Composable
-internal fun HomeScreen() {
+internal fun HomeScreen(walletViewModel: WalletViewModel) {
     val navControllerWalletNavigation: NavHostController = rememberAnimatedNavController()
     // the splash screen hides the system bars
     // we need to bring them back on before continuing
@@ -28,7 +27,7 @@ internal fun HomeScreen() {
 
     Scaffold(bottomBar = { BottomNavigationBar(navControllerWalletNavigation) }) { innerPadding ->
         Box(modifier = Modifier.padding(innerPadding)) {
-            WalletNavigation(navControllerWalletNavigation = navControllerWalletNavigation)
+            WalletNavigation(navControllerWalletNavigation = navControllerWalletNavigation, walletViewModel = walletViewModel)
         }
     }
 }

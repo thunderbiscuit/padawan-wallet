@@ -23,7 +23,7 @@ import com.google.accompanist.navigation.animation.composable
 
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
-fun WalletNavigation(navControllerWalletNavigation: NavHostController) {
+fun WalletNavigation(navControllerWalletNavigation: NavHostController, walletViewModel: WalletViewModel) {
     val animationDuration = 400
 
     AnimatedNavHost(
@@ -66,7 +66,7 @@ fun WalletNavigation(navControllerWalletNavigation: NavHostController) {
                     else -> slideOutOfContainer(AnimatedContentScope.SlideDirection.Start, animationSpec = tween(animationDuration))
                 }
             }
-        ) { WalletScreen(navController = navControllerWalletNavigation) }
+        ) { WalletScreen(navController = navControllerWalletNavigation, walletViewModel = walletViewModel) }
 
 
         // Receive
@@ -102,7 +102,7 @@ fun WalletNavigation(navControllerWalletNavigation: NavHostController) {
             popExitTransition = {
                 slideOutOfContainer(AnimatedContentScope.SlideDirection.Down, animationSpec = tween(animationDuration))
             }
-        ) { SendScreen(navController = navControllerWalletNavigation) }
+        ) { SendScreen(navController = navControllerWalletNavigation, walletViewModel = walletViewModel) }
 
         // QR Scanner Screen
         composable(

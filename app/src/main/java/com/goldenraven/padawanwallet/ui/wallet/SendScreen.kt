@@ -7,21 +7,22 @@ package com.goldenraven.padawanwallet.ui.wallet
 
 import android.util.Log
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.OutlinedTextField
-import androidx.compose.material.TextFieldDefaults
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.*
+import androidx.compose.material3.TextFieldDefaults.indicatorLine
 import androidx.compose.runtime.*
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -31,16 +32,17 @@ import androidx.navigation.NavHostController
 import com.goldenraven.padawanwallet.R
 import com.goldenraven.padawanwallet.data.Wallet
 import com.goldenraven.padawanwallet.theme.*
-import com.goldenraven.padawanwallet.ui.Screen
+import com.goldenraven.padawanwallet.ui.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 import org.bitcoindevkit.PartiallySignedBitcoinTransaction
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-internal fun SendScreen(navController: NavHostController) {
+internal fun SendScreen(navController: NavHostController, walletViewModel: WalletViewModel) {
     val (showDialog, setShowDialog) = rememberSaveable { mutableStateOf(false) }
 
+    val balance by walletViewModel.balance.observeAsState()
     val recipientAddress: MutableState<String> = rememberSaveable { mutableStateOf("") }
     val amount: MutableState<String> = rememberSaveable { mutableStateOf("") }
     val feeRate: MutableState<String> = rememberSaveable { mutableStateOf("") }
@@ -74,135 +76,182 @@ internal fun SendScreen(navController: NavHostController) {
             }
         },
     ) {
-        ConstraintLayout(
-            modifier = Modifier
-                .fillMaxSize()
-                .background(md_theme_dark_background)
-        ) {
-            val (screenTitle, transactionInputs, bottomButtons, dropDownMenu) = createRefs()
-            Text(
-                text = "Send Bitcoin",
-                fontSize = 28.sp,
-                textAlign = TextAlign.Center,
-                modifier = Modifier
-                    .constrainAs(screenTitle) {
-                        top.linkTo(parent.top)
-                        start.linkTo(parent.start)
-                        end.linkTo(parent.end)
-                    }
-                    .padding(top = 70.dp)
-            )
-
-
-            Column(
-                modifier = Modifier
-                    .constrainAs(dropDownMenu) {
-                        start.linkTo(screenTitle.end)
-                    }
-                    .padding(top = 67.dp),
-            ) {
-                IconButton(onClick = { showMenu.value = !showMenu.value }) {
-                    Icon(
-                        imageVector = Icons.Default.Settings,
-                        contentDescription = "More transaction options",
-                    )
-                }
-                DropdownMenu(
-                    expanded = showMenu.value,
-                    onDismissRequest = { showMenu.value = false }
-                ) {
-                    DropdownMenuItem(
-                        onClick = {
-                            transactionOption.value = TransactionType.DEFAULT
-                            showMenu.value = false
-                        },
-                        text = {
-                            if (transactionOption.value == TransactionType.DEFAULT) {
-                                Text("Default ✓")
-                            } else {
-                                Text(text = "Default")
-                            }
-                        }
-                    )
-                    DropdownMenuItem(
-                        onClick = {
-                            transactionOption.value = TransactionType.SEND_ALL
-                            showMenu.value = false
-                        },
-                        text = {
-                            if (transactionOption.value == TransactionType.SEND_ALL) {
-                                Text(text = "Send All ✓")
-                            } else {
-                                Text(text = "Send All")
-                            }
-                        }
-                    )
-                }
-            }
-
-            Column(
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.Center,
-                modifier = Modifier.constrainAs(transactionInputs) {
-                    top.linkTo(screenTitle.bottom)
-                    bottom.linkTo(bottomButtons.top)
-                    start.linkTo(parent.start)
-                    end.linkTo(parent.end)
-                    height = Dimension.fillToConstraints
-                }
-            ) {
-                ScanQRCode(navController = navController, recipientAddress = recipientAddress)
-                TransactionRecipientInput(recipientAddress = recipientAddress)
-                TransactionAmountInput(amount = amount, transactionOption = transactionOption.value)
-                TransactionFeeInput(feeRate = feeRate)
-                Dialog(
-                    recipientAddress = recipientAddress.value,
-                    amount = amount.value,
-                    feeRate = feeRate.value,
-                    transactionOption = transactionOption.value,
-                    showDialog = showDialog,
-                    setShowDialog = setShowDialog,
-                    snackbarHostState = snackbarHostState,
-                    scope = scope,
+        Column(modifier = Modifier.standardBackground()) {
+            Row(modifier = Modifier.padding(top = 120.dp, bottom = 8.dp)) {
+                Text(
+                    text = "Amount",
+                    fontWeight = FontWeight.Bold,
+                    textAlign = TextAlign.Start,
+                    fontSize = 20.sp,
+                    modifier = Modifier
+                        .weight(weight = 0.5f)
+                        .align(Alignment.Bottom)
+                )
+                Text(
+                    text = "Balance: ${balance.toString()} sats",
+                    textAlign = TextAlign.End,
+                    modifier = Modifier
+                        .weight(weight = 0.5f)
+                        .align(Alignment.Bottom)
                 )
             }
-
-            Column(
-                Modifier
-                    .constrainAs(bottomButtons) {
-                        bottom.linkTo(parent.bottom)
-                        start.linkTo(parent.start)
-                        end.linkTo(parent.end)
+            TextField(
+                modifier = Modifier.wideTextField().height(IntrinsicSize.Min),
+                shape = RoundedCornerShape(percent = 20),
+                value = if (transactionOption.value == TransactionType.DEFAULT) amount.value else "${Wallet.getBalance()} (Before Fees)",
+                onValueChange = { value -> amount.value = value.filter { it.isDigit() } },
+                singleLine = true,
+                placeholder = { Text(text = "Enter Amount") },
+                colors = TextFieldDefaults.textFieldColors(
+                    backgroundColor = padawan_theme_background_secondary,
+                    cursorColor = padawan_theme_onPrimary,
+                    focusedIndicatorColor = Color.Transparent,
+                    unfocusedIndicatorColor = Color.Transparent,
+                    disabledIndicatorColor = Color.Transparent,
+                    errorIndicatorColor = Color.Transparent,
+                ),
+                enabled = (
+                    when (transactionOption.value) {
+                        TransactionType.SEND_ALL -> false
+                        else -> true
                     }
-                    .padding(bottom = 24.dp)
-            ) {
-                Button(
-                    onClick = {
-                        val inputVerified = verifyInput(
-                            recipientAddress = recipientAddress.value,
-                            amount = amount.value,
-                            feeRate = feeRate.value,
-                            transactionOption = transactionOption.value,
-                            snackbarHostState = snackbarHostState,
-                            scope = scope
+                ),
+                trailingIcon = {
+                    Row {
+                        VerticalDivider()
+                        Icon(
+                            painter = painterResource(id = R.drawable.ic_send),
+                            contentDescription = "",
+                            tint = Color.Black
                         )
-                        if (inputVerified)
-                            setShowDialog(true)
-                    },
-                    colors = ButtonDefaults.buttonColors(md_theme_dark_secondary),
-                    shape = RoundedCornerShape(16.dp),
-                    modifier = Modifier
-                        .height(80.dp)
-                        .fillMaxWidth(0.9f)
-                        .padding(vertical = 8.dp, horizontal = 8.dp)
-                        .shadow(elevation = 4.dp, shape = RoundedCornerShape(16.dp))
-                ) {
-                    Text(
-                        text = "broadcast transaction",
-                        textAlign = TextAlign.Center,
-                    )
+                    }
                 }
-            }
+            )
+//            val (screenTitle, transactionInputs, bottomButtons, dropDownMenu) = createRefs()
+//            Text(
+//                text = "Send Bitcoin",
+//                fontSize = 28.sp,
+//                textAlign = TextAlign.Center,
+//                modifier = Modifier
+//                    .constrainAs(screenTitle) {
+//                        top.linkTo(parent.top)
+//                        start.linkTo(parent.start)
+//                        end.linkTo(parent.end)
+//                    }
+//                    .padding(top = 70.dp)
+//            )
+//
+//
+//            Column(
+//                modifier = Modifier
+//                    .constrainAs(dropDownMenu) {
+//                        start.linkTo(screenTitle.end)
+//                    }
+//                    .padding(top = 67.dp),
+//            ) {
+//                IconButton(onClick = { showMenu.value = !showMenu.value }) {
+//                    Icon(
+//                        imageVector = Icons.Default.Settings,
+//                        contentDescription = "More transaction options",
+//                    )
+//                }
+//                DropdownMenu(
+//                    expanded = showMenu.value,
+//                    onDismissRequest = { showMenu.value = false }
+//                ) {
+//                    DropdownMenuItem(
+//                        onClick = {
+//                            transactionOption.value = TransactionType.DEFAULT
+//                            showMenu.value = false
+//                        },
+//                        text = {
+//                            if (transactionOption.value == TransactionType.DEFAULT) {
+//                                Text("Default ✓")
+//                            } else {
+//                                Text(text = "Default")
+//                            }
+//                        }
+//                    )
+//                    DropdownMenuItem(
+//                        onClick = {
+//                            transactionOption.value = TransactionType.SEND_ALL
+//                            showMenu.value = false
+//                        },
+//                        text = {
+//                            if (transactionOption.value == TransactionType.SEND_ALL) {
+//                                Text(text = "Send All ✓")
+//                            } else {
+//                                Text(text = "Send All")
+//                            }
+//                        }
+//                    )
+//                }
+//            }
+//
+//            Column(
+//                horizontalAlignment = Alignment.CenterHorizontally,
+//                verticalArrangement = Arrangement.Center,
+//                modifier = Modifier.constrainAs(transactionInputs) {
+//                    top.linkTo(screenTitle.bottom)
+//                    bottom.linkTo(bottomButtons.top)
+//                    start.linkTo(parent.start)
+//                    end.linkTo(parent.end)
+//                    height = Dimension.fillToConstraints
+//                }
+//            ) {
+//                ScanQRCode(navController = navController, recipientAddress = recipientAddress)
+//                TransactionRecipientInput(recipientAddress = recipientAddress)
+//                TransactionAmountInput(amount = amount, transactionOption = transactionOption.value)
+//                TransactionFeeInput(feeRate = feeRate)
+//                Dialog(
+//                    recipientAddress = recipientAddress.value,
+//                    amount = amount.value,
+//                    feeRate = feeRate.value,
+//                    transactionOption = transactionOption.value,
+//                    showDialog = showDialog,
+//                    setShowDialog = setShowDialog,
+//                    snackbarHostState = snackbarHostState,
+//                    scope = scope,
+//                )
+//            }
+//
+//            Column(
+//                Modifier
+//                    .constrainAs(bottomButtons) {
+//                        bottom.linkTo(parent.bottom)
+//                        start.linkTo(parent.start)
+//                        end.linkTo(parent.end)
+//                    }
+//                    .padding(bottom = 24.dp)
+//            ) {
+//                Button(
+//                    onClick = {
+//                        val inputVerified = verifyInput(
+//                            recipientAddress = recipientAddress.value,
+//                            amount = amount.value,
+//                            feeRate = feeRate.value,
+//                            transactionOption = transactionOption.value,
+//                            snackbarHostState = snackbarHostState,
+//                            scope = scope
+//                        )
+//                        if (inputVerified)
+//                            setShowDialog(true)
+//                    },
+//                    colors = ButtonDefaults.buttonColors(md_theme_dark_secondary),
+//                    shape = RoundedCornerShape(16.dp),
+//                    modifier = Modifier
+//                        .height(80.dp)
+//                        .fillMaxWidth(0.9f)
+//                        .padding(vertical = 8.dp, horizontal = 8.dp)
+//                        .shadow(elevation = 4.dp, shape = RoundedCornerShape(16.dp))
+//                ) {
+//                    Text(
+//                        text = "broadcast transaction",
+//                        textAlign = TextAlign.Center,
+//                    )
+//                }
+//            }
+//        }
         }
     }
 }

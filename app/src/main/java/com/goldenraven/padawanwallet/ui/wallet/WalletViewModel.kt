@@ -38,7 +38,7 @@ import kotlinx.coroutines.launch
 import org.bitcoindevkit.AddressInfo
 import org.bitcoindevkit.Transaction
 
-internal class WalletViewModel(
+class WalletViewModel(
     application: Application,
 ) : AndroidViewModel(application) {
     val readAllData: LiveData<List<Tx>>
