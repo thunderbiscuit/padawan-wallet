@@ -27,7 +27,6 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import com.goldenraven.padawanwallet.R
 import com.goldenraven.padawanwallet.data.Tx
@@ -37,10 +36,7 @@ import com.goldenraven.padawanwallet.ui.*
 import com.goldenraven.padawanwallet.utils.getDateDifference
 
 @Composable
-internal fun WalletScreen(
-    walletViewModel: WalletViewModel = viewModel(),
-    navController: NavHostController
-) {
+internal fun WalletScreen(navController: NavHostController, walletViewModel: WalletViewModel, ) {
     val balance by walletViewModel.balance.observeAsState()
     val isRefreshing by walletViewModel.isRefreshing.collectAsState()
     val openFaucetDialog by walletViewModel.openFaucetDialog
@@ -57,12 +53,7 @@ internal fun WalletScreen(
         Wallet.createBlockchain()
     }
 
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(padawan_theme_background_secondary, shape = BackgroundShape())
-            .padding(all = 32.dp)
-    ) {
+    Column(modifier = Modifier.standardBackground()) {
         MainBox(navController = navController, balance = balance.toString())
         TransactionListBox(transactionList = transactionList)
     }
@@ -72,10 +63,12 @@ internal fun WalletScreen(
 @Composable
 fun MainBox(navController: NavHostController, balance: String) {
     Card(
-        modifier = Modifier.shadowModifier(shadowHeight = 20f).fillMaxWidth(),
-        border = BorderStroke(2.dp, SolidColor(padawan_theme_onPrimary)),
+        border = standardBorder,
         shape = RoundedCornerShape(20.dp),
-        containerColor = padawan_theme_onBackground_secondary
+        containerColor = padawan_theme_onBackground_secondary,
+        modifier = Modifier
+            .shadowModifier(shadowHeight = 20f)
+            .fillMaxWidth()
     ) {
         ConstraintLayout(
             modifier = Modifier
@@ -91,51 +84,37 @@ fun MainBox(navController: NavHostController, balance: String) {
                     start.linkTo(parent.start)
                 }
             )
-            Box(modifier = Modifier
-                .constrainAs(currencyToggle) {
-                    top.linkTo(parent.top)
-                    end.linkTo(parent.end)
-                }
-                .background(
-                    color = padawan_theme_button_secondary,
-                    shape = RoundedCornerShape(size = 10.dp)
-                )
-                .noRippleClickable { currencyToggleState.value = !currencyToggleState.value }
+            Box(
+                modifier = Modifier
+                    .constrainAs(currencyToggle) {
+                        top.linkTo(parent.top)
+                        end.linkTo(parent.end)
+                    }
+                    .background(
+                        color = padawan_theme_button_secondary,
+                        shape = RoundedCornerShape(size = 10.dp)
+                    )
+                    .noRippleClickable { currencyToggleState.value = !currencyToggleState.value }
             ) {
                 Row(
                     modifier = Modifier
                         .height(IntrinsicSize.Min)
                         .padding(horizontal = 8.dp)
                 ) {
-                    Text(
-                        text = "btc",
-                        textAlign = TextAlign.Center,
-                        modifier = Modifier.padding(all = 8.dp),
-                        color = if (!currencyToggleState.value) padawan_theme_primary_faded else padawan_theme_onPrimary
-                    )
-                    Divider(
-                        color = padawan_theme_primary_faded,
-                        modifier = Modifier
-                            .fillMaxHeight()
-                            .width(3.dp)
-                            .padding(vertical = 8.dp)
-                    )
-                    Text(
-                        text = "sats",
-                        textAlign = TextAlign.Center,
-                        modifier = Modifier.padding(all = 8.dp),
-                        color = if (currencyToggleState.value) padawan_theme_primary_faded else padawan_theme_onPrimary
-                    )
+                    CurrencyToggleText(currencyToggleState = currencyToggleState, text = "btc")
+                    FadedVerticalDivider()
+                    CurrencyToggleText(currencyToggleState = currencyToggleState, text = "sats")
                 }
             }
             Text(
                 text = balance,
-                modifier = Modifier.constrainAs(balanceText) {
-                    top.linkTo(cardName.bottom)
-                    start.linkTo(parent.start)
-                },
                 fontSize = 40.sp,
                 fontWeight = FontWeight.Bold,
+                modifier = Modifier
+                    .constrainAs(balanceText) {
+                    top.linkTo(cardName.bottom)
+                    start.linkTo(parent.start)
+                }
             )
             Text(
                 text = "sats",
@@ -148,19 +127,22 @@ fun MainBox(navController: NavHostController, balance: String) {
             )
             Row(
                 modifier = Modifier
+                    .padding(top = 16.dp)
                     .constrainAs(buttonRow) {
                         top.linkTo(balanceText.bottom)
                         start.linkTo(parent.start)
                         end.linkTo(parent.end)
                     }
-                    .padding(top = 16.dp)
             ) {
                 Button(
                     onClick = { navController.navigate(Screen.ReceiveScreen.route) },
-                    modifier = Modifier.padding(all = 8.dp).shadowModifier(shadowHeight = 10f).weight(weight = 0.5f),
                     colors = ButtonDefaults.buttonColors(containerColor = padawan_theme_button_secondary),
                     shape = RoundedCornerShape(20.dp),
-                    border = BorderStroke(2.dp, SolidColor(padawan_theme_onPrimary))
+                    border = standardBorder,
+                    modifier = Modifier
+                        .padding(all = 8.dp)
+                        .shadowModifier(shadowHeight = 10f)
+                        .weight(weight = 0.5f)
                 ) {
                     Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.padding(vertical = 8.dp)) {
                         Text(text = "Receive")
@@ -169,10 +151,13 @@ fun MainBox(navController: NavHostController, balance: String) {
                 }
                 Button(
                     onClick = { navController.navigate(Screen.SendScreen.route) },
-                    modifier = Modifier.padding(all = 8.dp).shadowModifier(shadowHeight = 10f).weight(weight = 0.5f),
                     colors = ButtonDefaults.buttonColors(containerColor = padawan_theme_button_primary),
                     shape = RoundedCornerShape(20.dp),
-                    border = BorderStroke(2.dp, SolidColor(padawan_theme_onPrimary))
+                    border = standardBorder,
+                    modifier = Modifier
+                        .padding(all = 8.dp)
+                        .shadowModifier(shadowHeight = 10f)
+                        .weight(weight = 0.5f),
                 ) {
                     Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.padding(vertical = 8.dp)) {
                         Text(text = "Send")
@@ -208,7 +193,7 @@ fun TransactionListBox(transactionList: List<Tx>) {
 
     Card(
         modifier = Modifier.fillMaxWidth(),
-        border = BorderStroke(2.dp, SolidColor(padawan_theme_onPrimary)),
+        border = standardBorder,
         shape = RoundedCornerShape(20.dp),
         containerColor = padawan_theme_background_secondary
     ) {
@@ -222,7 +207,9 @@ fun TransactionListBox(transactionList: List<Tx>) {
                     )
                     Button(
                         onClick = {  },
-                        modifier = Modifier.padding(all = 8.dp).shadowModifier(shadowHeight = 10f),
+                        modifier = Modifier
+                            .padding(all = 8.dp)
+                            .shadowModifier(shadowHeight = 10f),
                         colors = ButtonDefaults.buttonColors(containerColor = padawan_theme_button_primary),
                         shape = RoundedCornerShape(20.dp),
                         border = BorderStroke(2.dp, SolidColor(padawan_theme_onPrimary))
@@ -312,6 +299,17 @@ fun TransactionListBox(transactionList: List<Tx>) {
             }
         }
     }
+}
+
+@Composable
+fun CurrencyToggleText(text: String, currencyToggleState: MutableState<Boolean>) {
+    val currencyState = (!currencyToggleState.value && text == "btc") || (currencyToggleState.value && text == "sats")
+    Text(
+        text = text,
+        textAlign = TextAlign.Center,
+        modifier = Modifier.padding(all = 8.dp),
+        color = if (currencyState) padawan_theme_primary_faded else padawan_theme_onPrimary
+    )
 }
 
 @Composable

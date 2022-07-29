@@ -4,10 +4,13 @@ import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.expandVertically
 import androidx.compose.animation.shrinkVertically
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.*
@@ -20,10 +23,7 @@ import androidx.compose.ui.geometry.CornerRadius
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.geometry.Size
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.Outline
-import androidx.compose.ui.graphics.Path
-import androidx.compose.ui.graphics.Shape
+import androidx.compose.ui.graphics.*
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.LayoutDirection
@@ -61,6 +61,24 @@ fun Modifier.shadowModifier(shadowHeight: Float): Modifier = this.then(
         }
 )
 
+fun Modifier.standardBackground(): Modifier = this.then(
+    fillMaxSize()
+        .background(padawan_theme_background_secondary, shape = BackgroundShape())
+        .padding(all = 32.dp)
+)
+
+fun Modifier.wideTextField(): Modifier = this.then(
+    Modifier
+        .padding(vertical = 8.dp)
+        .fillMaxWidth()
+        .border(
+            width = 2.dp,
+            color = padawan_theme_onPrimary,
+            shape = RoundedCornerShape(percent = 20)
+        )
+        .shadowModifier(shadowHeight = 15f)
+)
+
 inline fun Modifier.noRippleClickable(crossinline onClick: () -> Unit): Modifier = composed {
     clickable(
         indication = null,
@@ -69,6 +87,8 @@ inline fun Modifier.noRippleClickable(crossinline onClick: () -> Unit): Modifier
         onClick()
     }
 }
+
+val standardBorder = BorderStroke(2.dp, SolidColor(padawan_theme_onPrimary))
 
 class BackgroundShape : Shape {
     override fun createOutline(
@@ -79,10 +99,10 @@ class BackgroundShape : Shape {
         return Outline.Generic(
             path = Path().apply {
                 reset()
-                moveTo(x = 0f, y = (size.height / 12) * 3)
-                quadraticBezierTo(x1 = size.width / 2, y1 = size.height / 12, x2 = size.width, y2 = size.height / 4)
+                moveTo(x = 0f, y = size.height / 5)
+                quadraticBezierTo(x1 = size.width / 2, y1 = size.height / 7, x2 = size.width, y2 = size.height / 5)
                 addRect(rect = Rect(
-                    top = size.height / 4,
+                    top = size.height / 5,
                     bottom = size.height,
                     left = 0f,
                     right = size.width,
@@ -91,6 +111,28 @@ class BackgroundShape : Shape {
             }
         )
     }
+}
+
+@Composable
+internal fun FadedVerticalDivider() {
+    Divider(
+        color = padawan_theme_primary_faded,
+        modifier = Modifier
+            .fillMaxHeight()
+            .width(3.dp)
+            .padding(vertical = 8.dp)
+    )
+}
+
+@Composable
+internal fun VerticalDivider() {
+    Divider(
+        color = padawan_theme_onPrimary,
+        modifier = Modifier
+            .fillMaxHeight()
+            .width(3.dp)
+            .padding(vertical = 8.dp)
+    )
 }
 
 @Composable
