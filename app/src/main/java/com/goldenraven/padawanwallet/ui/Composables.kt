@@ -1,9 +1,7 @@
 package com.goldenraven.padawanwallet.ui
 
-import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.animateColorAsState
-import androidx.compose.animation.expandVertically
-import androidx.compose.animation.shrinkVertically
+import androidx.compose.animation.*
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -25,11 +23,14 @@ import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.*
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import androidx.navigation.NavHostController
 import com.goldenraven.padawanwallet.R
 import com.goldenraven.padawanwallet.theme.*
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
@@ -116,7 +117,7 @@ class BackgroundShape : Shape {
 @Composable
 internal fun FadedVerticalDivider() {
     Divider(
-        color = padawan_theme_primary_faded,
+        color = padawan_theme_onBackground_faded,
         modifier = Modifier
             .fillMaxHeight()
             .width(3.dp)
@@ -125,15 +126,55 @@ internal fun FadedVerticalDivider() {
 }
 
 @Composable
-internal fun VerticalDivider() {
+internal fun VerticalTextFieldDivider() {
     Divider(
         color = padawan_theme_onPrimary,
         modifier = Modifier
             .fillMaxHeight()
             .width(3.dp)
-            .padding(vertical = 8.dp)
+            .padding(vertical = 14.dp)
     )
 }
+
+@Composable
+internal fun PadawanAppBar(navController: NavHostController, title: String) {
+    val appBarVisibility = remember { mutableStateOf(value = false) }
+    LaunchedEffect(key1 = true) {
+        delay(500)
+        appBarVisibility.value = true
+    }
+    AnimatedVisibility(
+        visible = appBarVisibility.value,
+        enter = fadeIn(tween(durationMillis = 500))
+    ) {
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(all = 16.dp)
+        ) {
+            IconButton(
+                onClick = { navController.popBackStack() },
+                modifier = Modifier.align(alignment = Alignment.CenterStart)
+            ) {
+                Icon(
+                    painter = painterResource(id = R.drawable.ic_back),
+                    contentDescription = "Back Icon",
+                    tint = padawan_theme_onPrimary
+                )
+            }
+            Text(
+                text = title,
+                textAlign = TextAlign.Center,
+                fontWeight = FontWeight.Bold,
+                fontSize = 20.sp,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .align(alignment = Alignment.Center)
+            )
+        }
+    }
+}
+
 
 @Composable
 internal fun ShowBars() {

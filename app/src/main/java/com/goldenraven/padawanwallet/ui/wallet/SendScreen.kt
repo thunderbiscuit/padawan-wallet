@@ -7,13 +7,9 @@ package com.goldenraven.padawanwallet.ui.wallet
 
 import android.util.Log
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.*
-import androidx.compose.material3.TextFieldDefaults.indicatorLine
 import androidx.compose.runtime.*
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -21,13 +17,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.constraintlayout.compose.ConstraintLayout
-import androidx.constraintlayout.compose.Dimension
 import androidx.navigation.NavHostController
 import com.goldenraven.padawanwallet.R
 import com.goldenraven.padawanwallet.data.Wallet
@@ -37,7 +30,6 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 import org.bitcoindevkit.PartiallySignedBitcoinTransaction
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 internal fun SendScreen(navController: NavHostController, walletViewModel: WalletViewModel) {
     val (showDialog, setShowDialog) = rememberSaveable { mutableStateOf(false) }
@@ -58,75 +50,176 @@ internal fun SendScreen(navController: NavHostController, walletViewModel: Walle
     }
     val transactionOption: MutableState<TransactionType> = rememberSaveable { mutableStateOf(transactionOptions[0]) }
     val showMenu: MutableState<Boolean> = remember { mutableStateOf(false) }
+    var dropDownMenuExpanded by remember { mutableStateOf(false) }
+    val currencyList = listOf(CurrencyType.SATS, CurrencyType.BTC)
+    var selectedCurrency by remember { mutableStateOf(0) }
 
-    Scaffold(
-        snackbarHost = {
-            SnackbarHost(snackbarHostState) { data ->
-                Snackbar(
-                    modifier = Modifier
-                        .padding(12.dp)
-                        .background(md_theme_dark_warning),
-                    containerColor = md_theme_dark_warning,
+    val qrCodeScanner = navController.currentBackStackEntry?.savedStateHandle?.getLiveData<String>("BTC_Address")?.observeAsState()
+    qrCodeScanner?.value.let {
+        if (it != null)
+            recipientAddress.value = it
+
+        navController.currentBackStackEntry?.savedStateHandle?.remove<String>("BTC_Address")
+    }
+
+    PadawanAppBar(navController = navController, title = "Send bitcoin")
+    Column(modifier = Modifier.standardBackground()) {
+        Row(modifier = Modifier.padding(top = 100.dp, bottom = 8.dp)) {
+            Text(
+                text = "Amount",
+                fontWeight = FontWeight.Bold,
+                textAlign = TextAlign.Start,
+                fontSize = 20.sp,
+                modifier = Modifier
+                    .weight(weight = 0.5f)
+                    .align(Alignment.Bottom)
+            )
+            Text(
+                text = "Balance: ${balance.toString()} sats",
+                textAlign = TextAlign.End,
+                modifier = Modifier
+                    .weight(weight = 0.5f)
+                    .align(Alignment.Bottom)
+            )
+        }
+        TextField(
+            modifier = Modifier
+                .wideTextField()
+                .height(IntrinsicSize.Min),
+            shape = RoundedCornerShape(percent = 20),
+            value = if (transactionOption.value == TransactionType.DEFAULT) amount.value else "${Wallet.getBalance()} (Before Fees)",
+            onValueChange = { value -> amount.value = value.filter { it.isDigit() } },
+            singleLine = true,
+            placeholder = { Text(text = "Enter Amount") },
+            colors = TextFieldDefaults.textFieldColors(
+                backgroundColor = padawan_theme_background_secondary,
+                cursorColor = padawan_theme_onPrimary,
+                focusedIndicatorColor = Color.Transparent,
+                unfocusedIndicatorColor = Color.Transparent,
+                disabledIndicatorColor = Color.Transparent,
+                errorIndicatorColor = Color.Transparent,
+            ),
+            enabled = (
+                when (transactionOption.value) {
+                    TransactionType.SEND_ALL -> false
+                    else -> true
+                }
+            ),
+            trailingIcon = {
+                Row {
+                    VerticalTextFieldDivider()
+                    Row(
+                        Modifier
+                            .noRippleClickable { dropDownMenuExpanded = true }
+                            .fillMaxHeight()
+
                     ) {
-                    Text(
-                        text = data.visuals.message,
-                        style = TextStyle(md_theme_dark_onLightBackground)
-                    )
+                        Text(
+                            text = currencyList[selectedCurrency].toString().lowercase(),
+                            textAlign = TextAlign.End,
+                            modifier = Modifier
+                                .align(Alignment.CenterVertically)
+                                .padding(bottom = 4.dp, start = 12.dp)
+                                .widthIn(min = 32.dp)
+                        )
+                        Icon(
+                            painter = painterResource(id = R.drawable.ic_dropdown),
+                            contentDescription = "Dropdown Menu",
+                            modifier = Modifier
+                                .align(Alignment.CenterVertically)
+                                .padding(end = 12.dp)
+                        )
+                        DropdownMenu(
+                            expanded = dropDownMenuExpanded,
+                            onDismissRequest = { dropDownMenuExpanded = false },
+                            modifier = Modifier.background(Color.Transparent),
+                        ) {
+                            currencyList.forEachIndexed { index, currency ->
+                                DropdownMenuItem(
+                                    onClick = { selectedCurrency = index },
+                                    text = { Text(text = currency.toString().lowercase() ) },
+                                    colors = MenuDefaults.itemColors(
+                                        textColor = if (selectedCurrency == index) padawan_theme_onPrimary else padawan_theme_onBackground_faded
+                                    ),
+                                )
+                            }
+                        }
+                    }
                 }
             }
-        },
-    ) {
-        Column(modifier = Modifier.standardBackground()) {
-            Row(modifier = Modifier.padding(top = 120.dp, bottom = 8.dp)) {
-                Text(
-                    text = "Amount",
-                    fontWeight = FontWeight.Bold,
-                    textAlign = TextAlign.Start,
-                    fontSize = 20.sp,
-                    modifier = Modifier
-                        .weight(weight = 0.5f)
-                        .align(Alignment.Bottom)
-                )
-                Text(
-                    text = "Balance: ${balance.toString()} sats",
-                    textAlign = TextAlign.End,
-                    modifier = Modifier
-                        .weight(weight = 0.5f)
-                        .align(Alignment.Bottom)
-                )
-            }
-            TextField(
-                modifier = Modifier.wideTextField().height(IntrinsicSize.Min),
-                shape = RoundedCornerShape(percent = 20),
-                value = if (transactionOption.value == TransactionType.DEFAULT) amount.value else "${Wallet.getBalance()} (Before Fees)",
-                onValueChange = { value -> amount.value = value.filter { it.isDigit() } },
-                singleLine = true,
-                placeholder = { Text(text = "Enter Amount") },
-                colors = TextFieldDefaults.textFieldColors(
-                    backgroundColor = padawan_theme_background_secondary,
-                    cursorColor = padawan_theme_onPrimary,
-                    focusedIndicatorColor = Color.Transparent,
-                    unfocusedIndicatorColor = Color.Transparent,
-                    disabledIndicatorColor = Color.Transparent,
-                    errorIndicatorColor = Color.Transparent,
-                ),
-                enabled = (
-                    when (transactionOption.value) {
-                        TransactionType.SEND_ALL -> false
-                        else -> true
-                    }
-                ),
-                trailingIcon = {
-                    Row {
-                        VerticalDivider()
+        )
+
+
+        Text(
+            text = "Address",
+            fontWeight = FontWeight.Bold,
+            textAlign = TextAlign.Start,
+            fontSize = 20.sp,
+            modifier = Modifier.padding(top = 16.dp)
+        )
+        TextField(
+            modifier = Modifier
+                .wideTextField()
+                .height(IntrinsicSize.Min),
+            shape = RoundedCornerShape(percent = 20),
+            value = recipientAddress.value,
+            onValueChange = { recipientAddress.value = it },
+            singleLine = true,
+            placeholder = { Text(text = "Enter a bitcoin testnet address") },
+            colors = TextFieldDefaults.textFieldColors(
+                backgroundColor = padawan_theme_background_secondary,
+                cursorColor = padawan_theme_onPrimary,
+                focusedIndicatorColor = Color.Transparent,
+                unfocusedIndicatorColor = Color.Transparent,
+                disabledIndicatorColor = Color.Transparent,
+                errorIndicatorColor = Color.Transparent,
+            ),
+            trailingIcon = {
+                Row {
+                    VerticalTextFieldDivider()
+                    IconButton(
+                        onClick = {
+                            navController.navigate(Screen.QRScanScreen.route) {
+                                launchSingleTop = true
+                            }
+                        },
+                        modifier = Modifier.align(Alignment.CenterVertically)
+                    ) {
                         Icon(
-                            painter = painterResource(id = R.drawable.ic_send),
-                            contentDescription = "",
-                            tint = Color.Black
+                            painter = painterResource(id = R.drawable.ic_camera),
+                            contentDescription = "Scan QR Icon",
                         )
                     }
                 }
+            }
+        )
+
+
+        Text(
+            text = "Fees",
+            fontWeight = FontWeight.Bold,
+            textAlign = TextAlign.Start,
+            fontSize = 20.sp,
+            modifier = Modifier.padding(top = 16.dp)
+        )
+        TextField(
+            modifier = Modifier
+                .wideTextField()
+                .height(IntrinsicSize.Min),
+            shape = RoundedCornerShape(percent = 20),
+            value = feeRate.value,
+            onValueChange = { value -> feeRate.value = value.filter { it.isDigit() } },
+            singleLine = true,
+            placeholder = { Text(text = "Edit fees") },
+            colors = TextFieldDefaults.textFieldColors(
+                backgroundColor = padawan_theme_background_secondary,
+                cursorColor = padawan_theme_onPrimary,
+                focusedIndicatorColor = Color.Transparent,
+                unfocusedIndicatorColor = Color.Transparent,
+                disabledIndicatorColor = Color.Transparent,
+                errorIndicatorColor = Color.Transparent,
             )
+        )
 //            val (screenTitle, transactionInputs, bottomButtons, dropDownMenu) = createRefs()
 //            Text(
 //                text = "Send Bitcoin",
@@ -252,140 +345,6 @@ internal fun SendScreen(navController: NavHostController, walletViewModel: Walle
 //                }
 //            }
 //        }
-        }
-    }
-}
-
-@Composable
-fun ScanQRCode(navController: NavHostController, recipientAddress: MutableState<String>) {
-    val qrCodeScanner = navController.currentBackStackEntry
-        ?.savedStateHandle
-        ?.getLiveData<String>("BTC_Address")?.observeAsState()
-
-    qrCodeScanner?.value.let {
-        if (it != null)
-            recipientAddress.value = it
-
-        navController.currentBackStackEntry
-            ?.savedStateHandle
-            ?.remove<String>("BTC_Address")
-    }
-
-    Row(
-        modifier = Modifier.fillMaxWidth(0.8f),
-        horizontalArrangement = Arrangement.End,
-    ) {
-        IconButton(onClick = {
-            navController.navigate(Screen.QRScanScreen.route) {
-                launchSingleTop = true
-            }
-        }) {
-            Row {
-                Icon(
-                    contentDescription = null,
-                    painter = painterResource(id = R.drawable.ic_camera),
-                )
-                Spacer(modifier = Modifier.width(8.dp))
-                Text(
-                    text = "Scan",
-                    textAlign = TextAlign.Center,
-                )
-            }
-        }
-    }
-}
-
-@Composable
-private fun TransactionRecipientInput(recipientAddress: MutableState<String>) {
-    Column(horizontalAlignment = Alignment.CenterHorizontally) {
-        OutlinedTextField(
-            modifier = Modifier
-                .padding(vertical = 8.dp)
-                .fillMaxWidth(0.9f),
-            value = recipientAddress.value,
-            onValueChange = { recipientAddress.value = it.trim() },
-            label = {
-                Text(
-                    text = "Recipient address",
-                )
-            },
-            singleLine = true,
-            textStyle = TextStyle(fontFamily = ShareTechMono, color = md_theme_dark_onBackground),
-            colors = TextFieldDefaults.outlinedTextFieldColors(
-                focusedBorderColor = MaterialTheme.colorScheme.primary,
-                unfocusedBorderColor = md_theme_dark_onBackgroundFaded,
-                cursorColor = MaterialTheme.colorScheme.primary,
-            ),
-        )
-    }
-}
-
-@Composable
-private fun TransactionAmountInput(
-    amount: MutableState<String>,
-    transactionOption: TransactionType
-) {
-    Column(horizontalAlignment = Alignment.CenterHorizontally) {
-        OutlinedTextField(
-            modifier = Modifier
-                .padding(vertical = 8.dp)
-                .fillMaxWidth(0.9f),
-            value = if (transactionOption == TransactionType.DEFAULT) amount.value else "${Wallet.getBalance()} (Before Fees)",
-            onValueChange = { value: String ->
-                amount.value = value.filter { it.isDigit() }
-            },
-            singleLine = true,
-            textStyle = TextStyle(fontFamily = ShareTechMono, color = md_theme_dark_onBackground),
-            label = {
-                when (transactionOption) {
-                    TransactionType.SEND_ALL -> {
-                        Text(text = "Amount (Send All)")
-                    }
-                    else -> {
-                        Text(text = "Amount (satoshis)")
-                    }
-                }
-            },
-            colors = TextFieldDefaults.outlinedTextFieldColors(
-                focusedBorderColor = MaterialTheme.colorScheme.primary,
-                unfocusedBorderColor = md_theme_dark_onBackgroundFaded,
-                cursorColor = MaterialTheme.colorScheme.primary,
-            ),
-            enabled = (
-                when (transactionOption) {
-                    TransactionType.SEND_ALL -> false
-                    else -> true
-                }
-            )
-        )
-    }
-}
-
-@Composable
-private fun TransactionFeeInput(feeRate: MutableState<String>) {
-    Column(horizontalAlignment = Alignment.CenterHorizontally) {
-
-        OutlinedTextField(
-            modifier = Modifier
-                .padding(vertical = 8.dp)
-                .fillMaxWidth(0.9f),
-            value = feeRate.value,
-            onValueChange = { newValue: String ->
-                feeRate.value = newValue.filter { it.isDigit() }
-            },
-            singleLine = true,
-            textStyle = TextStyle(fontFamily = ShareTechMono, color = md_theme_dark_onBackground),
-            label = {
-                Text(
-                    text = "Fee rate",
-                )
-            },
-            colors = TextFieldDefaults.outlinedTextFieldColors(
-                focusedBorderColor = MaterialTheme.colorScheme.primary,
-                unfocusedBorderColor = md_theme_dark_onBackgroundFaded,
-                cursorColor = MaterialTheme.colorScheme.primary,
-            ),
-        )
     }
 }
 

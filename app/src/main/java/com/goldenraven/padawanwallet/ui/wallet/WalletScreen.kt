@@ -5,6 +5,9 @@
 
 package com.goldenraven.padawanwallet.ui.wallet
 
+import androidx.compose.animation.animateColor
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.core.updateTransition
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -101,9 +104,9 @@ fun MainBox(navController: NavHostController, balance: String) {
                         .height(IntrinsicSize.Min)
                         .padding(horizontal = 8.dp)
                 ) {
-                    CurrencyToggleText(currencyToggleState = currencyToggleState, text = "btc")
+                    CurrencyToggleText(currencyToggleState = currencyToggleState, text = CurrencyType.BTC)
                     FadedVerticalDivider()
-                    CurrencyToggleText(currencyToggleState = currencyToggleState, text = "sats")
+                    CurrencyToggleText(currencyToggleState = currencyToggleState, text = CurrencyType.SATS)
                 }
             }
             Text(
@@ -117,7 +120,7 @@ fun MainBox(navController: NavHostController, balance: String) {
                 }
             )
             Text(
-                text = "sats",
+                text = CurrencyType.SATS.toString().lowercase(),
                 modifier = Modifier
                     .padding(all = 8.dp)
                     .constrainAs(currencyText) {
@@ -246,7 +249,7 @@ fun TransactionListBox(transactionList: List<Tx>) {
                                     .align(Alignment.Bottom)
                             )
                             Text(
-                                text = "${if (txn.isPayment) txn.valueOut.toString() else txn.valueIn.toString()} sats",
+                                text = "${if (txn.isPayment) txn.valueOut.toString() else txn.valueIn.toString()} ${CurrencyType.SATS.toString().lowercase()}",
                                 textAlign = TextAlign.End,
                                 modifier = Modifier
                                     .weight(weight = 0.5f)
@@ -302,13 +305,22 @@ fun TransactionListBox(transactionList: List<Tx>) {
 }
 
 @Composable
-fun CurrencyToggleText(text: String, currencyToggleState: MutableState<Boolean>) {
-    val currencyState = (!currencyToggleState.value && text == "btc") || (currencyToggleState.value && text == "sats")
+fun CurrencyToggleText(currencyToggleState: MutableState<Boolean>, text: CurrencyType) {
+    val currencyState = (!currencyToggleState.value && text == CurrencyType.BTC) || (currencyToggleState.value && text == CurrencyType.SATS)
+
+    val colorTransition = updateTransition(if (currencyState) padawan_theme_onBackground_faded else padawan_theme_onPrimary, label = "")
+    val color by colorTransition.animateColor(
+        transitionSpec = { tween(durationMillis = 500) },
+        label = "Changing Color Animation",
+    ) {
+        if (it == padawan_theme_onBackground_faded) padawan_theme_onPrimary else padawan_theme_onBackground_faded
+    }
+
     Text(
-        text = text,
+        text = text.toString().lowercase(),
         textAlign = TextAlign.Center,
         modifier = Modifier.padding(all = 8.dp),
-        color = if (currencyState) padawan_theme_primary_faded else padawan_theme_onPrimary
+        color = color,
     )
 }
 
