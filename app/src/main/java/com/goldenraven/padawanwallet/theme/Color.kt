@@ -44,7 +44,7 @@ val padawan_theme_background_secondary = Color(0xFFf3f4ff)
 val padawan_theme_onBackground_secondary = Color(0xFFdadeff)
 
 val padawan_theme_lazyColumn_background = Color(0xFFfee7e0)
-val padawan_theme_primary_faded = Color(0x668480e5)
+val padawan_theme_onBackground_faded = Color(0x668480e5)
 val padawan_disabled = Color(0xA6000000)
 val padawan_theme_receive_primary = Color(0x668480e5)
 val padawan_theme_send_primary = Color(0x6676dab3)

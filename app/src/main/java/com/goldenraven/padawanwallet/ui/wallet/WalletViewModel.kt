@@ -224,3 +224,8 @@ private fun callTatooineFaucet(address: AddressInfo) {
         ktorClient.close()
     }
 }
+
+enum class CurrencyType {
+    SATS,
+    BTC,
+}
