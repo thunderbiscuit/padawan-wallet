@@ -86,7 +86,7 @@ internal fun SendScreen(navController: NavHostController, walletViewModel: Walle
             modifier = Modifier
                 .wideTextField()
                 .height(IntrinsicSize.Min),
-            shape = RoundedCornerShape(percent = 20),
+            shape = RoundedCornerShape(20.dp),
             value = if (transactionOption.value == TransactionType.DEFAULT) amount.value else "${Wallet.getBalance()} (Before Fees)",
             onValueChange = { value -> amount.value = value.filter { it.isDigit() } },
             singleLine = true,
@@ -161,7 +161,7 @@ internal fun SendScreen(navController: NavHostController, walletViewModel: Walle
             modifier = Modifier
                 .wideTextField()
                 .height(IntrinsicSize.Min),
-            shape = RoundedCornerShape(percent = 20),
+            shape = RoundedCornerShape(20.dp),
             value = recipientAddress.value,
             onValueChange = { recipientAddress.value = it },
             singleLine = true,
@@ -206,7 +206,7 @@ internal fun SendScreen(navController: NavHostController, walletViewModel: Walle
             modifier = Modifier
                 .wideTextField()
                 .height(IntrinsicSize.Min),
-            shape = RoundedCornerShape(percent = 20),
+            shape = RoundedCornerShape(20.dp),
             value = feeRate.value,
             onValueChange = { value -> feeRate.value = value.filter { it.isDigit() } },
             singleLine = true,
