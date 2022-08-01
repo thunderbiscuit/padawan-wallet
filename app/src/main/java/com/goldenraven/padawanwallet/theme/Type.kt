@@ -38,12 +38,13 @@ val PadawanTypography = Typography(
 		lineHeight = 40.sp,
 		letterSpacing = 0.sp,
 	),
-	headlineMedium = TextStyle(
-		fontFamily = SofiaPro,
-		fontWeight = FontWeight.Normal,
-		fontSize = 18.sp,
+	// headlineMedium = TextStyle(),
+	headlineSmall = TextStyle(
+		fontFamily = Outfit,
+		fontWeight = FontWeight.SemiBold,
+		fontSize = 24.sp,
+		lineHeight = 32.sp
 	),
-	// headlineSmall = TextStyle(),
 
 	titleLarge = TextStyle(
 		fontFamily = SofiaPro,
@@ -73,9 +74,10 @@ val PadawanTypography = Typography(
 	// bodySmall = TextStyle(),
 
 	labelLarge = TextStyle(
-		fontFamily = SofiaPro,
+		fontFamily = Outfit,
 		fontWeight = FontWeight.Normal,
 		fontSize = 16.sp,
+		lineHeight = 24.sp
 	),
 	labelMedium = TextStyle(
 		fontFamily = SofiaPro,
@@ -84,8 +86,8 @@ val PadawanTypography = Typography(
 		lineHeight = 20.sp,
 	),
 	labelSmall = TextStyle(
-		fontFamily = SofiaPro,
-		fontWeight = FontWeight.Normal,
+		fontFamily = Outfit,
+		fontWeight = FontWeight.Medium,
 		fontSize = 11.sp,
 		lineHeight = 16.sp,
 	),

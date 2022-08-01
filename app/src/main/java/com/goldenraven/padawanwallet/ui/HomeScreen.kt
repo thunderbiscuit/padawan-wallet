@@ -9,6 +9,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
+import com.goldenraven.padawanwallet.theme.PadawanTypography
 import com.goldenraven.padawanwallet.theme.padawan_theme_navigation_bar_unselected
 import com.goldenraven.padawanwallet.theme.padawan_theme_onBackground
 import com.goldenraven.padawanwallet.theme.white
@@ -52,7 +53,10 @@ internal fun BottomNavigationBar(navControllerWalletNavigation: NavController) {
                     }
                 },
                 label = {
-                    Text(text = item.title)
+                    Text(
+                        text = item.title,
+                        style = PadawanTypography.labelSmall
+                    )
                 },
                 selected = selectedItem == index,
                 onClick = {
