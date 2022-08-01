@@ -43,6 +43,7 @@ import com.goldenraven.padawanwallet.data.Wallet
 import com.goldenraven.padawanwallet.theme.*
 import com.goldenraven.padawanwallet.ui.*
 import com.goldenraven.padawanwallet.utils.getDateDifference
+import io.ktor.http.*
 
 @Composable
 internal fun WalletScreen(navController: NavHostController, walletViewModel: WalletViewModel, ) {
@@ -168,7 +169,10 @@ fun MainBox(navController: NavHostController, balance: String) {
                         .weight(weight = 0.5f)
                 ) {
                     Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.padding(vertical = 8.dp)) {
-                        Text(text = "Receive")
+                        Text(
+                            text = "Receive",
+                            style = PadawanTypography.labelLarge,
+                        )
                         Icon(painter = painterResource(id = R.drawable.ic_receive), contentDescription = "Receive Icon")
                     }
                 }
@@ -190,7 +194,10 @@ fun MainBox(navController: NavHostController, balance: String) {
                         .weight(weight = 0.5f),
                 ) {
                     Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.padding(vertical = 8.dp)) {
-                        Text(text = "Send")
+                        Text(
+                            text = "Send",
+                            style = PadawanTypography.labelLarge,
+                        )
                         Icon(painter = painterResource(id = R.drawable.ic_send), contentDescription = "Send Icon")
                     }
                 }
@@ -205,9 +212,8 @@ fun TransactionListBox(transactionList: List<Tx>) {
     Row(modifier = Modifier.padding(top = 16.dp, bottom = 8.dp)) {
         Text(
             text = "Transactions",
-            fontWeight = FontWeight.Bold,
+            style = PadawanTypography.headlineSmall,
             textAlign = TextAlign.Start,
-            fontSize = 20.sp,
             modifier = Modifier
                 .weight(weight = 0.5f)
                 .align(Alignment.Bottom)
