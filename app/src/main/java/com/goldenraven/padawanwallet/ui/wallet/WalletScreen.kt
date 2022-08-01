@@ -21,12 +21,18 @@ import androidx.compose.runtime.*
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.draw.scale
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Paint
 import androidx.compose.ui.graphics.SolidColor
+import androidx.compose.ui.graphics.drawscope.drawIntoCanvas
+import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
@@ -70,7 +76,14 @@ fun MainBox(navController: NavHostController, balance: String) {
         shape = RoundedCornerShape(20.dp),
         containerColor = padawan_theme_onBackground_secondary,
         modifier = Modifier
-            .shadowModifier(shadowHeight = 20f)
+            .advancedShadow(
+                color = Color.Black,
+                alpha = 1f,
+                cornersRadius = 20.dp,
+                shadowBlurRadius = 0.0001.dp,
+                offsetX = 4.dp,
+                offsetY = 4.dp
+            )
             .fillMaxWidth()
     ) {
         ConstraintLayout(
@@ -144,7 +157,14 @@ fun MainBox(navController: NavHostController, balance: String) {
                     border = standardBorder,
                     modifier = Modifier
                         .padding(all = 8.dp)
-                        .shadowModifier(shadowHeight = 10f)
+                        .advancedShadow(
+                            color = Color.Black,
+                            alpha = 1f,
+                            cornersRadius = 20.dp,
+                            shadowBlurRadius = 0.0001.dp,
+                            offsetX = 4.dp,
+                            offsetY = 4.dp
+                        )
                         .weight(weight = 0.5f)
                 ) {
                     Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.padding(vertical = 8.dp)) {
@@ -159,7 +179,14 @@ fun MainBox(navController: NavHostController, balance: String) {
                     border = standardBorder,
                     modifier = Modifier
                         .padding(all = 8.dp)
-                        .shadowModifier(shadowHeight = 10f)
+                        .advancedShadow(
+                            color = Color.Black,
+                            alpha = 1f,
+                            cornersRadius = 20.dp,
+                            shadowBlurRadius = 0.0001.dp,
+                            offsetX = 4.dp,
+                            offsetY = 4.dp
+                        )
                         .weight(weight = 0.5f),
                 ) {
                     Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.padding(vertical = 8.dp)) {
@@ -212,7 +239,14 @@ fun TransactionListBox(transactionList: List<Tx>) {
                         onClick = {  },
                         modifier = Modifier
                             .padding(all = 8.dp)
-                            .shadowModifier(shadowHeight = 10f),
+                            .advancedShadow(
+                                color = Color.Black,
+                                alpha = 1f,
+                                cornersRadius = 20.dp,
+                                shadowBlurRadius = 0.0001.dp,
+                                offsetX = 4.dp,
+                                offsetY = 4.dp
+                            ),
                         colors = ButtonDefaults.buttonColors(containerColor = padawan_theme_button_primary),
                         shape = RoundedCornerShape(20.dp),
                         border = BorderStroke(2.dp, SolidColor(padawan_theme_onPrimary))
