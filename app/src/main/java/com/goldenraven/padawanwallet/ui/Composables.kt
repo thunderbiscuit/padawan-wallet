@@ -75,9 +75,18 @@ fun Modifier.wideTextField(): Modifier = this.then(
         .border(
             width = 2.dp,
             color = padawan_theme_onPrimary,
-            shape = RoundedCornerShape(percent = 20)
+            // shape = RoundedCornerShape(percent = 20)
+            shape = RoundedCornerShape(20.dp)
         )
-        .shadowModifier(shadowHeight = 15f)
+        // .shadowModifier(shadowHeight = 15f)
+        .advancedShadow(
+            color = Color.Black,
+            alpha = 1f,
+            cornersRadius = 20.dp,
+            shadowBlurRadius = 0.0001.dp,
+            offsetX = 4.dp,
+            offsetY = 4.dp
+        )
 )
 
 inline fun Modifier.noRippleClickable(crossinline onClick: () -> Unit): Modifier = composed {
