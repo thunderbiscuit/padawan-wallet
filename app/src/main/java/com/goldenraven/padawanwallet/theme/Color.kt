@@ -40,7 +40,7 @@ val padawan_theme_primary = Color(0xFF76dab3)
 val padawan_theme_onPrimary = Color(0xFF000000)
 val padawan_theme_background = Color(0xFF76dab3)
 val padawan_theme_onBackground = Color(0xFF8480e5)
-val padawan_theme_background_secondary = Color(0xFFf3f4ff)
+val padawan_theme_background_secondary = Color(0x66FFFFFF)
 val padawan_theme_onBackground_secondary = Color(0xFFdadeff)
 
 val padawan_theme_lazyColumn_background = Color(0xFFfee7e0)

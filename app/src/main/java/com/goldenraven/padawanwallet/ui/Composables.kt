@@ -4,29 +4,18 @@ import androidx.compose.animation.*
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.composed
-import androidx.compose.ui.draw.drawBehind
-import androidx.compose.ui.geometry.CornerRadius
-import androidx.compose.ui.geometry.Offset
-import androidx.compose.ui.geometry.Rect
-import androidx.compose.ui.geometry.Size
-import androidx.compose.ui.graphics.*
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.Density
-import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
@@ -36,92 +25,7 @@ import com.goldenraven.padawanwallet.theme.*
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import kotlinx.coroutines.delay
 
-fun Modifier.shadowModifier(shadowHeight: Float): Modifier = this.then(
-    Modifier
-        .drawBehind {
-            drawRoundRect(
-                color = padawan_theme_onPrimary,
-                size = Size(
-                    width = size.width,
-                    height = size.height / 2 + shadowHeight,
-                ),
-                topLeft = Offset(x = 0f, y = size.height / 2),
-                cornerRadius = CornerRadius(
-                    x = 20.dp.toPx(),
-                    y = 20.dp.toPx()
-                )
-            )
-            drawRect(
-                color = padawan_theme_onPrimary,
-                size = Size(
-                    width = size.width,
-                    height = size.height / 4 + shadowHeight / 2,
-                ),
-                topLeft = Offset(x = 0f, y = size.height / 2)
-            )
-        }
-)
-
-fun Modifier.standardBackground(): Modifier = this.then(
-    fillMaxSize()
-        .background(padawan_theme_background_secondary, shape = BackgroundShape())
-        .padding(all = 32.dp)
-)
-
-fun Modifier.wideTextField(): Modifier = this.then(
-    Modifier
-        .padding(vertical = 8.dp)
-        .fillMaxWidth()
-        .border(
-            width = 2.dp,
-            color = padawan_theme_onPrimary,
-            // shape = RoundedCornerShape(percent = 20)
-            shape = RoundedCornerShape(20.dp)
-        )
-        // .shadowModifier(shadowHeight = 15f)
-        .advancedShadow(
-            color = Color.Black,
-            alpha = 1f,
-            cornersRadius = 20.dp,
-            shadowBlurRadius = 0.0001.dp,
-            offsetX = 4.dp,
-            offsetY = 4.dp
-        )
-)
-
-inline fun Modifier.noRippleClickable(crossinline onClick: () -> Unit): Modifier = composed {
-    clickable(
-        indication = null,
-        interactionSource = remember { MutableInteractionSource() }
-    ) {
-        onClick()
-    }
-}
-
 val standardBorder = BorderStroke(2.dp, SolidColor(padawan_theme_onPrimary))
-
-class BackgroundShape : Shape {
-    override fun createOutline(
-        size: Size,
-        layoutDirection: LayoutDirection,
-        density: Density
-    ): Outline {
-        return Outline.Generic(
-            path = Path().apply {
-                reset()
-                moveTo(x = 0f, y = size.height / 5)
-                quadraticBezierTo(x1 = size.width / 2, y1 = size.height / 7, x2 = size.width, y2 = size.height / 5)
-                addRect(rect = Rect(
-                    top = size.height / 5,
-                    bottom = size.height,
-                    left = 0f,
-                    right = size.width,
-                ))
-                close()
-            }
-        )
-    }
-}
 
 @Composable
 internal fun FadedVerticalDivider() {
