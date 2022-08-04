@@ -11,6 +11,7 @@ import androidx.compose.animation.core.updateTransition
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -21,18 +22,13 @@ import androidx.compose.runtime.*
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.Paint
 import androidx.compose.ui.graphics.SolidColor
-import androidx.compose.ui.graphics.drawscope.drawIntoCanvas
-import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
@@ -49,11 +45,11 @@ import io.ktor.http.*
 internal fun WalletScreen(navController: NavHostController, walletViewModel: WalletViewModel, ) {
     val balance by walletViewModel.balance.observeAsState()
     val isRefreshing by walletViewModel.isRefreshing.collectAsState()
-    val openFaucetDialog by walletViewModel.openFaucetDialog
     val transactionList by walletViewModel.readAllData.observeAsState(initial = emptyList())
+    val openFaucetDialog = walletViewModel.openFaucetDialog
     val context = LocalContext.current
 
-    if (openFaucetDialog) {
+    if (openFaucetDialog.value) {
         FaucetDialog(
             walletViewModel = walletViewModel
         )
@@ -65,7 +61,7 @@ internal fun WalletScreen(navController: NavHostController, walletViewModel: Wal
 
     Column(modifier = Modifier.standardBackground()) {
         MainBox(navController = navController, balance = balance.toString())
-        TransactionListBox(transactionList = transactionList)
+        TransactionListBox(openFaucetDialog = openFaucetDialog, transactionList = transactionList)
     }
 }
 
@@ -208,7 +204,7 @@ fun MainBox(navController: NavHostController, balance: String) {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TransactionListBox(transactionList: List<Tx>) {
+fun TransactionListBox(openFaucetDialog: MutableState<Boolean>, transactionList: List<Tx>) {
     Row(modifier = Modifier.padding(top = 16.dp, bottom = 8.dp)) {
         Text(
             text = "Transactions",
@@ -224,6 +220,7 @@ fun TransactionListBox(transactionList: List<Tx>) {
             modifier = Modifier
                 .weight(weight = 0.5f)
                 .align(Alignment.Bottom)
+                .clickable { /* TODO */ }
         )
     }
 
@@ -242,7 +239,7 @@ fun TransactionListBox(transactionList: List<Tx>) {
                         modifier = Modifier.padding(all = 8.dp)
                     )
                     Button(
-                        onClick = {  },
+                        onClick = { openFaucetDialog.value = true },
                         modifier = Modifier
                             .padding(all = 8.dp)
                             .advancedShadow(
