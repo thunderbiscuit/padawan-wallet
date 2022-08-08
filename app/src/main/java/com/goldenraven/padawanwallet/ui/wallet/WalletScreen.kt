@@ -8,13 +8,12 @@ package com.goldenraven.padawanwallet.ui.wallet
 import androidx.compose.animation.animateColor
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.core.updateTransition
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.AlertDialog
 import androidx.compose.material3.*
@@ -23,8 +22,6 @@ import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.scale
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
@@ -37,9 +34,10 @@ import com.goldenraven.padawanwallet.R
 import com.goldenraven.padawanwallet.data.Tx
 import com.goldenraven.padawanwallet.data.Wallet
 import com.goldenraven.padawanwallet.theme.*
-import com.goldenraven.padawanwallet.ui.*
+import com.goldenraven.padawanwallet.ui.FadedVerticalDivider
+import com.goldenraven.padawanwallet.ui.Screen
+import com.goldenraven.padawanwallet.ui.standardBorder
 import com.goldenraven.padawanwallet.utils.getDateDifference
-import io.ktor.http.*
 
 @Composable
 internal fun WalletScreen(navController: NavHostController, walletViewModel: WalletViewModel, ) {
@@ -73,14 +71,7 @@ fun MainBox(navController: NavHostController, balance: String) {
         shape = RoundedCornerShape(20.dp),
         containerColor = padawan_theme_onBackground_secondary,
         modifier = Modifier
-            .advancedShadow(
-                color = Color.Black,
-                alpha = 1f,
-                cornersRadius = 20.dp,
-                shadowBlurRadius = 0.0001.dp,
-                offsetX = 4.dp,
-                offsetY = 4.dp
-            )
+            .standardShadow()
             .fillMaxWidth()
     ) {
         ConstraintLayout(
@@ -154,14 +145,7 @@ fun MainBox(navController: NavHostController, balance: String) {
                     border = standardBorder,
                     modifier = Modifier
                         .padding(all = 8.dp)
-                        .advancedShadow(
-                            color = Color.Black,
-                            alpha = 1f,
-                            cornersRadius = 20.dp,
-                            shadowBlurRadius = 0.0001.dp,
-                            offsetX = 4.dp,
-                            offsetY = 4.dp
-                        )
+                        .standardShadow()
                         .weight(weight = 0.5f)
                 ) {
                     Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.padding(vertical = 8.dp)) {
@@ -179,14 +163,7 @@ fun MainBox(navController: NavHostController, balance: String) {
                     border = standardBorder,
                     modifier = Modifier
                         .padding(all = 8.dp)
-                        .advancedShadow(
-                            color = Color.Black,
-                            alpha = 1f,
-                            cornersRadius = 20.dp,
-                            shadowBlurRadius = 0.0001.dp,
-                            offsetX = 4.dp,
-                            offsetY = 4.dp
-                        )
+                        .standardShadow()
                         .weight(weight = 0.5f),
                 ) {
                     Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.padding(vertical = 8.dp)) {
@@ -242,17 +219,10 @@ fun TransactionListBox(openFaucetDialog: MutableState<Boolean>, transactionList:
                         onClick = { openFaucetDialog.value = true },
                         modifier = Modifier
                             .padding(all = 8.dp)
-                            .advancedShadow(
-                                color = Color.Black,
-                                alpha = 1f,
-                                cornersRadius = 20.dp,
-                                shadowBlurRadius = 0.0001.dp,
-                                offsetX = 4.dp,
-                                offsetY = 4.dp
-                            ),
+                            .standardShadow(),
                         colors = ButtonDefaults.buttonColors(containerColor = padawan_theme_button_primary),
                         shape = RoundedCornerShape(20.dp),
-                        border = BorderStroke(2.dp, SolidColor(padawan_theme_onPrimary))
+                        border = standardBorder
                     ) {
                         Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.padding(vertical = 8.dp)) {
                             Text(text = "Get coins")
@@ -272,9 +242,12 @@ fun TransactionListBox(openFaucetDialog: MutableState<Boolean>, transactionList:
             LazyColumn(
                 modifier = Modifier
                     .background(color = padawan_theme_lazyColumn_background)
-                    .padding(all = 24.dp)
+                    .padding(horizontal = 24.dp)
             ) {
-                items(transactionList) { txn ->
+                itemsIndexed(transactionList) { index, txn ->
+                    if (index == 0) {
+                        Spacer(modifier = Modifier.height(24.dp))
+                    }
                     Column {
                         Row {
                             Text(
@@ -333,7 +306,11 @@ fun TransactionListBox(openFaucetDialog: MutableState<Boolean>, transactionList:
                                 }
                             }
                         }
-                        Divider(modifier = Modifier.padding(vertical = 8.dp))
+                        if (index != transactionList.size - 1) {
+                            Divider(modifier = Modifier.padding(vertical = 8.dp))
+                        } else {
+                            Spacer(modifier = Modifier.height(24.dp))
+                        }
                     }
                 }
             }

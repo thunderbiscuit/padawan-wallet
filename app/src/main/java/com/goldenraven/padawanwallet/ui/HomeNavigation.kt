@@ -15,6 +15,7 @@ import com.goldenraven.padawanwallet.ui.drawer.AboutScreen
 import com.goldenraven.padawanwallet.ui.drawer.RecoveryPhraseScreen
 import com.goldenraven.padawanwallet.ui.drawer.SendCoinsBackScreen
 import com.goldenraven.padawanwallet.ui.drawer.SettingsScreen
+import com.goldenraven.padawanwallet.ui.tutorials.TutorialViewModel
 import com.goldenraven.padawanwallet.ui.wallet.WalletViewModel
 import com.google.accompanist.navigation.animation.AnimatedNavHost
 import com.google.accompanist.navigation.animation.composable
@@ -22,7 +23,7 @@ import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
-fun HomeNavigation(walletViewModel: WalletViewModel = viewModel()) {
+fun HomeNavigation(walletViewModel: WalletViewModel = viewModel(), tutorialViewModel: TutorialViewModel = viewModel()) {
     val navController: NavHostController = rememberAnimatedNavController()
     val animationDuration = 400
 
@@ -46,7 +47,7 @@ fun HomeNavigation(walletViewModel: WalletViewModel = viewModel()) {
             exitTransition = {
                 slideOutOfContainer(AnimatedContentScope.SlideDirection.Start, animationSpec = tween(animationDuration))
             },
-        ) { HomeScreen(walletViewModel = walletViewModel) }
+        ) { HomeScreen(walletViewModel = walletViewModel, tutorialViewModel = tutorialViewModel) }
 
 
         // About

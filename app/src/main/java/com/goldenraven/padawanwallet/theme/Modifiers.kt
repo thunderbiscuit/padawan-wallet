@@ -54,6 +54,17 @@ fun Modifier.advancedShadow(
     }
 }
 
+fun Modifier.standardShadow(): Modifier = this.then(
+    advancedShadow(
+        color = Color.Black,
+        alpha = 1f,
+        cornersRadius = 20.dp,
+        shadowBlurRadius = 0.0001.dp,
+        offsetX = 4.dp,
+        offsetY = 4.dp
+    )
+)
+
 fun Modifier.standardBackground(): Modifier = this.then(
     fillMaxSize()
         .background(padawan_theme_background_secondary, shape = BackgroundShape())

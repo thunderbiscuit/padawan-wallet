@@ -71,6 +71,8 @@
     <string name="E8_title">Recovering your wallet</string>
     <string name="tutorial_done">Mark tutorial\nas done</string>
     <string name="back_to_list">Back to tutorials list</string>
+    <string name="basic">Basics</string>
+    <string name="advanced">Advanced</string>
 
     <!-- drawer -->
     <string name="about_title">About</string>
