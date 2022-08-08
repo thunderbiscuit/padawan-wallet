@@ -1,6 +1,8 @@
 package com.goldenraven.padawanwallet.ui.tutorials
 
-import androidx.compose.foundation.Image
+import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.tween
+import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
@@ -13,12 +15,15 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.draw.scale
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.navigation.NavController
 import com.goldenraven.padawanwallet.R
 import com.goldenraven.padawanwallet.theme.*
@@ -32,25 +37,26 @@ internal fun TutorialsHomeScreen(tutorialViewModel: TutorialViewModel, navContro
     val currTutorial = 0 // TODO
     val tutorial = tutorialList[currTutorial]
 
-    Box(
+    Column(
         modifier = Modifier
             .fillMaxSize()
             .background(color = padawan_theme_background_secondary)
+            .verticalScroll(rememberScrollState())
     ) {
         Column(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(horizontal = 32.dp)
-                .verticalScroll(rememberScrollState())
         ) {
-            Spacer(modifier = Modifier.height(32.dp))
+            Spacer(modifier = Modifier.height(height = 32.dp))
             TutorialHomeTitle()
+            Spacer(modifier = Modifier.height(height = 20.dp))
             TutorialHomeVisual(tutorial = tutorial)
+            Spacer(modifier = Modifier.height(height = 8.dp))
             TutorialId(tutorial = tutorial)
-            TutorialTile(tutorial = tutorial)
+            TutorialTitle(tutorial = tutorial)
             TutorialDesc(tutorial = tutorial)
             TutorialButton(tutorial = tutorial, navController = navController)
-            Spacer(modifier = Modifier.height(32.dp))
         }
     }
 }
@@ -58,37 +64,21 @@ internal fun TutorialsHomeScreen(tutorialViewModel: TutorialViewModel, navContro
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TutorialHomeTitle() {
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .height(IntrinsicSize.Min)
-    ) {
+    Row(modifier = Modifier.fillMaxWidth()) {
         Column(modifier = Modifier.weight(weight = 0.65f)) {
-            // Screen Title
-            Text(
-                text = "Padawan journey",
-                fontSize = 24.sp,
-                fontWeight = FontWeight.Bold,
-            )
-
-            // Screen Description
-            Text(
-                text = "Continue on your journey of becoming a bitcoin master",
-                fontSize = 14.sp,
-                modifier = Modifier.padding(vertical = 16.dp)
-            )
+            Text(text = "Padawan journey", fontSize = 24.sp, fontWeight = FontWeight.Bold)
+            Spacer(modifier = Modifier.height(height = 16.dp))
+            Text(text = "Continue on your journey of becoming a bitcoin master", fontSize = 14.sp)
         }
 
         Spacer(modifier = Modifier.weight(weight = 0.1f))
 
-        // Screen Logo
         Card(
             containerColor = padawan_theme_tutorial_faded,
             shape = CircleShape,
             modifier = Modifier
-                .fillMaxWidth()
-                .aspectRatio(ratio = 1f)
                 .weight(weight = 0.25f)
+                .aspectRatio(ratio = 1f)
         ) {
             Icon(
                 painter = painterResource(id = R.drawable.ic_tutorial_star),
@@ -106,73 +96,47 @@ fun TutorialHomeTitle() {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TutorialHomeVisual(tutorial: TutorialData) {
-    // Tutorial Box
     Card(
-        containerColor = padawan_theme_background_tutorial,
+        containerColor = padawan_theme_tutorial_background,
         border = standardBorder,
         modifier = Modifier
             .fillMaxWidth()
             .standardShadow()
     ) {
-        ConstraintLayout(
+        Column(
             modifier = Modifier
-                .padding(all = 16.dp)
                 .fillMaxSize()
+                .padding(all = 24.dp)
         ) {
-            val (tutorialTitle, tutorialProgress, tutorialProgressVisual, dragText) = createRefs()
-
-            // Tutorial Title & Difficulty
-            Column(
-                modifier = Modifier.constrainAs(tutorialTitle) {
-                    top.linkTo(parent.top)
-                    start.linkTo(parent.start)
+            Box(modifier = Modifier.fillMaxWidth()) {
+                Column(modifier = Modifier.align(alignment = Alignment.CenterStart)) {
+                    Text(text = "Chapter ${tutorial.id}", fontWeight = FontWeight.Bold)
+                    Spacer(modifier = Modifier.height(height = 8.dp))
+                    Text(text = tutorial.difficulty, fontSize = 14.sp,)
                 }
-            ) {
-                Text(
-                    text = "Chapter ${tutorial.id}",
-                    fontWeight = FontWeight.Bold
-                )
-                Text(
-                    text = tutorial.difficulty,
-                    fontSize = 14.sp,
-                    modifier = Modifier.padding(vertical = 8.dp)
-                )
+                
+                Column(
+                    modifier = Modifier
+                        .align(alignment = Alignment.CenterEnd)
+                        .width(intrinsicSize = IntrinsicSize.Max)
+                ) {
+                    ProgressBar(completionPercentage = tutorial.completion.toFloat() / tutorial.data.size.toFloat())
+                    Text(text = "${tutorial.completion} of ${tutorial.data.size} done")
+                }
             }
 
-            // Tutorial Progress Text & Bar TODO
-            Column(
-                modifier = Modifier.constrainAs(tutorialProgress) {
-                    top.linkTo(parent.top)
-                    end.linkTo(parent.end)
-                }
-            ) {
-                //LinearProgressIndicator(progress = tutorial.completion.toFloat() / tutorial.data.size.toFloat())
-                Text(text = "${tutorial.completion} of ${tutorial.data.size} done")
-            }
-
-            // Tutorial Visual Diagram TODO
+            Box(modifier = Modifier.height(150.dp))
+            
             Box(
                 modifier = Modifier
-                    .height(150.dp)
-                    .constrainAs(tutorialProgressVisual) {
-                        top.linkTo(tutorialTitle.bottom)
-                        start.linkTo(parent.start)
-                        end.linkTo(parent.end)
-                    }
-            )
-
-            // Drag Text TODO
-            Row(
-                modifier = Modifier
-                    .padding(vertical = 8.dp)
-                    .constrainAs(dragText) {
-                        top.linkTo(tutorialProgressVisual.bottom)
-                        start.linkTo(parent.start)
-                        end.linkTo(parent.end)
-                        bottom.linkTo(parent.bottom)
-                    }
+                    .fillMaxWidth()
+                    .align(alignment = Alignment.CenterHorizontally)
             ) {
-                Text(text = "drag horizontally")
+                Row(modifier = Modifier.align(alignment = Alignment.Center)) {
+                    Icon(painter = painterResource(id = R.drawable.ic_drag_left), tint = padawan_theme_tutorial, contentDescription = "Drag Left")
+                    Text(text = "drag horizontally", modifier = Modifier.padding(horizontal = 16.dp))
+                    Icon(painter = painterResource(id = R.drawable.ic_drag_right), tint = padawan_theme_tutorial, contentDescription = "Drag Right")
+                }
             }
         }
     }
@@ -180,18 +144,16 @@ fun TutorialHomeVisual(tutorial: TutorialData) {
 
 @Composable
 fun TutorialId(tutorial: TutorialData) {
-    // Tutorial ID & Difficulty
     Text(
         text = "Chapter ${tutorial.id} - ${tutorial.difficulty}",
         color = padawan_theme_tutorial_chapter,
-        modifier = Modifier.padding(top = 16.dp, bottom = 8.dp)
+        modifier = Modifier.padding(top = 16.dp)
     )
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TutorialTile(tutorial: TutorialData) {
-    // Tutorial Title & Type
+fun TutorialTitle(tutorial: TutorialData) {
     Box(
         modifier = Modifier
             .fillMaxWidth()
@@ -207,9 +169,7 @@ fun TutorialTile(tutorial: TutorialData) {
             containerColor = padawan_theme_button_primary,
             shape = RoundedCornerShape(20.dp),
             border = standardBorder,
-            modifier = Modifier
-                .align(alignment = Alignment.CenterEnd)
-                .standardShadow()
+            modifier = Modifier.align(alignment = Alignment.CenterEnd)
         ) {
             Text(
                 text = tutorial.type,
@@ -221,17 +181,12 @@ fun TutorialTile(tutorial: TutorialData) {
 
 @Composable
 fun TutorialDesc(tutorial: TutorialData) {
-    // Tutorial Description
-    Text(
-        text = stringResource(id = tutorial.data[0][1].resourceId),
-        modifier = Modifier.padding(vertical = 8.dp)
-    )
+    Text(text = stringResource(id = tutorial.data[0][1].resourceId))
 }
 
 @Composable
 fun TutorialButton(tutorial: TutorialData, navController: NavController) {
     Box(modifier = Modifier.fillMaxWidth()) {
-        // Start Lesson button
         Button(
             onClick = { navController.navigate(route = "${Screen.TutorialsScreen.route}/${tutorial.id}") },
             colors = ButtonDefaults.buttonColors(containerColor = padawan_theme_button_primary),
@@ -255,6 +210,50 @@ fun TutorialButton(tutorial: TutorialData, navController: NavController) {
                     contentDescription = "Next Icon"
                 )
             }
+        }
+    }
+}
+
+@Composable
+fun ProgressBar(
+    height: Dp = 12.dp,
+    backgroundColor: Color = padawan_theme_progressbar_background,
+    color: Color = padawan_theme_tutorial,
+    animationDuration: Int = 1000,
+    animationDelay: Int = 0,
+    completionPercentage: Float,
+) {
+    val animateProgress = animateFloatAsState(
+        targetValue = completionPercentage,
+        animationSpec = tween(
+            durationMillis = animationDuration,
+            delayMillis = animationDelay
+        )
+    )
+
+    Canvas(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(height = height)
+    ) {
+        // Background
+        drawLine(
+            color = backgroundColor,
+            cap = StrokeCap.Round,
+            strokeWidth = size.height,
+            start = Offset(x = 0f, y = 0f),
+            end = Offset(x = size.width, y = 0f)
+        )
+
+        // Foreground
+        if (animateProgress.value != 0f) {
+            drawLine(
+                color = color,
+                cap = StrokeCap.Round,
+                strokeWidth = size.height,
+                start = Offset(x = 0f, y = 0f),
+                end = Offset(x = animateProgress.value * size.width, y = 0f)
+            )
         }
     }
 }
