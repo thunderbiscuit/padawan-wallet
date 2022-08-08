@@ -19,7 +19,7 @@ import com.goldenraven.padawanwallet.theme.md_theme_dark_background
 
 @Composable
 fun TutorialsScreen(tutorial: Tutorial) {
-    TutorialPage(tutorial.data)
+    //TutorialPage(tutorial.data)
 }
 
 @Composable
@@ -73,22 +73,5 @@ internal fun TutorialPage(tutorialData: List<TutorialElement>) {
                 }
             }
         }
-    }
-}
-
-enum class Tutorial(val id: Int, val data: List<TutorialElement>) {
-    T1(1, tutorial1),
-    T2(2, tutorial2),
-    T3(3, tutorial3),
-    T4(4, tutorial4),
-    T5(5, tutorial5),
-    T6(6, tutorial6),
-    T7(7, tutorial7),
-    T8(8, tutorial8);
-
-    // we can use this to reverse-lookup the tutorial based on an Int
-    companion object {
-        private val map: Map<Int, Tutorial> = values().associateBy(Tutorial::id)
-        fun fromId(id: Int): Tutorial? = map[id]
     }
 }

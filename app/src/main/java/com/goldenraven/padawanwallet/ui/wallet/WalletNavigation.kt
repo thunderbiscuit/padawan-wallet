@@ -16,6 +16,7 @@ import androidx.navigation.NavType
 import androidx.navigation.navArgument
 import com.goldenraven.padawanwallet.ui.Screen
 import com.goldenraven.padawanwallet.ui.tutorials.Tutorial
+import com.goldenraven.padawanwallet.ui.tutorials.TutorialViewModel
 import com.goldenraven.padawanwallet.ui.tutorials.TutorialsHomeScreen
 import com.goldenraven.padawanwallet.ui.tutorials.TutorialsScreen
 import com.google.accompanist.navigation.animation.AnimatedNavHost
@@ -23,7 +24,11 @@ import com.google.accompanist.navigation.animation.composable
 
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
-fun WalletNavigation(navControllerWalletNavigation: NavHostController, walletViewModel: WalletViewModel) {
+fun WalletNavigation(
+    navControllerWalletNavigation: NavHostController,
+    walletViewModel: WalletViewModel,
+    tutorialViewModel: TutorialViewModel
+) {
     val animationDuration = 400
 
     AnimatedNavHost(
@@ -149,7 +154,7 @@ fun WalletNavigation(navControllerWalletNavigation: NavHostController, walletVie
                     else -> fadeOut(animationSpec = tween(300))
                 }
             }
-        ) { TutorialsHomeScreen(navController = navControllerWalletNavigation) }
+        ) { TutorialsHomeScreen(tutorialViewModel = tutorialViewModel, navController = navControllerWalletNavigation) }
 
 
         // Specific tutorials
