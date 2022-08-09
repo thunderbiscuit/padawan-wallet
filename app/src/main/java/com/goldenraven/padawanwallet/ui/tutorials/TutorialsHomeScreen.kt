@@ -21,6 +21,8 @@ import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.toLowerCase
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -50,9 +52,9 @@ internal fun TutorialsHomeScreen(tutorialViewModel: TutorialViewModel, navContro
         ) {
             Spacer(modifier = Modifier.height(height = 32.dp))
             TutorialHomeTitle()
-            Spacer(modifier = Modifier.height(height = 20.dp))
+            Spacer(modifier = Modifier.height(height = 24.dp))
             TutorialHomeVisual(tutorial = tutorial)
-            Spacer(modifier = Modifier.height(height = 8.dp))
+            Spacer(modifier = Modifier.height(height = 24.dp))
             TutorialId(tutorial = tutorial)
             TutorialTitle(tutorial = tutorial)
             TutorialDesc(tutorial = tutorial)
@@ -66,9 +68,17 @@ internal fun TutorialsHomeScreen(tutorialViewModel: TutorialViewModel, navContro
 fun TutorialHomeTitle() {
     Row(modifier = Modifier.fillMaxWidth()) {
         Column(modifier = Modifier.weight(weight = 0.65f)) {
-            Text(text = "Padawan journey", fontSize = 24.sp, fontWeight = FontWeight.Bold)
+            Text(
+                text = "Padawan journey",
+                style = PadawanTypography.headlineSmall,
+                color = padawan_theme_text_headline
+            )
             Spacer(modifier = Modifier.height(height = 16.dp))
-            Text(text = "Continue on your journey of becoming a bitcoin master", fontSize = 14.sp)
+            Text(
+                text = "Continue on your journey of becoming a bitcoin master",
+                style = PadawanTypography.bodyMedium,
+                color = padawan_theme_text_faded
+            )
         }
 
         Spacer(modifier = Modifier.weight(weight = 0.1f))
@@ -110,9 +120,15 @@ fun TutorialHomeVisual(tutorial: TutorialData) {
         ) {
             Box(modifier = Modifier.fillMaxWidth()) {
                 Column(modifier = Modifier.align(alignment = Alignment.CenterStart)) {
-                    Text(text = "Chapter ${tutorial.id}", fontWeight = FontWeight.Bold)
+                    Text(
+                        text = "Chapter ${tutorial.id}",
+                        style = PadawanTypography.labelLarge
+                    )
                     Spacer(modifier = Modifier.height(height = 8.dp))
-                    Text(text = tutorial.difficulty, fontSize = 14.sp,)
+                    Text(
+                        text = tutorial.difficulty,
+                        style = PadawanTypography.bodySmall
+                    )
                 }
                 
                 Column(
@@ -121,7 +137,10 @@ fun TutorialHomeVisual(tutorial: TutorialData) {
                         .width(intrinsicSize = IntrinsicSize.Max)
                 ) {
                     ProgressBar(completionPercentage = tutorial.completion.toFloat() / tutorial.data.size.toFloat())
-                    Text(text = "${tutorial.completion} of ${tutorial.data.size} done")
+                    Text(
+                        text = "${tutorial.completion} of ${tutorial.data.size} done",
+                        style = PadawanTypography.bodyMedium
+                    )
                 }
             }
 
@@ -134,7 +153,13 @@ fun TutorialHomeVisual(tutorial: TutorialData) {
             ) {
                 Row(modifier = Modifier.align(alignment = Alignment.Center)) {
                     Icon(painter = painterResource(id = R.drawable.ic_drag_left), tint = padawan_theme_tutorial, contentDescription = "Drag Left")
-                    Text(text = "drag horizontally", modifier = Modifier.padding(horizontal = 16.dp))
+                    Text(
+                        text = "drag horizontally",
+                        style = PadawanTypography.bodySmall,
+                        modifier = Modifier
+                            .align(alignment = Alignment.CenterVertically)
+                            .padding(horizontal = 16.dp)
+                    )
                     Icon(painter = painterResource(id = R.drawable.ic_drag_right), tint = padawan_theme_tutorial, contentDescription = "Drag Right")
                 }
             }
@@ -146,8 +171,8 @@ fun TutorialHomeVisual(tutorial: TutorialData) {
 fun TutorialId(tutorial: TutorialData) {
     Text(
         text = "Chapter ${tutorial.id} - ${tutorial.difficulty}",
-        color = padawan_theme_tutorial_chapter,
-        modifier = Modifier.padding(top = 16.dp)
+        style = PadawanTypography.labelLarge,
+        color = padawan_theme_button_primary
     )
 }
 
@@ -161,8 +186,8 @@ fun TutorialTitle(tutorial: TutorialData) {
     ) {
         Text(
             text = tutorial.title,
-            fontSize = 18.sp,
-            fontWeight = FontWeight.Bold,
+            style = PadawanTypography.headlineSmall,
+            fontSize = 20.sp,
             modifier = Modifier.align(alignment = Alignment.CenterStart)
         )
         Card(
@@ -172,7 +197,8 @@ fun TutorialTitle(tutorial: TutorialData) {
             modifier = Modifier.align(alignment = Alignment.CenterEnd)
         ) {
             Text(
-                text = tutorial.type,
+                text = tutorial.type.lowercase(),
+                style = PadawanTypography.bodySmall,
                 modifier = Modifier.padding(all = 8.dp)
             )
         }
@@ -181,7 +207,11 @@ fun TutorialTitle(tutorial: TutorialData) {
 
 @Composable
 fun TutorialDesc(tutorial: TutorialData) {
-    Text(text = stringResource(id = tutorial.data[0][1].resourceId))
+    Text(
+        text = stringResource(id = tutorial.data[0][1].resourceId),
+        style = PadawanTypography.bodyMedium,
+        color = padawan_theme_text_faded
+    )
 }
 
 @Composable

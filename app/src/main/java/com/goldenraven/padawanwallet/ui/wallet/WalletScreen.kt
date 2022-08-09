@@ -24,7 +24,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -59,6 +58,7 @@ internal fun WalletScreen(navController: NavHostController, walletViewModel: Wal
 
     Column(modifier = Modifier.standardBackground()) {
         MainBox(navController = navController, balance = balance.toString())
+        Spacer(modifier = Modifier.height(height = 12.dp))
         TransactionListBox(openFaucetDialog = openFaucetDialog, transactionList = transactionList)
     }
 }
@@ -76,13 +76,15 @@ fun MainBox(navController: NavHostController, balance: String) {
     ) {
         ConstraintLayout(
             modifier = Modifier
-                .padding(horizontal = 16.dp, vertical = 24.dp)
+                .padding(start = 24.dp, end = 24.dp, top = 24.dp, bottom = 12.dp)
                 .fillMaxWidth()
         ) {
             val (cardName, currencyToggle, balanceText, currencyText, buttonRow) = createRefs()
             val currencyToggleState = remember { mutableStateOf(value = false) }
             Text(
                 text = "bitcoin testnet",
+                style = PadawanTypography.bodyMedium,
+                color = padawan_theme_text_default.copy(alpha = 0.5f),
                 modifier = Modifier.constrainAs(cardName) {
                     top.linkTo(parent.top)
                     start.linkTo(parent.start)
@@ -90,15 +92,15 @@ fun MainBox(navController: NavHostController, balance: String) {
             )
             Box(
                 modifier = Modifier
-                    .constrainAs(currencyToggle) {
-                        top.linkTo(parent.top)
-                        end.linkTo(parent.end)
-                    }
+                    .noRippleClickable { currencyToggleState.value = !currencyToggleState.value }
                     .background(
                         color = padawan_theme_button_secondary,
                         shape = RoundedCornerShape(size = 10.dp)
                     )
-                    .noRippleClickable { currencyToggleState.value = !currencyToggleState.value }
+                    .constrainAs(currencyToggle) {
+                        top.linkTo(parent.top)
+                        end.linkTo(parent.end)
+                    }
             ) {
                 Row(
                     modifier = Modifier
@@ -112,16 +114,16 @@ fun MainBox(navController: NavHostController, balance: String) {
             }
             Text(
                 text = balance,
-                fontSize = 40.sp,
-                fontWeight = FontWeight.Bold,
+                style = PadawanTypography.displaySmall,
                 modifier = Modifier
                     .constrainAs(balanceText) {
-                    top.linkTo(cardName.bottom)
-                    start.linkTo(parent.start)
-                }
+                        top.linkTo(cardName.bottom)
+                        start.linkTo(parent.start)
+                    }
             )
             Text(
                 text = CurrencyType.SATS.toString().lowercase(),
+                style = PadawanTypography.bodyMedium,
                 modifier = Modifier
                     .padding(all = 8.dp)
                     .constrainAs(currencyText) {
@@ -131,7 +133,7 @@ fun MainBox(navController: NavHostController, balance: String) {
             )
             Row(
                 modifier = Modifier
-                    .padding(top = 16.dp)
+                    .padding(top = 24.dp)
                     .constrainAs(buttonRow) {
                         top.linkTo(balanceText.bottom)
                         start.linkTo(parent.start)
@@ -144,7 +146,7 @@ fun MainBox(navController: NavHostController, balance: String) {
                     shape = RoundedCornerShape(20.dp),
                     border = standardBorder,
                     modifier = Modifier
-                        .padding(all = 8.dp)
+                        .padding(all = 4.dp)
                         .standardShadow()
                         .weight(weight = 0.5f)
                 ) {
@@ -162,7 +164,7 @@ fun MainBox(navController: NavHostController, balance: String) {
                     shape = RoundedCornerShape(20.dp),
                     border = standardBorder,
                     modifier = Modifier
-                        .padding(all = 8.dp)
+                        .padding(all = 4.dp)
                         .standardShadow()
                         .weight(weight = 0.5f),
                 ) {
@@ -188,16 +190,18 @@ fun TransactionListBox(openFaucetDialog: MutableState<Boolean>, transactionList:
             style = PadawanTypography.headlineSmall,
             textAlign = TextAlign.Start,
             modifier = Modifier
-                .weight(weight = 0.5f)
                 .align(Alignment.Bottom)
+                .weight(weight = 0.5f)
         )
         Text(
             text = "View all transactions",
+            style = PadawanTypography.bodyMedium,
             textAlign = TextAlign.End,
+            color = padawan_theme_text_default.copy(alpha = 0.5f),
             modifier = Modifier
-                .weight(weight = 0.5f)
+                .noRippleClickable { /* TODO */ }
                 .align(Alignment.Bottom)
-                .clickable { /* TODO */ }
+                .weight(weight = 0.5f)
         )
     }
 
@@ -208,11 +212,11 @@ fun TransactionListBox(openFaucetDialog: MutableState<Boolean>, transactionList:
         containerColor = padawan_theme_background_secondary
     ) {
         if (transactionList.isEmpty()) {
-            Row(modifier = Modifier.padding(all = 32.dp)) {
+            Row(modifier = Modifier.padding(all = 24.dp)) {
                 Column(modifier = Modifier.weight(weight = 0.70f)) {
                     Text(
                         text = "Hey! Your transaction list is empty, get some coins so you can fill it up.",
-                        fontSize = 14.sp,
+                        style = PadawanTypography.bodyMedium,
                         modifier = Modifier.padding(all = 8.dp)
                     )
                     Button(
@@ -225,8 +229,8 @@ fun TransactionListBox(openFaucetDialog: MutableState<Boolean>, transactionList:
                         border = standardBorder
                     ) {
                         Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.padding(vertical = 8.dp)) {
-                            Text(text = "Get coins")
-                            Icon(painter = painterResource(id = R.drawable.ic_receive), contentDescription = "Get Coins Icon")
+                            Text(text = "Get coins", style = PadawanTypography.bodyMedium)
+                            Icon(painter = painterResource(id = R.drawable.ic_receive_secondary), contentDescription = "Get Coins Icon")
                         }
                     }
                 }
@@ -249,40 +253,28 @@ fun TransactionListBox(openFaucetDialog: MutableState<Boolean>, transactionList:
                         Spacer(modifier = Modifier.height(24.dp))
                     }
                     Column {
-                        Row {
+                        Box(modifier = Modifier.fillMaxWidth()) {
                             Text(
                                 text = "${txn.txid.take(n = 5)}.....${txn.txid.takeLast(n = 5)}",
-                                textAlign = TextAlign.Start,
+                                style = PadawanTypography.bodyMedium,
                                 maxLines = 1,
-                                modifier = Modifier
-                                    .weight(weight = 0.5f)
-                                    .align(Alignment.Bottom)
+                                modifier = Modifier.align(Alignment.BottomStart)
                             )
                             Text(
                                 text = "${if (txn.isPayment) txn.valueOut.toString() else txn.valueIn.toString()} ${CurrencyType.SATS.toString().lowercase()}",
+                                style = PadawanTypography.bodyMedium,
                                 textAlign = TextAlign.End,
-                                modifier = Modifier
-                                    .weight(weight = 0.5f)
-                                    .align(Alignment.Bottom)
+                                modifier = Modifier.align(Alignment.BottomEnd)
                             )
                         }
-                        Row(
-                            modifier = Modifier.padding(vertical = 4.dp)
-                        ) {
+                        Box(modifier = Modifier.fillMaxWidth().padding(vertical = 4.dp)) {
                             Text(
                                 text = "${getDateDifference(date = txn.date)} ago",
-                                textAlign = TextAlign.Start,
-                                fontSize = 14.sp,
+                                style = PadawanTypography.bodySmall,
                                 maxLines = 1,
-                                modifier = Modifier
-                                    .weight(weight = 0.5f)
-                                    .align(Alignment.Bottom)
+                                modifier = Modifier.align(Alignment.CenterStart)
                             )
-                            Box(
-                                modifier = Modifier
-                                    .weight(weight = 0.5f)
-                                    .align(Alignment.Bottom)
-                            ) {
+                            Box(modifier = Modifier.align(Alignment.BottomEnd)) {
                                 Row(
                                     modifier = Modifier
                                         .align(Alignment.CenterEnd)
@@ -290,18 +282,17 @@ fun TransactionListBox(openFaucetDialog: MutableState<Boolean>, transactionList:
                                             color = if (txn.isPayment) padawan_theme_send_primary else padawan_theme_receive_primary,
                                             shape = RoundedCornerShape(size = 5.dp)
                                         )
-                                        .padding(horizontal = 8.dp)
                                 ) {
                                     Text(
                                         text = if (txn.isPayment) "Sent" else "Receive",
-                                        fontSize = 14.sp,
-                                        modifier = Modifier.align(Alignment.CenterVertically)
+                                        style = PadawanTypography.bodySmall,
+                                        modifier = Modifier.align(Alignment.CenterVertically).padding(start = 8.dp, top = 4.dp, bottom = 4.dp)
                                     )
                                     Icon(
                                         painter = if (txn.isPayment) painterResource(id = R.drawable.ic_send_secondary) else painterResource(id = R.drawable.ic_receive_secondary),
+                                        tint = padawan_disabled,
                                         contentDescription = if (txn.isPayment) "Send Icon" else "Receive Icon",
-                                        modifier = Modifier.scale(scale = 0.75f),
-                                        tint = padawan_disabled
+                                        modifier = Modifier.align(Alignment.CenterVertically).scale(scale = 0.75f).padding(end = 8.dp),
                                     )
                                 }
                             }
@@ -322,7 +313,9 @@ fun TransactionListBox(openFaucetDialog: MutableState<Boolean>, transactionList:
 fun CurrencyToggleText(currencyToggleState: MutableState<Boolean>, text: CurrencyType) {
     val currencyState = (!currencyToggleState.value && text == CurrencyType.BTC) || (currencyToggleState.value && text == CurrencyType.SATS)
 
-    val colorTransition = updateTransition(if (currencyState) padawan_theme_onBackground_faded else padawan_theme_onPrimary, label = "")
+    val colorTransition = updateTransition(
+        if (currencyState) padawan_theme_onBackground_faded else padawan_theme_onPrimary, label = "Currency Toggle Text"
+    )
     val color by colorTransition.animateColor(
         transitionSpec = { tween(durationMillis = 500) },
         label = "Changing Color Animation",
@@ -333,8 +326,9 @@ fun CurrencyToggleText(currencyToggleState: MutableState<Boolean>, text: Currenc
     Text(
         text = text.toString().lowercase(),
         textAlign = TextAlign.Center,
-        modifier = Modifier.padding(all = 8.dp),
+        style = PadawanTypography.bodyMedium,
         color = color,
+        modifier = Modifier.padding(all = 8.dp),
     )
 }
 
