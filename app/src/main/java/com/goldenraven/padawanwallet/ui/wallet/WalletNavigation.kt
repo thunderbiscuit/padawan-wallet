@@ -15,10 +15,8 @@ import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.navArgument
 import com.goldenraven.padawanwallet.ui.Screen
-import com.goldenraven.padawanwallet.ui.tutorials.Tutorial
-import com.goldenraven.padawanwallet.ui.tutorials.TutorialViewModel
+import com.goldenraven.padawanwallet.ui.tutorials.*
 import com.goldenraven.padawanwallet.ui.tutorials.TutorialsHomeScreen
-import com.goldenraven.padawanwallet.ui.tutorials.TutorialsScreen
 import com.google.accompanist.navigation.animation.AnimatedNavHost
 import com.google.accompanist.navigation.animation.composable
 
@@ -174,11 +172,9 @@ fun WalletNavigation(
                 slideOutOfContainer(AnimatedContentScope.SlideDirection.Down, animationSpec = tween(animationDuration))
             }
         ) { backStackEntry ->
-                backStackEntry.arguments?.getInt("tutorialId")?.let {
-                    // use the id to reverse-lookup the correct enum variant and provide it to the composable
-                    val tutorial = Tutorial.fromId(it + 1) ?: throw Exception("Cannot find requested tutorial")
-                    TutorialsScreen(tutorial = tutorial)
-                }
+            backStackEntry.arguments?.getInt("tutorialId")?.let {
+                TutorialsScreen(tutorial = tutorialViewModel.getTutorial(id = it), navController = navControllerWalletNavigation)
+            }
         }
     }
 }

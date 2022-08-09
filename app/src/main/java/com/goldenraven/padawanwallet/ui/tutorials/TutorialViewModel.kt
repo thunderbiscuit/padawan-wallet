@@ -26,4 +26,8 @@ class TutorialViewModel(application: Application) : AndroidViewModel(application
             TutorialData(id = 8, title = application.getString(R.string.E8_title), type = application.getString(R.string.skill), difficulty = application.getString(R.string.advanced), completion = 0, data = tutorial8),
         )
     }
+
+    fun getTutorial(id: Int): TutorialData {
+        return _tutorialsList.first { it.id == id }
+    }
 }

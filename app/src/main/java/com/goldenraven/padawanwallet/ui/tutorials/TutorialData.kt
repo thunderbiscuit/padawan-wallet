@@ -25,35 +25,20 @@ enum class ElementType {
     RESOURCE,
 }
 
-enum class Tutorial(val id: Int, val data: List<List<TutorialElement>>) {
-    T1(id = 1, data = tutorial1),
-    T2(id = 2, data = tutorial2),
-    T3(id = 3, data = tutorial3),
-    T4(id = 4, data = tutorial4),
-    T5(id = 5, data = tutorial5),
-    T6(id = 6, data = tutorial6),
-    T7(id = 7, data = tutorial7),
-    T8(id = 8, data = tutorial8);
-
-    // we can use this to reverse-lookup the tutorial based on an Int
-    companion object {
-        private val map: Map<Int, Tutorial> = values().associateBy(Tutorial::id)
-        fun fromId(id: Int): Tutorial? = map[id]
-    }
-}
-
 val tutorial1: List<List<TutorialElement>> = listOf(
     listOf(
         TutorialElement(ElementType.TITLE, R.string.E1_title),
         TutorialElement(ElementType.BODY, R.string.t1_p1),
+        TutorialElement(ElementType.RESOURCE, R.drawable.placeholder_image),
         TutorialElement(ElementType.SUBTITLE, R.string.t1_h2),
-    ),
-    listOf(
         TutorialElement(ElementType.BODY, R.string.t1_p2),
-        TutorialElement(ElementType.SUBTITLE, R.string.t1_h3),
     ),
     listOf(
+        TutorialElement(ElementType.SUBTITLE, R.string.t1_h3),
         TutorialElement(ElementType.BODY, R.string.t1_p3),
+        TutorialElement(ElementType.RESOURCE, R.drawable.placeholder_image),
+    ),
+    listOf(
         TutorialElement(ElementType.SUBTITLE, R.string.t1_h4),
         TutorialElement(ElementType.BODY, R.string.t1_p4),
     )
