@@ -51,15 +51,19 @@ val padawan_theme_send_primary = Color(0x6676dab3)
 val padawan_theme_navigation_bar_unselected = Color(0xFF8A8A8A)
 val padawan_theme_progressbar_background = Color(0x4DD3D3D3)
 
+val padawan_theme_text_faded = Color(0xFF787878)
+val padawan_theme_text_headline = Color(0xFF1F0208)
+val padawan_theme_text_default = Color(0xFF000000)
+
 val padawan_theme_tutorial = Color(0xFFFFC847)
 val padawan_theme_tutorial_faded = Color(0xFFFFE6AA)
 val padawan_theme_tutorial_background = Color(0xFFBA4FFC)
 val padawan_theme_tutorial_chapter = Color(0xFFcc241d)
 
-val padawan_theme_button_primary = Color(0xFFff6022)
+val padawan_theme_button_primary = Color(0xFFFF6D3B)
 val padawan_theme_button_secondary = Color(0xFFffd1bf)
-val white = Color(0xFFFFFFFF)
 
+val white = Color(0xFFFFFFFF)
 val error = Color(0xFFcc241d)
 
 val md_theme_dark_surfaceLight = Color(0xFF504945)
