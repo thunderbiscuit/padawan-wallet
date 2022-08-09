@@ -20,9 +20,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.text.toLowerCase
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -77,7 +74,7 @@ fun TutorialHomeTitle() {
             Text(
                 text = "Continue on your journey of becoming a bitcoin master",
                 style = PadawanTypography.bodyMedium,
-                color = padawan_theme_text_faded
+                color = padawan_theme_text_faded_secondary
             )
         }
 
@@ -210,7 +207,7 @@ fun TutorialDesc(tutorial: TutorialData) {
     Text(
         text = stringResource(id = tutorial.data[0][1].resourceId),
         style = PadawanTypography.bodyMedium,
-        color = padawan_theme_text_faded
+        color = padawan_theme_text_faded_secondary
     )
 }
 

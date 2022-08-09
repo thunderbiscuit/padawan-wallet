@@ -10,7 +10,6 @@ import androidx.compose.animation.core.tween
 import androidx.compose.animation.core.updateTransition
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
@@ -26,7 +25,6 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.navigation.NavHostController
 import com.goldenraven.padawanwallet.R
@@ -84,7 +82,7 @@ fun MainBox(navController: NavHostController, balance: String) {
             Text(
                 text = "bitcoin testnet",
                 style = PadawanTypography.bodyMedium,
-                color = padawan_theme_text_default.copy(alpha = 0.5f),
+                color = padawan_theme_text_faded,
                 modifier = Modifier.constrainAs(cardName) {
                     top.linkTo(parent.top)
                     start.linkTo(parent.start)
@@ -197,7 +195,7 @@ fun TransactionListBox(openFaucetDialog: MutableState<Boolean>, transactionList:
             text = "View all transactions",
             style = PadawanTypography.bodyMedium,
             textAlign = TextAlign.End,
-            color = padawan_theme_text_default.copy(alpha = 0.5f),
+            color = padawan_theme_text_faded,
             modifier = Modifier
                 .noRippleClickable { /* TODO */ }
                 .align(Alignment.Bottom)
