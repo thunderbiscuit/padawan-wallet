@@ -49,7 +49,7 @@ object Wallet {
     }
 
     fun loadExistingWallet() {
-        val initialWalletData: RequiredInitialWalletData = Repository.getInitialWalletData()
+        val initialWalletData: RequiredInitialWalletData = WalletRepository.getInitialWalletData()
         Log.i(TAG, "Loading existing wallet with descriptor: ${initialWalletData.descriptor}")
         Log.i(TAG, "Loading existing wallet with change descriptor: ${initialWalletData.changeDescriptor}")
         initialize(
@@ -66,8 +66,8 @@ object Wallet {
             descriptor = descriptor,
             changeDescriptor = changeDescriptor,
         )
-        Repository.saveWallet(path, descriptor, changeDescriptor)
-        Repository.saveMnemonic(keys.mnemonic)
+        WalletRepository.saveWallet(path, descriptor, changeDescriptor)
+        WalletRepository.saveMnemonic(keys.mnemonic)
     }
 
     fun createWallet() {
@@ -78,8 +78,8 @@ object Wallet {
             descriptor = descriptor,
             changeDescriptor = changeDescriptor,
         )
-        Repository.saveWallet(path, descriptor, changeDescriptor)
-        Repository.saveMnemonic(keys.mnemonic)
+        WalletRepository.saveWallet(path, descriptor, changeDescriptor)
+        WalletRepository.saveMnemonic(keys.mnemonic)
     }
 
     private fun generateExtendedKey(): ExtendedKeyInfo {

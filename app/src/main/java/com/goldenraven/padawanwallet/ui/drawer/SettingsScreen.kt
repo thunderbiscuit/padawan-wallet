@@ -24,7 +24,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.goldenraven.padawanwallet.BuildConfig
 import com.goldenraven.padawanwallet.R
-import com.goldenraven.padawanwallet.data.Repository
+import com.goldenraven.padawanwallet.data.WalletRepository
 import com.goldenraven.padawanwallet.data.Wallet
 import com.goldenraven.padawanwallet.ui.DrawerAppBar
 import io.ktor.client.*
@@ -43,7 +43,7 @@ import org.bitcoindevkit.AddressInfo
 @Composable
 internal fun SettingsScreen(navController: NavController) {
 
-    val faucetCallDone = Repository.wasFaucetCallDone()
+    val faucetCallDone = WalletRepository.wasFaucetCallDone()
     val coroutineScope = rememberCoroutineScope()
     val snackbarHostState = remember { SnackbarHostState() }
     val context = LocalContext.current
@@ -111,7 +111,7 @@ private fun callTatooineFaucet(
             val response: HttpResponse = ktorClient.post(faucetUrl) {
                 body = TextContent(address.address, ContentType.Text.Plain)
             }
-            Repository.faucetCallDone()
+            WalletRepository.faucetCallDone()
             Log.i("SettingsFragment", "API call to Tatooine was performed. Response is ${response.status}, ${response.readText()}")
         } catch (cause: Throwable) {
             Log.i("SettingsFragment", "Tatooine call failed: $cause")

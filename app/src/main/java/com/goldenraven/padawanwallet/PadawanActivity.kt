@@ -9,7 +9,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
-import com.goldenraven.padawanwallet.data.Repository
+import com.goldenraven.padawanwallet.data.WalletRepository
 import com.goldenraven.padawanwallet.data.Wallet
 import com.goldenraven.padawanwallet.ui.intro.IntroNavigation
 import com.goldenraven.padawanwallet.theme.PadawanTheme
@@ -25,7 +25,7 @@ class PadawanActivity : AppCompatActivity() {
 
         // ask the repository if a wallet already exists
         // if so, load it and launch into wallet activity, otherwise go to intro
-        if (Repository.doesWalletExist()) {
+        if (WalletRepository.doesWalletExist()) {
             Wallet.loadExistingWallet()
             Log.i(TAG, "Wallet already exists!")
 

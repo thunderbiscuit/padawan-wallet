@@ -7,7 +7,7 @@ package com.goldenraven.padawanwallet
 
 import android.app.Application
 import android.content.Context
-import com.goldenraven.padawanwallet.data.Repository
+import com.goldenraven.padawanwallet.data.WalletRepository
 import com.goldenraven.padawanwallet.data.Wallet
 
 class PadawanWalletApplication : Application() {
@@ -19,6 +19,6 @@ class PadawanWalletApplication : Application() {
         Wallet.setPath(applicationContext.filesDir.toString())
 
         // initialize Repository object and set shared preferences
-        Repository.setSharedPreferences(applicationContext.getSharedPreferences("current_wallet", Context.MODE_PRIVATE))
+        WalletRepository.setSharedPreferences(applicationContext.getSharedPreferences("current_wallet", Context.MODE_PRIVATE))
     }
 }

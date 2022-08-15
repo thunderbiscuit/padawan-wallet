@@ -3,14 +3,17 @@
  * Use of this source code is governed by the Apache 2.0 license that can be found in the ./LICENSE file.
  */
 
-package com.goldenraven.padawanwallet.data
+package com.goldenraven.padawanwallet.data.tx
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.goldenraven.padawanwallet.data.tutorial.Tutorial
+import com.goldenraven.padawanwallet.data.tutorial.TutorialDao
+import com.goldenraven.padawanwallet.data.tutorial.TutorialDatabase
 
-@Database(entities = [Tx::class], version = 3, exportSchema = false)
+@Database(entities = [Tx::class], version = 1, exportSchema = false)
 abstract class TxDatabase: RoomDatabase() {
 
     abstract fun txDao(): TxDao

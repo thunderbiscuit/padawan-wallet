@@ -14,14 +14,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.goldenraven.padawanwallet.data.Repository
+import com.goldenraven.padawanwallet.data.WalletRepository
 import com.goldenraven.padawanwallet.ui.DrawerAppBar
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 internal fun RecoveryPhraseScreen(navController: NavController) {
 
-    val seedPhrase: String = Repository.getMnemonic()
+    val seedPhrase: String = WalletRepository.getMnemonic()
     val wordList: List<String> = seedPhrase.split(" ")
 
     Scaffold(

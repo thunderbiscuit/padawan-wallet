@@ -8,9 +8,9 @@ import org.junit.Test
 import org.mockito.Mockito.*
 
 
-class RepositoryTest {
+class WalletRepositoryTest {
 
-    private val repo: Repository = Repository
+    private val repo: WalletRepository = WalletRepository
     private lateinit var sharedPrefsMock: SharedPreferences
     private lateinit var editorMock: SharedPreferences.Editor
 

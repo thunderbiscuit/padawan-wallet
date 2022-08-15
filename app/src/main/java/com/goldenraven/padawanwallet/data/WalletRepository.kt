@@ -11,7 +11,7 @@ import com.goldenraven.padawanwallet.utils.RequiredInitialWalletData
 
 private const val TAG = "Repository"
 
-object Repository {
+object WalletRepository {
 
     private lateinit var sharedPreferences: SharedPreferences
     // private var resetTutorial : Boolean = false
