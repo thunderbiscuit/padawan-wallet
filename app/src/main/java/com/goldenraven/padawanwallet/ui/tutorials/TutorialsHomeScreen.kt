@@ -11,6 +11,9 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
@@ -25,16 +28,17 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.goldenraven.padawanwallet.R
+import com.goldenraven.padawanwallet.data.tutorial.Tutorial
 import com.goldenraven.padawanwallet.theme.*
 import com.goldenraven.padawanwallet.ui.Screen
 import com.goldenraven.padawanwallet.ui.standardBorder
 
 @Composable
 internal fun TutorialsHomeScreen(tutorialViewModel: TutorialViewModel, navController: NavController) {
-    val tutorialList = tutorialViewModel.tutorialsList
-
-    val currTutorial = 0 // TODO
-    val tutorial = tutorialList[currTutorial]
+    val currTutorial = 1 // TODO
+    val tutorialData = remember { mutableStateOf(Tutorial(id = 0, title = "", type = "", difficulty = "", completion = 0)) }
+    LaunchedEffect(key1 = true) { tutorialData.value = tutorialViewModel.getTutorialData(id = currTutorial) }
+    val tutorialPage = tutorialViewModel.getTutorialPage(id = currTutorial)
 
     Column(
         modifier = Modifier
@@ -50,12 +54,12 @@ internal fun TutorialsHomeScreen(tutorialViewModel: TutorialViewModel, navContro
             Spacer(modifier = Modifier.height(height = 32.dp))
             TutorialHomeTitle()
             Spacer(modifier = Modifier.height(height = 24.dp))
-            TutorialHomeVisual(tutorial = tutorial)
+            TutorialHomeVisual(tutorialData = tutorialData.value, tutorialPage = tutorialPage)
             Spacer(modifier = Modifier.height(height = 24.dp))
-            TutorialId(tutorial = tutorial)
-            TutorialTitle(tutorial = tutorial)
-            TutorialDesc(tutorial = tutorial)
-            TutorialButton(tutorial = tutorial, navController = navController)
+            TutorialId(tutorialData = tutorialData.value)
+            TutorialTitle(tutorialData = tutorialData.value)
+            TutorialDesc(tutorialPage = tutorialPage)
+            TutorialButton(tutorialData = tutorialData.value, navController = navController)
         }
     }
 }
@@ -102,7 +106,7 @@ fun TutorialHomeTitle() {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TutorialHomeVisual(tutorial: TutorialData) {
+fun TutorialHomeVisual(tutorialData: Tutorial, tutorialPage: List<List<TutorialElement>>) {
     Card(
         containerColor = padawan_theme_tutorial_background,
         border = standardBorder,
@@ -118,12 +122,12 @@ fun TutorialHomeVisual(tutorial: TutorialData) {
             Box(modifier = Modifier.fillMaxWidth()) {
                 Column(modifier = Modifier.align(alignment = Alignment.CenterStart)) {
                     Text(
-                        text = "Chapter ${tutorial.id}",
+                        text = "Chapter ${tutorialData.id}",
                         style = PadawanTypography.labelLarge
                     )
                     Spacer(modifier = Modifier.height(height = 8.dp))
                     Text(
-                        text = tutorial.difficulty,
+                        text = tutorialData.difficulty,
                         style = PadawanTypography.bodySmall
                     )
                 }
@@ -133,9 +137,9 @@ fun TutorialHomeVisual(tutorial: TutorialData) {
                         .align(alignment = Alignment.CenterEnd)
                         .width(intrinsicSize = IntrinsicSize.Max)
                 ) {
-                    ProgressBar(completionPercentage = tutorial.completion.toFloat() / tutorial.data.size.toFloat())
+                    ProgressBar(completionPercentage = tutorialData.completion.toFloat() / tutorialPage.size.toFloat())
                     Text(
-                        text = "${tutorial.completion} of ${tutorial.data.size} done",
+                        text = "${tutorialData.completion} of ${tutorialPage.size} done",
                         style = PadawanTypography.bodyMedium
                     )
                 }
@@ -165,9 +169,9 @@ fun TutorialHomeVisual(tutorial: TutorialData) {
 }
 
 @Composable
-fun TutorialId(tutorial: TutorialData) {
+fun TutorialId(tutorialData: Tutorial) {
     Text(
-        text = "Chapter ${tutorial.id} - ${tutorial.difficulty}",
+        text = "Chapter ${tutorialData.id} - ${tutorialData.difficulty}",
         style = PadawanTypography.labelLarge,
         color = padawan_theme_button_primary
     )
@@ -175,14 +179,14 @@ fun TutorialId(tutorial: TutorialData) {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TutorialTitle(tutorial: TutorialData) {
+fun TutorialTitle(tutorialData: Tutorial) {
     Box(
         modifier = Modifier
             .fillMaxWidth()
             .padding(bottom = 12.dp)
     ) {
         Text(
-            text = tutorial.title,
+            text = tutorialData.title,
             style = PadawanTypography.headlineSmall,
             fontSize = 20.sp,
             modifier = Modifier.align(alignment = Alignment.CenterStart)
@@ -194,7 +198,7 @@ fun TutorialTitle(tutorial: TutorialData) {
             modifier = Modifier.align(alignment = Alignment.CenterEnd)
         ) {
             Text(
-                text = tutorial.type.lowercase(),
+                text = tutorialData.type.lowercase(),
                 style = PadawanTypography.bodySmall,
                 modifier = Modifier.padding(all = 8.dp)
             )
@@ -203,19 +207,19 @@ fun TutorialTitle(tutorial: TutorialData) {
 }
 
 @Composable
-fun TutorialDesc(tutorial: TutorialData) {
+fun TutorialDesc(tutorialPage: List<List<TutorialElement>>) {
     Text(
-        text = stringResource(id = tutorial.data[0][1].resourceId),
+        text = stringResource(id = tutorialPage[0][1].resourceId),
         style = PadawanTypography.bodyMedium,
         color = padawan_theme_text_faded_secondary
     )
 }
 
 @Composable
-fun TutorialButton(tutorial: TutorialData, navController: NavController) {
+fun TutorialButton(tutorialData: Tutorial, navController: NavController) {
     Box(modifier = Modifier.fillMaxWidth()) {
         Button(
-            onClick = { navController.navigate(route = "${Screen.TutorialsScreen.route}/${tutorial.id}") },
+            onClick = { navController.navigate(route = "${Screen.TutorialsScreen.route}/${tutorialData.id}") },
             colors = ButtonDefaults.buttonColors(containerColor = padawan_theme_button_primary),
             shape = RoundedCornerShape(20.dp),
             border = standardBorder,

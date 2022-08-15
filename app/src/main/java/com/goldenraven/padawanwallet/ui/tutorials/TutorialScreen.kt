@@ -1,13 +1,12 @@
 package com.goldenraven.padawanwallet.ui.tutorials
 
+import androidx.compose.animation.core.FastOutSlowInEasing
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawBehind
@@ -21,13 +20,24 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.goldenraven.padawanwallet.R
+import com.goldenraven.padawanwallet.data.tutorial.Tutorial
 import com.goldenraven.padawanwallet.theme.*
 import com.goldenraven.padawanwallet.ui.standardBorder
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.launch
 
 @Composable
-fun TutorialsScreen(tutorial: TutorialData, navController: NavHostController) {
-    val tutorialPages = tutorial.data
-    val currentPage = remember { mutableStateOf(value = tutorial.completion) }
+fun TutorialsScreen(
+    tutorialId: Int,
+    tutorialViewModel: TutorialViewModel,
+    navController: NavHostController
+) {
+    val tutorialPages = tutorialViewModel.getTutorialPage(id = tutorialId)
+    var tutorialData = Tutorial(id = 0, title = "", type = "", difficulty = "", completion = 0)
+    LaunchedEffect(key1 = true) { tutorialData = tutorialViewModel.getTutorialData(id = tutorialId) }
+    val currentPage = remember { mutableStateOf(value = tutorialData.completion) }
+    val pageScrollState = rememberScrollState()
+    val coroutineScope = rememberCoroutineScope()
 
     Column(
         modifier = Modifier
@@ -50,32 +60,50 @@ fun TutorialsScreen(tutorial: TutorialData, navController: NavHostController) {
         ) {
             Column(modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp)) {
                 TutorialAppBar(navController = navController)
-                TutorialProgressBar(completion = currentPage, total = tutorial.data.size)
+                TutorialProgressBar(completion = currentPage, total = tutorialPages.size)
             }
         }
 
         Column(
             modifier = Modifier
-                .verticalScroll(rememberScrollState())
+                .verticalScroll(pageScrollState)
                 .padding(all = 32.dp)
                 .fillMaxSize()
         ) {
             TutorialPage(tutorialPages = tutorialPages, currentPage = currentPage)
-            TutorialButtons(tutorialPagesSize = tutorialPages.size, currentPage = currentPage)
+            TutorialButtons(
+                tutorialPagesSize = tutorialPages.size,
+                currentPage = currentPage,
+                pageScrollState = pageScrollState,
+                coroutineScope = coroutineScope,
+                tutorialViewModel = tutorialViewModel,
+                tutorialId = tutorialId,
+            )
         }
     }
 }
 
 @Composable
-fun TutorialButtons(tutorialPagesSize: Int, currentPage: MutableState<Int>) {
+fun TutorialButtons(
+    tutorialPagesSize: Int,
+    currentPage: MutableState<Int>,
+    pageScrollState: ScrollState,
+    coroutineScope: CoroutineScope,
+    tutorialViewModel: TutorialViewModel,
+    tutorialId: Int
+) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(all = 8.dp)
+            .padding(horizontal = 8.dp)
     ) {
         if (currentPage.value != 0) {
             Button(
-                onClick = { currentPage.value -= 1 },
+                onClick = {
+                    currentPage.value -= 1
+                    tutorialViewModel.setCompletion(id = tutorialId - 1, completion = currentPage.value)
+                    scrollUp(pageScrollState = pageScrollState, coroutineScope = coroutineScope)
+                },
                 colors = ButtonDefaults.buttonColors(containerColor = padawan_theme_button_secondary),
                 shape = RoundedCornerShape(20.dp),
                 border = standardBorder,
@@ -104,7 +132,11 @@ fun TutorialButtons(tutorialPagesSize: Int, currentPage: MutableState<Int>) {
         }
         if (tutorialPagesSize > currentPage.value) {
             Button(
-                onClick = { currentPage.value += 1 },
+                onClick = {
+                    currentPage.value += 1
+                    tutorialViewModel.setCompletion(id = tutorialId - 1, completion = currentPage.value)
+                    scrollUp(pageScrollState = pageScrollState, coroutineScope = coroutineScope)
+                },
                 colors = ButtonDefaults.buttonColors(containerColor = padawan_theme_button_primary),
                 shape = RoundedCornerShape(20.dp),
                 border = standardBorder,
@@ -131,6 +163,12 @@ fun TutorialButtons(tutorialPagesSize: Int, currentPage: MutableState<Int>) {
         } else {
             Spacer(modifier = Modifier.weight(weight = 0.5f))
         }
+    }
+}
+
+fun scrollUp(pageScrollState: ScrollState, coroutineScope: CoroutineScope) {
+    coroutineScope.launch {
+        pageScrollState.animateScrollTo(value = 0, animationSpec = tween(durationMillis = 500, easing = FastOutSlowInEasing))
     }
 }
 

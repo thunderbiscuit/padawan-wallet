@@ -173,7 +173,7 @@ fun WalletNavigation(
             }
         ) { backStackEntry ->
             backStackEntry.arguments?.getInt("tutorialId")?.let {
-                TutorialsScreen(tutorial = tutorialViewModel.getTutorial(id = it), navController = navControllerWalletNavigation)
+                TutorialsScreen(tutorialId = it, tutorialViewModel = tutorialViewModel, navController = navControllerWalletNavigation)
             }
         }
     }

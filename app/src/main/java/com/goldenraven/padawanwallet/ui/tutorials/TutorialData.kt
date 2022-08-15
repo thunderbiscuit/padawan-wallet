@@ -7,15 +7,6 @@ package com.goldenraven.padawanwallet.ui.tutorials
 
 import com.goldenraven.padawanwallet.R
 
-data class TutorialData(
-    val id: Int,
-    val title: String,
-    val type: String,
-    val difficulty: String,
-    val completion: Int,
-    val data: List<List<TutorialElement>>
-)
-
 data class TutorialElement(val elementType: ElementType, val resourceId: Int)
 
 enum class ElementType {

@@ -28,8 +28,8 @@ import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.navigation.NavHostController
 import com.goldenraven.padawanwallet.R
-import com.goldenraven.padawanwallet.data.Tx
 import com.goldenraven.padawanwallet.data.Wallet
+import com.goldenraven.padawanwallet.data.tx.Tx
 import com.goldenraven.padawanwallet.theme.*
 import com.goldenraven.padawanwallet.ui.FadedVerticalDivider
 import com.goldenraven.padawanwallet.ui.Screen

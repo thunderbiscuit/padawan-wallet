@@ -19,6 +19,10 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.goldenraven.padawanwallet.BuildConfig
 import com.goldenraven.padawanwallet.data.*
+import com.goldenraven.padawanwallet.data.tx.Tx
+import com.goldenraven.padawanwallet.data.tx.TxDao
+import com.goldenraven.padawanwallet.data.tx.TxDatabase
+import com.goldenraven.padawanwallet.data.tx.TxRepository
 import com.goldenraven.padawanwallet.utils.*
 import io.ktor.client.*
 import io.ktor.client.engine.cio.*
@@ -74,18 +78,18 @@ class WalletViewModel(
     }
 
     private fun didWeOfferFaucet(): Boolean {
-        val faucetOfferDone = Repository.didWeOfferFaucet()
+        val faucetOfferDone = WalletRepository.didWeOfferFaucet()
         Log.i("WalletScreen", "We have already asked if they wanted testnet coins: $faucetOfferDone")
         return faucetOfferDone
     }
 
     private fun faucetOfferWasMade() {
         Log.i("WalletScreen", "The offer to call the faucet was made")
-        Repository.offerFaucetDone()
+        WalletRepository.offerFaucetDone()
     }
 
     private fun faucetCallDone() {
-        Repository.faucetCallDone()
+        WalletRepository.faucetCallDone()
     }
 
     // Wallet Code
@@ -216,7 +220,7 @@ private fun callTatooineFaucet(address: AddressInfo) {
             val response: HttpResponse = ktorClient.post(faucetUrl) {
                 body = TextContent(address.address, ContentType.Text.Plain)
             }
-            Repository.faucetCallDone()
+            WalletRepository.faucetCallDone()
             Log.i("WalletScreen","API call to Tatooine was performed. Response is ${response.status}, ${response.readText()}")
         } catch (cause: Throwable) {
             Log.i("WalletScreen","Tatooine call failed: $cause")
