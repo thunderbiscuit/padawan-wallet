@@ -31,13 +31,13 @@ class TutorialViewModel(application: Application) : AndroidViewModel(application
         val tutorialDao = TutorialDatabase.getInstance(application).tutorialDao()
         tutorialRepository = TutorialRepository(tutorialDao)
         readAllData = tutorialRepository.readAllData
-        viewModelScope.launch(Dispatchers.IO) { getTutorialData(id = 1) }// TODO Change to most recent one
+        viewModelScope.launch(Dispatchers.IO) { getTutorialData(id = 1) }// TODO Change to most recent tutorial
         _tutorialPageMap = initTutorialPageMap()
-        if (readAllData.value.isNullOrEmpty()) initTutorial()
+        if (readAllData.value.isNullOrEmpty()) initTutorial() // TODO Check if readAllData is initialized in init (might cause tutorial data to get refreshed on startup)
     }
 
     fun setCompletion(id: Int, completion: Int) {
-        viewModelScope.launch(Dispatchers.IO) { tutorialRepository.setCompletion(id = id, completion = completion) }
+        viewModelScope.launch(Dispatchers.IO) { tutorialRepository.setCompletion(id = id, completion = completion) } // TODO Check if calling a coroutine is necessary
         _tutorialData.completion = completion
     }
 
@@ -52,6 +52,7 @@ class TutorialViewModel(application: Application) : AndroidViewModel(application
         return tutorialData
     }
 
+    // TODO If localization is enabled change language here
     private fun initTutorial() {
         val application: Application = getApplication()
         val tutorialList = listOf(

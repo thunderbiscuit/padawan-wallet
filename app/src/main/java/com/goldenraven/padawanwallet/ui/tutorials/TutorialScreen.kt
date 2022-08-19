@@ -26,6 +26,10 @@ import com.goldenraven.padawanwallet.ui.standardBorder
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
+// TODO Add Finish Button
+// TODO Add transition between pages smoother (pages & progress bar)
+// TODO Add tutorial images
+
 @Composable
 fun TutorialsScreen(
     tutorialId: Int,
@@ -130,6 +134,7 @@ fun TutorialButtons(
         } else {
             Spacer(modifier = Modifier.weight(weight = 0.5f))
         }
+
         if (tutorialPagesSize > currentPage.value) {
             Button(
                 onClick = {
@@ -212,7 +217,7 @@ fun TutorialProgressBar(
 
         for (i in 0 until total) {
             drawLine(
-                color = if (completion.value > i) completeColor else incompleteColor,
+                color = if (completion.value + 1 > i) completeColor else incompleteColor,
                 strokeWidth = size.height,
                 start = Offset(x = i * (progressBarLen + spacer), y = 0f),
                 end = Offset(x = (i + 1) * (progressBarLen + spacer) - spacer, y = 0f)
