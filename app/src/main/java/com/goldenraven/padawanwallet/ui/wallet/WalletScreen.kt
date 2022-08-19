@@ -36,6 +36,12 @@ import com.goldenraven.padawanwallet.ui.Screen
 import com.goldenraven.padawanwallet.ui.standardBorder
 import com.goldenraven.padawanwallet.utils.getDateDifference
 
+// TODO Think about reintroducing refreshing
+// TODO Reuse composable more
+// TODO Handle no internet connection situations
+// TODO Handle old faucet dialog
+// TODO Finish up send & receive screen
+
 @Composable
 internal fun WalletScreen(navController: NavHostController, walletViewModel: WalletViewModel, ) {
     val balance by walletViewModel.balance.observeAsState()

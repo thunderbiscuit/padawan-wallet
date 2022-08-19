@@ -33,6 +33,11 @@ import com.goldenraven.padawanwallet.theme.*
 import com.goldenraven.padawanwallet.ui.Screen
 import com.goldenraven.padawanwallet.ui.standardBorder
 
+// TODO Group composable better
+// TODO Get next tutorial & page
+// TODO Add scrollable box in TutorialHomeVisual + icons & lines
+// TODO Update texts when new tutorials come in
+
 @Composable
 internal fun TutorialsHomeScreen(tutorialViewModel: TutorialViewModel, navController: NavController) {
     val currTutorial = 1 // TODO
