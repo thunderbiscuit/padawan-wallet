@@ -70,7 +70,7 @@ class PadawanActivity : AppCompatActivity() {
     }
 }
 
-sealed class WalletCreateType() {
-    class FROMSCRATCH : WalletCreateType()
+sealed class WalletCreateType {
+    object FROMSCRATCH : WalletCreateType()
     class RECOVER(val recoveryPhrase: String) : WalletCreateType()
 }

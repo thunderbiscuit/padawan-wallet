@@ -62,7 +62,7 @@ internal fun WalletChoiceScreen(
         }
 
         Button(
-            onClick = { onBuildWalletButtonClicked(WalletCreateType.FROMSCRATCH()) },
+            onClick = { onBuildWalletButtonClicked(WalletCreateType.FROMSCRATCH) },
             colors = ButtonDefaults.buttonColors(md_theme_dark_surfaceLight),
             shape = RoundedCornerShape(16.dp),
             modifier = Modifier

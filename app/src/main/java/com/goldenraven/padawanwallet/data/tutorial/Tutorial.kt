@@ -7,7 +7,6 @@ package com.goldenraven.padawanwallet.data.tutorial
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.goldenraven.padawanwallet.ui.tutorials.TutorialElement
 
 @Entity(tableName = "tutorial_db")
 data class Tutorial(

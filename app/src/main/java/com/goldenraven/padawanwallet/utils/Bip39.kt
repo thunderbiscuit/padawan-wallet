@@ -6,12 +6,11 @@
 package com.goldenraven.padawanwallet.utils
 
 import android.util.Log
-import androidx.compose.ui.text.toLowerCase
 
 // return a FAILURE if any of the words are empty or not part of the list
 // return a SUCCESS with the clean recovery phrase as a string otherwise
 fun checkWords(recoveryPhraseWordMap: Map<Int, String>): WordCheckResult {
-    recoveryPhraseWordMap.forEach() { it ->
+    recoveryPhraseWordMap.forEach {
         if (it.value.isBlank()) {
             Log.i("Utils/checkWords", "Word ${it.key} was empty")
             return WordCheckResult.FAILURE(errorMessage = "Word ${it.key} is empty")
@@ -29,13 +28,13 @@ fun checkWords(recoveryPhraseWordMap: Map<Int, String>): WordCheckResult {
 // input words can have capital letters, space around them, space inside of them
 private fun buildRecoveryPhrase(recoveryPhraseWordMap: Map<Int, String>): String {
     var recoveryPhrase = ""
-    recoveryPhraseWordMap.values.forEach() {
+    recoveryPhraseWordMap.values.forEach {
         recoveryPhrase = recoveryPhrase.plus(it.trim().replace(" ", "").lowercase().plus(" "))
     }
     return recoveryPhrase.trim()
 }
 
-sealed class WordCheckResult() {
+sealed class WordCheckResult {
     class SUCCESS(val recoveryPhrase: String) : WordCheckResult()
     class FAILURE(val errorMessage: String) : WordCheckResult()
 }

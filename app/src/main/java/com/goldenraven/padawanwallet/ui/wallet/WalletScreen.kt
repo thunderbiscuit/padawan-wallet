@@ -43,7 +43,7 @@ import com.goldenraven.padawanwallet.utils.getDateDifference
 // TODO Finish up send & receive screen
 
 @Composable
-internal fun WalletScreen(navController: NavHostController, walletViewModel: WalletViewModel, ) {
+internal fun WalletScreen(navController: NavHostController, walletViewModel: WalletViewModel) {
     val balance by walletViewModel.balance.observeAsState()
     val isRefreshing by walletViewModel.isRefreshing.collectAsState()
     val transactionList by walletViewModel.readAllData.observeAsState(initial = emptyList())

@@ -119,7 +119,7 @@ internal fun ReceiveScreen(
 private fun addressToQR(address: String): ImageBitmap? {
     Log.i("ReceiveScreen", "We are generating the QR code for address $address")
     try {
-        val qrCodeWriter: QRCodeWriter = QRCodeWriter()
+        val qrCodeWriter = QRCodeWriter()
         val bitMatrix: BitMatrix = qrCodeWriter.encode(address, BarcodeFormat.QR_CODE, 1000, 1000)
         val bitMap = createBitmap(1000, 1000)
         for (x in 0 until 1000) {
