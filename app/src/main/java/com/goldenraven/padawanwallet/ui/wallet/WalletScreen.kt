@@ -21,8 +21,10 @@ import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.scale
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
@@ -61,15 +63,16 @@ internal fun WalletScreen(navController: NavHostController, walletViewModel: Wal
     }
 
     Column(modifier = Modifier.standardBackground()) {
-        MainBox(navController = navController, balance = balance.toString())
+        BalanceBox(balance = balance.toString())
         Spacer(modifier = Modifier.height(height = 12.dp))
+        SendReceive(navController = navController)
         TransactionListBox(openFaucetDialog = openFaucetDialog, transactionList = transactionList)
     }
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MainBox(navController: NavHostController, balance: String) {
+fun BalanceBox(balance: String) {
     Card(
         border = standardBorder,
         shape = RoundedCornerShape(20.dp),
@@ -80,7 +83,8 @@ fun MainBox(navController: NavHostController, balance: String) {
     ) {
         ConstraintLayout(
             modifier = Modifier
-                .padding(start = 24.dp, end = 24.dp, top = 24.dp, bottom = 12.dp)
+                .padding(start = 24.dp, end = 24.dp, top = 24.dp, bottom = 0.dp)
+                // .padding(start = 24.dp, end = 24.dp, top = 24.dp, bottom = 12.dp)
                 .fillMaxWidth()
         ) {
             val (cardName, currencyToggle, balanceText, currencyText, buttonRow) = createRefs()
@@ -137,7 +141,7 @@ fun MainBox(navController: NavHostController, balance: String) {
             )
             Row(
                 modifier = Modifier
-                    .padding(top = 24.dp)
+                    .padding(top = 16.dp, bottom = 0.dp)
                     .constrainAs(buttonRow) {
                         top.linkTo(balanceText.bottom)
                         start.linkTo(parent.start)
@@ -145,41 +149,73 @@ fun MainBox(navController: NavHostController, balance: String) {
                     }
             ) {
                 Button(
-                    onClick = { navController.navigate(Screen.ReceiveScreen.route) },
-                    colors = ButtonDefaults.buttonColors(containerColor = padawan_theme_button_secondary),
-                    shape = RoundedCornerShape(20.dp),
+                    onClick = {  },
+                    colors = ButtonDefaults.buttonColors(containerColor = Color.Black),
+                    shape = RoundedCornerShape(20.dp, 20.dp, 0.dp, 0.dp),
                     border = standardBorder,
                     modifier = Modifier
-                        .padding(all = 4.dp)
-                        .standardShadow(20.dp)
-                        .weight(weight = 0.5f)
+                        .width(110.dp)
                 ) {
-                    Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.padding(vertical = 8.dp)) {
+                    Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.Center) {
                         Text(
-                            text = "Receive",
+                            text = "sync",
                             style = PadawanTypography.labelLarge,
+                            fontWeight = FontWeight.Normal,
+                            color = Color(0xffdbdeff),
+                            modifier = Modifier.padding(horizontal = 8.dp)
                         )
-                        Icon(painter = painterResource(id = R.drawable.ic_receive), contentDescription = "Receive Icon")
+                        Icon(
+                            painter = painterResource(id = R.drawable.ic_sync),
+                            tint = Color(0xffdbdeff),
+                            contentDescription = "Sync Icon"
+                        )
                     }
                 }
-                Button(
-                    onClick = { navController.navigate(Screen.SendScreen.route) },
-                    colors = ButtonDefaults.buttonColors(containerColor = padawan_theme_button_primary),
-                    shape = RoundedCornerShape(20.dp),
-                    border = standardBorder,
-                    modifier = Modifier
-                        .padding(all = 4.dp)
-                        .standardShadow(20.dp)
-                        .weight(weight = 0.5f),
-                ) {
-                    Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.padding(vertical = 8.dp)) {
-                        Text(
-                            text = "Send",
-                            style = PadawanTypography.labelLarge,
-                        )
-                        Icon(painter = painterResource(id = R.drawable.ic_send), contentDescription = "Send Icon")
-                    }
-                }
+            }
+        }
+    }
+}
+
+@Composable
+fun SendReceive(navController: NavHostController) {
+    Row(
+        modifier = Modifier
+            .padding(top = 4.dp)
+    ) {
+        Button(
+            onClick = { navController.navigate(Screen.ReceiveScreen.route) },
+            colors = ButtonDefaults.buttonColors(containerColor = padawan_theme_button_secondary),
+            shape = RoundedCornerShape(20.dp),
+            border = standardBorder,
+            modifier = Modifier
+                .padding(all = 4.dp)
+                .standardShadow(20.dp)
+                .weight(weight = 0.5f)
+        ) {
+            Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.padding(vertical = 8.dp)) {
+                Text(
+                    text = "Receive",
+                    style = PadawanTypography.labelLarge,
+                )
+                Icon(painter = painterResource(id = R.drawable.ic_receive), contentDescription = "Receive Icon")
+            }
+        }
+        Button(
+            onClick = { navController.navigate(Screen.SendScreen.route) },
+            colors = ButtonDefaults.buttonColors(containerColor = padawan_theme_button_primary),
+            shape = RoundedCornerShape(20.dp),
+            border = standardBorder,
+            modifier = Modifier
+                .padding(all = 4.dp)
+                .standardShadow(20.dp)
+                .weight(weight = 0.5f),
+        ) {
+            Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.padding(vertical = 8.dp)) {
+                Text(
+                    text = "Send",
+                    style = PadawanTypography.labelLarge,
+                )
+                Icon(painter = painterResource(id = R.drawable.ic_send), contentDescription = "Send Icon")
             }
         }
     }
@@ -188,7 +224,7 @@ fun MainBox(navController: NavHostController, balance: String) {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TransactionListBox(openFaucetDialog: MutableState<Boolean>, transactionList: List<Tx>) {
-    Row(modifier = Modifier.padding(top = 16.dp, bottom = 8.dp)) {
+    Row(modifier = Modifier.padding(top = 24.dp, bottom = 8.dp)) {
         Text(
             text = "Transactions",
             style = PadawanTypography.headlineSmall,
@@ -271,7 +307,9 @@ fun TransactionListBox(openFaucetDialog: MutableState<Boolean>, transactionList:
                                 modifier = Modifier.align(Alignment.BottomEnd)
                             )
                         }
-                        Box(modifier = Modifier.fillMaxWidth().padding(vertical = 4.dp)) {
+                        Box(modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(vertical = 4.dp)) {
                             Text(
                                 text = "${getDateDifference(date = txn.date)} ago",
                                 style = PadawanTypography.bodySmall,
@@ -290,13 +328,18 @@ fun TransactionListBox(openFaucetDialog: MutableState<Boolean>, transactionList:
                                     Text(
                                         text = if (txn.isPayment) "Sent" else "Receive",
                                         style = PadawanTypography.bodySmall,
-                                        modifier = Modifier.align(Alignment.CenterVertically).padding(start = 8.dp, top = 4.dp, bottom = 4.dp)
+                                        modifier = Modifier
+                                            .align(Alignment.CenterVertically)
+                                            .padding(start = 8.dp, top = 4.dp, bottom = 4.dp)
                                     )
                                     Icon(
                                         painter = if (txn.isPayment) painterResource(id = R.drawable.ic_send_secondary) else painterResource(id = R.drawable.ic_receive_secondary),
                                         tint = padawan_disabled,
                                         contentDescription = if (txn.isPayment) "Send Icon" else "Receive Icon",
-                                        modifier = Modifier.align(Alignment.CenterVertically).scale(scale = 0.75f).padding(end = 8.dp),
+                                        modifier = Modifier
+                                            .align(Alignment.CenterVertically)
+                                            .scale(scale = 0.75f)
+                                            .padding(end = 8.dp),
                                     )
                                 }
                             }
