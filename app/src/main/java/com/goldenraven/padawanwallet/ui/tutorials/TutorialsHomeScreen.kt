@@ -117,7 +117,7 @@ fun TutorialHomeVisual(tutorialData: Tutorial, tutorialPage: List<List<TutorialE
         border = standardBorder,
         modifier = Modifier
             .fillMaxWidth()
-            .standardShadow()
+            .standardShadow(8.dp)
     ) {
         Column(
             modifier = Modifier
@@ -230,7 +230,7 @@ fun TutorialButton(tutorialData: Tutorial, navController: NavController) {
             border = standardBorder,
             modifier = Modifier
                 .padding(all = 8.dp)
-                .standardShadow()
+                .standardShadow(20.dp)
                 .align(alignment = Alignment.Center),
         ) {
             Row(

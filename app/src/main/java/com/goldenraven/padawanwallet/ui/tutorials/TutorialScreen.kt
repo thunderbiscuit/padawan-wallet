@@ -113,7 +113,7 @@ fun TutorialButtons(
                 border = standardBorder,
                 modifier = Modifier
                     .padding(all = 8.dp)
-                    .standardShadow()
+                    .standardShadow(20.dp)
                     .weight(weight = 0.5f)
             ) {
                 Row(
@@ -147,7 +147,7 @@ fun TutorialButtons(
                 border = standardBorder,
                 modifier = Modifier
                     .padding(all = 8.dp)
-                    .standardShadow()
+                    .standardShadow(20.dp)
                     .weight(weight = 0.5f),
             ) {
                 Row(
@@ -259,7 +259,7 @@ internal fun TutorialPage(tutorialPages: List<List<TutorialElement>>, currentPag
                         modifier = Modifier
                             .height(height = 150.dp)
                             .fillMaxWidth()
-                            .standardShadow()
+                            .standardShadow(20.dp)
                     ) {  }
                 }
             }

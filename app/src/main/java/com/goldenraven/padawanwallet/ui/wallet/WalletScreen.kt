@@ -75,7 +75,7 @@ fun MainBox(navController: NavHostController, balance: String) {
         shape = RoundedCornerShape(20.dp),
         containerColor = padawan_theme_onBackground_secondary,
         modifier = Modifier
-            .standardShadow()
+            .standardShadow(20.dp)
             .fillMaxWidth()
     ) {
         ConstraintLayout(
@@ -151,7 +151,7 @@ fun MainBox(navController: NavHostController, balance: String) {
                     border = standardBorder,
                     modifier = Modifier
                         .padding(all = 4.dp)
-                        .standardShadow()
+                        .standardShadow(20.dp)
                         .weight(weight = 0.5f)
                 ) {
                     Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.padding(vertical = 8.dp)) {
@@ -169,7 +169,7 @@ fun MainBox(navController: NavHostController, balance: String) {
                     border = standardBorder,
                     modifier = Modifier
                         .padding(all = 4.dp)
-                        .standardShadow()
+                        .standardShadow(20.dp)
                         .weight(weight = 0.5f),
                 ) {
                     Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.padding(vertical = 8.dp)) {
@@ -227,7 +227,7 @@ fun TransactionListBox(openFaucetDialog: MutableState<Boolean>, transactionList:
                         onClick = { openFaucetDialog.value = true },
                         modifier = Modifier
                             .padding(all = 8.dp)
-                            .standardShadow(),
+                            .standardShadow(20.dp),
                         colors = ButtonDefaults.buttonColors(containerColor = padawan_theme_button_primary),
                         shape = RoundedCornerShape(20.dp),
                         border = standardBorder
