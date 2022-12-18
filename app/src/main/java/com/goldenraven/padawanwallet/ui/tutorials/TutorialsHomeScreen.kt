@@ -38,6 +38,8 @@ import com.google.accompanist.pager.HorizontalPager
 // TODO Add scrollable box in TutorialHomeVisual + icons & lines
 // TODO Update texts when new tutorials come in
 
+private const val TAG = "TutorialHomeScreen"
+
 @Composable
 internal fun TutorialsHomeScreen(tutorialViewModel: TutorialViewModel, navController: NavController) {
     val currTutorial = 1 // TODO
@@ -141,9 +143,9 @@ fun TutorialHomeVisual(
                             .align(alignment = Alignment.CenterEnd)
                             .width(intrinsicSize = IntrinsicSize.Max)
                     ) {
-                        ProgressBar(completionPercentage = currentPage.toFloat() / tutorialPage.size.toFloat())
+                        ProgressBar(completionPercentage = calculateCompletionOfGroup(page, completedTutorials))
                         Text(
-                            text = "${tutorialData.completed} of ${tutorialPage.size} done",
+                            text = calculateCompletionStringOfGroup(page, completedTutorials),
                             style = PadawanTypography.bodyMedium
                         )
                     }
@@ -163,19 +165,67 @@ fun TutorialHomeVisual(
                             LessonCircle(lessonNumber = it, completed = completed)
                             // LessonCircle(lessonNumber = it, completed = completedTutorials[it] ?: false)
                         }
-                        1 -> (4..7).forEach {
+                        1 -> (4..6).forEach {
                             LessonCircle(lessonNumber = it, completed = false)
                             // LessonCircle(lessonNumber = it, completed = completedTutorials[it] ?: false)
                         }
-                        2 -> (8..10).forEach {
+                        2 -> (7..8).forEach {
                             LessonCircle(lessonNumber = it, completed = false)
                         }
                     }
-                    // LessonCircle(lessonNumber = 1, completed = false)
-                    // LessonCircle(lessonNumber = 2, completed = true)
-                    // LessonCircle(lessonNumber = 3, completed = false)
                 }
             }
+        }
+    }
+}
+
+fun calculateCompletionStringOfGroup(page: Int, completedTutorials: Map<Int, Boolean>): String {
+    return when (page) {
+        0 -> {
+            val count = completedTutorials.count {
+                it.key <= 3 && it.value
+            }
+            "$count of 3 done"
+        }
+        1 -> {
+            val count = completedTutorials.count {
+                it.key in 4..6 && it.value
+            }
+            "$count of 3 done"
+        }
+        2 -> {
+            val count = completedTutorials.count {
+                it.key in 7..8 && it.value
+            }
+            "$count of 2 done"
+        }
+        else -> {
+            Log.i(TAG, "We've made a terrible mistake")
+            ""
+        }
+    }
+}
+
+fun calculateCompletionOfGroup(page: Int, completedTutorials: Map<Int, Boolean>): Float {
+    return when (page) {
+        0 -> {
+            completedTutorials.count {
+                it.key <= 3 && it.value
+            }.div(3.0).toFloat()
+        }
+        1 -> {
+            completedTutorials.count {
+                it.key in 4..6 && it.value
+            }.div(3.0).toFloat()
+        }
+        2 -> {
+            completedTutorials.count {
+                it.key in 7..8 && it.value
+            }.div(2.0).toFloat()
+        }
+        else -> {
+            Log.i(TAG, "We've made a terrible mistake")
+            1.0.toFloat()
         }
     }
 }
