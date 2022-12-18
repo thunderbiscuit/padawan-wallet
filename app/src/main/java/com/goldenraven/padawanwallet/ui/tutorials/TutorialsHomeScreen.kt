@@ -161,7 +161,7 @@ fun TutorialHomeVisual(
                     when (page) {
                         0 -> (1..3).forEach {
                             val completed = completedTutorials[it] ?: false
-                            Log.i("TutorialsHomeScreen", "Completed variable was $completed")
+                            Log.i(TAG, "Completed variable was $completed")
                             LessonCircle(lessonNumber = it, completed = completed)
                             // LessonCircle(lessonNumber = it, completed = completedTutorials[it] ?: false)
                         }
@@ -264,7 +264,7 @@ fun LessonCircle(lessonNumber: Int, completed: Boolean) {
                 )
             }
             .clickable {
-                Log.i("Tutorials", "Clicked on tutorial $lessonNumber")
+                Log.i(TAG, "Clicked on tutorial $lessonNumber")
             },
     )
 }

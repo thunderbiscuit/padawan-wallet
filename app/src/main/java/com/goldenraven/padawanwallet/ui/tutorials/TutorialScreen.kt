@@ -105,7 +105,7 @@ fun TutorialButtons(
             .fillMaxWidth()
             .padding(horizontal = 8.dp)
     ) {
-        Log.i("TutorialScreen", "We're on page ${currentPage.value}")
+        Log.i(TAG, "We're on page ${currentPage.value}")
         if (currentPage.value != 1) {
             Button(
                 onClick = {

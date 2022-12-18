@@ -10,6 +10,8 @@ import androidx.lifecycle.LiveData
 class TutorialRepository(private val tutorialDao: TutorialDao) {
     val readAllData: LiveData<List<Tutorial>> = tutorialDao.readAllTutorial()
 
+    val readAllInitialData: List<Tutorial>? = tutorialDao.readAllTutorial().value
+
     internal suspend fun getTutorial(id: Int): Tutorial {
         return tutorialDao.getTutorial(id = id)
     }
@@ -22,7 +24,7 @@ class TutorialRepository(private val tutorialDao: TutorialDao) {
         tutorialDao.addTutorial(tutorial = tutorial)
     }
 
-    internal suspend fun initTutorial(tutorialList: List<Tutorial>) {
+    suspend fun initTutorial(tutorialList: List<Tutorial>) {
         tutorialList.forEach {
             addTutorial(tutorial = it)
         }

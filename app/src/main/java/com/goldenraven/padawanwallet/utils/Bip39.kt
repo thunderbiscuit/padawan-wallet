@@ -7,16 +7,18 @@ package com.goldenraven.padawanwallet.utils
 
 import android.util.Log
 
+private const val TAG = "Utils"
+
 // return a FAILURE if any of the words are empty or not part of the list
 // return a SUCCESS with the clean recovery phrase as a string otherwise
 fun checkWords(recoveryPhraseWordMap: Map<Int, String>): WordCheckResult {
     recoveryPhraseWordMap.forEach {
         if (it.value.isBlank()) {
-            Log.i("Utils/checkWords", "Word ${it.key} was empty")
+            Log.i(TAG, "Word ${it.key} was empty")
             return WordCheckResult.FAILURE(errorMessage = "Word ${it.key} is empty")
         }
         if (it.value.trim().lowercase() !in validWords) {
-            Log.i("Utils/checkWords", "Word ${it.key} is not valid")
+            Log.i(TAG, "Word ${it.key} is not valid")
             return WordCheckResult.FAILURE(errorMessage = "Word ${it.key} is not valid")
         }
     }

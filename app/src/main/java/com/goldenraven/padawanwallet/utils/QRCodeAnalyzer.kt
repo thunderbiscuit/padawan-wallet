@@ -8,6 +8,8 @@ import com.google.zxing.*
 import com.google.zxing.common.HybridBinarizer
 import java.nio.ByteBuffer
 
+private const val TAG = "QrCodeAnalyzer"
+
 class QRCodeAnalyzer(
     private val onQrCodeScanned: (result: String?) -> Unit
 ) : ImageAnalysis.Analyzer {
@@ -38,7 +40,7 @@ class QRCodeAnalyzer(
                         )
                     )
                 }.decode(binaryBitmap)
-                Log.i("QrCodeAnalyzer", "QR code scanned is ${result.text}")
+                Log.i(TAG, "QR code scanned is ${result.text}")
                 onQrCodeScanned(result.text)
             } catch (e: Exception) {
                 e.printStackTrace()

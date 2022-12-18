@@ -10,6 +10,8 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 
+private const val TAG = "WalletRecoveryScreenTest"
+
 class WalletRecoveryScreenTest {
 
     @get:Rule
@@ -20,8 +22,8 @@ class WalletRecoveryScreenTest {
 
         val onBuildWalletButtonClicked : (WalletCreateType) -> Unit = { walletCreateType ->
             when (walletCreateType) {
-                is WalletCreateType.FROMSCRATCH -> Log.i("WalletRecoveryScreenTest", "Successful wallet init")
-                is WalletCreateType.RECOVER -> Log.i("WalletRecoveryScreenTest", "Successful wallet recovery")
+                is WalletCreateType.FROMSCRATCH -> Log.i(TAG, "Successful wallet init")
+                is WalletCreateType.RECOVER -> Log.i(TAG, "Successful wallet recovery")
             }
         }
 

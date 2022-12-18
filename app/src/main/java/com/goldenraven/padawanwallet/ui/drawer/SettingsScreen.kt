@@ -39,6 +39,8 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 import org.bitcoindevkit.AddressInfo
 
+private const val TAG = "SettingsFragment"
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 internal fun SettingsScreen(navController: NavController) {
@@ -106,15 +108,15 @@ private fun callTatooineFaucet(
             }
         }
 
-        Log.i("SettingsFragment", "API call to Tatooine will request coins at $address")
+        Log.i(TAG, "API call to Tatooine will request coins at $address")
         try {
             val response: HttpResponse = ktorClient.post(faucetUrl) {
                 body = TextContent(address.address, ContentType.Text.Plain)
             }
             WalletRepository.faucetCallDone()
-            Log.i("SettingsFragment", "API call to Tatooine was performed. Response is ${response.status}, ${response.readText()}")
+            Log.i(TAG, "API call to Tatooine was performed. Response is ${response.status}, ${response.readText()}")
         } catch (cause: Throwable) {
-            Log.i("SettingsFragment", "Tatooine call failed: $cause")
+            Log.i(TAG, "Tatooine call failed: $cause")
             coroutineScope.launch { snackbarHostState.showSnackbar(context.resources.getString(R.string.errorFaucet)) }
         }
         ktorClient.close()

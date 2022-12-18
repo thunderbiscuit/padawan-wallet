@@ -42,6 +42,8 @@ import kotlinx.coroutines.launch
 import org.bitcoindevkit.AddressInfo
 import org.bitcoindevkit.Transaction
 
+private const val TAG = "WalletViewModel"
+
 class WalletViewModel(
     application: Application,
 ) : AndroidViewModel(application) {
@@ -58,7 +60,7 @@ class WalletViewModel(
         get() = _isRefreshing.asStateFlow()
 
     init {
-        Log.i("WalletScreen", "The WalletScreen viewmodel is being initialized...")
+        Log.i(TAG, "The WalletScreen viewmodel is being initialized...")
         val txDao: TxDao = TxDatabase.getDatabase(application).txDao()
         repository = TxRepository(txDao)
         readAllData = repository.readAllData
@@ -79,12 +81,12 @@ class WalletViewModel(
 
     private fun didWeOfferFaucet(): Boolean {
         val faucetOfferDone = WalletRepository.didWeOfferFaucet()
-        Log.i("WalletScreen", "We have already asked if they wanted testnet coins: $faucetOfferDone")
+        Log.i(TAG, "We have already asked if they wanted testnet coins: $faucetOfferDone")
         return faucetOfferDone
     }
 
     private fun faucetOfferWasMade() {
-        Log.i("WalletScreen", "The offer to call the faucet was made")
+        Log.i(TAG, "The offer to call the faucet was made")
         WalletRepository.offerFaucetDone()
     }
 
@@ -121,7 +123,7 @@ class WalletViewModel(
 
     private fun syncTransactionHistory() {
         val txHistory = Wallet.listTransactions()
-        Log.i("WalletScreen","Transactions history, number of transactions: ${txHistory.size}")
+        Log.i(TAG,"Transactions history, number of transactions: ${txHistory.size}")
 
         for (tx in txHistory) {
             val details = when (tx) {
@@ -168,7 +170,7 @@ class WalletViewModel(
 
     private fun addTx(tx: Tx) {
         viewModelScope.launch(Dispatchers.IO) {
-            Log.i("WalletScreen", "Adding transaction to DB: $tx")
+            Log.i(TAG, "Adding transaction to DB: $tx")
             repository.addTx(tx)
         }
     }
@@ -180,15 +182,15 @@ class WalletViewModel(
         if (capabilities != null) {
             when {
                 capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> {
-                    Log.i("Internet", "NetworkCapabilities.TRANSPORT_CELLULAR")
+                    Log.i(TAG, "NetworkCapabilities.TRANSPORT_CELLULAR")
                     return true
                 }
                 capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) -> {
-                    Log.i("Internet", "NetworkCapabilities.TRANSPORT_WIFI")
+                    Log.i(TAG, "NetworkCapabilities.TRANSPORT_WIFI")
                     return true
                 }
                 capabilities.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET) -> {
-                    Log.i("Internet", "NetworkCapabilities.TRANSPORT_ETHERNET")
+                    Log.i(TAG, "NetworkCapabilities.TRANSPORT_ETHERNET")
                     return true
                 }
             }
@@ -215,15 +217,15 @@ private fun callTatooineFaucet(address: AddressInfo) {
             }
         }
 
-        Log.i("WalletScreen","API call to Tatooine will request coins at $address")
+        Log.i(TAG,"API call to Tatooine will request coins at $address")
         try {
             val response: HttpResponse = ktorClient.post(faucetUrl) {
                 body = TextContent(address.address, ContentType.Text.Plain)
             }
             WalletRepository.faucetCallDone()
-            Log.i("WalletScreen","API call to Tatooine was performed. Response is ${response.status}, ${response.readText()}")
+            Log.i(TAG,"API call to Tatooine was performed. Response is ${response.status}, ${response.readText()}")
         } catch (cause: Throwable) {
-            Log.i("WalletScreen","Tatooine call failed: $cause")
+            Log.i(TAG,"Tatooine call failed: $cause")
         }
         ktorClient.close()
     }

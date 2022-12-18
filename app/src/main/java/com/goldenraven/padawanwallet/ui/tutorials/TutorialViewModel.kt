@@ -31,7 +31,9 @@ class TutorialViewModel(application: Application) : AndroidViewModel(application
     init {
         val tutorialDao = TutorialDatabase.getInstance(application).tutorialDao()
         tutorialRepository = TutorialRepository(tutorialDao)
+        // this variable is null on first access, and hence triggers the reinitialization of the database content
         readAllData = tutorialRepository.readAllData
+        Log.i(TAG, "readAllData variable is ${readAllData.value}")
         viewModelScope.launch(Dispatchers.IO) { getTutorialData(id = 1) }// TODO Change to most recent tutorial
         _tutorialPageMap = initTutorialPageMap()
         if (readAllData.value.isNullOrEmpty()) initTutorial() // TODO Check if readAllData is initialized in init (might cause tutorial data to get refreshed on startup)
@@ -47,8 +49,8 @@ class TutorialViewModel(application: Application) : AndroidViewModel(application
         runBlocking {
             (1..8).forEach {
                 val completed: Boolean = tutorialRepository.getTutorial(it).completed
+                Log.i(TAG, "Tutorial $it was completed: $completed")
                 completedTutorials[it] = completed
-                // completedTutorials[it] to completed
             }
         }
         Log.i(TAG, "Completed tutorials were $completedTutorials")
@@ -63,7 +65,7 @@ class TutorialViewModel(application: Application) : AndroidViewModel(application
         val tutorialAsync = viewModelScope.async { tutorialRepository.getTutorial(id = id) }
         tutorialAsync.start()
         _tutorialData = tutorialAsync.await()
-        return tutorialData
+        return _tutorialData
     }
 
     // TODO If localization is enabled change language here

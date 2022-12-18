@@ -30,6 +30,8 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 import org.bitcoindevkit.PartiallySignedBitcoinTransaction
 
+private const val TAG = "SendScreen"
+
 @Composable
 internal fun SendScreen(navController: NavHostController, walletViewModel: WalletViewModel) {
     val (showDialog, setShowDialog) = rememberSaveable { mutableStateOf(false) }
@@ -454,7 +456,7 @@ private fun broadcastTransaction(
     snackbarHostState: SnackbarHostState,
     scope: CoroutineScope,
 ) {
-    Log.i("SendScreen", "Attempting to broadcast transaction with inputs: recipient: ${recipientAddress}, amount: ${amount}, fee rate: $feeRate")
+    Log.i(TAG, "Attempting to broadcast transaction with inputs: recipient: ${recipientAddress}, amount: ${amount}, fee rate: $feeRate")
     var snackbarMsg: String
     try {
         // create, sign, and broadcast
@@ -465,9 +467,9 @@ private fun broadcastTransaction(
         Wallet.sign(psbt)
         val txid: String = Wallet.broadcast(psbt)
         snackbarMsg = "Transaction was broadcast successfully"
-        Log.i("SendScreen", "Transaction was broadcast! txid: $txid")
+        Log.i(TAG, "Transaction was broadcast! txid: $txid")
     } catch (e: Throwable) {
-        Log.i("SendScreen", "Broadcast error: ${e.message}")
+        Log.i(TAG, "Broadcast error: ${e.message}")
         snackbarMsg = "Error : ${e.message}"
     }
     scope.launch {

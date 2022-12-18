@@ -36,6 +36,8 @@ import com.google.zxing.BarcodeFormat
 import com.google.zxing.common.BitMatrix
 import com.google.zxing.qrcode.QRCodeWriter
 
+private const val TAG = "ReceiveScreen"
+
 @Composable
 internal fun ReceiveScreen(
     addressViewModel: AddressViewModel = viewModel()
@@ -72,7 +74,7 @@ internal fun ReceiveScreen(
             }
         ) {
             val QR: ImageBitmap? = addressToQR(address)
-            Log.i("ReceiveScreen", "New receive address is $address")
+            Log.i(TAG, "New receive address is $address")
             if (address != "No address yet" && QR != null) {
                 Image(
                     bitmap = QR,
@@ -117,7 +119,7 @@ internal fun ReceiveScreen(
 }
 
 private fun addressToQR(address: String): ImageBitmap? {
-    Log.i("ReceiveScreen", "We are generating the QR code for address $address")
+    Log.i(TAG, "We are generating the QR code for address $address")
     try {
         val qrCodeWriter = QRCodeWriter()
         val bitMatrix: BitMatrix = qrCodeWriter.encode(address, BarcodeFormat.QR_CODE, 1000, 1000)
@@ -128,10 +130,10 @@ private fun addressToQR(address: String): ImageBitmap? {
                 bitMap.setPixel(x, y, if (bitMatrix[x, y]) 0xFF3c3836.toInt() else 0xFFebdbb2.toInt())
             }
         }
-        // Log.i("ReceiveScreen", "QR is ${bitMap.asImageBitmap()}")
+        // Log.i(TAG, "QR is ${bitMap.asImageBitmap()}")
         return bitMap.asImageBitmap()
     } catch (e: Throwable) {
-        Log.i("ReceiveScreen", "Error with QRCode generation, $e")
+        Log.i(TAG, "Error with QRCode generation, $e")
     }
     return null
 }
