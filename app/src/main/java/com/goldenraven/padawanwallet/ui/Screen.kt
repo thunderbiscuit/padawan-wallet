@@ -8,7 +8,8 @@ package com.goldenraven.padawanwallet.ui
 sealed class Screen(val route: String) {
     // intro screens
     object SplashScreen : Screen("splash_screen")
-    object IntroScreen : Screen("intro_screen")
+    // object IntroScreen : Screen("intro_screen")
+    object OnboardingScreen : Screen("onboarding_screen")
     object WalletChoiceScreen : Screen("wallet_choice_screen")
     object WalletRecoveryScreen : Screen("wallet_recovery_screen")
 

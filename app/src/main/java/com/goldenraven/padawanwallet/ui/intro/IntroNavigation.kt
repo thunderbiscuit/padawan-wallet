@@ -33,14 +33,14 @@ fun IntroNavigation(onBuildWalletButtonClicked: (WalletCreateType) -> Unit) {
         ) { SplashScreen(navController = navController, moveToIntro = true) }
 
         composable(
-            route = Screen.IntroScreen.route,
+            route = Screen.OnboardingScreen.route,
             exitTransition = {
                 slideOutOfContainer(AnimatedContentScope.SlideDirection.Start, animationSpec = tween(animationDuration))
             },
             popEnterTransition = {
                 slideIntoContainer(AnimatedContentScope.SlideDirection.End, animationSpec = tween(animationDuration))
             },
-        ) { IntroScreen(navController = navController) }
+        ) { OnboardingScreen(navController = navController, onBuildWalletButtonClicked) }
 
         composable(
             route = Screen.WalletChoiceScreen.route,

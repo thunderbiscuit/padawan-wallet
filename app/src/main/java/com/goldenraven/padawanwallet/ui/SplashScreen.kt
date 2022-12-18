@@ -30,7 +30,7 @@ internal fun SplashScreen(navController: NavController, moveToIntro: Boolean) {
     LaunchedEffect(key1 = true) {
         delay(1000)
         if (moveToIntro) {
-            navController.navigate(Screen.IntroScreen.route) {
+            navController.navigate(Screen.OnboardingScreen.route) {
                 popUpTo(0)
             }
         } else {
