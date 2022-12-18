@@ -15,6 +15,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.navArgument
 import com.goldenraven.padawanwallet.ui.Screen
+import com.goldenraven.padawanwallet.ui.drawer.SettingsScreen
 import com.goldenraven.padawanwallet.ui.tutorials.*
 import com.goldenraven.padawanwallet.ui.tutorials.TutorialsHomeScreen
 import com.google.accompanist.navigation.animation.AnimatedNavHost
@@ -107,6 +108,7 @@ fun WalletNavigation(
             }
         ) { SendScreen(navController = navControllerWalletNavigation, walletViewModel = walletViewModel) }
 
+
         // QR Scanner Screen
         composable(
             route = Screen.QRScanScreen.route,
@@ -176,5 +178,17 @@ fun WalletNavigation(
                 TutorialsScreen(tutorialId = it, tutorialViewModel = tutorialViewModel, navController = navControllerWalletNavigation)
             }
         }
+
+
+        // Settings
+        composable(
+            route = Screen.SettingsScreen.route,
+            popEnterTransition = {
+                slideIntoContainer(AnimatedContentScope.SlideDirection.End, animationSpec = tween(animationDuration))
+            },
+            exitTransition = {
+                slideOutOfContainer(AnimatedContentScope.SlideDirection.Down, animationSpec = tween(animationDuration))
+            },
+        ) { SettingsScreen(navController = navControllerWalletNavigation) }
     }
 }
