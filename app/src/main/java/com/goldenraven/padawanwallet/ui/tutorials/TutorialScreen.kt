@@ -1,5 +1,6 @@
 package com.goldenraven.padawanwallet.ui.tutorials
 
+import android.util.Log
 import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.*
@@ -26,9 +27,10 @@ import com.goldenraven.padawanwallet.ui.standardBorder
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
-// TODO Add Finish Button
 // TODO Add transition between pages smoother (pages & progress bar)
 // TODO Add tutorial images
+
+private const val TAG = "TutorialScreen"
 
 @Composable
 fun TutorialsScreen(
@@ -36,10 +38,12 @@ fun TutorialsScreen(
     tutorialViewModel: TutorialViewModel,
     navController: NavHostController
 ) {
-    val tutorialPages = tutorialViewModel.getTutorialPage(id = tutorialId)
-    var tutorialData = Tutorial(id = 0, title = "", type = "", difficulty = "", completion = 0)
+    val tutorialPages = tutorialViewModel.getTutorialPages(id = tutorialId)
+    Log.i(TAG, "We're dealing with tutorial $tutorialId and the tutorialPagesSize is ${tutorialPages.size}")
+    var tutorialData = Tutorial(id = 0, title = "", type = "", difficulty = "", completed = false)
     LaunchedEffect(key1 = true) { tutorialData = tutorialViewModel.getTutorialData(id = tutorialId) }
-    val currentPage = remember { mutableStateOf(value = tutorialData.completion) }
+    val currentPage = remember { mutableStateOf(1) }
+    // val currentPage = remember { mutableStateOf(value = tutorialData.completion) }
     val pageScrollState = rememberScrollState()
     val coroutineScope = rememberCoroutineScope()
 
@@ -64,7 +68,7 @@ fun TutorialsScreen(
         ) {
             Column(modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp)) {
                 TutorialAppBar(navController = navController)
-                TutorialProgressBar(completion = currentPage, total = tutorialPages.size)
+                TutorialProgressBar(completion = currentPage, total = tutorialPages.size - 1)
             }
         }
 
@@ -101,11 +105,12 @@ fun TutorialButtons(
             .fillMaxWidth()
             .padding(horizontal = 8.dp)
     ) {
-        if (currentPage.value != 0) {
+        Log.i("TutorialScreen", "We're on page ${currentPage.value}")
+        if (currentPage.value != 1) {
             Button(
                 onClick = {
-                    currentPage.value -= 1
-                    tutorialViewModel.setCompletion(id = tutorialId - 1, completion = currentPage.value)
+                    currentPage.value += 1
+                    // tutorialViewModel.setCompletion(id = tutorialId - 1, completion = currentPage.value)
                     scrollUp(pageScrollState = pageScrollState, coroutineScope = coroutineScope)
                 },
                 colors = ButtonDefaults.buttonColors(containerColor = padawan_theme_button_secondary),
@@ -135,11 +140,11 @@ fun TutorialButtons(
             Spacer(modifier = Modifier.weight(weight = 0.5f))
         }
 
-        if (tutorialPagesSize > currentPage.value) {
+        if (currentPage.value < tutorialPagesSize - 1) {
             Button(
                 onClick = {
                     currentPage.value += 1
-                    tutorialViewModel.setCompletion(id = tutorialId - 1, completion = currentPage.value)
+                    // tutorialViewModel.setCompleted(id = tutorialId - 1, completed = currentPage.value)
                     scrollUp(pageScrollState = pageScrollState, coroutineScope = coroutineScope)
                 },
                 colors = ButtonDefaults.buttonColors(containerColor = padawan_theme_button_primary),
@@ -162,6 +167,29 @@ fun TutorialButtons(
                     Icon(
                         painter = painterResource(id = R.drawable.ic_front),
                         contentDescription = "Next Tutorial Icon"
+                    )
+                }
+            }
+        } else if (currentPage.value == tutorialPagesSize - 1) {
+            Button(
+                onClick = {
+                    tutorialViewModel.setCompleted(id = tutorialId, completed = true)
+                },
+                colors = ButtonDefaults.buttonColors(containerColor = padawan_theme_button_primary),
+                shape = RoundedCornerShape(20.dp),
+                border = standardBorder,
+                modifier = Modifier
+                    .padding(all = 8.dp)
+                    .standardShadow(20.dp)
+                    .weight(weight = 0.5f),
+            ) {
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    modifier = Modifier.padding(vertical = 8.dp)
+                ) {
+                    Text(
+                        text = "Finish",
+                        style = PadawanTypography.labelLarge,
                     )
                 }
             }
@@ -213,14 +241,16 @@ fun TutorialProgressBar(
             .padding(all = 16.dp)
             .height(height = height)
     ) {
-        val progressBarLen = ((size.width + spacer) / total) - spacer
+        val progressBarLength = ((size.width + spacer) / total - 1) - spacer
 
+        // total -1 because the list of pages includes the description, which counts as 1 page
+        // for (i in 0 until total - 1) {
         for (i in 0 until total) {
             drawLine(
-                color = if (completion.value + 1 > i) completeColor else incompleteColor,
+                color = if (completion.value > i) completeColor else incompleteColor,
                 strokeWidth = size.height,
-                start = Offset(x = i * (progressBarLen + spacer), y = 0f),
-                end = Offset(x = (i + 1) * (progressBarLen + spacer) - spacer, y = 0f)
+                start = Offset(x = i * (progressBarLength + spacer), y = 0f),
+                end = Offset(x = (i + 1) * (progressBarLength + spacer) - spacer, y = 0f)
             )
         }
     }
@@ -229,7 +259,8 @@ fun TutorialProgressBar(
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 internal fun TutorialPage(tutorialPages: List<List<TutorialElement>>, currentPage: MutableState<Int>) {
-    if (tutorialPages.size != currentPage.value) {
+    // if (tutorialPages.size != currentPage.value) {
+        // tutorials are numbered 1 to 8 and the pages are 1-indexed, but the list is 0-indexed, so we ask for current page - 1
         for (element in tutorialPages[currentPage.value]) {
             when (element.elementType) {
                 ElementType.TITLE -> {
@@ -265,5 +296,5 @@ internal fun TutorialPage(tutorialPages: List<List<TutorialElement>>, currentPag
             }
             Spacer(modifier = Modifier.height(height = 24.dp))
         }
-    }
+    // }
 }

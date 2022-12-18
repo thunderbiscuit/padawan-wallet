@@ -6,6 +6,7 @@
 package com.goldenraven.padawanwallet.ui.tutorials
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
@@ -13,9 +14,9 @@ import com.goldenraven.padawanwallet.R
 import com.goldenraven.padawanwallet.data.tutorial.Tutorial
 import com.goldenraven.padawanwallet.data.tutorial.TutorialDatabase
 import com.goldenraven.padawanwallet.data.tutorial.TutorialRepository
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.async
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
+
+private const val TAG = "TutorialViewModel"
 
 class TutorialViewModel(application: Application) : AndroidViewModel(application) {
     private val readAllData: LiveData<List<Tutorial>>
@@ -36,12 +37,25 @@ class TutorialViewModel(application: Application) : AndroidViewModel(application
         if (readAllData.value.isNullOrEmpty()) initTutorial() // TODO Check if readAllData is initialized in init (might cause tutorial data to get refreshed on startup)
     }
 
-    fun setCompletion(id: Int, completion: Int) {
-        viewModelScope.launch(Dispatchers.IO) { tutorialRepository.setCompletion(id = id, completion = completion) } // TODO Check if calling a coroutine is necessary
-        _tutorialData.completion = completion
+    fun setCompleted(id: Int, completed: Boolean) {
+        viewModelScope.launch(Dispatchers.IO) { tutorialRepository.setCompleted(id = id, completed = completed) } // TODO Check if calling a coroutine is necessary
+        _tutorialData.completed = completed
     }
 
-    fun getTutorialPage(id: Int): List<List<TutorialElement>> {
+    fun getCompletedTutorials(): Map<Int, Boolean> {
+        val completedTutorials = mutableMapOf<Int, Boolean>()
+        runBlocking {
+            (1..8).forEach {
+                val completed: Boolean = tutorialRepository.getTutorial(it).completed
+                completedTutorials[it] = completed
+                // completedTutorials[it] to completed
+            }
+        }
+        Log.i(TAG, "Completed tutorials were $completedTutorials")
+        return completedTutorials
+    }
+
+    fun getTutorialPages(id: Int): List<List<TutorialElement>> {
         return _tutorialPageMap.get(key = id)!!
     }
 
@@ -56,14 +70,14 @@ class TutorialViewModel(application: Application) : AndroidViewModel(application
     private fun initTutorial() {
         val application: Application = getApplication()
         val tutorialList = listOf(
-            Tutorial(id = 1, title = application.getString(R.string.E1_title), type = application.getString(R.string.concept), difficulty = application.getString(R.string.basic), completion = 0),
-            Tutorial(id = 2, title = application.getString(R.string.E2_title), type = application.getString(R.string.concept), difficulty = application.getString(R.string.basic), completion = 0),
-            Tutorial(id = 3, title = application.getString(R.string.E3_title), type = application.getString(R.string.skill), difficulty = application.getString(R.string.basic), completion = 0),
-            Tutorial(id = 4, title = application.getString(R.string.E4_title), type = application.getString(R.string.concept), difficulty = application.getString(R.string.basic), completion = 0),
-            Tutorial(id = 5, title = application.getString(R.string.E5_title), type = application.getString(R.string.skill), difficulty = application.getString(R.string.advanced), completion = 0),
-            Tutorial(id = 6, title = application.getString(R.string.E6_title), type = application.getString(R.string.concept), difficulty = application.getString(R.string.advanced), completion = 0),
-            Tutorial(id = 7, title = application.getString(R.string.E7_title), type = application.getString(R.string.concept), difficulty = application.getString(R.string.advanced), completion = 0),
-            Tutorial(id = 8, title = application.getString(R.string.E8_title), type = application.getString(R.string.skill), difficulty = application.getString(R.string.advanced), completion = 0),
+            Tutorial(id = 1, title = application.getString(R.string.E1_title), type = application.getString(R.string.concept), difficulty = application.getString(R.string.basic), completed = false),
+            Tutorial(id = 2, title = application.getString(R.string.E2_title), type = application.getString(R.string.concept), difficulty = application.getString(R.string.basic), completed = false),
+            Tutorial(id = 3, title = application.getString(R.string.E3_title), type = application.getString(R.string.skill), difficulty = application.getString(R.string.basic), completed = false),
+            Tutorial(id = 4, title = application.getString(R.string.E4_title), type = application.getString(R.string.concept), difficulty = application.getString(R.string.basic), completed = false),
+            Tutorial(id = 5, title = application.getString(R.string.E5_title), type = application.getString(R.string.skill), difficulty = application.getString(R.string.advanced), completed = false),
+            Tutorial(id = 6, title = application.getString(R.string.E6_title), type = application.getString(R.string.concept), difficulty = application.getString(R.string.advanced), completed = false),
+            Tutorial(id = 7, title = application.getString(R.string.E7_title), type = application.getString(R.string.concept), difficulty = application.getString(R.string.advanced), completed = false),
+            Tutorial(id = 8, title = application.getString(R.string.E8_title), type = application.getString(R.string.skill), difficulty = application.getString(R.string.advanced), completed = false),
         )
         viewModelScope.launch(Dispatchers.IO) {
             tutorialRepository.initTutorial(tutorialList = tutorialList)

@@ -255,7 +255,7 @@ fun TransactionListBox(openFaucetDialog: MutableState<Boolean>, transactionList:
             Row(modifier = Modifier.padding(all = 24.dp)) {
                 Column(modifier = Modifier.weight(weight = 0.70f)) {
                     Text(
-                        text = "Hey! Your transaction list is empty, get some coins so you can fill it up.",
+                        text = "Hey! Your transaction list is empty, get some coins so you can start sending them!",
                         style = PadawanTypography.bodyMedium,
                         modifier = Modifier.padding(all = 8.dp)
                     )

@@ -15,5 +15,5 @@ data class Tutorial(
     val title: String,
     val type: String,
     val difficulty: String,
-    var completion: Int
+    var completed: Boolean,
 )

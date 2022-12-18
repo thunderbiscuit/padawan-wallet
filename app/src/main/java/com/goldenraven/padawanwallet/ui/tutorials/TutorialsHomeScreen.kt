@@ -1,14 +1,11 @@
 package com.goldenraven.padawanwallet.ui.tutorials
 
+import android.util.Log
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
-import androidx.compose.foundation.Canvas
-import androidx.compose.foundation.background
+import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -16,13 +13,14 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.rotate
-import androidx.compose.ui.draw.scale
+import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -32,6 +30,8 @@ import com.goldenraven.padawanwallet.data.tutorial.Tutorial
 import com.goldenraven.padawanwallet.theme.*
 import com.goldenraven.padawanwallet.ui.Screen
 import com.goldenraven.padawanwallet.ui.standardBorder
+import com.google.accompanist.pager.ExperimentalPagerApi
+import com.google.accompanist.pager.HorizontalPager
 
 // TODO Group composable better
 // TODO Get next tutorial & page
@@ -41,9 +41,11 @@ import com.goldenraven.padawanwallet.ui.standardBorder
 @Composable
 internal fun TutorialsHomeScreen(tutorialViewModel: TutorialViewModel, navController: NavController) {
     val currTutorial = 1 // TODO
-    val tutorialData = remember { mutableStateOf(Tutorial(id = 0, title = "", type = "", difficulty = "", completion = 0)) }
+    val tutorialData = remember { mutableStateOf(Tutorial(id = 0, title = "", type = "", difficulty = "", completed = false)) }
+    val completedTutorialsMap = tutorialViewModel.getCompletedTutorials()
     LaunchedEffect(key1 = true) { tutorialData.value = tutorialViewModel.getTutorialData(id = currTutorial) }
-    val tutorialPage = tutorialViewModel.getTutorialPage(id = currTutorial)
+    val tutorialPage = tutorialViewModel.getTutorialPages(id = currTutorial)
+    val tutorialDescription = tutorialPage[0]
 
     Column(
         modifier = Modifier
@@ -54,26 +56,31 @@ internal fun TutorialsHomeScreen(tutorialViewModel: TutorialViewModel, navContro
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(horizontal = 32.dp)
         ) {
             Spacer(modifier = Modifier.height(height = 32.dp))
             TutorialHomeTitle()
             Spacer(modifier = Modifier.height(height = 24.dp))
-            TutorialHomeVisual(tutorialData = tutorialData.value, tutorialPage = tutorialPage)
+            TutorialHomeVisual(tutorialData = tutorialData.value, tutorialPage = tutorialPage, completedTutorials = completedTutorialsMap)
             Spacer(modifier = Modifier.height(height = 24.dp))
             TutorialId(tutorialData = tutorialData.value)
             TutorialTitle(tutorialData = tutorialData.value)
-            TutorialDesc(tutorialPage = tutorialPage)
+            TutorialDesc(tutorialPage = tutorialDescription)
             TutorialButton(tutorialData = tutorialData.value, navController = navController)
         }
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TutorialHomeTitle() {
-    Row(modifier = Modifier.fillMaxWidth()) {
-        Column(modifier = Modifier.weight(weight = 0.65f)) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+    ) {
+        Column(
+            modifier = Modifier
+                .weight(weight = 0.65f)
+                .padding(horizontal = 32.dp)
+        ) {
             Text(
                 text = "Padawan journey",
                 style = PadawanTypography.headlineSmall,
@@ -88,94 +95,134 @@ fun TutorialHomeTitle() {
         }
 
         Spacer(modifier = Modifier.weight(weight = 0.1f))
+    }
+}
+
+@OptIn(ExperimentalPagerApi::class, ExperimentalMaterial3Api::class)
+@Composable
+fun TutorialHomeVisual(
+    tutorialData: Tutorial,
+    tutorialPage: List<List<TutorialElement>>,
+    completedTutorials: Map<Int, Boolean>
+) {
+    HorizontalPager(
+        count = 3,
+        contentPadding = PaddingValues(horizontal = 12.dp, vertical = 12.dp)
+    ) { page ->
+        val cardBackgroundColor = getBackgroundColor(page)
 
         Card(
-            containerColor = padawan_theme_tutorial_faded,
-            shape = CircleShape,
+            containerColor = cardBackgroundColor,
+            border = standardBorder,
             modifier = Modifier
-                .weight(weight = 0.25f)
-                .aspectRatio(ratio = 1f)
+                .fillMaxWidth(0.97f)
+                .standardShadow(8.dp)
         ) {
-            Icon(
-                painter = painterResource(id = R.drawable.ic_tutorial_star),
-                contentDescription = "Tutorial Star",
-                tint = padawan_theme_tutorial,
+            Column(
                 modifier = Modifier
                     .fillMaxSize()
-                    .scale(scale = 0.60f)
-                    .rotate(degrees = 15f)
-            )
+                    .padding(all = 24.dp)
+            ) {
+                Box(modifier = Modifier.fillMaxWidth()) {
+                    Column(modifier = Modifier.align(alignment = Alignment.CenterStart)) {
+                        Text(
+                            text = "Chapter ${tutorialData.id}",
+                            style = PadawanTypography.labelLarge
+                        )
+                        Spacer(modifier = Modifier.height(height = 8.dp))
+                        Text(
+                            text = tutorialData.difficulty,
+                            style = PadawanTypography.bodySmall
+                        )
+                    }
+
+                    Column(
+                        modifier = Modifier
+                            .align(alignment = Alignment.CenterEnd)
+                            .width(intrinsicSize = IntrinsicSize.Max)
+                    ) {
+                        ProgressBar(completionPercentage = currentPage.toFloat() / tutorialPage.size.toFloat())
+                        Text(
+                            text = "${tutorialData.completed} of ${tutorialPage.size} done",
+                            style = PadawanTypography.bodyMedium
+                        )
+                    }
+                }
+
+                Row(
+                    horizontalArrangement = Arrangement.SpaceAround,
+                    verticalAlignment = Alignment.CenterVertically,
+                    modifier = Modifier
+                        .height(150.dp)
+                        .fillMaxWidth()
+                ) {
+                    when (page) {
+                        0 -> (1..3).forEach {
+                            val completed = completedTutorials[it] ?: false
+                            Log.i("TutorialsHomeScreen", "Completed variable was $completed")
+                            LessonCircle(lessonNumber = it, completed = completed)
+                            // LessonCircle(lessonNumber = it, completed = completedTutorials[it] ?: false)
+                        }
+                        1 -> (4..7).forEach {
+                            LessonCircle(lessonNumber = it, completed = false)
+                            // LessonCircle(lessonNumber = it, completed = completedTutorials[it] ?: false)
+                        }
+                        2 -> (8..10).forEach {
+                            LessonCircle(lessonNumber = it, completed = false)
+                        }
+                    }
+                    // LessonCircle(lessonNumber = 1, completed = false)
+                    // LessonCircle(lessonNumber = 2, completed = true)
+                    // LessonCircle(lessonNumber = 3, completed = false)
+                }
+            }
         }
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-fun TutorialHomeVisual(tutorialData: Tutorial, tutorialPage: List<List<TutorialElement>>) {
-    Card(
-        containerColor = padawan_theme_tutorial_background,
-        border = standardBorder,
-        modifier = Modifier
-            .fillMaxWidth()
-            .standardShadow(8.dp)
-    ) {
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(all = 24.dp)
-        ) {
-            Box(modifier = Modifier.fillMaxWidth()) {
-                Column(modifier = Modifier.align(alignment = Alignment.CenterStart)) {
-                    Text(
-                        text = "Chapter ${tutorialData.id}",
-                        style = PadawanTypography.labelLarge
-                    )
-                    Spacer(modifier = Modifier.height(height = 8.dp))
-                    Text(
-                        text = tutorialData.difficulty,
-                        style = PadawanTypography.bodySmall
-                    )
-                }
-                
-                Column(
-                    modifier = Modifier
-                        .align(alignment = Alignment.CenterEnd)
-                        .width(intrinsicSize = IntrinsicSize.Max)
-                ) {
-                    ProgressBar(completionPercentage = tutorialData.completion.toFloat() / tutorialPage.size.toFloat())
-                    Text(
-                        text = "${tutorialData.completion} of ${tutorialPage.size} done",
-                        style = PadawanTypography.bodyMedium
-                    )
-                }
-            }
-
-            Box(modifier = Modifier.height(150.dp))
-            
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .align(alignment = Alignment.CenterHorizontally)
-            ) {
-                Row(modifier = Modifier.align(alignment = Alignment.Center)) {
-                    Icon(painter = painterResource(id = R.drawable.ic_drag_left), tint = padawan_theme_tutorial, contentDescription = "Drag Left")
-                    Text(
-                        text = "drag horizontally",
-                        style = PadawanTypography.bodySmall,
-                        modifier = Modifier
-                            .align(alignment = Alignment.CenterVertically)
-                            .padding(horizontal = 16.dp)
-                    )
-                    Icon(painter = painterResource(id = R.drawable.ic_drag_right), tint = padawan_theme_tutorial, contentDescription = "Drag Right")
-                }
-            }
-        }
+fun getBackgroundColor(page: Int): Color {
+    return when (page) {
+        0 -> Color(0xffba4ffc)
+        1 -> Color(0xfffc4f79)
+        2 -> Color(0xffff6d3b)
+        else -> Color(0xffffffff)
     }
+}
+
+@Composable
+fun LessonCircle(lessonNumber: Int, completed: Boolean) {
+    val completedColor = if (completed) Color(0xffffc847) else Color(0xcfb0b0b0)
+
+    Text(
+        text = lessonNumber.toString(),
+        style = TextStyle(
+            color = completedColor,
+            fontSize = 28.sp,
+            fontWeight = FontWeight.SemiBold,
+            fontFamily = ShareTechMono
+        ),
+        modifier = Modifier
+            .padding(24.dp)
+            .drawBehind {
+                drawCircle(
+                    color = completedColor,
+                    radius = 82f,
+                )
+                drawCircle(
+                    color = Color(0xff000000),
+                    radius = 64f
+                )
+            }
+            .clickable {
+                Log.i("Tutorials", "Clicked on tutorial $lessonNumber")
+            },
+    )
 }
 
 @Composable
 fun TutorialId(tutorialData: Tutorial) {
     Text(
+        modifier = Modifier.padding(horizontal = 32.dp),
         text = "Chapter ${tutorialData.id} - ${tutorialData.difficulty}",
         style = PadawanTypography.labelLarge,
         color = padawan_theme_button_primary
@@ -189,6 +236,7 @@ fun TutorialTitle(tutorialData: Tutorial) {
         modifier = Modifier
             .fillMaxWidth()
             .padding(bottom = 12.dp)
+            .padding(horizontal = 32.dp)
     ) {
         Text(
             text = tutorialData.title,
@@ -212,9 +260,10 @@ fun TutorialTitle(tutorialData: Tutorial) {
 }
 
 @Composable
-fun TutorialDesc(tutorialPage: List<List<TutorialElement>>) {
+fun TutorialDesc(tutorialPage: List<TutorialElement>) {
     Text(
-        text = stringResource(id = tutorialPage[0][1].resourceId),
+        modifier = Modifier.padding(horizontal = 32.dp),
+        text = stringResource(id = tutorialPage[0].resourceId),
         style = PadawanTypography.bodyMedium,
         color = padawan_theme_text_faded_secondary
     )

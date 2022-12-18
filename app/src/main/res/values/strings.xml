@@ -69,6 +69,7 @@
     <string name="E6_title">What are transaction fees?</string>
     <string name="E7_title">What is a recovery phrase?</string>
     <string name="E8_title">Recovering your wallet</string>
+    <string name="E1_description">Did you know there are actually more than one bitcoin network? Testnet is one of them, and it\'s surprisingly useful!</string>
     <string name="tutorial_done">Mark tutorial\nas done</string>
     <string name="back_to_list">Back to tutorials list</string>
     <string name="basic">Basics</string>

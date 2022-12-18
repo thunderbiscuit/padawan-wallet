@@ -18,6 +18,9 @@ enum class ElementType {
 
 val tutorial1: List<List<TutorialElement>> = listOf(
     listOf(
+        TutorialElement(ElementType.BODY, R.string.E1_description)
+    ),
+    listOf(
         TutorialElement(ElementType.TITLE, R.string.E1_title),
         TutorialElement(ElementType.BODY, R.string.t1_p1),
         TutorialElement(ElementType.RESOURCE, R.drawable.placeholder_image),

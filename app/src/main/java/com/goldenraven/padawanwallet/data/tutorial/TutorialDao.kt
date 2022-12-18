@@ -16,8 +16,8 @@ interface TutorialDao {
     @Query("SELECT * FROM tutorial_db ORDER BY id ASC")
     fun readAllTutorial(): LiveData<List<Tutorial>>
 
-    @Query("UPDATE tutorial_db SET completion = :completion WHERE id = :id")
-    suspend fun setCompletion(id: Int, completion: Int)
+    @Query("UPDATE tutorial_db SET completed = :completed WHERE id = :id")
+    suspend fun setCompleted(id: Int, completed: Boolean)
 
     @Query("SELECT * FROM tutorial_db WHERE id = :id")
     suspend fun getTutorial(id: Int): Tutorial

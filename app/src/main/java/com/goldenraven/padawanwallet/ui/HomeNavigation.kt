@@ -23,7 +23,10 @@ import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
-fun HomeNavigation(walletViewModel: WalletViewModel = viewModel(), tutorialViewModel: TutorialViewModel = viewModel()) {
+fun HomeNavigation(
+    walletViewModel: WalletViewModel = viewModel(),
+    tutorialViewModel: TutorialViewModel = viewModel()
+) {
     val navController: NavHostController = rememberAnimatedNavController()
     val animationDuration = 400
 

@@ -1,6 +1,7 @@
 package com.goldenraven.padawanwallet.utils
 
 import android.graphics.ImageFormat
+import android.util.Log
 import androidx.camera.core.ImageAnalysis
 import androidx.camera.core.ImageProxy
 import com.google.zxing.*
@@ -37,6 +38,7 @@ class QRCodeAnalyzer(
                         )
                     )
                 }.decode(binaryBitmap)
+                Log.i("QrCodeAnalyzer", "QR code scanned is ${result.text}")
                 onQrCodeScanned(result.text)
             } catch (e: Exception) {
                 e.printStackTrace()
