@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawBehind
@@ -39,7 +40,9 @@ internal fun TutorialsRootScreen(tutorialViewModel: TutorialViewModel, navContro
     val currTutorial = 1
     // val selectedTutorial: MutableState<Int> = remember { mutableStateOf(1) }
 
+    val tutorialLiveData: Tutorial? by tutorialViewModel.tutorialLiveData.observeAsState()
     // val tutorialData = remember { mutableStateOf(Tutorial(id = 0, title = "", type = "", difficulty = "", completed = false)) }
+    val defaultTutorial = Tutorial(0, "", "", "", false)
     val completedTutorialsMap = tutorialViewModel.getCompletedTutorials()
     // LaunchedEffect(key1 = true) { tutorialData.value = tutorialViewModel.getTutorialData(id = tutorialViewModel.selectedTutorial.value) }
     val tutorialPage = tutorialViewModel.getTutorialPages(id = currTutorial)
@@ -73,10 +76,11 @@ internal fun TutorialsRootScreen(tutorialViewModel: TutorialViewModel, navContro
                 viewModel = tutorialViewModel
             )
             Spacer(modifier = Modifier.height(height = 24.dp))
-            TutorialId(tutorialData = tutorialData)
-            TutorialTitle(tutorialData = tutorialData)
+            // tutorialLiveData?.let { TutorialId(tutorialData = it) }
+            TutorialId(tutorialData = tutorialLiveData ?: defaultTutorial)
+            TutorialTitle(tutorialData = tutorialLiveData ?: defaultTutorial)
             // TutorialDesc(tutorialPage = tutorialData)
-            TutorialButton(tutorialData = tutorialData, navController = navController)
+            TutorialButton(tutorialData = tutorialLiveData ?: defaultTutorial, navController = navController)
         }
     }
 }
@@ -189,66 +193,6 @@ fun TutorialSectionsCarousel(
                 }
             }
         }
-    }
-}
-
-fun calculateCompletionStringOfGroup(page: Int, completedTutorials: Map<Int, Boolean>): String {
-    return when (page) {
-        0 -> {
-            val count = completedTutorials.count {
-                it.key <= 3 && it.value
-            }
-            "$count of 3 done"
-        }
-        1 -> {
-            val count = completedTutorials.count {
-                it.key in 4..6 && it.value
-            }
-            "$count of 3 done"
-        }
-        2 -> {
-            val count = completedTutorials.count {
-                it.key in 7..8 && it.value
-            }
-            "$count of 2 done"
-        }
-        else -> {
-            Log.i(TAG, "We've made a terrible mistake")
-            ""
-        }
-    }
-}
-
-fun calculateCompletionOfGroup(page: Int, completedTutorials: Map<Int, Boolean>): Float {
-    return when (page) {
-        0 -> {
-            completedTutorials.count {
-                it.key <= 3 && it.value
-            }.div(3.0).toFloat()
-        }
-        1 -> {
-            completedTutorials.count {
-                it.key in 4..6 && it.value
-            }.div(3.0).toFloat()
-        }
-        2 -> {
-            completedTutorials.count {
-                it.key in 7..8 && it.value
-            }.div(2.0).toFloat()
-        }
-        else -> {
-            Log.i(TAG, "We've made a terrible mistake")
-            1.0.toFloat()
-        }
-    }
-}
-
-fun getBackgroundColor(page: Int): Color {
-    return when (page) {
-        0 -> Color(0xffba4ffc)
-        1 -> Color(0xfffc4f79)
-        2 -> Color(0xffff6d3b)
-        else -> Color(0xffffffff)
     }
 }
 
@@ -404,5 +348,65 @@ fun ProgressBar(
                 end = Offset(x = animateProgress.value * size.width, y = 0f)
             )
         }
+    }
+}
+
+fun calculateCompletionStringOfGroup(page: Int, completedTutorials: Map<Int, Boolean>): String {
+    return when (page) {
+        0 -> {
+            val count = completedTutorials.count {
+                it.key <= 3 && it.value
+            }
+            "$count of 3 done"
+        }
+        1 -> {
+            val count = completedTutorials.count {
+                it.key in 4..6 && it.value
+            }
+            "$count of 3 done"
+        }
+        2 -> {
+            val count = completedTutorials.count {
+                it.key in 7..8 && it.value
+            }
+            "$count of 2 done"
+        }
+        else -> {
+            Log.i(TAG, "We've made a terrible mistake")
+            ""
+        }
+    }
+}
+
+fun calculateCompletionOfGroup(page: Int, completedTutorials: Map<Int, Boolean>): Float {
+    return when (page) {
+        0 -> {
+            completedTutorials.count {
+                it.key <= 3 && it.value
+            }.div(3.0).toFloat()
+        }
+        1 -> {
+            completedTutorials.count {
+                it.key in 4..6 && it.value
+            }.div(3.0).toFloat()
+        }
+        2 -> {
+            completedTutorials.count {
+                it.key in 7..8 && it.value
+            }.div(2.0).toFloat()
+        }
+        else -> {
+            Log.i(TAG, "We've made a terrible mistake")
+            1.0.toFloat()
+        }
+    }
+}
+
+fun getBackgroundColor(page: Int): Color {
+    return when (page) {
+        0 -> Color(0xffba4ffc)
+        1 -> Color(0xfffc4f79)
+        2 -> Color(0xffff6d3b)
+        else -> Color(0xffffffff)
     }
 }

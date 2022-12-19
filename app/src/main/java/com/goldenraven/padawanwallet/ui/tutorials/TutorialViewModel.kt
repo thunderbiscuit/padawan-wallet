@@ -11,6 +11,7 @@ import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.goldenraven.padawanwallet.R
 import com.goldenraven.padawanwallet.data.tutorial.Tutorial
@@ -29,6 +30,7 @@ class TutorialViewModel(application: Application) : AndroidViewModel(application
     private lateinit var _tutorialData: Tutorial
     val tutorialData: Tutorial
         get() = _tutorialData
+    val tutorialLiveData: MutableLiveData<Tutorial> = MutableLiveData<Tutorial>(Tutorial(id = 0, title = "", type = "", difficulty = "", completed = false))
 
     private val _tutorialPageMap: Map<Int, List<List<TutorialElement>>>
 
@@ -77,6 +79,7 @@ class TutorialViewModel(application: Application) : AndroidViewModel(application
             val tutorialAsync = viewModelScope.async { tutorialRepository.getTutorial(id = id) }
             tutorialAsync.start()
             _tutorialData = tutorialAsync.await()
+            tutorialLiveData.setValue(_tutorialData)
         }
         Log.i(TAG, "Tutorial data was: $tutorialData")
     }
