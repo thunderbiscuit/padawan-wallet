@@ -14,11 +14,8 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.InlineTextContent
 import androidx.compose.foundation.text.appendInlineContent
-import androidx.compose.material.SnackbarHost
 import androidx.compose.material.SnackbarHostState
 import androidx.compose.material3.Divider
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
@@ -34,16 +31,13 @@ import androidx.compose.ui.text.PlaceholderVerticalAlign
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavController
 import com.goldenraven.padawanwallet.R
 import com.goldenraven.padawanwallet.theme.ShareTechMono
-import com.goldenraven.padawanwallet.ui.DrawerAppBar
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-internal fun SendCoinsBackScreen(navController: NavController) {
+internal fun SendCoinsBackScreen() {
 
     val context = LocalContext.current
     val scope = rememberCoroutineScope()
@@ -64,43 +58,37 @@ internal fun SendCoinsBackScreen(navController: NavController) {
             )
         }
     )
-
-    Scaffold(
-        topBar = { DrawerAppBar(navController, title = "Send Coins Back") },
-        bottomBar = { SnackbarHost(hostState = snackbarHostState) }
+    Column(
+        Modifier.padding(all = 32.dp)
     ) {
+        Image(
+            painterResource(R.drawable.return_sats_faucet_address),
+            contentDescription = "Return sats faucet address image",
+            modifier = Modifier.padding(start = 50.dp, end = 50.dp, bottom = 20.dp)
+        )
         Column(
-            Modifier.padding(all = 32.dp)
+            Modifier
+                .align(Alignment.CenterHorizontally)
+                .clickable(onClick = { copyToClipboard(context, scope, snackbarHostState) })
+                .padding(bottom = 20.dp)
         ) {
-            Image(
-                painterResource(R.drawable.return_sats_faucet_address),
-                contentDescription = "Return sats faucet address image",
-                modifier = Modifier.padding(start = 50.dp, end = 50.dp, bottom = 20.dp)
+            Text(
+                text = stringResource(R.string.send_coins_back_address),
+                fontFamily = ShareTechMono,
+                fontSize = 12.sp
             )
-            Column(
-                Modifier
-                    .align(Alignment.CenterHorizontally)
-                    .clickable(onClick = { copyToClipboard(context, scope, snackbarHostState) })
-                    .padding(bottom = 20.dp)
-            ) {
-                Text(
-                    text = stringResource(R.string.send_coins_back_address),
-                    fontFamily = ShareTechMono,
-                    fontSize = 12.sp
-                )
-                Divider(
-                    color = colorResource(id = R.color.fg1),
-                    thickness = 1.dp,
-                    modifier = Modifier.padding(all = 3.dp)
-                )
-                Text(
-                    text = copyAddrString,
-                    inlineContent = inlineContentMap,
-                    modifier = Modifier.align(Alignment.End)
-                )
-            }
-            Text(text = stringResource(id = R.string.send_coins_back))
+            Divider(
+                color = colorResource(id = R.color.fg1),
+                thickness = 1.dp,
+                modifier = Modifier.padding(all = 3.dp)
+            )
+            Text(
+                text = copyAddrString,
+                inlineContent = inlineContentMap,
+                modifier = Modifier.align(Alignment.End)
+            )
         }
+        Text(text = stringResource(id = R.string.send_coins_back))
     }
 }
 

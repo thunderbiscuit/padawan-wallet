@@ -5,37 +5,34 @@
 
 package com.goldenraven.padawanwallet.ui.settings
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
 import com.goldenraven.padawanwallet.data.WalletRepository
-import com.goldenraven.padawanwallet.ui.DrawerAppBar
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-internal fun RecoveryPhraseScreen(navController: NavController) {
+internal fun RecoveryPhraseScreen() {
 
     val seedPhrase: String = WalletRepository.getMnemonic()
     val wordList: List<String> = seedPhrase.split(" ")
 
-    Scaffold(
-        topBar = { DrawerAppBar(navController, title = "Wallet Recovery Phrase") },
-    ) {
-        Column (
-            modifier = Modifier.padding(all = 32.dp)
-        ){
-            wordList.forEachIndexed { index, item ->
-                Text(
-                    text = "${index + 1}: $item",
-                    modifier = Modifier.weight(weight = 1F)
-                )
-            }
+    Column (
+        modifier = Modifier
+            .padding(all = 32.dp)
+            .background(Color(0xffffffff))
+            .fillMaxSize()
+    ){
+        wordList.forEachIndexed { index, item ->
+            Text(
+                text = "${index + 1}: $item",
+                modifier = Modifier.weight(weight = 1F)
+            )
         }
     }
 }

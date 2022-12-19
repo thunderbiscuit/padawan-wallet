@@ -5,8 +5,6 @@ import androidx.compose.animation.core.tween
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -18,7 +16,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import com.goldenraven.padawanwallet.R
 import com.goldenraven.padawanwallet.theme.*
@@ -88,7 +85,6 @@ internal fun PadawanAppBar(navController: NavHostController, title: String) {
     }
 }
 
-
 @Composable
 internal fun ShowBars() {
     rememberSystemUiController().apply {
@@ -96,34 +92,6 @@ internal fun ShowBars() {
         this.isNavigationBarVisible = true
         this.isStatusBarVisible = true
     }
-}
-
-@Composable
-internal fun DrawerAppBar(navController: NavController, title: String) {
-    SmallTopAppBar(
-        title = { DrawerScreenAppBarTitle(title) },
-        colors = TopAppBarDefaults.smallTopAppBarColors(containerColor = md_theme_dark_surfaceLight),
-        // modifier = Modifier.background(color = md_theme_dark_background2),
-        navigationIcon = {
-            IconButton(onClick = { navController.navigate(Screen.HomeScreen.route) }) {
-                Icon(
-                    imageVector = Icons.Filled.ArrowBack,
-                    contentDescription = "Open drawer",
-                    tint = MaterialTheme.colorScheme.onBackground
-                )
-            }
-        },
-        actions = { }
-    )
-}
-
-@Composable
-internal fun DrawerScreenAppBarTitle(title: String) {
-    Text(
-        text = title,
-        style = PadawanTypography.titleLarge,
-        color = MaterialTheme.colorScheme.primary
-    )
 }
 
 @Composable

@@ -16,6 +16,8 @@ import androidx.navigation.NavType
 import androidx.navigation.navArgument
 import com.goldenraven.padawanwallet.ui.Screen
 import com.goldenraven.padawanwallet.ui.settings.AboutScreen
+import com.goldenraven.padawanwallet.ui.settings.RecoveryPhraseScreen
+import com.goldenraven.padawanwallet.ui.settings.SendCoinsBackScreen
 import com.goldenraven.padawanwallet.ui.settings.SettingsScreen
 import com.goldenraven.padawanwallet.ui.tutorials.*
 import com.goldenraven.padawanwallet.ui.tutorials.TutorialsHomeScreen
@@ -192,7 +194,7 @@ fun WalletNavigation(
             enterTransition = {
                 when (initialState.destination.route) {
                     in settingsScreens -> fadeIn(animationSpec = tween(400))
-                    else -> slideIntoContainer(AnimatedContentScope.SlideDirection.Start, animationSpec = tween(animationDuration))
+                    else               -> slideIntoContainer(AnimatedContentScope.SlideDirection.Start, animationSpec = tween(animationDuration))
                 }
             },
             popEnterTransition = {
@@ -204,13 +206,13 @@ fun WalletNavigation(
             exitTransition = {
                 when (targetState.destination.route) {
                     in settingsScreens -> fadeOut(animationSpec = tween(400))
-                    else -> slideOutOfContainer(AnimatedContentScope.SlideDirection.End, animationSpec = tween(animationDuration))
+                    else               -> slideOutOfContainer(AnimatedContentScope.SlideDirection.End, animationSpec = tween(animationDuration))
                 }
             },
             popExitTransition = {
                 when (targetState.destination.route) {
                     in settingsScreens -> fadeOut(animationSpec = tween(400))
-                    else -> slideOutOfContainer(AnimatedContentScope.SlideDirection.End, animationSpec = tween(animationDuration))
+                    else               -> slideOutOfContainer(AnimatedContentScope.SlideDirection.End, animationSpec = tween(animationDuration))
                 }
             },
         ) { SettingsScreen(navController = navControllerWalletNavigation) }
@@ -232,5 +234,41 @@ fun WalletNavigation(
                 slideOutOfContainer(AnimatedContentScope.SlideDirection.Down, animationSpec = tween(animationDuration))
             }
         ) { AboutScreen() }
+
+
+        // Recovery phrase
+        composable(
+            route = Screen.RecoveryPhraseScreen.route,
+            enterTransition = {
+                slideIntoContainer(AnimatedContentScope.SlideDirection.Up, animationSpec = tween(animationDuration))
+            },
+            popEnterTransition = {
+                slideIntoContainer(AnimatedContentScope.SlideDirection.Up, animationSpec = tween(animationDuration))
+            },
+            exitTransition = {
+                slideOutOfContainer(AnimatedContentScope.SlideDirection.Down, animationSpec = tween(animationDuration))
+            },
+            popExitTransition = {
+                slideOutOfContainer(AnimatedContentScope.SlideDirection.Down, animationSpec = tween(animationDuration))
+            }
+        ) { RecoveryPhraseScreen() }
+
+
+        // Send coins back
+        composable(
+            route = Screen.SendCoinsBackScreen.route,
+            enterTransition = {
+                slideIntoContainer(AnimatedContentScope.SlideDirection.Up, animationSpec = tween(animationDuration))
+            },
+            popEnterTransition = {
+                slideIntoContainer(AnimatedContentScope.SlideDirection.Up, animationSpec = tween(animationDuration))
+            },
+            exitTransition = {
+                slideOutOfContainer(AnimatedContentScope.SlideDirection.Down, animationSpec = tween(animationDuration))
+            },
+            popExitTransition = {
+                slideOutOfContainer(AnimatedContentScope.SlideDirection.Down, animationSpec = tween(animationDuration))
+            }
+        ) { SendCoinsBackScreen() }
     }
 }

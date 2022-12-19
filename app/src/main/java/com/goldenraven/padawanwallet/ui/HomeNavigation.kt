@@ -47,53 +47,5 @@ fun HomeNavigation(
                 slideOutOfContainer(AnimatedContentScope.SlideDirection.Start, animationSpec = tween(animationDuration))
             },
         ) { HomeScreen(walletViewModel = walletViewModel, tutorialViewModel = tutorialViewModel) }
-
-
-        // // About
-        // composable(
-        //     route = Screen.AboutScreen.route,
-        //     popEnterTransition = {
-        //         slideIntoContainer(AnimatedContentScope.SlideDirection.End, animationSpec = tween(animationDuration))
-        //     },
-        //     exitTransition = {
-        //         slideOutOfContainer(AnimatedContentScope.SlideDirection.Down, animationSpec = tween(animationDuration))
-        //     },
-        // ) { AboutScreen(navController = navController) }
-
-
-        // // Settings
-        // composable(
-        //     route = Screen.SettingsScreen.route,
-        //     popEnterTransition = {
-        //         slideIntoContainer(AnimatedContentScope.SlideDirection.End, animationSpec = tween(animationDuration))
-        //     },
-        //     exitTransition = {
-        //         slideOutOfContainer(AnimatedContentScope.SlideDirection.Down, animationSpec = tween(animationDuration))
-        //     },
-        // ) { SettingsScreen(navController = navController) }
-
-
-        // // Recovery Phrase
-        // composable(
-        //     route = Screen.RecoveryPhrase.route,
-        //     popEnterTransition = {
-        //         slideIntoContainer(AnimatedContentScope.SlideDirection.End, animationSpec = tween(animationDuration))
-        //     },
-        //     exitTransition = {
-        //         slideOutOfContainer(AnimatedContentScope.SlideDirection.Down, animationSpec = tween(animationDuration))
-        //     },
-        // ) { RecoveryPhraseScreen(navController = navController) }
-
-
-        // // Send your coins back
-        // composable(
-        //     route = Screen.SendCoinsBackScreen.route,
-        //     popEnterTransition = {
-        //         slideIntoContainer(AnimatedContentScope.SlideDirection.End, animationSpec = tween(animationDuration))
-        //     },
-        //     exitTransition = {
-        //         slideOutOfContainer(AnimatedContentScope.SlideDirection.Down, animationSpec = tween(animationDuration))
-        //     },
-        // ) { SendCoinsBackScreen(navController = navController) }
     }
 }

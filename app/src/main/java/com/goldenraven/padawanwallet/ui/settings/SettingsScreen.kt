@@ -60,15 +60,14 @@ internal fun SettingsScreen(
         )
 
         Button(
-            // onClick = {
-            //     navController.navigate(Screen.RecoveryPhraseScreen.route) {
-            //         navController.graph.startDestinationRoute?.let { route ->
-            //             popUpTo(route)
-            //         }
-            //         launchSingleTop = true
-            //     }
-            // },
-            onClick = {},
+            onClick = {
+                navController.navigate(Screen.RecoveryPhraseScreen.route) {
+                    navController.graph.startDestinationRoute?.let { route ->
+                        popUpTo(route)
+                    }
+                    launchSingleTop = true
+                }
+            },
             colors = ButtonDefaults.buttonColors(containerColor = Color(0xffffffff)),
             shape = RoundedCornerShape(8.dp),
             border = BorderStroke(1.dp, Color(0xff2f2f2f)),
@@ -91,7 +90,14 @@ internal fun SettingsScreen(
         }
 
         Button(
-            onClick = {},
+            onClick = {
+                navController.navigate(Screen.SendCoinsBackScreen.route) {
+                    navController.graph.startDestinationRoute?.let { route ->
+                        popUpTo(route)
+                    }
+                    launchSingleTop = true
+                }
+            },
             colors = ButtonDefaults.buttonColors(containerColor = Color(0xffffffff)),
             shape = RoundedCornerShape(8.dp),
             border = BorderStroke(1.dp, Color(0xff2f2f2f)),
