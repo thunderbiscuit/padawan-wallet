@@ -7,10 +7,7 @@ import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawBehind
@@ -33,21 +30,21 @@ import com.goldenraven.padawanwallet.ui.standardBorder
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 
-// TODO Group composable better
-// TODO Get next tutorial & page
-// TODO Add scrollable box in TutorialHomeVisual + icons & lines
-// TODO Update texts when new tutorials come in
+// TODO: Remember "next up" tutorial
 
-private const val TAG = "TutorialHomeScreen"
+private const val TAG = "TutorialRootScreen"
 
 @Composable
-internal fun TutorialsHomeScreen(tutorialViewModel: TutorialViewModel, navController: NavController) {
-    val currTutorial = 1 // TODO
-    val tutorialData = remember { mutableStateOf(Tutorial(id = 0, title = "", type = "", difficulty = "", completed = false)) }
+internal fun TutorialsRootScreen(tutorialViewModel: TutorialViewModel, navController: NavController) {
+    val currTutorial = 1
+    // val selectedTutorial: MutableState<Int> = remember { mutableStateOf(1) }
+
+    // val tutorialData = remember { mutableStateOf(Tutorial(id = 0, title = "", type = "", difficulty = "", completed = false)) }
     val completedTutorialsMap = tutorialViewModel.getCompletedTutorials()
-    LaunchedEffect(key1 = true) { tutorialData.value = tutorialViewModel.getTutorialData(id = currTutorial) }
+    // LaunchedEffect(key1 = true) { tutorialData.value = tutorialViewModel.getTutorialData(id = tutorialViewModel.selectedTutorial.value) }
     val tutorialPage = tutorialViewModel.getTutorialPages(id = currTutorial)
     val tutorialDescription = tutorialPage[0]
+
 
     Column(
         modifier = Modifier
@@ -59,15 +56,27 @@ internal fun TutorialsHomeScreen(tutorialViewModel: TutorialViewModel, navContro
             modifier = Modifier
                 .fillMaxSize()
         ) {
+            tutorialViewModel.getTutorialData(tutorialViewModel.selectedTutorial.value)
+            val tutorialData: Tutorial = tutorialViewModel.tutorialData
+            Log.i(TAG, "Tutorial data from root screen was $tutorialData")
+
             Spacer(modifier = Modifier.height(height = 32.dp))
             TutorialHomeTitle()
             Spacer(modifier = Modifier.height(height = 24.dp))
-            TutorialHomeVisual(tutorialData = tutorialData.value, tutorialPage = tutorialPage, completedTutorials = completedTutorialsMap)
+            // TutorialSectionsCarousel(
+            //     tutorialData = tutorialData.value,
+            //     tutorialPage = tutorialPage,
+            //     completedTutorials = completedTutorialsMap,
+            //     selectedTutorial = tutorialViewModel.selectedTutorial,
+            // )
+            TutorialSectionsCarousel(
+                viewModel = tutorialViewModel
+            )
             Spacer(modifier = Modifier.height(height = 24.dp))
-            TutorialId(tutorialData = tutorialData.value)
-            TutorialTitle(tutorialData = tutorialData.value)
-            TutorialDesc(tutorialPage = tutorialDescription)
-            TutorialButton(tutorialData = tutorialData.value, navController = navController)
+            TutorialId(tutorialData = tutorialData)
+            TutorialTitle(tutorialData = tutorialData)
+            // TutorialDesc(tutorialPage = tutorialData)
+            TutorialButton(tutorialData = tutorialData, navController = navController)
         }
     }
 }
@@ -95,18 +104,21 @@ fun TutorialHomeTitle() {
                 color = padawan_theme_text_faded_secondary
             )
         }
-
         Spacer(modifier = Modifier.weight(weight = 0.1f))
     }
 }
 
 @OptIn(ExperimentalPagerApi::class, ExperimentalMaterial3Api::class)
 @Composable
-fun TutorialHomeVisual(
-    tutorialData: Tutorial,
-    tutorialPage: List<List<TutorialElement>>,
-    completedTutorials: Map<Int, Boolean>
+fun TutorialSectionsCarousel(
+    viewModel: TutorialViewModel
 ) {
+// fun TutorialSectionsCarousel(
+//     tutorialData: Tutorial,
+//     tutorialPage: List<List<TutorialElement>>,
+//     completedTutorials: Map<Int, Boolean>,
+//     selectedTutorial: MutableState<Int>
+// ) {
     HorizontalPager(
         count = 3,
         contentPadding = PaddingValues(horizontal = 12.dp, vertical = 12.dp)
@@ -128,14 +140,15 @@ fun TutorialHomeVisual(
                 Box(modifier = Modifier.fillMaxWidth()) {
                     Column(modifier = Modifier.align(alignment = Alignment.CenterStart)) {
                         Text(
-                            text = "Chapter ${tutorialData.id}",
-                            style = PadawanTypography.labelLarge
+                            text = "Section ${page + 1}",
+                            style = PadawanTypography.labelLarge,
+                            fontSize = 18.sp,
                         )
                         Spacer(modifier = Modifier.height(height = 8.dp))
-                        Text(
-                            text = tutorialData.difficulty,
-                            style = PadawanTypography.bodySmall
-                        )
+                        // Text(
+                        //     text = tutorialData.difficulty,
+                        //     style = PadawanTypography.bodySmall
+                        // )
                     }
 
                     Column(
@@ -143,9 +156,9 @@ fun TutorialHomeVisual(
                             .align(alignment = Alignment.CenterEnd)
                             .width(intrinsicSize = IntrinsicSize.Max)
                     ) {
-                        ProgressBar(completionPercentage = calculateCompletionOfGroup(page, completedTutorials))
+                        ProgressBar(completionPercentage = calculateCompletionOfGroup(page, viewModel.getCompletedTutorials()))
                         Text(
-                            text = calculateCompletionStringOfGroup(page, completedTutorials),
+                            text = calculateCompletionStringOfGroup(page, viewModel.getCompletedTutorials()),
                             style = PadawanTypography.bodyMedium
                         )
                     }
@@ -160,17 +173,17 @@ fun TutorialHomeVisual(
                 ) {
                     when (page) {
                         0 -> (1..3).forEach {
-                            val completed = completedTutorials[it] ?: false
+                            val completed = viewModel.getCompletedTutorials()[it] ?: false
                             Log.i(TAG, "Completed variable was $completed")
-                            LessonCircle(lessonNumber = it, completed = completed)
+                            LessonCircle(lessonNumber = it, completed = completed, selectedTutorial = viewModel.selectedTutorial)
                             // LessonCircle(lessonNumber = it, completed = completedTutorials[it] ?: false)
                         }
                         1 -> (4..6).forEach {
-                            LessonCircle(lessonNumber = it, completed = false)
+                            LessonCircle(lessonNumber = it, completed = false, selectedTutorial = viewModel.selectedTutorial)
                             // LessonCircle(lessonNumber = it, completed = completedTutorials[it] ?: false)
                         }
                         2 -> (7..8).forEach {
-                            LessonCircle(lessonNumber = it, completed = false)
+                            LessonCircle(lessonNumber = it, completed = false, selectedTutorial = viewModel.selectedTutorial)
                         }
                     }
                 }
@@ -240,7 +253,7 @@ fun getBackgroundColor(page: Int): Color {
 }
 
 @Composable
-fun LessonCircle(lessonNumber: Int, completed: Boolean) {
+fun LessonCircle(lessonNumber: Int, completed: Boolean, selectedTutorial: MutableState<Int>) {
     val completedColor = if (completed) Color(0xffffc847) else Color(0xcfb0b0b0)
 
     Text(
@@ -264,6 +277,7 @@ fun LessonCircle(lessonNumber: Int, completed: Boolean) {
                 )
             }
             .clickable {
+                selectedTutorial.value = lessonNumber
                 Log.i(TAG, "Clicked on tutorial $lessonNumber")
             },
     )
@@ -273,7 +287,7 @@ fun LessonCircle(lessonNumber: Int, completed: Boolean) {
 fun TutorialId(tutorialData: Tutorial) {
     Text(
         modifier = Modifier.padding(horizontal = 32.dp),
-        text = "Chapter ${tutorialData.id} - ${tutorialData.difficulty}",
+        text = "Chapter ${tutorialData.id}",
         style = PadawanTypography.labelLarge,
         color = padawan_theme_button_primary
     )
@@ -328,7 +342,7 @@ fun TutorialButton(tutorialData: Tutorial, navController: NavController) {
             shape = RoundedCornerShape(20.dp),
             border = standardBorder,
             modifier = Modifier
-                .padding(all = 8.dp)
+                .padding(all = 16.dp)
                 .standardShadow(20.dp)
                 .align(alignment = Alignment.Center),
         ) {

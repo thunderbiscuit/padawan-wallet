@@ -21,7 +21,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.goldenraven.padawanwallet.R
-import com.goldenraven.padawanwallet.data.tutorial.Tutorial
 import com.goldenraven.padawanwallet.theme.*
 import com.goldenraven.padawanwallet.ui.standardBorder
 import kotlinx.coroutines.CoroutineScope
@@ -40,8 +39,8 @@ fun TutorialsScreen(
 ) {
     val tutorialPages = tutorialViewModel.getTutorialPages(id = tutorialId)
     Log.i(TAG, "We're dealing with tutorial $tutorialId and the tutorialPagesSize is ${tutorialPages.size}")
-    var tutorialData = Tutorial(id = 0, title = "", type = "", difficulty = "", completed = false)
-    LaunchedEffect(key1 = true) { tutorialData = tutorialViewModel.getTutorialData(id = tutorialId) }
+    // var tutorialData = Tutorial(id = 0, title = "", type = "", difficulty = "", completed = false)
+    // LaunchedEffect(key1 = true) { tutorialData = tutorialViewModel.getTutorialData(id = tutorialId) }
     val currentPage = remember { mutableStateOf(1) }
     // val currentPage = remember { mutableStateOf(value = tutorialData.completion) }
     val pageScrollState = rememberScrollState()
@@ -86,6 +85,7 @@ fun TutorialsScreen(
                 coroutineScope = coroutineScope,
                 tutorialViewModel = tutorialViewModel,
                 tutorialId = tutorialId,
+                navController
             )
         }
     }
@@ -98,7 +98,8 @@ fun TutorialButtons(
     pageScrollState: ScrollState,
     coroutineScope: CoroutineScope,
     tutorialViewModel: TutorialViewModel,
-    tutorialId: Int
+    tutorialId: Int,
+    navController: NavHostController
 ) {
     Row(
         modifier = Modifier
@@ -174,6 +175,7 @@ fun TutorialButtons(
             Button(
                 onClick = {
                     tutorialViewModel.setCompleted(id = tutorialId, completed = true)
+                    navController.popBackStack()
                 },
                 colors = ButtonDefaults.buttonColors(containerColor = padawan_theme_button_primary),
                 shape = RoundedCornerShape(20.dp),

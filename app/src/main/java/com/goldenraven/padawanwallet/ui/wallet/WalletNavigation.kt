@@ -20,7 +20,7 @@ import com.goldenraven.padawanwallet.ui.settings.RecoveryPhraseScreen
 import com.goldenraven.padawanwallet.ui.settings.SendCoinsBackScreen
 import com.goldenraven.padawanwallet.ui.settings.SettingsScreen
 import com.goldenraven.padawanwallet.ui.tutorials.*
-import com.goldenraven.padawanwallet.ui.tutorials.TutorialsHomeScreen
+import com.goldenraven.padawanwallet.ui.tutorials.TutorialsRootScreen
 import com.google.accompanist.navigation.animation.AnimatedNavHost
 import com.google.accompanist.navigation.animation.composable
 
@@ -73,7 +73,7 @@ fun WalletNavigation(
                     else -> slideOutOfContainer(AnimatedContentScope.SlideDirection.Start, animationSpec = tween(animationDuration))
                 }
             }
-        ) { WalletScreen(navController = navControllerWalletNavigation, walletViewModel = walletViewModel) }
+        ) { WalletRootScreen(navController = navControllerWalletNavigation, walletViewModel = walletViewModel) }
 
 
         // Receive
@@ -161,7 +161,7 @@ fun WalletNavigation(
                     else -> fadeOut(animationSpec = tween(300))
                 }
             }
-        ) { TutorialsHomeScreen(tutorialViewModel = tutorialViewModel, navController = navControllerWalletNavigation) }
+        ) { TutorialsRootScreen(tutorialViewModel = tutorialViewModel, navController = navControllerWalletNavigation) }
 
 
         // Specific tutorials

@@ -7,6 +7,8 @@ package com.goldenraven.padawanwallet.ui.tutorials
 
 import android.app.Application
 import android.util.Log
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
@@ -19,11 +21,13 @@ import kotlinx.coroutines.*
 private const val TAG = "TutorialViewModel"
 
 class TutorialViewModel(application: Application) : AndroidViewModel(application) {
+    val selectedTutorial: MutableState<Int> = mutableStateOf(1)
+
     private val readAllData: LiveData<List<Tutorial>>
     private val tutorialRepository: TutorialRepository
 
     private lateinit var _tutorialData: Tutorial
-    private val tutorialData: Tutorial
+    val tutorialData: Tutorial
         get() = _tutorialData
 
     private val _tutorialPageMap: Map<Int, List<List<TutorialElement>>>
@@ -61,11 +65,20 @@ class TutorialViewModel(application: Application) : AndroidViewModel(application
         return _tutorialPageMap.get(key = id)!!
     }
 
-    suspend fun getTutorialData(id: Int): Tutorial {
-        val tutorialAsync = viewModelScope.async { tutorialRepository.getTutorial(id = id) }
-        tutorialAsync.start()
-        _tutorialData = tutorialAsync.await()
-        return _tutorialData
+    // suspend fun getTutorialData(id: Int): Tutorial {
+    //     val tutorialAsync = viewModelScope.async { tutorialRepository.getTutorial(id = id) }
+    //     tutorialAsync.start()
+    //     _tutorialData = tutorialAsync.await()
+    //     return _tutorialData
+    // }
+
+    fun getTutorialData(id: Int): Unit {
+        val tutorialData = viewModelScope.async {
+            val tutorialAsync = viewModelScope.async { tutorialRepository.getTutorial(id = id) }
+            tutorialAsync.start()
+            _tutorialData = tutorialAsync.await()
+        }
+        Log.i(TAG, "Tutorial data was: $tutorialData")
     }
 
     // TODO If localization is enabled change language here
