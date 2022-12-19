@@ -11,10 +11,6 @@ import androidx.compose.animation.core.tween
 import androidx.compose.runtime.Composable
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
-import com.goldenraven.padawanwallet.ui.drawer.AboutScreen
-import com.goldenraven.padawanwallet.ui.drawer.RecoveryPhraseScreen
-import com.goldenraven.padawanwallet.ui.drawer.SendCoinsBackScreen
-import com.goldenraven.padawanwallet.ui.drawer.SettingsScreen
 import com.goldenraven.padawanwallet.ui.tutorials.TutorialViewModel
 import com.goldenraven.padawanwallet.ui.wallet.WalletViewModel
 import com.google.accompanist.navigation.animation.AnimatedNavHost
@@ -53,51 +49,51 @@ fun HomeNavigation(
         ) { HomeScreen(walletViewModel = walletViewModel, tutorialViewModel = tutorialViewModel) }
 
 
-        // About
-        composable(
-            route = Screen.AboutScreen.route,
-            popEnterTransition = {
-                slideIntoContainer(AnimatedContentScope.SlideDirection.End, animationSpec = tween(animationDuration))
-            },
-            exitTransition = {
-                slideOutOfContainer(AnimatedContentScope.SlideDirection.Down, animationSpec = tween(animationDuration))
-            },
-        ) { AboutScreen(navController = navController) }
+        // // About
+        // composable(
+        //     route = Screen.AboutScreen.route,
+        //     popEnterTransition = {
+        //         slideIntoContainer(AnimatedContentScope.SlideDirection.End, animationSpec = tween(animationDuration))
+        //     },
+        //     exitTransition = {
+        //         slideOutOfContainer(AnimatedContentScope.SlideDirection.Down, animationSpec = tween(animationDuration))
+        //     },
+        // ) { AboutScreen(navController = navController) }
 
 
-        // Settings
-        composable(
-            route = Screen.SettingsScreen.route,
-            popEnterTransition = {
-                slideIntoContainer(AnimatedContentScope.SlideDirection.End, animationSpec = tween(animationDuration))
-            },
-            exitTransition = {
-                slideOutOfContainer(AnimatedContentScope.SlideDirection.Down, animationSpec = tween(animationDuration))
-            },
-        ) { SettingsScreen(navController = navController) }
+        // // Settings
+        // composable(
+        //     route = Screen.SettingsScreen.route,
+        //     popEnterTransition = {
+        //         slideIntoContainer(AnimatedContentScope.SlideDirection.End, animationSpec = tween(animationDuration))
+        //     },
+        //     exitTransition = {
+        //         slideOutOfContainer(AnimatedContentScope.SlideDirection.Down, animationSpec = tween(animationDuration))
+        //     },
+        // ) { SettingsScreen(navController = navController) }
 
 
-        // Recovery Phrase
-        composable(
-            route = Screen.RecoveryPhrase.route,
-            popEnterTransition = {
-                slideIntoContainer(AnimatedContentScope.SlideDirection.End, animationSpec = tween(animationDuration))
-            },
-            exitTransition = {
-                slideOutOfContainer(AnimatedContentScope.SlideDirection.Down, animationSpec = tween(animationDuration))
-            },
-        ) { RecoveryPhraseScreen(navController = navController) }
+        // // Recovery Phrase
+        // composable(
+        //     route = Screen.RecoveryPhrase.route,
+        //     popEnterTransition = {
+        //         slideIntoContainer(AnimatedContentScope.SlideDirection.End, animationSpec = tween(animationDuration))
+        //     },
+        //     exitTransition = {
+        //         slideOutOfContainer(AnimatedContentScope.SlideDirection.Down, animationSpec = tween(animationDuration))
+        //     },
+        // ) { RecoveryPhraseScreen(navController = navController) }
 
 
-        // Send your coins back
-        composable(
-            route = Screen.SendCoinsBackScreen.route,
-            popEnterTransition = {
-                slideIntoContainer(AnimatedContentScope.SlideDirection.End, animationSpec = tween(animationDuration))
-            },
-            exitTransition = {
-                slideOutOfContainer(AnimatedContentScope.SlideDirection.Down, animationSpec = tween(animationDuration))
-            },
-        ) { SendCoinsBackScreen(navController = navController) }
+        // // Send your coins back
+        // composable(
+        //     route = Screen.SendCoinsBackScreen.route,
+        //     popEnterTransition = {
+        //         slideIntoContainer(AnimatedContentScope.SlideDirection.End, animationSpec = tween(animationDuration))
+        //     },
+        //     exitTransition = {
+        //         slideOutOfContainer(AnimatedContentScope.SlideDirection.Down, animationSpec = tween(animationDuration))
+        //     },
+        // ) { SendCoinsBackScreen(navController = navController) }
     }
 }

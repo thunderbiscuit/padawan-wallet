@@ -27,6 +27,6 @@ sealed class Screen(val route: String) {
     // drawer screens
     object AboutScreen : Screen("about_screen")
     object SettingsScreen : Screen("settings_screen")
-    object RecoveryPhrase : Screen("backup_screen")
+    object RecoveryPhrase : Screen("recovery_phrase_screen")
     object SendCoinsBackScreen : Screen("send_coins_back_screen")
 }

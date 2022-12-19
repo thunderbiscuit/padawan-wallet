@@ -3,37 +3,24 @@
  * Use of this source code is governed by the Apache 2.0 license that can be found in the ./LICENSE file.
  */
 
-package com.goldenraven.padawanwallet.ui.drawer
+package com.goldenraven.padawanwallet.ui.settings
 
-import android.content.Context
-import android.util.Log
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.SnackbarHost
-import androidx.compose.material.SnackbarHostState
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.goldenraven.padawanwallet.BuildConfig
 import com.goldenraven.padawanwallet.R
-import com.goldenraven.padawanwallet.data.WalletRepository
-import com.goldenraven.padawanwallet.data.Wallet
 import com.goldenraven.padawanwallet.theme.PadawanTypography
 import com.goldenraven.padawanwallet.theme.padawan_theme_background_secondary
-import com.goldenraven.padawanwallet.theme.standardBackground
-import com.goldenraven.padawanwallet.ui.DrawerAppBar
+import com.goldenraven.padawanwallet.ui.Screen
 import io.ktor.client.*
 import io.ktor.client.engine.cio.*
 import io.ktor.client.features.auth.*
@@ -42,13 +29,9 @@ import io.ktor.client.request.*
 import io.ktor.client.statement.*
 import io.ktor.http.*
 import io.ktor.http.content.*
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.launch
-import org.bitcoindevkit.AddressInfo
 
-private const val TAG = "SettingsFragment"
+private const val TAG = "SettingsScreen"
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 internal fun SettingsScreen(
     navController: NavController
@@ -131,7 +114,14 @@ internal fun SettingsScreen(
         }
 
         Button(
-            onClick = {},
+            onClick = {
+                navController.navigate(Screen.AboutScreen.route) {
+                    navController.graph.startDestinationRoute?.let { route ->
+                        popUpTo(route)
+                    }
+                    launchSingleTop = true
+                }
+            },
             colors = ButtonDefaults.buttonColors(containerColor = Color(0xffffffff)),
             shape = RoundedCornerShape(8.dp),
             border = BorderStroke(1.dp, Color(0xff2f2f2f)),
