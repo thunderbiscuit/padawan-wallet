@@ -12,14 +12,24 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.geometry.Rect
+import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Outline
+import androidx.compose.ui.graphics.Path
+import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.Density
+import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.goldenraven.padawanwallet.R
 import com.goldenraven.padawanwallet.theme.PadawanTypography
 import com.goldenraven.padawanwallet.theme.padawan_theme_background_secondary
+import com.goldenraven.padawanwallet.theme.standardBackground
 import com.goldenraven.padawanwallet.ui.Screen
 import io.ktor.client.*
 import io.ktor.client.engine.cio.*
@@ -29,6 +39,7 @@ import io.ktor.client.request.*
 import io.ktor.client.statement.*
 import io.ktor.http.*
 import io.ktor.http.content.*
+import kotlin.math.roundToInt
 
 private const val TAG = "SettingsScreen"
 
@@ -149,26 +160,26 @@ internal fun SettingsScreen(
             )
         }
 
+        Divider(
+            modifier = Modifier.fillMaxWidth().padding(40.dp),
+            color = Color(0xff8f8f8f),
+            thickness = 1.dp
+        )
+
         Button(
             onClick = {},
-            colors = ButtonDefaults.buttonColors(containerColor = Color(0xffffffff)),
+            colors = ButtonDefaults.buttonColors(containerColor = Color(0x60f6cf47)),
             shape = RoundedCornerShape(8.dp),
-            border = BorderStroke(1.dp, Color(0xff2f2f2f)),
+            border = BorderStroke(1.dp, Color(0xfff6cf47)),
             modifier = Modifier
-                .size(width = 400.dp, height = 80.dp)
-                .padding(start = 24.dp, end = 24.dp, top = 24.dp)
+                .size(width = 400.dp, height = 60.dp)
+                .padding(start = 24.dp, end = 24.dp)
         ) {
             Text(
                 text = "Reset completed tutorials",
                 fontWeight = FontWeight.Normal,
                 color = Color(0xff2f2f2f)
 
-            )
-            Spacer(modifier = Modifier.weight(1f))
-            Icon(
-                painter = painterResource(id = R.drawable.ic_hicon_right_2),
-                contentDescription = "Scan icon",
-                tint = Color(0xff2f2f2f)
             )
         }
     }
