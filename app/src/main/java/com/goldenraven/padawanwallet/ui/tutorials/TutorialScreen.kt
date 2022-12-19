@@ -230,8 +230,10 @@ internal fun TutorialAppBar(navController: NavHostController) {
 fun TutorialProgressBar(
     height: Dp = 8.dp,
     spacer: Float = 30f,
-    incompleteColor: Color = padawan_theme_progressbar_background,
-    completeColor: Color = padawan_theme_tutorial,
+    incompleteColor: Color = Color(0xfffbf5bf),
+    completeColor: Color = Color(0xff1f0208),
+    // incompleteColor: Color = padawan_theme_progressbar_background,
+    // completeColor: Color = padawan_theme_tutorial,
     completion: MutableState<Int>,
     total: Int,
 ) {

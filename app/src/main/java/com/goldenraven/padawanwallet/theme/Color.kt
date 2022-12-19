@@ -58,7 +58,8 @@ val padawan_theme_text_faded_secondary = Color(0xFF787878)
 
 val padawan_theme_tutorial = Color(0xFFFFC847)
 val padawan_theme_tutorial_faded = Color(0xFFFFE6AA)
-val padawan_theme_tutorial_background = Color(0xFFBA4FFC)
+val padawan_theme_tutorial_background = Color(0xfff6cf47)
+// val padawan_theme_tutorial_background = Color(0xFFBA4FFC)
 val padawan_theme_tutorial_chapter = Color(0xFFcc241d)
 
 val padawan_theme_button_primary = Color(0xFFFF6D3B)
