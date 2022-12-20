@@ -13,7 +13,6 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.goldenraven.padawanwallet.R
 import com.goldenraven.padawanwallet.data.tutorial.Tutorial
 import com.goldenraven.padawanwallet.data.tutorial.TutorialDatabase
 import com.goldenraven.padawanwallet.data.tutorial.TutorialRepository
@@ -43,14 +42,13 @@ class TutorialViewModel(application: Application) : AndroidViewModel(application
         // viewModelScope.launch(Dispatchers.IO) { getTutorialData(id = 1) }//
         updateSelectedTutorial(1) // TODO Change to most recent tutorial
         _tutorialPageMap = initTutorialPageMap()
-        if (readAllData.value.isNullOrEmpty()) initTutorial() // TODO Check if readAllData is initialized in init (might cause tutorial data to get refreshed on startup)
+        // if (readAllData.value.isNullOrEmpty()) initTutorial() // TODO Check if readAllData is initialized in init (might cause tutorial data to get refreshed on startup)
     }
 
     fun setCompleted(id: Int, completed: Boolean) {
         viewModelScope.launch {
             tutorialRepository.setCompleted(id = id, completed = completed)
         }
-        // _tutorialData.completed = completed
     }
 
     fun getCompletedTutorials(): Map<Int, Boolean> {
@@ -76,24 +74,6 @@ class TutorialViewModel(application: Application) : AndroidViewModel(application
                 tutorialRepository.getTutorial(id)
             }.await()
             selectedTutorialData.setValue(tutorial)
-        }
-    }
-
-    // TODO If localization is enabled change language here
-    private fun initTutorial() {
-        val application: Application = getApplication()
-        val tutorialList = listOf(
-            Tutorial(id = 1, title = application.getString(R.string.E1_title), type = application.getString(R.string.concept), difficulty = application.getString(R.string.basic), completed = false),
-            Tutorial(id = 2, title = application.getString(R.string.E2_title), type = application.getString(R.string.concept), difficulty = application.getString(R.string.basic), completed = false),
-            Tutorial(id = 3, title = application.getString(R.string.E3_title), type = application.getString(R.string.skill), difficulty = application.getString(R.string.basic), completed = false),
-            Tutorial(id = 4, title = application.getString(R.string.E4_title), type = application.getString(R.string.concept), difficulty = application.getString(R.string.basic), completed = false),
-            Tutorial(id = 5, title = application.getString(R.string.E5_title), type = application.getString(R.string.skill), difficulty = application.getString(R.string.advanced), completed = false),
-            Tutorial(id = 6, title = application.getString(R.string.E6_title), type = application.getString(R.string.concept), difficulty = application.getString(R.string.advanced), completed = false),
-            Tutorial(id = 7, title = application.getString(R.string.E7_title), type = application.getString(R.string.concept), difficulty = application.getString(R.string.advanced), completed = false),
-            Tutorial(id = 8, title = application.getString(R.string.E8_title), type = application.getString(R.string.skill), difficulty = application.getString(R.string.advanced), completed = false),
-        )
-        viewModelScope.launch(Dispatchers.IO) {
-            tutorialRepository.initTutorial(tutorialList = tutorialList)
         }
     }
 
