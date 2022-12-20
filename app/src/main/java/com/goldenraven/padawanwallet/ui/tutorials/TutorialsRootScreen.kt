@@ -282,7 +282,7 @@ fun TutorialButton(tutorialData: Tutorial, navController: NavController) {
                 modifier = Modifier.padding(vertical = 8.dp)
             ) {
                 Text(
-                    text = "Start Lesson",
+                    text = "Start Chapter",
                     style = PadawanTypography.labelLarge,
                 )
                 Icon(
