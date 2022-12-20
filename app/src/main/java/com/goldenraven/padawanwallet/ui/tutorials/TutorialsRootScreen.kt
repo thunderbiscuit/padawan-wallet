@@ -22,7 +22,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.goldenraven.padawanwallet.R
 import com.goldenraven.padawanwallet.data.tutorial.Tutorial
@@ -62,23 +61,12 @@ internal fun TutorialsRootScreen(tutorialViewModel: TutorialViewModel, navContro
                 .fillMaxSize()
         ) {
             tutorialViewModel.updateSelectedTutorial(tutorialViewModel.selectedTutorial.value)
-            // val tutorialData: Tutorial = tutorialViewModel.tutorialData
-            // Log.i(TAG, "Tutorial data from root screen was $tutorialData")
 
             Spacer(modifier = Modifier.height(height = 32.dp))
             TutorialHomeTitle()
             Spacer(modifier = Modifier.height(height = 24.dp))
-            // TutorialSectionsCarousel(
-            //     tutorialData = tutorialData.value,
-            //     tutorialPage = tutorialPage,
-            //     completedTutorials = completedTutorialsMap,
-            //     selectedTutorial = tutorialViewModel.selectedTutorial,
-            // )
-            TutorialSectionsCarousel(
-                viewModel = tutorialViewModel
-            )
+            TutorialSectionsCarousel(viewModel = tutorialViewModel)
             Spacer(modifier = Modifier.height(height = 24.dp))
-            // tutorialLiveData?.let { TutorialId(tutorialData = it) }
             TutorialId(tutorialData = selectedTutorialData ?: defaultTutorial)
             TutorialTitle(tutorialData = selectedTutorialData ?: defaultTutorial)
             TutorialDesc(tutorialPage = selectedTutorialDescription[0])
@@ -119,12 +107,6 @@ fun TutorialHomeTitle() {
 fun TutorialSectionsCarousel(
     viewModel: TutorialViewModel
 ) {
-// fun TutorialSectionsCarousel(
-//     tutorialData: Tutorial,
-//     tutorialPage: List<List<TutorialElement>>,
-//     completedTutorials: Map<Int, Boolean>,
-//     selectedTutorial: MutableState<Int>
-// ) {
     HorizontalPager(
         count = 3,
         contentPadding = PaddingValues(horizontal = 12.dp, vertical = 12.dp)

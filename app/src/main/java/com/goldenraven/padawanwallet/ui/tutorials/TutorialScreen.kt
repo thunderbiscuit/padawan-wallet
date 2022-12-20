@@ -137,8 +137,8 @@ fun TutorialButtons(
                     )
                 }
             }
-        } else {
-            Spacer(modifier = Modifier.weight(weight = 0.5f))
+        } else if (tutorialPagesSize > 1) {
+            // Spacer(modifier = Modifier.weight(weight = 0.5f))
         }
 
         if (currentPage.value < tutorialPagesSize - 1) {
