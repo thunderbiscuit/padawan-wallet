@@ -27,6 +27,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.navigation.NavHostController
 import com.goldenraven.padawanwallet.R
@@ -45,7 +46,10 @@ import com.goldenraven.padawanwallet.utils.getDateDifference
 // TODO Finish up send & receive screen
 
 @Composable
-internal fun WalletRootScreen(navController: NavHostController, walletViewModel: WalletViewModel) {
+internal fun WalletRootScreen(
+    navController: NavHostController,
+    walletViewModel: WalletViewModel
+) {
     val balance by walletViewModel.balance.observeAsState()
     val isRefreshing by walletViewModel.isRefreshing.collectAsState()
     val transactionList by walletViewModel.readAllData.observeAsState(initial = emptyList())
@@ -63,7 +67,7 @@ internal fun WalletRootScreen(navController: NavHostController, walletViewModel:
     }
 
     Column(modifier = Modifier.standardBackground()) {
-        BalanceBox(balance = balance.toString())
+        BalanceBox(balance = balance.toString(), viewModel = walletViewModel)
         Spacer(modifier = Modifier.height(height = 12.dp))
         SendReceive(navController = navController)
         TransactionListBox(openFaucetDialog = openFaucetDialog, transactionList = transactionList)
@@ -72,7 +76,11 @@ internal fun WalletRootScreen(navController: NavHostController, walletViewModel:
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun BalanceBox(balance: String) {
+fun BalanceBox(
+    balance: String,
+    viewModel: WalletViewModel
+) {
+    val context = LocalContext.current // TODO: is this the right place to get this context?
     Card(
         border = standardBorder,
         shape = RoundedCornerShape(20.dp),
@@ -84,7 +92,6 @@ fun BalanceBox(balance: String) {
         ConstraintLayout(
             modifier = Modifier
                 .padding(start = 24.dp, end = 24.dp, top = 24.dp, bottom = 0.dp)
-                // .padding(start = 24.dp, end = 24.dp, top = 24.dp, bottom = 12.dp)
                 .fillMaxWidth()
         ) {
             val (cardName, currencyToggle, balanceText, currencyText, buttonRow) = createRefs()
@@ -123,6 +130,7 @@ fun BalanceBox(balance: String) {
             Text(
                 text = balance,
                 style = PadawanTypography.displaySmall,
+                fontSize = 36.sp,
                 modifier = Modifier
                     .constrainAs(balanceText) {
                         top.linkTo(cardName.bottom)
@@ -149,7 +157,9 @@ fun BalanceBox(balance: String) {
                     }
             ) {
                 Button(
-                    onClick = {  },
+                    onClick = {
+                        viewModel.refresh(context)
+                    },
                     colors = ButtonDefaults.buttonColors(containerColor = Color.Black),
                     shape = RoundedCornerShape(20.dp, 20.dp, 0.dp, 0.dp),
                     border = standardBorder,
@@ -167,7 +177,7 @@ fun BalanceBox(balance: String) {
                         Icon(
                             painter = painterResource(id = R.drawable.ic_sync),
                             tint = Color(0xffdbdeff),
-                            contentDescription = "Sync Icon"
+                            contentDescription = "Sync icon"
                         )
                     }
                 }

@@ -222,6 +222,31 @@ internal fun SendScreen(navController: NavHostController, walletViewModel: Walle
                 errorIndicatorColor = Color.Transparent,
             )
         )
+
+        Button(
+            onClick = {
+
+            },
+            colors = ButtonDefaults.buttonColors(containerColor = padawan_theme_button_primary),
+            shape = RoundedCornerShape(20.dp),
+            border = standardBorder,
+            modifier = Modifier
+                .padding(top = 32.dp, start = 4.dp, end = 4.dp, bottom = 24.dp)
+                .standardShadow(20.dp)
+                .height(70.dp)
+                .width(240.dp)
+                .align(Alignment.CenterHorizontally)
+        ) {
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                modifier = Modifier.padding(vertical = 4.dp)
+            ) {
+                Text(
+                    text = "Verify transaction",
+                    color = Color(0xff000000)
+                )
+            }
+        }
 //            val (screenTitle, transactionInputs, bottomButtons, dropDownMenu) = createRefs()
 //            Text(
 //                text = "Send Bitcoin",

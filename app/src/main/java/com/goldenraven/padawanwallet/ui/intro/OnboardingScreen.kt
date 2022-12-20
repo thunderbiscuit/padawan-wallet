@@ -10,19 +10,14 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.AlertDialog
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.FontStyle
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -175,130 +170,6 @@ internal fun OnboardingScreen(
                 )
             }
         }
-    }
-}
-
-@Composable
-internal fun IntroScreen(navController: NavController) {
-
-    // the splash screen hides the system bars
-    // we need to bring them back on before continuing
-    ShowBars()
-
-    val (showDialog, setShowDialog) =  remember { mutableStateOf(false) }
-
-    Column(
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.SpaceAround,
-        modifier = Modifier
-            .background(color = md_theme_dark_background)
-            .fillMaxSize(1f),
-    ) {
-        AppName()
-        IntroText()
-        LetsGoButton(setShowDialog)
-        Dialog(
-            showDialog = showDialog,
-            setShowDialog = setShowDialog,
-            navController
-        )
-    }
-}
-
-@Composable
-fun AppName() {
-    Column {
-        Text(
-            text = stringResource(R.string.padawan),
-            color = md_theme_dark_primary,
-            fontSize = 70.sp,
-            fontFamily = ShareTechMono,
-        )
-        Text(
-            stringResource(R.string.elevator_pitch),
-            color = md_theme_dark_onBackground,
-            style = PadawanTypography.headlineMedium,
-            fontStyle = FontStyle.Italic,
-            fontWeight = FontWeight.Light,
-            modifier = Modifier.align(Alignment.End)
-        )
-    }
-}
-
-@Composable
-fun Dialog(showDialog: Boolean, setShowDialog: (Boolean) -> Unit, navController: NavController) {
-    if (showDialog) {
-        AlertDialog(
-            backgroundColor = md_theme_dark_lightBackground,
-            onDismissRequest = {},
-            title = {
-                Text(
-                    text = stringResource(R.string.intro_dialog_title),
-                    style = MaterialTheme.typography.headlineMedium,
-                    color = md_theme_dark_onLightBackground
-                )
-            },
-            text = {
-                Text(
-                    text = stringResource(R.string.intro_dialog_message),
-                    style = PadawanTypography.bodyMedium,
-                    color = md_theme_dark_onLightBackground
-                )
-            },
-            confirmButton = {
-                TextButton(
-                    onClick = {
-                        setShowDialog(false)
-                        navController.navigate(Screen.WalletChoiceScreen.route)
-                    },
-                ) {
-                    Text(
-                        text = stringResource(R.string.intro_dialog_positive),
-                        style = PadawanTypography.labelLarge,
-                        color = md_theme_dark_onLightBackground
-                    )
-                }
-            },
-            dismissButton = {
-                TextButton(
-                    onClick = {
-                        setShowDialog(false)
-                    },
-                ) {
-                    Text(
-                        text = stringResource(R.string.intro_dialog_negative),
-                        style = PadawanTypography.labelLarge,
-                        color = md_theme_dark_onLightBackground
-                    )
-                }
-            },
-        )
-    }
-}
-
-@Composable
-internal fun IntroText() {
-    Text(
-        stringResource(R.string.welcome_statement),
-        modifier = Modifier.padding(horizontal = 24.dp),
-        style = PadawanTypography.bodyLarge,
-        color = md_theme_dark_onBackground,
-    )
-}
-
-@Composable
-internal fun LetsGoButton(setShowDialog: (Boolean) -> Unit) {
-    Button(
-        onClick = { setShowDialog(true) },
-        shape = RoundedCornerShape(16.dp),
-        modifier = Modifier
-            .size(width = 200.dp, height = 100.dp)
-            .padding(top = 24.dp)
-    ) {
-        Text(
-            stringResource(R.string.entry_button),
-            style = PadawanTypography.labelLarge
-        )
     }
 }
 

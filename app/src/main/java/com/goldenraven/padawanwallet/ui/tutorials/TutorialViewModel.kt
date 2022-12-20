@@ -54,10 +54,8 @@ class TutorialViewModel(application: Application) : AndroidViewModel(application
         // this variable is null on first access, and hence triggers the reinitialization of the database content
         readAllData = tutorialRepository.readAllData
         Log.i(TAG, "readAllData variable is ${readAllData.value}")
-        // viewModelScope.launch(Dispatchers.IO) { getTutorialData(id = 1) }//
         updateSelectedTutorial(1) // TODO Change to most recent tutorial
         _tutorialPageMap = initTutorialPageMap()
-        // if (readAllData.value.isNullOrEmpty()) initTutorial() // TODO Check if readAllData is initialized in init (might cause tutorial data to get refreshed on startup)
     }
 
     fun setCompleted(id: Int) {
@@ -113,4 +111,3 @@ class TutorialViewModel(application: Application) : AndroidViewModel(application
         )
     }
 }
-
