@@ -174,7 +174,7 @@ fun TutorialButtons(
         } else if (currentPage.value == tutorialPagesSize - 1) {
             Button(
                 onClick = {
-                    tutorialViewModel.setCompleted(id = tutorialId, completed = true)
+                    tutorialViewModel.setCompleted(id = tutorialId)
                     navController.popBackStack()
                 },
                 colors = ButtonDefaults.buttonColors(containerColor = padawan_theme_button_primary),

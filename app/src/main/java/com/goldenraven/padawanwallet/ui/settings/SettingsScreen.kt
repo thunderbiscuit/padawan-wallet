@@ -21,12 +21,14 @@ import com.goldenraven.padawanwallet.R
 import com.goldenraven.padawanwallet.theme.PadawanTypography
 import com.goldenraven.padawanwallet.theme.padawan_theme_background_secondary
 import com.goldenraven.padawanwallet.ui.Screen
+import com.goldenraven.padawanwallet.ui.tutorials.TutorialViewModel
 
 private const val TAG = "SettingsScreen"
 
 @Composable
 internal fun SettingsScreen(
-    navController: NavController
+    navController: NavController,
+    viewModel: TutorialViewModel
 ) {
     Column(
         modifier = Modifier
@@ -148,7 +150,9 @@ internal fun SettingsScreen(
         )
 
         Button(
-            onClick = {},
+            onClick = {
+                viewModel.unsetAllCompleted()
+            },
             colors = ButtonDefaults.buttonColors(containerColor = Color(0x60f6cf47)),
             shape = RoundedCornerShape(8.dp),
             border = BorderStroke(1.dp, Color(0xfff6cf47)),

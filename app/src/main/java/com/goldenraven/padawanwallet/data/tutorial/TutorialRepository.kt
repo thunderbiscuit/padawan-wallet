@@ -20,8 +20,12 @@ class TutorialRepository(private val tutorialDao: TutorialDao) {
         return tutorialDao.getTutorial(id = id)
     }
 
-    internal suspend fun setCompleted(id: Int, completed: Boolean) {
-        tutorialDao.setCompleted(id = id, completed = completed)
+    internal suspend fun setCompleted(id: Int) {
+        tutorialDao.setCompleted(id = id, completed = true)
+    }
+
+    internal suspend fun unsetAllCompleted(id: Int) {
+        tutorialDao.setCompleted(id = id, completed = false)
     }
 
     private suspend fun addTutorial(tutorial: Tutorial) {

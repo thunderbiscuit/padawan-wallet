@@ -1,7 +1,5 @@
 package com.goldenraven.padawanwallet.ui
 
-import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.*
@@ -9,7 +7,6 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.geometry.Offset
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
@@ -47,14 +44,10 @@ internal fun BottomNavigationBar(
         NavigationItem.Settings
     )
 
-    // Divider(color = Color.Blue, thickness = 1.dp)
     NavigationBar(
         tonalElevation = 0.dp,
         containerColor = padawan_theme_background_secondary,
         modifier = Modifier.drawBehind {
-            // val strokeWidth = 1.dp * density
-            // val y = size.height - (strokeWidth / 2).roundToPx().toFloat()
-
             drawLine(
                 padawan_theme_navigation_bar_unselected,
                 Offset(0f, 0f),
@@ -62,7 +55,6 @@ internal fun BottomNavigationBar(
                 2.dp.toPx()
             )
         },
-        // modifier = Modifier.border(1.dp, padawan_theme_navigation_bar_unselected)
     ) {
         items.forEachIndexed { index, item ->
             NavigationBarItem(

@@ -13,7 +13,6 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.goldenraven.padawanwallet.R
 import com.goldenraven.padawanwallet.data.tutorial.Tutorial
 import com.goldenraven.padawanwallet.data.tutorial.TutorialDatabase
@@ -61,9 +60,17 @@ class TutorialViewModel(application: Application) : AndroidViewModel(application
         // if (readAllData.value.isNullOrEmpty()) initTutorial() // TODO Check if readAllData is initialized in init (might cause tutorial data to get refreshed on startup)
     }
 
-    fun setCompleted(id: Int, completed: Boolean) {
+    fun setCompleted(id: Int) {
         viewModelScope.launch {
-            tutorialRepository.setCompleted(id = id, completed = completed)
+            tutorialRepository.setCompleted(id = id)
+        }
+    }
+
+    fun unsetAllCompleted(): Unit {
+        viewModelScope.launch {
+            (1..8).forEach {
+                tutorialRepository.unsetAllCompleted(it)
+            }
         }
     }
 

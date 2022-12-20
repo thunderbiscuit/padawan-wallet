@@ -215,7 +215,7 @@ fun WalletNavigation(
                     else               -> slideOutOfContainer(AnimatedContentScope.SlideDirection.End, animationSpec = tween(animationDuration))
                 }
             },
-        ) { SettingsScreen(navController = navControllerWalletNavigation) }
+        ) { SettingsScreen(navController = navControllerWalletNavigation, viewModel = tutorialViewModel) }
 
 
         // About
