@@ -22,6 +22,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.goldenraven.padawanwallet.R
 import com.goldenraven.padawanwallet.data.tutorial.Tutorial
@@ -40,7 +41,8 @@ internal fun TutorialsRootScreen(tutorialViewModel: TutorialViewModel, navContro
     val currTutorial = 1
     // val selectedTutorial: MutableState<Int> = remember { mutableStateOf(1) }
 
-    val tutorialLiveData: Tutorial? by tutorialViewModel.tutorialLiveData.observeAsState()
+    val selectedTutorialData: Tutorial? by tutorialViewModel.selectedTutorialData.observeAsState()
+    val selectedTutorialDescription = tutorialViewModel.getTutorialPages(tutorialViewModel.selectedTutorial.value)
     // val tutorialData = remember { mutableStateOf(Tutorial(id = 0, title = "", type = "", difficulty = "", completed = false)) }
     val defaultTutorial = Tutorial(0, "", "", "", false)
     val completedTutorialsMap = tutorialViewModel.getCompletedTutorials()
@@ -59,9 +61,9 @@ internal fun TutorialsRootScreen(tutorialViewModel: TutorialViewModel, navContro
             modifier = Modifier
                 .fillMaxSize()
         ) {
-            tutorialViewModel.getTutorialData(tutorialViewModel.selectedTutorial.value)
-            val tutorialData: Tutorial = tutorialViewModel.tutorialData
-            Log.i(TAG, "Tutorial data from root screen was $tutorialData")
+            tutorialViewModel.updateSelectedTutorial(tutorialViewModel.selectedTutorial.value)
+            // val tutorialData: Tutorial = tutorialViewModel.tutorialData
+            // Log.i(TAG, "Tutorial data from root screen was $tutorialData")
 
             Spacer(modifier = Modifier.height(height = 32.dp))
             TutorialHomeTitle()
@@ -77,10 +79,10 @@ internal fun TutorialsRootScreen(tutorialViewModel: TutorialViewModel, navContro
             )
             Spacer(modifier = Modifier.height(height = 24.dp))
             // tutorialLiveData?.let { TutorialId(tutorialData = it) }
-            TutorialId(tutorialData = tutorialLiveData ?: defaultTutorial)
-            TutorialTitle(tutorialData = tutorialLiveData ?: defaultTutorial)
-            // TutorialDesc(tutorialPage = tutorialData)
-            TutorialButton(tutorialData = tutorialLiveData ?: defaultTutorial, navController = navController)
+            TutorialId(tutorialData = selectedTutorialData ?: defaultTutorial)
+            TutorialTitle(tutorialData = selectedTutorialData ?: defaultTutorial)
+            TutorialDesc(tutorialPage = selectedTutorialDescription[0])
+            TutorialButton(tutorialData = selectedTutorialData ?: defaultTutorial, navController = navController)
         }
     }
 }

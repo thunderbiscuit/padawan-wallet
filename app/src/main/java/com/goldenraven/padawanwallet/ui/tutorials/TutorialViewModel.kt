@@ -27,10 +27,10 @@ class TutorialViewModel(application: Application) : AndroidViewModel(application
     private val readAllData: LiveData<List<Tutorial>>
     private val tutorialRepository: TutorialRepository
 
-    private lateinit var _tutorialData: Tutorial
-    val tutorialData: Tutorial
-        get() = _tutorialData
-    val tutorialLiveData: MutableLiveData<Tutorial> = MutableLiveData<Tutorial>(Tutorial(id = 0, title = "", type = "", difficulty = "", completed = false))
+    // private lateinit var _tutorialData: Tutorial
+    // val tutorialData: Tutorial
+    //     get() = _tutorialData
+    val selectedTutorialData: MutableLiveData<Tutorial> = MutableLiveData<Tutorial>(Tutorial(id = 0, title = "", type = "", difficulty = "", completed = false))
 
     private val _tutorialPageMap: Map<Int, List<List<TutorialElement>>>
 
@@ -40,14 +40,17 @@ class TutorialViewModel(application: Application) : AndroidViewModel(application
         // this variable is null on first access, and hence triggers the reinitialization of the database content
         readAllData = tutorialRepository.readAllData
         Log.i(TAG, "readAllData variable is ${readAllData.value}")
-        viewModelScope.launch(Dispatchers.IO) { getTutorialData(id = 1) }// TODO Change to most recent tutorial
+        // viewModelScope.launch(Dispatchers.IO) { getTutorialData(id = 1) }//
+        updateSelectedTutorial(1) // TODO Change to most recent tutorial
         _tutorialPageMap = initTutorialPageMap()
         if (readAllData.value.isNullOrEmpty()) initTutorial() // TODO Check if readAllData is initialized in init (might cause tutorial data to get refreshed on startup)
     }
 
     fun setCompleted(id: Int, completed: Boolean) {
-        viewModelScope.launch(Dispatchers.IO) { tutorialRepository.setCompleted(id = id, completed = completed) } // TODO Check if calling a coroutine is necessary
-        _tutorialData.completed = completed
+        viewModelScope.launch {
+            tutorialRepository.setCompleted(id = id, completed = completed)
+        }
+        // _tutorialData.completed = completed
     }
 
     fun getCompletedTutorials(): Map<Int, Boolean> {
@@ -67,21 +70,13 @@ class TutorialViewModel(application: Application) : AndroidViewModel(application
         return _tutorialPageMap.get(key = id)!!
     }
 
-    // suspend fun getTutorialData(id: Int): Tutorial {
-    //     val tutorialAsync = viewModelScope.async { tutorialRepository.getTutorial(id = id) }
-    //     tutorialAsync.start()
-    //     _tutorialData = tutorialAsync.await()
-    //     return _tutorialData
-    // }
-
-    fun getTutorialData(id: Int): Unit {
-        val tutorialData = viewModelScope.async {
-            val tutorialAsync = viewModelScope.async { tutorialRepository.getTutorial(id = id) }
-            tutorialAsync.start()
-            _tutorialData = tutorialAsync.await()
-            tutorialLiveData.setValue(_tutorialData)
+    fun updateSelectedTutorial(id: Int): Unit {
+        viewModelScope.launch {
+            val tutorial: Tutorial = async {
+                tutorialRepository.getTutorial(id)
+            }.await()
+            selectedTutorialData.setValue(tutorial)
         }
-        Log.i(TAG, "Tutorial data was: $tutorialData")
     }
 
     // TODO If localization is enabled change language here
