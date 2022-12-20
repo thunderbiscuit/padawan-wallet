@@ -21,4 +21,7 @@ interface TutorialDao {
 
     @Query("SELECT * FROM tutorial_db WHERE id = :id")
     suspend fun getTutorial(id: Int): Tutorial
+
+    @Query("SELECT (SELECT COUNT(*) FROM tutorial_db) == 0")
+    fun isEmpty(): Boolean
 }

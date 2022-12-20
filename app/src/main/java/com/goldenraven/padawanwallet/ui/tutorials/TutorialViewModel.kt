@@ -13,6 +13,8 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.goldenraven.padawanwallet.R
 import com.goldenraven.padawanwallet.data.tutorial.Tutorial
 import com.goldenraven.padawanwallet.data.tutorial.TutorialDatabase
 import com.goldenraven.padawanwallet.data.tutorial.TutorialRepository
@@ -26,16 +28,30 @@ class TutorialViewModel(application: Application) : AndroidViewModel(application
     private val readAllData: LiveData<List<Tutorial>>
     private val tutorialRepository: TutorialRepository
 
-    // private lateinit var _tutorialData: Tutorial
-    // val tutorialData: Tutorial
-    //     get() = _tutorialData
     val selectedTutorialData: MutableLiveData<Tutorial> = MutableLiveData<Tutorial>(Tutorial(id = 0, title = "", type = "", difficulty = "", completed = false))
 
     private val _tutorialPageMap: Map<Int, List<List<TutorialElement>>>
 
+    private val initialChapterList = listOf(
+        Tutorial(id = 1, title = application.getString(R.string.E1_title), type = application.getString(R.string.concept), difficulty = application.getString(R.string.basic), completed = false),
+        Tutorial(id = 2, title = application.getString(R.string.E2_title), type = application.getString(R.string.concept), difficulty = application.getString(R.string.basic), completed = false),
+        Tutorial(id = 3, title = application.getString(R.string.E3_title), type = application.getString(R.string.skill), difficulty = application.getString(R.string.basic), completed = false),
+        Tutorial(id = 4, title = application.getString(R.string.E4_title), type = application.getString(R.string.concept), difficulty = application.getString(R.string.basic), completed = false),
+        Tutorial(id = 5, title = application.getString(R.string.E5_title), type = application.getString(R.string.skill), difficulty = application.getString(R.string.advanced), completed = false),
+        Tutorial(id = 6, title = application.getString(R.string.E6_title), type = application.getString(R.string.concept), difficulty = application.getString(R.string.advanced), completed = false),
+        Tutorial(id = 7, title = application.getString(R.string.E7_title), type = application.getString(R.string.concept), difficulty = application.getString(R.string.advanced), completed = false),
+        Tutorial(id = 8, title = application.getString(R.string.E8_title), type = application.getString(R.string.skill), difficulty = application.getString(R.string.advanced), completed = false),
+    )
+
     init {
         val tutorialDao = TutorialDatabase.getInstance(application).tutorialDao()
         tutorialRepository = TutorialRepository(tutorialDao)
+        runBlocking(Dispatchers.IO) {
+            val dbIsEmpty = tutorialRepository.dbIsEmpty()
+            if (dbIsEmpty) {
+                tutorialRepository.loadInitialData(initialChapterList)
+            }
+        }
         // this variable is null on first access, and hence triggers the reinitialization of the database content
         readAllData = tutorialRepository.readAllData
         Log.i(TAG, "readAllData variable is ${readAllData.value}")
@@ -90,3 +106,4 @@ class TutorialViewModel(application: Application) : AndroidViewModel(application
         )
     }
 }
+

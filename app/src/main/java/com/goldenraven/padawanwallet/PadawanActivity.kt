@@ -52,6 +52,9 @@ class PadawanActivity : AppCompatActivity() {
                     Room.databaseBuilder(applicationContext, TutorialDatabase::class.java, "tutorial_db")
                         .createFromAsset("databases/tutorial_db.db")
                         .build()
+                        // .also {
+                        //     Log.i(TAG, "We are pre-populating the database")
+                        // }
 
                     setContent {
                         PadawanTheme {

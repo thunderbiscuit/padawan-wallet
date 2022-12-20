@@ -5,7 +5,11 @@
 
 package com.goldenraven.padawanwallet.data.tutorial
 
+import android.util.Log
 import androidx.lifecycle.LiveData
+import kotlinx.coroutines.runBlocking
+
+private const val TAG = "TutorialRepository"
 
 class TutorialRepository(private val tutorialDao: TutorialDao) {
     val readAllData: LiveData<List<Tutorial>> = tutorialDao.readAllTutorial()
@@ -27,6 +31,19 @@ class TutorialRepository(private val tutorialDao: TutorialDao) {
     suspend fun initTutorial(tutorialList: List<Tutorial>) {
         tutorialList.forEach {
             addTutorial(tutorial = it)
+        }
+    }
+
+    suspend fun dbIsEmpty(): Boolean {
+        return tutorialDao.isEmpty()
+    }
+
+    suspend fun loadInitialData(initialChapterList: List<Tutorial>) {
+        runBlocking {
+            initialChapterList.forEach {
+                addTutorial(tutorial = it)
+                Log.i(TAG, "Loading initial chapter ${it.id}")
+            }
         }
     }
 }
