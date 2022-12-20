@@ -163,15 +163,18 @@ fun TutorialSectionsCarousel(
                         0 -> (1..3).forEach {
                             val completed = viewModel.getCompletedTutorials()[it] ?: false
                             Log.i(TAG, "Completed variable was $completed")
-                            LessonCircle(lessonNumber = it, completed = completed, selectedTutorial = viewModel.selectedTutorial)
+                            val selected = (it == viewModel.selectedTutorial.value)
+                            LessonCircle(lessonNumber = it, completed = completed, selected = selected, selectedTutorial = viewModel.selectedTutorial)
                         }
                         1 -> (4..6).forEach {
                             val completed = viewModel.getCompletedTutorials()[it] ?: false
-                            LessonCircle(lessonNumber = it, completed = completed, selectedTutorial = viewModel.selectedTutorial)
+                            val selected = (it == viewModel.selectedTutorial.value)
+                            LessonCircle(lessonNumber = it, completed = completed, selected = selected, selectedTutorial = viewModel.selectedTutorial)
                         }
                         2 -> (7..8).forEach {
                             val completed = viewModel.getCompletedTutorials()[it] ?: false
-                            LessonCircle(lessonNumber = it, completed = completed, selectedTutorial = viewModel.selectedTutorial)
+                            val selected = (it == viewModel.selectedTutorial.value)
+                            LessonCircle(lessonNumber = it, completed = completed, selected = selected, selectedTutorial = viewModel.selectedTutorial)
                         }
                     }
                 }
@@ -181,7 +184,7 @@ fun TutorialSectionsCarousel(
 }
 
 @Composable
-fun LessonCircle(lessonNumber: Int, completed: Boolean, selectedTutorial: MutableState<Int>) {
+fun LessonCircle(lessonNumber: Int, completed: Boolean, selected: Boolean, selectedTutorial: MutableState<Int>) {
     val completedColor = if (completed) Color(0xffffc847) else Color(0xcfb0b0b0)
 
     Text(
@@ -197,7 +200,7 @@ fun LessonCircle(lessonNumber: Int, completed: Boolean, selectedTutorial: Mutabl
             .drawBehind {
                 drawCircle(
                     color = completedColor,
-                    radius = 82f,
+                    radius = if (selected) 96f else 82f,
                 )
                 drawCircle(
                     color = Color(0xff000000),
