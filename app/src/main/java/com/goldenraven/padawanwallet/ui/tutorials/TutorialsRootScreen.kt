@@ -182,14 +182,14 @@ fun TutorialSectionsCarousel(
                             val completed = viewModel.getCompletedTutorials()[it] ?: false
                             Log.i(TAG, "Completed variable was $completed")
                             LessonCircle(lessonNumber = it, completed = completed, selectedTutorial = viewModel.selectedTutorial)
-                            // LessonCircle(lessonNumber = it, completed = completedTutorials[it] ?: false)
                         }
                         1 -> (4..6).forEach {
-                            LessonCircle(lessonNumber = it, completed = false, selectedTutorial = viewModel.selectedTutorial)
-                            // LessonCircle(lessonNumber = it, completed = completedTutorials[it] ?: false)
+                            val completed = viewModel.getCompletedTutorials()[it] ?: false
+                            LessonCircle(lessonNumber = it, completed = completed, selectedTutorial = viewModel.selectedTutorial)
                         }
                         2 -> (7..8).forEach {
-                            LessonCircle(lessonNumber = it, completed = false, selectedTutorial = viewModel.selectedTutorial)
+                            val completed = viewModel.getCompletedTutorials()[it] ?: false
+                            LessonCircle(lessonNumber = it, completed = completed, selectedTutorial = viewModel.selectedTutorial)
                         }
                     }
                 }
