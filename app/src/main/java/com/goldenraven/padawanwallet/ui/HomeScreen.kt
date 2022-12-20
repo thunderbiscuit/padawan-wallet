@@ -1,18 +1,20 @@
 package com.goldenraven.padawanwallet.ui
 
+import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.drawBehind
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
-import com.goldenraven.padawanwallet.theme.PadawanTypography
-import com.goldenraven.padawanwallet.theme.padawan_theme_navigation_bar_unselected
-import com.goldenraven.padawanwallet.theme.padawan_theme_onBackground
-import com.goldenraven.padawanwallet.theme.white
+import com.goldenraven.padawanwallet.theme.*
 import com.goldenraven.padawanwallet.ui.tutorials.TutorialViewModel
 import com.goldenraven.padawanwallet.utils.NavigationItem
 import com.goldenraven.padawanwallet.ui.wallet.WalletNavigation
@@ -35,7 +37,9 @@ internal fun HomeScreen(walletViewModel: WalletViewModel, tutorialViewModel: Tut
 }
 
 @Composable
-internal fun BottomNavigationBar(navControllerWalletNavigation: NavController) {
+internal fun BottomNavigationBar(
+    navControllerWalletNavigation: NavController,
+) {
     var selectedItem by remember { mutableStateOf(0) }
     val items = listOf(
         NavigationItem.Home,
@@ -43,7 +47,23 @@ internal fun BottomNavigationBar(navControllerWalletNavigation: NavController) {
         NavigationItem.Settings
     )
 
-    NavigationBar(tonalElevation = 0.dp) {
+    // Divider(color = Color.Blue, thickness = 1.dp)
+    NavigationBar(
+        tonalElevation = 0.dp,
+        containerColor = padawan_theme_background_secondary,
+        modifier = Modifier.drawBehind {
+            // val strokeWidth = 1.dp * density
+            // val y = size.height - (strokeWidth / 2).roundToPx().toFloat()
+
+            drawLine(
+                padawan_theme_navigation_bar_unselected,
+                Offset(0f, 0f),
+                Offset(size.width, 0f),
+                2.dp.toPx()
+            )
+        },
+        // modifier = Modifier.border(1.dp, padawan_theme_navigation_bar_unselected)
+    ) {
         items.forEachIndexed { index, item ->
             NavigationBarItem(
                 icon = {
@@ -74,7 +94,7 @@ internal fun BottomNavigationBar(navControllerWalletNavigation: NavController) {
                     selectedTextColor = padawan_theme_onBackground,
                     unselectedIconColor = padawan_theme_navigation_bar_unselected,
                     unselectedTextColor = padawan_theme_navigation_bar_unselected,
-                    indicatorColor = white,
+                    indicatorColor = padawan_theme_background_secondary,
                 )
             )
         }
