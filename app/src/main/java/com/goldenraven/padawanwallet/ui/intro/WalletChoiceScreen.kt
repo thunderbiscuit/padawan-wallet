@@ -43,7 +43,7 @@ internal fun WalletChoiceScreen(
             Column {
                 Text(
                     text = stringResource(R.string.padawan),
-                    color = md_theme_dark_primary,
+                    color = padawan_theme_text_headline,
                     fontSize = 70.sp,
                     fontFamily = ShareTechMono,
                     modifier = Modifier

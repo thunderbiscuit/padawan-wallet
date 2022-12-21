@@ -7,11 +7,11 @@ package com.goldenraven.padawanwallet.theme
 
 import androidx.compose.ui.graphics.Color
 
-val md_theme_dark_primary = Color(0xFFb8bb26)
-val md_theme_dark_onPrimary = Color(0xFFebdbb2)
+// val md_theme_dark_primary = Color(0xFFb8bb26)
+// val md_theme_dark_onPrimary = Color(0xFFebdbb2)
 // val md_theme_dark_primaryContainer = Color(0xFFf50057) // pink
 // val md_theme_dark_onPrimaryContainer = Color(0xFFf50057) // pink
-val md_theme_dark_secondary = Color(0xFFd65d0e)
+// val md_theme_dark_secondary = Color(0xFFd65d0e)
 // val md_theme_dark_onSecondary = Color(0xFFf50057) // pink
 // val md_theme_dark_secondaryContainer = Color(0xFFf50057) // pink
 // val md_theme_dark_onSecondaryContainer = Color(0xFFf50057) // pink
@@ -51,7 +51,7 @@ val padawan_theme_send_primary = Color(0x6676dab3)
 val padawan_theme_navigation_bar_unselected = Color(0xFF8a8a8a)
 val padawan_theme_progressbar_background = Color(0x4dd3d3d3)
 
-val padawan_theme_text_headline = Color(0xFF1f0208)
+val padawan_theme_text_headline = Color(0xff1f0208) // default dark text (not quite black)
 val padawan_theme_text_default = Color(0xFF000000)
 val padawan_theme_text_faded = Color(0x60000000)
 val padawan_theme_text_faded_secondary = Color(0xff787878)

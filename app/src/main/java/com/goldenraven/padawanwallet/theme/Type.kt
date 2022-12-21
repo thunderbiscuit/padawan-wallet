@@ -72,7 +72,7 @@ val PadawanTypography = Typography(
 		fontFamily = Outfit,
 		fontWeight = FontWeight.Light,
 		fontSize = 16.sp,
-		lineHeight = 20.sp,
+		lineHeight = 22.sp,
 		letterSpacing = 0.25.sp,
 	),
 	bodySmall = TextStyle(

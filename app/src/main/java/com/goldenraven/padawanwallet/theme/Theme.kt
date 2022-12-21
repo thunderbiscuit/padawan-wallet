@@ -8,11 +8,11 @@ import androidx.compose.ui.graphics.Color
 
 private val DarkThemeColors = darkColorScheme(
 
-    primary = md_theme_dark_primary,
-    onPrimary = md_theme_dark_onPrimary,
+    // primary = md_theme_dark_primary,
+    // onPrimary = md_theme_dark_onPrimary,
     // primaryContainer = md_theme_dark_primaryContainer,
     // onPrimaryContainer = md_theme_dark_onPrimaryContainer,
-    secondary = md_theme_dark_secondary,
+    // secondary = md_theme_dark_secondary,
     // onSecondary = md_theme_dark_onSecondary,
     // secondaryContainer = md_theme_dark_secondaryContainer,
     // onSecondaryContainer = md_theme_dark_onSecondaryContainer,

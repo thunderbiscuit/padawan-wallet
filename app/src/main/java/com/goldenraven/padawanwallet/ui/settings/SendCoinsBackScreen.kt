@@ -8,9 +8,9 @@ package com.goldenraven.padawanwallet.ui.settings
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.clickable
+import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.InlineTextContent
 import androidx.compose.foundation.text.appendInlineContent
@@ -32,13 +32,13 @@ import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.goldenraven.padawanwallet.R
-import com.goldenraven.padawanwallet.theme.ShareTechMono
+import com.goldenraven.padawanwallet.theme.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
 @Composable
 internal fun SendCoinsBackScreen() {
-
+    val scrollState = rememberScrollState()
     val context = LocalContext.current
     val scope = rememberCoroutineScope()
     val snackbarHostState = remember { SnackbarHostState() }
@@ -59,8 +59,18 @@ internal fun SendCoinsBackScreen() {
         }
     )
     Column(
-        Modifier.padding(all = 32.dp)
+        Modifier
+            .fillMaxSize()
+            .verticalScroll(state = scrollState)
+            .background(padawan_theme_background_secondary)
     ) {
+        Text(
+            text = "Send your coins back to us!",
+            style = PadawanTypography.headlineSmall,
+            color = padawan_theme_text_headline,
+            modifier = Modifier
+                .padding(top = 48.dp, start = 24.dp, end = 24.dp, bottom = 32.dp)
+        )
         Image(
             painterResource(R.drawable.return_sats_faucet_address),
             contentDescription = "Return sats faucet address image",
@@ -70,12 +80,11 @@ internal fun SendCoinsBackScreen() {
             Modifier
                 .align(Alignment.CenterHorizontally)
                 .clickable(onClick = { copyToClipboard(context, scope, snackbarHostState) })
-                .padding(bottom = 20.dp)
+                .padding(start = 24.dp, end = 24.dp, bottom = 20.dp)
         ) {
             Text(
                 text = stringResource(R.string.send_coins_back_address),
-                fontFamily = ShareTechMono,
-                fontSize = 12.sp
+                fontSize = 14.sp
             )
             Divider(
                 color = colorResource(id = R.color.fg1),
@@ -88,7 +97,12 @@ internal fun SendCoinsBackScreen() {
                 modifier = Modifier.align(Alignment.End)
             )
         }
-        Text(text = stringResource(id = R.string.send_coins_back))
+        Text(
+            text = stringResource(id = R.string.send_coins_back),
+            style = PadawanTypography.bodyMedium,
+            color = padawan_theme_text_faded_secondary,
+            modifier = Modifier.padding(start = 24.dp, end = 24.dp)
+        )
     }
 }
 
