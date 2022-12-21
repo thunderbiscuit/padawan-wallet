@@ -139,48 +139,6 @@ internal fun SendScreen(navController: NavHostController, walletViewModel: Walle
                     keyboardType = KeyboardType.Number,
                     imeAction = ImeAction.Next
                 ),
-                // trailingIcon = {
-                    // Row {
-                    //     VerticalTextFieldDivider()
-                    //     Row(
-                    //         Modifier
-                    //             .noRippleClickable { dropDownMenuExpanded = true }
-                    //             .fillMaxHeight()
-                    //
-                    //     ) {
-                    //         Text(
-                    //             text = currencyList[selectedCurrency].toString().lowercase(),
-                    //             textAlign = TextAlign.End,
-                    //             modifier = Modifier
-                    //                 .align(Alignment.CenterVertically)
-                    //                 .padding(bottom = 4.dp, start = 12.dp)
-                    //                 .widthIn(min = 32.dp)
-                    //         )
-                    //         Icon(
-                    //             painter = painterResource(id = R.drawable.ic_dropdown),
-                    //             contentDescription = "Dropdown Menu",
-                    //             modifier = Modifier
-                    //                 .align(Alignment.CenterVertically)
-                    //                 .padding(end = 12.dp)
-                    //         )
-                    //         DropdownMenu(
-                    //             expanded = dropDownMenuExpanded,
-                    //             onDismissRequest = { dropDownMenuExpanded = false },
-                    //             modifier = Modifier.background(Color.Transparent),
-                    //         ) {
-                    //             currencyList.forEachIndexed { index, currency ->
-                    //                 DropdownMenuItem(
-                    //                     onClick = { selectedCurrency = index },
-                    //                     text = { Text(text = currency.toString().lowercase()) },
-                    //                     colors = MenuDefaults.itemColors(
-                    //                         textColor = if (selectedCurrency == index) padawan_theme_onPrimary else padawan_theme_onBackground_faded
-                    //                     ),
-                    //                 )
-                    //             }
-                    //         }
-                    //     }
-                    // }
-                // }
             )
 
             Text(
