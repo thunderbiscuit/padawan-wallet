@@ -32,7 +32,6 @@ internal fun SettingsRootScreen(
 ) {
     Column(
         modifier = Modifier
-            .padding(top = 48.dp)
             .fillMaxSize()
             // .standardBackground()
             .background(padawan_theme_background_secondary)
@@ -43,7 +42,7 @@ internal fun SettingsRootScreen(
             style = PadawanTypography.headlineSmall,
             color = Color(0xff1f0208),
             modifier = Modifier
-                .padding(start = 24.dp, end = 24.dp, bottom = 8.dp)
+                .padding(top = 48.dp, start = 24.dp, end = 24.dp, bottom = 8.dp)
         )
         Text(
             text = "A collection of everything else you need in the app.",
