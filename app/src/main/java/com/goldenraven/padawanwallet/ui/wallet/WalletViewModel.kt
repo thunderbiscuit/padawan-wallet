@@ -11,6 +11,8 @@ import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.util.Log
 import android.widget.Toast
+import androidx.compose.material.SnackbarDuration
+import androidx.compose.material.SnackbarHostState
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.AndroidViewModel
@@ -40,6 +42,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import org.bitcoindevkit.AddressInfo
+import org.bitcoindevkit.PartiallySignedTransaction
 
 private const val TAG = "WalletViewModel"
 
@@ -195,6 +198,23 @@ class WalletViewModel(
             }
         }
         return false
+    }
+
+    fun broadcastTransaction(
+        psbt: PartiallySignedTransaction,
+        snackbarHostState: SnackbarHostState,
+    ) {
+        val snackbarMsg: String = try {
+            Wallet.sign(psbt)
+            Wallet.broadcast(psbt)
+            "Transaction was broadcast successfully"
+        } catch (e: Throwable) {
+            Log.i(TAG, "Broadcast error: ${e.message}")
+            "Error: ${e.message}"
+        }
+        viewModelScope.launch {
+            snackbarHostState.showSnackbar(message = snackbarMsg, duration = SnackbarDuration.Short)
+        }
     }
 }
 

@@ -46,7 +46,9 @@ class TutorialViewModel(application: Application) : AndroidViewModel(application
         val tutorialDao = TutorialDatabase.getInstance(application).tutorialDao()
         tutorialRepository = TutorialRepository(tutorialDao)
         runBlocking(Dispatchers.IO) {
+            // TODO #2: this is a hack because of issue outlined in TODO #1
             val dbIsEmpty = tutorialRepository.dbIsEmpty()
+            Log.i(TAG, "Database was empty on first boot")
             if (dbIsEmpty) {
                 tutorialRepository.loadInitialData(initialChapterList)
             }

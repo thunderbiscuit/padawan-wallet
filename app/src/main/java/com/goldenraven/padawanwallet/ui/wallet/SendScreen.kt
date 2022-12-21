@@ -42,7 +42,6 @@ import com.goldenraven.padawanwallet.theme.*
 import com.goldenraven.padawanwallet.ui.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
-import org.bitcoindevkit.PartiallySignedTransaction
 import org.bitcoindevkit.TxBuilderResult
 import androidx.compose.material.SnackbarHostState as SnackbarHostStateM2
 import androidx.compose.material.SnackbarDuration as SnackbarDurationM2
@@ -62,7 +61,7 @@ internal fun SendScreen(navController: NavHostController, walletViewModel: Walle
     val recipientAddress: MutableState<String> = rememberSaveable { mutableStateOf("") }
     val amount: MutableState<String> = rememberSaveable { mutableStateOf("") }
     val feeRate: MutableState<String> = rememberSaveable { mutableStateOf("") }
-    val txBuilderResult: MutableState<TxBuilderResult?> = rememberSaveable { mutableStateOf(null) }
+    val txBuilderResult: MutableState<TxBuilderResult?> = remember { mutableStateOf(null) }
     val scope = rememberCoroutineScope()
     val showMenu: MutableState<Boolean> = remember { mutableStateOf(false) }
     var dropDownMenuExpanded by remember { mutableStateOf(false) }
@@ -84,7 +83,7 @@ internal fun SendScreen(navController: NavHostController, walletViewModel: Walle
     )
 
     BottomSheetScaffold(
-        sheetContent = { TransactionConfirmation(txBuilderResult, recipientAddress, feeRate, bottomSheetScaffoldState, scope, navController) },
+        sheetContent = { TransactionConfirmation(txBuilderResult, recipientAddress, amount, feeRate, bottomSheetScaffoldState, scope, navController, walletViewModel) },
         scaffoldState = bottomSheetScaffoldState,
         sheetBackgroundColor = Color.White,
         sheetElevation = 12.dp,
@@ -273,10 +272,12 @@ internal fun SendScreen(navController: NavHostController, walletViewModel: Walle
 fun TransactionConfirmation(
     txBuilderResult: MutableState<TxBuilderResult?>,
     recipientAddress: MutableState<String>,
+    amount: MutableState<String>,
     feeRate: MutableState<String>,
     snackbarHostState: BottomSheetScaffoldState,
     scope: CoroutineScope,
     navController: NavHostController,
+    viewModel: WalletViewModel,
 ) {
     Column(
         modifier = Modifier
@@ -306,7 +307,8 @@ fun TransactionConfirmation(
             horizontalArrangement = Arrangement.Center
         ) {
             Text(
-                text = "${txBuilderResult.value?.transactionDetails?.sent ?: 0}",
+                text = "${amount.value}",
+                // text = "${txBuilderResult.value?.transactionDetails?.sent ?: 0}",
                 fontSize = 16.sp,
             )
         }
@@ -324,7 +326,7 @@ fun TransactionConfirmation(
             horizontalArrangement = Arrangement.Center
         ) {
             Text(
-                text = "$recipientAddress",
+                text = recipientAddress.value,
                 fontSize = 16.sp,
             )
         }
@@ -342,7 +344,7 @@ fun TransactionConfirmation(
             horizontalArrangement = Arrangement.Center
         ) {
             Text(
-                text = "$feeRate",
+                text = feeRate.value,
                 fontSize = 16.sp,
             )
         }
@@ -350,8 +352,9 @@ fun TransactionConfirmation(
         Button(
             onClick = {
                 val psbt = txBuilderResult.value?.psbt ?: throw Exception()
-                broadcastTransaction(psbt, snackbarHostState.snackbarHostState, scope)
-                navController.popBackStack()
+                viewModel.broadcastTransaction(psbt, snackbarHostState.snackbarHostState)
+                // broadcastTransaction(psbt, snackbarHostState.snackbarHostState, scope)
+                // navController.popBackStack()
             },
             colors = ButtonDefaults.buttonColors(containerColor = padawan_theme_button_primary),
             shape = RoundedCornerShape(20.dp),
@@ -468,20 +471,20 @@ fun verifyInputs(
     return true
 }
 
-private fun broadcastTransaction(
-    psbt: PartiallySignedTransaction,
-    snackbarHostState: SnackbarHostStateM2,
-    scope: CoroutineScope,
-) {
-    val snackbarMsg: String = try {
-        Wallet.sign(psbt)
-        Wallet.broadcast(psbt)
-        "Transaction was broadcast successfully"
-    } catch (e: Throwable) {
-        Log.i(TAG, "Broadcast error: ${e.message}")
-        "Error: ${e.message}"
-    }
-    scope.launch {
-        snackbarHostState.showSnackbar(message = snackbarMsg, duration = SnackbarDurationM2.Short)
-    }
-}
+// private fun broadcastTransaction(
+//     psbt: PartiallySignedTransaction,
+//     snackbarHostState: SnackbarHostStateM2,
+//     scope: CoroutineScope,
+// ) {
+//     val snackbarMsg: String = try {
+//         Wallet.sign(psbt)
+//         Wallet.broadcast(psbt)
+//         "Transaction was broadcast successfully"
+//     } catch (e: Throwable) {
+//         Log.i(TAG, "Broadcast error: ${e.message}")
+//         "Error: ${e.message}"
+//     }
+//     scope.launch {
+//         snackbarHostState.showSnackbar(message = snackbarMsg, duration = SnackbarDurationM2.Short)
+//     }
+// }

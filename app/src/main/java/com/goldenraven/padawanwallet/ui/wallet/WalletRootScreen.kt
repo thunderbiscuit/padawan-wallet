@@ -36,7 +36,6 @@ import com.goldenraven.padawanwallet.theme.*
 import com.goldenraven.padawanwallet.ui.FadedVerticalDivider
 import com.goldenraven.padawanwallet.ui.Screen
 import com.goldenraven.padawanwallet.ui.standardBorder
-import com.goldenraven.padawanwallet.utils.getDateDifference
 
 // TODO Think about reintroducing refreshing
 // TODO Reuse composable more
@@ -127,10 +126,12 @@ fun BalanceBox(
                 }
             }
             Text(
+                // text = "100",
                 text = balance,
                 style = PadawanTypography.displaySmall,
                 fontSize = 36.sp,
                 modifier = Modifier
+                    .padding(top = 16.dp)
                     .constrainAs(balanceText) {
                         top.linkTo(cardName.bottom)
                         start.linkTo(parent.start)
@@ -242,16 +243,6 @@ fun TransactionListBox(openFaucetDialog: MutableState<Boolean>, transactionList:
                 .align(Alignment.Bottom)
                 .weight(weight = 0.5f)
         )
-        Text(
-            text = "View all transactions",
-            style = PadawanTypography.bodyMedium,
-            textAlign = TextAlign.End,
-            color = padawan_theme_text_faded,
-            modifier = Modifier
-                .noRippleClickable { /* TODO */ }
-                .align(Alignment.Bottom)
-                .weight(weight = 0.5f)
-        )
     }
 
     Card(
@@ -290,20 +281,22 @@ fun TransactionListBox(openFaucetDialog: MutableState<Boolean>, transactionList:
                     .background(color = padawan_theme_lazyColumn_background)
                     .padding(horizontal = 24.dp)
             ) {
-                itemsIndexed(transactionList) { index, txn ->
+                itemsIndexed(transactionList) { index, tx ->
                     if (index == 0) {
                         Spacer(modifier = Modifier.height(24.dp))
                     }
                     Column {
                         Box(modifier = Modifier.fillMaxWidth()) {
                             Text(
-                                text = "${txn.txid.take(n = 5)}.....${txn.txid.takeLast(n = 5)}",
+                                text = "${tx.txid.take(n = 5)}.....${tx.txid.takeLast(n = 5)}",
                                 style = PadawanTypography.bodyMedium,
+                                fontWeight = FontWeight.SemiBold,
+                                // fontFamily = ShareTechMono,
                                 maxLines = 1,
-                                modifier = Modifier.align(Alignment.BottomStart)
+                                modifier = Modifier.align(Alignment.BottomStart).padding(top = 8.dp)
                             )
                             Text(
-                                text = "${if (txn.isPayment) txn.valueOut.toString() else txn.valueIn.toString()} ${CurrencyType.SATS.toString().lowercase()}",
+                                text = "${if (tx.isPayment) tx.valueOut.toString() else tx.valueIn.toString()} ${CurrencyType.SATS.toString().lowercase()}",
                                 style = PadawanTypography.bodyMedium,
                                 textAlign = TextAlign.End,
                                 modifier = Modifier.align(Alignment.BottomEnd)
@@ -312,8 +305,9 @@ fun TransactionListBox(openFaucetDialog: MutableState<Boolean>, transactionList:
                         Box(modifier = Modifier
                             .fillMaxWidth()
                             .padding(vertical = 4.dp)) {
+                            // val message = if (tx.date == "Pending") "Pending" else "${getDateDifference(date = tx.date)} ago"
                             Text(
-                                text = "${getDateDifference(date = txn.date)} ago",
+                                text = tx.date,
                                 style = PadawanTypography.bodySmall,
                                 maxLines = 1,
                                 modifier = Modifier.align(Alignment.CenterStart)
@@ -323,21 +317,21 @@ fun TransactionListBox(openFaucetDialog: MutableState<Boolean>, transactionList:
                                     modifier = Modifier
                                         .align(Alignment.CenterEnd)
                                         .background(
-                                            color = if (txn.isPayment) padawan_theme_send_primary else padawan_theme_receive_primary,
+                                            color = if (tx.isPayment) padawan_theme_send_primary else padawan_theme_receive_primary,
                                             shape = RoundedCornerShape(size = 5.dp)
                                         )
                                 ) {
                                     Text(
-                                        text = if (txn.isPayment) "Sent" else "Receive",
+                                        text = if (tx.isPayment) "Sent" else "Receive",
                                         style = PadawanTypography.bodySmall,
                                         modifier = Modifier
                                             .align(Alignment.CenterVertically)
                                             .padding(start = 8.dp, top = 4.dp, bottom = 4.dp)
                                     )
                                     Icon(
-                                        painter = if (txn.isPayment) painterResource(id = R.drawable.ic_send_secondary) else painterResource(id = R.drawable.ic_receive_secondary),
+                                        painter = if (tx.isPayment) painterResource(id = R.drawable.ic_send_secondary) else painterResource(id = R.drawable.ic_receive_secondary),
                                         tint = padawan_disabled,
-                                        contentDescription = if (txn.isPayment) "Send Icon" else "Receive Icon",
+                                        contentDescription = if (tx.isPayment) "Send Icon" else "Receive Icon",
                                         modifier = Modifier
                                             .align(Alignment.CenterVertically)
                                             .scale(scale = 0.75f)
