@@ -86,8 +86,10 @@ internal fun BottomNavigationBar(
                     }
                 },
                 colors = NavigationBarItemDefaults.colors(
-                    selectedIconColor = padawan_theme_onBackground,
-                    selectedTextColor = padawan_theme_onBackground,
+                    // selectedIconColor = padawan_theme_onBackground,
+                    // selectedTextColor = padawan_theme_onBackground,
+                    selectedIconColor = padawan_theme_button_primary,
+                    selectedTextColor = padawan_theme_button_primary,
                     unselectedIconColor = padawan_theme_navigation_bar_unselected,
                     unselectedTextColor = padawan_theme_navigation_bar_unselected,
                     indicatorColor = padawan_theme_background_secondary,
