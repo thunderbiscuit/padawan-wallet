@@ -7,6 +7,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
@@ -17,6 +18,7 @@ import com.goldenraven.padawanwallet.utils.NavigationItem
 import com.goldenraven.padawanwallet.ui.wallet.WalletNavigation
 import com.goldenraven.padawanwallet.ui.wallet.WalletViewModel
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
+import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
 @OptIn(ExperimentalMaterial3Api::class, androidx.compose.animation.ExperimentalAnimationApi::class)
 @Composable
@@ -43,6 +45,8 @@ internal fun BottomNavigationBar(
         NavigationItem.Tutorial,
         NavigationItem.Settings
     )
+
+    SystemBars()
 
     NavigationBar(
         tonalElevation = 0.dp,
@@ -90,5 +94,22 @@ internal fun BottomNavigationBar(
                 )
             )
         }
+    }
+}
+
+@Composable
+internal fun SystemBars() {
+    rememberSystemUiController().apply {
+        // setStatusBarColor(
+        //     color = Color.Transparent,
+        //     darkIcons = false
+        // )
+        // this.isStatusBarVisible = false
+
+        setNavigationBarColor(
+            color = Color.Transparent,
+            darkIcons = false
+        )
+        this.isNavigationBarVisible = false
     }
 }
