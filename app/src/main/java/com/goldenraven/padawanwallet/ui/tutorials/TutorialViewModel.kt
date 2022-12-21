@@ -14,9 +14,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.goldenraven.padawanwallet.R
-import com.goldenraven.padawanwallet.data.tutorial.Tutorial
-import com.goldenraven.padawanwallet.data.tutorial.TutorialDatabase
-import com.goldenraven.padawanwallet.data.tutorial.TutorialRepository
+import com.goldenraven.padawanwallet.data.chapters.Tutorial
+import com.goldenraven.padawanwallet.data.chapters.TutorialDatabase
+import com.goldenraven.padawanwallet.data.chapters.TutorialRepository
 import kotlinx.coroutines.*
 
 private const val TAG = "TutorialViewModel"

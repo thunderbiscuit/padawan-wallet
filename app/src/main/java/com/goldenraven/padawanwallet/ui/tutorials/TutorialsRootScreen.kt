@@ -24,7 +24,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.goldenraven.padawanwallet.R
-import com.goldenraven.padawanwallet.data.tutorial.Tutorial
+import com.goldenraven.padawanwallet.data.chapters.Tutorial
 import com.goldenraven.padawanwallet.theme.*
 import com.goldenraven.padawanwallet.ui.Screen
 import com.goldenraven.padawanwallet.ui.standardBorder
