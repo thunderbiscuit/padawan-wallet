@@ -8,7 +8,6 @@ package com.goldenraven.padawanwallet.ui.wallet
 import androidx.compose.animation.animateColor
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.core.updateTransition
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -263,7 +262,7 @@ fun TransactionListBox(openFaucetDialog: MutableState<Boolean>, transactionList:
     ) {
         if (transactionList.isEmpty()) {
             Row(modifier = Modifier.padding(all = 24.dp)) {
-                Column(modifier = Modifier.weight(weight = 0.70f)) {
+                Column {
                     Text(
                         text = "Hey! Your transaction list is empty, get some coins so you can start sending them!",
                         style = PadawanTypography.bodyMedium,
@@ -284,13 +283,6 @@ fun TransactionListBox(openFaucetDialog: MutableState<Boolean>, transactionList:
                         }
                     }
                 }
-                Image(
-                    painter = painterResource(id = R.drawable.diagram_wip),
-                    contentDescription = "No Transactions Diagram",
-                    modifier = Modifier
-                        .weight(weight = 0.30f)
-                        .align(Alignment.CenterVertically)
-                )
             }
         } else {
             LazyColumn(
