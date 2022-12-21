@@ -6,31 +6,32 @@
 package com.goldenraven.padawanwallet.ui.wallet
 
 import android.util.Log
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material.BottomSheetScaffold
 import androidx.compose.material.*
 import androidx.compose.material3.*
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
-import androidx.compose.material3.MenuDefaults
-import androidx.compose.material3.SnackbarDuration
-import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.*
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -41,11 +42,16 @@ import com.goldenraven.padawanwallet.theme.*
 import com.goldenraven.padawanwallet.ui.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
-import org.bitcoindevkit.PartiallySignedBitcoinTransaction
+import org.bitcoindevkit.PartiallySignedTransaction
+import org.bitcoindevkit.TxBuilderResult
+import androidx.compose.material.SnackbarHostState as SnackbarHostStateM2
+import androidx.compose.material.SnackbarDuration as SnackbarDurationM2
 
 private const val TAG = "SendScreen"
 
-@OptIn(ExperimentalMaterialApi::class)
+// BottomSheetScaffold is not available in Material 3, so this screen is all Material 2
+
+@OptIn(ExperimentalMaterialApi::class, ExperimentalComposeUiApi::class)
 @Composable
 internal fun SendScreen(navController: NavHostController, walletViewModel: WalletViewModel) {
     val (showDialog, setShowDialog) = rememberSaveable { mutableStateOf(false) }
@@ -56,18 +62,8 @@ internal fun SendScreen(navController: NavHostController, walletViewModel: Walle
     val recipientAddress: MutableState<String> = rememberSaveable { mutableStateOf("") }
     val amount: MutableState<String> = rememberSaveable { mutableStateOf("") }
     val feeRate: MutableState<String> = rememberSaveable { mutableStateOf("") }
-
-    val snackbarHostState = remember { SnackbarHostState() }
+    val txBuilderResult: MutableState<TxBuilderResult?> = rememberSaveable { mutableStateOf(null) }
     val scope = rememberCoroutineScope()
-
-    val transactionOptions = remember {
-        listOf(
-            TransactionType.DEFAULT,
-            TransactionType.SEND_ALL,
-        )
-    }
-    val transactionOption: MutableState<TransactionType> =
-        rememberSaveable { mutableStateOf(transactionOptions[0]) }
     val showMenu: MutableState<Boolean> = remember { mutableStateOf(false) }
     var dropDownMenuExpanded by remember { mutableStateOf(false) }
     val currencyList = listOf(CurrencyType.SATS, CurrencyType.BTC)
@@ -88,14 +84,16 @@ internal fun SendScreen(navController: NavHostController, walletViewModel: Walle
     )
 
     BottomSheetScaffold(
-        sheetContent = { TransactionConfirmation() },
+        sheetContent = { TransactionConfirmation(txBuilderResult, recipientAddress, feeRate, bottomSheetScaffoldState, scope, navController) },
         scaffoldState = bottomSheetScaffoldState,
         sheetBackgroundColor = Color.White,
         sheetElevation = 12.dp,
         sheetPeekHeight = 0.dp,
         backgroundColor = padawan_theme_background
     ) {
+        val focusManager = LocalFocusManager.current
         PadawanAppBar(navController = navController, title = "Send bitcoin")
+
         Column(
             modifier = Modifier
                 .fillMaxSize()
@@ -124,10 +122,10 @@ internal fun SendScreen(navController: NavHostController, walletViewModel: Walle
                     .wideTextField()
                     .height(IntrinsicSize.Min),
                 shape = RoundedCornerShape(20.dp),
-                value = if (transactionOption.value == TransactionType.DEFAULT) amount.value else "${Wallet.getBalance()} (Before Fees)",
+                value = amount.value,
                 onValueChange = { value -> amount.value = value.filter { it.isDigit() } },
                 singleLine = true,
-                placeholder = { Text(text = "Enter Amount") },
+                placeholder = { Text("Enter amount (sats)") },
                 colors = TextFieldDefaults.textFieldColors(
                     backgroundColor = padawan_theme_background_secondary,
                     cursorColor = padawan_theme_onPrimary,
@@ -136,54 +134,53 @@ internal fun SendScreen(navController: NavHostController, walletViewModel: Walle
                     disabledIndicatorColor = Color.Transparent,
                     errorIndicatorColor = Color.Transparent,
                 ),
-                enabled = (
-                    when (transactionOption.value) {
-                        TransactionType.SEND_ALL -> false
-                        else                     -> true
-                    }
+                enabled = (true),
+                keyboardOptions = KeyboardOptions(
+                    keyboardType = KeyboardType.Number,
+                    imeAction = ImeAction.Next
                 ),
-                trailingIcon = {
-                    Row {
-                        VerticalTextFieldDivider()
-                        Row(
-                            Modifier
-                                .noRippleClickable { dropDownMenuExpanded = true }
-                                .fillMaxHeight()
-
-                        ) {
-                            Text(
-                                text = currencyList[selectedCurrency].toString().lowercase(),
-                                textAlign = TextAlign.End,
-                                modifier = Modifier
-                                    .align(Alignment.CenterVertically)
-                                    .padding(bottom = 4.dp, start = 12.dp)
-                                    .widthIn(min = 32.dp)
-                            )
-                            Icon(
-                                painter = painterResource(id = R.drawable.ic_dropdown),
-                                contentDescription = "Dropdown Menu",
-                                modifier = Modifier
-                                    .align(Alignment.CenterVertically)
-                                    .padding(end = 12.dp)
-                            )
-                            DropdownMenu(
-                                expanded = dropDownMenuExpanded,
-                                onDismissRequest = { dropDownMenuExpanded = false },
-                                modifier = Modifier.background(Color.Transparent),
-                            ) {
-                                currencyList.forEachIndexed { index, currency ->
-                                    DropdownMenuItem(
-                                        onClick = { selectedCurrency = index },
-                                        text = { Text(text = currency.toString().lowercase()) },
-                                        colors = MenuDefaults.itemColors(
-                                            textColor = if (selectedCurrency == index) padawan_theme_onPrimary else padawan_theme_onBackground_faded
-                                        ),
-                                    )
-                                }
-                            }
-                        }
-                    }
-                }
+                // trailingIcon = {
+                    // Row {
+                    //     VerticalTextFieldDivider()
+                    //     Row(
+                    //         Modifier
+                    //             .noRippleClickable { dropDownMenuExpanded = true }
+                    //             .fillMaxHeight()
+                    //
+                    //     ) {
+                    //         Text(
+                    //             text = currencyList[selectedCurrency].toString().lowercase(),
+                    //             textAlign = TextAlign.End,
+                    //             modifier = Modifier
+                    //                 .align(Alignment.CenterVertically)
+                    //                 .padding(bottom = 4.dp, start = 12.dp)
+                    //                 .widthIn(min = 32.dp)
+                    //         )
+                    //         Icon(
+                    //             painter = painterResource(id = R.drawable.ic_dropdown),
+                    //             contentDescription = "Dropdown Menu",
+                    //             modifier = Modifier
+                    //                 .align(Alignment.CenterVertically)
+                    //                 .padding(end = 12.dp)
+                    //         )
+                    //         DropdownMenu(
+                    //             expanded = dropDownMenuExpanded,
+                    //             onDismissRequest = { dropDownMenuExpanded = false },
+                    //             modifier = Modifier.background(Color.Transparent),
+                    //         ) {
+                    //             currencyList.forEachIndexed { index, currency ->
+                    //                 DropdownMenuItem(
+                    //                     onClick = { selectedCurrency = index },
+                    //                     text = { Text(text = currency.toString().lowercase()) },
+                    //                     colors = MenuDefaults.itemColors(
+                    //                         textColor = if (selectedCurrency == index) padawan_theme_onPrimary else padawan_theme_onBackground_faded
+                    //                     ),
+                    //                 )
+                    //             }
+                    //         }
+                    //     }
+                    // }
+                // }
             )
 
             Text(
@@ -209,6 +206,10 @@ internal fun SendScreen(navController: NavHostController, walletViewModel: Walle
                     unfocusedIndicatorColor = Color.Transparent,
                     disabledIndicatorColor = Color.Transparent,
                     errorIndicatorColor = Color.Transparent,
+                ),
+                keyboardOptions = KeyboardOptions(
+                    keyboardType = KeyboardType.Text,
+                    imeAction = ImeAction.Next
                 ),
                 trailingIcon = {
                     Row {
@@ -253,16 +254,37 @@ internal fun SendScreen(navController: NavHostController, walletViewModel: Walle
                     unfocusedIndicatorColor = Color.Transparent,
                     disabledIndicatorColor = Color.Transparent,
                     errorIndicatorColor = Color.Transparent,
-                )
+                ),
+                keyboardOptions = KeyboardOptions(
+                    keyboardType = KeyboardType.Number,
+                    imeAction = ImeAction.Done
+                ),
+                keyboardActions = KeyboardActions(
+                    onDone = {
+                        focusManager.clearFocus()
+                    }
+                ),
             )
 
             Button(
                 onClick = {
-                    coroutineScope.launch {
-                        if (bottomSheetScaffoldState.bottomSheetState.isCollapsed) {
-                            bottomSheetScaffoldState.bottomSheetState.expand()
+                    val inputsAreValid = verifyInputs(recipientAddress.value, amount.value, feeRate.value, scope, bottomSheetScaffoldState.snackbarHostState)
+                    try {
+                        if (inputsAreValid) {
+                            val txBR = Wallet.createTransaction(recipientAddress.value, amount.value.toULong(), feeRate.value.toFloat())
+                            txBuilderResult.value = txBR
+                            coroutineScope.launch {
+                                if (bottomSheetScaffoldState.bottomSheetState.isCollapsed) {
+                                    bottomSheetScaffoldState.bottomSheetState.expand()
+                                }
+                            }
+                        }
+                    } catch (exception: Exception) {
+                        scope.launch {
+                            bottomSheetScaffoldState.snackbarHostState.showSnackbar(message = "$exception", duration = SnackbarDurationM2.Short)
                         }
                     }
+
                 },
                 colors = ButtonDefaults.buttonColors(containerColor = padawan_theme_button_primary),
                 shape = RoundedCornerShape(20.dp),
@@ -288,8 +310,16 @@ internal fun SendScreen(navController: NavHostController, walletViewModel: Walle
     }
 }
 
+@OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun TransactionConfirmation() {
+fun TransactionConfirmation(
+    txBuilderResult: MutableState<TxBuilderResult?>,
+    recipientAddress: MutableState<String>,
+    feeRate: MutableState<String>,
+    snackbarHostState: BottomSheetScaffoldState,
+    scope: CoroutineScope,
+    navController: NavHostController,
+) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -298,8 +328,7 @@ fun TransactionConfirmation() {
         Row(
             Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.Center
-        )
-        {
+        ) {
             Text(
                 text = "Confirm Transaction",
                 fontSize = 24.sp,
@@ -319,7 +348,7 @@ fun TransactionConfirmation() {
             horizontalArrangement = Arrangement.Center
         ) {
             Text(
-                text = "my amount",
+                text = "${txBuilderResult.value?.transactionDetails?.sent ?: 0}",
                 fontSize = 16.sp,
             )
         }
@@ -337,7 +366,7 @@ fun TransactionConfirmation() {
             horizontalArrangement = Arrangement.Center
         ) {
             Text(
-                text = "my address",
+                text = "$recipientAddress",
                 fontSize = 16.sp,
             )
         }
@@ -355,14 +384,16 @@ fun TransactionConfirmation() {
             horizontalArrangement = Arrangement.Center
         ) {
             Text(
-                text = "fee",
+                text = "$feeRate",
                 fontSize = 16.sp,
             )
         }
 
         Button(
             onClick = {
-                // Wallet.broadcast()
+                val psbt = txBuilderResult.value?.psbt ?: throw Exception()
+                broadcastTransaction(psbt, snackbarHostState.snackbarHostState, scope)
+                navController.popBackStack()
             },
             colors = ButtonDefaults.buttonColors(containerColor = padawan_theme_button_primary),
             shape = RoundedCornerShape(20.dp),
@@ -387,98 +418,92 @@ fun TransactionConfirmation() {
     }
 }
 
-@Composable
-fun Dialog(
-    recipientAddress: String,
-    amount: String,
-    feeRate: String,
-    transactionOption: TransactionType,
-    showDialog: Boolean,
-    setShowDialog: (Boolean) -> Unit,
-    snackbarHostState: SnackbarHostState,
-    scope: CoroutineScope,
-) {
-    if (showDialog) {
-        AlertDialog(
-            containerColor = md_theme_dark_background2,
-            onDismissRequest = {},
-            title = {
-                Text(
-                    text = "Confirm transaction",
-                )
-            },
-            text = {
-                val confirmationText = when (transactionOption) {
-                    TransactionType.DEFAULT -> "Send: $amount satoshis \nto: $recipientAddress\nFee rate: $feeRate"
-                    TransactionType.SEND_ALL -> "Send: ${Wallet.getBalance()} satoshis \n" + "to: $recipientAddress\n" + "Fee rate: $feeRate"
-                }
-                Text(
-                    text = confirmationText
-                )
-            },
-            confirmButton = {
-                TextButton(
-                    onClick = {
-                        broadcastTransaction(
-                            recipientAddress = recipientAddress,
-                            amount = amount,
-                            feeRate = feeRate,
-                            transactionOption = transactionOption,
-                            snackbarHostState = snackbarHostState,
-                            scope = scope,
-                        )
-                        setShowDialog(false)
-                    },
-                ) {
-                    Text(
-                        text = "Confirm",
-                    )
-                }
-            },
-            dismissButton = {
-                TextButton(
-                    onClick = {
-                        setShowDialog(false)
-                    },
-                ) {
-                    Text(
-                        text = "Cancel",
-                    )
-                }
-            },
-        )
-    }
-}
+// @Composable
+// fun Dialog(
+//     recipientAddress: String,
+//     amount: String,
+//     feeRate: String,
+//     showDialog: Boolean,
+//     setShowDialog: (Boolean) -> Unit,
+//     snackbarHostState: SnackbarHostState,
+//     scope: CoroutineScope,
+// ) {
+//     if (showDialog) {
+//         AlertDialog(
+//             containerColor = md_theme_dark_background2,
+//             onDismissRequest = {},
+//             title = {
+//                 Text(
+//                     text = "Confirm transaction",
+//                 )
+//             },
+//             text = {
+//                 Text(
+//                     text = "Send: $amount satoshis \nto: $recipientAddress\nFee rate: $feeRate"
+//                 )
+//             },
+//             confirmButton = {
+//                 TextButton(
+//                     onClick = {
+//                         broadcastTransaction(
+//                             recipientAddress = recipientAddress,
+//                             amount = amount,
+//                             feeRate = feeRate,
+//                             snackbarHostState = snackbarHostState,
+//                             scope = scope,
+//                         )
+//                         setShowDialog(false)
+//                     },
+//                 ) {
+//                     Text(
+//                         text = "Confirm",
+//                     )
+//                 }
+//             },
+//             dismissButton = {
+//                 TextButton(
+//                     onClick = {
+//                         setShowDialog(false)
+//                     },
+//                 ) {
+//                     Text(
+//                         text = "Cancel",
+//                     )
+//                 }
+//             },
+//         )
+//     }
+// }
 
-fun verifyInput(
+fun verifyInputs(
     recipientAddress: String,
     amount: String,
     feeRate: String,
-    transactionOption: TransactionType,
     scope: CoroutineScope,
-    snackbarHostState: SnackbarHostState,
+    snackbarHostState: SnackbarHostStateM2,
 ): Boolean {
-    if (recipientAddress.isBlank()) {
+    if (amount.isBlank()) {
         scope.launch {
-            snackbarHostState.showSnackbar(message = "Address is missing!", duration = SnackbarDuration.Short)
+            snackbarHostState.showSnackbar(message = "Amount is missing!", duration = SnackbarDurationM2.Short)
         }
         return false
     }
-    if (transactionOption == TransactionType.DEFAULT && amount.isBlank()) {
+    if (recipientAddress.isBlank()) {
         scope.launch {
-            snackbarHostState.showSnackbar(message = "Amount is missing!", duration = SnackbarDuration.Short)
+            Log.i(TAG, "Showing snackbar for missing address")
+            snackbarHostState.showSnackbar(message = "Address is missing!", duration = SnackbarDurationM2.Short)
         }
         return false
     }
     if (feeRate.isBlank()) {
         scope.launch {
-            snackbarHostState.showSnackbar(message = "Fee Rate is missing!", duration = SnackbarDuration.Short)
+            snackbarHostState.showSnackbar(message = "Fee Rate is missing!", duration = SnackbarDurationM2.Short)
         }
         return false
     }
     if (feeRate.toInt() < 1 || feeRate.toInt() > 200) {
         scope.launch {
-            snackbarHostState.showSnackbar(message = "Please input a fee rate between 1 and 200", duration = SnackbarDuration.Short)
+            snackbarHostState.showSnackbar(message = "Please input a fee rate between 1 and 200", duration = SnackbarDurationM2.Short)
         }
         return false
     }
@@ -486,35 +511,19 @@ fun verifyInput(
 }
 
 private fun broadcastTransaction(
-    recipientAddress: String,
-    amount: String,
-    feeRate: String,
-    transactionOption: TransactionType,
-    snackbarHostState: SnackbarHostState,
+    psbt: PartiallySignedTransaction,
+    snackbarHostState: SnackbarHostStateM2,
     scope: CoroutineScope,
 ) {
-    Log.i(TAG, "Attempting to broadcast transaction with inputs: recipient: ${recipientAddress}, amount: ${amount}, fee rate: $feeRate")
-    var snackbarMsg: String
-    try {
-        // create, sign, and broadcast
-        val psbt: PartiallySignedBitcoinTransaction = when (transactionOption) {
-            TransactionType.DEFAULT -> Wallet.createTransaction(recipientAddress, amount.toULong(), feeRate.toFloat())
-            TransactionType.SEND_ALL -> Wallet.createSendAllTransaction(recipientAddress, feeRate.toFloat())
-        }
+    val snackbarMsg: String = try {
         Wallet.sign(psbt)
-        val txid: String = Wallet.broadcast(psbt)
-        snackbarMsg = "Transaction was broadcast successfully"
-        Log.i(TAG, "Transaction was broadcast! txid: $txid")
+        Wallet.broadcast(psbt)
+        "Transaction was broadcast successfully"
     } catch (e: Throwable) {
         Log.i(TAG, "Broadcast error: ${e.message}")
-        snackbarMsg = "Error : ${e.message}"
+        "Error: ${e.message}"
     }
     scope.launch {
-        snackbarHostState.showSnackbar(message = snackbarMsg, duration = SnackbarDuration.Short)
+        snackbarHostState.showSnackbar(message = snackbarMsg, duration = SnackbarDurationM2.Short)
     }
-}
-
-enum class TransactionType {
-    DEFAULT,
-    SEND_ALL,
 }

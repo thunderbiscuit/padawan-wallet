@@ -31,8 +31,8 @@ object Wallet {
     }
 
     private fun initialize(
-        descriptor: String,
-        changeDescriptor: String,
+        descriptor: Descriptor,
+        changeDescriptor: Descriptor,
     ) {
         val database = DatabaseConfig.Sqlite(SqliteDbConfiguration("$path/bdk-sqlite"))
         wallet = BdkWallet(
@@ -53,93 +53,97 @@ object Wallet {
         Log.i(TAG, "Loading existing wallet with descriptor: ${initialWalletData.descriptor}")
         Log.i(TAG, "Loading existing wallet with change descriptor: ${initialWalletData.changeDescriptor}")
         initialize(
-            descriptor = initialWalletData.descriptor,
-            changeDescriptor = initialWalletData.changeDescriptor,
+            descriptor = Descriptor(initialWalletData.descriptor, Network.TESTNET),
+            changeDescriptor = Descriptor(initialWalletData.changeDescriptor, Network.TESTNET),
         )
     }
 
-    fun recoverWallet(mnemonic: String) {
-        val keys = restoreExtendedKeyFromMnemonic(mnemonic)
-        val descriptor: String = createDescriptor(keys)
-        val changeDescriptor: String = createChangeDescriptor(keys)
+    fun recoverWallet(recoveryPhrase: String) {
+        val mnemonic = Mnemonic.fromString(recoveryPhrase)
+        val bip32ExtendedRootKey: DescriptorSecretKey = DescriptorSecretKey(Network.TESTNET, mnemonic, null)
+        val descriptor: Descriptor = Descriptor.newBip84(bip32ExtendedRootKey, KeychainKind.EXTERNAL, Network.TESTNET)
+        val changeDescriptor: Descriptor = Descriptor.newBip84(bip32ExtendedRootKey, KeychainKind.INTERNAL, Network.TESTNET)
         initialize(
             descriptor = descriptor,
             changeDescriptor = changeDescriptor,
         )
-        WalletRepository.saveWallet(path, descriptor, changeDescriptor)
-        WalletRepository.saveMnemonic(keys.mnemonic)
+        WalletRepository.saveWallet(path, descriptor.asStringPrivate(), changeDescriptor.asStringPrivate())
+        WalletRepository.saveMnemonic(mnemonic.asString())
     }
 
     fun createWallet() {
-        val keys = generateExtendedKey()
-        val descriptor: String = createDescriptor(keys)
-        val changeDescriptor: String = createChangeDescriptor(keys)
+        val mnemonic = Mnemonic(WordCount.WORDS12)
+        val bip32ExtendedRootKey: DescriptorSecretKey = DescriptorSecretKey(Network.TESTNET, mnemonic, null)
+        val descriptor: Descriptor = Descriptor.newBip84(bip32ExtendedRootKey, KeychainKind.EXTERNAL, Network.TESTNET)
+        val changeDescriptor: Descriptor = Descriptor.newBip84(bip32ExtendedRootKey, KeychainKind.INTERNAL, Network.TESTNET)
         initialize(
             descriptor = descriptor,
             changeDescriptor = changeDescriptor,
         )
-        WalletRepository.saveWallet(path, descriptor, changeDescriptor)
-        WalletRepository.saveMnemonic(keys.mnemonic)
+        WalletRepository.saveWallet(path, descriptor.asStringPrivate(), changeDescriptor.asStringPrivate())
+        WalletRepository.saveMnemonic(mnemonic.asString())
     }
 
-    private fun generateExtendedKey(): ExtendedKeyInfo {
-        return generateExtendedKey(Network.TESTNET, WordCount.WORDS12, null)
-    }
+    // private fun generateExtendedKey(): ExtendedKeyInfo {
+    //     return generateExtendedKey(Network.TESTNET, WordCount.WORDS12, null)
+    // }
 
-    private fun restoreExtendedKeyFromMnemonic(mnemonic: String): ExtendedKeyInfo {
-        return restoreExtendedKey(Network.TESTNET, mnemonic, null)
-    }
+    // private fun restoreExtendedKeyFromMnemonic(mnemonic: String): ExtendedKeyInfo {
+    //     return restoreExtendedKey(Network.TESTNET, mnemonic, null)
+    // }
 
-    private fun createDescriptor(keys: ExtendedKeyInfo): String {
-        Log.i(TAG,"Descriptor for receive addresses is wpkh(${keys.xprv}/84'/1'/0'/0/*)")
-        return ("wpkh(${keys.xprv}/84'/1'/0'/0/*)")
-    }
+    // private fun createDescriptor(keys: ExtendedKeyInfo): String {
+    //     Log.i(TAG,"Descriptor for receive addresses is wpkh(${keys.xprv}/84'/1'/0'/0/*)")
+    //     return ("wpkh(${keys.xprv}/84'/1'/0'/0/*)")
+    // }
 
-    private fun createChangeDescriptor(keys: ExtendedKeyInfo): String {
-        Log.i(TAG, "Descriptor for change addresses is wpkh(${keys.xprv}/84'/1'/0'/1/*)")
-        return ("wpkh(${keys.xprv}/84'/1'/0'/1/*)")
-    }
+    // private fun createChangeDescriptor(keys: ExtendedKeyInfo): String {
+    //     Log.i(TAG, "Descriptor for change addresses is wpkh(${keys.xprv}/84'/1'/0'/1/*)")
+    //     return ("wpkh(${keys.xprv}/84'/1'/0'/1/*)")
+    // }
 
     fun sync() {
         wallet.sync(blockchain = blockchain, progress = LogProgress)
     }
 
     fun getBalance(): ULong {
-        return wallet.getBalance()
+        return wallet.getBalance().total
     }
 
-    fun getNewAddress(): AddressInfo {
-        return wallet.getAddress(AddressIndex.NEW)
-    }
+    // fun getNewAddress(): AddressInfo {
+    //     return wallet.getAddress(AddressIndex.NEW)
+    // }
 
     fun getLastUnusedAddress(): AddressInfo {
         return wallet.getAddress(AddressIndex.LAST_UNUSED)
     }
 
-    fun createTransaction(recipient: String, amount: ULong, feeRate: Float): PartiallySignedBitcoinTransaction {
+    fun createTransaction(recipientAddress: String, amount: ULong, feeRate: Float): TxBuilderResult {
+        val recipientScriptPubKey = Address(recipientAddress).scriptPubkey()
         return TxBuilder()
-            .addRecipient(recipient, amount)
+            .addRecipient(recipientScriptPubKey, amount)
             .feeRate(satPerVbyte = feeRate)
             .finish(wallet)
     }
 
-    fun createSendAllTransaction(recipient: String, feeRate: Float): PartiallySignedBitcoinTransaction {
-        return TxBuilder()
-            .drainWallet()
-            .drainTo(address = recipient)
-            .feeRate(satPerVbyte = feeRate)
-            .finish(wallet)
+    // fun createSendAllTransaction(recipientAddress: String, feeRate: Float): TxBuilderResult {
+    //     val recipientScriptPubKey = Address(recipientAddress).scriptPubkey()
+    //     return TxBuilder()
+    //         .drainWallet()
+    //         .drainTo(recipientScriptPubKey)
+    //         .feeRate(satPerVbyte = feeRate)
+    //         .finish(wallet)
+    // }
+
+    fun listTransactions(): List<TransactionDetails> {
+        return wallet.listTransactions()
     }
 
-    fun listTransactions(): List<Transaction> {
-        return wallet.getTransactions()
-    }
-
-    fun sign(psbt: PartiallySignedBitcoinTransaction) {
+    fun sign(psbt: PartiallySignedTransaction) {
         wallet.sign(psbt)
     }
 
-    fun broadcast(signedPsbt: PartiallySignedBitcoinTransaction): String {
+    fun broadcast(signedPsbt: PartiallySignedTransaction): String {
         blockchain.broadcast(signedPsbt)
         return signedPsbt.txid()
     }

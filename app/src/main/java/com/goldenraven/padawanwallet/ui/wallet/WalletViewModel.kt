@@ -40,7 +40,6 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import org.bitcoindevkit.AddressInfo
-import org.bitcoindevkit.Transaction
 
 private const val TAG = "WalletViewModel"
 
@@ -126,41 +125,41 @@ class WalletViewModel(
         Log.i(TAG,"Transactions history, number of transactions: ${txHistory.size}")
 
         for (tx in txHistory) {
-            val details = when (tx) {
-                is Transaction.Confirmed -> tx.details
-                is Transaction.Unconfirmed -> tx.details
-            }
+            // val details = when (tx.confirmationTime) {
+            //     null -> tx.details
+            //     is BlockTime -> tx.details
+            // }
             var valueIn = 0
             var valueOut = 0
-            val satoshisIn = SatoshisIn(details.received.toInt())
-            val satoshisOut = SatoshisOut(details.sent.toInt())
+            val satoshisIn = SatoshisIn(tx.received.toInt())
+            val satoshisOut = SatoshisOut(tx.sent.toInt())
             val isPayment = isPayment(satoshisOut, satoshisIn)
             when (isPayment) {
                 true -> {
                     valueOut = netSendWithoutFees(
                         txSatsOut = satoshisOut,
                         txSatsIn = satoshisIn,
-                        fees = details.fee?.toInt() ?: 0
+                        fees = tx.fee?.toInt() ?: 0
                     )
                 }
                 false -> {
-                    valueIn = details.received.toInt()
+                    valueIn = tx.received.toInt()
                 }
             }
-            val time: String = when (tx) {
-                is Transaction.Confirmed -> tx.confirmation.timestamp.timestampToString()
-                else -> "Pending"
+            val time: String = when (tx.confirmationTime) {
+                null -> "Pending"
+                else -> tx.confirmationTime?.timestamp?.timestampToString() ?: "Pending"
             }
-            val height: UInt = when (tx) {
-                is Transaction.Confirmed -> tx.confirmation.height
-                else -> 100_000_000u
+            val height: UInt = when (tx.confirmationTime) {
+                null -> 100_000_000u
+                else -> tx.confirmationTime?.height ?: 100_000_000u
             }
             val transaction = Tx(
-                txid = details.txid,
+                txid = tx.txid,
                 date = time,
                 valueIn = valueIn,
                 valueOut = valueOut,
-                fees = details.fee?.toInt() ?: 0,
+                fees = tx.fee?.toInt() ?: 0,
                 isPayment = isPayment,
                 height = height.toInt()
             )
