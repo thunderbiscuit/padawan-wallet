@@ -23,10 +23,10 @@ import com.goldenraven.padawanwallet.theme.padawan_theme_background_secondary
 import com.goldenraven.padawanwallet.ui.Screen
 import com.goldenraven.padawanwallet.ui.tutorials.TutorialViewModel
 
-private const val TAG = "SettingsScreen"
+private const val TAG = "SettingsRootScreen"
 
 @Composable
-internal fun SettingsScreen(
+internal fun SettingsRootScreen(
     navController: NavController,
     viewModel: TutorialViewModel
 ) {

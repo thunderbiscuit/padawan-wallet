@@ -18,7 +18,7 @@ import com.goldenraven.padawanwallet.ui.Screen
 import com.goldenraven.padawanwallet.ui.settings.AboutScreen
 import com.goldenraven.padawanwallet.ui.settings.RecoveryPhraseScreen
 import com.goldenraven.padawanwallet.ui.settings.SendCoinsBackScreen
-import com.goldenraven.padawanwallet.ui.settings.SettingsScreen
+import com.goldenraven.padawanwallet.ui.settings.SettingsRootScreen
 import com.goldenraven.padawanwallet.ui.tutorials.*
 import com.goldenraven.padawanwallet.ui.tutorials.TutorialsRootScreen
 import com.google.accompanist.navigation.animation.AnimatedNavHost
@@ -35,12 +35,12 @@ fun WalletNavigation(
 
     AnimatedNavHost(
         navController = navControllerWalletNavigation,
-        startDestination = Screen.WalletScreen.route,
+        startDestination = Screen.WalletRootScreen.route,
     ) {
 
         // Wallet
         composable(
-            route = Screen.WalletScreen.route,
+            route = Screen.WalletRootScreen.route,
             enterTransition = {
                 when (initialState.destination.route) {
                     "receive_screen" -> fadeIn(animationSpec = tween(1000))
@@ -132,32 +132,32 @@ fun WalletNavigation(
 
         // Tutorials home
         composable(
-            route = Screen.TutorialsHomeScreen.route,
+            route = Screen.TutorialsRootScreen.route,
             enterTransition = {
                 when (initialState.destination.route) {
                     "wallet_screen" -> slideIntoContainer(AnimatedContentScope.SlideDirection.Start, animationSpec = tween(animationDuration))
-                    "settings_screen" -> slideIntoContainer(AnimatedContentScope.SlideDirection.End, animationSpec = tween(animationDuration))
+                    "settings_root_screen" -> slideIntoContainer(AnimatedContentScope.SlideDirection.End, animationSpec = tween(animationDuration))
                     else -> fadeIn(animationSpec = tween(1000))
                 }
             },
             popEnterTransition = {
                 when (initialState.destination.route) {
                     "wallet_screen" -> slideIntoContainer(AnimatedContentScope.SlideDirection.Start, animationSpec = tween(animationDuration))
-                    "settings_screen" -> slideIntoContainer(AnimatedContentScope.SlideDirection.End, animationSpec = tween(animationDuration))
+                    "settings_root_screen" -> slideIntoContainer(AnimatedContentScope.SlideDirection.End, animationSpec = tween(animationDuration))
                     else -> fadeIn(animationSpec = tween(1000))
                 }
             },
             exitTransition = {
                 when (targetState.destination.route) {
                     "wallet_screen" -> slideOutOfContainer(AnimatedContentScope.SlideDirection.End, animationSpec = tween(animationDuration))
-                    "settings_screen" -> slideOutOfContainer(AnimatedContentScope.SlideDirection.Start, animationSpec = tween(animationDuration))
+                    "settings_root_screen" -> slideOutOfContainer(AnimatedContentScope.SlideDirection.Start, animationSpec = tween(animationDuration))
                     else -> fadeOut(animationSpec = tween(300))
                 }
             },
             popExitTransition = {
                 when (targetState.destination.route) {
                     "wallet_screen" -> slideOutOfContainer(AnimatedContentScope.SlideDirection.End, animationSpec = tween(animationDuration))
-                    "settings_screen" -> slideOutOfContainer(AnimatedContentScope.SlideDirection.Start, animationSpec = tween(animationDuration))
+                    "settings_root_screen" -> slideOutOfContainer(AnimatedContentScope.SlideDirection.Start, animationSpec = tween(animationDuration))
                     else -> fadeOut(animationSpec = tween(300))
                 }
             }
@@ -190,7 +190,7 @@ fun WalletNavigation(
         // Settings
         val settingsScreens: List<String> = listOf("about_screen", "recovery_phrase_screen", "send_coins_back_screen", )
         composable(
-            route = Screen.SettingsScreen.route,
+            route = Screen.SettingsRootScreen.route,
             enterTransition = {
                 when (initialState.destination.route) {
                     in settingsScreens -> fadeIn(animationSpec = tween(400))
@@ -215,7 +215,7 @@ fun WalletNavigation(
                     else               -> slideOutOfContainer(AnimatedContentScope.SlideDirection.End, animationSpec = tween(animationDuration))
                 }
             },
-        ) { SettingsScreen(navController = navControllerWalletNavigation, viewModel = tutorialViewModel) }
+        ) { SettingsRootScreen(navController = navControllerWalletNavigation, viewModel = tutorialViewModel) }
 
 
         // About
