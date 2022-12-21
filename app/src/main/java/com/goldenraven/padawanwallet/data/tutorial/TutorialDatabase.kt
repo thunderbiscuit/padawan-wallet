@@ -24,11 +24,12 @@ abstract class TutorialDatabase: RoomDatabase() {
                 return tempInstance
             }
             synchronized(this) {
-                val instance = Room.databaseBuilder(
-                    context.applicationContext,
-                    TutorialDatabase::class.java,
-                    "tutorial_db",
-                )
+                val instance = Room.databaseBuilder(context.applicationContext, TutorialDatabase::class.java, "tutorial_db")
+                    // .createFromAsset("databases/tutorial_db.db")
+                    // TODO #1: Having this on makes the pre-populating of the database to re-create it on every boot
+                    // because somehow it thinks the db schema has changed?
+                    // the createFromAsset only gets called if the db doesn't exist, so this could cause problems if we ever ship a new pre-populated db
+                    // where we'd need to delete the database and recreate it from scratch, i.e. what fallback... would do
                     .fallbackToDestructiveMigration()
                     .build()
                 INSTANCE = instance

@@ -9,10 +9,8 @@ import android.os.Bundle
 import android.util.Log
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
-import androidx.room.Room
 import com.goldenraven.padawanwallet.data.WalletRepository
 import com.goldenraven.padawanwallet.data.Wallet
-import com.goldenraven.padawanwallet.data.tutorial.TutorialDatabase
 import com.goldenraven.padawanwallet.ui.intro.IntroNavigation
 import com.goldenraven.padawanwallet.theme.PadawanTheme
 import com.goldenraven.padawanwallet.ui.HomeNavigation
@@ -47,14 +45,6 @@ class PadawanActivity : AppCompatActivity() {
                         is WalletCreateType.FROMSCRATCH -> Wallet.createWallet()
                         is WalletCreateType.RECOVER -> Wallet.recoverWallet(walletCreateType.recoveryPhrase)
                     }
-
-                    // We pre-populate the chapters database on first build
-                    Room.databaseBuilder(applicationContext, TutorialDatabase::class.java, "tutorial_db")
-                        .createFromAsset("databases/tutorial_db.db")
-                        .build()
-                        // .also {
-                        //     Log.i(TAG, "We are pre-populating the database")
-                        // }
 
                     setContent {
                         PadawanTheme {
