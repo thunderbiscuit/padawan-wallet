@@ -6,6 +6,8 @@
 package com.goldenraven.padawanwallet.ui.wallet
 
 import android.util.Log
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
@@ -83,6 +85,8 @@ internal fun SendScreen(navController: NavHostController, walletViewModel: Walle
     )
 
     BottomSheetScaffold(
+        sheetShape = RoundedCornerShape(topEnd = 20.dp, topStart = 20.dp),
+        sheetContentColor = padawan_theme_background,
         sheetContent = { TransactionConfirmation(txBuilderResult, recipientAddress, amount, feeRate, bottomSheetScaffoldState, scope, navController, walletViewModel) },
         scaffoldState = bottomSheetScaffoldState,
         sheetBackgroundColor = Color.White,
@@ -282,48 +286,53 @@ fun TransactionConfirmation(
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = 16.dp)
+            .background(padawan_theme_button_secondary)
+            .border(3.dp, padawan_theme_button_primary, RoundedCornerShape(20.dp, 20.dp, 0.dp, 0.dp))
+            .padding(horizontal = 24.dp)
     ) {
         Row(
-            Modifier.fillMaxWidth(),
+            Modifier.fillMaxWidth().padding(top = 16.dp),
             horizontalArrangement = Arrangement.Center
         ) {
             Text(
                 text = "Confirm Transaction",
+                style = PadawanTypography.headlineLarge,
                 fontSize = 24.sp,
             )
         }
         Row(
-            Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.Center
+            Modifier.fillMaxWidth().padding(top = 16.dp),
+            horizontalArrangement = Arrangement.Start
         ) {
             Text(
                 text = "Amount",
+                style = PadawanTypography.headlineSmall,
                 fontSize = 20.sp,
             )
         }
         Row(
             Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.Center
+            horizontalArrangement = Arrangement.Start
         ) {
             Text(
-                text = "${amount.value}",
+                text = "${amount.value} satoshis",
                 // text = "${txBuilderResult.value?.transactionDetails?.sent ?: 0}",
                 fontSize = 16.sp,
             )
         }
         Row(
-            Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.Center
+            Modifier.fillMaxWidth().padding(top = 16.dp),
+            horizontalArrangement = Arrangement.Start
         ) {
             Text(
                 text = "Address",
+                style = PadawanTypography.headlineSmall,
                 fontSize = 20.sp,
             )
         }
         Row(
             Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.Center
+            horizontalArrangement = Arrangement.Start
         ) {
             Text(
                 text = recipientAddress.value,
@@ -331,20 +340,21 @@ fun TransactionConfirmation(
             )
         }
         Row(
-            Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.Center
+            Modifier.fillMaxWidth().padding(top = 16.dp),
+            horizontalArrangement = Arrangement.Start
         ) {
             Text(
-                text = "Fee",
+                text = "Total fee",
+                style = PadawanTypography.headlineSmall,
                 fontSize = 20.sp,
             )
         }
         Row(
             Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.Center
+            horizontalArrangement = Arrangement.Start
         ) {
             Text(
-                text = feeRate.value,
+                text = "${txBuilderResult.value?.transactionDetails?.fee ?: 0} satoshis",
                 fontSize = 16.sp,
             )
         }
