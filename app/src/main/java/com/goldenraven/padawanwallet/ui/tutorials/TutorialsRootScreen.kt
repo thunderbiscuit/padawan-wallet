@@ -390,10 +390,16 @@ fun calculateCompletionOfGroup(page: Int, completedTutorials: Map<Int, Boolean>)
 }
 
 fun getBackgroundColor(page: Int): Color {
+    // TODO #3: Consider softening these colours
+    // All 3 original colours are saturated at 97
+    // The new ones are saturated at 90
     return when (page) {
-        0 -> Color(0xffba4ffc)
-        1 -> Color(0xfffc4f79)
-        2 -> Color(0xffff6d3b)
+        0 -> Color(0xffb855f6)
+        1 -> Color(0xfff6557e)
+        2 -> Color(0xfff57247)
+        // 0 -> Color(0xffba4ffc)
+        // 1 -> Color(0xfffc4f79)
+        // 2 -> Color(0xffff6d3b)
         else -> Color(0xffffffff)
     }
 }
