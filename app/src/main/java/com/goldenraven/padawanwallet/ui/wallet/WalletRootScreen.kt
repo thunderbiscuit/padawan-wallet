@@ -30,7 +30,6 @@ import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.navigation.NavHostController
 import com.goldenraven.padawanwallet.R
-import com.goldenraven.padawanwallet.data.Wallet
 import com.goldenraven.padawanwallet.data.tx.Tx
 import com.goldenraven.padawanwallet.theme.*
 import com.goldenraven.padawanwallet.ui.FadedVerticalDivider
@@ -60,9 +59,9 @@ internal fun WalletRootScreen(
         )
     }
 
-    if (walletViewModel.isOnline(context = context) && !Wallet.isBlockChainCreated()) {
-        Wallet.createBlockchain()
-    }
+    // if (walletViewModel.isOnline(context = context) && !Wallet.blockchainIsInitialized()) {
+    //     Wallet.createBlockchain()
+    // }
 
     Column(modifier = Modifier.standardBackground()) {
         BalanceBox(balance = balance.toString(), viewModel = walletViewModel)

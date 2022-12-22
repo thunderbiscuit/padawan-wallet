@@ -29,6 +29,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
@@ -83,6 +84,7 @@ internal fun SendScreen(navController: NavHostController, walletViewModel: Walle
     val bottomSheetScaffoldState = rememberBottomSheetScaffoldState(
         bottomSheetState = rememberBottomSheetState(initialValue = BottomSheetValue.Collapsed)
     )
+    // val context = LocalContext.current
 
     BottomSheetScaffold(
         sheetShape = RoundedCornerShape(topEnd = 20.dp, topStart = 20.dp),
@@ -95,6 +97,7 @@ internal fun SendScreen(navController: NavHostController, walletViewModel: Walle
         backgroundColor = padawan_theme_background
     ) {
         val focusManager = LocalFocusManager.current
+
         PadawanAppBar(navController = navController, title = "Send bitcoin")
 
         Column(
@@ -282,7 +285,9 @@ fun TransactionConfirmation(
     scope: CoroutineScope,
     navController: NavHostController,
     viewModel: WalletViewModel,
+    // context: Context,
 ) {
+    val context = LocalContext.current // TODO: is this the right place to get this context?
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -362,7 +367,13 @@ fun TransactionConfirmation(
         Button(
             onClick = {
                 val psbt = txBuilderResult.value?.psbt ?: throw Exception()
-                viewModel.broadcastTransaction(psbt, snackbarHostState.snackbarHostState)
+                if (!viewModel.isOnline(context = context)) {
+                    scope.launch {
+                        snackbarHostState.snackbarHostState.showSnackbar("Your device is not connected to the internet!", duration = SnackbarDurationM2.Short)
+                    }
+                } else {
+                    viewModel.broadcastTransaction(psbt, snackbarHostState.snackbarHostState)
+                }
                 // broadcastTransaction(psbt, snackbarHostState.snackbarHostState, scope)
                 // navController.popBackStack()
             },

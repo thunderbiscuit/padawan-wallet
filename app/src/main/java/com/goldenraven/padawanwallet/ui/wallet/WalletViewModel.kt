@@ -65,6 +65,10 @@ class WalletViewModel(
         val txDao: TxDao = TxDatabase.getDatabase(application).txDao()
         repository = TxRepository(txDao)
         readAllData = repository.readAllData
+
+        if (isOnline(context = application) && !Wallet.blockchainIsInitialized()) {
+            Wallet.createBlockchain()
+        }
     }
 
     // Faucet Code
@@ -118,7 +122,7 @@ class WalletViewModel(
                 _isRefreshing.emit(false)
             }
         } else {
-            Toast.makeText(context, "No Internet Access!", Toast.LENGTH_SHORT)
+            Toast.makeText(context, "No Internet Access!", Toast.LENGTH_LONG).show()
         }
     }
 
@@ -177,10 +181,12 @@ class WalletViewModel(
     }
 
     // Internet connectivity
+    // fun isOnline(): Boolean {
     fun isOnline(context: Context): Boolean {
         val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         val capabilities = connectivityManager.getNetworkCapabilities(connectivityManager.activeNetwork)
         if (capabilities != null) {
+            Log.i(TAG, "isOnline function returned $capabilities")
             when {
                 capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> {
                     Log.i(TAG, "NetworkCapabilities.TRANSPORT_CELLULAR")
@@ -202,18 +208,22 @@ class WalletViewModel(
     fun broadcastTransaction(
         psbt: PartiallySignedTransaction,
         snackbarHostState: SnackbarHostState,
+        // context: Context,
     ) {
-        val snackbarMsg: String = try {
-            Wallet.sign(psbt)
-            Wallet.broadcast(psbt)
-            "Transaction was broadcast successfully"
-        } catch (e: Throwable) {
-            Log.i(TAG, "Broadcast error: ${e.message}")
-            "Error: ${e.message}"
-        }
-        viewModelScope.launch {
-            snackbarHostState.showSnackbar(message = snackbarMsg, duration = SnackbarDuration.Short)
-        }
+        // if (!isOnline(context = context)) {
+        //     Toast.makeText(context, "You currently don't have internet access!", Toast.LENGTH_SHORT).show()
+        // } else {
+            val snackbarMsg: String = try {
+                Wallet.sign(psbt)
+                Wallet.broadcast(psbt)
+                "Transaction was broadcast successfully"
+            } catch (e: Throwable) {
+                Log.i(TAG, "Broadcast error: ${e.message}")
+                "Error: ${e.message}"
+            }
+            viewModelScope.launch {
+                snackbarHostState.showSnackbar(message = snackbarMsg, duration = SnackbarDuration.Short)
+            }
     }
 
     private fun callTatooineFaucet(addressInfo: AddressInfo) {
@@ -228,22 +238,28 @@ class WalletViewModel(
                 install(Auth) {
                     basic {
                         credentials {
-                            BasicAuthCredentials(username = faucetUsername, password = faucetPassword)
+                            BasicAuthCredentials(
+                                username = faucetUsername,
+                                password = faucetPassword
+                            )
                         }
                     }
                 }
             }
 
-            Log.i(TAG,"API call to Tatooine will request coins at $addressInfo")
+            Log.i(TAG, "API call to Tatooine will request coins at $addressInfo")
             try {
                 val response: HttpResponse = ktorClient.request(faucetUrl) {
                     method = HttpMethod.Post
                     setBody(TextContent(addressInfo.address, ContentType.Text.Plain))
                 }
                 WalletRepository.faucetCallDone()
-                Log.i(TAG,"API call to Tatooine was performed. Response is ${response.status}, ${response.bodyAsText()}")
+                Log.i(
+                    TAG,
+                    "API call to Tatooine was performed. Response is ${response.status}, ${response.bodyAsText()}"
+                )
             } catch (cause: Throwable) {
-                Log.i(TAG,"Tatooine call failed: $cause")
+                Log.i(TAG, "Tatooine call failed: $cause")
             }
             ktorClient.close()
         }

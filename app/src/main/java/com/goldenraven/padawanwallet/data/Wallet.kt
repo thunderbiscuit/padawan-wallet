@@ -148,5 +148,5 @@ object Wallet {
         return signedPsbt.txid()
     }
 
-    fun isBlockChainCreated() = ::blockchain.isInitialized
+    fun blockchainIsInitialized() = ::blockchain.isInitialized
 }
