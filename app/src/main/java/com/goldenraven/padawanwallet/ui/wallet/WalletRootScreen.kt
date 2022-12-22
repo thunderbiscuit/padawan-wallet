@@ -34,6 +34,7 @@ import com.goldenraven.padawanwallet.theme.*
 import com.goldenraven.padawanwallet.ui.FadedVerticalDivider
 import com.goldenraven.padawanwallet.ui.Screen
 import com.goldenraven.padawanwallet.ui.standardBorder
+import com.goldenraven.padawanwallet.utils.formatInBtc
 import io.ktor.http.*
 
 // TODO Think about reintroducing refreshing
@@ -60,12 +61,8 @@ internal fun WalletRootScreen(
         )
     }
 
-    // if (walletViewModel.isOnline(context = context) && !Wallet.blockchainIsInitialized()) {
-    //     Wallet.createBlockchain()
-    // }
-
     Column(modifier = Modifier.standardBackground()) {
-        BalanceBox(balance = balance.toString(), viewModel = walletViewModel)
+        BalanceBox(balance = balance ?: 0uL, viewModel = walletViewModel)
         Spacer(modifier = Modifier.height(height = 12.dp))
         SendReceive(navController = navController)
         TransactionListBox(tempOpenFaucetDialog = tempOpenFaucetDialog, transactionList = transactionList)
@@ -75,10 +72,10 @@ internal fun WalletRootScreen(
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun BalanceBox(
-    balance: String,
+    balance: ULong,
     viewModel: WalletViewModel
 ) {
-    val context = LocalContext.current // TODO: is this the right place to get this context?
+    val context = LocalContext.current // TODO #4: Is this the right place to get this context?
     Card(
         border = standardBorder,
         shape = RoundedCornerShape(20.dp),
@@ -93,7 +90,7 @@ fun BalanceBox(
                 .fillMaxWidth()
         ) {
             val (cardName, currencyToggle, balanceText, currencyText, buttonRow) = createRefs()
-            val currencyToggleState = remember { mutableStateOf(value = false) }
+            val currencyToggleState = remember { mutableStateOf(value = true) }
             Text(
                 text = "bitcoin testnet",
                 style = PadawanTypography.bodyMedium,
@@ -125,9 +122,10 @@ fun BalanceBox(
                     CurrencyToggleText(currencyToggleState = currencyToggleState, text = CurrencyType.SATS)
                 }
             }
+            val balanceDisplay: String = if (currencyToggleState.value) balance.toString() else balance.formatInBtc()
+            val currencyDisplay: String = if (currencyToggleState.value) CurrencyType.SATS.toString().lowercase() else CurrencyType.BTC.toString().lowercase()
             Text(
-                // text = "100",
-                text = balance,
+                text = balanceDisplay,
                 style = PadawanTypography.displaySmall,
                 fontSize = 36.sp,
                 modifier = Modifier
@@ -138,7 +136,7 @@ fun BalanceBox(
                     }
             )
             Text(
-                text = CurrencyType.SATS.toString().lowercase(),
+                text = currencyDisplay,
                 style = PadawanTypography.bodyMedium,
                 modifier = Modifier
                     .padding(all = 8.dp)
