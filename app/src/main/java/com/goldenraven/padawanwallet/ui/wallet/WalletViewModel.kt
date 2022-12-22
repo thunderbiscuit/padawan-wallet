@@ -57,6 +57,10 @@ class WalletViewModel(
     val balance: LiveData<ULong>
         get() = _balance
 
+    private var _address: MutableLiveData<String> = MutableLiveData("No address yet")
+    val address: LiveData<String>
+        get() = _address
+
     private val _isRefreshing: MutableStateFlow<Boolean> = MutableStateFlow(false)
     val isRefreshing: StateFlow<Boolean>
         get() = _isRefreshing.asStateFlow()
@@ -106,9 +110,10 @@ class WalletViewModel(
         WalletRepository.faucetCallDone()
     }
 
-    // Wallet Code
-    private fun getLastUnusedAddress(): AddressInfo {
-        return Wallet.getLastUnusedAddress()
+    fun getLastUnusedAddress(): AddressInfo {
+        val address = Wallet.getLastUnusedAddress()
+        _address.setValue(address.address)
+        return address
     }
 
     private fun updateBalance() {

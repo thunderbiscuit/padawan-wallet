@@ -10,9 +10,6 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
@@ -23,9 +20,7 @@ import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
 import androidx.core.graphics.createBitmap
-import androidx.lifecycle.LiveData
 import androidx.navigation.NavHostController
-import com.goldenraven.padawanwallet.data.Wallet
 import com.goldenraven.padawanwallet.theme.*
 import com.goldenraven.padawanwallet.ui.PadawanAppBar
 import com.goldenraven.padawanwallet.ui.standardBorder
@@ -38,9 +33,9 @@ private const val TAG = "ReceiveScreen"
 @Composable
 internal fun ReceiveScreen(
     navController: NavHostController,
-    addressViewModel: AddressViewModel = viewModel()
+    viewModel: WalletViewModel
 ) {
-    val address by addressViewModel.address.observeAsState("Generate new address")
+    val address by viewModel.address.observeAsState("Generate new address")
 
     ConstraintLayout(
         modifier = Modifier
@@ -103,7 +98,7 @@ internal fun ReceiveScreen(
                 .padding(bottom = 24.dp)
         ) {
             Button(
-                onClick = { addressViewModel.updateAddress() },
+                onClick = { viewModel.getLastUnusedAddress() },
                 colors = ButtonDefaults.buttonColors(containerColor = padawan_theme_button_primary),
                 shape = RoundedCornerShape(20.dp),
                 border = standardBorder,
@@ -140,20 +135,4 @@ private fun addressToQR(address: String): ImageBitmap? {
         Log.i(TAG, "Error with QRCode generation, $e")
     }
     return null
-}
-
-internal class AddressViewModel : ViewModel() {
-
-    private var _address: MutableLiveData<String> = MutableLiveData("No address yet")
-    val address: LiveData<String>
-        get() = _address
-
-    //private var _addressIndex: MutableLiveData<UInt> = MutableLiveData(0u)
-    //val addressIndex: LiveData<UInt>
-    //    get() = _addressIndex
-
-    fun updateAddress() {
-        _address.value = Wallet.getLastUnusedAddress().address
-        //_addressIndex.value = Wallet.getLastUnusedAddress().index
-    }
 }
