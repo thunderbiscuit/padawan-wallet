@@ -13,7 +13,6 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.AlertDialog
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.runtime.livedata.observeAsState
@@ -35,6 +34,7 @@ import com.goldenraven.padawanwallet.theme.*
 import com.goldenraven.padawanwallet.ui.FadedVerticalDivider
 import com.goldenraven.padawanwallet.ui.Screen
 import com.goldenraven.padawanwallet.ui.standardBorder
+import io.ktor.http.*
 
 // TODO Think about reintroducing refreshing
 // TODO Reuse composable more
@@ -53,11 +53,12 @@ internal fun WalletRootScreen(
     val openFaucetDialog = walletViewModel.openFaucetDialog
     val context = LocalContext.current
 
-    if (openFaucetDialog.value) {
-        FaucetDialog(
-            walletViewModel = walletViewModel
-        )
-    }
+    // if (openFaucetDialog.value) {
+    // // if (true) {
+    //     FaucetDialog(
+    //         walletViewModel = walletViewModel
+    //     )
+    // }
 
     // if (walletViewModel.isOnline(context = context) && !Wallet.blockchainIsInitialized()) {
     //     Wallet.createBlockchain()
@@ -376,44 +377,88 @@ fun CurrencyToggleText(currencyToggleState: MutableState<Boolean>, text: Currenc
 
 @Composable
 private fun FaucetDialog(walletViewModel: WalletViewModel) {
-    AlertDialog(
-        backgroundColor = md_theme_dark_lightBackground,
+    androidx.compose.material3.AlertDialog(
         onDismissRequest = {},
         title = {
             Text(
                 text = "Hello there!",
                 style = PadawanTypography.headlineMedium,
-                color = md_theme_dark_onLightBackground
+                color = Color(0xff1f0208)
             )
         },
         text = {
             Text(
-                text = "We notice it is your first time opening Padawan wallet. Would you like Padawan to send you some testnet coins to get your started?",
-                color = md_theme_dark_onLightBackground
+                text = "We notice it is your first time opening Padawan wallet. Would you like Padawan to send you some testnet coins to get you started?",
+                color = Color(0xff2f2f2f)
             )
         },
-        confirmButton = {
-            TextButton(
-                onClick = {
-                    walletViewModel.onPositiveDialogClick()
-                },
-            ) {
-                Text(
-                    text = "Yes please!",
-                    color = md_theme_dark_onLightBackground
-                )
-            }
-        },
+
         dismissButton = {
-            TextButton(
+            Button(
                 onClick = {
                     walletViewModel.onNegativeDialogClick()
                 },
+                colors = ButtonDefaults.buttonColors(containerColor = Color(0xfffc4f4f)),
+                shape = RoundedCornerShape(20.dp),
+                border = standardBorder,
+                modifier = Modifier
+                    .padding(top = 4.dp, start = 4.dp, end = 4.dp, bottom = 4.dp)
+                    .standardShadow(20.dp)
+                    .height(70.dp)
+                    .width(110.dp)
             ) {
-                Text(
-                    text = "Not right now",
-                    color = md_theme_dark_onLightBackground
-                )
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    modifier = Modifier.padding(vertical = 4.dp)
+                ) {
+                    Text(
+                        text = "Not now",
+                        style = PadawanTypography.labelMedium,
+                        fontSize = 12.sp,
+                        color = Color(0xff000000)
+                    )
+                    Spacer(modifier = Modifier.width(8.dp))
+                    Icon(
+                        painter = painterResource(id = R.drawable.ic_hicon_dislike),
+                        contentDescription = "Do not log in icon",
+                        tint = Color(0xff000000)
+                    )
+                }
+            }
+        },
+
+        confirmButton = {
+            Button(
+                onClick = {
+                    walletViewModel.onPositiveDialogClick()
+                },
+                colors = ButtonDefaults.buttonColors(containerColor = Color(0xff78c5b2)),
+                shape = RoundedCornerShape(20.dp),
+                contentPadding = PaddingValues(0.dp),
+                border = standardBorder,
+                modifier = Modifier
+                    .padding(top = 4.dp, start = 4.dp, end = 4.dp, bottom = 4.dp)
+                    .standardShadow(20.dp)
+                    .height(70.dp)
+                    .width(110.dp)
+            ) {
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    modifier = Modifier.padding(vertical = 4.dp)
+                ) {
+                    Text(
+                        text = "Yes please!",
+                        style = PadawanTypography.labelMedium,
+                        fontSize = 12.sp,
+                        color = Color(0xff000000)
+                    )
+                    Spacer(modifier = Modifier.width(8.dp))
+                    Icon(
+                        painter = painterResource(id = R.drawable.ic_hicon_like),
+                        contentDescription = "Proceed icon",
+                        tint = Color(0xff000000)
+                    )
+                }
             }
         },
     )
