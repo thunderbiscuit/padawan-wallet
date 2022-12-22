@@ -10,7 +10,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.material3.Slider
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.BottomSheetScaffold
 import androidx.compose.material.*
@@ -26,12 +26,13 @@ import androidx.compose.runtime.*
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
@@ -53,7 +54,7 @@ private const val TAG = "SendScreen"
 
 // BottomSheetScaffold is not available in Material 3, so this screen is all Material 2
 
-@OptIn(ExperimentalMaterialApi::class, ExperimentalComposeUiApi::class)
+@OptIn(ExperimentalMaterialApi::class)
 @Composable
 internal fun SendScreen(navController: NavHostController, walletViewModel: WalletViewModel) {
     val (showDialog, setShowDialog) = rememberSaveable { mutableStateOf(false) }
@@ -84,7 +85,6 @@ internal fun SendScreen(navController: NavHostController, walletViewModel: Walle
     val bottomSheetScaffoldState = rememberBottomSheetScaffoldState(
         bottomSheetState = rememberBottomSheetState(initialValue = BottomSheetValue.Collapsed)
     )
-    // val context = LocalContext.current
 
     BottomSheetScaffold(
         sheetShape = RoundedCornerShape(topEnd = 20.dp, topStart = 20.dp),
@@ -196,39 +196,50 @@ internal fun SendScreen(navController: NavHostController, walletViewModel: Walle
             )
 
             Text(
-                text = "Fees",
+                text = "Fees (sats/vbytes)",
                 fontWeight = FontWeight.Bold,
                 textAlign = TextAlign.Start,
                 fontSize = 20.sp,
                 modifier = Modifier.padding(top = 16.dp)
             )
-            TextField(
-                modifier = Modifier
-                    .wideTextField()
-                    .height(IntrinsicSize.Min),
-                shape = RoundedCornerShape(20.dp),
-                value = feeRate.value,
-                onValueChange = { value -> feeRate.value = value.filter { it.isDigit() } },
-                singleLine = true,
-                placeholder = { Text(text = "Edit fees") },
-                colors = TextFieldDefaults.textFieldColors(
-                    backgroundColor = padawan_theme_background_secondary,
-                    cursorColor = padawan_theme_onPrimary,
-                    focusedIndicatorColor = Color.Transparent,
-                    unfocusedIndicatorColor = Color.Transparent,
-                    disabledIndicatorColor = Color.Transparent,
-                    errorIndicatorColor = Color.Transparent,
-                ),
-                keyboardOptions = KeyboardOptions(
-                    keyboardType = KeyboardType.Number,
-                    imeAction = ImeAction.Done
-                ),
-                keyboardActions = KeyboardActions(
-                    onDone = {
-                        focusManager.clearFocus()
-                    }
-                ),
+            // TextField(
+            //     modifier = Modifier
+            //         .wideTextField()
+            //         .height(IntrinsicSize.Min),
+            //     shape = RoundedCornerShape(20.dp),
+            //     value = feeRate.value,
+            //     onValueChange = { value -> feeRate.value = value.filter { it.isDigit() } },
+            //     singleLine = true,
+            //     placeholder = { Text(text = "Edit fees") },
+            //     colors = TextFieldDefaults.textFieldColors(
+            //         backgroundColor = padawan_theme_background_secondary,
+            //         cursorColor = padawan_theme_onPrimary,
+            //         focusedIndicatorColor = Color.Transparent,
+            //         unfocusedIndicatorColor = Color.Transparent,
+            //         disabledIndicatorColor = Color.Transparent,
+            //         errorIndicatorColor = Color.Transparent,
+            //     ),
+            //     keyboardOptions = KeyboardOptions(
+            //         keyboardType = KeyboardType.Number,
+            //         imeAction = ImeAction.Done
+            //     ),
+            //     keyboardActions = KeyboardActions(
+            //         onDone = {
+            //             focusManager.clearFocus()
+            //         }
+            //     ),
+            // )
+
+            var sliderPosition by remember { mutableStateOf(0f) }
+            Slider(
+                modifier = Modifier.semantics { contentDescription = "Localized Description" },
+                value = sliderPosition,
+                onValueChange = { sliderPosition = it },
+                valueRange = 0f..8f,
+                onValueChangeFinished = { feeRate.value = sliderPosition.toString().take(3) },
+                steps = 7
             )
+            Text(text = sliderPosition.toString().take(3))
 
             Button(
                 onClick = {
@@ -367,7 +378,8 @@ fun TransactionConfirmation(
         Button(
             onClick = {
                 val psbt = txBuilderResult.value?.psbt ?: throw Exception()
-                if (!viewModel.isOnline(context = context)) {
+                viewModel.updateConnectivityStatus(context)
+                if (viewModel.isOnlineVariable.value == false) {
                     scope.launch {
                         snackbarHostState.snackbarHostState.showSnackbar("Your device is not connected to the internet!", duration = SnackbarDurationM2.Short)
                     }
@@ -398,63 +410,6 @@ fun TransactionConfirmation(
         }
     }
 }
-
-// @Composable
-// fun Dialog(
-//     recipientAddress: String,
-//     amount: String,
-//     feeRate: String,
-//     showDialog: Boolean,
-//     setShowDialog: (Boolean) -> Unit,
-//     snackbarHostState: SnackbarHostState,
-//     scope: CoroutineScope,
-// ) {
-//     if (showDialog) {
-//         AlertDialog(
-//             containerColor = md_theme_dark_background2,
-//             onDismissRequest = {},
-//             title = {
-//                 Text(
-//                     text = "Confirm transaction",
-//                 )
-//             },
-//             text = {
-//                 Text(
-//                     text = "Send: $amount satoshis \nto: $recipientAddress\nFee rate: $feeRate"
-//                 )
-//             },
-//             confirmButton = {
-//                 TextButton(
-//                     onClick = {
-//                         broadcastTransaction(
-//                             recipientAddress = recipientAddress,
-//                             amount = amount,
-//                             feeRate = feeRate,
-//                             snackbarHostState = snackbarHostState,
-//                             scope = scope,
-//                         )
-//                         setShowDialog(false)
-//                     },
-//                 ) {
-//                     Text(
-//                         text = "Confirm",
-//                     )
-//                 }
-//             },
-//             dismissButton = {
-//                 TextButton(
-//                     onClick = {
-//                         setShowDialog(false)
-//                     },
-//                 ) {
-//                     Text(
-//                         text = "Cancel",
-//                     )
-//                 }
-//             },
-//         )
-//     }
-// }
 
 fun verifyInputs(
     recipientAddress: String,
@@ -490,21 +445,3 @@ fun verifyInputs(
     }
     return true
 }
-
-// private fun broadcastTransaction(
-//     psbt: PartiallySignedTransaction,
-//     snackbarHostState: SnackbarHostStateM2,
-//     scope: CoroutineScope,
-// ) {
-//     val snackbarMsg: String = try {
-//         Wallet.sign(psbt)
-//         Wallet.broadcast(psbt)
-//         "Transaction was broadcast successfully"
-//     } catch (e: Throwable) {
-//         Log.i(TAG, "Broadcast error: ${e.message}")
-//         "Error: ${e.message}"
-//     }
-//     scope.launch {
-//         snackbarHostState.showSnackbar(message = snackbarMsg, duration = SnackbarDurationM2.Short)
-//     }
-// }

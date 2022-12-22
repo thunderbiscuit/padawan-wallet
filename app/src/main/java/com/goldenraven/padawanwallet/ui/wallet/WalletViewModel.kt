@@ -65,15 +65,20 @@ class WalletViewModel(
     val isRefreshing: StateFlow<Boolean>
         get() = _isRefreshing.asStateFlow()
 
+    var isOnlineVariable: MutableLiveData<Boolean> = MutableLiveData(false)
+
     init {
         Log.i(TAG, "The WalletScreen viewmodel is being initialized...")
+
         val txDao: TxDao = TxDatabase.getDatabase(application).txDao()
         repository = TxRepository(txDao)
         readAllData = repository.readAllData
 
-        if (isOnline(context = application) && !Wallet.blockchainIsInitialized()) {
+        if (isOnlineVariable.value == true && !Wallet.blockchainIsInitialized()) {
             Wallet.createBlockchain()
         }
+
+        updateConnectivityStatus(application)
 
         // app will sync on initialization of the viewmodel
         viewModelScope.launch {
@@ -110,10 +115,15 @@ class WalletViewModel(
         WalletRepository.faucetCallDone()
     }
 
-    fun getLastUnusedAddress(): AddressInfo {
+    private fun getLastUnusedAddress(): AddressInfo {
         val address = Wallet.getLastUnusedAddress()
         _address.setValue(address.address)
         return address
+    }
+
+    fun updateLastUnusedAddress(): Unit {
+        val address = Wallet.getLastUnusedAddress().address
+        _address.value = address
     }
 
     private fun updateBalance() {
@@ -123,7 +133,8 @@ class WalletViewModel(
 
     // Refreshing & Syncing
     fun refresh(context: Context) {
-        if (isOnline(context = context)) {
+        // updateConnectivityStatus(context)
+        if (isOnlineVariable.value == true) {
             if (!Wallet.blockchainIsInitialized()) { Wallet.createBlockchain() }
             // This doesn't handle multiple 'refreshing' tasks, don't use this
             viewModelScope.launch {
@@ -193,39 +204,39 @@ class WalletViewModel(
         }
     }
 
-    // Internet connectivity
-    // fun isOnline(): Boolean {
-    fun isOnline(context: Context): Boolean {
+    fun updateConnectivityStatus(context: Context): Unit {
+        Log.i(TAG, "Updating connectivity status...")
         val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         val capabilities = connectivityManager.getNetworkCapabilities(connectivityManager.activeNetwork)
-        if (capabilities != null) {
-            Log.i(TAG, "isOnline function returned $capabilities")
+
+        val onlineStatus: Boolean = if (capabilities != null) {
+            Log.i(TAG, "updateConnectivityStatus function returned $capabilities")
             when {
-                capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> {
-                    Log.i(TAG, "NetworkCapabilities.TRANSPORT_CELLULAR")
-                    return true
-                }
                 capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) -> {
-                    Log.i(TAG, "NetworkCapabilities.TRANSPORT_WIFI")
-                    return true
+                    Log.i(TAG, "Network capabilities: TRANSPORT_WIFI")
+                    true
+                }
+                capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> {
+                    Log.i(TAG, "Network capabilities: TRANSPORT_CELLULAR")
+                    true
                 }
                 capabilities.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET) -> {
-                    Log.i(TAG, "NetworkCapabilities.TRANSPORT_ETHERNET")
-                    return true
+                    Log.i(TAG, "Network capabilities: TRANSPORT_ETHERNET")
+                    true
                 }
+                else -> false
             }
+        } else {
+            false
         }
-        return false
+        Log.i(TAG, "Updating online status to $onlineStatus")
+        isOnlineVariable.setValue(onlineStatus)
     }
 
     fun broadcastTransaction(
         psbt: PartiallySignedTransaction,
         snackbarHostState: SnackbarHostState,
-        // context: Context,
     ) {
-        // if (!isOnline(context = context)) {
-        //     Toast.makeText(context, "You currently don't have internet access!", Toast.LENGTH_SHORT).show()
-        // } else {
             val snackbarMsg: String = try {
                 Wallet.sign(psbt)
                 Wallet.broadcast(psbt)
@@ -244,8 +255,6 @@ class WalletViewModel(
         val faucetUsername: String = BuildConfig.FAUCET_USERNAME
         val faucetPassword: String = BuildConfig.FAUCET_PASSWORD
 
-        // used to be a lifecycleScope.launch because it was in a fragment
-        // now simply using a background thread untied to the lifecycle of the composable
         viewModelScope.launch {
             val ktorClient = HttpClient(CIO) {
                 install(Auth) {
