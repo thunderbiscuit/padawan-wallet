@@ -47,16 +47,13 @@ The tutorials are broken down in two groups: _Essentials_ and _Advanced_, each o
 5. Sending bitcoin (skill)
 6. What are transaction fees? (concept)
 7. What is a wallet recovery phrase? (concept)
-8. Recovering a wallet from a recovery phrase (skill)  
-
-**Advanced**  
-1. Connect to your own node  
-2. Replace-by-fee  
-3. Address types  
-4. What are light clients?  
+8. Recovering a wallet from a recovery phrase (skill)
 
 ### 🧐 Where can I get testnet coins?
 There are many bitcoin testnet faucets out there, but Padawan uses native segwit addresses uniquely (bech32), so you'll need a faucet that can send to those. We suggest [this one](https://testnet-faucet.mempool.co/).
+
+### How can I delete my wallet?
+You cannot delete your wallet directly from within the app. This is on purpose, to make sure people don't delete wallets without putting in some work. If you are certain that your wallet is empty (if it's not, send the testnet coins back to us!), you can delete the wallet by clearing all app data for Padawan in your Android settings, or you can uninstall and reinstall the app directly from the Play Store. 
 
 ### Building and running Padawan
 To build and run the app from source, you'll need:
