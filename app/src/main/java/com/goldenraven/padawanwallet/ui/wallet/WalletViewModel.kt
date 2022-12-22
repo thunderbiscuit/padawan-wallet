@@ -50,7 +50,8 @@ class WalletViewModel(
 ) : AndroidViewModel(application) {
     val readAllData: LiveData<List<Tx>>
     private val repository: TxRepository
-    var openFaucetDialog: MutableState<Boolean> = mutableStateOf(!didWeOfferFaucet())
+    // var openFaucetDialog: MutableState<Boolean> = mutableStateOf(!didWeOfferFaucet())
+    var openFaucetDialog: MutableState<Boolean> = mutableStateOf(false)
 
     private var _balance: MutableLiveData<ULong> = MutableLiveData(0u)
     val balance: LiveData<ULong>
@@ -73,27 +74,27 @@ class WalletViewModel(
 
     // Faucet Code
     fun onPositiveDialogClick() {
-        faucetOfferWasMade()
+        // faucetOfferWasMade()
         callTatooineFaucet(getLastUnusedAddress())
         faucetCallDone()
         openFaucetDialog.value = false
     }
 
     fun onNegativeDialogClick() {
-        faucetOfferWasMade()
+        // faucetOfferWasMade()
         openFaucetDialog.value = false
     }
 
-    private fun didWeOfferFaucet(): Boolean {
-        val faucetOfferDone = WalletRepository.didWeOfferFaucet()
-        Log.i(TAG, "We have already asked if they wanted testnet coins: $faucetOfferDone")
-        return faucetOfferDone
-    }
+    // private fun didWeOfferFaucet(): Boolean {
+    //     val faucetOfferDone = WalletRepository.didWeOfferFaucet()
+    //     Log.i(TAG, "We have already asked if they wanted testnet coins: $faucetOfferDone")
+    //     return faucetOfferDone
+    // }
 
-    private fun faucetOfferWasMade() {
-        Log.i(TAG, "The offer to call the faucet was made")
-        WalletRepository.offerFaucetDone()
-    }
+    // private fun faucetOfferWasMade() {
+    //     Log.i(TAG, "The offer to call the faucet was made")
+    //     WalletRepository.offerFaucetDone()
+    // }
 
     private fun faucetCallDone() {
         WalletRepository.faucetCallDone()

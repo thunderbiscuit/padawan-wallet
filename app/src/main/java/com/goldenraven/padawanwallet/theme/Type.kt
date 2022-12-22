@@ -43,7 +43,13 @@ val PadawanTypography = Typography(
 		lineHeight = 40.sp,
 		letterSpacing = 0.sp,
 	),
-	// headlineMedium = TextStyle(),
+	headlineMedium = TextStyle(
+		fontFamily = Outfit,
+		fontWeight = FontWeight.SemiBold,
+		fontSize = 28.sp,
+		lineHeight = 36.sp,
+		letterSpacing = 0.sp,
+	),
 	headlineSmall = TextStyle(
 		fontFamily = Outfit,
 		fontWeight = FontWeight.SemiBold,

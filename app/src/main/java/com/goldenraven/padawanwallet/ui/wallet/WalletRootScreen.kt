@@ -50,15 +50,15 @@ internal fun WalletRootScreen(
     val balance by walletViewModel.balance.observeAsState()
     val isRefreshing by walletViewModel.isRefreshing.collectAsState()
     val transactionList by walletViewModel.readAllData.observeAsState(initial = emptyList())
-    val openFaucetDialog = walletViewModel.openFaucetDialog
+    // val openFaucetDialog = walletViewModel.openFaucetDialog
+    val tempOpenFaucetDialog = walletViewModel.openFaucetDialog
     val context = LocalContext.current
 
-    // if (openFaucetDialog.value) {
-    // // if (true) {
-    //     FaucetDialog(
-    //         walletViewModel = walletViewModel
-    //     )
-    // }
+    if (tempOpenFaucetDialog.value) {
+        FaucetDialog(
+            walletViewModel = walletViewModel
+        )
+    }
 
     // if (walletViewModel.isOnline(context = context) && !Wallet.blockchainIsInitialized()) {
     //     Wallet.createBlockchain()
@@ -68,7 +68,7 @@ internal fun WalletRootScreen(
         BalanceBox(balance = balance.toString(), viewModel = walletViewModel)
         Spacer(modifier = Modifier.height(height = 12.dp))
         SendReceive(navController = navController)
-        TransactionListBox(openFaucetDialog = openFaucetDialog, transactionList = transactionList)
+        TransactionListBox(tempOpenFaucetDialog = tempOpenFaucetDialog, transactionList = transactionList)
     }
 }
 
@@ -233,7 +233,7 @@ fun SendReceive(navController: NavHostController) {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TransactionListBox(openFaucetDialog: MutableState<Boolean>, transactionList: List<Tx>) {
+fun TransactionListBox(tempOpenFaucetDialog: MutableState<Boolean>, transactionList: List<Tx>) {
     Row(modifier = Modifier.padding(top = 24.dp, bottom = 8.dp)) {
         Text(
             text = "Transactions",
@@ -255,12 +255,12 @@ fun TransactionListBox(openFaucetDialog: MutableState<Boolean>, transactionList:
             Row(modifier = Modifier.padding(all = 24.dp)) {
                 Column {
                     Text(
-                        text = "Hey! Your transaction list is empty, get some coins so you can start sending them!",
+                        text = "Hey! It looks like your transaction list is empty. Take a look around, and come back to get some coins so you can start playing with the wallet!",
                         style = PadawanTypography.bodyMedium,
                         modifier = Modifier.padding(all = 8.dp)
                     )
                     Button(
-                        onClick = { openFaucetDialog.value = true },
+                        onClick = { tempOpenFaucetDialog.value = true },
                         modifier = Modifier
                             .padding(all = 8.dp)
                             .standardShadow(20.dp),
@@ -383,12 +383,13 @@ private fun FaucetDialog(walletViewModel: WalletViewModel) {
             Text(
                 text = "Hello there!",
                 style = PadawanTypography.headlineMedium,
-                color = Color(0xff1f0208)
+                color = padawan_theme_text_headline
             )
         },
         text = {
             Text(
-                text = "We notice it is your first time opening Padawan wallet. Would you like Padawan to send you some testnet coins to get you started?",
+                text = "To help you get started learning about bitcoin, Padawan Wallet can send you some coins so you can follow along the tutorials and and send them around to friends!\nWould you like to receive some testnet bitcoin?",
+                fontSize = 18.sp,
                 color = Color(0xff2f2f2f)
             )
         },
@@ -397,6 +398,7 @@ private fun FaucetDialog(walletViewModel: WalletViewModel) {
             Button(
                 onClick = {
                     walletViewModel.onNegativeDialogClick()
+                    walletViewModel.openFaucetDialog.value = false
                 },
                 colors = ButtonDefaults.buttonColors(containerColor = Color(0xfffc4f4f)),
                 shape = RoundedCornerShape(20.dp),
@@ -411,16 +413,16 @@ private fun FaucetDialog(walletViewModel: WalletViewModel) {
                     verticalAlignment = Alignment.CenterVertically,
                     modifier = Modifier.padding(vertical = 4.dp)
                 ) {
-                    Text(
-                        text = "Not now",
-                        style = PadawanTypography.labelMedium,
-                        fontSize = 12.sp,
-                        color = Color(0xff000000)
-                    )
-                    Spacer(modifier = Modifier.width(8.dp))
+                    // Text(
+                    //     text = "Not now",
+                    //     style = PadawanTypography.labelMedium,
+                    //     fontSize = 12.sp,
+                    //     color = Color(0xff000000)
+                    // )
+                    // Spacer(modifier = Modifier.width(8.dp))
                     Icon(
                         painter = painterResource(id = R.drawable.ic_hicon_dislike),
-                        contentDescription = "Do not log in icon",
+                        contentDescription = "No thank you icon",
                         tint = Color(0xff000000)
                     )
                 }
@@ -431,8 +433,9 @@ private fun FaucetDialog(walletViewModel: WalletViewModel) {
             Button(
                 onClick = {
                     walletViewModel.onPositiveDialogClick()
+                    walletViewModel.openFaucetDialog.value = false
                 },
-                colors = ButtonDefaults.buttonColors(containerColor = Color(0xff78c5b2)),
+                colors = ButtonDefaults.buttonColors(containerColor = padawan_theme_background),
                 shape = RoundedCornerShape(20.dp),
                 contentPadding = PaddingValues(0.dp),
                 border = standardBorder,
@@ -446,13 +449,13 @@ private fun FaucetDialog(walletViewModel: WalletViewModel) {
                     verticalAlignment = Alignment.CenterVertically,
                     modifier = Modifier.padding(vertical = 4.dp)
                 ) {
-                    Text(
-                        text = "Yes please!",
-                        style = PadawanTypography.labelMedium,
-                        fontSize = 12.sp,
-                        color = Color(0xff000000)
-                    )
-                    Spacer(modifier = Modifier.width(8.dp))
+                    // Text(
+                    //     text = "Yes please!",
+                    //     style = PadawanTypography.labelMedium,
+                    //     fontSize = 12.sp,
+                    //     color = Color(0xff000000)
+                    // )
+                    // Spacer(modifier = Modifier.width(8.dp))
                     Icon(
                         painter = painterResource(id = R.drawable.ic_hicon_like),
                         contentDescription = "Proceed icon",
