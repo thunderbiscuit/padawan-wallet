@@ -33,7 +33,6 @@ internal fun SettingsRootScreen(
     Column(
         modifier = Modifier
             .fillMaxSize()
-            // .standardBackground()
             .background(padawan_theme_background_secondary)
     ) {
         // Title
@@ -46,7 +45,6 @@ internal fun SettingsRootScreen(
         )
         Text(
             text = "A collection of everything else you need in the app.",
-            // style = GargoyleTypography.bodyMedium,
             color = Color(0xff787878),
             modifier = Modifier
                 .padding(start = 24.dp, end = 24.dp, bottom = 12.dp)
@@ -168,85 +166,3 @@ internal fun SettingsRootScreen(
         }
     }
 }
-
-// @OptIn(ExperimentalMaterial3Api::class)
-// @Composable
-// internal fun SettingsScreen(navController: NavController) {
-//
-//     val faucetCallDone = WalletRepository.wasFaucetCallDone()
-//     val coroutineScope = rememberCoroutineScope()
-//     val snackbarHostState = remember { SnackbarHostState() }
-//     val context = LocalContext.current
-//
-//     Scaffold(
-//         topBar = { DrawerAppBar(navController, title = "Settings") },
-//         bottomBar = { SnackbarHost(hostState = snackbarHostState) }
-//     ) {
-//         Column(
-//             Modifier.padding(all = 16.dp)
-//         ) {
-//             if (!faucetCallDone) {
-//                 Button(
-//                     onClick = {
-//                         callTatooineFaucet(Wallet.getNewAddress(), coroutineScope, snackbarHostState, context)
-//                     },
-//                     modifier = Modifier.fillMaxWidth()
-//                 ) {
-//                     Text(text = stringResource(id = R.string.request_testnet_coins))
-//                 }
-//             } else {
-//                 Button(
-//                     onClick = {
-//                         coroutineScope.launch {
-//                             snackbarHostState.showSnackbar("Error: You have already gotten testnet coins before.")
-//                         }
-//                     },
-//                     modifier = Modifier.fillMaxWidth(),
-//                     colors = ButtonDefaults.buttonColors(colorResource(id = R.color.bg2))
-//                 ) {
-//                     Text(text = stringResource(id = R.string.request_testnet_coins))
-//                 }
-//             }
-//         }
-//     }
-// }
-//
-//
-// private fun callTatooineFaucet(
-//     address: AddressInfo,
-//     coroutineScope: CoroutineScope,
-//     snackbarHostState: SnackbarHostState,
-//     context: Context
-// ) {
-//     val faucetUrl: String = BuildConfig.FAUCET_URL
-//     val faucetUsername: String = BuildConfig.FAUCET_USERNAME
-//     val faucetPassword: String = BuildConfig.FAUCET_PASSWORD
-//
-//     coroutineScope.launch {
-//         val ktorClient = HttpClient(CIO) {
-//             install(Auth) {
-//                 basic {
-//                     credentials {
-//                         BasicAuthCredentials(
-//                             username = faucetUsername,
-//                             password = faucetPassword
-//                         )
-//                     }
-//                 }
-//             }
-//         }
-//
-//         Log.i(TAG, "API call to Tatooine will request coins at $address")
-//         try {
-//             val response: HttpResponse = ktorClient.post(faucetUrl) {
-//                 body = TextContent(address.address, ContentType.Text.Plain)
-//             }
-//             WalletRepository.faucetCallDone()
-//             Log.i(TAG, "API call to Tatooine was performed. Response is ${response.status}, ${response.readText()}")
-//         } catch (cause: Throwable) {
-//             Log.i(TAG, "Tatooine call failed: $cause")
-//             coroutineScope.launch { snackbarHostState.showSnackbar(context.resources.getString(R.string.errorFaucet)) }
-//         }
-//         ktorClient.close()
-//     }
-// }

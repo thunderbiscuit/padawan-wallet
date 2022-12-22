@@ -124,8 +124,8 @@ dependencies {
     implementation("org.bitcoindevkit:bdk-android:0.26.0-SNAPSHOT")
 
     // Ktor
-    implementation("io.ktor:ktor-client-cio:1.6.7")
-    implementation("io.ktor:ktor-client-auth:1.6.7")
+    implementation("io.ktor:ktor-client-cio:2.2.1")
+    implementation("io.ktor:ktor-client-auth:2.2.1")
 
     // QR codes
     implementation("com.google.zxing:core:3.4.1")

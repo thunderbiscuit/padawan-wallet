@@ -28,13 +28,12 @@ import com.goldenraven.padawanwallet.data.tx.TxRepository
 import com.goldenraven.padawanwallet.utils.*
 import io.ktor.client.*
 import io.ktor.client.engine.cio.*
-import io.ktor.client.features.auth.*
-import io.ktor.client.features.auth.providers.*
+import io.ktor.client.plugins.auth.*
+import io.ktor.client.plugins.auth.providers.*
 import io.ktor.client.request.*
 import io.ktor.client.statement.*
 import io.ktor.content.*
 import io.ktor.http.*
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -216,37 +215,38 @@ class WalletViewModel(
             snackbarHostState.showSnackbar(message = snackbarMsg, duration = SnackbarDuration.Short)
         }
     }
-}
 
-private fun callTatooineFaucet(address: AddressInfo) {
-    val faucetUrl: String = BuildConfig.FAUCET_URL
-    val faucetUsername: String = BuildConfig.FAUCET_USERNAME
-    val faucetPassword: String = BuildConfig.FAUCET_PASSWORD
+    private fun callTatooineFaucet(addressInfo: AddressInfo) {
+        val faucetUrl: String = BuildConfig.FAUCET_URL
+        val faucetUsername: String = BuildConfig.FAUCET_USERNAME
+        val faucetPassword: String = BuildConfig.FAUCET_PASSWORD
 
-    // used to be a lifecycleScope.launch because it was in a fragment
-    // now simply using a background thread untied to the lifecycle of the composable
-    val faucetScope = CoroutineScope(Dispatchers.IO)
-    faucetScope.launch {
-        val ktorClient = HttpClient(CIO) {
-            install(Auth) {
-                basic {
-                    username = faucetUsername
-                    password = faucetPassword
+        // used to be a lifecycleScope.launch because it was in a fragment
+        // now simply using a background thread untied to the lifecycle of the composable
+        viewModelScope.launch {
+            val ktorClient = HttpClient(CIO) {
+                install(Auth) {
+                    basic {
+                        credentials {
+                            BasicAuthCredentials(username = faucetUsername, password = faucetPassword)
+                        }
+                    }
                 }
             }
-        }
 
-        Log.i(TAG,"API call to Tatooine will request coins at $address")
-        try {
-            val response: HttpResponse = ktorClient.post(faucetUrl) {
-                body = TextContent(address.address, ContentType.Text.Plain)
+            Log.i(TAG,"API call to Tatooine will request coins at $addressInfo")
+            try {
+                val response: HttpResponse = ktorClient.request(faucetUrl) {
+                    method = HttpMethod.Post
+                    setBody(TextContent(addressInfo.address, ContentType.Text.Plain))
+                }
+                WalletRepository.faucetCallDone()
+                Log.i(TAG,"API call to Tatooine was performed. Response is ${response.status}, ${response.bodyAsText()}")
+            } catch (cause: Throwable) {
+                Log.i(TAG,"Tatooine call failed: $cause")
             }
-            WalletRepository.faucetCallDone()
-            Log.i(TAG,"API call to Tatooine was performed. Response is ${response.status}, ${response.readText()}")
-        } catch (cause: Throwable) {
-            Log.i(TAG,"Tatooine call failed: $cause")
+            ktorClient.close()
         }
-        ktorClient.close()
     }
 }
 
