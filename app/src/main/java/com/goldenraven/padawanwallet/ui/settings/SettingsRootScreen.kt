@@ -20,6 +20,7 @@ import androidx.navigation.NavController
 import com.goldenraven.padawanwallet.R
 import com.goldenraven.padawanwallet.theme.PadawanTypography
 import com.goldenraven.padawanwallet.theme.padawan_theme_background_secondary
+import com.goldenraven.padawanwallet.theme.padawan_theme_button_primary
 import com.goldenraven.padawanwallet.ui.Screen
 import com.goldenraven.padawanwallet.ui.tutorials.TutorialViewModel
 
@@ -150,18 +151,17 @@ internal fun SettingsRootScreen(
             onClick = {
                 viewModel.unsetAllCompleted()
             },
-            colors = ButtonDefaults.buttonColors(containerColor = Color(0x60f6cf47)),
+            colors = ButtonDefaults.buttonColors(containerColor = Color(0xffFEE6DE)),
             shape = RoundedCornerShape(8.dp),
-            border = BorderStroke(1.dp, Color(0xfff6cf47)),
+            border = BorderStroke(1.dp, padawan_theme_button_primary),
             modifier = Modifier
                 .size(width = 400.dp, height = 60.dp)
                 .padding(start = 24.dp, end = 24.dp)
         ) {
             Text(
-                text = "Reset completed tutorials",
+                text = "Reset completed chapters",
                 fontWeight = FontWeight.Normal,
                 color = Color(0xff2f2f2f)
-
             )
         }
     }
