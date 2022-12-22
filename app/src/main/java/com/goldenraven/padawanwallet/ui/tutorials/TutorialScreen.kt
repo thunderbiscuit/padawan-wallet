@@ -110,7 +110,7 @@ fun TutorialButtons(
         if (currentPage.value != 1) {
             Button(
                 onClick = {
-                    currentPage.value += 1
+                    currentPage.value -= 1
                     // tutorialViewModel.setCompletion(id = tutorialId - 1, completion = currentPage.value)
                     scrollUp(pageScrollState = pageScrollState, coroutineScope = coroutineScope)
                 },
