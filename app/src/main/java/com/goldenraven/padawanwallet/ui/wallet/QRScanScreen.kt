@@ -10,23 +10,26 @@ import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.camera.view.PreviewView
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLifecycleOwner
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.navigation.NavHostController
 import com.goldenraven.padawanwallet.theme.md_theme_dark_background
+import com.goldenraven.padawanwallet.theme.standardShadow
+import com.goldenraven.padawanwallet.ui.standardBorder
 import com.goldenraven.padawanwallet.utils.QRCodeAnalyzer
 
 @Composable
@@ -119,16 +122,31 @@ internal fun QRScanScreen(navController: NavHostController) {
             }
 
             Button(
-                onClick = { navController.popBackStack() },
-                modifier = Modifier.constrainAs(cancelButton) {
-                    absoluteRight.linkTo(parent.absoluteRight, margin = 16.dp)
-                    bottom.linkTo(parent.bottom, margin = 16.dp)
-                }
+                onClick = {
+                    navController.popBackStack()
+                },
+                colors = ButtonDefaults.buttonColors(containerColor = Color(0xfff6cf47)),
+                shape = RoundedCornerShape(20.dp),
+                border = standardBorder,
+                modifier = Modifier
+                    .constrainAs(cancelButton) {
+                        absoluteRight.linkTo(parent.absoluteRight, margin = 16.dp)
+                        bottom.linkTo(parent.bottom, margin = 16.dp)
+                    }
+                    .padding(top = 4.dp, start = 4.dp, end = 4.dp, bottom = 4.dp)
+                    .standardShadow(20.dp)
+                    .height(70.dp)
+                    .width(200.dp)
             ) {
-                Text(
-                    text = "Cancel",
-                    textAlign = TextAlign.Center,
-                )
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    modifier = Modifier.padding(vertical = 4.dp)
+                ) {
+                    Text(
+                        text = "Cancel",
+                        color = Color(0xff000000)
+                    )
+                }
             }
         }
     }
