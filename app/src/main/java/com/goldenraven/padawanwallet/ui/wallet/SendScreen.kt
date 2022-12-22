@@ -373,9 +373,8 @@ fun TransactionConfirmation(
                     }
                 } else {
                     viewModel.broadcastTransaction(psbt, snackbarHostState.snackbarHostState)
+                    navController.popBackStack()
                 }
-                // broadcastTransaction(psbt, snackbarHostState.snackbarHostState, scope)
-                // navController.popBackStack()
             },
             colors = ButtonDefaults.buttonColors(containerColor = padawan_theme_button_primary),
             shape = RoundedCornerShape(20.dp),
