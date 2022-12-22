@@ -1,6 +1,7 @@
 package com.goldenraven.padawanwallet.ui
 
 import androidx.compose.animation.*
+import androidx.compose.animation.core.MutableTransitionState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
@@ -49,10 +50,14 @@ internal fun VerticalTextFieldDivider() {
 @Composable
 internal fun PadawanAppBar(navController: NavHostController, title: String) {
     val appBarVisibility = remember { mutableStateOf(value = false) }
+
+
     LaunchedEffect(key1 = true) {
         delay(500)
         appBarVisibility.value = true
     }
+    if (!appBarVisibility.value) { Spacer(Modifier.height(100.dp)) }
+
     AnimatedVisibility(
         visible = appBarVisibility.value,
         enter = fadeIn(tween(durationMillis = 500))
@@ -60,7 +65,8 @@ internal fun PadawanAppBar(navController: NavHostController, title: String) {
         Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(all = 16.dp)
+                .padding(horizontal = 16.dp)
+                .height(100.dp)
         ) {
             IconButton(
                 onClick = { navController.popBackStack() },
