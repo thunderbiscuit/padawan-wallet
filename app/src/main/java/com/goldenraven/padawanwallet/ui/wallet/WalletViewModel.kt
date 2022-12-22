@@ -70,6 +70,12 @@ class WalletViewModel(
         if (isOnline(context = application) && !Wallet.blockchainIsInitialized()) {
             Wallet.createBlockchain()
         }
+
+        // app will sync on initialization of the viewmodel
+        viewModelScope.launch {
+            delay(8000)
+            refresh(application)
+        }
     }
 
     // Faucet Code
