@@ -119,6 +119,7 @@ class WalletViewModel(
     // Refreshing & Syncing
     fun refresh(context: Context) {
         if (isOnline(context = context)) {
+            if (!Wallet.blockchainIsInitialized()) { Wallet.createBlockchain() }
             // This doesn't handle multiple 'refreshing' tasks, don't use this
             viewModelScope.launch {
                 // A fake 2 second 'refresh'

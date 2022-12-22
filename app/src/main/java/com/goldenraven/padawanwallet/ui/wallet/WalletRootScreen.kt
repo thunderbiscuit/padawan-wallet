@@ -62,10 +62,33 @@ internal fun WalletRootScreen(
     }
 
     Column(modifier = Modifier.standardBackground()) {
+        if (!walletViewModel.isOnline(context = context)) { NoNetworkBanner() }
         BalanceBox(balance = balance ?: 0uL, viewModel = walletViewModel)
         Spacer(modifier = Modifier.height(height = 12.dp))
         SendReceive(navController = navController)
         TransactionListBox(tempOpenFaucetDialog = tempOpenFaucetDialog, transactionList = transactionList)
+    }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun NoNetworkBanner() {
+    Card(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(bottom = 8.dp)
+            .height(40.dp),
+        border = standardBorder,
+        // shape = RoundedCornerShape(20.dp),
+        containerColor = Color(0xfff6cf47)
+    ) {
+        Row(
+            modifier = Modifier.fillMaxSize(),
+            horizontalArrangement = Arrangement.Center,
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+            Text("Currently unable to access network")
+        }
     }
 }
 
@@ -291,7 +314,9 @@ fun TransactionListBox(tempOpenFaucetDialog: MutableState<Boolean>, transactionL
                                 fontWeight = FontWeight.SemiBold,
                                 // fontFamily = ShareTechMono,
                                 maxLines = 1,
-                                modifier = Modifier.align(Alignment.BottomStart).padding(top = 8.dp)
+                                modifier = Modifier
+                                    .align(Alignment.BottomStart)
+                                    .padding(top = 8.dp)
                             )
                             Text(
                                 text = "${if (tx.isPayment) tx.valueOut.toString() else tx.valueIn.toString()} ${CurrencyType.SATS.toString().lowercase()}",
