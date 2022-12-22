@@ -14,19 +14,15 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.graphics.ImageBitmap
-import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
-import androidx.core.graphics.createBitmap
 import androidx.navigation.NavHostController
 import com.goldenraven.padawanwallet.theme.*
 import com.goldenraven.padawanwallet.ui.PadawanAppBar
 import com.goldenraven.padawanwallet.ui.standardBorder
-import com.google.zxing.BarcodeFormat
-import com.google.zxing.common.BitMatrix
-import com.google.zxing.qrcode.QRCodeWriter
+import com.goldenraven.padawanwallet.utils.addressToQR
 
 private const val TAG = "ReceiveScreen"
 
@@ -52,10 +48,7 @@ internal fun ReceiveScreen(
                     end.linkTo(parent.end)
                 }
         ) {
-            PadawanAppBar(
-                navController = navController,
-                title = "Receive bitcoin",
-            )
+            PadawanAppBar(navController = navController, title = "Receive bitcoin")
         }
 
         Column(
@@ -98,7 +91,7 @@ internal fun ReceiveScreen(
                 .padding(bottom = 24.dp)
         ) {
             Button(
-                onClick = { viewModel.getLastUnusedAddress() },
+                onClick = { viewModel.updateLastUnusedAddress() },
                 colors = ButtonDefaults.buttonColors(containerColor = padawan_theme_button_primary),
                 shape = RoundedCornerShape(20.dp),
                 border = standardBorder,
@@ -114,25 +107,4 @@ internal fun ReceiveScreen(
             }
         }
     }
-}
-
-private fun addressToQR(address: String): ImageBitmap? {
-    Log.i(TAG, "We are generating the QR code for address $address")
-    try {
-        val qrCodeWriter = QRCodeWriter()
-        val bitMatrix: BitMatrix = qrCodeWriter.encode(address, BarcodeFormat.QR_CODE, 1000, 1000)
-        val bitMap = createBitmap(1000, 1000)
-        for (x in 0 until 1000) {
-            for (y in 0 until 1000) {
-                // uses night1 and md_theme_dark_onPrimary for colors
-                bitMap.setPixel(x, y, if (bitMatrix[x, y]) 0xff000000.toInt() else 0xfff3f4ff.toInt())
-                // bitMap.setPixel(x, y, if (bitMatrix[x, y]) 0xFF3c3836.toInt() else 0xFFebdbb2.toInt())
-            }
-        }
-        // Log.i(TAG, "QR is ${bitMap.asImageBitmap()}")
-        return bitMap.asImageBitmap()
-    } catch (e: Throwable) {
-        Log.i(TAG, "Error with QRCode generation, $e")
-    }
-    return null
 }

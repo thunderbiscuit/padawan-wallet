@@ -5,10 +5,12 @@
 
 package com.goldenraven.padawanwallet.ui.wallet
 
+import android.content.Context
 import androidx.compose.animation.animateColor
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.core.updateTransition
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
@@ -51,7 +53,7 @@ internal fun WalletRootScreen(
     val balance by walletViewModel.balance.observeAsState()
     val isRefreshing by walletViewModel.isRefreshing.collectAsState()
     val transactionList by walletViewModel.readAllData.observeAsState(initial = emptyList())
-    // val openFaucetDialog = walletViewModel.openFaucetDialog
+    val isOnlineStatus by walletViewModel.isOnlineVariable.observeAsState()
     val tempOpenFaucetDialog = walletViewModel.openFaucetDialog
     val context = LocalContext.current
 
@@ -62,7 +64,8 @@ internal fun WalletRootScreen(
     }
 
     Column(modifier = Modifier.standardBackground()) {
-        if (!walletViewModel.isOnline(context = context)) { NoNetworkBanner() }
+        if (isOnlineStatus == false) { NoNetworkBanner(walletViewModel, context) }
+        // if (walletViewModel.isOnlineVariable.value == false) { NoNetworkBanner(walletViewModel, context) }
         BalanceBox(balance = balance ?: 0uL, viewModel = walletViewModel)
         Spacer(modifier = Modifier.height(height = 12.dp))
         SendReceive(navController = navController)
@@ -72,12 +75,15 @@ internal fun WalletRootScreen(
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun NoNetworkBanner() {
+fun NoNetworkBanner(walletViewModel: WalletViewModel, context: Context) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
             .padding(bottom = 8.dp)
-            .height(40.dp),
+            .height(40.dp)
+            .clickable {
+                walletViewModel.updateConnectivityStatus(context)
+            },
         border = standardBorder,
         // shape = RoundedCornerShape(20.dp),
         containerColor = Color(0xfff6cf47)
@@ -179,6 +185,7 @@ fun BalanceBox(
             ) {
                 Button(
                     onClick = {
+                        viewModel.updateConnectivityStatus(context)
                         viewModel.refresh(context)
                     },
                     colors = ButtonDefaults.buttonColors(containerColor = Color.Black),

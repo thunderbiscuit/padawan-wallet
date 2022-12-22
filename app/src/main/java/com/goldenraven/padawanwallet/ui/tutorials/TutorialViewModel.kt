@@ -79,7 +79,7 @@ class TutorialViewModel(application: Application) : AndroidViewModel(application
         runBlocking {
             (1..8).forEach {
                 val completed: Boolean = tutorialRepository.getTutorial(it).completed
-                Log.i(TAG, "Tutorial $it was completed: $completed")
+                // Log.i(TAG, "Tutorial $it was completed: $completed")
                 completedTutorials[it] = completed
             }
         }
