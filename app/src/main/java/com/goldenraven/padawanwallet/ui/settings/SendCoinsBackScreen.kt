@@ -23,7 +23,6 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.Placeholder
@@ -53,7 +52,7 @@ internal fun SendCoinsBackScreen() {
             Placeholder(17.sp, 17.sp, PlaceholderVerticalAlign.TextCenter)
         ) {
             Image(
-                painterResource(R.drawable.ic_copy_outline),
+                painterResource(R.drawable.hicon_add_square),
                 contentDescription = "Copy to clipboard image",
             )
         }
@@ -87,7 +86,7 @@ internal fun SendCoinsBackScreen() {
                 fontSize = 14.sp
             )
             Divider(
-                color = colorResource(id = R.color.fg1),
+                color = padawan_theme_text_faded_secondary,
                 thickness = 1.dp,
                 modifier = Modifier.padding(all = 3.dp)
             )

@@ -13,8 +13,7 @@
         android:icon="@mipmap/ic_padawan_white"
         android:roundIcon="@mipmap/ic_padawan_white"
         android:allowBackup="true"
-        android:supportsRtl="true"
-        android:theme="@style/Theme.PadawanWallet.Launcher">
+        android:supportsRtl="true">
 
         <activity
             android:name=".PadawanActivity"

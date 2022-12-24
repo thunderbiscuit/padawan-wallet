@@ -4,41 +4,4 @@
     <color name="padawan_white_background">#FF6D3B</color>
     <color name="padawan_debug_white_background">#FFC847</color>
     <color name="padawan_colour_background">#ffffff</color>
-
-    <!--   Gruvbox dark  -->
-    <color name="bg0soft">#32302f</color>
-    <color name="bg0">#282828</color>
-    <color name="bg0hard">#1d2021</color>
-    <color name="bg1">#3c3836</color>
-    <color name="bg2">#504945</color>
-    <color name="bg3">#665c54</color>
-    <color name="bg4">#7c6f64</color>
-    <color name="gray">#928374</color>
-    <color name="fg0">#fbf1c7</color>
-    <color name="fg1">#ebdbb2</color>
-    <color name="fg2">#d5c4a1</color>
-    <color name="fg3">#bdae93</color>
-    <color name="fg4">#a89984</color>
-    <color name="bright_red">#fb4934</color>
-    <color name="bright_green">#b8bb26</color>
-    <color name="bright_yellow">#fabd2f</color>
-    <color name="bright_blue">#83a598</color>
-    <color name="bright_purple">#d3869b</color>
-    <color name="bright_aqua">#8ec07c</color>
-    <color name="bright_orange">#fe8019</color>
-    <color name="red">#cc241d</color>
-    <color name="green">#98971a</color>
-    <color name="yellow">#d79921</color>
-    <color name="blue">#458588</color>
-    <color name="purple">#b16286</color>
-    <color name="aqua">#689d6a</color>
-    <color name="orange">#d65d0e</color>
-
-    <!--  Gruvbox light  -->
-    <color name="bg0soft_light">#f2e5bc</color>
-    <color name="bg0_light">#fbf1c7</color>
-    <color name="bg2_light">#d5c4a1</color>
-    <color name="fg0_light">#282828</color>
-    <color name="fg1_light">#3c3836</color>
-    <color name="fg4_light">#7c6f64</color>
 </resources>
