@@ -64,7 +64,7 @@ internal fun OnboardingScreen(
                 }
         ) {
             Image(
-                painter = painterResource(id = R.drawable.ic_logo_v2_0_0),
+                painter = painterResource(id = R.drawable.ic_padawan_colour_foreground),
                 contentDescription = "Padawan Logo",
                 Modifier.size(140.dp)
             )

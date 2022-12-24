@@ -19,7 +19,6 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.goldenraven.padawanwallet.R
-import com.goldenraven.padawanwallet.theme.md_theme_dark_lightBackground
 import kotlinx.coroutines.delay
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
@@ -48,7 +47,7 @@ internal fun SplashScreen(navController: NavController, moveToIntro: Boolean) {
             .background(Color.White)
     ) {
         Image(
-            painter = painterResource(id = R.drawable.ic_logo_v2_0_0),
+            painter = painterResource(id = R.drawable.ic_padawan_colour_foreground),
             contentDescription = "Padawan Logo",
             Modifier.size(200.dp)
         )
