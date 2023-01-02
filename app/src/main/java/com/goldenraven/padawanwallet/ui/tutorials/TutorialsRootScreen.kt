@@ -239,18 +239,6 @@ fun TutorialTitle(tutorialData: Tutorial) {
             fontSize = 20.sp,
             modifier = Modifier.align(alignment = Alignment.CenterStart)
         )
-        Card(
-            containerColor = padawan_theme_button_primary,
-            shape = RoundedCornerShape(20.dp),
-            border = standardBorder,
-            modifier = Modifier.align(alignment = Alignment.CenterEnd)
-        ) {
-            Text(
-                text = tutorialData.type.lowercase(),
-                style = PadawanTypography.bodySmall,
-                modifier = Modifier.padding(all = 8.dp)
-            )
-        }
     }
 }
 
