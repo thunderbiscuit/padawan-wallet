@@ -40,6 +40,7 @@ class TutorialViewModel(application: Application) : AndroidViewModel(application
         Tutorial(id = 6, title = application.getString(R.string.E6_title), type = application.getString(R.string.concept), difficulty = application.getString(R.string.advanced), completed = false),
         Tutorial(id = 7, title = application.getString(R.string.E7_title), type = application.getString(R.string.concept), difficulty = application.getString(R.string.advanced), completed = false),
         Tutorial(id = 8, title = application.getString(R.string.E8_title), type = application.getString(R.string.skill), difficulty = application.getString(R.string.advanced), completed = false),
+        Tutorial(id = 9, title = application.getString(R.string.E9_title), type = application.getString(R.string.concept), difficulty = application.getString(R.string.advanced), completed = false),
     )
 
     init {
@@ -68,7 +69,7 @@ class TutorialViewModel(application: Application) : AndroidViewModel(application
 
     fun unsetAllCompleted(): Unit {
         viewModelScope.launch {
-            (1..8).forEach {
+            (1..9).forEach {
                 tutorialRepository.unsetAllCompleted(it)
             }
         }
@@ -77,7 +78,7 @@ class TutorialViewModel(application: Application) : AndroidViewModel(application
     fun getCompletedTutorials(): Map<Int, Boolean> {
         val completedTutorials = mutableMapOf<Int, Boolean>()
         runBlocking {
-            (1..8).forEach {
+            (1..9).forEach {
                 val completed: Boolean = tutorialRepository.getTutorial(it).completed
                 // Log.i(TAG, "Tutorial $it was completed: $completed")
                 completedTutorials[it] = completed
@@ -110,6 +111,7 @@ class TutorialViewModel(application: Application) : AndroidViewModel(application
             Pair(6, tutorial6),
             Pair(7, tutorial7),
             Pair(8, tutorial8),
+            Pair(9, tutorial9),
         )
     }
 }

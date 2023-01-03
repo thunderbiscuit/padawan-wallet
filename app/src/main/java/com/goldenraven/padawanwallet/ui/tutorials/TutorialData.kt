@@ -118,3 +118,13 @@ val tutorial8: List<List<TutorialElement>> = listOf(
         TutorialElement(ElementType.BODY, R.string.t8_p1),
     )
 )
+
+val tutorial9: List<List<TutorialElement>> = listOf(
+    listOf(
+        TutorialElement(ElementType.BODY, R.string.E9_description)
+    ),
+    listOf(
+        TutorialElement(ElementType.SUBTITLE, R.string.t9_h1),
+        TutorialElement(ElementType.BODY, R.string.t9_p1),
+    )
+)

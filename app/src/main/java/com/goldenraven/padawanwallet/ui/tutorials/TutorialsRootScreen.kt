@@ -171,7 +171,7 @@ fun TutorialSectionsCarousel(
                             val selected = (it == viewModel.selectedTutorial.value)
                             LessonCircle(lessonNumber = it, completed = completed, selected = selected, selectedTutorial = viewModel.selectedTutorial)
                         }
-                        2 -> (7..8).forEach {
+                        2 -> (7..9).forEach {
                             val completed = viewModel.getCompletedTutorials()[it] ?: false
                             val selected = (it == viewModel.selectedTutorial.value)
                             LessonCircle(lessonNumber = it, completed = completed, selected = selected, selectedTutorial = viewModel.selectedTutorial)
@@ -224,7 +224,6 @@ fun TutorialId(tutorialData: Tutorial) {
     )
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TutorialTitle(tutorialData: Tutorial) {
     Box(
@@ -344,7 +343,7 @@ fun calculateCompletionStringOfGroup(page: Int, completedTutorials: Map<Int, Boo
             val count = completedTutorials.count {
                 it.key in 7..8 && it.value
             }
-            "$count of 2 done"
+            "$count of 3 done"
         }
         else -> {
             Log.i(TAG, "We've made a terrible mistake")
@@ -367,8 +366,8 @@ fun calculateCompletionOfGroup(page: Int, completedTutorials: Map<Int, Boolean>)
         }
         2 -> {
             completedTutorials.count {
-                it.key in 7..8 && it.value
-            }.div(2.0).toFloat()
+                it.key in 7..9 && it.value
+            }.div(3.0).toFloat()
         }
         else -> {
             Log.i(TAG, "We've made a terrible mistake")

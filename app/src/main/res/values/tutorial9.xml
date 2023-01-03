@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--  string names for tutorials are defined as such:  -->
+    <!--  t1: tutorial 1  -->
+    <!--  h1: header 1  -->
+    <!--  p1: paragraph 1  -->
+
+    <string name="t9_h1">
+        Why is there more than one type of wallet?
+    </string>
+
+    <string name="t9_p1">
+        Did you know there is a wide range of things we call wallets?
+    </string>
+</resources>
