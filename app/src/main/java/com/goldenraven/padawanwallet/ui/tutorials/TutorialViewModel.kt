@@ -32,15 +32,15 @@ class TutorialViewModel(application: Application) : AndroidViewModel(application
     private val _tutorialPageMap: Map<Int, List<List<TutorialElement>>>
 
     private val initialChapterList = listOf(
-        Tutorial(id = 1, title = application.getString(R.string.E1_title), type = application.getString(R.string.concept), difficulty = application.getString(R.string.basic), completed = false),
-        Tutorial(id = 2, title = application.getString(R.string.E2_title), type = application.getString(R.string.concept), difficulty = application.getString(R.string.basic), completed = false),
-        Tutorial(id = 3, title = application.getString(R.string.E3_title), type = application.getString(R.string.skill), difficulty = application.getString(R.string.basic), completed = false),
-        Tutorial(id = 4, title = application.getString(R.string.E4_title), type = application.getString(R.string.concept), difficulty = application.getString(R.string.basic), completed = false),
-        Tutorial(id = 5, title = application.getString(R.string.E5_title), type = application.getString(R.string.skill), difficulty = application.getString(R.string.advanced), completed = false),
-        Tutorial(id = 6, title = application.getString(R.string.E6_title), type = application.getString(R.string.concept), difficulty = application.getString(R.string.advanced), completed = false),
-        Tutorial(id = 7, title = application.getString(R.string.E7_title), type = application.getString(R.string.concept), difficulty = application.getString(R.string.advanced), completed = false),
-        Tutorial(id = 8, title = application.getString(R.string.E8_title), type = application.getString(R.string.skill), difficulty = application.getString(R.string.advanced), completed = false),
-        Tutorial(id = 9, title = application.getString(R.string.E9_title), type = application.getString(R.string.concept), difficulty = application.getString(R.string.advanced), completed = false),
+        Tutorial(id = 1, title = application.getString(R.string.C1_title), type = application.getString(R.string.concept), difficulty = application.getString(R.string.basic), completed = false),
+        Tutorial(id = 2, title = application.getString(R.string.C2_title), type = application.getString(R.string.concept), difficulty = application.getString(R.string.basic), completed = false),
+        Tutorial(id = 3, title = application.getString(R.string.C3_title), type = application.getString(R.string.skill), difficulty = application.getString(R.string.basic), completed = false),
+        Tutorial(id = 4, title = application.getString(R.string.C4_title), type = application.getString(R.string.concept), difficulty = application.getString(R.string.basic), completed = false),
+        Tutorial(id = 5, title = application.getString(R.string.C5_title), type = application.getString(R.string.skill), difficulty = application.getString(R.string.advanced), completed = false),
+        Tutorial(id = 6, title = application.getString(R.string.C6_title), type = application.getString(R.string.concept), difficulty = application.getString(R.string.advanced), completed = false),
+        Tutorial(id = 7, title = application.getString(R.string.C7_title), type = application.getString(R.string.concept), difficulty = application.getString(R.string.advanced), completed = false),
+        Tutorial(id = 8, title = application.getString(R.string.C8_title), type = application.getString(R.string.skill), difficulty = application.getString(R.string.advanced), completed = false),
+        Tutorial(id = 9, title = application.getString(R.string.C9_title), type = application.getString(R.string.concept), difficulty = application.getString(R.string.advanced), completed = false),
     )
 
     init {

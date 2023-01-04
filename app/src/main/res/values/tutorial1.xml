@@ -6,31 +6,21 @@
 <!--  p1: paragraph 1  -->
 
 <resources>
-    <string name="t1_h1">
-        What is the Bitcoin testnet?
-    </string>
+    <string name="t1_h1">What is the Bitcoin testnet?</string>
 
-    <string name="t1_p1">You can think of the Bitcoin network as thousands of computers who speak a common language and communicate directly with each other over the internet. Even though the biggest and most well known of these computer networks is the one you\'re most familiar with and the one most people speak of when they say \"the Bitcoin network\", there are in fact a few different types of Bitcoin networks one might use.
-    </string>
+    <string name="t1_p1">A Bitcoin network is made up of thousands of computers across the world. These computers speak a common language and communicate directly with each other over the internet.</string>
+    <string name="t1_p2">You might not know, but there are many Bitcoin networks! The two most important of these networks are called "mainnet" and "testnet".</string>
 
-    <string name="t1_h2">
-        Mainnet
-    </string>
+    <string name="t1_h2">Mainnet</string>
+    <string name="t1_p3">When people talk about "the bitcoin network", they usually mean the "mainnet bitcoin network" (or "mainnet").</string>
+    <string name="t1_p4">The bitcoins on mainnet have monetary value and can be traded on cryptocurrency exchanges.</string>
 
-    <string name="t1_p2">The most well known of those is called <i>mainnet</i>, and refers to the bitcoins that have monetary value and can be traded on exchanges. The other two networks are built for testing and training, and are used by software developers who need to develop and test their software, and by people who wish to learn how to use Bitcoin without the worry of protecting and sending around "real" (mainnet) bitcoins.
-    </string>
+    <string name="t1_h3">Testnet</string>
+    <string name="t1_p5">The testnet network (or “testnet”) is not as well known as the mainnet network. The bitcoins on this network are called testnet coins and look and behave just like mainnet bitcoins. But unlike bitcoins, testnet coins have no monetary value.</string>
+    <string name="t1_p6">Testnet is used by software developers who create real-world applications that send and receive mainnet bitcoins. These developers can use testnet to make sure their software is working properly, before switching to mainnet.</string>
 
-    <string name="t1_h3">
-        Testnet
-    </string>
-
-    <string name="t1_p3">The testnet consists of a full-fledged bitcoin network that is available worldwide, and connects thousands of nodes (just like mainnet). The bitcoins on this network are called <i>testnet coins</i>, and look and behave most identically to normal bitcoin, except that they have no value! This feature is extremely useful for testing applications in the real world. It also allows curious minds to explore bitcoin in a real way, make transactions, back up wallets, and understand the foundational building blocks of the network without having to touch real bitcoin before they get comfortable with the basic set of heuristics that bitcoin requires users to understand in order to use it safely and effectively.
-    </string>
-
-    <string name="t1_h4">
-        Padawan
-    </string>
-
-    <string name="t1_p4">Padawan uses testnet <i>uniquely</i>. You cannot receive or send normal (mainnet) bitcoins to/from Padawan, and this is a feature! You can rely on Padawan never holding anything of great value other than the knowledge and experience you build with it. Any coins you have on balance or send to friends are testnet coins.
-    </string>
+    <string name="t1_h4">Padawan &amp; Testnet</string>
+    <string name="t1_p7">The testnet and its coins are an invaluable resource for curious people to learn, play, and get confident with bitcoin networks before even touching “real” mainnet bitcoins! Remember that testnet bitcoins DO NOT have monetary value.</string>
+    <string name="t1_p8">Padawan will teach you the foundations of bitcoin, including making transactions and backing up wallets, all using the testnet network. You cannot receive or send "real" (mainnet) bitcoins to or from your Padawan wallet. Any coins you have on Padawan or send to friends are testnet coins with NO monetary value.</string>
+    <string name="t1_p9">Use Padawan to learn, practice, and test the boundaries of your bitcoin knowledge!</string>
 </resources>
