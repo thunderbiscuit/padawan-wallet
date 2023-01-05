@@ -5,10 +5,14 @@
     <!--  h1: header 1  -->
     <!--  p1: paragraph 1  -->
 
-    <string name="t4_h1">
-        What is the mempool?
-    </string>
+    <string name="t4_p1">When you complete a bitcoin transaction, the transaction is recorded across all computers connected to the bitcoin network in 2 to 5 seconds. Eventually the transaction is recorded on the blockchain, but it first arrives at the mempool (or "memory pool") to be processed. At the mempool, your transaction is acknowledged by the network, but not yet made official on the blockchain.</string>
+    <string name="t4_p2">To be made official, bitcoin miners race to discover a solution to a complex hashing puzzle. Once the solution is discovered, this leads to a block of transactions officially added to the blockchain.</string>
 
-    <string name="t4_p1">The word <i>mempool</i> stands for memory pool, and you can think of it as the place where transactions go before they get mined and become "official". When you send a transaction on the bitcoin network, your transaction get propagated across all computers that comprise the bitcoin network all over the world in about 2 to 5 seconds. But at this point your transaction is not really done, i.e. included in the blockchain. Instead, it sorts of waits in this "in-between" space where it is acknowledged by the network, but not yet made official.\n\nWe can think of this space (the mempool) as a theoretical place where transactions all come together and form a lineup, waiting for the next block to be mined to include many of them. Imagine an bus that comes by a lineup of people waiting to go to their part of town every 10 minutes or so. This bus can take only a certain number of pounds on board, and because everyone weights a different weight, the exact number of people who can fit in the bus at every run is different.\n\nThe mempool is the area where transactions wait for their turn to be mined. One special thing about this "lineup" of transactions that are all waiting to be made official (to get "mined", or included in the next bitcoin block), is that you can bid money to make sure you are up near the front of the line if you need to, or, inversely, you can save a lot of money by not bidding much if you are not worried about speed and you have time for this transaction to be mined. Eventually, (at the moment every weekend or so), the line clears and every transaction waiting in line does get through.
-    </string>
+    <string name="t4_h1">Imagine a bus</string>
+    <string name="t4_p3">Imagine a bus coming to pick up passengers every 10 or so minutes. The bus can only take a certain amount of weight. Since every passenger is a different weight, the amount of passengers that can fit on the bus changes every time.</string>
+    <string name="t4_p4">The mempool acts as the bus stop. A lineup of transactions wait in the mempool to be processed into a block on the blockchain. The transactions wait for their turn to be mined.</string>
+
+    <string name="t4_h2">Some passengers</string>
+    <string name="t4_p5">Some passengers might be in a hurry to get on the next bus. They can pay an extra fare to make sure they are near the front of the line. These transactions will be prioritized in the mining process.</string>
+    <string name="t4_p6">On the other hand, some passengers might not be in a hurry at all. In that case, they might want to save their money by not paying a higher fare. Eventually, the line will clear and every transaction waiting in line does get through.</string>
 </resources>

@@ -83,6 +83,7 @@ val tutorial3: List<Page> = listOf(
         TutorialElement(ElementType.TITLE, R.string.C3_title),
         TutorialElement(ElementType.BODY, R.string.t3_p1),
         TutorialElement(ElementType.BODY, R.string.t3_p2),
+        TutorialElement(ElementType.RESOURCE, R.drawable.placeholder_image),
     )
 )
 
@@ -93,6 +94,17 @@ val tutorial4: List<Page> = listOf(
     listOf(
         TutorialElement(ElementType.TITLE, R.string.C4_title),
         TutorialElement(ElementType.BODY, R.string.t4_p1),
+        TutorialElement(ElementType.BODY, R.string.t4_p2),
+    ),
+    listOf(
+        TutorialElement(ElementType.SUBTITLE, R.string.t4_h1),
+        TutorialElement(ElementType.BODY, R.string.t4_p3),
+        TutorialElement(ElementType.BODY, R.string.t4_p4),
+    ),
+    listOf(
+        TutorialElement(ElementType.SUBTITLE, R.string.t4_h2),
+        TutorialElement(ElementType.BODY, R.string.t4_p5),
+        TutorialElement(ElementType.BODY, R.string.t4_p6),
     )
 )
 

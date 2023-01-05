@@ -17,6 +17,7 @@ class TutorialRepository(private val tutorialDao: TutorialDao) {
     val readAllInitialData: List<Tutorial>? = tutorialDao.readAllTutorial().value
 
     internal suspend fun getTutorial(id: Int): Tutorial {
+        Log.i(TAG, "Querying for chapter $id")
         return tutorialDao.getTutorial(id = id)
     }
 

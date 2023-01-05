@@ -420,7 +420,8 @@ private fun FaucetDialog(walletViewModel: WalletViewModel) {
             Text(
                 text = "To help you get started learning about bitcoin, Padawan Wallet can send you some coins so you can follow along the tutorials and and send them around to friends!\nWould you like to receive some testnet bitcoin?",
                 fontSize = 18.sp,
-                color = Color(0xff2f2f2f)
+                lineHeight = 24.sp,
+                color = padawan_theme_text_faded_secondary
             )
         },
 
