@@ -28,10 +28,8 @@ You can download the latest apk for this app on the [`v0.9.0` release page](http
 <br/>
 
 ## Screenshots
-<div align="center" >
-  <img src="./images/screenshots-intro.png" alt="Padawan Screenshot Intro" width="700">
-  <img src="./images/screenshots-home.png" alt="Padawan Screenshot Home" width="700">
-  <img src="./images/padawan-wallet-navigation.png" alt="Padawan Wallet Navigation" width="700">
+<div align="center">
+  <img src="./images/screenshots.jpg" alt="" width="900">
 </div>
 <br />
 
