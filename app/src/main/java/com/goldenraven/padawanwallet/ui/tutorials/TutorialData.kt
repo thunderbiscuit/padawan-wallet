@@ -73,14 +73,14 @@ val tutorial2: List<List<TutorialElement>> = listOf(
 )
 )
 
-val tutorial6: List<List<TutorialElement>> = listOf(
+val tutorial3: List<List<TutorialElement>> = listOf(
     listOf(
         TutorialElement(ElementType.BODY, R.string.C3_tagline)
     ),
     listOf(
         TutorialElement(ElementType.TITLE, R.string.C3_title),
-        TutorialElement(ElementType.BODY, R.string.t2_p1),
-        TutorialElement(ElementType.BODY, R.string.t2_p2),
+        TutorialElement(ElementType.BODY, R.string.t3_p1),
+        TutorialElement(ElementType.BODY, R.string.t3_p2),
     )
 )
 
@@ -94,13 +94,13 @@ val tutorial4: List<List<TutorialElement>> = listOf(
     )
 )
 
-val tutorial3: List<List<TutorialElement>> = listOf(
+val tutorial6: List<List<TutorialElement>> = listOf(
     listOf(
         TutorialElement(ElementType.BODY, R.string.C5_tagline)
     ),
     listOf(
         TutorialElement(ElementType.TITLE, R.string.C5_title),
-        TutorialElement(ElementType.BODY, R.string.t5_p1),
+        TutorialElement(ElementType.BODY, R.string.t2_p1),
     )
 )
 

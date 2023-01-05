@@ -71,8 +71,8 @@
     <string name="C8_title">Recovering your wallet</string>
     <string name="C9_title">The different types of wallets</string>
     <string name="C1_tagline">Did you know there are more than one bitcoin networks?</string>
-    <string name="C2_tagline">How do you actually receive bitcoin?</string>
-    <string name="C3_tagline">All right, show me how to receive some coins!</string>
+    <string name="C2_tagline">How do you receive bitcoin?</string>
+    <string name="C3_tagline">How do you send bitcoins?</string>
     <string name="C4_tagline">When I press "send" on a transaction… where does it go???</string>
     <string name="C5_tagline">I\'m ready to send some bitcoin around!</string>
     <string name="C6_tagline">Transactions have fees? What? How? To who?</string>
