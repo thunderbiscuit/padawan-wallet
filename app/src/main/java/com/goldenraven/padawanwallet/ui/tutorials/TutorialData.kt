@@ -24,7 +24,8 @@ val tutorial1: List<List<TutorialElement>> = listOf(
         TutorialElement(ElementType.TITLE, R.string.C1_title),
         TutorialElement(ElementType.BODY, R.string.t1_p1),
         TutorialElement(ElementType.BODY, R.string.t1_p2),
-
+    ),
+    listOf(
         TutorialElement(ElementType.SUBTITLE, R.string.t1_h2),
         TutorialElement(ElementType.BODY, R.string.t1_p3),
         TutorialElement(ElementType.BODY, R.string.t1_p4),
@@ -51,14 +52,25 @@ val tutorial2: List<List<TutorialElement>> = listOf(
         TutorialElement(ElementType.BODY, R.string.t2_p1),
         TutorialElement(ElementType.BODY, R.string.t2_p2),
         TutorialElement(ElementType.BODY, R.string.t2_p3),
+        TutorialElement(ElementType.RESOURCE, R.drawable.placeholder_image),
+        TutorialElement(ElementType.BODY, R.string.t2_p4),
+        TutorialElement(ElementType.BODY, R.string.t2_p5),
+        TutorialElement(ElementType.RESOURCE, R.drawable.placeholder_image),
+        TutorialElement(ElementType.BODY, R.string.t2_p6),
     ),
     listOf(
-        TutorialElement(ElementType.BODY, R.string.t2_p4),
-        TutorialElement(ElementType.RESOURCE, R.drawable.placeholder_image),
-        TutorialElement(ElementType.BODY, R.string.t2_h2),
-        TutorialElement(ElementType.BODY, R.string.t2_p5),
-        TutorialElement(ElementType.BODY, R.string.t2_p6),
-    )
+        TutorialElement(ElementType.SUBTITLE, R.string.t2_h1),
+        TutorialElement(ElementType.BODY, R.string.t2_p7),
+        TutorialElement(ElementType.BODY, R.string.t2_p8),
+        TutorialElement(ElementType.BODY, R.string.t2_p9),
+        TutorialElement(ElementType.BODY, R.string.t2_p10),
+    ),
+    listOf(
+        TutorialElement(ElementType.SUBTITLE, R.string.t2_h2),
+        TutorialElement(ElementType.BODY, R.string.t2_p11),
+        TutorialElement(ElementType.BODY, R.string.t2_p12),
+        TutorialElement(ElementType.BODY, R.string.t2_p13),
+)
 )
 
 val tutorial6: List<List<TutorialElement>> = listOf(
@@ -67,8 +79,8 @@ val tutorial6: List<List<TutorialElement>> = listOf(
     ),
     listOf(
         TutorialElement(ElementType.TITLE, R.string.C3_title),
-        TutorialElement(ElementType.BODY, R.string.t3_p1),
-        TutorialElement(ElementType.BODY, R.string.t3_p2),
+        TutorialElement(ElementType.BODY, R.string.t2_p1),
+        TutorialElement(ElementType.BODY, R.string.t2_p2),
     )
 )
 

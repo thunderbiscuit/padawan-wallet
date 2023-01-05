@@ -1,29 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="t2_h1">Bitcoin units</string>
+    <!--  string names for tutorials are defined as such:  -->
+    <!--  t1: tutorial 1  -->
+    <!--  h1: header 1  -->
+    <!--  p1: paragraph 1  -->
 
-    <string name="t2_p1">It is unfortunate but the word "bitcoin" has two completely different meanings. We speak of <i>Bitcoin</i> the network, the protocol, the open source project, and we also use the word "bitcoin" as one of the units of value when transacting on that network.
-    </string>
+    <string name="t2_p1">To receive bitcoin, generally you must ask your wallet software (like Padawan) to generate a receive address.</string>
+    <string name="t2_p2">To make it easier to share, we display the address in two common ways:</string>
+    <string name="t2_p3">1. A string of letters and numbers that could look like this:</string>
+    <string name="t2_p4">Or</string>
+    <string name="t2_p5">2. A QR code that could look like this:</string>
+    <string name="t2_p6">The two formats above refer to the same address, just in different ways.</string>
 
-    <string name="t2_p2">A bitcoin is a unit of value that can easily be broken down in smaller parts. Just like the kilometer can be broken down into meters and centimeters and the dollar can be broken down into quarters, dimes, and pennies, bitcoin can be broken into smaller units. While there are many units to describe bitcoin, only two of those are really important: the <i>bitcoin</i> and the <i>satoshi</i>. There are one hundred million (100,000,000) satoshis in a bitcoin.
-    </string>
+    <string name="t2_h1">Generating receive addresses</string>
+    <string name="t2_p7">To receive bitcoin, you have two options:</string>
+    <string name="t2_p8">1. Scan a QR code: If the person who wants to send you coins is nearby, generate a receive address and ask them to scan the QR code displayed.</string>
+    <string name="t2_p9">2. Copy and paste the receive address: Generate a receive address, copy the string version of the address, and paste it in a message to the person who will send you the content. You should try to send these messages on an encrypted platform.</string>
+    <string name="t2_p10">On Padawan, you can press the "copy address button" and the wallet will offer you to put the address directly into your clipboard.</string>
 
-    <string name="t2_p3">100,000,000 satoshis = 1 bitcoin\n1 satoshi = 0.00000001 bitcoin</string>
-
-    <string name="t2_p4">The symbols used to represent those units of value are not always the same. There is no central authority to dictate what should be the "official" symbol. Instead this choice is a matter of emergent consensus, and will eventually solidify over time around one symbol for each unit. Here are some of the symbols for bitcoin and satoshis you might see around in applications:
-    </string>
-
-    <!--  diagram symbols of bitcoin -->
-
-    <!--  diagram symbols of satoshis -->
-
-    <string name="t2_h2">Both units are useful</string>
-
-    <string name="t2_p5">Depending on the size of a transaction, it is often more appropriate to think of the amount transacted as being in bitcoin or in satoshis. A brand new car might be worth 1.7 bitcoins (1,700,000,000 sats is not as easy for the eye to quickly understand), whereas a candy might be worth 250 satoshis (0.00000250 bitcoin is harder to read).
-    </string>
-
-    <string name="t2_p6">The ability to use both units is an important skill to develop. A lot of transactions are denominated in bitcoin, but their <i>network fee</i> (tutorial #4) is almost always written using the satoshi unit. You can switch between the two units in the main wallet display page by touching the bitcoin/satoshi symbol.
-    </string>
-
-    <!--  GIF of unit switch in wallet  -->
+    <string name="t2_h2">Be careful!</string>
+    <string name="t2_p11">It is very important to be careful when sending and receiving bitcoin. The person sending bitcoin must use the exact correct address.</string>
+    <string name="t2_p12">Even though the QR code system and the copy/paste function of your phones are an acceptable way of remaining cautious, you should always double check the complete receive address. At the very least, when you copy and paste your receive address, make sure the first and last 5–10 characters of the address match.</string>
+    <string name="t2_p13">Reminder: Padawan only uses testnet bitcoins. Make sure you never send it real bitcoins!</string>
 </resources>
