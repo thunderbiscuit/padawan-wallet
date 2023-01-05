@@ -127,16 +127,13 @@ fun TutorialSectionsCarousel(
             ) {
                 Box(modifier = Modifier.fillMaxWidth()) {
                     Column(modifier = Modifier.align(alignment = Alignment.CenterStart)) {
+                        val sectionName: String = if (page == 0) "Getting started" else if (page == 1) "Transactions" else "Wallets"
                         Text(
-                            text = "Section ${page + 1}",
+                            text = "Section ${page + 1}: $sectionName",
                             style = PadawanTypography.labelLarge,
                             fontSize = 18.sp,
                         )
                         Spacer(modifier = Modifier.height(height = 8.dp))
-                        // Text(
-                        //     text = tutorialData.difficulty,
-                        //     style = PadawanTypography.bodySmall
-                        // )
                     }
 
                     Column(
