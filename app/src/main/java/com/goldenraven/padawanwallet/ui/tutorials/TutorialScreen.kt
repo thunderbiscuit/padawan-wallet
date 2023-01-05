@@ -145,7 +145,6 @@ fun TutorialButtons(
             Button(
                 onClick = {
                     currentPage.value += 1
-                    // tutorialViewModel.setCompleted(id = tutorialId - 1, completed = currentPage.value)
                     scrollUp(pageScrollState = pageScrollState, coroutineScope = coroutineScope)
                 },
                 colors = ButtonDefaults.buttonColors(containerColor = padawan_theme_button_primary),
@@ -234,8 +233,6 @@ fun TutorialProgressBar(
     spacer: Float = 30f,
     incompleteColor: Color = Color(0xfffbf5bf),
     completeColor: Color = Color(0xff1f0208),
-    // incompleteColor: Color = padawan_theme_progressbar_background,
-    // completeColor: Color = padawan_theme_tutorial,
     completion: MutableState<Int>,
     total: Int,
 ) {
@@ -262,43 +259,40 @@ fun TutorialProgressBar(
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-internal fun TutorialPage(tutorialPages: List<List<TutorialElement>>, currentPage: MutableState<Int>) {
-    // if (tutorialPages.size != currentPage.value) {
-        // tutorials are numbered 1 to 8 and the pages are 1-indexed, but the list is 0-indexed, so we ask for current page - 1
-        for (element in tutorialPages[currentPage.value]) {
-            when (element.elementType) {
-                ElementType.TITLE -> {
-                    Text(
-                        text = stringResource(id = element.resourceId),
-                        style = PadawanTypography.headlineSmall,
-                    )
-                }
-                ElementType.SUBTITLE -> {
-                    Text(
-                        text = stringResource(id = element.resourceId),
-                        style = PadawanTypography.labelLarge,
-                        fontSize = 18.sp
-                    )
-                }
-                ElementType.BODY -> {
-                    Text(
-                        text = stringResource(id = element.resourceId),
-                        style = PadawanTypography.bodyMedium,
-                        color = padawan_theme_text_faded_secondary
-                    )
-                }
-                ElementType.RESOURCE -> {
-                    Card(
-                        containerColor = padawan_theme_button_secondary,
-                        border = standardBorder,
-                        modifier = Modifier
-                            .height(height = 150.dp)
-                            .fillMaxWidth()
-                            .standardShadow(20.dp)
-                    ) {  }
-                }
+internal fun TutorialPage(tutorialPages: List<Page>, currentPage: MutableState<Int>) {
+    for (element in tutorialPages[currentPage.value]) {
+        when (element.elementType) {
+            ElementType.TITLE -> {
+                Text(
+                    text = stringResource(id = element.resourceId),
+                    style = PadawanTypography.headlineSmall,
+                )
             }
-            Spacer(modifier = Modifier.height(height = 24.dp))
+            ElementType.SUBTITLE -> {
+                Text(
+                    text = stringResource(id = element.resourceId),
+                    style = PadawanTypography.labelLarge,
+                    fontSize = 18.sp
+                )
+            }
+            ElementType.BODY -> {
+                Text(
+                    text = stringResource(id = element.resourceId),
+                    style = PadawanTypography.bodyMedium,
+                    color = padawan_theme_text_faded_secondary
+                )
+            }
+            ElementType.RESOURCE -> {
+                Card(
+                    containerColor = padawan_theme_button_secondary,
+                    border = standardBorder,
+                    modifier = Modifier
+                        .height(height = 150.dp)
+                        .fillMaxWidth()
+                        .standardShadow(20.dp)
+                ) {  }
+            }
         }
-    // }
+        Spacer(modifier = Modifier.height(height = 24.dp))
+    }
 }

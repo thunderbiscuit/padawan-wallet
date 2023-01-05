@@ -9,6 +9,8 @@ import com.goldenraven.padawanwallet.R
 
 data class TutorialElement(val elementType: ElementType, val resourceId: Int)
 
+typealias Page = List<TutorialElement>
+
 enum class ElementType {
     TITLE,
     SUBTITLE,
@@ -16,7 +18,7 @@ enum class ElementType {
     RESOURCE,
 }
 
-val tutorial1: List<List<TutorialElement>> = listOf(
+val tutorial1: List<Page> = listOf(
     listOf(
         TutorialElement(ElementType.BODY, R.string.C1_tagline)
     ),
@@ -43,7 +45,7 @@ val tutorial1: List<List<TutorialElement>> = listOf(
     )
 )
 
-val tutorial2: List<List<TutorialElement>> = listOf(
+val tutorial2: List<Page> = listOf(
     listOf(
         TutorialElement(ElementType.BODY, R.string.C2_tagline)
     ),
@@ -73,7 +75,7 @@ val tutorial2: List<List<TutorialElement>> = listOf(
 )
 )
 
-val tutorial3: List<List<TutorialElement>> = listOf(
+val tutorial3: List<Page> = listOf(
     listOf(
         TutorialElement(ElementType.BODY, R.string.C3_tagline)
     ),
@@ -84,7 +86,7 @@ val tutorial3: List<List<TutorialElement>> = listOf(
     )
 )
 
-val tutorial4: List<List<TutorialElement>> = listOf(
+val tutorial4: List<Page> = listOf(
     listOf(
         TutorialElement(ElementType.BODY, R.string.C4_tagline)
     ),
@@ -94,7 +96,7 @@ val tutorial4: List<List<TutorialElement>> = listOf(
     )
 )
 
-val tutorial6: List<List<TutorialElement>> = listOf(
+val tutorial6: List<Page> = listOf(
     listOf(
         TutorialElement(ElementType.BODY, R.string.C5_tagline)
     ),
@@ -104,7 +106,7 @@ val tutorial6: List<List<TutorialElement>> = listOf(
     )
 )
 
-val tutorial5: List<List<TutorialElement>> = listOf(
+val tutorial5: List<Page> = listOf(
     listOf(
         TutorialElement(ElementType.BODY, R.string.C6_tagline)
     ),
@@ -114,7 +116,7 @@ val tutorial5: List<List<TutorialElement>> = listOf(
     )
 )
 
-val tutorial7: List<List<TutorialElement>> = listOf(
+val tutorial7: List<Page> = listOf(
     listOf(
         TutorialElement(ElementType.BODY, R.string.C7_tagline)
     ),
@@ -125,7 +127,7 @@ val tutorial7: List<List<TutorialElement>> = listOf(
     )
 )
 
-val tutorial8: List<List<TutorialElement>> = listOf(
+val tutorial8: List<Page> = listOf(
     listOf(
         TutorialElement(ElementType.BODY, R.string.C8_tagline)
     ),
@@ -135,7 +137,7 @@ val tutorial8: List<List<TutorialElement>> = listOf(
     )
 )
 
-val tutorial9: List<List<TutorialElement>> = listOf(
+val tutorial9: List<Page> = listOf(
     listOf(
         TutorialElement(ElementType.BODY, R.string.C9_tagline)
     ),
