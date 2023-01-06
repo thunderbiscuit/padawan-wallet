@@ -42,7 +42,7 @@ val tutorial1: List<Page> = listOf(
         TutorialElement(ElementType.BODY, R.string.t1_p7),
         TutorialElement(ElementType.BODY, R.string.t1_p8),
         TutorialElement(ElementType.BODY, R.string.t1_p9),
-    )
+    ),
 )
 
 val tutorial2: List<Page> = listOf(
@@ -72,7 +72,7 @@ val tutorial2: List<Page> = listOf(
         TutorialElement(ElementType.BODY, R.string.t2_p11),
         TutorialElement(ElementType.BODY, R.string.t2_p12),
         TutorialElement(ElementType.BODY, R.string.t2_p13),
-)
+    ),
 )
 
 val tutorial3: List<Page> = listOf(
@@ -84,7 +84,7 @@ val tutorial3: List<Page> = listOf(
         TutorialElement(ElementType.BODY, R.string.t3_p1),
         TutorialElement(ElementType.BODY, R.string.t3_p2),
         TutorialElement(ElementType.RESOURCE, R.drawable.placeholder_image),
-    )
+    ),
 )
 
 val tutorial4: List<Page> = listOf(
@@ -105,7 +105,7 @@ val tutorial4: List<Page> = listOf(
         TutorialElement(ElementType.SUBTITLE, R.string.t4_h2),
         TutorialElement(ElementType.BODY, R.string.t4_p5),
         TutorialElement(ElementType.BODY, R.string.t4_p6),
-    )
+    ),
 )
 
 val tutorial5: List<Page> = listOf(
@@ -125,7 +125,7 @@ val tutorial5: List<Page> = listOf(
     listOf(
         TutorialElement(ElementType.SUBTITLE, R.string.t5_h2),
         TutorialElement(ElementType.BODY, R.string.t5_p5),
-    )
+    ),
 )
 
 val tutorial6: List<Page> = listOf(
@@ -188,8 +188,19 @@ val tutorial8: List<Page> = listOf(
     ),
     listOf(
         TutorialElement(ElementType.TITLE, R.string.C8_title),
-        TutorialElement(ElementType.BODY, R.string.t8_p1),
-    )
+        TutorialElement(ElementType.BODY, R.string.C8_p1),
+        TutorialElement(ElementType.BODY, R.string.C8_p2),
+        TutorialElement(ElementType.RESOURCE, R.drawable.placeholder_image),
+        TutorialElement(ElementType.BODY, R.string.C8_p3),
+        TutorialElement(ElementType.BODY, R.string.C8_p4),
+        TutorialElement(ElementType.BODY, R.string.C8_p5),
+    ),
+    listOf(
+        TutorialElement(ElementType.TITLE, R.string.C8_h1),
+        TutorialElement(ElementType.BODY, R.string.C8_p6),
+        TutorialElement(ElementType.BODY, R.string.C8_p7),
+        TutorialElement(ElementType.BODY, R.string.C8_p8),
+    ),
 )
 
 val tutorial9: List<Page> = listOf(
