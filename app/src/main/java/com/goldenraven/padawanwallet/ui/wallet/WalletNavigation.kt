@@ -19,8 +19,8 @@ import com.goldenraven.padawanwallet.ui.settings.AboutScreen
 import com.goldenraven.padawanwallet.ui.settings.RecoveryPhraseScreen
 import com.goldenraven.padawanwallet.ui.settings.SendCoinsBackScreen
 import com.goldenraven.padawanwallet.ui.settings.SettingsRootScreen
-import com.goldenraven.padawanwallet.ui.tutorials.*
-import com.goldenraven.padawanwallet.ui.tutorials.TutorialsRootScreen
+import com.goldenraven.padawanwallet.ui.chapters.*
+import com.goldenraven.padawanwallet.ui.chapters.ChaptersRootScreen
 import com.google.accompanist.navigation.animation.AnimatedNavHost
 import com.google.accompanist.navigation.animation.composable
 
@@ -29,7 +29,7 @@ import com.google.accompanist.navigation.animation.composable
 fun WalletNavigation(
     navControllerWalletNavigation: NavHostController,
     walletViewModel: WalletViewModel,
-    tutorialViewModel: TutorialViewModel
+    chaptersViewModel: ChaptersViewModel
 ) {
     val animationDuration = 400
 
@@ -130,9 +130,9 @@ fun WalletNavigation(
         ) { QRScanScreen(navController = navControllerWalletNavigation) }
 
 
-        // Tutorials home
+        // Chapters home
         composable(
-            route = Screen.TutorialsRootScreen.route,
+            route = Screen.ChaptersRootScreen.route,
             enterTransition = {
                 when (initialState.destination.route) {
                     "wallet_screen" -> slideIntoContainer(AnimatedContentScope.SlideDirection.Start, animationSpec = tween(animationDuration))
@@ -161,13 +161,13 @@ fun WalletNavigation(
                     else -> fadeOut(animationSpec = tween(300))
                 }
             }
-        ) { TutorialsRootScreen(tutorialViewModel = tutorialViewModel, navController = navControllerWalletNavigation) }
+        ) { ChaptersRootScreen(chaptersViewModel = chaptersViewModel, navController = navControllerWalletNavigation) }
 
 
-        // Specific tutorials
+        // Specific chapters
         composable(
-            route = Screen.TutorialsScreen.route + "/{tutorialId}",
-            arguments = listOf(navArgument("tutorialId") { type = NavType.IntType }),
+            route = Screen.ChapterScreen.route + "/{chapterId}",
+            arguments = listOf(navArgument("chapterId") { type = NavType.IntType }),
             enterTransition = {
                 slideIntoContainer(AnimatedContentScope.SlideDirection.Up, animationSpec = tween(animationDuration))
             },
@@ -181,8 +181,8 @@ fun WalletNavigation(
                 slideOutOfContainer(AnimatedContentScope.SlideDirection.Down, animationSpec = tween(animationDuration))
             }
         ) { backStackEntry ->
-            backStackEntry.arguments?.getInt("tutorialId")?.let {
-                TutorialsScreen(tutorialId = it, tutorialViewModel = tutorialViewModel, navController = navControllerWalletNavigation)
+            backStackEntry.arguments?.getInt("chapterId")?.let {
+                ChapterScreen(chapterId = it, chaptersViewModel = chaptersViewModel, navController = navControllerWalletNavigation)
             }
         }
 
@@ -215,7 +215,7 @@ fun WalletNavigation(
                     else               -> slideOutOfContainer(AnimatedContentScope.SlideDirection.End, animationSpec = tween(animationDuration))
                 }
             },
-        ) { SettingsRootScreen(navController = navControllerWalletNavigation, viewModel = tutorialViewModel) }
+        ) { SettingsRootScreen(navController = navControllerWalletNavigation, viewModel = chaptersViewModel) }
 
 
         // About

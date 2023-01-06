@@ -22,14 +22,14 @@ import com.goldenraven.padawanwallet.theme.PadawanTypography
 import com.goldenraven.padawanwallet.theme.padawan_theme_background_secondary
 import com.goldenraven.padawanwallet.theme.padawan_theme_button_primary
 import com.goldenraven.padawanwallet.ui.Screen
-import com.goldenraven.padawanwallet.ui.tutorials.TutorialViewModel
+import com.goldenraven.padawanwallet.ui.chapters.ChaptersViewModel
 
 private const val TAG = "SettingsRootScreen"
 
 @Composable
 internal fun SettingsRootScreen(
     navController: NavController,
-    viewModel: TutorialViewModel
+    viewModel: ChaptersViewModel
 ) {
     Column(
         modifier = Modifier

@@ -22,9 +22,9 @@ sealed class Screen(val route: String) {
     object SendScreen : Screen("send_screen")
     object QRScanScreen : Screen("qr_scan_screen")
 
-    // Tutorials screens
-    object TutorialsRootScreen : Screen("tutorials_home_screen")
-    object TutorialsScreen : Screen("tutorials_screen")
+    // Chapters screens
+    object ChaptersRootScreen : Screen("chapters_home_screen")
+    object ChapterScreen : Screen("chapter_screen")
 
     // Settings screens
     object SettingsRootScreen : Screen("settings_root_screen")

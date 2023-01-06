@@ -29,7 +29,7 @@
 
     <!-- wallet -->
     <string name="tab_wallet">Wallet</string>
-    <string name="tab_tutorials">Tutorials</string>
+    <string name="tab_chapters">Chapters</string>
     <string name="wallet_balance_section">Balance (testnet coins)</string>
     <string name="transaction_history_section">Transaction History</string>
     <string name="sync">SYNC</string>

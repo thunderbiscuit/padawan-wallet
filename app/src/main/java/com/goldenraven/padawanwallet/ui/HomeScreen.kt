@@ -13,7 +13,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import com.goldenraven.padawanwallet.theme.*
-import com.goldenraven.padawanwallet.ui.tutorials.TutorialViewModel
+import com.goldenraven.padawanwallet.ui.chapters.ChaptersViewModel
 import com.goldenraven.padawanwallet.utils.NavigationItem
 import com.goldenraven.padawanwallet.ui.wallet.WalletNavigation
 import com.goldenraven.padawanwallet.ui.wallet.WalletViewModel
@@ -22,7 +22,7 @@ import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
 @OptIn(ExperimentalMaterial3Api::class, androidx.compose.animation.ExperimentalAnimationApi::class)
 @Composable
-internal fun HomeScreen(walletViewModel: WalletViewModel, tutorialViewModel: TutorialViewModel) {
+internal fun HomeScreen(walletViewModel: WalletViewModel, chaptersViewModel: ChaptersViewModel) {
     val navControllerWalletNavigation: NavHostController = rememberAnimatedNavController()
     // the splash screen hides the system bars
     // we need to bring them back on before continuing
@@ -30,7 +30,7 @@ internal fun HomeScreen(walletViewModel: WalletViewModel, tutorialViewModel: Tut
 
     Scaffold(bottomBar = { BottomNavigationBar(navControllerWalletNavigation) }) { innerPadding ->
         Box(modifier = Modifier.padding(innerPadding)) {
-            WalletNavigation(navControllerWalletNavigation = navControllerWalletNavigation, walletViewModel = walletViewModel, tutorialViewModel = tutorialViewModel)
+            WalletNavigation(navControllerWalletNavigation = navControllerWalletNavigation, walletViewModel = walletViewModel, chaptersViewModel = chaptersViewModel)
         }
     }
 }
@@ -42,7 +42,7 @@ internal fun BottomNavigationBar(
     var selectedItem by remember { mutableStateOf(0) }
     val items = listOf(
         NavigationItem.Home,
-        NavigationItem.Tutorial,
+        NavigationItem.Chapters,
         NavigationItem.Settings
     )
 

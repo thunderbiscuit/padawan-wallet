@@ -11,7 +11,7 @@ import androidx.compose.animation.core.tween
 import androidx.compose.runtime.Composable
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
-import com.goldenraven.padawanwallet.ui.tutorials.TutorialViewModel
+import com.goldenraven.padawanwallet.ui.chapters.ChaptersViewModel
 import com.goldenraven.padawanwallet.ui.wallet.WalletViewModel
 import com.google.accompanist.navigation.animation.AnimatedNavHost
 import com.google.accompanist.navigation.animation.composable
@@ -21,7 +21,7 @@ import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 @Composable
 fun HomeNavigation(
     walletViewModel: WalletViewModel = viewModel(),
-    tutorialViewModel: TutorialViewModel = viewModel()
+    chaptersViewModel: ChaptersViewModel = viewModel()
 ) {
     val navController: NavHostController = rememberAnimatedNavController()
     val animationDuration = 400
@@ -46,6 +46,6 @@ fun HomeNavigation(
             exitTransition = {
                 slideOutOfContainer(AnimatedContentScope.SlideDirection.Start, animationSpec = tween(animationDuration))
             },
-        ) { HomeScreen(walletViewModel = walletViewModel, tutorialViewModel = tutorialViewModel) }
+        ) { HomeScreen(walletViewModel = walletViewModel, chaptersViewModel = chaptersViewModel) }
     }
 }

@@ -1,4 +1,4 @@
-package com.goldenraven.padawanwallet.ui.tutorials
+package com.goldenraven.padawanwallet.ui.chapters
 
 import android.util.Log
 import androidx.compose.animation.core.animateFloatAsState
@@ -24,30 +24,22 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.goldenraven.padawanwallet.R
-import com.goldenraven.padawanwallet.data.chapters.Tutorial
+import com.goldenraven.padawanwallet.data.chapters.Chapter
 import com.goldenraven.padawanwallet.theme.*
 import com.goldenraven.padawanwallet.ui.Screen
 import com.goldenraven.padawanwallet.ui.standardBorder
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 
-// TODO: Remember "next up" tutorial
+// TODO: Remember "next up" chapter
 
-private const val TAG = "TutorialRootScreen"
+private const val TAG = "ChaptersRootScreen"
 
 @Composable
-internal fun TutorialsRootScreen(tutorialViewModel: TutorialViewModel, navController: NavController) {
-    val currTutorial = 1
-    // val selectedTutorial: MutableState<Int> = remember { mutableStateOf(1) }
-
-    val selectedTutorialData: Tutorial? by tutorialViewModel.selectedTutorialData.observeAsState()
-    val selectedTutorialDescription = tutorialViewModel.getTutorialPages(tutorialViewModel.selectedTutorial.value)
-    // val tutorialData = remember { mutableStateOf(Tutorial(id = 0, title = "", type = "", difficulty = "", completed = false)) }
-    val defaultTutorial = Tutorial(0, "", "", "", false)
-    val completedTutorialsMap = tutorialViewModel.getCompletedTutorials()
-    // LaunchedEffect(key1 = true) { tutorialData.value = tutorialViewModel.getTutorialData(id = tutorialViewModel.selectedTutorial.value) }
-    val tutorialPage = tutorialViewModel.getTutorialPages(id = currTutorial)
-    val tutorialDescription = tutorialPage[0]
+internal fun ChaptersRootScreen(chaptersViewModel: ChaptersViewModel, navController: NavController) {
+    val selectedChapterData: Chapter? by chaptersViewModel.selectedChapterData.observeAsState()
+    val selectedChapterTagline = chaptersViewModel.getChapterPages(chaptersViewModel.selectedChapter.value)
+    val defaultChapter = Chapter(0, "", "", "", false)
 
 
     Column(
@@ -60,23 +52,23 @@ internal fun TutorialsRootScreen(tutorialViewModel: TutorialViewModel, navContro
             modifier = Modifier
                 .fillMaxSize()
         ) {
-            tutorialViewModel.updateSelectedTutorial(tutorialViewModel.selectedTutorial.value)
+            chaptersViewModel.updateSelectedChapter(chaptersViewModel.selectedChapter.value)
 
             Spacer(modifier = Modifier.height(height = 32.dp))
-            TutorialHomeTitle()
+            ChapterHomeTitle()
             Spacer(modifier = Modifier.height(height = 24.dp))
-            TutorialSectionsCarousel(viewModel = tutorialViewModel)
+            SectionsCarousel(viewModel = chaptersViewModel)
             Spacer(modifier = Modifier.height(height = 24.dp))
-            TutorialId(tutorialData = selectedTutorialData ?: defaultTutorial)
-            TutorialTitle(tutorialData = selectedTutorialData ?: defaultTutorial)
-            TutorialDesc(tutorialPage = selectedTutorialDescription[0])
-            TutorialButton(tutorialData = selectedTutorialData ?: defaultTutorial, navController = navController)
+            ChapterId(chapterData = selectedChapterData ?: defaultChapter)
+            ChapterTitle(chapterData = selectedChapterData ?: defaultChapter)
+            ChapterTagline(chapterData = selectedChapterTagline[0])
+            ChapterButton(chapterData = selectedChapterData ?: defaultChapter, navController = navController)
         }
     }
 }
 
 @Composable
-fun TutorialHomeTitle() {
+fun ChapterHomeTitle() {
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -104,8 +96,8 @@ fun TutorialHomeTitle() {
 
 @OptIn(ExperimentalPagerApi::class, ExperimentalMaterial3Api::class)
 @Composable
-fun TutorialSectionsCarousel(
-    viewModel: TutorialViewModel
+fun SectionsCarousel(
+    viewModel: ChaptersViewModel
 ) {
     HorizontalPager(
         count = 3,
@@ -141,9 +133,9 @@ fun TutorialSectionsCarousel(
                             .align(alignment = Alignment.CenterEnd)
                             .width(intrinsicSize = IntrinsicSize.Max)
                     ) {
-                        ProgressBar(completionPercentage = calculateCompletionOfGroup(page, viewModel.getCompletedTutorials()))
+                        ProgressBar(completionPercentage = calculateCompletionOfGroup(page, viewModel.getCompletedChapters()))
                         Text(
-                            text = calculateCompletionStringOfGroup(page, viewModel.getCompletedTutorials()),
+                            text = calculateCompletionStringOfGroup(page, viewModel.getCompletedChapters()),
                             style = PadawanTypography.bodyMedium
                         )
                     }
@@ -158,20 +150,20 @@ fun TutorialSectionsCarousel(
                 ) {
                     when (page) {
                         0 -> (1..3).forEach {
-                            val completed = viewModel.getCompletedTutorials()[it] ?: false
+                            val completed = viewModel.getCompletedChapters()[it] ?: false
                             Log.i(TAG, "Completed variable was $completed")
-                            val selected = (it == viewModel.selectedTutorial.value)
-                            LessonCircle(lessonNumber = it, completed = completed, selected = selected, selectedTutorial = viewModel.selectedTutorial)
+                            val selected = (it == viewModel.selectedChapter.value)
+                            LessonCircle(lessonNumber = it, completed = completed, selected = selected, selectedChapter = viewModel.selectedChapter)
                         }
                         1 -> (4..6).forEach {
-                            val completed = viewModel.getCompletedTutorials()[it] ?: false
-                            val selected = (it == viewModel.selectedTutorial.value)
-                            LessonCircle(lessonNumber = it, completed = completed, selected = selected, selectedTutorial = viewModel.selectedTutorial)
+                            val completed = viewModel.getCompletedChapters()[it] ?: false
+                            val selected = (it == viewModel.selectedChapter.value)
+                            LessonCircle(lessonNumber = it, completed = completed, selected = selected, selectedChapter = viewModel.selectedChapter)
                         }
                         2 -> (7..9).forEach {
-                            val completed = viewModel.getCompletedTutorials()[it] ?: false
-                            val selected = (it == viewModel.selectedTutorial.value)
-                            LessonCircle(lessonNumber = it, completed = completed, selected = selected, selectedTutorial = viewModel.selectedTutorial)
+                            val completed = viewModel.getCompletedChapters()[it] ?: false
+                            val selected = (it == viewModel.selectedChapter.value)
+                            LessonCircle(lessonNumber = it, completed = completed, selected = selected, selectedChapter = viewModel.selectedChapter)
                         }
                     }
                 }
@@ -181,7 +173,7 @@ fun TutorialSectionsCarousel(
 }
 
 @Composable
-fun LessonCircle(lessonNumber: Int, completed: Boolean, selected: Boolean, selectedTutorial: MutableState<Int>) {
+fun LessonCircle(lessonNumber: Int, completed: Boolean, selected: Boolean, selectedChapter: MutableState<Int>) {
     val completedColor = if (completed) Color(0xffffc847) else Color(0xcfb0b0b0)
 
     Text(
@@ -205,24 +197,24 @@ fun LessonCircle(lessonNumber: Int, completed: Boolean, selected: Boolean, selec
                 )
             }
             .clickable {
-                selectedTutorial.value = lessonNumber
-                Log.i(TAG, "Clicked on tutorial $lessonNumber")
+                selectedChapter.value = lessonNumber
+                Log.i(TAG, "Clicked on chapter $lessonNumber")
             },
     )
 }
 
 @Composable
-fun TutorialId(tutorialData: Tutorial) {
+fun ChapterId(chapterData: Chapter) {
     Text(
         modifier = Modifier.padding(horizontal = 32.dp),
-        text = "Chapter ${tutorialData.id}",
+        text = "Chapter ${chapterData.id}",
         style = PadawanTypography.labelLarge,
         color = padawan_theme_button_primary
     )
 }
 
 @Composable
-fun TutorialTitle(tutorialData: Tutorial) {
+fun ChapterTitle(chapterData: Chapter) {
     Box(
         modifier = Modifier
             .fillMaxWidth()
@@ -230,7 +222,7 @@ fun TutorialTitle(tutorialData: Tutorial) {
             .padding(horizontal = 32.dp)
     ) {
         Text(
-            text = tutorialData.title,
+            text = chapterData.title,
             style = PadawanTypography.headlineSmall,
             fontSize = 20.sp,
             modifier = Modifier.align(alignment = Alignment.CenterStart)
@@ -239,20 +231,20 @@ fun TutorialTitle(tutorialData: Tutorial) {
 }
 
 @Composable
-fun TutorialDesc(tutorialPage: List<TutorialElement>) {
+fun ChapterTagline(chapterData: List<ChapterElement>) {
     Text(
         modifier = Modifier.padding(horizontal = 32.dp),
-        text = stringResource(id = tutorialPage[0].resourceId),
+        text = stringResource(id = chapterData[0].resourceId),
         style = PadawanTypography.bodyMedium,
         color = padawan_theme_text_faded_secondary
     )
 }
 
 @Composable
-fun TutorialButton(tutorialData: Tutorial, navController: NavController) {
+fun ChapterButton(chapterData: Chapter, navController: NavController) {
     Box(modifier = Modifier.fillMaxWidth()) {
         Button(
-            onClick = { navController.navigate(route = "${Screen.TutorialsScreen.route}/${tutorialData.id}") },
+            onClick = { navController.navigate(route = "${Screen.ChapterScreen.route}/${chapterData.id}") },
             colors = ButtonDefaults.buttonColors(containerColor = padawan_theme_button_primary),
             shape = RoundedCornerShape(20.dp),
             border = standardBorder,
@@ -322,22 +314,22 @@ fun ProgressBar(
     }
 }
 
-fun calculateCompletionStringOfGroup(page: Int, completedTutorials: Map<Int, Boolean>): String {
+fun calculateCompletionStringOfGroup(page: Int, completedChapters: Map<Int, Boolean>): String {
     return when (page) {
         0 -> {
-            val count = completedTutorials.count {
+            val count = completedChapters.count {
                 it.key <= 3 && it.value
             }
             "$count of 3 done"
         }
         1 -> {
-            val count = completedTutorials.count {
+            val count = completedChapters.count {
                 it.key in 4..6 && it.value
             }
             "$count of 3 done"
         }
         2 -> {
-            val count = completedTutorials.count {
+            val count = completedChapters.count {
                 it.key in 7..8 && it.value
             }
             "$count of 3 done"
@@ -349,20 +341,20 @@ fun calculateCompletionStringOfGroup(page: Int, completedTutorials: Map<Int, Boo
     }
 }
 
-fun calculateCompletionOfGroup(page: Int, completedTutorials: Map<Int, Boolean>): Float {
+fun calculateCompletionOfGroup(page: Int, completedChapters: Map<Int, Boolean>): Float {
     return when (page) {
         0 -> {
-            completedTutorials.count {
+            completedChapters.count {
                 it.key <= 3 && it.value
             }.div(3.0).toFloat()
         }
         1 -> {
-            completedTutorials.count {
+            completedChapters.count {
                 it.key in 4..6 && it.value
             }.div(3.0).toFloat()
         }
         2 -> {
-            completedTutorials.count {
+            completedChapters.count {
                 it.key in 7..9 && it.value
             }.div(3.0).toFloat()
         }

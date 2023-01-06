@@ -1,4 +1,4 @@
-package com.goldenraven.padawanwallet.ui.tutorials
+package com.goldenraven.padawanwallet.ui.chapters
 
 import android.util.Log
 import androidx.compose.animation.core.FastOutSlowInEasing
@@ -27,22 +27,19 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
 // TODO Add transition between pages smoother (pages & progress bar)
-// TODO Add tutorial images
+// TODO Add chapter images
 
-private const val TAG = "TutorialScreen"
+private const val TAG = "ChapterScreen"
 
 @Composable
-fun TutorialsScreen(
-    tutorialId: Int,
-    tutorialViewModel: TutorialViewModel,
+fun ChapterScreen(
+    chapterId: Int,
+    chaptersViewModel: ChaptersViewModel,
     navController: NavHostController
 ) {
-    val tutorialPages = tutorialViewModel.getTutorialPages(id = tutorialId)
-    Log.i(TAG, "We're dealing with tutorial $tutorialId and the tutorialPagesSize is ${tutorialPages.size}")
-    // var tutorialData = Tutorial(id = 0, title = "", type = "", difficulty = "", completed = false)
-    // LaunchedEffect(key1 = true) { tutorialData = tutorialViewModel.getTutorialData(id = tutorialId) }
+    val chapterPages = chaptersViewModel.getChapterPages(id = chapterId)
+    Log.i(TAG, "We're dealing with chapter $chapterId and the chapterPageSize is ${chapterPages.size}")
     val currentPage = remember { mutableStateOf(1) }
-    // val currentPage = remember { mutableStateOf(value = tutorialData.completion) }
     val pageScrollState = rememberScrollState()
     val coroutineScope = rememberCoroutineScope()
 
@@ -66,8 +63,8 @@ fun TutorialsScreen(
                 }
         ) {
             Column(modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp)) {
-                TutorialAppBar(navController = navController)
-                TutorialProgressBar(completion = currentPage, total = tutorialPages.size - 1)
+                ChapterAppBar(navController = navController)
+                ChapterProgressBar(completion = currentPage, total = chapterPages.size - 1)
             }
         }
 
@@ -77,14 +74,14 @@ fun TutorialsScreen(
                 .padding(all = 32.dp)
                 .fillMaxSize()
         ) {
-            TutorialPage(tutorialPages = tutorialPages, currentPage = currentPage)
-            TutorialButtons(
-                tutorialPagesSize = tutorialPages.size,
+            ChapterPage(chapterPages = chapterPages, currentPage = currentPage)
+            ChapterButtons(
+                chapterPageSize = chapterPages.size,
                 currentPage = currentPage,
                 pageScrollState = pageScrollState,
                 coroutineScope = coroutineScope,
-                tutorialViewModel = tutorialViewModel,
-                tutorialId = tutorialId,
+                chaptersViewModel = chaptersViewModel,
+                chapterId = chapterId,
                 navController
             )
         }
@@ -92,13 +89,13 @@ fun TutorialsScreen(
 }
 
 @Composable
-fun TutorialButtons(
-    tutorialPagesSize: Int,
+fun ChapterButtons(
+    chapterPageSize: Int,
     currentPage: MutableState<Int>,
     pageScrollState: ScrollState,
     coroutineScope: CoroutineScope,
-    tutorialViewModel: TutorialViewModel,
-    tutorialId: Int,
+    chaptersViewModel: ChaptersViewModel,
+    chapterId: Int,
     navController: NavHostController
 ) {
     Row(
@@ -111,7 +108,7 @@ fun TutorialButtons(
             Button(
                 onClick = {
                     currentPage.value -= 1
-                    // tutorialViewModel.setCompletion(id = tutorialId - 1, completion = currentPage.value)
+                    // chaptersViewModel.setCompletion(id = tutorialId - 1, completion = currentPage.value)
                     scrollUp(pageScrollState = pageScrollState, coroutineScope = coroutineScope)
                 },
                 colors = ButtonDefaults.buttonColors(containerColor = padawan_theme_button_secondary),
@@ -128,7 +125,7 @@ fun TutorialButtons(
                 ) {
                     Icon(
                         painter = painterResource(id = R.drawable.ic_back),
-                        contentDescription = "Previous Tutorial Icon"
+                        contentDescription = "Previous Chapter Icon"
                     )
                     Spacer(modifier = Modifier.width(width = 16.dp))
                     Text(
@@ -137,11 +134,11 @@ fun TutorialButtons(
                     )
                 }
             }
-        } else if (tutorialPagesSize > 1) {
+        } else if (chapterPageSize > 1) {
             // Spacer(modifier = Modifier.weight(weight = 0.5f))
         }
 
-        if (currentPage.value < tutorialPagesSize - 1) {
+        if (currentPage.value < chapterPageSize - 1) {
             Button(
                 onClick = {
                     currentPage.value += 1
@@ -166,14 +163,14 @@ fun TutorialButtons(
                     Spacer(modifier = Modifier.width(width = 16.dp))
                     Icon(
                         painter = painterResource(id = R.drawable.ic_front),
-                        contentDescription = "Next Tutorial Icon"
+                        contentDescription = "Next Chapter Icon"
                     )
                 }
             }
-        } else if (currentPage.value == tutorialPagesSize - 1) {
+        } else if (currentPage.value == chapterPageSize - 1) {
             Button(
                 onClick = {
-                    tutorialViewModel.setCompleted(id = tutorialId)
+                    chaptersViewModel.setCompleted(id = chapterId)
                     navController.popBackStack()
                 },
                 colors = ButtonDefaults.buttonColors(containerColor = padawan_theme_button_primary),
@@ -207,7 +204,7 @@ fun scrollUp(pageScrollState: ScrollState, coroutineScope: CoroutineScope) {
 }
 
 @Composable
-internal fun TutorialAppBar(navController: NavHostController) {
+internal fun ChapterAppBar(navController: NavHostController) {
     Row(modifier = Modifier.fillMaxWidth()) {
         IconButton(
             onClick = { navController.popBackStack() },
@@ -228,7 +225,7 @@ internal fun TutorialAppBar(navController: NavHostController) {
 }
 
 @Composable
-fun TutorialProgressBar(
+fun ChapterProgressBar(
     height: Dp = 8.dp,
     spacer: Float = 30f,
     incompleteColor: Color = Color(0xfffbf5bf),
@@ -259,8 +256,8 @@ fun TutorialProgressBar(
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-internal fun TutorialPage(tutorialPages: List<Page>, currentPage: MutableState<Int>) {
-    for (element in tutorialPages[currentPage.value]) {
+internal fun ChapterPage(chapterPages: List<Page>, currentPage: MutableState<Int>) {
+    for (element in chapterPages[currentPage.value]) {
         when (element.elementType) {
             ElementType.TITLE -> {
                 Text(

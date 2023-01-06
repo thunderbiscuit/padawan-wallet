@@ -18,6 +18,6 @@
     <string name="t6_p6">We use the bitcoin (BTC) or satoshi (sat) units depending on the size of the transaction.</string>
     <string name="t6_p7">- A brand new car might be worth 1,700,000,000 sats, but it is more simple to say 1.7 bitcoin.</string>
     <string name="t6_p8">- You could buy a candy for 0.00000250 bitcoin, but it makes much more sense to say 250 satoshis.</string>
-    <string name="t6_p9">Someone using bitcoin apps must develop the skill to understand both bitcoin and satoshi units. Many transactions are denominated in bitcoin, but their network fee (see tutorial #4) is almost always using the satoshi unit.</string>
+    <string name="t6_p9">Someone using bitcoin apps must develop the skill to understand both bitcoin and satoshi units. Many transactions are denominated in bitcoin, but their network fee (see chapter #4) is almost always using the satoshi unit.</string>
     <string name="t6_p10">In the Padawan app, you can switch between the two units in the main wallet display page by touching the bitcoin/satoshi symbol.</string>
 </resources>

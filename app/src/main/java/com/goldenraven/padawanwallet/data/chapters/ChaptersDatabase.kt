@@ -10,22 +10,22 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 
-@Database(entities = [Tutorial::class], version = 3, exportSchema = false)
-abstract class TutorialDatabase: RoomDatabase() {
-    abstract fun tutorialDao(): TutorialDao
+@Database(entities = [Chapter::class], version = 4, exportSchema = false)
+abstract class ChaptersDatabase: RoomDatabase() {
+    abstract fun chapterDao(): ChapterDao
 
     companion object {
         @Volatile
-        private var INSTANCE: TutorialDatabase? = null
+        private var INSTANCE: ChaptersDatabase? = null
 
-        fun getInstance(context: Context): TutorialDatabase {
+        fun getInstance(context: Context): ChaptersDatabase {
             val tempInstance = INSTANCE
             if(tempInstance != null) {
                 return tempInstance
             }
             synchronized(this) {
-                val instance = Room.databaseBuilder(context.applicationContext, TutorialDatabase::class.java, "tutorial_db")
-                    // .createFromAsset("databases/tutorial_db.db")
+                val instance = Room.databaseBuilder(context.applicationContext, ChaptersDatabase::class.java, "chapters_db")
+                    // .createFromAsset("databases/chapters_db.db")
                     // TODO #1: Having this on makes the pre-populating of the database to re-create it on every boot
                     // because somehow it thinks the db schema has changed?
                     // the createFromAsset only gets called if the db doesn't exist, so this could cause problems if we ever ship a new pre-populated db

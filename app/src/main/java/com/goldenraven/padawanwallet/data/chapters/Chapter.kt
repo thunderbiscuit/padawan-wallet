@@ -8,8 +8,8 @@ package com.goldenraven.padawanwallet.data.chapters
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "tutorial_db")
-data class Tutorial(
+@Entity(tableName = "chapters_db")
+data class Chapter(
     @PrimaryKey(autoGenerate = false)
     val id: Int,
     val title: String,

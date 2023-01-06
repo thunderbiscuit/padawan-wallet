@@ -9,19 +9,19 @@ import androidx.lifecycle.LiveData
 import androidx.room.*
 
 @Dao
-interface TutorialDao {
+interface ChapterDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun addTutorial(tutorial: Tutorial)
+    suspend fun addChapter(chapter: Chapter)
 
-    @Query("SELECT * FROM tutorial_db ORDER BY id ASC")
-    fun readAllTutorial(): LiveData<List<Tutorial>>
+    @Query("SELECT * FROM chapters_db ORDER BY id ASC")
+    fun readAllChapters(): LiveData<List<Chapter>>
 
-    @Query("UPDATE tutorial_db SET completed = :completed WHERE id = :id")
+    @Query("UPDATE chapters_db SET completed = :completed WHERE id = :id")
     suspend fun setCompleted(id: Int, completed: Boolean)
 
-    @Query("SELECT * FROM tutorial_db WHERE id = :id")
-    suspend fun getTutorial(id: Int): Tutorial
+    @Query("SELECT * FROM chapters_db WHERE id = :id")
+    suspend fun getChapter(id: Int): Chapter
 
-    @Query("SELECT (SELECT COUNT(*) FROM tutorial_db) == 0")
+    @Query("SELECT (SELECT COUNT(*) FROM chapters_db) == 0")
     fun isEmpty(): Boolean
 }

@@ -51,7 +51,6 @@ internal fun WalletRootScreen(
     walletViewModel: WalletViewModel
 ) {
     val balance by walletViewModel.balance.observeAsState()
-    val isRefreshing by walletViewModel.isRefreshing.collectAsState()
     val transactionList by walletViewModel.readAllData.observeAsState(initial = emptyList())
     val isOnlineStatus by walletViewModel.isOnlineVariable.observeAsState()
     val tempOpenFaucetDialog = walletViewModel.openFaucetDialog
@@ -407,7 +406,7 @@ fun CurrencyToggleText(currencyToggleState: MutableState<Boolean>, text: Currenc
 
 @Composable
 private fun FaucetDialog(walletViewModel: WalletViewModel) {
-    androidx.compose.material3.AlertDialog(
+    AlertDialog(
         onDismissRequest = {},
         title = {
             Text(
@@ -418,7 +417,7 @@ private fun FaucetDialog(walletViewModel: WalletViewModel) {
         },
         text = {
             Text(
-                text = "To help you get started learning about bitcoin, Padawan Wallet can send you some coins so you can follow along the tutorials and and send them around to friends!\nWould you like to receive some testnet bitcoin?",
+                text = "To help you get started learning about bitcoin, Padawan Wallet can send you some coins so you can follow along the chapters and and send them around to friends!\nWould you like to receive some testnet bitcoin?",
                 fontSize = 18.sp,
                 lineHeight = 24.sp,
                 color = padawan_theme_text_faded_secondary
