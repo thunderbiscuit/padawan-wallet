@@ -1,29 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="t10_h1">Bitcoin units</string>
+    <string name="C6_title">Bitcoin units</string>
+    <string name="C6_tagline">Satoshis, bitcoins, and beyond.</string>
 
-    <string name="t10_p1">It is unfortunate but the word "bitcoin" has two completely different meanings. We speak of <i>Bitcoin</i> the network, the protocol, the open source project, and we also use the word "bitcoin" as one of the units of value when transacting on that network.
-    </string>
+    <string name="t6_p1">The word "bitcoin" has a few meanings. When referring to "bitcoin," people may mean the network, the protocol, or the open source project.</string>
+    <string name="t6_p2">The word "bitcoin" also means one of the units of value when transacting on the Bitcoin network.</string>
 
-    <string name="t10_p2">A bitcoin is a unit of value that can easily be broken down in smaller parts. Just like the kilometer can be broken down into meters and centimeters and the dollar can be broken down into quarters, dimes, and pennies, bitcoin can be broken into smaller units. While there are many units to describe bitcoin, only two of those are really important: the <i>bitcoin</i> and the <i>satoshi</i>. There are one hundred million (100,000,000) satoshis in a bitcoin.
-    </string>
+    <string name="t6_h1">Breaking it down</string>
+    <string name="t6_p3">Just like the kilometer can be broken down into meters and centimeters, a bitcoin can be broken into smaller parts.
+</string>
+    <string name="t6_p4">The most important units to describe bitcoin are the bitcoin and the satoshi. Sometimes we shorten the bitcoin unit to BTC and the satoshi unit to "sats".</string>
 
-    <string name="t10_p3">100,000,000 satoshis = 1 bitcoin\n1 satoshi = 0.00000001 bitcoin</string>
+    <string name="t6_h2">Symbols</string>
+    <string name="t6_p5">There is not yet an "official" symbol for either unit (bitcoin or satoshi). You may see the following symbols on Padawan or in other cryptocurrency exchanges or applications.</string>
 
-    <string name="t10_p4">The symbols used to represent those units of value are not always the same. There is no central authority to dictate what should be the "official" symbol. Instead this choice is a matter of emergent consensus, and will eventually solidify over time around one symbol for each unit. Here are some of the symbols for bitcoin and satoshis you might see around in applications:
-    </string>
-
-    <!--  diagram symbols of bitcoin -->
-
-    <!--  diagram symbols of satoshis -->
-
-    <string name="t10_h2">Both units are useful</string>
-
-    <string name="t10_p5">Depending on the size of a transaction, it is often more appropriate to think of the amount transacted as being in bitcoin or in satoshis. A brand new car might be worth 1.7 bitcoins (1,700,000,000 sats is not as easy for the eye to quickly understand), whereas a candy might be worth 250 satoshis (0.00000250 bitcoin is harder to read).
-    </string>
-
-    <string name="t10_p6">The ability to use both units is an important skill to develop. A lot of transactions are denominated in bitcoin, but their <i>network fee</i> (tutorial #4) is almost always written using the satoshi unit. You can switch between the two units in the main wallet display page by touching the bitcoin/satoshi symbol.
-    </string>
-
-    <!--  GIF of unit switch in wallet  -->
+    <string name="t6_h3">Which unit should I use?</string>
+    <string name="t6_p6">We use the bitcoin (BTC) or satoshi (sat) units depending on the size of the transaction.</string>
+    <string name="t6_p7">- A brand new car might be worth 1,700,000,000 sats, but it is more simple to say 1.7 bitcoin.</string>
+    <string name="t6_p8">- You could buy a candy for 0.00000250 bitcoin, but it makes much more sense to say 250 satoshis.</string>
+    <string name="t6_p9">Someone using bitcoin apps must develop the skill to understand both bitcoin and satoshi units. Many transactions are denominated in bitcoin, but their network fee (see tutorial #4) is almost always using the satoshi unit.</string>
+    <string name="t6_p10">In the Padawan app, you can switch between the two units in the main wallet display page by touching the bitcoin/satoshi symbol.</string>
 </resources>

@@ -133,13 +133,29 @@ val tutorial6: List<Page> = listOf(
         TutorialElement(ElementType.BODY, R.string.C6_tagline)
     ),
     listOf(
-        TutorialElement(ElementType.TITLE, R.string.C5_title),
-        TutorialElement(ElementType.BODY, R.string.t5_p1),
+        TutorialElement(ElementType.TITLE, R.string.C6_title),
+        TutorialElement(ElementType.BODY, R.string.t6_p1),
+        TutorialElement(ElementType.BODY, R.string.t6_p2),
     ),
     listOf(
-        TutorialElement(ElementType.SUBTITLE, R.string.t5_h1),
-        TutorialElement(ElementType.BODY, R.string.t5_p1),
-    )
+        TutorialElement(ElementType.SUBTITLE, R.string.t6_h1),
+        TutorialElement(ElementType.BODY, R.string.t6_p3),
+        TutorialElement(ElementType.BODY, R.string.t6_p4),
+        TutorialElement(ElementType.RESOURCE, R.drawable.placeholder_image),
+    ),
+    listOf(
+        TutorialElement(ElementType.SUBTITLE, R.string.t6_h2),
+        TutorialElement(ElementType.BODY, R.string.t6_p5),
+        TutorialElement(ElementType.RESOURCE, R.drawable.placeholder_image),
+    ),
+    listOf(
+        TutorialElement(ElementType.SUBTITLE, R.string.t6_h3),
+        TutorialElement(ElementType.BODY, R.string.t6_p6),
+        TutorialElement(ElementType.BODY, R.string.t6_p7),
+        TutorialElement(ElementType.BODY, R.string.t6_p8),
+        TutorialElement(ElementType.BODY, R.string.t6_p9),
+        TutorialElement(ElementType.BODY, R.string.t6_p10),
+    ),
 )
 
 val tutorial7: List<Page> = listOf(
