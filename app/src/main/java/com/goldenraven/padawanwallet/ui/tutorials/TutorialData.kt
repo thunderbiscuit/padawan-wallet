@@ -108,23 +108,37 @@ val tutorial4: List<Page> = listOf(
     )
 )
 
-val tutorial6: List<Page> = listOf(
+val tutorial5: List<Page> = listOf(
     listOf(
         TutorialElement(ElementType.BODY, R.string.C5_tagline)
     ),
     listOf(
         TutorialElement(ElementType.TITLE, R.string.C5_title),
-        TutorialElement(ElementType.BODY, R.string.t2_p1),
+        TutorialElement(ElementType.BODY, R.string.t5_p1),
+        TutorialElement(ElementType.BODY, R.string.t5_p2),
+    ),
+    listOf(
+        TutorialElement(ElementType.SUBTITLE, R.string.t5_h1),
+        TutorialElement(ElementType.BODY, R.string.t5_p3),
+        TutorialElement(ElementType.BODY, R.string.t5_p4),
+    ),
+    listOf(
+        TutorialElement(ElementType.SUBTITLE, R.string.t5_h2),
+        TutorialElement(ElementType.BODY, R.string.t5_p5),
     )
 )
 
-val tutorial5: List<Page> = listOf(
+val tutorial6: List<Page> = listOf(
     listOf(
         TutorialElement(ElementType.BODY, R.string.C6_tagline)
     ),
     listOf(
         TutorialElement(ElementType.TITLE, R.string.C5_title),
-        TutorialElement(ElementType.BODY, R.string.t6_p1),
+        TutorialElement(ElementType.BODY, R.string.t5_p1),
+    ),
+    listOf(
+        TutorialElement(ElementType.SUBTITLE, R.string.t5_h1),
+        TutorialElement(ElementType.BODY, R.string.t5_p1),
     )
 )
 
