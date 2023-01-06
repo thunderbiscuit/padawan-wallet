@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!--  string names for tutorials are defined as such:  -->
-    <!--  t1: tutorial 1  -->
-    <!--  h1: header 1  -->
-    <!--  p1: paragraph 1  -->
+    <string name="C5_title">What are transaction fees?</string>
+    <string name="C5_tagline">Transactions have fees? What? How? To who?</string>
 
     <string name="t5_p1">Now you know a little bit more about transactions. There are many, many transactions being sent, validated, confirmed, and stored in the bitcoin network every minute of every day. This is a very costly affair.</string>
     <string name="t5_p2">The bitcoin network can only keep up with so much demand on the system. To make sure the load on the network stays light and lean, there is a limited capacity for the total amount of bytes that can be transacted over the network per amount of time.</string>

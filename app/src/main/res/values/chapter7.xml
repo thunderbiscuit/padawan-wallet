@@ -1,10 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!--  string names for tutorials are defined as such:  -->
-    <!--  C1: chapter 1  -->
-    <!--  h1: header 1  -->
-    <!--  p1: paragraph 1  -->
-
     <string name="C7_title">What is a recovery phrase?</string>
     <string name="C7_tagline">Learn how to keep your wallet and your funds safe.</string>
 

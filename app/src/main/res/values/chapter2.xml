@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!--  string names for tutorials are defined as such:  -->
-    <!--  t1: tutorial 1  -->
-    <!--  h1: header 1  -->
-    <!--  p1: paragraph 1  -->
+    <string name="C2_title">Receiving bitcoin</string>
+    <string name="C2_tagline">How do you receive bitcoin?</string>
 
     <string name="t2_p1">To receive bitcoin, generally you must ask your wallet software (like Padawan) to generate a receive address.</string>
     <string name="t2_p2">To make it easier to share, we display the address in two common ways:</string>

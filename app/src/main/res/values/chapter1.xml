@@ -6,6 +6,9 @@
 <!--  p1: paragraph 1  -->
 
 <resources>
+    <string name="C1_title">What is the Bitcoin testnet?</string>
+    <string name="C1_tagline">Did you know there are more than one bitcoin networks?</string>
+
     <string name="t1_h1">What is the Bitcoin testnet?</string>
 
     <string name="t1_p1">A Bitcoin network is made up of thousands of computers across the world. These computers speak a common language and communicate directly with each other over the internet.</string>

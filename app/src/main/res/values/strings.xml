@@ -57,20 +57,12 @@
     <string name="scan">Scan</string>
     <string name="address">address</string>
 
-    <!-- tutorials -->
+    <!-- chapters -->
     <string name="essentials_section_name">Essentials</string>
     <string name="concept">Concept</string>
     <string name="skill">Skill</string>
-    <string name="C2_title">Receiving bitcoin</string>
-    <string name="C3_title">Sending bitcoin</string>
-    <string name="C4_title">What is the mempool?</string>
-    <string name="C5_title">What are transaction fees?</string>
-    <string name="C9_title">The different types of wallets</string>
-    <string name="C2_tagline">How do you receive bitcoin?</string>
-    <string name="C3_tagline">How do you send bitcoins?</string>
-    <string name="C4_tagline">When I send a transaction... where does it go?</string>
-    <string name="C5_tagline">Transactions have fees? What? How? To who?</string>
-    <string name="C9_tagline">Hot wallets, cold wallets, hardware wallets, mobile wallets… what you need to know to understand their uses.</string>
+
+
     <string name="tutorial_done">Mark tutorial\nas done</string>
     <string name="back_to_list">Back to tutorials list</string>
     <string name="basic">Basics</string>

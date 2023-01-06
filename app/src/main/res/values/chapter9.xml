@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!--  string names for tutorials are defined as such:  -->
-    <!--  t1: tutorial 1  -->
-    <!--  h1: header 1  -->
-    <!--  p1: paragraph 1  -->
+    <string name="C9_title">The different types of wallets</string>
+    <string name="C9_tagline">Hot wallets, cold wallets, hardware wallets, mobile wallets… what you need to know to understand their uses.</string>
 
     <string name="t9_h1">
         Why is there more than one type of wallet?

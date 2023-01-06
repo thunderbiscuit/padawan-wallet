@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!--  string names for tutorials are defined as such:  -->
-    <!--  t1: tutorial 1  -->
-    <!--  h1: header 1  -->
-    <!--  p1: paragraph 1  -->
+    <string name="C4_title">What is the mempool?</string>
+    <string name="C4_tagline">When I send a transaction... where does it go?</string>
 
     <string name="t4_p1">When you complete a bitcoin transaction, the transaction is recorded across all computers connected to the bitcoin network in 2 to 5 seconds. Eventually the transaction is recorded on the blockchain, but it first arrives at the mempool (or "memory pool") to be processed. At the mempool, your transaction is acknowledged by the network, but not yet made official on the blockchain.</string>
     <string name="t4_p2">To be made official, bitcoin miners race to discover a solution to a complex hashing puzzle. Once the solution is discovered, this leads to a block of transactions officially added to the blockchain.</string>
