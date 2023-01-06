@@ -163,10 +163,23 @@ val tutorial7: List<Page> = listOf(
         TutorialElement(ElementType.BODY, R.string.C7_tagline)
     ),
     listOf(
-        TutorialElement(ElementType.TITLE, R.string.C7_title),
-        TutorialElement(ElementType.BODY, R.string.t7_p1),
-        TutorialElement(ElementType.BODY, R.string.t7_p2),
-    )
+        TutorialElement(ElementType.SUBTITLE, R.string.C7_title),
+        TutorialElement(ElementType.BODY, R.string.C7_p1),
+        TutorialElement(ElementType.BODY, R.string.C7_p2),
+        TutorialElement(ElementType.BODY, R.string.C7_p3),
+    ),
+    listOf(
+        TutorialElement(ElementType.TITLE, R.string.C7_h1),
+        TutorialElement(ElementType.BODY, R.string.C7_p4),
+        TutorialElement(ElementType.RESOURCE, R.drawable.placeholder_image),
+        TutorialElement(ElementType.BODY, R.string.C7_p5),
+        TutorialElement(ElementType.BODY, R.string.C7_p6),
+    ),
+    listOf(
+        TutorialElement(ElementType.TITLE, R.string.C7_h2),
+        TutorialElement(ElementType.BODY, R.string.C7_p7),
+        TutorialElement(ElementType.RESOURCE, R.drawable.placeholder_image)
+    ),
 )
 
 val tutorial8: List<Page> = listOf(

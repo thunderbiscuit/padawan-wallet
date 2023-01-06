@@ -65,15 +65,12 @@
     <string name="C3_title">Sending bitcoin</string>
     <string name="C4_title">What is the mempool?</string>
     <string name="C5_title">What are transaction fees?</string>
-<!--    <string name="C6_title">Bitcoin units</string>-->
-    <string name="C7_title">What is a recovery phrase?</string>
     <string name="C8_title">Recovering your wallet</string>
     <string name="C9_title">The different types of wallets</string>
     <string name="C2_tagline">How do you receive bitcoin?</string>
     <string name="C3_tagline">How do you send bitcoins?</string>
     <string name="C4_tagline">When I send a transaction... where does it go?</string>
     <string name="C5_tagline">Transactions have fees? What? How? To who?</string>
-    <string name="C7_tagline">Keeping your coins safe starts by knowing how to make backups!</string>
     <string name="C8_tagline">Find out how you can use a recovery phrase backup to load a pre-existing wallet on your device.</string>
     <string name="C9_tagline">Hot wallets, cold wallets, hardware wallets, mobile wallets… what you need to know to understand their uses.</string>
     <string name="tutorial_done">Mark tutorial\nas done</string>
