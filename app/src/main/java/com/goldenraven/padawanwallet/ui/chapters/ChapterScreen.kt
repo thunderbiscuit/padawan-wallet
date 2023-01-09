@@ -21,6 +21,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.goldenraven.padawanwallet.R
+import com.goldenraven.padawanwallet.data.chapters.ElementType
+import com.goldenraven.padawanwallet.data.chapters.Page
 import com.goldenraven.padawanwallet.theme.*
 import com.goldenraven.padawanwallet.ui.standardBorder
 import kotlinx.coroutines.CoroutineScope

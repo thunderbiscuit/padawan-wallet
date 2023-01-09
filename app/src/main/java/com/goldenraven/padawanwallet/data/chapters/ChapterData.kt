@@ -3,7 +3,7 @@
  * Use of this source code is governed by the Apache 2.0 license that can be found in the ./LICENSE file.
  */
 
-package com.goldenraven.padawanwallet.ui.chapters
+package com.goldenraven.padawanwallet.data.chapters
 
 import com.goldenraven.padawanwallet.R
 
@@ -210,5 +210,19 @@ val chapter9: List<Page> = listOf(
     listOf(
         ChapterElement(ElementType.SUBTITLE, R.string.t9_h1),
         ChapterElement(ElementType.BODY, R.string.t9_p1),
-    )
+    ),
+    listOf(
+        ChapterElement(ElementType.SUBTITLE, R.string.t9_h2),
+        ChapterElement(ElementType.BODY, R.string.t9_p2),
+        ChapterElement(ElementType.BODY, R.string.t9_p3),
+    ),
+    listOf(
+        ChapterElement(ElementType.SUBTITLE, R.string.t9_h3),
+        ChapterElement(ElementType.BODY, R.string.t9_p4),
+        ChapterElement(ElementType.BODY, R.string.t9_p5),
+        ChapterElement(ElementType.BODY, R.string.t9_p6),
+        ChapterElement(ElementType.BODY, R.string.t9_p7),
+        ChapterElement(ElementType.BODY, R.string.t9_p8),
+        ChapterElement(ElementType.BODY, R.string.t9_p9),
+    ),
 )

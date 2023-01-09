@@ -25,6 +25,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.goldenraven.padawanwallet.R
 import com.goldenraven.padawanwallet.data.chapters.Chapter
+import com.goldenraven.padawanwallet.data.chapters.ChapterElement
 import com.goldenraven.padawanwallet.theme.*
 import com.goldenraven.padawanwallet.ui.Screen
 import com.goldenraven.padawanwallet.ui.standardBorder
@@ -206,7 +207,7 @@ fun LessonCircle(lessonNumber: Int, completed: Boolean, selected: Boolean, selec
 @Composable
 fun ChapterId(chapterData: Chapter) {
     Text(
-        modifier = Modifier.padding(horizontal = 32.dp),
+        modifier = Modifier.padding(start = 32.dp, end = 32.dp, bottom = 12.dp),
         text = "Chapter ${chapterData.id}",
         style = PadawanTypography.labelLarge,
         color = padawan_theme_button_primary

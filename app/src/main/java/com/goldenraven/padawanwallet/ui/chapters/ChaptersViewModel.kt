@@ -14,9 +14,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.goldenraven.padawanwallet.R
-import com.goldenraven.padawanwallet.data.chapters.Chapter
-import com.goldenraven.padawanwallet.data.chapters.ChaptersDatabase
-import com.goldenraven.padawanwallet.data.chapters.ChapterRepository
+import com.goldenraven.padawanwallet.data.chapters.*
 import kotlinx.coroutines.*
 
 private const val TAG = "ChaptersViewModel"
