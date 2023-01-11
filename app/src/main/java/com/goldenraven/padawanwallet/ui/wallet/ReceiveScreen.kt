@@ -108,3 +108,14 @@ internal fun ReceiveScreen(
         }
     }
 }
+
+// @Preview(device = Devices.PIXEL_4, showBackground = true)
+// @Composable
+// internal fun PreviewIntroScreen() {
+//     PadawanTheme {
+//         ReceiveScreen(
+//             rememberNavController(),
+//             WalletViewModel(),
+//         )
+//     }
+// }

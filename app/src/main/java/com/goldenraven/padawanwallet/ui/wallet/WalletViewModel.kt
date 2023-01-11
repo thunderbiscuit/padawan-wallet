@@ -50,7 +50,6 @@ class WalletViewModel(
 ) : AndroidViewModel(application) {
     val readAllData: LiveData<List<Tx>>
     private val repository: TxRepository
-    // var openFaucetDialog: MutableState<Boolean> = mutableStateOf(!didWeOfferFaucet())
     var openFaucetDialog: MutableState<Boolean> = mutableStateOf(false)
 
     private var _balance: MutableLiveData<ULong> = MutableLiveData(0u)
@@ -89,14 +88,12 @@ class WalletViewModel(
 
     // Faucet Code
     fun onPositiveDialogClick() {
-        // faucetOfferWasMade()
         callTatooineFaucet(getLastUnusedAddress())
         faucetCallDone()
         openFaucetDialog.value = false
     }
 
     fun onNegativeDialogClick() {
-        // faucetOfferWasMade()
         openFaucetDialog.value = false
     }
 
@@ -121,7 +118,7 @@ class WalletViewModel(
         return address
     }
 
-    fun updateLastUnusedAddress(): Unit {
+    fun updateLastUnusedAddress() {
         val address = Wallet.getLastUnusedAddress().address
         _address.value = address
     }
@@ -204,7 +201,7 @@ class WalletViewModel(
         }
     }
 
-    fun updateConnectivityStatus(context: Context): Unit {
+    fun updateConnectivityStatus(context: Context) {
         Log.i(TAG, "Updating connectivity status...")
         val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         val capabilities = connectivityManager.getNetworkCapabilities(connectivityManager.activeNetwork)

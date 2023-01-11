@@ -42,35 +42,50 @@ fun WalletNavigation(
         composable(
             route = Screen.WalletRootScreen.route,
             enterTransition = {
-                when (initialState.destination.route) {
-                    "receive_screen" -> fadeIn(animationSpec = tween(1000))
-                    "send_screen" -> fadeIn(animationSpec = tween(1000))
-                    "wallet_screen" -> null
-                    else -> slideIntoContainer(AnimatedContentScope.SlideDirection.End, animationSpec = tween(animationDuration))
+                val route = initialState.destination.route
+                if (route == null) {
+                    slideIntoContainer(AnimatedContentScope.SlideDirection.End, animationSpec = tween(animationDuration))
+                } else if (route.contains("receive") || route.contains("send") || route.contains("transaction")) {
+                    fadeIn(animationSpec = tween(1000))
+                } else {
+                    slideIntoContainer(AnimatedContentScope.SlideDirection.End, animationSpec = tween(animationDuration))
                 }
+                // when (initialState.destination.route) {
+                //     "receive_screen" -> fadeIn(animationSpec = tween(1000))
+                //     "send_screen" -> fadeIn(animationSpec = tween(1000))
+                //     "transaction_screen" -> fadeIn(animationSpec = tween(1000))
+                //     "wallet_screen" -> null
+                //     else -> slideIntoContainer(AnimatedContentScope.SlideDirection.End, animationSpec = tween(animationDuration))
+                // }
             },
             popEnterTransition = {
-                when (initialState.destination.route) {
-                    "receive_screen" -> fadeIn(animationSpec = tween(1000))
-                    "send_screen" -> fadeIn(animationSpec = tween(1000))
-                    "wallet_screen" -> null
-                    else -> slideIntoContainer(AnimatedContentScope.SlideDirection.End, animationSpec = tween(animationDuration))
+                val route = initialState.destination.route
+                if (route == null) {
+                    slideIntoContainer(AnimatedContentScope.SlideDirection.End, animationSpec = tween(animationDuration))
+                } else if (route.contains("receive") || route.contains("send") || route.contains("transaction")) {
+                    fadeIn(animationSpec = tween(1000))
+                } else {
+                    slideIntoContainer(AnimatedContentScope.SlideDirection.End, animationSpec = tween(animationDuration))
                 }
             },
             exitTransition = {
-                when (targetState.destination.route) {
-                    "receive_screen" -> fadeOut(animationSpec = tween(300))
-                    "send_screen" -> fadeOut(animationSpec = tween(300))
-                    "wallet_screen" -> null
-                    else -> slideOutOfContainer(AnimatedContentScope.SlideDirection.Start, animationSpec = tween(animationDuration))
+                val route = targetState.destination.route
+                if (route == null) {
+                    slideOutOfContainer(AnimatedContentScope.SlideDirection.Start, animationSpec = tween(animationDuration))
+                } else if (route.contains("receive") || route.contains("send") || route.contains("transaction")) {
+                    fadeOut(animationSpec = tween(300))
+                } else {
+                    slideOutOfContainer(AnimatedContentScope.SlideDirection.Start, animationSpec = tween(animationDuration))
                 }
             },
             popExitTransition = {
-                when (targetState.destination.route) {
-                    "receive_screen" -> fadeOut(animationSpec = tween(300))
-                    "send_screen" -> fadeOut(animationSpec = tween(300))
-                    "wallet_screen" -> null
-                    else -> slideOutOfContainer(AnimatedContentScope.SlideDirection.Start, animationSpec = tween(animationDuration))
+                val route = targetState.destination.route
+                if (route == null) {
+                    slideOutOfContainer(AnimatedContentScope.SlideDirection.Start, animationSpec = tween(animationDuration))
+                } else if (route.contains("receive") || route.contains("send") || route.contains("transaction")) {
+                    fadeOut(animationSpec = tween(300))
+                } else {
+                    slideOutOfContainer(AnimatedContentScope.SlideDirection.Start, animationSpec = tween(animationDuration))
                 }
             }
         ) { WalletRootScreen(navController = navControllerWalletNavigation, walletViewModel = walletViewModel) }
@@ -111,6 +126,27 @@ fun WalletNavigation(
             }
         ) { SendScreen(navController = navControllerWalletNavigation, walletViewModel = walletViewModel) }
 
+
+        // Transaction screen
+        composable(
+            route = "${Screen.TransactionScreen.route}/txid={txid}",
+            enterTransition = {
+                slideIntoContainer(AnimatedContentScope.SlideDirection.Up, animationSpec = tween(animationDuration))
+            },
+            exitTransition = {
+                slideOutOfContainer(AnimatedContentScope.SlideDirection.Down, animationSpec = tween(animationDuration))
+            },
+            popEnterTransition = {
+                slideIntoContainer(AnimatedContentScope.SlideDirection.Up, animationSpec = tween(animationDuration))
+            },
+            popExitTransition = {
+                slideOutOfContainer(AnimatedContentScope.SlideDirection.Down, animationSpec = tween(animationDuration))
+            }
+        ) { backStackEntry ->
+            backStackEntry.arguments?.getString("txid")?.let {
+                TransactionScreen(navControllerWalletNavigation, backStackEntry.arguments?.getString("txid"))
+            }
+        }
 
         // QR Scanner Screen
         composable(
@@ -188,7 +224,7 @@ fun WalletNavigation(
 
 
         // Settings
-        val settingsScreens: List<String> = listOf("about_screen", "recovery_phrase_screen", "send_coins_back_screen", )
+        val settingsScreens: List<String> = listOf("about_screen", "recovery_phrase_screen", "send_coins_back_screen")
         composable(
             route = Screen.SettingsRootScreen.route,
             enterTransition = {

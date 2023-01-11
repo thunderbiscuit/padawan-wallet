@@ -60,7 +60,7 @@ object Wallet {
 
     fun recoverWallet(recoveryPhrase: String) {
         val mnemonic = Mnemonic.fromString(recoveryPhrase)
-        val bip32ExtendedRootKey: DescriptorSecretKey = DescriptorSecretKey(Network.TESTNET, mnemonic, null)
+        val bip32ExtendedRootKey = DescriptorSecretKey(Network.TESTNET, mnemonic, null)
         val descriptor: Descriptor = Descriptor.newBip84(bip32ExtendedRootKey, KeychainKind.EXTERNAL, Network.TESTNET)
         val changeDescriptor: Descriptor = Descriptor.newBip84(bip32ExtendedRootKey, KeychainKind.INTERNAL, Network.TESTNET)
         initialize(
@@ -73,7 +73,7 @@ object Wallet {
 
     fun createWallet() {
         val mnemonic = Mnemonic(WordCount.WORDS12)
-        val bip32ExtendedRootKey: DescriptorSecretKey = DescriptorSecretKey(Network.TESTNET, mnemonic, null)
+        val bip32ExtendedRootKey = DescriptorSecretKey(Network.TESTNET, mnemonic, null)
         val descriptor: Descriptor = Descriptor.newBip84(bip32ExtendedRootKey, KeychainKind.EXTERNAL, Network.TESTNET)
         val changeDescriptor: Descriptor = Descriptor.newBip84(bip32ExtendedRootKey, KeychainKind.INTERNAL, Network.TESTNET)
         initialize(
@@ -137,6 +137,16 @@ object Wallet {
 
     fun listTransactions(): List<TransactionDetails> {
         return wallet.listTransactions()
+    }
+
+    fun getTransaction(txid: String): TransactionDetails? {
+        val allTransactions = listTransactions()
+        allTransactions.forEach {
+            if (it.txid == txid) {
+                return it
+            }
+        }
+        return null
     }
 
     fun sign(psbt: PartiallySignedTransaction) {

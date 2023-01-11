@@ -29,7 +29,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
@@ -57,7 +56,7 @@ private const val TAG = "SendScreen"
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 internal fun SendScreen(navController: NavHostController, walletViewModel: WalletViewModel) {
-    val (showDialog, setShowDialog) = rememberSaveable { mutableStateOf(false) }
+    // val (showDialog, setShowDialog) = rememberSaveable { mutableStateOf(false) }
 
     val coroutineScope = rememberCoroutineScope()
 
@@ -67,10 +66,10 @@ internal fun SendScreen(navController: NavHostController, walletViewModel: Walle
     val feeRate: MutableState<String> = rememberSaveable { mutableStateOf("") }
     val txBuilderResult: MutableState<TxBuilderResult?> = remember { mutableStateOf(null) }
     val scope = rememberCoroutineScope()
-    val showMenu: MutableState<Boolean> = remember { mutableStateOf(false) }
-    var dropDownMenuExpanded by remember { mutableStateOf(false) }
-    val currencyList = listOf(CurrencyType.SATS, CurrencyType.BTC)
-    var selectedCurrency by remember { mutableStateOf(0) }
+    // val showMenu: MutableState<Boolean> = remember { mutableStateOf(false) }
+    // var dropDownMenuExpanded by remember { mutableStateOf(false) }
+    // val currencyList = listOf(CurrencyType.SATS, CurrencyType.BTC)
+    // var selectedCurrency by remember { mutableStateOf(0) }
 
     val qrCodeScanner =
         navController.currentBackStackEntry?.savedStateHandle?.getLiveData<String>("BTC_Address")
@@ -89,14 +88,13 @@ internal fun SendScreen(navController: NavHostController, walletViewModel: Walle
     BottomSheetScaffold(
         sheetShape = RoundedCornerShape(topEnd = 20.dp, topStart = 20.dp),
         sheetContentColor = padawan_theme_background,
-        sheetContent = { TransactionConfirmation(txBuilderResult, recipientAddress, amount, feeRate, bottomSheetScaffoldState, scope, navController, walletViewModel) },
+        sheetContent = { TransactionConfirmation(txBuilderResult, recipientAddress, amount, bottomSheetScaffoldState, scope, navController, walletViewModel) },
         scaffoldState = bottomSheetScaffoldState,
         sheetBackgroundColor = Color.White,
         sheetElevation = 12.dp,
         sheetPeekHeight = 0.dp,
         backgroundColor = padawan_theme_background
     ) {
-        val focusManager = LocalFocusManager.current
 
         PadawanAppBar(navController = navController, title = "Send bitcoin")
 
@@ -202,33 +200,6 @@ internal fun SendScreen(navController: NavHostController, walletViewModel: Walle
                 fontSize = 20.sp,
                 modifier = Modifier.padding(top = 16.dp)
             )
-            // TextField(
-            //     modifier = Modifier
-            //         .wideTextField()
-            //         .height(IntrinsicSize.Min),
-            //     shape = RoundedCornerShape(20.dp),
-            //     value = feeRate.value,
-            //     onValueChange = { value -> feeRate.value = value.filter { it.isDigit() } },
-            //     singleLine = true,
-            //     placeholder = { Text(text = "Edit fees") },
-            //     colors = TextFieldDefaults.textFieldColors(
-            //         backgroundColor = padawan_theme_background_secondary,
-            //         cursorColor = padawan_theme_onPrimary,
-            //         focusedIndicatorColor = Color.Transparent,
-            //         unfocusedIndicatorColor = Color.Transparent,
-            //         disabledIndicatorColor = Color.Transparent,
-            //         errorIndicatorColor = Color.Transparent,
-            //     ),
-            //     keyboardOptions = KeyboardOptions(
-            //         keyboardType = KeyboardType.Number,
-            //         imeAction = ImeAction.Done
-            //     ),
-            //     keyboardActions = KeyboardActions(
-            //         onDone = {
-            //             focusManager.clearFocus()
-            //         }
-            //     ),
-            // )
 
             var sliderPosition by remember { mutableStateOf(0f) }
             Slider(
@@ -291,12 +262,10 @@ fun TransactionConfirmation(
     txBuilderResult: MutableState<TxBuilderResult?>,
     recipientAddress: MutableState<String>,
     amount: MutableState<String>,
-    feeRate: MutableState<String>,
     snackbarHostState: BottomSheetScaffoldState,
     scope: CoroutineScope,
     navController: NavHostController,
     viewModel: WalletViewModel,
-    // context: Context,
 ) {
     val context = LocalContext.current // TODO: is this the right place to get this context?
     Column(
@@ -437,9 +406,9 @@ fun verifyInputs(
         }
         return false
     }
-    if (feeRate.toInt() < 1 || feeRate.toInt() > 200) {
+    if (feeRate.toFloat() < 1 || feeRate.toFloat() > 100) {
         scope.launch {
-            snackbarHostState.showSnackbar(message = "Please input a fee rate between 1 and 200", duration = SnackbarDurationM2.Short)
+            snackbarHostState.showSnackbar(message = "Please input a fee rate between 1 and 100", duration = SnackbarDurationM2.Short)
         }
         return false
     }

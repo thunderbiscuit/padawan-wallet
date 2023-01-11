@@ -29,6 +29,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
+import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import com.goldenraven.padawanwallet.R
 import com.goldenraven.padawanwallet.data.tx.Tx
@@ -68,7 +69,7 @@ internal fun WalletRootScreen(
         BalanceBox(balance = balance ?: 0uL, viewModel = walletViewModel)
         Spacer(modifier = Modifier.height(height = 12.dp))
         SendReceive(navController = navController)
-        TransactionListBox(tempOpenFaucetDialog = tempOpenFaucetDialog, transactionList = transactionList)
+        TransactionListBox(tempOpenFaucetDialog = tempOpenFaucetDialog, transactionList = transactionList, navController = navController)
     }
 }
 
@@ -260,7 +261,11 @@ fun SendReceive(navController: NavHostController) {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TransactionListBox(tempOpenFaucetDialog: MutableState<Boolean>, transactionList: List<Tx>) {
+fun TransactionListBox(
+    tempOpenFaucetDialog: MutableState<Boolean>,
+    transactionList: List<Tx>,
+    navController: NavHostController,
+) {
     Row(modifier = Modifier.padding(top = 24.dp, bottom = 8.dp)) {
         Text(
             text = "Transactions",
@@ -276,7 +281,7 @@ fun TransactionListBox(tempOpenFaucetDialog: MutableState<Boolean>, transactionL
         modifier = Modifier.fillMaxWidth(),
         border = standardBorder,
         shape = RoundedCornerShape(20.dp),
-        containerColor = padawan_theme_background_secondary
+        containerColor = padawan_theme_background_secondary,
     ) {
         if (transactionList.isEmpty()) {
             Row(modifier = Modifier.padding(all = 24.dp)) {
@@ -312,8 +317,12 @@ fun TransactionListBox(tempOpenFaucetDialog: MutableState<Boolean>, transactionL
                     if (index == 0) {
                         Spacer(modifier = Modifier.height(24.dp))
                     }
-                    Column {
-                        Box(modifier = Modifier.fillMaxWidth()) {
+                    Column(
+                        modifier = Modifier.noRippleClickable { viewTransaction(navController, txid = tx.txid) }
+                    ) {
+                        Box(modifier = Modifier
+                            .fillMaxWidth()
+                        ) {
                             Text(
                                 text = "${tx.txid.take(n = 5)}.....${tx.txid.takeLast(n = 5)}",
                                 style = PadawanTypography.bodyMedium,
@@ -495,4 +504,8 @@ private fun FaucetDialog(walletViewModel: WalletViewModel) {
             }
         },
     )
+}
+
+private fun viewTransaction(navController: NavController, txid: String) {
+    navController.navigate("${Screen.TransactionScreen.route}/txid=$txid")
 }

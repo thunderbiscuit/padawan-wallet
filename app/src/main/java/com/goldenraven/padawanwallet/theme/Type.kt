@@ -65,7 +65,12 @@ val PadawanTypography = Typography(
 		letterSpacing = 0.sp,
 	),
 	// titleMedium = TextStyle(),
-	// titleSmall = TextStyle(),
+	titleSmall = TextStyle(
+		fontFamily = Outfit,
+		fontWeight = FontWeight.SemiBold,
+		fontSize = 20.sp,
+		lineHeight = 28.sp
+	),
 
 	bodyLarge = TextStyle(
 		fontFamily = Outfit,
