@@ -6,28 +6,26 @@
 package com.goldenraven.padawanwallet.ui.settings
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Card
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.goldenraven.padawanwallet.data.WalletRepository
 import com.goldenraven.padawanwallet.theme.PadawanTypography
 import com.goldenraven.padawanwallet.theme.padawan_theme_background_secondary
 import com.goldenraven.padawanwallet.theme.padawan_theme_text_headline
-import com.goldenraven.padawanwallet.theme.standardShadow
 import com.goldenraven.padawanwallet.ui.standardBorder
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 internal fun RecoveryPhraseScreen() {
+    val scrollState = rememberScrollState()
     val seedPhrase: String = WalletRepository.getMnemonic()
     val wordList: List<String> = seedPhrase.split(" ")
 
@@ -35,6 +33,7 @@ internal fun RecoveryPhraseScreen() {
         modifier = Modifier
             .background(padawan_theme_background_secondary)
             .fillMaxSize()
+            .verticalScroll(state = scrollState)
     ){
         Text(
             text = "Your wallet recovery phrase",
