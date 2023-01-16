@@ -14,7 +14,9 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.runtime.livedata.observeAsState
@@ -285,7 +287,11 @@ fun TransactionListBox(
     ) {
         if (transactionList.isEmpty()) {
             Row(modifier = Modifier.padding(all = 24.dp)) {
-                Column {
+                val scrollState = rememberScrollState()
+
+                Column(
+                    modifier = Modifier.verticalScroll(state = scrollState)
+                ) {
                     Text(
                         text = "Hey! It looks like your transaction list is empty. Take a look around, and come back to get some coins so you can start playing with the wallet!",
                         style = PadawanTypography.bodyMedium,
