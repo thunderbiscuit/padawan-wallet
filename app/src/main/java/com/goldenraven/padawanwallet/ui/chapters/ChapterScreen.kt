@@ -117,7 +117,7 @@ fun ChapterButtons(
                 shape = RoundedCornerShape(20.dp),
                 border = standardBorder,
                 modifier = Modifier
-                    .padding(all = 8.dp)
+                    .padding(all = 4.dp)
                     .standardShadow(20.dp)
                     .weight(weight = 0.5f)
             ) {
@@ -150,7 +150,7 @@ fun ChapterButtons(
                 shape = RoundedCornerShape(20.dp),
                 border = standardBorder,
                 modifier = Modifier
-                    .padding(all = 8.dp)
+                    .padding(all = 4.dp)
                     .standardShadow(20.dp)
                     .weight(weight = 0.5f),
             ) {
@@ -179,7 +179,7 @@ fun ChapterButtons(
                 shape = RoundedCornerShape(20.dp),
                 border = standardBorder,
                 modifier = Modifier
-                    .padding(all = 8.dp)
+                    .padding(all = 4.dp)
                     .standardShadow(20.dp)
                     .weight(weight = 0.5f),
             ) {
