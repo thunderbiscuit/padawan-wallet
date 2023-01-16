@@ -113,7 +113,7 @@ internal fun OnboardingScreen(
                 shape = RoundedCornerShape(20.dp),
                 border = standardBorder,
                 modifier = Modifier
-                    .padding(top = 4.dp, start = 4.dp, end = 4.dp, bottom = 24.dp)
+                    .padding(top = 4.dp, start = 4.dp, end = 4.dp, bottom = 4.dp)
                     .standardShadow(20.dp)
                     .height(70.dp)
                     .width(240.dp)
@@ -147,7 +147,6 @@ internal fun OnboardingScreen(
         ) {
             Text(
                 text = "Already have a wallet?",
-                // style = GargoyleTypography.bodyMedium,
                 color = Color(0xff787878),
                 modifier = Modifier
                     .padding(start = 24.dp, bottom = 8.dp)
