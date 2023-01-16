@@ -62,6 +62,7 @@ internal fun SendCoinsBackScreen() {
             .fillMaxSize()
             .verticalScroll(state = scrollState)
             .background(padawan_theme_background_secondary)
+            .padding(bottom = 12.dp)
     ) {
         Text(
             text = "Send your coins back to us!",

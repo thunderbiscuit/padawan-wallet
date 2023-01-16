@@ -15,7 +15,6 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.goldenraven.padawanwallet.R
@@ -31,6 +30,7 @@ internal fun AboutScreen() {
         Modifier
             .verticalScroll(state = scrollState)
             .background(padawan_theme_background_secondary)
+            .padding(bottom = 12.dp)
     ) {
         Text(
             text = "About Padawan",
