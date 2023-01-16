@@ -40,6 +40,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import org.bitcoindevkit.AddressInfo
 import org.bitcoindevkit.PartiallySignedTransaction
 
@@ -123,24 +124,25 @@ class WalletViewModel(
         _address.value = address
     }
 
-    private fun updateBalance() {
+    private suspend fun updateBalance() {
         Wallet.sync()
-        _balance.value = Wallet.getBalance()
+        withContext(Dispatchers.Main) {
+            _balance.value = Wallet.getBalance()
+        }
     }
 
     // Refreshing & Syncing
     fun refresh(context: Context) {
-        // updateConnectivityStatus(context)
         if (isOnlineVariable.value == true) {
             if (!Wallet.blockchainIsInitialized()) { Wallet.createBlockchain() }
             // This doesn't handle multiple 'refreshing' tasks, don't use this
-            viewModelScope.launch {
+            viewModelScope.launch(Dispatchers.IO) {
                 // A fake 2 second 'refresh'
-                _isRefreshing.emit(true)
+                // _isRefreshing.emit(true)
                 updateBalance()
                 syncTransactionHistory()
-                delay(300)
-                _isRefreshing.emit(false)
+                // delay(300)
+                // _isRefreshing.emit(false)
             }
         } else {
             Toast.makeText(context, "No Internet Access!", Toast.LENGTH_LONG).show()
