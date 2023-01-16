@@ -68,7 +68,7 @@ val PadawanTypography = Typography(
 	titleSmall = TextStyle(
 		fontFamily = Outfit,
 		fontWeight = FontWeight.SemiBold,
-		fontSize = 20.sp,
+		fontSize = 18.sp,
 		lineHeight = 28.sp
 	),
 
