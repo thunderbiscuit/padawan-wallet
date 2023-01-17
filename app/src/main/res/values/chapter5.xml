@@ -11,5 +11,5 @@
     <string name="t5_p4">The transactions with the highest fees are prioritized by the miners when building blocks.</string>
 
     <string name="t5_h2">Why does the network need a light load?</string>
-    <string name="t5_p5">One of the main advantages of the bitcoin network is its ability to stay synchronized and distributed across many computers linked to the network. The lighter and leaner the load on the network, the more resistant it is to attacks, and the more neutral and robust it stays.</string>
+    <string name="t5_p5">One of the main advantages of the bitcoin network is its ability to stay synchronized and distributed across many computers linked to the network all over the world. The lighter and leaner the load on the network, the more resistant it is to attacks, and the more neutral and robust it stays so that all can benefit from its availability and robustness.</string>
 </resources>

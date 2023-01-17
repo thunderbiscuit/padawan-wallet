@@ -11,19 +11,19 @@
 
     <string name="t1_h1">What is the Bitcoin testnet?</string>
 
-    <string name="t1_p1">A Bitcoin network is made up of thousands of computers across the world. These computers speak a common language and communicate directly with each other over the internet.</string>
-    <string name="t1_p2">You might not know, but there are many Bitcoin networks! The two most important of these networks are called "mainnet" and "testnet".</string>
+    <string name="t1_p1">Bitcoin networks are made up of thousands of computers across the world. These computers speak a common language and communicate directly with each other over the internet.</string>
+    <string name="t1_p2">You might not know, but there are many bitcoin networks! The two most important of these networks are called "mainnet" and "testnet".</string>
 
     <string name="t1_h2">Mainnet</string>
-    <string name="t1_p3">When people talk about "the bitcoin network", they usually mean the "mainnet bitcoin network" (or "mainnet").</string>
-    <string name="t1_p4">The bitcoins on mainnet have monetary value and can be traded on cryptocurrency exchanges.</string>
+    <string name="t1_p3">When people talk about "the bitcoin network", they usually mean the mainnet bitcoin network (or simply \"mainnet\").</string>
+    <string name="t1_p4">The bitcoins on mainnet have monetary value, can be used as money for transactions between people, and can be traded on cryptocurrency exchanges.</string>
 
     <string name="t1_h3">Testnet</string>
-    <string name="t1_p5">The testnet network (or “testnet”) is not as well known as the mainnet network. The bitcoins on this network are called testnet coins and look and behave just like mainnet bitcoins. But unlike bitcoins, testnet coins have no monetary value.</string>
-    <string name="t1_p6">Testnet is used by software developers who create real-world applications that send and receive mainnet bitcoins. These developers can use testnet to make sure their software is working properly, before switching to mainnet.</string>
+    <string name="t1_p5">The testnet network (or \"testnet\") is not as well known as the mainnet network. The bitcoins on this network are called testnet coins and look and behave just like mainnet bitcoins. But unlike bitcoins, testnet coins have no monetary value.</string>
+    <string name="t1_p6">Testnet is used by software developers who create real-world applications that interact with bitcoin. These developers can use testnet to make sure their software is working properly, before switching to mainnet. But you don\'t need to be a software developer to use testnet!</string>
 
     <string name="t1_h4">Padawan &amp; Testnet</string>
-    <string name="t1_p7">The testnet and its coins are an invaluable resource for curious people to learn, play, and get confident with bitcoin networks before even touching “real” mainnet bitcoins! Remember that testnet bitcoins DO NOT have monetary value.</string>
-    <string name="t1_p8">Padawan will teach you the foundations of bitcoin, including making transactions and backing up wallets, all using the testnet network. You cannot receive or send "real" (mainnet) bitcoins to or from your Padawan wallet. Any coins you have on Padawan or send to friends are testnet coins with NO monetary value.</string>
+    <string name="t1_p7">The testnet and its coins are an invaluable resource for curious people to learn, play, and get confident with bitcoin networks before even touching \"real\" mainnet bitcoins! Remember that testnet bitcoins DO NOT have monetary value.</string>
+    <string name="t1_p8">Padawan will teach you the foundations of bitcoin, including making transactions and backing up wallets, all using the testnet network. You cannot receive or send (mainnet) bitcoins to or from your Padawan wallet. Any coins you have on Padawan or send to friends are testnet coins with NO monetary value.</string>
     <string name="t1_p9">Use Padawan to learn, practice, and test the boundaries of your bitcoin knowledge!</string>
 </resources>

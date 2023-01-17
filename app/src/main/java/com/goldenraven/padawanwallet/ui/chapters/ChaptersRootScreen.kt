@@ -331,7 +331,7 @@ fun calculateCompletionStringOfGroup(page: Int, completedChapters: Map<Int, Bool
         }
         2 -> {
             val count = completedChapters.count {
-                it.key in 7..8 && it.value
+                it.key in 7..9 && it.value
             }
             "$count of 3 done"
         }
@@ -374,9 +374,6 @@ fun getBackgroundColor(page: Int): Color {
         0 -> Color(0xffb855f6)
         1 -> Color(0xfff6557e)
         2 -> Color(0xfff57247)
-        // 0 -> Color(0xffba4ffc)
-        // 1 -> Color(0xfffc4f79)
-        // 2 -> Color(0xffff6d3b)
         else -> Color(0xffffffff)
     }
 }
