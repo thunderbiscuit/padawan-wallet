@@ -44,7 +44,7 @@ object Wallet {
     }
 
     fun createBlockchain() {
-        val blockchainConfig = BlockchainConfig.Electrum(ElectrumConfig(electrumURL, null, 5u, null, 10u))
+        val blockchainConfig = BlockchainConfig.Electrum(ElectrumConfig(electrumURL, null, 5u, null, 10u, true))
         blockchain = Blockchain(blockchainConfig)
     }
 

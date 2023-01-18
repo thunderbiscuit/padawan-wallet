@@ -116,7 +116,7 @@ dependencies {
     implementation("com.google.accompanist:accompanist-pager:0.23.1")
 
     // bitcoin
-    implementation("org.bitcoindevkit:bdk-android:0.26.0-SNAPSHOT")
+    implementation("org.bitcoindevkit:bdk-android:0.26.0")
 
     // Ktor
     implementation("io.ktor:ktor-client-cio:2.2.1")
