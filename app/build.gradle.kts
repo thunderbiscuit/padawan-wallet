@@ -94,15 +94,10 @@ android {
 }
 
 dependencies {
-    implementation("androidx.core:core-ktx:1.8.0")
-    implementation("androidx.appcompat:appcompat:1.4.2")
-    implementation("com.google.android.material:material:1.6.1")
-    // implementation("androidx.constraintlayout:constraintlayout:2.1.3")
-    // implementation("androidx.navigation:navigation-fragment-ktx:2.4.1")
-    // implementation("androidx.navigation:navigation-ui-ktx:2.4.1")
-    implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.3.1")
-    // implementation("androidx.legacy:legacy-support-v4:1.0.0")
-    // implementation("androidx.viewpager:viewpager:1.0.0")
+    implementation("androidx.core:core-ktx:1.9.0")
+    implementation("androidx.appcompat:appcompat:1.6.0")
+    implementation("com.google.android.material:material:1.7.0")
+    implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.3.2")
 
     // compose
     implementation("androidx.activity:activity-compose:1.5.0")
