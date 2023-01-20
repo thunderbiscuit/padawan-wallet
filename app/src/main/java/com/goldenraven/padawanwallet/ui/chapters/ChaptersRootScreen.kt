@@ -76,7 +76,7 @@ fun ChapterHomeTitle() {
     ) {
         Column(
             modifier = Modifier
-                .weight(weight = 0.65f)
+                .weight(weight = 0.70f)
                 .padding(horizontal = 32.dp)
         ) {
             Text(
@@ -86,7 +86,7 @@ fun ChapterHomeTitle() {
             )
             Spacer(modifier = Modifier.height(height = 16.dp))
             Text(
-                text = "Continue on your journey of becoming a bitcoin master",
+                text = "Continue on your journey of learning bitcoin.",
                 style = PadawanTypography.bodyMedium,
                 color = padawan_theme_text_faded_secondary
             )
