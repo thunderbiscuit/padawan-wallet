@@ -17,10 +17,12 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.goldenraven.padawanwallet.BuildConfig
 import com.goldenraven.padawanwallet.R
 import com.goldenraven.padawanwallet.theme.PadawanTypography
 import com.goldenraven.padawanwallet.theme.padawan_theme_background_secondary
 import com.goldenraven.padawanwallet.theme.padawan_theme_button_primary
+import com.goldenraven.padawanwallet.theme.padawan_theme_text_faded_secondary
 import com.goldenraven.padawanwallet.ui.Screen
 import com.goldenraven.padawanwallet.ui.chapters.ChaptersViewModel
 
@@ -142,7 +144,28 @@ internal fun SettingsRootScreen(
         }
 
         Divider(
-            modifier = Modifier.fillMaxWidth().padding(40.dp),
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(top = 40.dp, bottom = 8.dp, start = 40.dp, end = 40.dp),
+            color = Color(0xff8f8f8f),
+            thickness = 1.dp
+        )
+
+        Row(
+            horizontalArrangement = Arrangement.Center,
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Text(
+                text = "Padawan Wallet ${BuildConfig.VERSION_NAME}",
+                style = PadawanTypography.bodySmall,
+                color = padawan_theme_text_faded_secondary
+            )
+        }
+
+        Divider(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(top = 8.dp, bottom = 40.dp, start = 40.dp, end = 40.dp),
             color = Color(0xff8f8f8f),
             thickness = 1.dp
         )
