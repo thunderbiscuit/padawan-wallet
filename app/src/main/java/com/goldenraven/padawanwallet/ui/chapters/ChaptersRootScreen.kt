@@ -175,7 +175,7 @@ fun SectionsCarousel(
 
 @Composable
 fun LessonCircle(lessonNumber: Int, completed: Boolean, selected: Boolean, selectedChapter: MutableState<Int>) {
-    val completedColor = if (completed) Color(0xffffc847) else Color(0xcfb0b0b0)
+    val completedColor = if (completed) Color(0xffffc847) else Color(0xefffffff)
 
     Text(
         text = lessonNumber.toString(),
@@ -183,14 +183,13 @@ fun LessonCircle(lessonNumber: Int, completed: Boolean, selected: Boolean, selec
             color = completedColor,
             fontSize = 28.sp,
             fontWeight = FontWeight.SemiBold,
-            fontFamily = ShareTechMono
         ),
         modifier = Modifier
             .padding(24.dp)
             .drawBehind {
                 drawCircle(
                     color = completedColor,
-                    radius = if (selected) 96f else 82f,
+                    radius = if (selected) 102f else 86f,
                 )
                 drawCircle(
                     color = Color(0xff000000),
