@@ -13,7 +13,11 @@ allprojects {
     repositories {
         google()
         mavenCentral()
-        maven(url = "https://jitpack.io")
+
+        // snapshot repository
         maven("https://s01.oss.sonatype.org/content/repositories/snapshots/")
+
+        // local Maven
+        // mavenLocal()
     }
 }
