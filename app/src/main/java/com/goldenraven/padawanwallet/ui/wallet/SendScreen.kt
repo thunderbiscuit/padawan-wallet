@@ -53,7 +53,7 @@ private const val TAG = "SendScreen"
 
 // BottomSheetScaffold is not available in Material 3, so this screen is all Material 2
 
-@OptIn(ExperimentalMaterialApi::class)
+@OptIn(ExperimentalMaterialApi::class, ExperimentalMaterial3Api::class)
 @Composable
 internal fun SendScreen(navController: NavHostController, walletViewModel: WalletViewModel) {
     // val (showDialog, setShowDialog) = rememberSaveable { mutableStateOf(false) }
@@ -131,7 +131,8 @@ internal fun SendScreen(navController: NavHostController, walletViewModel: Walle
                 singleLine = true,
                 placeholder = { Text("Enter amount (sats)") },
                 colors = TextFieldDefaults.textFieldColors(
-                    backgroundColor = padawan_theme_background_secondary,
+                    // backgroundColor = padawan_theme_background_secondary,
+                    containerColor = padawan_theme_background_secondary,
                     cursorColor = padawan_theme_onPrimary,
                     focusedIndicatorColor = Color.Transparent,
                     unfocusedIndicatorColor = Color.Transparent,
@@ -162,7 +163,8 @@ internal fun SendScreen(navController: NavHostController, walletViewModel: Walle
                 singleLine = true,
                 placeholder = { Text(text = "Enter a bitcoin testnet address") },
                 colors = TextFieldDefaults.textFieldColors(
-                    backgroundColor = padawan_theme_background_secondary,
+                    // backgroundColor = padawan_theme_background_secondary,
+                    containerColor = padawan_theme_background_secondary,
                     cursorColor = padawan_theme_onPrimary,
                     focusedIndicatorColor = Color.Transparent,
                     unfocusedIndicatorColor = Color.Transparent,

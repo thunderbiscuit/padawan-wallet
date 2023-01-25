@@ -283,7 +283,8 @@ internal fun ChapterPage(chapterPages: List<Page>, currentPage: MutableState<Int
             }
             ElementType.RESOURCE -> {
                 Card(
-                    containerColor = padawan_theme_button_secondary,
+                    // containerColor = padawan_theme_button_secondary,
+                    colors = CardDefaults.cardColors(padawan_theme_button_secondary),
                     border = standardBorder,
                     modifier = Modifier
                         .height(height = 150.dp)

@@ -107,7 +107,8 @@ fun SectionsCarousel(
         val cardBackgroundColor = getBackgroundColor(page)
 
         Card(
-            containerColor = cardBackgroundColor,
+            // containerColor = cardBackgroundColor,
+            colors = CardDefaults.cardColors(cardBackgroundColor),
             border = standardBorder,
             modifier = Modifier
                 .fillMaxWidth(0.97f)

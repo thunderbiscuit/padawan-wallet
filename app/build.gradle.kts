@@ -79,7 +79,7 @@ android {
     }
 
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.1.1"
+        kotlinCompilerExtensionVersion = "1.4.0"
     }
 
     packagingOptions {
@@ -100,15 +100,15 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.3.2")
 
     // compose
-    implementation("androidx.activity:activity-compose:1.5.0")
-    implementation("androidx.compose.material:material:1.1.1")
-    implementation("androidx.compose.animation:animation:1.1.1")
-    implementation("androidx.compose.ui:ui-tooling:1.1.1")
-    implementation("androidx.compose.runtime:runtime-livedata:1.1.1")
-    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.5.0")
-    implementation("androidx.navigation:navigation-compose:2.5.0")
-    implementation("androidx.compose.ui:ui:1.1.1")
-    implementation("androidx.compose.material3:material3:1.0.0-alpha08")
+    implementation("androidx.activity:activity-compose:1.6.1")
+    implementation("androidx.compose.material:material:1.3.1")
+    implementation("androidx.compose.animation:animation:1.3.3")
+    implementation("androidx.compose.ui:ui-tooling:1.3.3")
+    implementation("androidx.compose.runtime:runtime-livedata:1.3.3")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.5.1")
+    implementation("androidx.navigation:navigation-compose:2.5.3")
+    implementation("androidx.compose.ui:ui:1.3.3")
+    implementation("androidx.compose.material3:material3:1.0.1")
     implementation("androidx.constraintlayout:constraintlayout-compose:1.0.1")
     implementation("com.google.accompanist:accompanist-navigation-animation:0.23.1")
     implementation("com.google.accompanist:accompanist-systemuicontroller:0.23.1")
@@ -139,8 +139,8 @@ dependencies {
     testImplementation("org.mockito:mockito-core:4.4.0")
 
     // Instrumentation testing
-    androidTestImplementation("androidx.compose.ui:ui-test-junit4:1.1.1")
-    debugImplementation("androidx.compose.ui:ui-test-manifest:1.1.1")
+    androidTestImplementation("androidx.compose.ui:ui-test-junit4:1.3.3")
+    debugImplementation("androidx.compose.ui:ui-test-manifest:1.3.3")
 }
 
 tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach {

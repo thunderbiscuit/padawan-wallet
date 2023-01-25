@@ -75,7 +75,6 @@ internal fun WalletRootScreen(
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun NoNetworkBanner(walletViewModel: WalletViewModel, context: Context) {
     Card(
@@ -88,7 +87,8 @@ fun NoNetworkBanner(walletViewModel: WalletViewModel, context: Context) {
             },
         border = standardBorder,
         // shape = RoundedCornerShape(20.dp),
-        containerColor = Color(0xfff6cf47)
+        // containerColor = Color(0xfff6cf47)
+        colors = CardDefaults.cardColors(Color(0xfff6cf47)),
     ) {
         Row(
             modifier = Modifier.fillMaxSize(),
@@ -110,7 +110,8 @@ fun BalanceBox(
     Card(
         border = standardBorder,
         shape = RoundedCornerShape(20.dp),
-        containerColor = padawan_theme_onBackground_secondary,
+        // containerColor = padawan_theme_onBackground_secondary,
+        colors = CardDefaults.cardColors(padawan_theme_onBackground_secondary),
         modifier = Modifier
             .standardShadow(20.dp)
             .fillMaxWidth()
@@ -283,7 +284,8 @@ fun TransactionListBox(
         modifier = Modifier.fillMaxWidth(),
         border = standardBorder,
         shape = RoundedCornerShape(20.dp),
-        containerColor = padawan_theme_background_secondary,
+        // containerColor = padawan_theme_background_secondary,
+        colors = CardDefaults.cardColors(padawan_theme_background_secondary),
     ) {
         if (transactionList.isEmpty()) {
             Row(modifier = Modifier.padding(all = 24.dp)) {
