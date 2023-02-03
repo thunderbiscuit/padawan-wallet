@@ -99,16 +99,24 @@ dependencies {
     implementation("com.google.android.material:material:1.7.0")
     implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.3.2")
 
-    // compose
-    implementation("androidx.activity:activity-compose:1.6.1")
-    implementation("androidx.compose.material:material:1.3.1")
-    implementation("androidx.compose.animation:animation:1.3.3")
-    implementation("androidx.compose.ui:ui-tooling:1.3.3")
-    implementation("androidx.compose.runtime:runtime-livedata:1.3.3")
+    // Compose
+    // Adding the Bill of Materials synchronizes dependencies in the androidx.compose namespace
+    // You can remove the library version in your dependency declaration
+    implementation(platform("androidx.compose:compose-bom:2023.01.00"))
+
+    // Why does this work? As far as I understand it the androidx.activity namespace is not managed by the compose bill of materials
+    // Was implementation("androidx.activity:activity-compose:1.6.1")
+    implementation("androidx.activity:activity-compose")
+
+    implementation("androidx.compose.material:material")
+    implementation("androidx.compose.animation:animation")
+    implementation("androidx.compose.ui:ui-tooling")
+    implementation("androidx.compose.runtime:runtime-livedata")
+    implementation("androidx.compose.ui:ui")
+    implementation("androidx.compose.material3:material3")
+
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.5.1")
     implementation("androidx.navigation:navigation-compose:2.5.3")
-    implementation("androidx.compose.ui:ui:1.3.3")
-    implementation("androidx.compose.material3:material3:1.0.1")
     implementation("androidx.constraintlayout:constraintlayout-compose:1.0.1")
     implementation("com.google.accompanist:accompanist-navigation-animation:0.23.1")
     implementation("com.google.accompanist:accompanist-systemuicontroller:0.23.1")
