@@ -6,6 +6,7 @@
 package com.goldenraven.padawanwallet.ui.settings
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
@@ -15,6 +16,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.goldenraven.padawanwallet.R
@@ -53,9 +55,13 @@ internal fun AboutScreen() {
             color = padawan_theme_text_faded_secondary
         )
         Spacer(Modifier.height(24.dp))
+        val mUriHandler = LocalUriHandler.current
+        val privacyLink = stringResource(id = R.string.privacyLink)
         Text(
-            text = stringResource(R.string.privacyLink),
-            modifier = Modifier.padding(start = 24.dp, end = 24.dp),
+            text = privacyLink,
+            modifier = Modifier
+                .clickable { mUriHandler.openUri(privacyLink) }
+                .padding(start = 24.dp, end = 24.dp),
             style = PadawanTypography.bodyMedium,
             color = padawan_theme_text_faded_secondary
         )
