@@ -14,11 +14,12 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.InlineTextContent
 import androidx.compose.foundation.text.appendInlineContent
-import androidx.compose.material.SnackbarHostState
+import androidx.compose.material.ScaffoldState
+import androidx.compose.material.rememberScaffoldState
 import androidx.compose.material3.Divider
+import androidx.compose.material.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -40,7 +41,7 @@ internal fun SendCoinsBackScreen() {
     val scrollState = rememberScrollState()
     val context = LocalContext.current
     val scope = rememberCoroutineScope()
-    val snackbarHostState = remember { SnackbarHostState() }
+    val scaffoldState: ScaffoldState = rememberScaffoldState()
 
     val copyAddrString = buildAnnotatedString {
         appendInlineContent(id = "copyAddrImageId")
@@ -57,59 +58,63 @@ internal fun SendCoinsBackScreen() {
             )
         }
     )
-    Column(
-        Modifier
-            .fillMaxSize()
-            .verticalScroll(state = scrollState)
-            .background(padawan_theme_background_secondary)
-            .padding(bottom = 12.dp)
-    ) {
-        Text(
-            text = "Send your coins back to us!",
-            style = PadawanTypography.headlineSmall,
-            color = padawan_theme_text_headline,
-            modifier = Modifier
-                .padding(top = 48.dp, start = 24.dp, end = 24.dp, bottom = 32.dp)
-        )
-        Image(
-            painterResource(R.drawable.return_sats_faucet_address),
-            contentDescription = "Return sats faucet address image",
-            modifier = Modifier.padding(start = 50.dp, end = 50.dp, bottom = 20.dp)
-        )
+    Scaffold(
+        scaffoldState = scaffoldState
+    ) { padding ->
         Column(
             Modifier
-                .align(Alignment.CenterHorizontally)
-                .clickable(onClick = { copyToClipboard(context, scope, snackbarHostState) })
-                .padding(start = 24.dp, end = 24.dp, bottom = 20.dp)
+                .fillMaxSize()
+                .verticalScroll(state = scrollState)
+                .background(padawan_theme_background_secondary)
+                .padding(padding)
         ) {
             Text(
-                text = stringResource(R.string.send_coins_back_address),
-                fontSize = 14.sp
+                text = "Send your coins back to us!",
+                style = PadawanTypography.headlineSmall,
+                color = padawan_theme_text_headline,
+                modifier = Modifier
+                    .padding(top = 48.dp, start = 24.dp, end = 24.dp, bottom = 32.dp)
             )
-            Divider(
-                color = padawan_theme_text_faded_secondary,
-                thickness = 1.dp,
-                modifier = Modifier.padding(all = 3.dp)
+            Image(
+                painterResource(R.drawable.return_sats_faucet_address),
+                contentDescription = "Return sats faucet address image",
+                modifier = Modifier.padding(start = 50.dp, end = 50.dp, bottom = 20.dp)
             )
+            Column(
+                Modifier
+                    .align(Alignment.CenterHorizontally)
+                    .clickable(onClick = { copyToClipboard(context, scope, scaffoldState) })
+                    .padding(start = 24.dp, end = 24.dp, bottom = 20.dp)
+            ) {
+                Text(
+                    text = stringResource(R.string.send_coins_back_address),
+                    fontSize = 14.sp
+                )
+                Divider(
+                    color = padawan_theme_text_faded_secondary,
+                    thickness = 1.dp,
+                    modifier = Modifier.padding(all = 3.dp)
+                )
+                Text(
+                    text = copyAddrString,
+                    inlineContent = inlineContentMap,
+                    modifier = Modifier.align(Alignment.End)
+                )
+            }
             Text(
-                text = copyAddrString,
-                inlineContent = inlineContentMap,
-                modifier = Modifier.align(Alignment.End)
+                text = stringResource(id = R.string.send_coins_back),
+                style = PadawanTypography.bodyMedium,
+                color = padawan_theme_text_faded_secondary,
+                modifier = Modifier.padding(start = 24.dp, end = 24.dp)
             )
         }
-        Text(
-            text = stringResource(id = R.string.send_coins_back),
-            style = PadawanTypography.bodyMedium,
-            color = padawan_theme_text_faded_secondary,
-            modifier = Modifier.padding(start = 24.dp, end = 24.dp)
-        )
     }
 }
 
-fun copyToClipboard(context: Context, scope: CoroutineScope, snackbarHostState: SnackbarHostState) {
+fun copyToClipboard(context: Context, scope: CoroutineScope, state: ScaffoldState) {
     val clipboard: ClipboardManager = context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
     val clip: ClipData = ClipData.newPlainText("", context.getString(R.string.send_coins_back_address))
     clipboard.setPrimaryClip(clip)
 
-    scope.launch { snackbarHostState.showSnackbar("Copied address to clipboard!") }
+    scope.launch { state.snackbarHostState.showSnackbar("Copied address to clipboard!") }
 }
