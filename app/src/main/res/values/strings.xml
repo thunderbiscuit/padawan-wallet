@@ -80,7 +80,7 @@
     <string name="reset_tutorials">Reset Done Tutorials</string>
     <string name="request_testnet_coins">Request Testnet Coins!</string>
     <string name="privacyText">Padawan Wallet does not collect any information on its users, and does not use Firebase Crashlytics. This, however, means it\'s much harder for us to hear about the bugs from our users. If you have feedback, feel free to send a message to the Padawan Twitter account or to write us an email. You can read our full privacy policy here:</string>
-    <string name="privacyLink">https://github.com/thunderbiscuit/padawan-wallet/blob/dev/PRIVACY</string>
+    <string name="privacyLink">https://github.com/thunderbiscuit/padawan-wallet/blob/master/PRIVACY</string>
     <string name="send_coins_back_address">tb1qk5238eluqllq2wps67lkxme3x43wll4k282s8q</string>
     <string name="copyAddrStr">Copy</string>
     <string name="errorFaucet">Error: Faucet Not Available</string>
