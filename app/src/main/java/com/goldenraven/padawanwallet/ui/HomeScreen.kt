@@ -77,12 +77,14 @@ internal fun BottomNavigationBar(
                 },
                 selected = selectedItem == index,
                 onClick = {
-                    selectedItem = index
-                    navControllerWalletNavigation.navigate(item.route) {
-                        navControllerWalletNavigation.graph.startDestinationRoute?.let { route ->
-                            popUpTo(route)
+                    if (selectedItem != index) {
+                        selectedItem = index
+                        navControllerWalletNavigation.navigate(item.route) {
+                            navControllerWalletNavigation.graph.startDestinationRoute?.let { route ->
+                                popUpTo(route)
+                            }
+                            launchSingleTop = true
                         }
-                        launchSingleTop = true
                     }
                 },
                 colors = NavigationBarItemDefaults.colors(
