@@ -45,7 +45,10 @@ The tutorials in the app are called _Chapters_, and there are currently 9 of the
 9. The different types of wallets
 
 ### Where can I get testnet coins?
-There are many bitcoin testnet faucets out there, but Padawan uses native segwit addresses uniquely (bech32), so you'll need a faucet that can send to those. We suggest [this one](https://testnet-faucet.mempool.co/).
+There are many bitcoin testnet faucets out there, but Padawan uses native segwit addresses uniquely (bech32), so you'll need a faucet that can send to those. We suggest these two:
+
+1. https://coinfaucet.eu/en/btc-testnet/
+2. https://bitcoinfaucet.uo1.net/
 
 ### How can I delete my wallet?
 You cannot delete your wallet directly from within the app. This is on purpose, to make sure people don't delete wallets without putting in some work. If you are certain that your wallet is empty (if it's not, send the testnet coins back to us!), you can delete the wallet by clearing all app data for Padawan in your Android settings, or you can uninstall and reinstall the app directly from the Play Store. 
