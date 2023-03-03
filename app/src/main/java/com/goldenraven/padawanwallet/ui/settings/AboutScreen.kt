@@ -18,12 +18,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import com.goldenraven.padawanwallet.R
-import com.goldenraven.padawanwallet.theme.PadawanTypography
-import com.goldenraven.padawanwallet.theme.padawan_theme_background_secondary
-import com.goldenraven.padawanwallet.theme.padawan_theme_text_faded_secondary
-import com.goldenraven.padawanwallet.theme.padawan_theme_text_headline
+import com.goldenraven.padawanwallet.theme.*
 
 @Composable
 internal fun AboutScreen() {
@@ -63,7 +61,8 @@ internal fun AboutScreen() {
                 .clickable { mUriHandler.openUri(privacyLink) }
                 .padding(start = 24.dp, end = 24.dp),
             style = PadawanTypography.bodyMedium,
-            color = padawan_theme_text_faded_secondary
+            color = padawan_theme_button_primary,
+            textDecoration = TextDecoration.Underline
         )
     }
 }
