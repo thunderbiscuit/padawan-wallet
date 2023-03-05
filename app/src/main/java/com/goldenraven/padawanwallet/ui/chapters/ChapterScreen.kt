@@ -137,7 +137,7 @@ fun ChapterButtons(
                 }
             }
         } else if (chapterPageSize > 1) {
-            // Spacer(modifier = Modifier.weight(weight = 0.5f))
+             //Spacer(modifier = Modifier.weight(weight = 0.5f))
         }
 
         if (currentPage.value < chapterPageSize - 1) {

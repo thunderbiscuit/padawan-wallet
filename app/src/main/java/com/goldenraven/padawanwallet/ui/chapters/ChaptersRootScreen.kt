@@ -141,6 +141,10 @@ fun SectionsCarousel(
                             style = PadawanTypography.bodyMedium
                         )
                     }
+                    // Added some padding between "Getting started" and the numbered sections
+                    if (page == 0) {
+                        Spacer(modifier = Modifier.width(50.dp))
+                    }
                 }
 
                 Row(
