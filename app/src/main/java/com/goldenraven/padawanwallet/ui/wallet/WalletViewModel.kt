@@ -13,8 +13,7 @@ import android.util.Log
 import android.widget.Toast
 import androidx.compose.material.SnackbarDuration
 import androidx.compose.material.SnackbarHostState
-import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.*
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -135,14 +134,12 @@ class WalletViewModel(
     fun refresh(context: Context) {
         if (isOnlineVariable.value == true) {
             if (!Wallet.blockchainIsInitialized()) { Wallet.createBlockchain() }
-            // This doesn't handle multiple 'refreshing' tasks, don't use this
             viewModelScope.launch(Dispatchers.IO) {
-                // A fake 2 second 'refresh'
-                // _isRefreshing.emit(true)
+                _isRefreshing.value = true
                 updateBalance()
                 syncTransactionHistory()
-                // delay(300)
-                // _isRefreshing.emit(false)
+            }.invokeOnCompletion {
+                 _isRefreshing.value = false
             }
         } else {
             Toast.makeText(context, "No Internet Access!", Toast.LENGTH_LONG).show()
