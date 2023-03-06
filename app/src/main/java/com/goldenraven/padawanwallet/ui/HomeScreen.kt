@@ -11,7 +11,10 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import androidx.navigation.NavDestination.Companion.hierarchy
+import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
+import androidx.navigation.compose.currentBackStackEntryAsState
 import com.goldenraven.padawanwallet.theme.*
 import com.goldenraven.padawanwallet.ui.chapters.ChaptersViewModel
 import com.goldenraven.padawanwallet.utils.NavigationItem
@@ -60,6 +63,8 @@ internal fun BottomNavigationBar(
             )
         },
     ) {
+        val navBackStackEntry by navControllerWalletNavigation.currentBackStackEntryAsState()
+        val currentDestination = navBackStackEntry?.destination
         items.forEachIndexed { index, item ->
             NavigationBarItem(
                 icon = {
@@ -75,15 +80,16 @@ internal fun BottomNavigationBar(
                         style = PadawanTypography.labelSmall
                     )
                 },
-                selected = selectedItem == index,
+                selected = currentDestination?.hierarchy?.any { it.route == item.route }==true,
                 onClick = {
                     if (selectedItem != index) {
                         selectedItem = index
                         navControllerWalletNavigation.navigate(item.route) {
-                            navControllerWalletNavigation.graph.startDestinationRoute?.let { route ->
-                                popUpTo(route)
+                            popUpTo(navControllerWalletNavigation.graph.findStartDestination().id) {
+                                saveState = true
                             }
                             launchSingleTop = true
+                            restoreState = true
                         }
                     }
                 },
