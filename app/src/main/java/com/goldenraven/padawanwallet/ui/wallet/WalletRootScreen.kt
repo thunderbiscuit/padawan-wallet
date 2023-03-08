@@ -154,7 +154,8 @@ fun BalanceBox(
                     CurrencyToggleText(currencyToggleState = currencyToggleState, text = CurrencyType.SATS)
                 }
             }
-            val balanceDisplay: String = if (currencyToggleState.value) balance.toString() else balance.formatInBtc()
+            var balanceDisplay: String = if (currencyToggleState.value) balance.toString() else balance.formatInBtc()
+            balanceDisplay = formatCurrency(balanceDisplay)
             val currencyDisplay: String = if (currencyToggleState.value) CurrencyType.SATS.toString().lowercase() else CurrencyType.BTC.toString().lowercase()
             Text(
                 text = balanceDisplay,
@@ -214,6 +215,18 @@ fun BalanceBox(
                 }
             }
         }
+    }
+}
+
+fun formatCurrency(amount: String): String {
+    val regex = "(\\d)(?=(\\d{3})+\$)".toRegex()
+    val dotIdx = amount.indexOf('.')
+    return if (dotIdx == -1)  {
+        amount.replace(regex, "\$1,")
+    } else {
+        val num = amount.substring(0, dotIdx).replace(regex, "\$1,")
+        val dec = amount.substring(dotIdx+1).replace(regex, "\$1'")
+        "$num.$dec"
     }
 }
 
