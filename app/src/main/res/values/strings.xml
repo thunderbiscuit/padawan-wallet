@@ -85,5 +85,6 @@
     <string name="copyAddrStr">Copy</string>
     <string name="errorFaucet">Error: Faucet Not Available</string>
     <string name="oneTimeFaucet">Error: you\'ve already received testnet coins!</string>
+    <string name="textCopied">Copied</string>
 
 </resources>
