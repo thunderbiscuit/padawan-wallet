@@ -183,7 +183,7 @@ internal fun SettingsRootScreen(
             Button(
                 onClick = {
                     viewModel.unsetAllCompleted()
-                    scope.launch { scaffoldState.snackbarHostState.showSnackbar("Chapters Reset Successful") }
+                    scope.launch { scaffoldState.snackbarHostState.showSnackbar("Chapters reset successful") }
                 },
                 colors = ButtonDefaults.buttonColors(containerColor = Color(0xffFEE6DE)),
                 shape = RoundedCornerShape(8.dp),
