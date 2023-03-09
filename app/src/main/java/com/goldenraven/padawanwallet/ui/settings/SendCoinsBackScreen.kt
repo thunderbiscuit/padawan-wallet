@@ -31,13 +31,17 @@ import androidx.compose.ui.text.PlaceholderVerticalAlign
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import com.goldenraven.padawanwallet.R
 import com.goldenraven.padawanwallet.theme.*
+import com.goldenraven.padawanwallet.ui.PadawanAppBar
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
 @Composable
-internal fun SendCoinsBackScreen() {
+internal fun SendCoinsBackScreen(
+    navController: NavHostController
+) {
     val scrollState = rememberScrollState()
     val context = LocalContext.current
     val scope = rememberCoroutineScope()
@@ -68,13 +72,7 @@ internal fun SendCoinsBackScreen() {
                 .background(padawan_theme_background_secondary)
                 .padding(padding)
         ) {
-            Text(
-                text = "Send your coins back to us!",
-                style = PadawanTypography.headlineSmall,
-                color = padawan_theme_text_headline,
-                modifier = Modifier
-                    .padding(top = 48.dp, start = 24.dp, end = 24.dp, bottom = 32.dp)
-            )
+            PadawanAppBar(navController = navController, title = "Send your coins back to us!")
             Image(
                 painterResource(R.drawable.return_sats_faucet_address),
                 contentDescription = "Return sats faucet address image",

@@ -16,15 +16,17 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
 import com.goldenraven.padawanwallet.data.WalletRepository
-import com.goldenraven.padawanwallet.theme.PadawanTypography
 import com.goldenraven.padawanwallet.theme.padawan_theme_background_secondary
-import com.goldenraven.padawanwallet.theme.padawan_theme_text_headline
+import com.goldenraven.padawanwallet.ui.PadawanAppBar
 import com.goldenraven.padawanwallet.ui.standardBorder
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-internal fun RecoveryPhraseScreen() {
+internal fun RecoveryPhraseScreen(
+    navController: NavHostController
+) {
     val scrollState = rememberScrollState()
     val seedPhrase: String = WalletRepository.getMnemonic()
     val wordList: List<String> = seedPhrase.split(" ")
@@ -35,13 +37,7 @@ internal fun RecoveryPhraseScreen() {
             .fillMaxSize()
             .verticalScroll(state = scrollState)
     ){
-        Text(
-            text = "Your wallet recovery phrase",
-            style = PadawanTypography.headlineSmall,
-            color = padawan_theme_text_headline,
-            modifier = Modifier
-                .padding(top = 48.dp, start = 24.dp, end = 24.dp, bottom = 32.dp)
-        )
+        PadawanAppBar(navController = navController, title = "Your wallet recovery phrase")
         wordList.forEachIndexed { index, item ->
             Row(
                 horizontalArrangement = Arrangement.Center,

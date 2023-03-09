@@ -7,10 +7,7 @@ package com.goldenraven.padawanwallet.ui.settings
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.*
@@ -20,11 +17,15 @@ import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
 import com.goldenraven.padawanwallet.R
 import com.goldenraven.padawanwallet.theme.*
+import com.goldenraven.padawanwallet.ui.PadawanAppBar
 
 @Composable
-internal fun AboutScreen() {
+internal fun AboutScreen(
+    navController: NavHostController
+) {
     val scrollState = rememberScrollState()
     Column(
         Modifier
@@ -32,13 +33,7 @@ internal fun AboutScreen() {
             .background(padawan_theme_background_secondary)
             .padding(bottom = 12.dp)
     ) {
-        Text(
-            text = "About Padawan",
-            style = PadawanTypography.headlineSmall,
-            color = padawan_theme_text_headline,
-            modifier = Modifier
-                .padding(top = 48.dp, start = 24.dp, end = 24.dp, bottom = 32.dp)
-        )
+        PadawanAppBar(navController = navController, title = "About Padawan")
         Text(
             text = stringResource(R.string.about_text),
             modifier = Modifier.padding(start = 24.dp, end = 24.dp),
