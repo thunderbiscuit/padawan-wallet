@@ -269,7 +269,7 @@ fun WalletNavigation(
             popExitTransition = {
                 slideOutOfContainer(AnimatedContentScope.SlideDirection.Down, animationSpec = tween(animationDuration))
             }
-        ) { AboutScreen() }
+        ) { AboutScreen(navController = navControllerWalletNavigation) }
 
 
         // Recovery phrase
@@ -287,7 +287,7 @@ fun WalletNavigation(
             popExitTransition = {
                 slideOutOfContainer(AnimatedContentScope.SlideDirection.Down, animationSpec = tween(animationDuration))
             }
-        ) { RecoveryPhraseScreen() }
+        ) { RecoveryPhraseScreen(navController = navControllerWalletNavigation) }
 
 
         // Send coins back
@@ -305,6 +305,6 @@ fun WalletNavigation(
             popExitTransition = {
                 slideOutOfContainer(AnimatedContentScope.SlideDirection.Down, animationSpec = tween(animationDuration))
             }
-        ) { SendCoinsBackScreen() }
+        ) { SendCoinsBackScreen(navController = navControllerWalletNavigation) }
     }
 }
