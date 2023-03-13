@@ -14,15 +14,16 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.InlineTextContent
 import androidx.compose.foundation.text.appendInlineContent
+import androidx.compose.material.Scaffold
 import androidx.compose.material.ScaffoldState
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.material3.Divider
-import androidx.compose.material.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -34,6 +35,7 @@ import androidx.compose.ui.unit.sp
 import com.goldenraven.padawanwallet.R
 import com.goldenraven.padawanwallet.theme.*
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 @Composable
@@ -43,19 +45,30 @@ internal fun SendCoinsBackScreen() {
     val scope = rememberCoroutineScope()
     val scaffoldState: ScaffoldState = rememberScaffoldState()
 
+    val (copyClicked, setCopyClicked) = remember { mutableStateOf(false) }
+
     val copyAddrString = buildAnnotatedString {
         appendInlineContent(id = "copyAddrImageId")
-        append(stringResource(id = R.string.copyAddrStr))
+        if (!copyClicked) append(stringResource(id = R.string.copyAddrStr)) else append(stringResource(R.string.textCopied))
     }
 
     val inlineContentMap = mapOf(
         "copyAddrImageId" to InlineTextContent(
             Placeholder(17.sp, 17.sp, PlaceholderVerticalAlign.TextCenter)
         ) {
-            Image(
-                painterResource(R.drawable.hicon_add_square),
-                contentDescription = "Copy to clipboard image",
-            )
+            if (copyClicked) {
+                Image(
+                    painter = painterResource(R.drawable.ic_checked),
+                    contentDescription = "Checkmark image",
+                    colorFilter = ColorFilter.tint(Color.Green)
+
+                )
+            } else {
+                Image(
+                    painter = painterResource(R.drawable.hicon_add_square),
+                    contentDescription = "Copy to clipboard image",
+                )
+            }
         }
     )
     Scaffold(
@@ -83,7 +96,10 @@ internal fun SendCoinsBackScreen() {
             Column(
                 Modifier
                     .align(Alignment.CenterHorizontally)
-                    .clickable(onClick = { copyToClipboard(context, scope, scaffoldState) })
+                    .clickable(onClick = {
+                        setCopyClicked(true)
+                        copyToClipboard(context, scope, scaffoldState, setCopyClicked)
+                    })
                     .padding(start = 24.dp, end = 24.dp, bottom = 20.dp)
             ) {
                 Text(
@@ -111,10 +127,13 @@ internal fun SendCoinsBackScreen() {
     }
 }
 
-fun copyToClipboard(context: Context, scope: CoroutineScope, state: ScaffoldState) {
+fun copyToClipboard(context: Context, scope: CoroutineScope, state: ScaffoldState, setCopyClicked: (Boolean) -> Unit) {
     val clipboard: ClipboardManager = context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
     val clip: ClipData = ClipData.newPlainText("", context.getString(R.string.send_coins_back_address))
     clipboard.setPrimaryClip(clip)
-
-    scope.launch { state.snackbarHostState.showSnackbar("Copied address to clipboard!") }
+    scope.launch {
+        state.snackbarHostState.showSnackbar("Copied address to clipboard!")
+        delay(1000)
+        setCopyClicked(false)
+    }
 }
