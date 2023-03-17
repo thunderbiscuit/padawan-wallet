@@ -54,10 +54,10 @@ val chapter2: List<Page> = listOf(
         ChapterElement(ElementType.BODY, R.string.t2_p1),
         ChapterElement(ElementType.BODY, R.string.t2_p2),
         ChapterElement(ElementType.BODY, R.string.t2_p3),
-        ChapterElement(ElementType.RESOURCE, R.drawable.placeholder_image),
+        ChapterElement(ElementType.RESOURCE, R.drawable.btc_address),
         ChapterElement(ElementType.BODY, R.string.t2_p4),
         ChapterElement(ElementType.BODY, R.string.t2_p5),
-        ChapterElement(ElementType.RESOURCE, R.drawable.placeholder_image),
+        ChapterElement(ElementType.RESOURCE, R.drawable.qr_code),
         ChapterElement(ElementType.BODY, R.string.t2_p6),
     ),
     listOf(

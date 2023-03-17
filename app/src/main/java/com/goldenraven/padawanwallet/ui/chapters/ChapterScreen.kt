@@ -290,7 +290,15 @@ internal fun ChapterPage(chapterPages: List<Page>, currentPage: MutableState<Int
                         .height(height = 150.dp)
                         .fillMaxWidth()
                         .standardShadow(20.dp)
-                ) {  }
+                ) {
+                    Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                        Image(
+                            painter = painterResource(id = element.resourceId),
+                            contentDescription = "sample btc address" ,
+                            modifier = Modifier.aspectRatio(1f)
+                        )
+                    }
+                }
             }
         }
         Spacer(modifier = Modifier.height(height = 24.dp))
