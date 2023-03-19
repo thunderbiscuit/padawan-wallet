@@ -19,6 +19,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -243,33 +244,51 @@ fun ChapterTagline(chapterData: List<ChapterElement>) {
 
 @Composable
 fun ChapterButton(chapterData: Chapter, navController: NavController) {
-    Box(modifier = Modifier.fillMaxWidth()) {
+    Row(
+        horizontalArrangement = Arrangement.SpaceBetween,
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(vertical = 16.dp, horizontal = 8.dp)
+    ) {
         Button(
-            onClick = { navController.navigate(route = "${Screen.ChapterScreen.route}/${chapterData.id}") },
+            onClick = {
+                navController.navigate(route = "${Screen.ChapterScreen.route}/${chapterData.id}")
+            },
             colors = ButtonDefaults.buttonColors(containerColor = padawan_theme_button_primary),
             shape = RoundedCornerShape(20.dp),
             border = standardBorder,
             modifier = Modifier
-                .padding(all = 16.dp)
+                .weight(1f)
                 .standardShadow(20.dp)
-                .align(alignment = Alignment.Center),
         ) {
-            Row(
-                verticalAlignment = Alignment.CenterVertically,
-                modifier = Modifier.padding(vertical = 8.dp)
-            ) {
-                Text(
-                    text = "Start Chapter",
-                    style = PadawanTypography.labelLarge,
-                )
-                Icon(
-                    painter = painterResource(id = R.drawable.ic_next),
-                    contentDescription = "Next Icon"
-                )
-            }
+            Text(
+                text = "Start Chapter",
+                style = PadawanTypography.labelLarge,
+            )
+        }
+        Spacer(modifier = Modifier.width(10.dp)) // Add space between the buttons
+        Button(
+            onClick = {
+                navController.navigate(route = "${Screen.ChapterScreen.route}/${chapterData.id + 1}")
+            },
+            colors = ButtonDefaults.buttonColors(containerColor = padawan_theme_button_secondary),
+            shape = RoundedCornerShape(20.dp),
+            border = standardBorder,
+            modifier = Modifier
+                .weight(1f)
+                .standardShadow(20.dp)
+        ) {
+            Text(
+                text = "Next up: Chapter ${chapterData.id + 1}",
+                style = PadawanTypography.labelLarge,
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis
+            )
         }
     }
 }
+
+
 
 @Composable
 fun ProgressBar(
