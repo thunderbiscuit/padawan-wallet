@@ -203,11 +203,13 @@ fun BalanceBox(
                         viewModel.updateConnectivityStatus(context)
                         viewModel.refresh(context)
                     },
-                    colors = ButtonDefaults.buttonColors(containerColor = Color.Black),
+                    colors = ButtonDefaults.buttonColors(containerColor = Color.Black,
+                        disabledContainerColor = padawan_theme_onBackground_faded),
                     shape = RoundedCornerShape(20.dp, 20.dp, 0.dp, 0.dp),
                     border = standardBorder,
                     modifier = Modifier
-                        .width(110.dp)
+                        .width(110.dp),
+                    enabled = !isRefreshing
                 ) {
                     Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.Center) {
                         Text(
