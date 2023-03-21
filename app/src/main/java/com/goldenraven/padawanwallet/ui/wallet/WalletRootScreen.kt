@@ -225,7 +225,7 @@ fun formatCurrency(amount: String): String {
         amount.replace(regex, "\$1,")
     } else {
         val num = amount.substring(0, dotIdx).replace(regex, "\$1,")
-        val dec = amount.substring(dotIdx+1).replace(regex, "\$1'")
+        val dec = amount.substring(dotIdx+1).replace(regex, "\$1 ")
         "$num.$dec"
     }
 }
