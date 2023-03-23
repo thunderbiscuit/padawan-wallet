@@ -132,7 +132,7 @@ class WalletViewModel(
     }
 
     // Refreshing & Syncing
-    fun refresh(context: Context) {
+    fun refresh(context: Context, onSyncSuccess:(Boolean) -> Unit = {}) {
         if (isOnlineVariable.value == true) {
             if (!Wallet.blockchainIsInitialized()) { Wallet.createBlockchain() }
             // This doesn't handle multiple 'refreshing' tasks, don't use this
@@ -143,6 +143,7 @@ class WalletViewModel(
                 syncTransactionHistory()
                 // delay(300)
                 // _isRefreshing.emit(false)
+                onSyncSuccess(false)
             }
         } else {
             Toast.makeText(context, "No Internet Access!", Toast.LENGTH_LONG).show()

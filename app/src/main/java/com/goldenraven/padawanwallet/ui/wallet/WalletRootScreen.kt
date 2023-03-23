@@ -7,8 +7,7 @@ package com.goldenraven.padawanwallet.ui.wallet
 
 import android.content.Context
 import androidx.compose.animation.animateColor
-import androidx.compose.animation.core.tween
-import androidx.compose.animation.core.updateTransition
+import androidx.compose.animation.core.*
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -22,6 +21,7 @@ import androidx.compose.runtime.*
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
@@ -31,6 +31,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
+import androidx.lifecycle.ViewModel
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import com.goldenraven.padawanwallet.R
@@ -66,12 +67,18 @@ internal fun WalletRootScreen(
     }
 
     Column(modifier = Modifier.standardBackground()) {
-        if (isOnlineStatus == false) { NoNetworkBanner(walletViewModel, context) }
+        if (isOnlineStatus == false) {
+            NoNetworkBanner(walletViewModel, context)
+        }
         // if (walletViewModel.isOnlineVariable.value == false) { NoNetworkBanner(walletViewModel, context) }
         BalanceBox(balance = balance ?: 0uL, viewModel = walletViewModel)
         Spacer(modifier = Modifier.height(height = 12.dp))
         SendReceive(navController = navController)
-        TransactionListBox(tempOpenFaucetDialog = tempOpenFaucetDialog, transactionList = transactionList, navController = navController)
+        TransactionListBox(
+            tempOpenFaucetDialog = tempOpenFaucetDialog,
+            transactionList = transactionList,
+            navController = navController
+        )
     }
 }
 
@@ -149,14 +156,23 @@ fun BalanceBox(
                         .height(IntrinsicSize.Min)
                         .padding(horizontal = 8.dp)
                 ) {
-                    CurrencyToggleText(currencyToggleState = currencyToggleState, text = CurrencyType.BTC)
+                    CurrencyToggleText(
+                        currencyToggleState = currencyToggleState,
+                        text = CurrencyType.BTC
+                    )
                     FadedVerticalDivider()
-                    CurrencyToggleText(currencyToggleState = currencyToggleState, text = CurrencyType.SATS)
+                    CurrencyToggleText(
+                        currencyToggleState = currencyToggleState,
+                        text = CurrencyType.SATS
+                    )
                 }
             }
-            var balanceDisplay: String = if (currencyToggleState.value) balance.toString() else balance.formatInBtc()
+            var balanceDisplay: String =
+                if (currencyToggleState.value) balance.toString() else balance.formatInBtc()
             balanceDisplay = formatCurrency(balanceDisplay)
-            val currencyDisplay: String = if (currencyToggleState.value) CurrencyType.SATS.toString().lowercase() else CurrencyType.BTC.toString().lowercase()
+            val currencyDisplay: String =
+                if (currencyToggleState.value) CurrencyType.SATS.toString()
+                    .lowercase() else CurrencyType.BTC.toString().lowercase()
             Text(
                 text = balanceDisplay,
                 style = PadawanTypography.displaySmall,
@@ -187,32 +203,7 @@ fun BalanceBox(
                         end.linkTo(parent.end)
                     }
             ) {
-                Button(
-                    onClick = {
-                        viewModel.updateConnectivityStatus(context)
-                        viewModel.refresh(context)
-                    },
-                    colors = ButtonDefaults.buttonColors(containerColor = Color.Black),
-                    shape = RoundedCornerShape(20.dp, 20.dp, 0.dp, 0.dp),
-                    border = standardBorder,
-                    modifier = Modifier
-                        .width(110.dp)
-                ) {
-                    Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.Center) {
-                        Text(
-                            text = "sync",
-                            style = PadawanTypography.labelLarge,
-                            fontWeight = FontWeight.Normal,
-                            color = Color(0xffdbdeff),
-                            modifier = Modifier.padding(horizontal = 8.dp)
-                        )
-                        Icon(
-                            painter = painterResource(id = R.drawable.ic_sync),
-                            tint = Color(0xffdbdeff),
-                            contentDescription = "Sync icon"
-                        )
-                    }
-                }
+                SyncButton(viewModel, context)
             }
         }
     }
@@ -221,12 +212,70 @@ fun BalanceBox(
 fun formatCurrency(amount: String): String {
     val regex = "(\\d)(?=(\\d{3})+\$)".toRegex()
     val dotIdx = amount.indexOf('.')
-    return if (dotIdx == -1)  {
+    return if (dotIdx == -1) {
         amount.replace(regex, "\$1,")
     } else {
         val num = amount.substring(0, dotIdx).replace(regex, "\$1,")
-        val dec = amount.substring(dotIdx+1).replace(regex, "\$1 ")
+        val dec = amount.substring(dotIdx + 1).replace(regex, "\$1 ")
         "$num.$dec"
+    }
+}
+
+@Composable
+private fun SyncButton(viewModel: WalletViewModel, context: Context) {
+    val isOnlineStatus by viewModel.isOnlineVariable.observeAsState()
+    //sync icon animation
+    var rotationAngle by remember { mutableStateOf(0f) }
+    var isAnimationRunning by remember { mutableStateOf(false) }
+    val infiniteTransition = rememberInfiniteTransition()
+
+    val rotation by infiniteTransition.animateFloat(
+        initialValue = 0f,
+        targetValue = 360f,
+        animationSpec = infiniteRepeatable(
+            animation = tween(2000, easing = LinearEasing),
+            repeatMode = RepeatMode.Restart
+        ),
+    )
+
+    if (isAnimationRunning) {
+        rotationAngle = rotation
+    }
+
+    Button(
+        onClick = {
+            if (isOnlineStatus == true) {
+                isAnimationRunning = true
+            }
+            viewModel.updateConnectivityStatus(context)
+            viewModel.refresh(context) { running ->
+                isAnimationRunning = running
+            }
+        },
+        colors = ButtonDefaults.buttonColors(containerColor = Color.Black),
+        shape = RoundedCornerShape(20.dp, 20.dp, 0.dp, 0.dp),
+        border = standardBorder,
+        modifier = Modifier
+            .width(110.dp)
+    ) {
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.Center
+        ) {
+            Text(
+                text = "sync",
+                style = PadawanTypography.labelLarge,
+                fontWeight = FontWeight.Normal,
+                color = Color(0xffdbdeff),
+                modifier = Modifier.padding(horizontal = 8.dp)
+            )
+            Icon(
+                modifier = Modifier.rotate(degrees = rotationAngle),
+                painter = painterResource(id = R.drawable.ic_sync),
+                tint = Color(0xffdbdeff),
+                contentDescription = "Sync icon"
+            )
+        }
     }
 }
 
@@ -246,12 +295,18 @@ fun SendReceive(navController: NavHostController) {
                 .standardShadow(20.dp)
                 .weight(weight = 0.5f)
         ) {
-            Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.padding(vertical = 8.dp)) {
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                modifier = Modifier.padding(vertical = 8.dp)
+            ) {
                 Text(
                     text = "Receive",
                     style = PadawanTypography.labelLarge,
                 )
-                Icon(painter = painterResource(id = R.drawable.ic_receive), contentDescription = "Receive Icon")
+                Icon(
+                    painter = painterResource(id = R.drawable.ic_receive),
+                    contentDescription = "Receive Icon"
+                )
             }
         }
         Button(
@@ -264,12 +319,18 @@ fun SendReceive(navController: NavHostController) {
                 .standardShadow(20.dp)
                 .weight(weight = 0.5f),
         ) {
-            Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.padding(vertical = 8.dp)) {
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                modifier = Modifier.padding(vertical = 8.dp)
+            ) {
                 Text(
                     text = "Send",
                     style = PadawanTypography.labelLarge,
                 )
-                Icon(painter = painterResource(id = R.drawable.ic_send), contentDescription = "Send Icon")
+                Icon(
+                    painter = painterResource(id = R.drawable.ic_send),
+                    contentDescription = "Send Icon"
+                )
             }
         }
     }
@@ -321,9 +382,15 @@ fun TransactionListBox(
                         shape = RoundedCornerShape(20.dp),
                         border = standardBorder
                     ) {
-                        Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.padding(vertical = 8.dp)) {
+                        Row(
+                            verticalAlignment = Alignment.CenterVertically,
+                            modifier = Modifier.padding(vertical = 8.dp)
+                        ) {
                             Text(text = "Get coins", style = PadawanTypography.bodyMedium)
-                            Icon(painter = painterResource(id = R.drawable.ic_receive_secondary), contentDescription = "Get Coins Icon")
+                            Icon(
+                                painter = painterResource(id = R.drawable.ic_receive_secondary),
+                                contentDescription = "Get Coins Icon"
+                            )
                         }
                     }
                 }
@@ -339,10 +406,16 @@ fun TransactionListBox(
                         Spacer(modifier = Modifier.height(24.dp))
                     }
                     Column(
-                        modifier = Modifier.noRippleClickable { viewTransaction(navController, txid = tx.txid) }
+                        modifier = Modifier.noRippleClickable {
+                            viewTransaction(
+                                navController,
+                                txid = tx.txid
+                            )
+                        }
                     ) {
-                        Box(modifier = Modifier
-                            .fillMaxWidth()
+                        Box(
+                            modifier = Modifier
+                                .fillMaxWidth()
                         ) {
                             Text(
                                 text = "${tx.txid.take(n = 5)}.....${tx.txid.takeLast(n = 5)}",
@@ -355,15 +428,19 @@ fun TransactionListBox(
                                     .padding(top = 8.dp)
                             )
                             Text(
-                                text = "${if (tx.isPayment) tx.valueOut.toString() else tx.valueIn.toString()} ${CurrencyType.SATS.toString().lowercase()}",
+                                text = "${if (tx.isPayment) tx.valueOut.toString() else tx.valueIn.toString()} ${
+                                    CurrencyType.SATS.toString().lowercase()
+                                }",
                                 style = PadawanTypography.bodyMedium,
                                 textAlign = TextAlign.End,
                                 modifier = Modifier.align(Alignment.BottomEnd)
                             )
                         }
-                        Box(modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(vertical = 4.dp)) {
+                        Box(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(vertical = 4.dp)
+                        ) {
                             // val message = if (tx.date == "Pending") "Pending" else "${getDateDifference(date = tx.date)} ago"
                             Text(
                                 text = tx.date,
@@ -388,7 +465,9 @@ fun TransactionListBox(
                                             .padding(start = 8.dp, top = 4.dp, bottom = 4.dp)
                                     )
                                     Icon(
-                                        painter = if (tx.isPayment) painterResource(id = R.drawable.ic_send_secondary) else painterResource(id = R.drawable.ic_receive_secondary),
+                                        painter = if (tx.isPayment) painterResource(id = R.drawable.ic_send_secondary) else painterResource(
+                                            id = R.drawable.ic_receive_secondary
+                                        ),
                                         tint = padawan_disabled,
                                         contentDescription = if (tx.isPayment) "Send Icon" else "Receive Icon",
                                         modifier = Modifier
@@ -413,10 +492,12 @@ fun TransactionListBox(
 
 @Composable
 fun CurrencyToggleText(currencyToggleState: MutableState<Boolean>, text: CurrencyType) {
-    val currencyState = (!currencyToggleState.value && text == CurrencyType.BTC) || (currencyToggleState.value && text == CurrencyType.SATS)
+    val currencyState =
+        (!currencyToggleState.value && text == CurrencyType.BTC) || (currencyToggleState.value && text == CurrencyType.SATS)
 
     val colorTransition = updateTransition(
-        if (currencyState) padawan_theme_onBackground_faded else padawan_theme_onPrimary, label = "Currency Toggle Text"
+        if (currencyState) padawan_theme_onBackground_faded else padawan_theme_onPrimary,
+        label = "Currency Toggle Text"
     )
     val color by colorTransition.animateColor(
         transitionSpec = { tween(durationMillis = 500) },
