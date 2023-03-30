@@ -156,7 +156,7 @@ tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach 
 }
 
 tasks.withType<Test> {
-    useJUnitPlatform()
+    useJUnitPlatform() // JUnit 5
 
     testLogging {
         events(PASSED, SKIPPED, FAILED, STANDARD_OUT, STANDARD_ERROR)
