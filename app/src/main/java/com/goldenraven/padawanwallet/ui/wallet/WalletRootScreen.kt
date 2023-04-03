@@ -107,113 +107,113 @@ fun BalanceBox(
     viewModel: WalletViewModel
 ) {
     val context = LocalContext.current // TODO #4: Is this the right place to get this context?
-    CompositionLocalProvider(
-        LocalMinimumTouchTargetEnforcement provides false,
+    Card(
+        border = standardBorder,
+        shape = RoundedCornerShape(20.dp),
+        // containerColor = padawan_theme_onBackground_secondary,
+        colors = CardDefaults.cardColors(padawan_theme_onBackground_secondary),
+        modifier = Modifier
+            .standardShadow(20.dp)
+            .fillMaxWidth()
     ) {
-        Card(
-            border = standardBorder,
-            shape = RoundedCornerShape(20.dp),
-            // containerColor = padawan_theme_onBackground_secondary,
-            colors = CardDefaults.cardColors(padawan_theme_onBackground_secondary),
+        ConstraintLayout(
             modifier = Modifier
-                .standardShadow(20.dp)
+                .padding(start = 24.dp, end = 24.dp, top = 24.dp, bottom = 0.dp)
                 .fillMaxWidth()
         ) {
-            ConstraintLayout(
-                modifier = Modifier
-                    .padding(start = 24.dp, end = 24.dp, top = 24.dp, bottom = 0.dp)
-                    .fillMaxWidth()
-            ) {
-                val (cardName, currencyToggle, balanceText, currencyText, buttonRow) = createRefs()
-                val currencyToggleState = remember { mutableStateOf(value = true) }
-                Text(
-                    text = "bitcoin testnet",
-                    style = PadawanTypography.bodyMedium,
-                    color = padawan_theme_text_faded,
-                    modifier = Modifier.constrainAs(cardName) {
-                        top.linkTo(parent.top)
-                        start.linkTo(parent.start)
-                    }
-                )
-                Box(
-                    modifier = Modifier
-                        .noRippleClickable {
-                            currencyToggleState.value = !currencyToggleState.value
-                        }
-                        .background(
-                            color = padawan_theme_button_secondary,
-                            shape = RoundedCornerShape(size = 10.dp)
-                        )
-                        .constrainAs(currencyToggle) {
-                            top.linkTo(parent.top)
-                            end.linkTo(parent.end)
-                        }
-                ) {
-                    Row(
-                        modifier = Modifier
-                            .height(IntrinsicSize.Min)
-                            .padding(horizontal = 8.dp)
-                    ) {
-                        CurrencyToggleText(
-                            currencyToggleState = currencyToggleState,
-                            text = CurrencyType.BTC
-                        )
-                        FadedVerticalDivider()
-                        CurrencyToggleText(
-                            currencyToggleState = currencyToggleState,
-                            text = CurrencyType.SATS
-                        )
-                    }
+            val (cardName, currencyToggle, balanceText, currencyText, buttonRow) = createRefs()
+            val currencyToggleState = remember { mutableStateOf(value = true) }
+            Text(
+                text = "bitcoin testnet",
+                style = PadawanTypography.bodyMedium,
+                color = padawan_theme_text_faded,
+                modifier = Modifier.constrainAs(cardName) {
+                    top.linkTo(parent.top)
+                    start.linkTo(parent.start)
                 }
-                var balanceDisplay: String =
-                    if (currencyToggleState.value) balance.toString() else balance.formatInBtc()
-                balanceDisplay = formatCurrency(balanceDisplay)
-                val currencyDisplay: String =
-                    if (currencyToggleState.value) CurrencyType.SATS.toString()
-                        .lowercase() else CurrencyType.BTC.toString().lowercase()
-                Text(
-                    text = balanceDisplay,
-                    style = PadawanTypography.displaySmall,
-                    fontSize = 36.sp,
-                    modifier = Modifier
-                        .padding(top = 16.dp)
-                        .constrainAs(balanceText) {
-                            top.linkTo(cardName.bottom)
-                            start.linkTo(parent.start)
-                        }
-                )
-                Text(
-                    text = currencyDisplay,
-                    style = PadawanTypography.bodyMedium,
-                    modifier = Modifier
-                        .padding(all = 8.dp)
-                        .constrainAs(currencyText) {
-                            start.linkTo(balanceText.end)
-                            bottom.linkTo(balanceText.bottom)
-                        }
-                )
+            )
+            Box(
+                modifier = Modifier
+                    .noRippleClickable {
+                        currencyToggleState.value = !currencyToggleState.value
+                    }
+                    .background(
+                        color = padawan_theme_button_secondary,
+                        shape = RoundedCornerShape(size = 10.dp)
+                    )
+                    .constrainAs(currencyToggle) {
+                        top.linkTo(parent.top)
+                        end.linkTo(parent.end)
+                    }
+            ) {
                 Row(
                     modifier = Modifier
-                        .padding(top = 16.dp, bottom = 0.dp)
-                        .constrainAs(buttonRow) {
-                            top.linkTo(balanceText.bottom)
-                            start.linkTo(parent.start)
-                            end.linkTo(parent.end)
-                        }
+                        .height(IntrinsicSize.Min)
+                        .padding(horizontal = 8.dp)
                 ) {
-                    val isRefreshing by viewModel.isRefreshing.collectAsState()
-                    val transition =
-                        updateTransition(targetState = isRefreshing, label = "PressTransition")
-                    val rotationAngle by transition.animateFloat(
-                        transitionSpec = {
-                            repeatable(
-                                iterations = Int.MAX_VALUE,
-                                animation = tween(durationMillis = 2000, easing = LinearEasing)
-                            )
-                        }, label = ""
-                    ) { pressed ->
-                        if (pressed) 360f else 0f
+                    CurrencyToggleText(
+                        currencyToggleState = currencyToggleState,
+                        text = CurrencyType.BTC
+                    )
+                    FadedVerticalDivider()
+                    CurrencyToggleText(
+                        currencyToggleState = currencyToggleState,
+                        text = CurrencyType.SATS
+                    )
+                }
+            }
+            var balanceDisplay: String =
+                if (currencyToggleState.value) balance.toString() else balance.formatInBtc()
+            balanceDisplay = formatCurrency(balanceDisplay)
+            val currencyDisplay: String =
+                if (currencyToggleState.value) CurrencyType.SATS.toString()
+                    .lowercase() else CurrencyType.BTC.toString().lowercase()
+            Text(
+                text = balanceDisplay,
+                style = PadawanTypography.displaySmall,
+                fontSize = 36.sp,
+                modifier = Modifier
+                    .padding(top = 16.dp)
+                    .constrainAs(balanceText) {
+                        top.linkTo(cardName.bottom)
+                        start.linkTo(parent.start)
                     }
+            )
+            Text(
+                text = currencyDisplay,
+                style = PadawanTypography.bodyMedium,
+                modifier = Modifier
+                    .padding(all = 8.dp)
+                    .constrainAs(currencyText) {
+                        start.linkTo(balanceText.end)
+                        bottom.linkTo(balanceText.bottom)
+                    }
+            )
+            Row(
+                modifier = Modifier
+                    .padding(top = 16.dp, bottom = 0.dp)
+                    .constrainAs(buttonRow) {
+                        top.linkTo(balanceText.bottom)
+                        start.linkTo(parent.start)
+                        end.linkTo(parent.end)
+                    }
+            ) {
+                val isRefreshing by viewModel.isRefreshing.collectAsState()
+                val transition =
+                    updateTransition(targetState = isRefreshing, label = "PressTransition")
+                val rotationAngle by transition.animateFloat(
+                    transitionSpec = {
+                        repeatable(
+                            iterations = Int.MAX_VALUE,
+                            animation = tween(durationMillis = 2000, easing = LinearEasing)
+                        )
+                    }, label = ""
+                ) { pressed ->
+                    if (pressed) 360f else 0f
+                }
+                CompositionLocalProvider(
+                    LocalMinimumTouchTargetEnforcement provides false,
+                ) {
                     Button(
                         onClick = {
                             viewModel.updateConnectivityStatus(context)
