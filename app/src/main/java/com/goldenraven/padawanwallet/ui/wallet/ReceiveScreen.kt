@@ -5,6 +5,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.selection.SelectionContainer
+import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
@@ -12,7 +13,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -32,6 +37,9 @@ internal fun ReceiveScreen(
     viewModel: WalletViewModel
 ) {
     val address by viewModel.address.observeAsState("Generate new address")
+    var isGeneratingQRState by rememberSaveable {
+        mutableStateOf(false)
+    }
 
     ConstraintLayout(
         modifier = Modifier
@@ -91,7 +99,11 @@ internal fun ReceiveScreen(
                 .padding(bottom = 24.dp)
         ) {
             Button(
-                onClick = { viewModel.updateLastUnusedAddress() },
+                onClick = {
+                    isGeneratingQRState = true
+                    viewModel.updateLastUnusedAddress()
+                    isGeneratingQRState = false
+                          },
                 colors = ButtonDefaults.buttonColors(containerColor = padawan_theme_button_primary),
                 shape = RoundedCornerShape(20.dp),
                 border = standardBorder,
@@ -101,9 +113,13 @@ internal fun ReceiveScreen(
                     .padding(vertical = 8.dp, horizontal = 8.dp)
                     .standardShadow(20.dp)
             ) {
-                Text(
-                    text = "Generate a new address",
-                )
+                if (isGeneratingQRState){
+                    CircularProgressIndicator(color = Color.Black)
+                } else {
+                    Text(
+                        text = "Generate a new address",
+                    )
+                }
             }
         }
     }
