@@ -39,6 +39,7 @@ import com.goldenraven.padawanwallet.theme.*
 import com.goldenraven.padawanwallet.ui.FadedVerticalDivider
 import com.goldenraven.padawanwallet.ui.Screen
 import com.goldenraven.padawanwallet.ui.standardBorder
+import com.goldenraven.padawanwallet.utils.ClickHelper
 import com.goldenraven.padawanwallet.utils.formatInBtc
 import io.ktor.http.*
 
@@ -252,7 +253,7 @@ fun SendReceive(navController: NavHostController) {
             .padding(top = 4.dp)
     ) {
         Button(
-            onClick = { navController.navigate(Screen.ReceiveScreen.route) },
+            onClick = {ClickHelper.getInstance().clickOnce{ navController.navigate(Screen.ReceiveScreen.route) } },
             colors = ButtonDefaults.buttonColors(containerColor = padawan_theme_button_secondary),
             shape = RoundedCornerShape(20.dp),
             border = standardBorder,
@@ -270,7 +271,7 @@ fun SendReceive(navController: NavHostController) {
             }
         }
         Button(
-            onClick = { navController.navigate(Screen.SendScreen.route) },
+            onClick = { ClickHelper.getInstance().clickOnce{ navController.navigate(Screen.SendScreen.route) } },
             colors = ButtonDefaults.buttonColors(containerColor = padawan_theme_button_primary),
             shape = RoundedCornerShape(20.dp),
             border = standardBorder,
