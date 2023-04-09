@@ -97,6 +97,7 @@ internal fun QRScanScreen(navController: NavHostController) {
                                             navController.previousBackStackEntry
                                                 ?.savedStateHandle
                                                 ?.set("BTC_Address", it)
+                                            imageAnalysis.clearAnalyzer()
                                             navController.popBackStack()
                                         }
                                     }
