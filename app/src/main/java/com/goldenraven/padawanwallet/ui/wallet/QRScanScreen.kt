@@ -63,8 +63,12 @@ internal fun QRScanScreen(navController: NavHostController) {
         modifier = Modifier.fillMaxSize(),
         backgroundColor = md_theme_dark_background,
         snackbarHost = { SnackbarHost(snackbarHostState) }
-    ) {
-        ConstraintLayout(modifier = Modifier.fillMaxSize()) {
+    ) { padding ->
+        ConstraintLayout(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(padding)
+        ) {
             val (camera, cancelButton) = createRefs()
 
             Box(
