@@ -185,7 +185,7 @@ fun ChapterButtons(
             ) {
                 Row(
                     verticalAlignment = Alignment.CenterVertically,
-                    modifier = Modifier.padding(vertical = 8.dp)
+                    modifier = Modifier.padding(vertical = 10.dp)
                 ) {
                     Text(
                         text = "Finish",
