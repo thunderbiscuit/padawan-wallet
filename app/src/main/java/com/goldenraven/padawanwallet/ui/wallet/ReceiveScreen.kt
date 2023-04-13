@@ -10,12 +10,14 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ImageBitmap
@@ -28,6 +30,8 @@ import com.goldenraven.padawanwallet.theme.*
 import com.goldenraven.padawanwallet.ui.PadawanAppBar
 import com.goldenraven.padawanwallet.ui.standardBorder
 import com.goldenraven.padawanwallet.utils.addressToQR
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 private const val TAG = "ReceiveScreen"
 
@@ -37,6 +41,15 @@ internal fun ReceiveScreen(
     viewModel: WalletViewModel
 ) {
     val address by viewModel.address.observeAsState("Generate new address")
+    var QR by remember {
+        mutableStateOf<ImageBitmap?>(null)
+    }
+
+    LaunchedEffect(address){
+        withContext(Dispatchers.IO){
+            QR = addressToQR(address)
+        }
+    }
     var isGeneratingQRState by rememberSaveable {
         mutableStateOf(false)
     }
@@ -71,21 +84,22 @@ internal fun ReceiveScreen(
                     height = Dimension.fillToConstraints
                 }
         ) {
-            val QR: ImageBitmap? = addressToQR(address)
             Log.i(TAG, "New receive address is $address")
-            if (address != "No address yet" && QR != null) {
-                Image(
-                    bitmap = QR,
-                    contentDescription = "Bitcoindevkit website QR code",
-                    Modifier.size(250.dp)
-                )
-                Spacer(modifier = Modifier.padding(vertical = 8.dp))
-                SelectionContainer {
-                    Text(
-                        text = address,
-                        fontFamily = ShareTechMono,
-                        fontSize = 12.sp
+            if (address != "No address yet") {
+                QR?.let {
+                    Image(
+                        bitmap = it,
+                        contentDescription = "Bitcoindevkit website QR code",
+                        Modifier.size(250.dp)
                     )
+                    Spacer(modifier = Modifier.padding(vertical = 8.dp))
+                    SelectionContainer {
+                        Text(
+                            text = address,
+                            fontFamily = ShareTechMono,
+                            fontSize = 12.sp
+                        )
+                    }
                 }
             }
         }
