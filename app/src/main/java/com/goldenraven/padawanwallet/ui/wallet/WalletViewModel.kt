@@ -56,7 +56,7 @@ class WalletViewModel(
     val balance: LiveData<ULong>
         get() = _balance
 
-    private var _address: MutableLiveData<String> = MutableLiveData("No address yet")
+    private var _address: MutableLiveData<String> = MutableLiveData("")
     val address: LiveData<String>
         get() = _address
 

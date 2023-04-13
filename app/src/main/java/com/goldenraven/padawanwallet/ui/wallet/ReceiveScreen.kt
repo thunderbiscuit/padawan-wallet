@@ -79,7 +79,7 @@ internal fun ReceiveScreen(
                 }
         ) {
             Log.i(TAG, "New receive address is $address")
-            if (address != "No address yet") {
+            if (address != "") {
                 QR?.let {
                     Image(
                         bitmap = it,
