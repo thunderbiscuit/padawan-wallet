@@ -70,7 +70,7 @@ internal fun WalletRootScreen(
         // if (walletViewModel.isOnlineVariable.value == false) { NoNetworkBanner(walletViewModel, context) }
         BalanceBox(balance = balance ?: 0uL, viewModel = walletViewModel)
         Spacer(modifier = Modifier.height(height = 12.dp))
-        SendReceive(navController = navController)
+        SendReceive(navController = navController, walletViewModel = walletViewModel)
         TransactionListBox(tempOpenFaucetDialog = tempOpenFaucetDialog, transactionList = transactionList, navController = navController)
     }
 }
@@ -267,13 +267,20 @@ fun formatCurrency(amount: String): String {
 }
 
 @Composable
-fun SendReceive(navController: NavHostController) {
+fun SendReceive(
+    navController: NavHostController,
+    walletViewModel: WalletViewModel
+) {
     Row(
         modifier = Modifier
             .padding(top = 4.dp)
     ) {
         Button(
-            onClick = { navController.navigate(Screen.ReceiveScreen.route) },
+            onClick = {
+                if (walletViewModel.isRecieveScreenOpen.value!=null && walletViewModel.isRecieveScreenOpen.value!=true) {
+                    navController.navigate(Screen.ReceiveScreen.route)
+                }
+            },
             colors = ButtonDefaults.buttonColors(containerColor = padawan_theme_button_secondary),
             shape = RoundedCornerShape(20.dp),
             border = standardBorder,
@@ -291,7 +298,11 @@ fun SendReceive(navController: NavHostController) {
             }
         }
         Button(
-            onClick = { navController.navigate(Screen.SendScreen.route) },
+            onClick = {
+                if (walletViewModel.isSendScreenOpen.value!=null && walletViewModel.isSendScreenOpen.value!=true) {
+                    navController.navigate(Screen.SendScreen.route)
+                }
+            },
             colors = ButtonDefaults.buttonColors(containerColor = padawan_theme_button_primary),
             shape = RoundedCornerShape(20.dp),
             border = standardBorder,

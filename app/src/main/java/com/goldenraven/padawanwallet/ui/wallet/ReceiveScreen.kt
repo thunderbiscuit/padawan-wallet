@@ -8,20 +8,18 @@ import androidx.compose.foundation.text.selection.SelectionContainer
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
-import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.graphics.ImageBitmap
+import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleEventObserver
 import androidx.navigation.NavHostController
 import com.goldenraven.padawanwallet.theme.*
 import com.goldenraven.padawanwallet.ui.PadawanAppBar
@@ -45,6 +43,23 @@ internal fun ReceiveScreen(
     LaunchedEffect(address){
         withContext(Dispatchers.IO){
             QR = addressToQR(address)
+        }
+    }
+
+    val lifeCycleOwner = LocalLifecycleOwner.current
+
+    DisposableEffect(lifeCycleOwner) {
+        val observer = LifecycleEventObserver { _, event ->
+            if (event == Lifecycle.Event.ON_PAUSE) {
+                println("onPause called")
+            }
+        }
+
+        lifeCycleOwner.lifecycle.addObserver(observer)
+
+        onDispose {
+            viewModel.isRecieveScreenOpen.value = false
+            lifeCycleOwner.lifecycle.removeObserver(observer)
         }
     }
 

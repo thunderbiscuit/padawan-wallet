@@ -29,6 +29,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
@@ -38,6 +39,8 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleEventObserver
 import androidx.navigation.NavHostController
 import com.goldenraven.padawanwallet.R
 import com.goldenraven.padawanwallet.data.Wallet
@@ -79,6 +82,23 @@ internal fun SendScreen(navController: NavHostController, walletViewModel: Walle
             recipientAddress.value = it
 
         navController.currentBackStackEntry?.savedStateHandle?.remove<String>("BTC_Address")
+    }
+
+    val lifeCycleOwner = LocalLifecycleOwner.current
+
+    DisposableEffect(lifeCycleOwner) {
+        val observer = LifecycleEventObserver { _, event ->
+            if (event == Lifecycle.Event.ON_PAUSE) {
+                println("onPause called")
+            }
+        }
+
+        lifeCycleOwner.lifecycle.addObserver(observer)
+
+        onDispose {
+            walletViewModel.isSendScreenOpen.value = false
+            lifeCycleOwner.lifecycle.removeObserver(observer)
+        }
     }
 
     val bottomSheetScaffoldState = rememberBottomSheetScaffoldState(

@@ -66,6 +66,9 @@ class WalletViewModel(
 
     var isOnlineVariable: MutableLiveData<Boolean> = MutableLiveData(false)
 
+    val isRecieveScreenOpen: MutableLiveData<Boolean> = MutableLiveData(false)
+    val isSendScreenOpen: MutableLiveData<Boolean> = MutableLiveData(false)
+
     init {
         Log.i(TAG, "The WalletScreen viewmodel is being initialized...")
 

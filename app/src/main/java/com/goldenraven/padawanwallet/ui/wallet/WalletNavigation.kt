@@ -106,7 +106,10 @@ fun WalletNavigation(
             popExitTransition = {
                 slideOutOfContainer(AnimatedContentScope.SlideDirection.Down, animationSpec = tween(animationDuration))
             }
-        ) { ReceiveScreen(navController = navControllerWalletNavigation, walletViewModel) }
+        ) {
+            walletViewModel.isRecieveScreenOpen.value = true
+            ReceiveScreen(navController = navControllerWalletNavigation, walletViewModel)
+        }
 
 
         // Send
@@ -124,7 +127,10 @@ fun WalletNavigation(
             popExitTransition = {
                 slideOutOfContainer(AnimatedContentScope.SlideDirection.Down, animationSpec = tween(animationDuration))
             }
-        ) { SendScreen(navController = navControllerWalletNavigation, walletViewModel = walletViewModel) }
+        ) {
+            walletViewModel.isSendScreenOpen.value = true
+            SendScreen(navController = navControllerWalletNavigation, walletViewModel = walletViewModel)
+        }
 
 
         // Transaction screen
