@@ -203,7 +203,7 @@ internal fun SendScreen(navController: NavHostController, walletViewModel: Walle
                 modifier = Modifier.padding(top = 16.dp)
             )
 
-            var sliderPosition by remember { mutableStateOf(0f) }
+            var sliderPosition by remember { mutableStateOf(1f) }
             Slider(
                 modifier = Modifier.semantics { contentDescription = "Localized Description" },
                 value = sliderPosition,
