@@ -208,9 +208,9 @@ internal fun SendScreen(navController: NavHostController, walletViewModel: Walle
                 modifier = Modifier.semantics { contentDescription = "Localized Description" },
                 value = sliderPosition,
                 onValueChange = { sliderPosition = it },
-                valueRange = 0f..8f,
+                valueRange = 1f..8f,
                 onValueChangeFinished = { feeRate.value = sliderPosition.toString().take(3) },
-                steps = 7
+                steps = 6
             )
             Text(text = sliderPosition.toString().take(3))
 
