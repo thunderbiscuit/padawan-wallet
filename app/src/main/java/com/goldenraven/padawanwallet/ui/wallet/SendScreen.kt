@@ -60,7 +60,7 @@ internal fun SendScreen(navController: NavHostController, walletViewModel: Walle
 
     val coroutineScope = rememberCoroutineScope()
 
-    val balance by walletViewModel.balance.observeAsState()
+    val balance by walletViewModel.balance.collectAsState()
     val recipientAddress: MutableState<String> = rememberSaveable { mutableStateOf("") }
     val amount: MutableState<String> = rememberSaveable { mutableStateOf("") }
     val feeRate: MutableState<String> = rememberSaveable { mutableStateOf("") }

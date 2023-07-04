@@ -52,8 +52,8 @@ class WalletViewModel(
     private val repository: TxRepository
     var openFaucetDialog: MutableState<Boolean> = mutableStateOf(false)
 
-    private var _balance: MutableLiveData<ULong> = MutableLiveData(0u)
-    val balance: LiveData<ULong>
+    private var _balance: MutableStateFlow<ULong> = MutableStateFlow(0u)
+    val balance: StateFlow<ULong>
         get() = _balance
 
     private var _address: MutableLiveData<String> = MutableLiveData("")

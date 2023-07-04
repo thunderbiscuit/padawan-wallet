@@ -53,7 +53,7 @@ internal fun WalletRootScreen(
     navController: NavHostController,
     walletViewModel: WalletViewModel
 ) {
-    val balance by walletViewModel.balance.observeAsState()
+    val balance by walletViewModel.balance.collectAsState()
     val transactionList by walletViewModel.readAllData.observeAsState(initial = emptyList())
     val isOnlineStatus by walletViewModel.isOnlineVariable.observeAsState()
     val tempOpenFaucetDialog = walletViewModel.openFaucetDialog
