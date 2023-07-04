@@ -125,13 +125,13 @@ fun ChapterButtons(
                     verticalAlignment = Alignment.CenterVertically,
                     modifier = Modifier.padding(vertical = 8.dp)
                 ) {
-                    Icon(
-                        painter = painterResource(id = R.drawable.ic_back),
-                        contentDescription = "Previous Chapter Icon"
-                    )
-                    Spacer(modifier = Modifier.width(width = 16.dp))
+//                    Icon(
+//                        painter = painterResource(id = R.drawable.ic_back),
+//                        contentDescription = "Previous Chapter Icon"
+//                    )
+//                    Spacer(modifier = Modifier.width(width = 16.dp))
                     Text(
-                        text = "Prev",
+                        text = "Previous",
                         style = PadawanTypography.labelLarge,
                     )
                 }
@@ -152,7 +152,7 @@ fun ChapterButtons(
                 modifier = Modifier
                     .padding(all = 4.dp)
                     .standardShadow(20.dp)
-                    .weight(weight = 0.5f),
+                    .weight(weight = 0.5f)
             ) {
                 Row(
                     verticalAlignment = Alignment.CenterVertically,
@@ -162,11 +162,11 @@ fun ChapterButtons(
                         text = "Next",
                         style = PadawanTypography.labelLarge,
                     )
-                    Spacer(modifier = Modifier.width(width = 16.dp))
-                    Icon(
-                        painter = painterResource(id = R.drawable.ic_front),
-                        contentDescription = "Next Chapter Icon"
-                    )
+//                    Spacer(modifier = Modifier.width(width = 16.dp))
+//                    Icon(
+//                        painter = painterResource(id = R.drawable.ic_front),
+//                        contentDescription = "Next Chapter Icon"
+//                    )
                 }
             }
         } else if (currentPage.value == chapterPageSize - 1) {
@@ -185,7 +185,7 @@ fun ChapterButtons(
             ) {
                 Row(
                     verticalAlignment = Alignment.CenterVertically,
-                    modifier = Modifier.padding(vertical = 10.dp)
+                    modifier = Modifier.padding(vertical = 8.dp)
                 ) {
                     Text(
                         text = "Finish",
