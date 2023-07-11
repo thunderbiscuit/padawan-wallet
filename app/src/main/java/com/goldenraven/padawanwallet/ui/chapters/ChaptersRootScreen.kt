@@ -15,6 +15,7 @@ import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.StrokeCap
+import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
@@ -95,7 +96,7 @@ fun ChapterHomeTitle() {
     }
 }
 
-@OptIn(ExperimentalPagerApi::class, ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalPagerApi::class)
 @Composable
 fun SectionsCarousel(
     viewModel: ChaptersViewModel
@@ -176,12 +177,13 @@ fun SectionsCarousel(
 
 @Composable
 fun LessonCircle(lessonNumber: Int, completed: Boolean, selected: Boolean, selectedChapter: MutableState<Int>) {
-    val completedColor = if (completed) Color(0xffffc847) else Color(0xefffffff)
+    val completedColor = if (completed) Color(0xffffc847) else Color(0xffababab)
 
     Text(
         text = lessonNumber.toString(),
         style = TextStyle(
-            color = completedColor,
+            // color = completedColor,
+            color = Color(0xff000000),
             fontSize = 28.sp,
             fontWeight = FontWeight.SemiBold,
         ),
@@ -190,11 +192,12 @@ fun LessonCircle(lessonNumber: Int, completed: Boolean, selected: Boolean, selec
             .drawBehind {
                 drawCircle(
                     color = completedColor,
-                    radius = if (selected) 102f else 86f,
+                    radius = 86f,
                 )
                 drawCircle(
-                    color = Color(0xff000000),
-                    radius = 64f
+                    color = if (selected) Color(0xff000000) else Color(0x00ffffff),
+                    radius = 88f,
+                    style = Stroke(width = 10f)
                 )
             }
             .clickable {
