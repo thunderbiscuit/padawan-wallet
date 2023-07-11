@@ -185,7 +185,6 @@ val chapter8: List<Page> = listOf(
         ChapterElement(ElementType.TITLE, R.string.C8_title),
         ChapterElement(ElementType.BODY, R.string.C8_p1),
         ChapterElement(ElementType.BODY, R.string.C8_p2),
-        ChapterElement(ElementType.RESOURCE, R.drawable.placeholder_image),
         ChapterElement(ElementType.BODY, R.string.C8_p3),
         ChapterElement(ElementType.BODY, R.string.C8_p4),
         ChapterElement(ElementType.BODY, R.string.C8_p5),
