@@ -42,22 +42,6 @@ fun IntroNavigation(onBuildWalletButtonClicked: (WalletCreateType) -> Unit) {
             },
         ) { OnboardingScreen(navController = navController, onBuildWalletButtonClicked) }
 
-        // composable(
-        //     route = Screen.WalletChoiceScreen.route,
-        //     enterTransition = {
-        //         slideIntoContainer(AnimatedContentScope.SlideDirection.Start, animationSpec = tween(animationDuration))
-        //     },
-        //     exitTransition = {
-        //         slideOutOfContainer(AnimatedContentScope.SlideDirection.Start, animationSpec = tween(animationDuration))
-        //     },
-        //     popEnterTransition = {
-        //         slideIntoContainer(AnimatedContentScope.SlideDirection.End, animationSpec = tween(animationDuration))
-        //     },
-        //     popExitTransition = {
-        //         slideOutOfContainer(AnimatedContentScope.SlideDirection.End, animationSpec = tween(animationDuration))
-        //     }
-        // ) { WalletChoiceScreen(navController = navController, onBuildWalletButtonClicked) }
-
         composable(
             route = Screen.WalletRecoveryScreen.route,
             enterTransition = {
