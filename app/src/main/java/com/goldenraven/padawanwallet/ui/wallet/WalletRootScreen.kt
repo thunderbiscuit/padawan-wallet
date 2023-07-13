@@ -6,7 +6,6 @@
 package com.goldenraven.padawanwallet.ui.wallet
 
 import android.content.Context
-import android.util.Log
 import androidx.compose.animation.animateColor
 import androidx.compose.animation.core.*
 import androidx.compose.foundation.background
@@ -44,10 +43,10 @@ import com.goldenraven.padawanwallet.theme.*
 import com.goldenraven.padawanwallet.ui.FadedVerticalDivider
 import com.goldenraven.padawanwallet.ui.Screen
 import com.goldenraven.padawanwallet.ui.standardBorder
-import com.goldenraven.padawanwallet.utils.ScreenSize
+import com.goldenraven.padawanwallet.utils.ScreenSizeWidth
 import com.goldenraven.padawanwallet.utils.formatCurrency
 import com.goldenraven.padawanwallet.utils.formatInBtc
-import com.goldenraven.padawanwallet.utils.getScreenSize
+import com.goldenraven.padawanwallet.utils.getScreenSizeWidth
 import io.ktor.http.*
 
 // TODO Think about reintroducing refreshing
@@ -120,7 +119,6 @@ fun BalanceBox(
     Card(
         border = standardBorder,
         shape = RoundedCornerShape(20.dp),
-        // containerColor = padawan_theme_onBackground_secondary,
         colors = CardDefaults.cardColors(padawan_theme_onBackground_secondary),
         modifier = Modifier
             .standardShadow(20.dp)
@@ -266,7 +264,7 @@ fun BalanceBox(
 
 @Composable
 fun SendReceive(navController: NavHostController) {
-    val screenSize: ScreenSize = getScreenSize(LocalConfiguration.current.screenWidthDp)
+    val screenSizeWidth: ScreenSizeWidth = getScreenSizeWidth(LocalConfiguration.current.screenWidthDp)
 
     Row(
         modifier = Modifier
@@ -289,7 +287,7 @@ fun SendReceive(navController: NavHostController) {
                     text = "Receive",
                     style = PadawanTypography.labelLarge,
                 )
-                if (screenSize == ScreenSize.Phone) {
+                if (screenSizeWidth == ScreenSizeWidth.Phone) {
                     Icon(painter = painterResource(id = R.drawable.ic_receive), contentDescription = "Receive Icon")
                 }
             }
@@ -310,7 +308,7 @@ fun SendReceive(navController: NavHostController) {
                     text = "Send",
                     style = PadawanTypography.labelLarge,
                 )
-                if (screenSize == ScreenSize.Phone) {
+                if (screenSizeWidth == ScreenSizeWidth.Phone) {
                     Icon(painter = painterResource(id = R.drawable.ic_send), contentDescription = "Send Icon")
                 }
             }
