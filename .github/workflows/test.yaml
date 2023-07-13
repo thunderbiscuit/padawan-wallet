@@ -1,0 +1,43 @@
+name: Run Unit and Instrumentation Tests
+
+on: [pull_request, workflow_dispatch]
+
+jobs: 
+  unit_tests:
+    name: "Run unit tests"
+    runs-on: ubuntu-22.04
+    steps:
+      - name: "Check out PR branch"
+        uses: actions/checkout@v2
+
+      - name: "Set up JDK"
+        uses: actions/setup-java@v3
+        with:
+          distribution: temurin
+          java-version: 11
+
+      - name: "Run unit tests"
+        run: ./gradlew test
+
+  instrumentation_tests:
+    name: "Run instrumentation tests"
+    runs-on: macOS-13
+    strategy:
+      matrix:
+        api-level: [26, 31]
+    steps:
+      - name: "Check out PR branch"
+        uses: actions/checkout@v3
+
+      - name: "Set up JDK"
+        uses: actions/setup-java@v3
+        with:
+          distribution: temurin
+          java-version: 11
+
+      - name: "Run instrumentation tests"
+        uses: ReactiveCircus/android-emulator-runner@v2
+        with:
+          api-level: ${{ matrix.api-level }}
+          arch: x86_64
+          script: ./gradlew connectedCheck 
