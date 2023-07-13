@@ -31,7 +31,7 @@ class PadawanActivity : AppCompatActivity() {
 
             setContent {
                 PadawanTheme {
-                   HomeNavigation()
+                    HomeNavigation()
                 }
             }
         } else {

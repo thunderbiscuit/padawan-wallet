@@ -6,6 +6,7 @@
 package com.goldenraven.padawanwallet.ui.wallet
 
 import android.content.Context
+import android.util.Log
 import androidx.compose.animation.animateColor
 import androidx.compose.animation.core.*
 import androidx.compose.foundation.background
@@ -24,23 +25,29 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Devices
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import com.goldenraven.padawanwallet.R
 import com.goldenraven.padawanwallet.data.tx.Tx
 import com.goldenraven.padawanwallet.theme.*
 import com.goldenraven.padawanwallet.ui.FadedVerticalDivider
 import com.goldenraven.padawanwallet.ui.Screen
 import com.goldenraven.padawanwallet.ui.standardBorder
+import com.goldenraven.padawanwallet.utils.ScreenSize
 import com.goldenraven.padawanwallet.utils.formatCurrency
 import com.goldenraven.padawanwallet.utils.formatInBtc
+import com.goldenraven.padawanwallet.utils.getScreenSize
 import io.ktor.http.*
 
 // TODO Think about reintroducing refreshing
@@ -48,6 +55,8 @@ import io.ktor.http.*
 // TODO Handle no internet connection situations
 // TODO Handle old faucet dialog
 // TODO Finish up send & receive screen
+
+private const val TAG = "WalletRootScreen"
 
 @Composable
 internal fun WalletRootScreen(
@@ -257,9 +266,12 @@ fun BalanceBox(
 
 @Composable
 fun SendReceive(navController: NavHostController) {
+    val screenSize: ScreenSize = getScreenSize(LocalConfiguration.current.screenWidthDp)
+
     Row(
         modifier = Modifier
             .padding(top = 4.dp)
+            .height(70.dp)
     ) {
         Button(
             onClick = { navController.navigate(Screen.ReceiveScreen.route) },
@@ -270,13 +282,16 @@ fun SendReceive(navController: NavHostController) {
                 .padding(all = 4.dp)
                 .standardShadow(20.dp)
                 .weight(weight = 0.5f)
+                .fillMaxHeight()
         ) {
             Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.padding(vertical = 8.dp)) {
                 Text(
                     text = "Receive",
                     style = PadawanTypography.labelLarge,
                 )
-                Icon(painter = painterResource(id = R.drawable.ic_receive), contentDescription = "Receive Icon")
+                if (screenSize == ScreenSize.Phone) {
+                    Icon(painter = painterResource(id = R.drawable.ic_receive), contentDescription = "Receive Icon")
+                }
             }
         }
         Button(
@@ -287,14 +302,17 @@ fun SendReceive(navController: NavHostController) {
             modifier = Modifier
                 .padding(all = 4.dp)
                 .standardShadow(20.dp)
-                .weight(weight = 0.5f),
+                .weight(weight = 0.5f)
+                .fillMaxHeight(),
         ) {
             Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.padding(vertical = 8.dp)) {
                 Text(
                     text = "Send",
                     style = PadawanTypography.labelLarge,
                 )
-                Icon(painter = painterResource(id = R.drawable.ic_send), contentDescription = "Send Icon")
+                if (screenSize == ScreenSize.Phone) {
+                    Icon(painter = painterResource(id = R.drawable.ic_send), contentDescription = "Send Icon")
+                }
             }
         }
     }
@@ -553,4 +571,15 @@ private fun FaucetDialog(walletViewModel: WalletViewModel) {
 
 private fun viewTransaction(navController: NavController, txid: String) {
     navController.navigate("${Screen.TransactionScreen.route}/txid=$txid")
+}
+
+@Preview(name = "PIXEL 4", device = Devices.PIXEL_4, showBackground = true)
+@Preview(name = "PIXEL 2, 270 Wide", device = Devices.PIXEL_2, widthDp = 270)
+@Composable
+internal fun PreviewSendReceiveRow() {
+    PadawanTheme {
+        SendReceive(
+            rememberNavController(),
+        )
+    }
 }
