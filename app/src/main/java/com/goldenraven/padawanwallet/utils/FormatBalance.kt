@@ -10,3 +10,15 @@ fun ULong?.formatInBtc(): String {
     }
     return DecimalFormat("0.00000000").format(balanceInSats)
 }
+
+fun formatCurrency(amount: String): String {
+    val regex = "(\\d)(?=(\\d{3})+\$)".toRegex()
+    val dotIdx = amount.indexOf('.')
+    return if (dotIdx == -1)  {
+        amount.replace(regex, "\$1,")
+    } else {
+        val num = amount.substring(0, dotIdx).replace(regex, "\$1,")
+        val dec = amount.substring(dotIdx+1).replace(regex, "\$1 ")
+        "$num.$dec"
+    }
+}

@@ -39,6 +39,7 @@ import com.goldenraven.padawanwallet.theme.*
 import com.goldenraven.padawanwallet.ui.FadedVerticalDivider
 import com.goldenraven.padawanwallet.ui.Screen
 import com.goldenraven.padawanwallet.ui.standardBorder
+import com.goldenraven.padawanwallet.utils.formatCurrency
 import com.goldenraven.padawanwallet.utils.formatInBtc
 import io.ktor.http.*
 
@@ -254,18 +255,6 @@ fun BalanceBox(
     }
 }
 
-fun formatCurrency(amount: String): String {
-    val regex = "(\\d)(?=(\\d{3})+\$)".toRegex()
-    val dotIdx = amount.indexOf('.')
-    return if (dotIdx == -1)  {
-        amount.replace(regex, "\$1,")
-    } else {
-        val num = amount.substring(0, dotIdx).replace(regex, "\$1,")
-        val dec = amount.substring(dotIdx+1).replace(regex, "\$1 ")
-        "$num.$dec"
-    }
-}
-
 @Composable
 fun SendReceive(navController: NavHostController) {
     Row(
@@ -311,7 +300,6 @@ fun SendReceive(navController: NavHostController) {
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TransactionListBox(
     tempOpenFaucetDialog: MutableState<Boolean>,
