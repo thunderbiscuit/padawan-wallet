@@ -200,7 +200,7 @@ fun LessonCircle(lessonNumber: Int, completed: Boolean, selected: Boolean, selec
                     style = Stroke(width = 10f)
                 )
             }
-            .clickable {
+            .noRippleClickable {
                 selectedChapter.value = lessonNumber
                 Log.i(TAG, "Clicked on chapter $lessonNumber")
             },
