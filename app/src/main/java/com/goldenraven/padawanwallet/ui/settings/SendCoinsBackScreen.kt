@@ -51,13 +51,13 @@ internal fun SendCoinsBackScreen(
 
     val (copyClicked, setCopyClicked) = remember { mutableStateOf(false) }
 
-    val copyAddrString = buildAnnotatedString {
-        appendInlineContent(id = "copyAddrImageId")
+    val copyAddressString = buildAnnotatedString {
+        appendInlineContent(id = "copyAddressImageId")
         if (!copyClicked) append(stringResource(id = R.string.copyAddrStr)) else append(stringResource(R.string.textCopied))
     }
 
     val inlineContentMap = mapOf(
-        "copyAddrImageId" to InlineTextContent(
+        "copyAddressImageId" to InlineTextContent(
             Placeholder(17.sp, 17.sp, PlaceholderVerticalAlign.TextCenter)
         ) {
             if (copyClicked) {
@@ -110,7 +110,7 @@ internal fun SendCoinsBackScreen(
                     modifier = Modifier.padding(all = 3.dp)
                 )
                 Text(
-                    text = copyAddrString,
+                    text = copyAddressString,
                     inlineContent = inlineContentMap,
                     modifier = Modifier.align(Alignment.End)
                 )
