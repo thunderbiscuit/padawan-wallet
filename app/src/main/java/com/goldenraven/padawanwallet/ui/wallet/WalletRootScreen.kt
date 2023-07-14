@@ -358,8 +358,13 @@ fun TransactionListBox(
         // containerColor = padawan_theme_background_secondary,
         colors = CardDefaults.cardColors(padawan_theme_background_secondary),
     ) {
+        val padding = when (getScreenSizeWidth(LocalConfiguration.current.screenWidthDp)) {
+            ScreenSizeWidth.Small -> 12.dp
+            ScreenSizeWidth.Phone -> 24.dp
+        }
+
         if (transactionList.isEmpty()) {
-            Row(modifier = Modifier.padding(all = 24.dp)) {
+            Row(modifier = Modifier.padding(all = padding)) {
                 val scrollState = rememberScrollState()
 
                 Column(
