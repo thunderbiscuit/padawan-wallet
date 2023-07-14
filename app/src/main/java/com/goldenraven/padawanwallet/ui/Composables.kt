@@ -1,5 +1,6 @@
 package com.goldenraven.padawanwallet.ui
 
+import android.util.Log
 import androidx.compose.animation.*
 import androidx.compose.animation.core.MutableTransitionState
 import androidx.compose.animation.core.tween
@@ -12,14 +13,20 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.SolidColor
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Devices
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import com.goldenraven.padawanwallet.R
 import com.goldenraven.padawanwallet.theme.*
+import com.goldenraven.padawanwallet.utils.ScreenSizeWidth
+import com.goldenraven.padawanwallet.utils.getScreenSizeWidth
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import kotlinx.coroutines.delay
 
@@ -49,6 +56,7 @@ internal fun VerticalTextFieldDivider() {
 
 @Composable
 internal fun PadawanAppBar(navController: NavHostController, title: String) {
+    val screenSizeWidth = getScreenSizeWidth(LocalConfiguration.current.screenWidthDp)
     val appBarVisibility = remember { mutableStateOf(value = false) }
 
 
@@ -62,10 +70,15 @@ internal fun PadawanAppBar(navController: NavHostController, title: String) {
         visible = appBarVisibility.value,
         enter = fadeIn(tween(durationMillis = 500))
     ) {
+        val (fontSize, horizontalPadding) = when (screenSizeWidth) {
+            ScreenSizeWidth.Small -> Pair(16.sp, 8.dp)
+            ScreenSizeWidth.Phone -> Pair(20.sp, 16.dp)
+        }
+
         Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(horizontal = 16.dp)
+                .padding(horizontal = horizontalPadding)
                 .height(100.dp)
         ) {
             IconButton(
@@ -82,7 +95,7 @@ internal fun PadawanAppBar(navController: NavHostController, title: String) {
                 text = title,
                 textAlign = TextAlign.Center,
                 fontWeight = FontWeight.Bold,
-                fontSize = 20.sp,
+                fontSize = fontSize,
                 modifier = Modifier
                     .fillMaxWidth()
                     .align(alignment = Alignment.Center)
@@ -144,5 +157,17 @@ fun ConnectivityStatusBox(isConnected: Boolean) {
             Spacer(modifier = Modifier.size(8.dp))
             androidx.compose.material.Text(message, color = Color.White, fontSize = 15.sp)
         }
+    }
+}
+
+@Preview(name = "PIXEL 4", device = Devices.PIXEL_4, showBackground = true)
+@Preview(name = "PIXEL 2, 270 Wide", device = Devices.PIXEL_2, widthDp = 270, showBackground = true)
+@Composable
+internal fun PreviewPadawanAppBar() {
+    PadawanTheme {
+        PadawanAppBar(
+            rememberNavController(),
+            "Padawan Wallet"
+        )
     }
 }

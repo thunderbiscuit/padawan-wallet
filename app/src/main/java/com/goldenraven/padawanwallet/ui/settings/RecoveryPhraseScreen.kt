@@ -10,7 +10,6 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Card
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -22,7 +21,6 @@ import com.goldenraven.padawanwallet.theme.padawan_theme_background_secondary
 import com.goldenraven.padawanwallet.ui.PadawanAppBar
 import com.goldenraven.padawanwallet.ui.standardBorder
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 internal fun RecoveryPhraseScreen(
     navController: NavHostController
@@ -37,7 +35,7 @@ internal fun RecoveryPhraseScreen(
             .fillMaxSize()
             .verticalScroll(state = scrollState)
     ){
-        PadawanAppBar(navController = navController, title = "Your wallet recovery phrase")
+        PadawanAppBar(navController = navController, title = "Your recovery phrase")
         wordList.forEachIndexed { index, item ->
             Row(
                 horizontalArrangement = Arrangement.Center,
