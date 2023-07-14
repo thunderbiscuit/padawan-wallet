@@ -182,16 +182,22 @@ fun BalanceBox(
                     )
                 }
             }
-            var balanceDisplay: String =
-                if (currencyToggleState.value) balance.toString() else balance.formatInBtc()
+            var balanceDisplay: String = if (currencyToggleState.value) balance.toString() else balance.formatInBtc()
             balanceDisplay = formatCurrency(balanceDisplay)
-            val currencyDisplay: String =
-                if (currencyToggleState.value) CurrencyType.SATS.toString()
-                    .lowercase() else CurrencyType.BTC.toString().lowercase()
+            val currencyDisplay: String = if (currencyToggleState.value) {
+                CurrencyType.SATS.toString().lowercase()
+            } else {
+                CurrencyType.BTC.toString().lowercase()
+            }
+            val fontSize = when (getScreenSizeWidth(LocalConfiguration.current.screenWidthDp)) {
+                ScreenSizeWidth.Small -> 28.sp
+                ScreenSizeWidth.Phone -> 36.sp
+            }
+
             Text(
                 text = balanceDisplay,
                 style = PadawanTypography.displaySmall,
-                fontSize = 36.sp,
+                fontSize = fontSize,
                 modifier = Modifier
                     .padding(top = 16.dp)
                     .constrainAs(balanceText) {
