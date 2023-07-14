@@ -16,6 +16,7 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.drawscope.Stroke
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
@@ -30,6 +31,8 @@ import com.goldenraven.padawanwallet.data.chapters.ChapterElement
 import com.goldenraven.padawanwallet.theme.*
 import com.goldenraven.padawanwallet.ui.Screen
 import com.goldenraven.padawanwallet.ui.standardBorder
+import com.goldenraven.padawanwallet.utils.ScreenSizeWidth
+import com.goldenraven.padawanwallet.utils.getScreenSizeWidth
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 
@@ -178,6 +181,11 @@ fun SectionsCarousel(
 @Composable
 fun LessonCircle(lessonNumber: Int, completed: Boolean, selected: Boolean, selectedChapter: MutableState<Int>) {
     val completedColor = if (completed) Color(0xffffc847) else Color(0xffababab)
+    val screenSizeWidth = getScreenSizeWidth(LocalConfiguration.current.screenWidthDp)
+    val (innerCircleSize, outerCircleSize) = when (screenSizeWidth) {
+        ScreenSizeWidth.Small -> Pair(48f, 50f)
+        ScreenSizeWidth.Phone -> Pair(86f, 88f)
+    }
 
     Text(
         text = lessonNumber.toString(),
@@ -192,11 +200,11 @@ fun LessonCircle(lessonNumber: Int, completed: Boolean, selected: Boolean, selec
             .drawBehind {
                 drawCircle(
                     color = completedColor,
-                    radius = 86f,
+                    radius = innerCircleSize,
                 )
                 drawCircle(
                     color = if (selected) Color(0xff000000) else Color(0x00ffffff),
-                    radius = 88f,
+                    radius = outerCircleSize,
                     style = Stroke(width = 10f)
                 )
             }
