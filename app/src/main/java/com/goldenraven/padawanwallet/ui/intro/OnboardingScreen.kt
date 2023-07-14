@@ -9,6 +9,8 @@ import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.indication
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -143,22 +145,15 @@ internal fun SmallOnboarding(
                     .padding(start = 24.dp, bottom = 8.dp)
                     .height(40.dp)
             )
-            TextButton(
-                onClick = {
-                    Log.i("OnboardScreen", "Recovering a wallet")
-                    navController.navigate(Screen.WalletRecoveryScreen.route)
-                },
+            Text(
                 modifier = Modifier
-                    .width(120.dp)
-                    .padding(0.dp)
-                    .height(70.dp)
-            ) {
-                Text(
-                    text = "Recover it here",
-                    color = Color(0xff787878),
-                    style = TextStyle(textDecoration = TextDecoration.Underline)
-                )
-            }
+                    .padding(start = 8.dp, bottom = 8.dp)
+                    .height(40.dp)
+                    .noRippleClickable { navController.navigate(Screen.WalletRecoveryScreen.route) },
+                text = "Recover it here",
+                color = Color(0xff787878),
+                style = bodyMediumUnderlined
+            )
         }
     }
 }
@@ -262,7 +257,7 @@ internal fun PhoneOnboarding(
 
         Row(
             horizontalArrangement = Arrangement.Center,
-            verticalAlignment = Alignment.Bottom,
+            verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier
                 .constrainAs(recover) {
                     top.linkTo(body.bottom)
@@ -276,25 +271,18 @@ internal fun PhoneOnboarding(
                 text = "Already have a wallet?",
                 color = Color(0xff787878),
                 modifier = Modifier
-                    .padding(start = 24.dp, bottom = 8.dp)
+                    .padding(bottom = 8.dp)
                     .height(40.dp)
             )
-            TextButton(
-                onClick = {
-                    Log.i("OnboardScreen", "Recovering a wallet")
-                    navController.navigate(Screen.WalletRecoveryScreen.route)
-                },
+            Text(
                 modifier = Modifier
-                    .width(120.dp)
-                    .padding(0.dp)
-                    .height(70.dp)
-            ) {
-                Text(
-                    text = "Recover it here",
-                    color = Color(0xff787878),
-                    style = TextStyle(textDecoration = TextDecoration.Underline)
-                )
-            }
+                    .padding(start = 8.dp, bottom = 8.dp)
+                    .height(40.dp)
+                    .noRippleClickable { navController.navigate(Screen.WalletRecoveryScreen.route) },
+                text = "Recover it here",
+                color = Color(0xff787878),
+                style = bodyMediumUnderlined
+            )
         }
     }
 }

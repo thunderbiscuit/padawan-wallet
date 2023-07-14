@@ -8,6 +8,7 @@ package com.goldenraven.padawanwallet.theme
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.sp
 
 // by default
@@ -112,4 +113,13 @@ val PadawanTypography = Typography(
 		fontSize = 11.sp,
 		lineHeight = 16.sp,
 	),
+)
+
+val bodyMediumUnderlined: TextStyle = TextStyle(
+	fontFamily = Outfit,
+	fontWeight = FontWeight.Light,
+	fontSize = 16.sp,
+	lineHeight = 22.sp,
+	letterSpacing = 0.25.sp,
+	textDecoration = TextDecoration.Underline,
 )
