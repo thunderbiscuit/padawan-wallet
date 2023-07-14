@@ -14,6 +14,7 @@ import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.SolidColor
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.Dp
@@ -25,6 +26,8 @@ import com.goldenraven.padawanwallet.data.chapters.ElementType
 import com.goldenraven.padawanwallet.data.chapters.Page
 import com.goldenraven.padawanwallet.theme.*
 import com.goldenraven.padawanwallet.ui.standardBorder
+import com.goldenraven.padawanwallet.utils.ScreenSizeWidth
+import com.goldenraven.padawanwallet.utils.getScreenSizeWidth
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
@@ -70,10 +73,16 @@ fun ChapterScreen(
             }
         }
 
+        val screenSizeWidth = getScreenSizeWidth(LocalConfiguration.current.screenWidthDp)
+        val padding = when (screenSizeWidth) {
+            ScreenSizeWidth.Small -> 16.dp
+            ScreenSizeWidth.Phone -> 32.dp
+        }
+
         Column(
             modifier = Modifier
                 .verticalScroll(pageScrollState)
-                .padding(all = 32.dp)
+                .padding(all = padding)
                 .fillMaxSize()
         ) {
             ChapterPage(chapterPages = chapterPages, currentPage = currentPage)
