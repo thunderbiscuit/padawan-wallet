@@ -86,6 +86,12 @@ internal fun WalletRootScreen(
 
 @Composable
 fun NoNetworkBanner(walletViewModel: WalletViewModel, context: Context) {
+    val screenSizeWidth = getScreenSizeWidth(LocalConfiguration.current.screenWidthDp)
+    val fontSize = when (screenSizeWidth) {
+        ScreenSizeWidth.Small -> 12.sp
+        ScreenSizeWidth.Phone -> 16.sp
+    }
+
     Card(
         modifier = Modifier
             .fillMaxWidth()
@@ -95,8 +101,6 @@ fun NoNetworkBanner(walletViewModel: WalletViewModel, context: Context) {
                 walletViewModel.updateConnectivityStatus(context)
             },
         border = standardBorder,
-        // shape = RoundedCornerShape(20.dp),
-        // containerColor = Color(0xfff6cf47)
         colors = CardDefaults.cardColors(Color(0xfff6cf47)),
     ) {
         Row(
@@ -104,7 +108,10 @@ fun NoNetworkBanner(walletViewModel: WalletViewModel, context: Context) {
             horizontalArrangement = Arrangement.Center,
             verticalAlignment = Alignment.CenterVertically,
         ) {
-            Text("Currently unable to access network")
+            Text(
+                text = "Currently unable to access network",
+                fontSize = fontSize
+            )
         }
     }
 }
