@@ -8,7 +8,9 @@ package com.goldenraven.padawanwallet.ui.settings
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.ScaffoldState
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.material3.*
@@ -39,6 +41,8 @@ internal fun SettingsRootScreen(
 ) {
     val scope = rememberCoroutineScope()
     val scaffoldState: ScaffoldState = rememberScaffoldState()
+    val scrollState = rememberScrollState()
+
     androidx.compose.material.Scaffold(
         scaffoldState = scaffoldState
     ) { padding ->
@@ -47,6 +51,7 @@ internal fun SettingsRootScreen(
                 .fillMaxSize()
                 .background(padawan_theme_background_secondary)
                 .padding(padding)
+                .verticalScroll(scrollState)
         ) {
             // Title
             Text(
@@ -183,6 +188,8 @@ internal fun SettingsRootScreen(
                     color = Color(0xff2f2f2f)
                 )
             }
+
+            Spacer(modifier = Modifier.height(24.dp))
         }
     }
 }
