@@ -9,9 +9,11 @@ import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Slider
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.BottomSheetScaffold
 import androidx.compose.material.*
 import androidx.compose.material3.*
@@ -69,10 +71,6 @@ internal fun SendScreen(navController: NavHostController, walletViewModel: Walle
     val feeRate: MutableState<String> = rememberSaveable { mutableStateOf("") }
     val txBuilderResult: MutableState<TxBuilderResult?> = remember { mutableStateOf(null) }
     val scope = rememberCoroutineScope()
-    // val showMenu: MutableState<Boolean> = remember { mutableStateOf(false) }
-    // var dropDownMenuExpanded by remember { mutableStateOf(false) }
-    // val currencyList = listOf(CurrencyType.SATS, CurrencyType.BTC)
-    // var selectedCurrency by remember { mutableStateOf(0) }
 
     val qrCodeScanner =
         navController.currentBackStackEntry?.savedStateHandle?.getLiveData<String>("BTC_Address")
@@ -106,10 +104,12 @@ internal fun SendScreen(navController: NavHostController, walletViewModel: Walle
             ScreenSizeWidth.Phone -> 32.dp
         }
 
+        val scrollState = rememberScrollState()
         Column(
             modifier = Modifier
                 .fillMaxSize()
                 .standardBackground(padding)
+                .verticalScroll(scrollState)
         ) {
             Row(modifier = Modifier.padding(top = 8.dp, bottom = 8.dp)) {
                 Text(
@@ -122,7 +122,7 @@ internal fun SendScreen(navController: NavHostController, walletViewModel: Walle
                         .align(Alignment.Bottom)
                 )
                 Text(
-                    text = "Balance: ${balance.toString()} sats",
+                    text = "Balance: $balance sats",
                     textAlign = TextAlign.End,
                     modifier = Modifier
                         .weight(weight = 0.5f)
