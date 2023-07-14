@@ -105,6 +105,10 @@ internal fun ReceiveScreen(
                 }
             }
         }
+        val bottomPadding = when (getScreenSizeWidth(LocalConfiguration.current.screenWidthDp)) {
+            ScreenSizeWidth.Small -> 12.dp
+            ScreenSizeWidth.Phone -> 24.dp
+        }
         Column(
             Modifier
                 .constrainAs(bottomButtons) {
@@ -112,7 +116,7 @@ internal fun ReceiveScreen(
                     start.linkTo(parent.start)
                     end.linkTo(parent.end)
                 }
-                .padding(bottom = 24.dp)
+                .padding(bottom = bottomPadding)
         ) {
             Button(
                 onClick = { viewModel.updateLastUnusedAddress() },
