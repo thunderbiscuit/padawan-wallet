@@ -9,6 +9,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
@@ -35,10 +36,15 @@ internal fun TransactionScreen(
         navController.popBackStack()
     }
 
+    val padding = when (getScreenSizeWidth(LocalConfiguration.current.screenWidthDp)) {
+        ScreenSizeWidth.Small -> 12.dp
+        ScreenSizeWidth.Phone -> 32.dp
+    }
+
     ConstraintLayout(
         modifier = Modifier
             .fillMaxSize()
-            .standardBackground()
+            .standardBackground(padding)
     ) {
         val (screenTitle, QRCode) = createRefs()
 

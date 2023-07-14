@@ -65,10 +65,10 @@ fun Modifier.standardShadow(cornerRadius: Dp): Modifier = this.then(
     )
 )
 
-fun Modifier.standardBackground(): Modifier = this.then(
+fun Modifier.standardBackground(padding: Dp): Modifier = this.then(
     fillMaxSize()
         .background(padawan_theme_background_secondary, shape = BackgroundShape())
-        .padding(all = 32.dp)
+        .padding(all = padding)
 )
 
 fun Modifier.wideTextField(): Modifier = this.then(

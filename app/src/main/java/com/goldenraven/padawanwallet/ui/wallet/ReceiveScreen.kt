@@ -18,6 +18,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.graphics.ImageBitmap
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
@@ -26,7 +27,9 @@ import androidx.navigation.NavHostController
 import com.goldenraven.padawanwallet.theme.*
 import com.goldenraven.padawanwallet.ui.PadawanAppBar
 import com.goldenraven.padawanwallet.ui.standardBorder
+import com.goldenraven.padawanwallet.utils.ScreenSizeWidth
 import com.goldenraven.padawanwallet.utils.addressToQR
+import com.goldenraven.padawanwallet.utils.getScreenSizeWidth
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
@@ -48,10 +51,15 @@ internal fun ReceiveScreen(
         }
     }
 
+    val padding = when (getScreenSizeWidth(LocalConfiguration.current.screenWidthDp)) {
+        ScreenSizeWidth.Small -> 12.dp
+        ScreenSizeWidth.Phone -> 32.dp
+    }
+
     ConstraintLayout(
         modifier = Modifier
             .fillMaxSize()
-            .standardBackground()
+            .standardBackground(padding)
     ) {
         val (screenTitle, QRCode, bottomButtons) = createRefs()
 

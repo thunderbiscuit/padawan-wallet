@@ -74,7 +74,12 @@ internal fun WalletRootScreen(
         )
     }
 
-    Column(modifier = Modifier.standardBackground()) {
+    val padding = when (getScreenSizeWidth(LocalConfiguration.current.screenWidthDp)) {
+        ScreenSizeWidth.Small -> 12.dp
+        ScreenSizeWidth.Phone -> 32.dp
+    }
+
+    Column(modifier = Modifier.standardBackground(padding)) {
         if (isOnlineStatus == false) { NoNetworkBanner(walletViewModel, context) }
         // if (walletViewModel.isOnlineVariable.value == false) { NoNetworkBanner(walletViewModel, context) }
         BalanceBox(balance = balance ?: 0uL, viewModel = walletViewModel)

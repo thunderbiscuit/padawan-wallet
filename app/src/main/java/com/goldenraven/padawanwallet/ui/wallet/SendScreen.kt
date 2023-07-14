@@ -28,6 +28,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.semantics.contentDescription
@@ -43,6 +44,8 @@ import com.goldenraven.padawanwallet.R
 import com.goldenraven.padawanwallet.data.Wallet
 import com.goldenraven.padawanwallet.theme.*
 import com.goldenraven.padawanwallet.ui.*
+import com.goldenraven.padawanwallet.utils.ScreenSizeWidth
+import com.goldenraven.padawanwallet.utils.getScreenSizeWidth
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 import org.bitcoindevkit.TxBuilderResult
@@ -98,10 +101,15 @@ internal fun SendScreen(navController: NavHostController, walletViewModel: Walle
 
         PadawanAppBar(navController = navController, title = "Send bitcoin")
 
+        val padding = when (getScreenSizeWidth(LocalConfiguration.current.screenWidthDp)) {
+            ScreenSizeWidth.Small -> 12.dp
+            ScreenSizeWidth.Phone -> 32.dp
+        }
+
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .standardBackground()
+                .standardBackground(padding)
         ) {
             Row(modifier = Modifier.padding(top = 8.dp, bottom = 8.dp)) {
                 Text(
