@@ -109,9 +109,9 @@ fun SectionsCarousel(
         contentPadding = PaddingValues(horizontal = 12.dp, vertical = 12.dp)
     ) { page ->
         val cardBackgroundColor = getBackgroundColor(page)
+        val screenSizeWidth = getScreenSizeWidth(LocalConfiguration.current.screenWidthDp)
 
         Card(
-            // containerColor = cardBackgroundColor,
             colors = CardDefaults.cardColors(cardBackgroundColor),
             border = standardBorder,
             modifier = Modifier
@@ -134,16 +134,18 @@ fun SectionsCarousel(
                         Spacer(modifier = Modifier.height(height = 8.dp))
                     }
 
-                    Column(
-                        modifier = Modifier
-                            .align(alignment = Alignment.CenterEnd)
-                            .width(intrinsicSize = IntrinsicSize.Max)
-                    ) {
-                        ProgressBar(completionPercentage = calculateCompletionOfGroup(page, viewModel.getCompletedChapters()))
-                        Text(
-                            text = calculateCompletionStringOfGroup(page, viewModel.getCompletedChapters()),
-                            style = PadawanTypography.bodyMedium
-                        )
+                    if (screenSizeWidth == ScreenSizeWidth.Phone) {
+                        Column(
+                            modifier = Modifier
+                                .align(alignment = Alignment.CenterEnd)
+                                .width(intrinsicSize = IntrinsicSize.Max)
+                        ) {
+                            ProgressBar(completionPercentage = calculateCompletionOfGroup(page, viewModel.getCompletedChapters()))
+                            Text(
+                                text = calculateCompletionStringOfGroup(page, viewModel.getCompletedChapters()),
+                                style = PadawanTypography.bodyMedium
+                            )
+                        }
                     }
                 }
 
