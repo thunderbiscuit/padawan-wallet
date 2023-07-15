@@ -5,10 +5,10 @@
 
 package com.goldenraven.padawanwallet.data.tx
 
-import androidx.lifecycle.LiveData
+import kotlinx.coroutines.flow.Flow
 
 class TxRepository(private val txDao: TxDao) {
-    val readAllData: LiveData<List<Tx>> = txDao.readAllTx()
+    val readAllData: Flow<List<Tx>> = txDao.readAllTx()
 
     fun addTx(tx: Tx) {
         txDao.addTx(tx = tx)

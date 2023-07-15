@@ -5,11 +5,11 @@
 
 package com.goldenraven.padawanwallet.data.tx
 
-import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface TxDao {
@@ -17,5 +17,5 @@ interface TxDao {
     fun addTx(tx: Tx)
 
     @Query("SELECT * FROM transaction_history ORDER BY date DESC")
-    fun readAllTx(): LiveData<List<Tx>>
+    fun readAllTx(): Flow<List<Tx>>
 }

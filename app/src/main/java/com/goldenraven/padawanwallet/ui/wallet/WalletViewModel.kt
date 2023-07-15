@@ -15,8 +15,6 @@ import androidx.compose.material.SnackbarDuration
 import androidx.compose.material.SnackbarHostState
 import androidx.compose.runtime.*
 import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.goldenraven.padawanwallet.BuildConfig
 import com.goldenraven.padawanwallet.data.*
@@ -48,7 +46,7 @@ private const val TAG = "WalletViewModel"
 class WalletViewModel(
     application: Application,
 ) : AndroidViewModel(application) {
-    val readAllData: LiveData<List<Tx>>
+    val readAllData: MutableStateFlow<List<Tx>> = MutableStateFlow<List<Tx>>(emptyList<Tx>())
     private val repository: TxRepository
     var openFaucetDialog: MutableState<Boolean> = mutableStateOf(false)
 
@@ -56,8 +54,8 @@ class WalletViewModel(
     val balance: StateFlow<ULong>
         get() = _balance
 
-    private var _address: MutableLiveData<String> = MutableLiveData("")
-    val address: LiveData<String>
+    private var _address: MutableStateFlow<String> = MutableStateFlow("No address yet")
+    val address: StateFlow<String>
         get() = _address
 
     var QRState: MutableStateFlow<QRUIState> = MutableStateFlow(QRUIState.NoQR)
@@ -66,14 +64,19 @@ class WalletViewModel(
     val isRefreshing: StateFlow<Boolean>
         get() = _isRefreshing.asStateFlow()
 
-    var isOnlineVariable: MutableLiveData<Boolean> = MutableLiveData(false)
+    var isOnlineVariable: MutableStateFlow<Boolean> = MutableStateFlow(false)
 
     init {
         Log.i(TAG, "The WalletScreen viewmodel is being initialized...")
 
         val txDao: TxDao = TxDatabase.getDatabase(application).txDao()
         repository = TxRepository(txDao)
-        readAllData = repository.readAllData
+        viewModelScope.launch {
+            repository.readAllData
+                .collect { result ->
+                    readAllData.value = result
+                }
+        }
 
         if (isOnlineVariable.value == true && !Wallet.blockchainIsInitialized()) {
             Wallet.createBlockchain()
@@ -116,7 +119,7 @@ class WalletViewModel(
 
     private fun getLastUnusedAddress(): AddressInfo {
         val address = Wallet.getLastUnusedAddress()
-        _address.setValue(address.address)
+        _address.value = address.address
         return address
     }
 
@@ -233,7 +236,7 @@ class WalletViewModel(
             false
         }
         Log.i(TAG, "Updating online status to $onlineStatus")
-        isOnlineVariable.setValue(onlineStatus)
+        isOnlineVariable.value = onlineStatus
     }
 
     fun broadcastTransaction(

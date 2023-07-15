@@ -10,22 +10,22 @@ import android.util.Log
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.goldenraven.padawanwallet.R
 import com.goldenraven.padawanwallet.data.chapters.*
 import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 
 private const val TAG = "ChaptersViewModel"
 
 class ChaptersViewModel(application: Application) : AndroidViewModel(application) {
     val selectedChapter: MutableState<Int> = mutableStateOf(1)
 
-    private val readAllData: LiveData<List<Chapter>>
+    private val readAllData: MutableStateFlow<List<Chapter>> = MutableStateFlow(emptyList())
     private val chapterRepository: ChapterRepository
 
-    val selectedChapterData: MutableLiveData<Chapter> = MutableLiveData<Chapter>(Chapter(id = 0, title = "", type = "", difficulty = "", completed = false))
+    val selectedChapterData: MutableStateFlow<Chapter> = MutableStateFlow<Chapter>(Chapter(id = 0, title = "", type = "", difficulty = "", completed = false))
 
     private val _chapterPageMap: Map<Int, List<List<ChapterElement>>>
 
@@ -53,7 +53,12 @@ class ChaptersViewModel(application: Application) : AndroidViewModel(application
             }
         }
         // this variable is null on first access, and hence triggers the reinitialization of the database content
-        readAllData = chapterRepository.readAllData
+        viewModelScope.launch {
+            chapterRepository.readAllData
+                .collect { result ->
+                    readAllData.value = result
+                }
+        }
         Log.i(TAG, "readAllData variable is ${readAllData.value}")
         updateSelectedChapter(1) // TODO Change to most recent chapter
         _chapterPageMap = initChapterPageMap()
@@ -95,7 +100,7 @@ class ChaptersViewModel(application: Application) : AndroidViewModel(application
             val chapter: Chapter = async {
                 chapterRepository.getChapter(id)
             }.await()
-            selectedChapterData.setValue(chapter)
+            selectedChapterData.value = chapter
         }
     }
 

@@ -7,6 +7,8 @@ package com.goldenraven.padawanwallet.data.chapters
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.StateFlow
 
 @Dao
 interface ChapterDao {
@@ -14,7 +16,7 @@ interface ChapterDao {
     suspend fun addChapter(chapter: Chapter)
 
     @Query("SELECT * FROM chapters_db ORDER BY id ASC")
-    fun readAllChapters(): LiveData<List<Chapter>>
+    fun readAllChapters(): Flow<List<Chapter>>
 
     @Query("UPDATE chapters_db SET completed = :completed WHERE id = :id")
     suspend fun setCompleted(id: Int, completed: Boolean)

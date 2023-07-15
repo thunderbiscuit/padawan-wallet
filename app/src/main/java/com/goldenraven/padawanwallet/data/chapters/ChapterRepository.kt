@@ -6,13 +6,15 @@
 package com.goldenraven.padawanwallet.data.chapters
 
 import android.util.Log
-import androidx.lifecycle.LiveData
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.runBlocking
 
 private const val TAG = "ChapterRepository"
 
 class ChapterRepository(private val chapterDao: ChapterDao) {
-    val readAllData: LiveData<List<Chapter>> = chapterDao.readAllChapters()
+
+    val readAllData: Flow<List<Chapter>> = chapterDao.readAllChapters()
 
     internal suspend fun getChapter(id: Int): Chapter {
         Log.i(TAG, "Querying for chapter $id")

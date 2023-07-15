@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
-import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawBehind
@@ -42,7 +41,7 @@ private const val TAG = "ChaptersRootScreen"
 
 @Composable
 internal fun ChaptersRootScreen(chaptersViewModel: ChaptersViewModel, navController: NavController) {
-    val selectedChapterData: Chapter? by chaptersViewModel.selectedChapterData.observeAsState()
+    val selectedChapterData: Chapter? by chaptersViewModel.selectedChapterData.collectAsState()
     val selectedChapterTagline = chaptersViewModel.getChapterPages(chaptersViewModel.selectedChapter.value)
     val defaultChapter = Chapter(0, "", "", "", false)
 

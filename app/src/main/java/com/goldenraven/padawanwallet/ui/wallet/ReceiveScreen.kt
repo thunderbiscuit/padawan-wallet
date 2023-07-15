@@ -12,12 +12,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.livedata.observeAsState
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.platform.LocalConfiguration
@@ -42,7 +38,7 @@ internal fun ReceiveScreen(
     navController: NavHostController,
     viewModel: WalletViewModel
 ) {
-    val address by viewModel.address.observeAsState("Generate new address")
+    val address by viewModel.address.collectAsState("Generate new address")
     var QR by remember {
         mutableStateOf<ImageBitmap?>(null)
     }
