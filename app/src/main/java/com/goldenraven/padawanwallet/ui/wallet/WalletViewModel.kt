@@ -60,6 +60,8 @@ class WalletViewModel(
     val address: LiveData<String>
         get() = _address
 
+    var QRState: MutableStateFlow<QRUIState> = MutableStateFlow(QRUIState.NoQR)
+
     private val _isRefreshing: MutableStateFlow<Boolean> = MutableStateFlow(false)
     val isRefreshing: StateFlow<Boolean>
         get() = _isRefreshing.asStateFlow()
@@ -119,8 +121,13 @@ class WalletViewModel(
     }
 
     fun updateLastUnusedAddress() {
-        val address = Wallet.getLastUnusedAddress().address
-        _address.value = address
+        viewModelScope.launch {
+            QRState.value = QRUIState.Loading
+            val address = Wallet.getLastUnusedAddress().address
+            delay(800)
+            QRState.value = QRUIState.QR
+            _address.value = address
+        }
     }
 
     private suspend fun updateBalance() {
@@ -282,6 +289,12 @@ class WalletViewModel(
             ktorClient.close()
         }
     }
+}
+
+sealed class QRUIState {
+    object NoQR : QRUIState()
+    object Loading : QRUIState()
+    object QR : QRUIState()
 }
 
 enum class CurrencyType {

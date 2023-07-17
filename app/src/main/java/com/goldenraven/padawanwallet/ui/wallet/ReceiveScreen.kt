@@ -7,9 +7,11 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.selection.SelectionContainer
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
@@ -44,6 +46,7 @@ internal fun ReceiveScreen(
     var QR by remember {
         mutableStateOf<ImageBitmap?>(null)
     }
+    val qrUIState: QRUIState = viewModel.QRState.collectAsState(QRUIState.NoQR).value
 
     LaunchedEffect(address){
         withContext(Dispatchers.IO){
@@ -86,12 +89,13 @@ internal fun ReceiveScreen(
                     height = Dimension.fillToConstraints
                 }
         ) {
-            Log.i(TAG, "New receive address is $address")
-            if (address != "") {
+            if (qrUIState == QRUIState.Loading) {
+                CircularProgressIndicator()
+            } else if (qrUIState == QRUIState.QR) {
                 QR?.let {
                     Image(
                         bitmap = it,
-                        contentDescription = "Bitcoindevkit website QR code",
+                        contentDescription = "QR Code",
                         Modifier.size(250.dp)
                     )
                     Spacer(modifier = Modifier.padding(vertical = 8.dp))
