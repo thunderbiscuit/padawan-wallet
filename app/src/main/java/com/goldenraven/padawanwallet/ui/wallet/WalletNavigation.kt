@@ -110,20 +110,33 @@ fun WalletNavigation(
 
 
         // Send
+        val sendScreens: List<String> = listOf("qr_scan_screen")
         composable(
             route = Screen.SendScreen.route,
             enterTransition = {
-                slideIntoContainer(AnimatedContentScope.SlideDirection.Up, animationSpec = tween(animationDuration))
+                when (initialState.destination.route) {
+                    in sendScreens -> fadeIn(animationSpec = tween(400))
+                    else           -> slideIntoContainer(AnimatedContentScope.SlideDirection.Up, animationSpec = tween(animationDuration))
+                }
             },
             popEnterTransition = {
-                slideIntoContainer(AnimatedContentScope.SlideDirection.Up, animationSpec = tween(animationDuration))
+                when (initialState.destination.route) {
+                    in sendScreens -> fadeIn(animationSpec = tween(400))
+                    else -> slideIntoContainer(AnimatedContentScope.SlideDirection.Up, animationSpec = tween(animationDuration))
+                }
             },
             exitTransition = {
-                slideOutOfContainer(AnimatedContentScope.SlideDirection.Down, animationSpec = tween(animationDuration))
+                when (targetState.destination.route) {
+                    in sendScreens -> fadeOut(animationSpec = tween(400))
+                    else           -> slideOutOfContainer(AnimatedContentScope.SlideDirection.Down, animationSpec = tween(animationDuration))
+                }
             },
             popExitTransition = {
-                slideOutOfContainer(AnimatedContentScope.SlideDirection.Down, animationSpec = tween(animationDuration))
-            }
+                when (targetState.destination.route) {
+                    in sendScreens -> fadeOut(animationSpec = tween(400))
+                    else           -> slideOutOfContainer(AnimatedContentScope.SlideDirection.Down, animationSpec = tween(animationDuration))
+                }
+            },
         ) { SendScreen(navController = navControllerWalletNavigation, walletViewModel = walletViewModel) }
 
 
