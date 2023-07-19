@@ -51,6 +51,8 @@ import com.goldenraven.padawanwallet.utils.getScreenSizeWidth
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 import org.bitcoindevkit.TxBuilderResult
+import org.bitcointools.Bip21URI
+import org.bitcointools.Network
 import androidx.compose.material.SnackbarHostState as SnackbarHostStateM2
 import androidx.compose.material.SnackbarDuration as SnackbarDurationM2
 
@@ -76,9 +78,14 @@ internal fun SendScreen(navController: NavHostController, walletViewModel: Walle
         navController.currentBackStackEntry?.savedStateHandle?.getLiveData<String>("BTC_Address")
             ?.observeAsState()
     qrCodeScanner?.value.let {
-        if (it != null)
-            recipientAddress.value = it
-
+        if (it != null) {
+            try {
+                val uri = Bip21URI.fromString(it, Network.TESTNET)
+                recipientAddress.value = uri.address.value
+            } catch (e: Exception) {
+                recipientAddress.value = it
+            }
+        }
         navController.currentBackStackEntry?.savedStateHandle?.remove<String>("BTC_Address")
     }
 
