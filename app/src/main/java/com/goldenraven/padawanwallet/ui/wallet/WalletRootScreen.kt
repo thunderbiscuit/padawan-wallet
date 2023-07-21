@@ -290,7 +290,7 @@ fun SendReceive(navController: NavHostController) {
             .height(70.dp)
     ) {
         Button(
-            onClick = { ClickHelper.getInstance().clickOnce { navController.navigate(Screen.ReceiveScreen.route) }},
+            onClick = { ClickHelper.clickOnce { navController.navigate(Screen.ReceiveScreen.route) }},
             colors = ButtonDefaults.buttonColors(containerColor = padawan_theme_button_secondary),
             shape = RoundedCornerShape(20.dp),
             border = standardBorder,
@@ -311,7 +311,7 @@ fun SendReceive(navController: NavHostController) {
             }
         }
         Button(
-            onClick = { ClickHelper.getInstance().clickOnce { navController.navigate(Screen.SendScreen.route) }},
+            onClick = { ClickHelper.clickOnce { navController.navigate(Screen.SendScreen.route) }},
             colors = ButtonDefaults.buttonColors(containerColor = padawan_theme_button_primary),
             shape = RoundedCornerShape(20.dp),
             border = standardBorder,
