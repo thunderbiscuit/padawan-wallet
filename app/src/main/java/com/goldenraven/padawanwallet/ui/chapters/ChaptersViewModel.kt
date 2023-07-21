@@ -1,5 +1,5 @@
 /*
- * Copyright 2020-2022 thunderbiscuit and contributors.
+ * Copyright 2020-2023 thunderbiscuit and contributors.
  * Use of this source code is governed by the Apache 2.0 license that can be found in the ./LICENSE file.
  */
 
@@ -15,7 +15,6 @@ import com.goldenraven.padawanwallet.R
 import com.goldenraven.padawanwallet.data.chapters.*
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
 
 private const val TAG = "ChaptersViewModel"
 

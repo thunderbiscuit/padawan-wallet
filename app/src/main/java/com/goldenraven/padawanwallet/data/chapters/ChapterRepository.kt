@@ -1,5 +1,5 @@
 /*
- * Copyright 2020-2022 thunderbiscuit and contributors.
+ * Copyright 2020-2023 thunderbiscuit and contributors.
  * Use of this source code is governed by the Apache 2.0 license that can be found in the ./LICENSE file.
  */
 
@@ -7,7 +7,6 @@ package com.goldenraven.padawanwallet.data.chapters
 
 import android.util.Log
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.runBlocking
 
 private const val TAG = "ChapterRepository"
@@ -33,7 +32,7 @@ class ChapterRepository(private val chapterDao: ChapterDao) {
         chapterDao.addChapter(chapter = chapter)
     }
 
-    suspend fun dbIsEmpty(): Boolean {
+    fun dbIsEmpty(): Boolean {
         return chapterDao.isEmpty()
     }
 
