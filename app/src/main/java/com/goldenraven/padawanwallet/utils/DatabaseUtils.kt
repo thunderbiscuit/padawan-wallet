@@ -7,10 +7,18 @@ package com.goldenraven.padawanwallet.utils
 
 import org.bitcoindevkit.TransactionDetails
 
+/**
+ * Calculates the net amount sent in a transaction, without fees. By default BDK gives us the total number of
+ * satoshis sent in a transaction, but for display purposes it's often useful to break that amount in two: what
+ * was sent to the recipient and the fees paid.
+ */
 fun netSendWithoutFees(txSatsOut: SatoshisOut, txSatsIn: SatoshisIn, fees: Int): Int {
     return txSatsOut.satoshis - (txSatsIn.satoshis + fees)
 }
 
+/**
+ * Determines whether a transaction is a payment or a receive.
+ */
 fun isPayment(sent: SatoshisOut, received: SatoshisIn): Boolean {
     return (received.satoshis - sent.satoshis) < 0
 }
