@@ -102,7 +102,7 @@ dependencies {
     // Compose
     // Adding the Bill of Materials synchronizes dependencies in the androidx.compose namespace
     // You can remove the library version in your dependency declaration
-    implementation(platform("androidx.compose:compose-bom:2023.01.00"))
+    implementation(platform("androidx.compose:compose-bom:2023.06.01"))
 
     // Why does this work? As far as I understand it the androidx.activity namespace is not managed by the compose bill of materials
     // Was implementation("androidx.activity:activity-compose:1.6.1")

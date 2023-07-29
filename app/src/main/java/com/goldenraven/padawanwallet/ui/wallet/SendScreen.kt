@@ -16,6 +16,7 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.BottomSheetScaffold
 import androidx.compose.material.*
+import androidx.compose.material.BottomSheetScaffoldState
 import androidx.compose.material3.*
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -41,6 +42,8 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.constraintlayout.compose.ConstraintLayout
+import androidx.constraintlayout.compose.Dimension
 import androidx.navigation.NavHostController
 import com.goldenraven.padawanwallet.R
 import com.goldenraven.padawanwallet.data.Wallet
@@ -96,170 +99,204 @@ internal fun SendScreen(navController: NavHostController, walletViewModel: Walle
         sheetPeekHeight = 0.dp,
         backgroundColor = padawan_theme_background
     ) {
-
-        PadawanAppBar(navController = navController, title = "Send bitcoin")
-
         val padding = when (getScreenSizeWidth(LocalConfiguration.current.screenWidthDp)) {
             ScreenSizeWidth.Small -> 12.dp
             ScreenSizeWidth.Phone -> 32.dp
         }
 
         val scrollState = rememberScrollState()
-        Column(
+
+        ConstraintLayout(
             modifier = Modifier
                 .fillMaxSize()
                 .standardBackground(padding)
-                .verticalScroll(scrollState)
         ) {
-            Row(modifier = Modifier.padding(top = 8.dp, bottom = 8.dp)) {
+            val (screenTitle, content) = createRefs()
+            Row(
+                Modifier
+                    .constrainAs(screenTitle) {
+                        top.linkTo(parent.top)
+                        start.linkTo(parent.start)
+                        end.linkTo(parent.end)
+                    }
+            ) {
+                PadawanAppBar(navController = navController, title = "Send bitcoin")
+            }
+
+            Column(
+                modifier = Modifier
+                    .constrainAs(content) {
+                        top.linkTo(screenTitle.bottom)
+                        start.linkTo(parent.start)
+                        end.linkTo(parent.end)
+                    }
+                    .fillMaxSize()
+                    .standardBackground(padding)
+                    .verticalScroll(scrollState)
+            ) {
+                Row(modifier = Modifier.padding(top = 8.dp, bottom = 8.dp)) {
+                    Text(
+                        text = "Amount",
+                        fontWeight = FontWeight.Bold,
+                        textAlign = TextAlign.Start,
+                        fontSize = 20.sp,
+                        modifier = Modifier
+                            .weight(weight = 0.5f)
+                            .align(Alignment.Bottom)
+                    )
+                    Text(
+                        text = "Balance: $balance sats",
+                        textAlign = TextAlign.End,
+                        modifier = Modifier
+                            .weight(weight = 0.5f)
+                            .align(Alignment.Bottom)
+                    )
+                }
+                TextField(
+                    modifier = Modifier
+                        .wideTextField()
+                        .height(IntrinsicSize.Min),
+                    shape = RoundedCornerShape(20.dp),
+                    value = amount.value,
+                    onValueChange = { value -> amount.value = value.filter { it.isDigit() } },
+                    singleLine = true,
+                    placeholder = { Text("Enter amount (sats)") },
+                    colors = TextFieldDefaults.textFieldColors(
+                        // backgroundColor = padawan_theme_background_secondary,
+                        containerColor = padawan_theme_background_secondary,
+                        cursorColor = padawan_theme_onPrimary,
+                        focusedIndicatorColor = Color.Transparent,
+                        unfocusedIndicatorColor = Color.Transparent,
+                        disabledIndicatorColor = Color.Transparent,
+                        errorIndicatorColor = Color.Transparent,
+                    ),
+                    enabled = (true),
+                    keyboardOptions = KeyboardOptions(
+                        keyboardType = KeyboardType.Number,
+                        imeAction = ImeAction.Next
+                    ),
+                )
+
                 Text(
-                    text = "Amount",
+                    text = "Address",
                     fontWeight = FontWeight.Bold,
                     textAlign = TextAlign.Start,
                     fontSize = 20.sp,
-                    modifier = Modifier
-                        .weight(weight = 0.5f)
-                        .align(Alignment.Bottom)
+                    modifier = Modifier.padding(top = 16.dp)
                 )
-                Text(
-                    text = "Balance: $balance sats",
-                    textAlign = TextAlign.End,
+                TextField(
                     modifier = Modifier
-                        .weight(weight = 0.5f)
-                        .align(Alignment.Bottom)
-                )
-            }
-            TextField(
-                modifier = Modifier
-                    .wideTextField()
-                    .height(IntrinsicSize.Min),
-                shape = RoundedCornerShape(20.dp),
-                value = amount.value,
-                onValueChange = { value -> amount.value = value.filter { it.isDigit() } },
-                singleLine = true,
-                placeholder = { Text("Enter amount (sats)") },
-                colors = TextFieldDefaults.textFieldColors(
-                    // backgroundColor = padawan_theme_background_secondary,
-                    containerColor = padawan_theme_background_secondary,
-                    cursorColor = padawan_theme_onPrimary,
-                    focusedIndicatorColor = Color.Transparent,
-                    unfocusedIndicatorColor = Color.Transparent,
-                    disabledIndicatorColor = Color.Transparent,
-                    errorIndicatorColor = Color.Transparent,
-                ),
-                enabled = (true),
-                keyboardOptions = KeyboardOptions(
-                    keyboardType = KeyboardType.Number,
-                    imeAction = ImeAction.Next
-                ),
-            )
-
-            Text(
-                text = "Address",
-                fontWeight = FontWeight.Bold,
-                textAlign = TextAlign.Start,
-                fontSize = 20.sp,
-                modifier = Modifier.padding(top = 16.dp)
-            )
-            TextField(
-                modifier = Modifier
-                    .wideTextField()
-                    .height(IntrinsicSize.Min),
-                shape = RoundedCornerShape(20.dp),
-                value = recipientAddress.value,
-                onValueChange = { recipientAddress.value = it },
-                singleLine = true,
-                placeholder = { Text(text = "Enter a bitcoin testnet address") },
-                colors = TextFieldDefaults.textFieldColors(
-                    // backgroundColor = padawan_theme_background_secondary,
-                    containerColor = padawan_theme_background_secondary,
-                    cursorColor = padawan_theme_onPrimary,
-                    focusedIndicatorColor = Color.Transparent,
-                    unfocusedIndicatorColor = Color.Transparent,
-                    disabledIndicatorColor = Color.Transparent,
-                    errorIndicatorColor = Color.Transparent,
-                ),
-                keyboardOptions = KeyboardOptions(
-                    keyboardType = KeyboardType.Text,
-                    imeAction = ImeAction.Next
-                ),
-                trailingIcon = {
-                    Row {
-                        VerticalTextFieldDivider()
-                        IconButton(
-                            onClick = {
-                                navController.navigate(Screen.QRScanScreen.route) {
-                                    launchSingleTop = true
-                                }
-                            },
-                            modifier = Modifier.align(Alignment.CenterVertically)
-                        ) {
-                            Icon(
-                                painter = painterResource(id = R.drawable.ic_camera),
-                                contentDescription = "Scan QR Icon",
-                            )
-                        }
-                    }
-                }
-            )
-
-            Text(
-                text = "Fees (sats/vbytes)",
-                fontWeight = FontWeight.Bold,
-                textAlign = TextAlign.Start,
-                fontSize = 20.sp,
-                modifier = Modifier.padding(top = 16.dp)
-            )
-
-            var sliderPosition by remember { mutableStateOf(1f) }
-            Slider(
-                modifier = Modifier.semantics { contentDescription = "Localized Description" },
-                value = sliderPosition,
-                onValueChange = { sliderPosition = it },
-                valueRange = 1f..8f,
-                onValueChangeFinished = { feeRate.value = sliderPosition.toString().take(3) },
-                steps = 6
-            )
-            Text(text = sliderPosition.toString().take(3))
-
-            Button(
-                onClick = {
-                    val inputsAreValid = verifyInputs(recipientAddress.value, amount.value, feeRate.value, scope, bottomSheetScaffoldState.snackbarHostState)
-                    try {
-                        if (inputsAreValid) {
-                            val txBR = Wallet.createTransaction(recipientAddress.value, amount.value.toULong(), feeRate.value.toFloat())
-                            txBuilderResult.value = txBR
-                            coroutineScope.launch {
-                                if (bottomSheetScaffoldState.bottomSheetState.isCollapsed) {
-                                    bottomSheetScaffoldState.bottomSheetState.expand()
-                                }
+                        .wideTextField()
+                        .height(IntrinsicSize.Min),
+                    shape = RoundedCornerShape(20.dp),
+                    value = recipientAddress.value,
+                    onValueChange = { recipientAddress.value = it },
+                    singleLine = true,
+                    placeholder = { Text(text = "Enter a bitcoin testnet address") },
+                    colors = TextFieldDefaults.textFieldColors(
+                        // backgroundColor = padawan_theme_background_secondary,
+                        containerColor = padawan_theme_background_secondary,
+                        cursorColor = padawan_theme_onPrimary,
+                        focusedIndicatorColor = Color.Transparent,
+                        unfocusedIndicatorColor = Color.Transparent,
+                        disabledIndicatorColor = Color.Transparent,
+                        errorIndicatorColor = Color.Transparent,
+                    ),
+                    keyboardOptions = KeyboardOptions(
+                        keyboardType = KeyboardType.Text,
+                        imeAction = ImeAction.Next
+                    ),
+                    trailingIcon = {
+                        Row {
+                            VerticalTextFieldDivider()
+                            IconButton(
+                                onClick = {
+                                    navController.navigate(Screen.QRScanScreen.route) {
+                                        launchSingleTop = true
+                                    }
+                                },
+                                modifier = Modifier.align(Alignment.CenterVertically)
+                            ) {
+                                Icon(
+                                    painter = painterResource(id = R.drawable.ic_camera),
+                                    contentDescription = "Scan QR Icon",
+                                )
                             }
                         }
-                    } catch (exception: Exception) {
-                        scope.launch {
-                            bottomSheetScaffoldState.snackbarHostState.showSnackbar(message = "$exception", duration = SnackbarDurationM2.Short)
-                        }
                     }
+                )
 
-                },
-                colors = ButtonDefaults.buttonColors(containerColor = padawan_theme_button_primary),
-                shape = RoundedCornerShape(20.dp),
-                border = standardBorder,
-                modifier = Modifier
-                    .padding(top = 32.dp, start = 4.dp, end = 4.dp, bottom = 24.dp)
-                    .standardShadow(20.dp)
-                    .height(70.dp)
-                    .width(240.dp)
-                    .align(Alignment.CenterHorizontally)
-            ) {
-                Row(
-                    verticalAlignment = Alignment.CenterVertically,
-                    modifier = Modifier.padding(vertical = 4.dp)
+                Text(
+                    text = "Fees (sats/vbytes)",
+                    fontWeight = FontWeight.Bold,
+                    textAlign = TextAlign.Start,
+                    fontSize = 20.sp,
+                    modifier = Modifier.padding(top = 16.dp)
+                )
+
+                var sliderPosition by remember { mutableStateOf(1f) }
+                Slider(
+                    modifier = Modifier.semantics { contentDescription = "Localized Description" },
+                    value = sliderPosition,
+                    onValueChange = { sliderPosition = it },
+                    valueRange = 1f..8f,
+                    onValueChangeFinished = { feeRate.value = sliderPosition.toString().take(3) },
+                    steps = 6
+                )
+                Text(text = sliderPosition.toString().take(3))
+
+                Button(
+                    onClick = {
+                        val inputsAreValid = verifyInputs(
+                            recipientAddress.value,
+                            amount.value,
+                            feeRate.value,
+                            scope,
+                            bottomSheetScaffoldState.snackbarHostState
+                        )
+                        try {
+                            if (inputsAreValid) {
+                                val txBR = Wallet.createTransaction(
+                                    recipientAddress.value,
+                                    amount.value.toULong(),
+                                    feeRate.value.toFloat()
+                                )
+                                txBuilderResult.value = txBR
+                                coroutineScope.launch {
+                                    if (bottomSheetScaffoldState.bottomSheetState.isCollapsed) {
+                                        bottomSheetScaffoldState.bottomSheetState.expand()
+                                    }
+                                }
+                            }
+                        } catch (exception: Exception) {
+                            scope.launch {
+                                bottomSheetScaffoldState.snackbarHostState.showSnackbar(
+                                    message = "$exception",
+                                    duration = SnackbarDurationM2.Short
+                                )
+                            }
+                        }
+
+                    },
+                    colors = ButtonDefaults.buttonColors(containerColor = padawan_theme_button_primary),
+                    shape = RoundedCornerShape(20.dp),
+                    border = standardBorder,
+                    modifier = Modifier
+                        .padding(top = 32.dp, start = 4.dp, end = 4.dp, bottom = 24.dp)
+                        .standardShadow(20.dp)
+                        .height(70.dp)
+                        .width(240.dp)
+                        .align(Alignment.CenterHorizontally)
                 ) {
-                    Text(
-                        text = "Verify transaction",
-                        color = Color(0xff000000)
-                    )
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
+                        modifier = Modifier.padding(vertical = 4.dp)
+                    ) {
+                        Text(
+                            text = "Verify transaction",
+                            color = Color(0xff000000)
+                        )
+                    }
                 }
             }
         }
