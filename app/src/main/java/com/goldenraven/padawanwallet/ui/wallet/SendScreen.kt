@@ -5,6 +5,7 @@
 
 package com.goldenraven.padawanwallet.ui.wallet
 
+import android.annotation.SuppressLint
 import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -61,17 +62,19 @@ private const val TAG = "SendScreen"
 
 // BottomSheetScaffold is not available in Material 3, so this screen is all Material 2
 
+@SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterialApi::class, ExperimentalMaterial3Api::class)
 @Composable
 internal fun SendScreen(navController: NavHostController, walletViewModel: WalletViewModel) {
     // val (showDialog, setShowDialog) = rememberSaveable { mutableStateOf(false) }
 
     val coroutineScope = rememberCoroutineScope()
+    val scaffoldState = rememberScaffoldState()
 
     val balance by walletViewModel.balance.collectAsState()
     val recipientAddress: MutableState<String> = rememberSaveable { mutableStateOf("") }
     val amount: MutableState<String> = rememberSaveable { mutableStateOf("") }
-    val feeRate: MutableState<String> = rememberSaveable { mutableStateOf("") }
+    val feeRate: MutableState<String> = rememberSaveable { mutableStateOf("1") }
     val txBuilderResult: MutableState<TxBuilderResult?> = remember { mutableStateOf(null) }
     val scope = rememberCoroutineScope()
 
@@ -85,20 +88,77 @@ internal fun SendScreen(navController: NavHostController, walletViewModel: Walle
         navController.currentBackStackEntry?.savedStateHandle?.remove<String>("BTC_Address")
     }
 
-    val bottomSheetScaffoldState = rememberBottomSheetScaffoldState(
-        bottomSheetState = rememberBottomSheetState(initialValue = BottomSheetValue.Collapsed)
+    val modalSheetState = rememberModalBottomSheetState(
+        initialValue = ModalBottomSheetValue.Hidden,
+        confirmStateChange = { it != ModalBottomSheetValue.HalfExpanded },
+        skipHalfExpanded = true
     )
 
-    BottomSheetScaffold(
+    ModalBottomSheetLayout(
         sheetShape = RoundedCornerShape(topEnd = 20.dp, topStart = 20.dp),
         sheetContentColor = padawan_theme_background,
-        sheetContent = { TransactionConfirmation(txBuilderResult, recipientAddress, amount, bottomSheetScaffoldState, scope, navController, walletViewModel) },
-        scaffoldState = bottomSheetScaffoldState,
+        sheetContent = { TransactionConfirmation(txBuilderResult, recipientAddress, amount, scaffoldState, scope, navController, walletViewModel) },
+        sheetState = modalSheetState,
         sheetBackgroundColor = Color.White,
         sheetElevation = 12.dp,
-        sheetPeekHeight = 0.dp,
-        backgroundColor = padawan_theme_background
     ) {
+        Scaffold(
+            scaffoldState = scaffoldState,
+            topBar = {PadawanAppBar(navController = navController, title = "Send bitcoin")}
+        ) {
+            val scrollState = rememberScrollState()
+            val padding = when (getScreenSizeWidth(LocalConfiguration.current.screenWidthDp)) {
+                ScreenSizeWidth.Small -> 12.dp
+                ScreenSizeWidth.Phone -> 32.dp
+            }
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .standardBackground(padding)
+                    .verticalScroll(scrollState)
+            ) {
+                Row(modifier = Modifier.padding(top = 8.dp, bottom = 8.dp)) {
+                    Text(
+                        text = "Amount",
+                        fontWeight = FontWeight.Bold,
+                        textAlign = TextAlign.Start,
+                        fontSize = 20.sp,
+                        modifier = Modifier
+                            .weight(weight = 0.5f)
+                            .align(Alignment.Bottom)
+                    )
+                    Text(
+                        text = "Balance: $balance sats",
+                        textAlign = TextAlign.End,
+                        modifier = Modifier
+                            .weight(weight = 0.5f)
+                            .align(Alignment.Bottom)
+                    )
+                }
+                TextField(
+                    modifier = Modifier
+                        .wideTextField()
+                        .height(IntrinsicSize.Min),
+                    shape = RoundedCornerShape(20.dp),
+                    value = amount.value,
+                    onValueChange = { value -> amount.value = value.filter { it.isDigit() } },
+                    singleLine = true,
+                    placeholder = { Text("Enter amount (sats)") },
+                    colors = TextFieldDefaults.textFieldColors(
+                        // backgroundColor = padawan_theme_background_secondary,
+                        containerColor = padawan_theme_background_secondary,
+                        cursorColor = padawan_theme_onPrimary,
+                        focusedIndicatorColor = Color.Transparent,
+                        unfocusedIndicatorColor = Color.Transparent,
+                        disabledIndicatorColor = Color.Transparent,
+                        errorIndicatorColor = Color.Transparent,
+                    ),
+                    enabled = (true),
+                    keyboardOptions = KeyboardOptions(
+                        keyboardType = KeyboardType.Number,
+                        imeAction = ImeAction.Next
+                    ),
+                )
         val padding = when (getScreenSizeWidth(LocalConfiguration.current.screenWidthDp)) {
             ScreenSizeWidth.Small -> 12.dp
             ScreenSizeWidth.Phone -> 32.dp
@@ -252,6 +312,37 @@ internal fun SendScreen(navController: NavHostController, walletViewModel: Walle
                             amount.value,
                             feeRate.value,
                             scope,
+                            scaffoldState.snackbarHostState
+                        )
+                        try {
+                            if (inputsAreValid) {
+                                val txBR = Wallet.createTransaction(
+                                    recipientAddress.value,
+                                    amount.value.toULong(),
+                                    feeRate.value.toFloat()
+                                )
+                                txBuilderResult.value = txBR
+                                coroutineScope.launch {
+                                    if (!modalSheetState.isVisible) {
+                                        modalSheetState.show()
+                                    }
+                                }
+                            }
+                        } catch (exception: Exception) {
+                            scope.launch {
+                                scaffoldState.snackbarHostState.showSnackbar(
+                                    message = "$exception",
+                                    duration = SnackbarDurationM2.Short
+                                )
+                            }
+                        }
+                Button(
+                    onClick = {
+                        val inputsAreValid = verifyInputs(
+                            recipientAddress.value,
+                            amount.value,
+                            feeRate.value,
+                            scope,
                             bottomSheetScaffoldState.snackbarHostState
                         )
                         try {
@@ -309,7 +400,7 @@ fun TransactionConfirmation(
     txBuilderResult: MutableState<TxBuilderResult?>,
     recipientAddress: MutableState<String>,
     amount: MutableState<String>,
-    snackbarHostState: BottomSheetScaffoldState,
+    snackbarHostState: ScaffoldState,
     scope: CoroutineScope,
     navController: NavHostController,
     viewModel: WalletViewModel,
@@ -319,11 +410,17 @@ fun TransactionConfirmation(
         modifier = Modifier
             .fillMaxWidth()
             .background(padawan_theme_button_secondary)
-            .border(3.dp, padawan_theme_button_primary, RoundedCornerShape(20.dp, 20.dp, 0.dp, 0.dp))
+            .border(
+                3.dp,
+                padawan_theme_button_primary,
+                RoundedCornerShape(20.dp, 20.dp, 0.dp, 0.dp)
+            )
             .padding(horizontal = 24.dp)
     ) {
         Row(
-            Modifier.fillMaxWidth().padding(top = 16.dp),
+            Modifier
+                .fillMaxWidth()
+                .padding(top = 16.dp),
             horizontalArrangement = Arrangement.Center
         ) {
             Text(
@@ -333,7 +430,9 @@ fun TransactionConfirmation(
             )
         }
         Row(
-            Modifier.fillMaxWidth().padding(top = 16.dp),
+            Modifier
+                .fillMaxWidth()
+                .padding(top = 16.dp),
             horizontalArrangement = Arrangement.Start
         ) {
             Text(
@@ -353,7 +452,9 @@ fun TransactionConfirmation(
             )
         }
         Row(
-            Modifier.fillMaxWidth().padding(top = 16.dp),
+            Modifier
+                .fillMaxWidth()
+                .padding(top = 16.dp),
             horizontalArrangement = Arrangement.Start
         ) {
             Text(
@@ -372,7 +473,9 @@ fun TransactionConfirmation(
             )
         }
         Row(
-            Modifier.fillMaxWidth().padding(top = 16.dp),
+            Modifier
+                .fillMaxWidth()
+                .padding(top = 16.dp),
             horizontalArrangement = Arrangement.Start
         ) {
             Text(
