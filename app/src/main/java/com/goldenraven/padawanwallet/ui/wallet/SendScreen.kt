@@ -127,11 +127,11 @@ internal fun SendScreen(navController: NavHostController, walletViewModel: Walle
                 modifier = Modifier
                     .constrainAs(content) {
                         top.linkTo(screenTitle.bottom)
+                        bottom.linkTo(parent.bottom)
                         start.linkTo(parent.start)
                         end.linkTo(parent.end)
+                        height = Dimension.fillToConstraints
                     }
-                    .fillMaxSize()
-                    .standardBackground(padding)
                     .verticalScroll(scrollState)
             ) {
                 Row(modifier = Modifier.padding(top = 8.dp, bottom = 8.dp)) {
