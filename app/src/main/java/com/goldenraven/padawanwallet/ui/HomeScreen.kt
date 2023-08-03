@@ -7,8 +7,17 @@ package com.goldenraven.padawanwallet.ui
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.*
-import androidx.compose.runtime.*
+import androidx.compose.material3.Icon
+import androidx.compose.material3.NavigationBar
+import androidx.compose.material3.NavigationBarItem
+import androidx.compose.material3.NavigationBarItemDefaults
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.geometry.Offset
@@ -20,7 +29,10 @@ import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
-import com.goldenraven.padawanwallet.theme.*
+import com.goldenraven.padawanwallet.theme.PadawanTypography
+import com.goldenraven.padawanwallet.theme.padawan_theme_background_secondary
+import com.goldenraven.padawanwallet.theme.padawan_theme_button_primary
+import com.goldenraven.padawanwallet.theme.padawan_theme_navigation_bar_unselected
 import com.goldenraven.padawanwallet.ui.chapters.ChaptersViewModel
 import com.goldenraven.padawanwallet.utils.NavigationItem
 import com.goldenraven.padawanwallet.ui.wallet.WalletNavigation
@@ -28,7 +40,9 @@ import com.goldenraven.padawanwallet.ui.wallet.WalletViewModel
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
-@OptIn(ExperimentalMaterial3Api::class, androidx.compose.animation.ExperimentalAnimationApi::class)
+private const val TAG = "HomeScreen"
+
+@OptIn(androidx.compose.animation.ExperimentalAnimationApi::class)
 @Composable
 internal fun HomeScreen(walletViewModel: WalletViewModel, chaptersViewModel: ChaptersViewModel) {
     val navControllerWalletNavigation: NavHostController = rememberAnimatedNavController()
@@ -73,11 +87,7 @@ internal fun BottomNavigationBar(
         items.forEachIndexed { index, item ->
             NavigationBarItem(
                 icon = {
-                    if (selectedItem == index) {
-                        Icon(painter = painterResource(id = item.icon_filled), contentDescription = item.title)
-                    } else {
-                        Icon(painter = painterResource(id = item.icon_outline), contentDescription = item.title)
-                    }
+                    Icon(painter = painterResource(id = item.iconOutline), contentDescription = item.title)
                 },
                 label = {
                     Text(
@@ -85,7 +95,7 @@ internal fun BottomNavigationBar(
                         style = PadawanTypography.labelSmall
                     )
                 },
-                selected = currentDestination?.hierarchy?.any { it.route == item.route }==true,
+                selected = currentDestination?.hierarchy?.any { it.route in item.group } == true,
                 onClick = {
                     if (selectedItem != index) {
                         selectedItem = index
@@ -99,8 +109,6 @@ internal fun BottomNavigationBar(
                     }
                 },
                 colors = NavigationBarItemDefaults.colors(
-                    // selectedIconColor = padawan_theme_onBackground,
-                    // selectedTextColor = padawan_theme_onBackground,
                     selectedIconColor = padawan_theme_button_primary,
                     selectedTextColor = padawan_theme_button_primary,
                     unselectedIconColor = padawan_theme_navigation_bar_unselected,

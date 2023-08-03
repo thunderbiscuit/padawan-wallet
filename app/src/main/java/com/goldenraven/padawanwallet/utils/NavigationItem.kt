@@ -8,8 +8,24 @@ package com.goldenraven.padawanwallet.utils
 import com.goldenraven.padawanwallet.R
 import com.goldenraven.padawanwallet.ui.Screen
 
-sealed class NavigationItem(val route: String, val icon_filled: Int, val icon_outline: Int, val title: String) {
-    object Home : NavigationItem(route = Screen.WalletRootScreen.route, icon_filled = R.drawable.ic_hicon_wallet, icon_outline = R.drawable.ic_hicon_wallet, title = "Wallet")
-    object Chapters : NavigationItem(route = Screen.ChaptersRootScreen.route, icon_filled = R.drawable.ic_hicon_education, icon_outline = R.drawable.ic_hicon_education, title = "Learn")
-    object Settings : NavigationItem(route = Screen.SettingsRootScreen.route, icon_filled = R.drawable.ic_hicon_menu, icon_outline = R.drawable.ic_hicon_menu, title = "Menu")
+sealed class NavigationItem(val route: String, val iconOutline: Int, val title: String, val group: Set<String>) {
+    object Home : NavigationItem(
+        route = Screen.WalletRootScreen.route,
+        iconOutline = R.drawable.ic_hicon_wallet,
+        title = "Wallet",
+        group = setOf("wallet_screen", "receive_screen", "send_screen", "transaction_screen/txid={txid}", "qr_scan_screen")
+    )
+
+    object Chapters : NavigationItem(
+        route = Screen.ChaptersRootScreen.route,
+        iconOutline = R.drawable.ic_hicon_education,
+        title = "Learn",
+        group = setOf("chapters_home_screen", "chapter_screen/{chapterId}")
+    )
+    object Settings : NavigationItem(
+        route = Screen.SettingsRootScreen.route,
+        iconOutline = R.drawable.ic_hicon_menu,
+        title = "Menu",
+        group = setOf("settings_root_screen", "about_screen", "recovery_phrase_screen", "send_coins_back_screen")
+    )
 }
