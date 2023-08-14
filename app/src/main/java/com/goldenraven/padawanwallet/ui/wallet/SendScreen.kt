@@ -87,8 +87,8 @@ internal fun SendScreen(navController: NavHostController, walletViewModel: Walle
 
     val modalSheetState = rememberModalBottomSheetState(
         initialValue = ModalBottomSheetValue.Hidden,
-        confirmStateChange = { it != ModalBottomSheetValue.HalfExpanded },
-        skipHalfExpanded = true
+        confirmValueChange = { it != ModalBottomSheetValue.HalfExpanded },
+        skipHalfExpanded = false
     )
 
     ModalBottomSheetLayout(
@@ -168,9 +168,11 @@ internal fun SendScreen(navController: NavHostController, walletViewModel: Walle
                         },
                         singleLine = true,
                         placeholder = { Text("Enter amount (sats)") },
-                        colors = TextFieldDefaults.textFieldColors(
+                        colors = TextFieldDefaults.colors(
                             // backgroundColor = padawan_theme_background_secondary,
-                            containerColor = padawan_theme_background_secondary,
+                            focusedContainerColor = padawan_theme_background_secondary,
+                            unfocusedContainerColor = padawan_theme_background_secondary,
+                            disabledContainerColor = padawan_theme_background_secondary,
                             cursorColor = padawan_theme_onPrimary,
                             focusedIndicatorColor = Color.Transparent,
                             unfocusedIndicatorColor = Color.Transparent,
@@ -198,9 +200,11 @@ internal fun SendScreen(navController: NavHostController, walletViewModel: Walle
                         onValueChange = { recipientAddress.value = it },
                         singleLine = true,
                         placeholder = { Text(text = "Enter a bitcoin testnet address") },
-                        colors = TextFieldDefaults.textFieldColors(
+                        colors = TextFieldDefaults.colors(
                             // backgroundColor = padawan_theme_background_secondary,
-                            containerColor = padawan_theme_background_secondary,
+                            focusedContainerColor = padawan_theme_background_secondary,
+                            unfocusedContainerColor = padawan_theme_background_secondary,
+                            disabledContainerColor = padawan_theme_background_secondary,
                             cursorColor = padawan_theme_onPrimary,
                             focusedIndicatorColor = Color.Transparent,
                             unfocusedIndicatorColor = Color.Transparent,
