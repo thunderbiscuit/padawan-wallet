@@ -93,7 +93,6 @@ internal fun SendScreen(navController: NavHostController, walletViewModel: Walle
 
     ModalBottomSheetLayout(
         sheetShape = RoundedCornerShape(topEnd = 20.dp, topStart = 20.dp),
-        sheetContentColor = padawan_theme_background,
         sheetContent = {
             TransactionConfirmation(
                 txBuilderResult,
@@ -106,7 +105,6 @@ internal fun SendScreen(navController: NavHostController, walletViewModel: Walle
             )
         },
         sheetState = modalSheetState,
-        sheetBackgroundColor = Color.White,
         sheetElevation = 12.dp,
     ) {
         Scaffold(scaffoldState = scaffoldState) {
@@ -120,6 +118,7 @@ internal fun SendScreen(navController: NavHostController, walletViewModel: Walle
             ConstraintLayout(
                 modifier = Modifier
                     .fillMaxSize()
+                    .background(padawan_theme_background)
                     .standardBackground(padding)
             ) {
                 val (screenTitle, content) = createRefs()
