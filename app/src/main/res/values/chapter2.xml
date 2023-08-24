@@ -7,17 +7,17 @@
     <string name="t2_p2">To make it easier to share, we display this address in two common ways:</string>
     <string name="t2_p3">1. A string of letters and numbers that might look like this:</string>
     <string name="t2_p4">Or</string>
-    <string name="t2_p5">2. A QR code that would look like this:</string>
+    <string name="t2_p5">2. A QR code that might look like this:</string>
     <string name="t2_p6">The two formats above refer to the same address, just in different ways.</string>
 
     <string name="t2_h1">Generating receive addresses</string>
     <string name="t2_p7">To receive bitcoin, you have two options:</string>
-    <string name="t2_p8">1. The sender scans a QR code: If the person who wants to send you coins is nearby, generate a new receive address and ask them to scan the QR code displayed by your wallet.</string>
+    <string name="t2_p8">1. The sender scans a QR code: If the person who wants to send you coins is nearby, generate a new receive address and ask them to use their phone to scan the QR code displayed by your wallet.</string>
     <string name="t2_p9">2. Copy and paste the receive address to share it: Generate a new receive address, copy the string of letters and numbers (the address), and paste it in a message to the person who will send you the payment. If possible, you should try to send these messages on an encrypted platform so as to keep the address and the transaction private between you and the payer!</string>
     <string name="t2_p10">On Padawan, you can long press the address and the wallet will offer you to put the address directly into your clipboard for pasting somewhere else.</string>
 
     <string name="t2_h2">Be careful!</string>
     <string name="t2_p11">It is very important to be careful when sending and receiving bitcoin. The person sending bitcoin must use the exact correct address.</string>
-    <string name="t2_p12">Even though the QR code system and the copy/paste function of your phones are an acceptable way of remaining cautious, you should always double check the complete receive address. At the very least, when you copy and paste your receive address, make sure the first and last 5–10 characters of the address match.</string>
+    <string name="t2_p12">Even though the QR code system and the copy/paste function of our phones are an acceptable way of remaining cautious, you should always double check the complete receive address. At the very least, when you copy and paste your receive address, make sure the first and last 5–10 characters of the address match.</string>
     <string name="t2_p13">Reminder: Padawan only uses testnet bitcoins. Do not try to send it real bitcoins!</string>
 </resources>

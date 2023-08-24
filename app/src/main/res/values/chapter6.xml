@@ -3,8 +3,8 @@
     <string name="C6_title">Bitcoin units</string>
     <string name="C6_tagline">Satoshis, bitcoins, and beyond.</string>
 
-    <string name="t6_p1">The word \"bitcoin\" has a few meanings. When referring to \"bitcoin\", people sometime mean the network, the protocol, the open source project.</string>
-    <string name="t6_p2">But the word bitcoin also means one of the units of value when transacting on the bitcoin network.</string>
+    <string name="t6_p1">The word bitcoin has a few meanings. When referring to bitcoin, people sometime mean
+        (a) the network, the protocol, the open source project, or (b) one of the units of value when transacting on the bitcoin network.</string>
 
     <string name="t6_h1">Breaking it down</string>
     <string name="t6_p3">Just like the kilometer can be broken down into meters and centimeters and the foot can be broken down into inches, a bitcoin can be broken into smaller units.

@@ -134,7 +134,6 @@ val chapter6: List<Page> = listOf(
     listOf(
         ChapterElement(ElementType.TITLE, R.string.C6_title),
         ChapterElement(ElementType.BODY, R.string.t6_p1),
-        ChapterElement(ElementType.BODY, R.string.t6_p2),
     ),
     listOf(
         ChapterElement(ElementType.SUBTITLE, R.string.t6_h1),
