@@ -314,9 +314,6 @@ internal fun SendScreen(navController: NavHostController, walletViewModel: Walle
     }
 }
 
-
-
-@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun TransactionConfirmation(
     txBuilderResult: MutableState<TxBuilderResult?>,
@@ -327,8 +324,7 @@ fun TransactionConfirmation(
     navController: NavHostController,
     viewModel: WalletViewModel,
 ) {
-    val context =
-        LocalContext.current // TODO: is this the right place to get this context?
+    val context = LocalContext.current // TODO: is this the right place to get this context?
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -455,7 +451,6 @@ fun TransactionConfirmation(
         }
     }
 }
-
 
 fun verifyInputs(
     recipientAddress: String,

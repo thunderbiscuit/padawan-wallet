@@ -6,15 +6,34 @@
 package com.goldenraven.padawanwallet.ui.intro
 
 import android.util.Log
-import androidx.compose.foundation.*
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.TextFieldDefaults
-import androidx.compose.material3.*
-import androidx.compose.runtime.*
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Snackbar
+import androidx.compose.material3.SnackbarDuration
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusDirection
@@ -33,14 +52,18 @@ import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
 import com.goldenraven.padawanwallet.R
 import com.goldenraven.padawanwallet.WalletCreateType
-import com.goldenraven.padawanwallet.theme.*
+import com.goldenraven.padawanwallet.theme.PadawanTypography
+import com.goldenraven.padawanwallet.theme.md_theme_dark_onBackgroundFaded
+import com.goldenraven.padawanwallet.theme.md_theme_dark_onLightBackground
+import com.goldenraven.padawanwallet.theme.md_theme_dark_warning
+import com.goldenraven.padawanwallet.theme.standardShadow
 import com.goldenraven.padawanwallet.ui.standardBorder
-import com.goldenraven.padawanwallet.utils.*
+import com.goldenraven.padawanwallet.utils.WordCheckResult
+import com.goldenraven.padawanwallet.utils.checkWords
 import kotlinx.coroutines.launch
 
 private const val TAG = "WalletRecoveryScreen"
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 internal fun WalletRecoveryScreen(onBuildWalletButtonClicked: (WalletCreateType) -> Unit) {
 

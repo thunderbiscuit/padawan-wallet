@@ -12,9 +12,24 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.goldenraven.padawanwallet.R
-import com.goldenraven.padawanwallet.data.chapters.*
-import kotlinx.coroutines.*
+import com.goldenraven.padawanwallet.data.chapters.Chapter
+import com.goldenraven.padawanwallet.data.chapters.ChapterElement
+import com.goldenraven.padawanwallet.data.chapters.ChapterRepository
+import com.goldenraven.padawanwallet.data.chapters.ChaptersDatabase
+import com.goldenraven.padawanwallet.data.chapters.chapter1
+import com.goldenraven.padawanwallet.data.chapters.chapter2
+import com.goldenraven.padawanwallet.data.chapters.chapter3
+import com.goldenraven.padawanwallet.data.chapters.chapter4
+import com.goldenraven.padawanwallet.data.chapters.chapter5
+import com.goldenraven.padawanwallet.data.chapters.chapter6
+import com.goldenraven.padawanwallet.data.chapters.chapter7
+import com.goldenraven.padawanwallet.data.chapters.chapter8
+import com.goldenraven.padawanwallet.data.chapters.chapter9
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 
 private const val TAG = "ChaptersViewModel"
 
