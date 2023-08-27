@@ -304,7 +304,18 @@ internal fun ChapterPage(chapterPages: List<Page>, currentPage: MutableState<Int
                         .height(height = 150.dp)
                         .fillMaxWidth()
                         .standardShadow(20.dp)
-                ) {  }
+                ) {
+                    Row(
+                        modifier = Modifier.fillMaxSize(),
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.Center
+                    ) {
+                        Image(
+                            painter = painterResource(id = element.resourceId),
+                            contentDescription = "image"
+                        )
+                    }
+                }
             }
         }
         Spacer(modifier = Modifier.height(height = 24.dp))
