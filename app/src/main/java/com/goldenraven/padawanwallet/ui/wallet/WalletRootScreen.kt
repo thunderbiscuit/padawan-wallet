@@ -40,6 +40,7 @@ import com.goldenraven.padawanwallet.R
 import com.goldenraven.padawanwallet.data.tx.Tx
 import com.goldenraven.padawanwallet.theme.*
 import com.goldenraven.padawanwallet.ui.FadedVerticalDivider
+import com.goldenraven.padawanwallet.ui.LoadingAnimation
 import com.goldenraven.padawanwallet.ui.Screen
 import com.goldenraven.padawanwallet.ui.standardBorder
 import com.goldenraven.padawanwallet.utils.ClickHelper
@@ -47,7 +48,6 @@ import com.goldenraven.padawanwallet.utils.ScreenSizeWidth
 import com.goldenraven.padawanwallet.utils.formatCurrency
 import com.goldenraven.padawanwallet.utils.formatInBtc
 import com.goldenraven.padawanwallet.utils.getScreenSizeWidth
-import io.ktor.http.*
 
 // TODO Think about reintroducing refreshing
 // TODO Reuse composable more
@@ -225,18 +225,6 @@ fun BalanceBox(
                     }
             ) {
                 val isRefreshing by viewModel.isRefreshing.collectAsState()
-                val transition =
-                    updateTransition(targetState = isRefreshing, label = "PressTransition")
-                val rotationAngle by transition.animateFloat(
-                    transitionSpec = {
-                        repeatable(
-                            iterations = Int.MAX_VALUE,
-                            animation = tween(durationMillis = 2000, easing = LinearEasing)
-                        )
-                    }, label = ""
-                ) { pressed ->
-                    if (pressed) 360f else 0f
-                }
                 CompositionLocalProvider(
                     LocalMinimumTouchTargetEnforcement provides false,
                 ) {
@@ -247,31 +235,28 @@ fun BalanceBox(
                         },
                         colors = ButtonDefaults.buttonColors(
                             containerColor = Color.Black,
-                            disabledContainerColor = padawan_theme_onBackground_faded
+                            disabledContainerColor = Color.Black
                         ),
                         shape = RoundedCornerShape(20.dp, 20.dp, 0.dp, 0.dp),
                         border = standardBorder,
-                        modifier = Modifier
-                            .width(110.dp),
+                        modifier = Modifier.width(110.dp),
                         enabled = !isRefreshing
                     ) {
                         Row(
                             verticalAlignment = Alignment.CenterVertically,
                             horizontalArrangement = Arrangement.Center
                         ) {
-                            Text(
-                                text = "sync",
-                                style = PadawanTypography.labelLarge,
-                                fontWeight = FontWeight.Normal,
-                                color = Color(0xffdbdeff),
-                                modifier = Modifier.padding(horizontal = 8.dp)
-                            )
-                            Icon(
-                                modifier = Modifier.rotate(rotationAngle),
-                                painter = painterResource(id = R.drawable.ic_sync),
-                                tint = Color(0xffdbdeff),
-                                contentDescription = "Sync icon"
-                            )
+                            if (isRefreshing) {
+                                LoadingAnimation()
+                            } else {
+                                Text(
+                                    text = "sync",
+                                    style = PadawanTypography.labelLarge,
+                                    fontWeight = FontWeight.Normal,
+                                    color = Color(0xffdbdeff),
+                                    modifier = Modifier.padding(horizontal = 8.dp)
+                                )
+                            }
                         }
                     }
                 }
