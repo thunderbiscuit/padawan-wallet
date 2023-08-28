@@ -15,12 +15,13 @@ import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.navArgument
 import com.goldenraven.padawanwallet.ui.Screen
+import com.goldenraven.padawanwallet.ui.chapters.ChapterScreen
 import com.goldenraven.padawanwallet.ui.settings.AboutScreen
 import com.goldenraven.padawanwallet.ui.settings.RecoveryPhraseScreen
 import com.goldenraven.padawanwallet.ui.settings.SendCoinsBackScreen
 import com.goldenraven.padawanwallet.ui.settings.SettingsRootScreen
-import com.goldenraven.padawanwallet.ui.chapters.*
 import com.goldenraven.padawanwallet.ui.chapters.ChaptersRootScreen
+import com.goldenraven.padawanwallet.ui.chapters.ChaptersViewModel
 import com.google.accompanist.navigation.animation.AnimatedNavHost
 import com.google.accompanist.navigation.animation.composable
 

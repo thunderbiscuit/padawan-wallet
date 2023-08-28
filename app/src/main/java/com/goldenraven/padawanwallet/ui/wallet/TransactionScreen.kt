@@ -6,9 +6,18 @@
 package com.goldenraven.padawanwallet.ui.wallet
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.*
+import androidx.compose.material3.Divider
+import androidx.compose.material3.Icon
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -22,9 +31,19 @@ import androidx.constraintlayout.compose.Dimension
 import androidx.navigation.NavHostController
 import com.goldenraven.padawanwallet.R
 import com.goldenraven.padawanwallet.data.Wallet
-import com.goldenraven.padawanwallet.theme.*
+import com.goldenraven.padawanwallet.theme.PadawanTypography
+import com.goldenraven.padawanwallet.theme.padawan_disabled
+import com.goldenraven.padawanwallet.theme.padawan_theme_receive_primary
+import com.goldenraven.padawanwallet.theme.padawan_theme_send_primary
+import com.goldenraven.padawanwallet.theme.standardBackground
 import com.goldenraven.padawanwallet.ui.PadawanAppBar
-import com.goldenraven.padawanwallet.utils.*
+import com.goldenraven.padawanwallet.utils.SatoshisIn
+import com.goldenraven.padawanwallet.utils.SatoshisOut
+import com.goldenraven.padawanwallet.utils.ScreenSizeWidth
+import com.goldenraven.padawanwallet.utils.getScreenSizeWidth
+import com.goldenraven.padawanwallet.utils.isPayment
+import com.goldenraven.padawanwallet.utils.parseTxAmounts
+import com.goldenraven.padawanwallet.utils.timestampToString
 
 private const val TAG = "TransactionScreen"
 

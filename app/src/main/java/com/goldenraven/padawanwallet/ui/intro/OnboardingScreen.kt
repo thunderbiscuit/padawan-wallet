@@ -9,11 +9,20 @@ import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.*
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -28,12 +37,16 @@ import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.navigation.NavController
 import com.goldenraven.padawanwallet.R
 import com.goldenraven.padawanwallet.WalletCreateType
-import com.goldenraven.padawanwallet.theme.*
+import com.goldenraven.padawanwallet.theme.PadawanTypography
+import com.goldenraven.padawanwallet.theme.standardShadow
 import com.goldenraven.padawanwallet.ui.Screen
 import com.goldenraven.padawanwallet.ui.ShowBars
 import com.goldenraven.padawanwallet.ui.standardBorder
 import com.goldenraven.padawanwallet.utils.ScreenSizeHeight
 import com.goldenraven.padawanwallet.utils.getScreenSizeHeight
+import androidx.compose.material3.Text
+import com.goldenraven.padawanwallet.theme.bodyMediumUnderlined
+import com.goldenraven.padawanwallet.theme.noRippleClickable
 
 private const val TAG = "OnboardingScreen"
 
@@ -87,8 +100,7 @@ internal fun SmallOnboarding(
             style = PadawanTypography.headlineLarge,
             fontSize = 34.sp,
             color = Color(0xff1f0208),
-            modifier = Modifier
-                .padding(start = 24.dp, end = 24.dp, bottom = 8.dp)
+            modifier = Modifier.padding(start = 24.dp, end = 24.dp, bottom = 8.dp)
         )
 
         Text(
@@ -96,8 +108,7 @@ internal fun SmallOnboarding(
             style = PadawanTypography.bodyMedium,
             fontSize = 16.sp,
             color = Color(0xff787878),
-            modifier = Modifier
-                .padding(start = 24.dp, end = 24.dp, bottom = 12.dp)
+            modifier = Modifier.padding(start = 24.dp, end = 24.dp, bottom = 12.dp)
         )
 
         Button(
@@ -165,8 +176,7 @@ internal fun PhoneOnboarding(
             .background(Color(0xffffffff))
     ) {
         val (header, body, recover) = createRefs()
-        val verticalChain =
-            createVerticalChain(header, body, recover, chainStyle = ChainStyle.SpreadInside)
+        val verticalChain = createVerticalChain(header, body, recover, chainStyle = ChainStyle.SpreadInside)
 
         Column(
             verticalArrangement = Arrangement.Center,

@@ -7,7 +7,25 @@ package com.goldenraven.padawanwallet.data
 
 import android.util.Log
 import com.goldenraven.padawanwallet.utils.RequiredInitialWalletData
-import org.bitcoindevkit.*
+import org.bitcoindevkit.Address
+import org.bitcoindevkit.AddressIndex
+import org.bitcoindevkit.AddressInfo
+import org.bitcoindevkit.Blockchain
+import org.bitcoindevkit.BlockchainConfig
+import org.bitcoindevkit.DatabaseConfig
+import org.bitcoindevkit.Descriptor
+import org.bitcoindevkit.DescriptorSecretKey
+import org.bitcoindevkit.ElectrumConfig
+import org.bitcoindevkit.KeychainKind
+import org.bitcoindevkit.Mnemonic
+import org.bitcoindevkit.Network
+import org.bitcoindevkit.PartiallySignedTransaction
+import org.bitcoindevkit.Progress
+import org.bitcoindevkit.SqliteDbConfiguration
+import org.bitcoindevkit.TransactionDetails
+import org.bitcoindevkit.TxBuilder
+import org.bitcoindevkit.TxBuilderResult
+import org.bitcoindevkit.WordCount
 import org.bitcoindevkit.Wallet as BdkWallet
 
 private const val TAG = "Wallet"
