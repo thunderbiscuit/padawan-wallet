@@ -6,31 +6,52 @@
 package com.goldenraven.padawanwallet.ui.wallet
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.text.selection.SelectionContainer
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.*
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
 import androidx.navigation.NavHostController
-import com.goldenraven.padawanwallet.theme.*
+import com.goldenraven.padawanwallet.theme.ShareTechMono
+import com.goldenraven.padawanwallet.theme.padawan_theme_background
+import com.goldenraven.padawanwallet.theme.padawan_theme_button_primary
+import com.goldenraven.padawanwallet.theme.standardBackground
+import com.goldenraven.padawanwallet.theme.standardShadow
+import com.goldenraven.padawanwallet.ui.LoadingAnimation
 import com.goldenraven.padawanwallet.ui.PadawanAppBar
 import com.goldenraven.padawanwallet.ui.standardBorder
 import com.goldenraven.padawanwallet.utils.ScreenSizeWidth
 import com.goldenraven.padawanwallet.utils.addressToQR
+import com.goldenraven.padawanwallet.utils.copyToClipboard
 import com.goldenraven.padawanwallet.utils.getScreenSizeWidth
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -42,6 +63,7 @@ internal fun ReceiveScreen(
     navController: NavHostController,
     viewModel: WalletViewModel
 ) {
+    val snackbarHostState = remember { SnackbarHostState() }
     val address by viewModel.address.collectAsState("Generate new address")
     var QR by remember {
         mutableStateOf<ImageBitmap?>(null)
@@ -59,48 +81,76 @@ internal fun ReceiveScreen(
         ScreenSizeWidth.Phone -> 32.dp
     }
 
-    ConstraintLayout(
-        modifier = Modifier
-            .fillMaxSize()
-            .standardBackground(padding)
-    ) {
-        val (screenTitle, QRCode, bottomButtons) = createRefs()
-
-        Row(
-            Modifier
-                .constrainAs(screenTitle) {
-                    top.linkTo(parent.top)
-                    start.linkTo(parent.start)
-                    end.linkTo(parent.end)
-                }
-        ) {
-            PadawanAppBar(navController = navController, title = "Receive bitcoin")
-        }
-
-        Column(
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center,
+    Scaffold(
+        snackbarHost = { SnackbarHost(snackbarHostState) }
+    ) { paddingValues ->
+        ConstraintLayout(
             modifier = Modifier
-                .constrainAs(QRCode) {
-                    top.linkTo(screenTitle.bottom)
-                    bottom.linkTo(bottomButtons.top)
-                    start.linkTo(parent.start)
-                    end.linkTo(parent.end)
-                    height = Dimension.fillToConstraints
-                }
+                .fillMaxSize()
+                .padding(paddingValues)
+                .standardBackground(padding)
         ) {
-            if (qrUIState == QRUIState.Loading) {
-                CircularProgressIndicator()
-            } else if (qrUIState == QRUIState.QR) {
-                QR?.let {
-                    Image(
-                        bitmap = it,
-                        contentDescription = "QR Code",
-                        Modifier.size(250.dp)
-                    )
-                    Spacer(modifier = Modifier.padding(vertical = 8.dp))
-                    SelectionContainer {
+            val (screenTitle, QRCode, bottomButtons) = createRefs()
+
+            Row(
+                Modifier
+                    .constrainAs(screenTitle) {
+                        top.linkTo(parent.top)
+                        start.linkTo(parent.start)
+                        end.linkTo(parent.end)
+                    }
+            ) {
+                PadawanAppBar(navController = navController, title = "Receive bitcoin")
+            }
+
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center,
+                modifier = Modifier
+                    .constrainAs(QRCode) {
+                        top.linkTo(screenTitle.bottom)
+                        bottom.linkTo(bottomButtons.top)
+                        start.linkTo(parent.start)
+                        end.linkTo(parent.end)
+                        height = Dimension.fillToConstraints
+                    }
+            ) {
+                val context = LocalContext.current
+                val scope = rememberCoroutineScope()
+
+                if (qrUIState == QRUIState.Loading) {
+                    LoadingAnimation(circleColor = padawan_theme_background, circleSize = 38.dp)
+                } else if (qrUIState == QRUIState.QR) {
+                    QR?.let {
+                        Image(
+                            bitmap = it,
+                            contentDescription = "QR Code",
+                            Modifier
+                                .size(250.dp)
+                                .clickable {
+                                    copyToClipboard(
+                                        address,
+                                        context,
+                                        scope,
+                                        snackbarHostState,
+                                        null
+                                    )
+                                }
+                                .padding(12.dp),
+                        )
+                        Spacer(modifier = Modifier.padding(vertical = 8.dp))
                         Text(
+                            modifier = Modifier
+                                .clickable {
+                                    copyToClipboard(
+                                        address,
+                                        context,
+                                        scope,
+                                        snackbarHostState,
+                                        null
+                                    )
+                                }
+                                .padding(12.dp),
                             text = address,
                             fontFamily = ShareTechMono,
                             fontSize = 12.sp
@@ -108,36 +158,37 @@ internal fun ReceiveScreen(
                     }
                 }
             }
-        }
-        val bottomPadding = when (getScreenSizeWidth(LocalConfiguration.current.screenWidthDp)) {
-            ScreenSizeWidth.Small -> 12.dp
-            ScreenSizeWidth.Phone -> 24.dp
-        }
-        Column(
-            Modifier
-                .constrainAs(bottomButtons) {
-                    bottom.linkTo(parent.bottom)
-                    start.linkTo(parent.start)
-                    end.linkTo(parent.end)
-                }
-                .padding(bottom = bottomPadding)
-        ) {
-            Button(
-                onClick = { viewModel.updateLastUnusedAddress() },
-                colors = ButtonDefaults.buttonColors(containerColor = padawan_theme_button_primary),
-                shape = RoundedCornerShape(20.dp),
-                border = standardBorder,
-                modifier = Modifier
-                    .height(100.dp)
-                    .fillMaxWidth(0.9f)
-                    .padding(vertical = 8.dp, horizontal = 8.dp)
-                    .standardShadow(20.dp)
+            val bottomPadding = when (getScreenSizeWidth(LocalConfiguration.current.screenWidthDp)) {
+                ScreenSizeWidth.Small -> 12.dp
+                ScreenSizeWidth.Phone -> 24.dp
+            }
+            Column(
+                Modifier
+                    .constrainAs(bottomButtons) {
+                        bottom.linkTo(parent.bottom)
+                        start.linkTo(parent.start)
+                        end.linkTo(parent.end)
+                    }
+                    .padding(bottom = bottomPadding)
             ) {
-                Text(
-                    text = "Generate a new address",
-                )
+                Button(
+                    onClick = { viewModel.updateLastUnusedAddress() },
+                    colors = ButtonDefaults.buttonColors(containerColor = padawan_theme_button_primary),
+                    shape = RoundedCornerShape(20.dp),
+                    border = standardBorder,
+                    modifier = Modifier
+                        .height(100.dp)
+                        .fillMaxWidth(0.9f)
+                        .padding(vertical = 8.dp, horizontal = 8.dp)
+                        .standardShadow(20.dp)
+                ) {
+                    Text(
+                        text = "Generate a new address",
+                    )
+                }
             }
         }
+
     }
 }
 

@@ -18,9 +18,6 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.InlineTextContent
 import androidx.compose.foundation.text.appendInlineContent
 import androidx.compose.foundation.verticalScroll
-// import androidx.compose.material.Scaffold
-// import androidx.compose.material.ScaffoldState
-// import androidx.compose.material.rememberScaffoldState
 import androidx.compose.material3.Divider
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHost
@@ -48,6 +45,7 @@ import com.goldenraven.padawanwallet.theme.PadawanTypography
 import com.goldenraven.padawanwallet.theme.padawan_theme_background_secondary
 import com.goldenraven.padawanwallet.theme.padawan_theme_text_faded_secondary
 import com.goldenraven.padawanwallet.ui.PadawanAppBar
+import com.goldenraven.padawanwallet.utils.copyToClipboard
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -97,6 +95,7 @@ internal fun SendCoinsBackScreen(
                 .background(padawan_theme_background_secondary)
                 .padding(padding)
         ) {
+            val returnAddress: String = stringResource(R.string.send_coins_back_address)
             PadawanAppBar(navController = navController, title = "Send your coins back to us!")
             Image(
                 painterResource(R.drawable.return_sats_faucet_address),
@@ -108,7 +107,7 @@ internal fun SendCoinsBackScreen(
                     .align(Alignment.CenterHorizontally)
                     .clickable(onClick = {
                         setCopyClicked(true)
-                        copyToClipboard(context, scope, snackbarHostState, setCopyClicked)
+                        copyToClipboard(returnAddress, context, scope, snackbarHostState, setCopyClicked)
                     })
                     .padding(start = 24.dp, end = 24.dp, bottom = 20.dp)
             ) {
@@ -137,13 +136,13 @@ internal fun SendCoinsBackScreen(
     }
 }
 
-fun copyToClipboard(context: Context, scope: CoroutineScope, snackbarHostState: SnackbarHostState, setCopyClicked: (Boolean) -> Unit) {
-    val clipboard: ClipboardManager = context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-    val clip: ClipData = ClipData.newPlainText("", context.getString(R.string.send_coins_back_address))
-    clipboard.setPrimaryClip(clip)
-    scope.launch {
-        snackbarHostState.showSnackbar("Copied address to clipboard!")
-        delay(1000)
-        setCopyClicked(false)
-    }
-}
+// fun copyToClipboard(context: Context, scope: CoroutineScope, snackbarHostState: SnackbarHostState, setCopyClicked: (Boolean) -> Unit) {
+//     val clipboard: ClipboardManager = context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+//     val clip: ClipData = ClipData.newPlainText("", context.getString(R.string.send_coins_back_address))
+//     clipboard.setPrimaryClip(clip)
+//     scope.launch {
+//         snackbarHostState.showSnackbar("Copied address to clipboard!")
+//         delay(1000)
+//         setCopyClicked(false)
+//     }
+// }
