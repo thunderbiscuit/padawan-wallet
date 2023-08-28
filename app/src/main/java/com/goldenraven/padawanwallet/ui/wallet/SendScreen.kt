@@ -16,8 +16,6 @@ import androidx.compose.material3.Slider
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
-import androidx.compose.material.SnackbarDuration
-import androidx.compose.material.SnackbarHostState
 import androidx.compose.material3.*
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -58,56 +56,49 @@ import org.bitcoindevkit.TxBuilderResult
 
 private const val TAG = "SendScreen"
 
-// BottomSheetScaffold is not available in Material 3, so this screen is all Material 2
-
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
-@OptIn(ExperimentalMaterialApi::class, ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 internal fun SendScreen(navController: NavHostController, walletViewModel: WalletViewModel) {
-    // val (showDialog, setShowDialog) = rememberSaveable { mutableStateOf(false) }
 
     val coroutineScope = rememberCoroutineScope()
-    val scaffoldState = rememberScaffoldState()
+    val bottomSheetScaffoldState: BottomSheetScaffoldState = rememberBottomSheetScaffoldState()
 
     val balance by walletViewModel.balance.collectAsState()
     val recipientAddress: MutableState<String> = rememberSaveable { mutableStateOf("") }
     val amount: MutableState<String> = rememberSaveable { mutableStateOf("") }
     val feeRate: MutableState<String> = rememberSaveable { mutableStateOf("1") }
     val txBuilderResult: MutableState<TxBuilderResult?> = remember { mutableStateOf(null) }
-    val scope = rememberCoroutineScope()
 
-    val qrCodeScanner =
-        navController.currentBackStackEntry?.savedStateHandle?.getLiveData<String>("BTC_Address")
-            ?.observeAsState()
+    val qrCodeScanner = navController
+        .currentBackStackEntry
+        ?.savedStateHandle
+        ?.getLiveData<String>("BTC_Address")
+        ?.observeAsState()
+
     qrCodeScanner?.value.let {
         if (it != null) recipientAddress.value = it
-
         navController.currentBackStackEntry?.savedStateHandle?.remove<String>("BTC_Address")
     }
 
-    val modalSheetState = rememberModalBottomSheetState(
-        initialValue = ModalBottomSheetValue.Hidden,
-        confirmValueChange = { it != ModalBottomSheetValue.HalfExpanded },
-        skipHalfExpanded = false
-    )
-
-    ModalBottomSheetLayout(
+    BottomSheetScaffold(
         sheetShape = RoundedCornerShape(topEnd = 20.dp, topStart = 20.dp),
+        scaffoldState = bottomSheetScaffoldState,
+        sheetPeekHeight = 0.dp,
+        sheetDragHandle = null,
         sheetContent = {
             TransactionConfirmation(
                 txBuilderResult,
                 recipientAddress,
                 amount,
-                scaffoldState,
-                scope,
+                bottomSheetScaffoldState,
+                coroutineScope,
                 navController,
                 walletViewModel
             )
         },
-        sheetState = modalSheetState,
-        sheetElevation = 12.dp,
     ) {
-        Scaffold(scaffoldState = scaffoldState) {
+        Column(modifier = Modifier.fillMaxSize()) {
             val padding = when (getScreenSizeWidth(LocalConfiguration.current.screenWidthDp)) {
                 ScreenSizeWidth.Small -> 12.dp
                 ScreenSizeWidth.Phone -> 32.dp
@@ -169,7 +160,6 @@ internal fun SendScreen(navController: NavHostController, walletViewModel: Walle
                         singleLine = true,
                         placeholder = { Text("Enter amount (sats)") },
                         colors = TextFieldDefaults.colors(
-                            // backgroundColor = padawan_theme_background_secondary,
                             focusedContainerColor = padawan_theme_background_secondary,
                             unfocusedContainerColor = padawan_theme_background_secondary,
                             disabledContainerColor = padawan_theme_background_secondary,
@@ -201,7 +191,6 @@ internal fun SendScreen(navController: NavHostController, walletViewModel: Walle
                         singleLine = true,
                         placeholder = { Text(text = "Enter a bitcoin testnet address") },
                         colors = TextFieldDefaults.colors(
-                            // backgroundColor = padawan_theme_background_secondary,
                             focusedContainerColor = padawan_theme_background_secondary,
                             unfocusedContainerColor = padawan_theme_background_secondary,
                             disabledContainerColor = padawan_theme_background_secondary,
@@ -260,8 +249,8 @@ internal fun SendScreen(navController: NavHostController, walletViewModel: Walle
                                 recipientAddress.value,
                                 amount.value,
                                 feeRate.value,
-                                scope,
-                                scaffoldState.snackbarHostState
+                                coroutineScope,
+                                bottomSheetScaffoldState
                             )
                             try {
                                 if (inputsAreValid) {
@@ -271,15 +260,17 @@ internal fun SendScreen(navController: NavHostController, walletViewModel: Walle
                                         feeRate.value.toFloat()
                                     )
                                     txBuilderResult.value = txBR
-                                    coroutineScope.launch {
-                                        if (!modalSheetState.isVisible) {
-                                            modalSheetState.show()
+
+                                    if (bottomSheetScaffoldState.bottomSheetState.currentValue == SheetValue.PartiallyExpanded) {
+                                        coroutineScope.launch {
+                                            bottomSheetScaffoldState.bottomSheetState.expand()
                                         }
                                     }
                                 }
                             } catch (exception: Exception) {
-                                scope.launch {
-                                    scaffoldState.snackbarHostState.showSnackbar(
+                                Log.i(TAG, "Exception: $exception")
+                                coroutineScope.launch {
+                                    bottomSheetScaffoldState.snackbarHostState.showSnackbar(
                                         message = "$exception",
                                         duration = SnackbarDuration.Short
                                     )
@@ -314,12 +305,13 @@ internal fun SendScreen(navController: NavHostController, walletViewModel: Walle
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TransactionConfirmation(
     txBuilderResult: MutableState<TxBuilderResult?>,
     recipientAddress: MutableState<String>,
     amount: MutableState<String>,
-    snackbarHostState: ScaffoldState,
+    scaffoldState: BottomSheetScaffoldState,
     scope: CoroutineScope,
     navController: NavHostController,
     viewModel: WalletViewModel,
@@ -414,16 +406,16 @@ fun TransactionConfirmation(
             onClick = {
                 val psbt = txBuilderResult.value?.psbt ?: throw Exception()
                 viewModel.updateConnectivityStatus(context)
-                if (viewModel.isOnlineVariable.value == false) {
+                if (!viewModel.isOnlineVariable.value) {
                     scope.launch {
-                        snackbarHostState.snackbarHostState.showSnackbar(
+                         scaffoldState.snackbarHostState.showSnackbar(
                             "Your device is not connected to the internet!",
                             duration = SnackbarDuration.Short
                         )
                     }
                 } else {
                     viewModel.broadcastTransaction(
-                        psbt, snackbarHostState.snackbarHostState
+                        psbt, scaffoldState.snackbarHostState
                     )
                     navController.popBackStack()
                 }
@@ -452,16 +444,17 @@ fun TransactionConfirmation(
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 fun verifyInputs(
     recipientAddress: String,
     amount: String,
     feeRate: String,
     scope: CoroutineScope,
-    snackbarHostState: SnackbarHostState,
+    bottomSheetScaffoldState: BottomSheetScaffoldState,
 ): Boolean {
     if (amount.isBlank()) {
         scope.launch {
-            snackbarHostState.showSnackbar(
+            bottomSheetScaffoldState.snackbarHostState.showSnackbar(
                 message = "Amount is missing!", duration = SnackbarDuration.Short
             )
         }
@@ -470,7 +463,7 @@ fun verifyInputs(
     if (recipientAddress.isBlank()) {
         scope.launch {
             Log.i(TAG, "Showing snackbar for missing address")
-            snackbarHostState.showSnackbar(
+            bottomSheetScaffoldState.snackbarHostState.showSnackbar(
                 message = "Address is missing!", duration = SnackbarDuration.Short
             )
         }
@@ -478,7 +471,7 @@ fun verifyInputs(
     }
     if (feeRate.isBlank()) {
         scope.launch {
-            snackbarHostState.showSnackbar(
+            bottomSheetScaffoldState.snackbarHostState.showSnackbar(
                 message = "Fee Rate is missing!", duration = SnackbarDuration.Short
             )
         }
@@ -486,12 +479,13 @@ fun verifyInputs(
     }
     if (feeRate.toFloat() < 1 || feeRate.toFloat() > 100) {
         scope.launch {
-            snackbarHostState.showSnackbar(
+            bottomSheetScaffoldState.snackbarHostState.showSnackbar(
                 message = "Please input a fee rate between 1 and 100",
                 duration = SnackbarDuration.Short
             )
         }
         return false
     }
+    Log.i(TAG, "Inputs are valid")
     return true
 }

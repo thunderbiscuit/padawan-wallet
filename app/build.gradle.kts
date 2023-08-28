@@ -108,7 +108,6 @@ dependencies {
     // Was implementation("androidx.activity:activity-compose:1.6.1")
     implementation("androidx.activity:activity-compose")
 
-    implementation("androidx.compose.material:material")
     implementation("androidx.compose.animation:animation")
     implementation("androidx.compose.ui:ui-tooling")
     implementation("androidx.compose.runtime:runtime-livedata")

@@ -19,14 +19,16 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.ScaffoldState
-import androidx.compose.material.rememberScaffoldState
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Divider
 import androidx.compose.material3.Icon
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -52,11 +54,11 @@ internal fun SettingsRootScreen(
     viewModel: ChaptersViewModel
 ) {
     val scope = rememberCoroutineScope()
-    val scaffoldState: ScaffoldState = rememberScaffoldState()
     val scrollState = rememberScrollState()
+    val snackbarHostState = remember { SnackbarHostState() }
 
-    androidx.compose.material.Scaffold(
-        scaffoldState = scaffoldState
+    Scaffold(
+        snackbarHost = { SnackbarHost(snackbarHostState) }
     ) { padding ->
         Column(
             modifier = Modifier
@@ -185,7 +187,7 @@ internal fun SettingsRootScreen(
             Button(
                 onClick = {
                     viewModel.unsetAllCompleted()
-                    scope.launch { scaffoldState.snackbarHostState.showSnackbar("Chapters reset successful") }
+                    scope.launch { snackbarHostState.showSnackbar("Chapters reset successful") }
                 },
                 colors = ButtonDefaults.buttonColors(containerColor = Color(0xffFEE6DE)),
                 shape = RoundedCornerShape(8.dp),

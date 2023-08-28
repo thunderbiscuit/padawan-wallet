@@ -18,10 +18,13 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.InlineTextContent
 import androidx.compose.foundation.text.appendInlineContent
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.Scaffold
-import androidx.compose.material.ScaffoldState
-import androidx.compose.material.rememberScaffoldState
+// import androidx.compose.material.Scaffold
+// import androidx.compose.material.ScaffoldState
+// import androidx.compose.material.rememberScaffoldState
 import androidx.compose.material3.Divider
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
@@ -56,7 +59,7 @@ internal fun SendCoinsBackScreen(
     val scrollState = rememberScrollState()
     val context = LocalContext.current
     val scope = rememberCoroutineScope()
-    val scaffoldState: ScaffoldState = rememberScaffoldState()
+    val snackbarHostState = remember { SnackbarHostState() }
 
     val (copyClicked, setCopyClicked) = remember { mutableStateOf(false) }
 
@@ -85,7 +88,7 @@ internal fun SendCoinsBackScreen(
         }
     )
     Scaffold(
-        scaffoldState = scaffoldState
+        snackbarHost = { SnackbarHost(snackbarHostState) }
     ) { padding ->
         Column(
             Modifier
@@ -105,7 +108,7 @@ internal fun SendCoinsBackScreen(
                     .align(Alignment.CenterHorizontally)
                     .clickable(onClick = {
                         setCopyClicked(true)
-                        copyToClipboard(context, scope, scaffoldState, setCopyClicked)
+                        copyToClipboard(context, scope, snackbarHostState, setCopyClicked)
                     })
                     .padding(start = 24.dp, end = 24.dp, bottom = 20.dp)
             ) {
@@ -134,12 +137,12 @@ internal fun SendCoinsBackScreen(
     }
 }
 
-fun copyToClipboard(context: Context, scope: CoroutineScope, state: ScaffoldState, setCopyClicked: (Boolean) -> Unit) {
+fun copyToClipboard(context: Context, scope: CoroutineScope, snackbarHostState: SnackbarHostState, setCopyClicked: (Boolean) -> Unit) {
     val clipboard: ClipboardManager = context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
     val clip: ClipData = ClipData.newPlainText("", context.getString(R.string.send_coins_back_address))
     clipboard.setPrimaryClip(clip)
     scope.launch {
-        state.snackbarHostState.showSnackbar("Copied address to clipboard!")
+        snackbarHostState.showSnackbar("Copied address to clipboard!")
         delay(1000)
         setCopyClicked(false)
     }

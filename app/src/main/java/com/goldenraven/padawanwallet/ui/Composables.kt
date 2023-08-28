@@ -186,9 +186,9 @@ fun ConnectivityStatusBox(isConnected: Boolean) {
         contentAlignment = Alignment.Center
     ) {
         Row(verticalAlignment = Alignment.CenterVertically) {
-            androidx.compose.material.Icon(painterResource(id = iconResource), "Connectivity Icon", tint = Color.White)
+            Icon(painterResource(id = iconResource), "Connectivity Icon", tint = Color.White)
             Spacer(modifier = Modifier.size(8.dp))
-            androidx.compose.material.Text(message, color = Color.White, fontSize = 15.sp)
+            Text(message, color = Color.White, fontSize = 15.sp)
         }
     }
 }
