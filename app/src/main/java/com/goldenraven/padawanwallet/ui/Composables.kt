@@ -7,6 +7,7 @@ package com.goldenraven.padawanwallet.ui
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.animateColorAsState
+import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.RepeatMode
 import androidx.compose.animation.core.infiniteRepeatable
 import androidx.compose.animation.core.tween
@@ -194,30 +195,19 @@ fun ConnectivityStatusBox(isConnected: Boolean) {
 
 @Composable
 fun LoadingAnimation(
-    // circleColor: Color = Color(0xff76dab3),
     circleColor: Color = Color(0xfff6cf47),
     circleSize: Dp = 12.dp,
     animationDelay: Int = 800,
     initialAlpha: Float = 0.3f
 ) {
-
-    // 3 circles
     val circles = listOf(
-        remember {
-            androidx.compose.animation.core.Animatable(initialValue = initialAlpha)
-        },
-        remember {
-            androidx.compose.animation.core.Animatable(initialValue = initialAlpha)
-        },
-        remember {
-            androidx.compose.animation.core.Animatable(initialValue = initialAlpha)
-        }
+        remember { Animatable(initialValue = initialAlpha) },
+        remember { Animatable(initialValue = initialAlpha) },
+        remember { Animatable(initialValue = initialAlpha) }
     )
 
     circles.forEachIndexed { index, animatable ->
-
         LaunchedEffect(Unit) {
-
             // Use coroutine delay to sync animations
             delay(timeMillis = (animationDelay / circles.size).toLong() * index)
 
@@ -227,7 +217,7 @@ fun LoadingAnimation(
                     animation = tween(
                         durationMillis = animationDelay
                     ),
-                    repeatMode = RepeatMode.Restart
+                    repeatMode = RepeatMode.Reverse
                 )
             )
         }
@@ -235,24 +225,16 @@ fun LoadingAnimation(
 
     // container for circles
     Row {
-
-        // adding each circle
         circles.forEachIndexed { index, animatable ->
-
             // gap between the circles
-            if (index != 0) {
-                Spacer(modifier = Modifier.width(width = 6.dp))
-            }
+            if (index != 0) Spacer(modifier = Modifier.width(width = 6.dp))
 
             Box(
                 modifier = Modifier
                     .size(size = circleSize)
                     .clip(shape = CircleShape)
-                    .background(
-                        color = circleColor.copy(alpha = animatable.value)
-                    )
-            ) {
-            }
+                    .background(circleColor.copy(alpha = animatable.value)                    )
+            )
         }
     }
 }

@@ -61,7 +61,7 @@ import com.goldenraven.padawanwallet.theme.padawan_theme_button_primary
 import com.goldenraven.padawanwallet.theme.padawan_theme_progressbar_background
 import com.goldenraven.padawanwallet.theme.padawan_theme_text_faded_secondary
 import com.goldenraven.padawanwallet.theme.padawan_theme_text_headline
-import com.goldenraven.padawanwallet.theme.padawan_theme_tutorial
+import com.goldenraven.padawanwallet.theme.padawan_theme_chapter_completed
 import com.goldenraven.padawanwallet.theme.standardShadow
 import com.goldenraven.padawanwallet.ui.Screen
 import com.goldenraven.padawanwallet.ui.standardBorder
@@ -322,7 +322,7 @@ fun ChapterButton(chapterData: Chapter, navController: NavController) {
 fun ProgressBar(
     height: Dp = 12.dp,
     backgroundColor: Color = padawan_theme_progressbar_background,
-    color: Color = padawan_theme_tutorial,
+    color: Color = padawan_theme_chapter_completed,
     animationDuration: Int = 1000,
     animationDelay: Int = 0,
     completionPercentage: Float,
