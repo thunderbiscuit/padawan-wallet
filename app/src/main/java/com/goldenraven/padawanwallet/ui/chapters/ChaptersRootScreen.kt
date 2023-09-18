@@ -216,7 +216,7 @@ fun SectionsCarousel(
 
 @Composable
 fun LessonCircle(lessonNumber: Int, completed: Boolean, selected: Boolean, selectedChapter: MutableState<Int>) {
-    val completedColor = if (completed) Color(0xffffc847) else Color(0xffababab)
+    val completedColor = if (completed) Color(0xffffc847) else Color(0xfff7e7ce)
     val screenSizeWidth = getScreenSizeWidth(LocalConfiguration.current.screenWidthDp)
     val (innerCircleSize, outerCircleSize) = when (screenSizeWidth) {
         ScreenSizeWidth.Small -> Pair(48f, 50f)
