@@ -173,7 +173,6 @@ val chapter7: List<Page> = listOf(
     listOf(
         ChapterElement(ElementType.TITLE, R.string.C7_h1),
         ChapterElement(ElementType.BODY, R.string.C7_p5),
-        ChapterElement(ElementType.RESOURCE, R.drawable.placeholder_image),
         ChapterElement(ElementType.BODY, R.string.C7_p6),
         ChapterElement(ElementType.BODY, R.string.C7_p7),
     ),
