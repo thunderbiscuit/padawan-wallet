@@ -91,6 +91,8 @@ android {
         resources.pickFirsts.add("win32-x86-64/attach_hotspot_windows.dll")
         resources.pickFirsts.add("win32-x86/attach_hotspot_windows.dll")
     }
+
+    namespace = "com.goldenraven.padawanwallet"
 }
 
 dependencies {
