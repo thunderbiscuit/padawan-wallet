@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="C3_title">Sending bitcoin</string>
+    <string name="C3_tagline">How do you send bitcoins?</string>
+
+    <string name="t3_p1">To send bitcoin, you must ask for a receive address. If offered a QR code, scan it using your phone\'s camera. If you receive a long string of letters and numbers, you can copy and paste the address into the address field of the transaction screen of the app. Remember to double check the address once you have pasted it!</string>
+    <string name="t3_p2">Once you have inputted the address, specify the amount of bitcoin to send (either in bitcoin units or in satoshis), and broadcast the transaction to the network. Your transaction will be picked up by nodes all over the world, and will eventually be mined in a block!.</string>
+</resources>

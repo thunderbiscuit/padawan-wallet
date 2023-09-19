@@ -26,6 +26,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Devices
@@ -250,7 +251,7 @@ fun BalanceBox(
                                 LoadingAnimation()
                             } else {
                                 Text(
-                                    text = "sync",
+                                    text = stringResource(id = R.string.sync),
                                     style = PadawanTypography.labelLarge,
                                     fontWeight = FontWeight.Normal,
                                     color = Color(0xffdbdeff),
@@ -287,7 +288,7 @@ fun SendReceive(navController: NavHostController) {
         ) {
             Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.padding(vertical = 8.dp)) {
                 Text(
-                    text = "Receive",
+                    text = stringResource(id = R.string.receive),
                     style = PadawanTypography.labelLarge,
                 )
                 if (screenSizeWidth == ScreenSizeWidth.Phone) {
@@ -308,7 +309,7 @@ fun SendReceive(navController: NavHostController) {
         ) {
             Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.padding(vertical = 8.dp)) {
                 Text(
-                    text = "Send",
+                    text = stringResource(id = R.string.send),
                     style = PadawanTypography.labelLarge,
                 )
                 if (screenSizeWidth == ScreenSizeWidth.Phone) {

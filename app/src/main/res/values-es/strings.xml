@@ -32,9 +32,9 @@
     <string name="tab_chapters">Chapters</string>
     <string name="wallet_balance_section">Balance (testnet coins)</string>
     <string name="transaction_history_section">Transaction History</string>
-    <string name="sync">sync</string>
-    <string name="send">Send</string>
-    <string name="receive">Receive</string>
+    <string name="sync">sinc</string>
+    <string name="send">Enviar</string>
+    <string name="receive">Recibir</string>
     <string name="receive_screen_title">Receive bitcoin (testnet)</string>
     <string name="generate_new_address">Generate new address</string>
     <string name="back_to_wallet">Back to wallet</string>
