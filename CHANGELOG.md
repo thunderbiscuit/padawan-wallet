@@ -5,19 +5,35 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).  
 <br/>
 
-## [Unreleased](https://github.com/thunderbiscuit/padawan-wallet/compare/v0.9.0...master)
+## [Unreleased](https://github.com/thunderbiscuit/padawan-wallet/compare/v0.11.0...master)  
+<br>
+
+## [v0.10.0 to 0.11.0](https://github.com/thunderbiscuit/padawan-wallet/compare/v0.10.0...v0.11.0) — September 18, 2023
+### Added
++ Copy address by pressing on it
++ Better formatting for bitcoin balance
++ Sync animation
++ Automatic sync on startup
++ A lot of small UI changes
++ Better support for smaller screens
++ Start fee rate slider at 1.0
++ Migrate LiveData to Kotlin Flows
++ Images in tutorials
+<br>
+
+## [v0.9.0 to 0.10.0](https://github.com/thunderbiscuit/padawan-wallet/compare/v0.9.0...v0.10.0) — January 25, 2023
 ### Added
 + Fairly extensive re-write of the app
 + Brand new UI
 + New chapters
 + Better content
-<br/>
+<br>
 
-## [v0.8.0 to v0.9.0](https://github.com/thunderbiscuit/padawan-wallet/compare/v0.8.0...v0.9.0) — March 23, 2022
+## [v0.8.0 to v0.9.0](https://github.com/thunderbiscuit/padawan-wallet/compare/v0.8.0...v0.9.0) — May 26, 2022
 ### Added
 + Complete re-write of the user interface in Jetpack Compose.
 + Many more tests
-<br/>
+<br>
 
 ## [v0.7.2 to v0.8.0](https://github.com/thunderbiscuit/padawan-wallet/compare/v0.7.2...v0.8.0) — March 23, 2022
 ### Added
@@ -37,7 +53,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Removed
 + Navigation broadcast fragment  
 + Remove dependency on androidmads QR code library  
-<br/>
+<br>
 
 ## [v0.7.0 to v0.7.2](https://github.com/thunderbiscuit/padawan-wallet/compare/v0.7.0...v0.7.2) — August 26, 2021
 ### Added
@@ -47,7 +63,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 + Bump bitcoindevkit dependency to `v0.3.0-rc1`  
-<br/>
+<br>
 
 ## [v0.6.0 to v0.7.0](https://github.com/thunderbiscuit/padawan-wallet/compare/v0.6.0...v0.7.0) — June 8, 2021
 ### Added
@@ -58,7 +74,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 + Bump bitcoindevkit dependency to `v0.2.1`  
-<br/>
+<br>
 
 ## [v0.5.0 to v0.6.0](https://github.com/thunderbiscuit/padawan-wallet/compare/v0.5.0...v0.6.0) — May 14, 2021
 ### Added
@@ -76,7 +92,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 + Clean up UI for larger devices
 + Tons of small UI improvements
 + Streamline use of snackbars across the app  
-<br/>  
+<br>  
 
 ## [v0.4.0 to v0.5.0](https://github.com/thunderbiscuit/padawan-wallet/compare/v0.4.0...v0.5.0) — Apr 7, 2021
 ### Added
@@ -95,7 +111,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 + Use Repository architecture element
 + Move the bitcoindevkit to Wallet Object
 + Point bdk to blockstream.info servers  
-<br/>  
+<br>  
 
 ## [v0.3.0 to v0.4.0](https://github.com/thunderbiscuit/padawan-wallet/compare/v0.3.0...v0.4.0) — Jan 12, 2021
 ### Added
@@ -105,7 +121,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 + Various improvements to the codebase  
-<br/>  
+<br>  
 
 ## [v0.2.0 to v0.3.0](https://github.com/thunderbiscuit/padawan-wallet/compare/v0.2.0...v0.3.0) — Jan 5, 2021
 ### Added
@@ -124,7 +140,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 + Use Material alert dialog
 + Remove use of theme background colour
 + Do not generate new address by default upon navigation to receive fragment  
-<br/>
+<br>
 
 ## [v0.1.0 to v0.2.0](https://github.com/thunderbiscuit/padawan-wallet/compare/v0.1.0...v0.2.0) — Jan 3, 2021
 ### Added
@@ -133,7 +149,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 + Receive fragment that can generate new addresses
 + Send fragment that can create transactions
 + Verify + Broadcast fragment that can broadcast transactions  
-<br/>
+<br>
 
 ## [v0.1.0](https://github.com/thunderbiscuit/padawan-wallet/releases/tag/v0.1.0) — Dec 20, 2020
 ### Added
