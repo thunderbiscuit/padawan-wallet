@@ -10,7 +10,7 @@
     <string name="already_have_a_wallet">I already have a\nPadawan wallet\n(12-words backup)</string>
     <string name="create_new_wallet">I want to create\na new wallet</string>
     <string name="intro_dialog_message">It’s important you know that Padawan is not a bitcoin wallet that can handle normal bitcoins.\n\nThis application is built to help you learn and experiment with bitcoin wallets through a series of tutorials, and it uses testnet coins, a type of bitcoin that doesn\'t have any value.\n\nThe wallet can only handle testnet coins, which are not compatible with normal bitcoins!</string>
-    <string name="intro_dialog_title">Be careful!</string>
+    <string name="intro_dialog_title">¡Ten cuidado!</string>
     <string name="intro_dialog_positive">I understand</string>
     <string name="intro_dialog_negative">Cancel</string>
     <string name="recover_wallet">Recover Wallet</string>
