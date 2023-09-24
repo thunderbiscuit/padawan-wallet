@@ -6,24 +6,24 @@
 <!--  p1: paragraph 1  -->
 
 <resources>
-    <string name="C1_title">What is the Bitcoin testnet?</string>
-    <string name="C1_tagline">Did you know there are more than one bitcoin networks?</string>
+    <string name="C1_title">¿Qué es la red de pruebas de bitcoin o testnet?</string>
+    <string name="C1_tagline">¿Sabías que hay más de una red de bitcoin?</string>
 
-    <string name="t1_h1">What is the Bitcoin testnet?</string>
+    <string name="t1_h1">¿Qué es la red de pruebas de bitcoin o testnet?</string>
 
-    <string name="t1_p1">Bitcoin networks are made up of thousands of computers across the world. These computers speak a common language and communicate directly with each other over the internet.</string>
-    <string name="t1_p2">You might not know, but there are many bitcoin networks! The two most important of these networks are called "mainnet" and "testnet".</string>
+    <string name="t1_p1">Las redes de bitcoin están compuestas por miles de ordenadores alrededor del mundo. Estos ordenadores hablan el mismo lenguaje y se comunican entre sí directamente a través de internet.</string>
+    <string name="t1_p2">Puede que no lo sepas pero, ¡hay muchas redes de bitcoin! Las dos redes más importantes son \“mainnet\” (o red principal) y \“testnet\” (o red de pruebas).</string>
 
-    <string name="t1_h2">Mainnet</string>
-    <string name="t1_p3">When people talk about "the bitcoin network", they usually mean the mainnet bitcoin network (or simply \"mainnet\").</string>
-    <string name="t1_p4">The bitcoins on mainnet have monetary value, can be used as money for transactions between people, and can be traded on cryptocurrency exchanges.</string>
+    <string name="t1_h2">La red principal (Mainnet)</string>
+    <string name="t1_p3">Cuando la gente habla de \“la red de bitcoin\”, normalmente se refieren a la red principal de bitcoin (o simplemente \“mainnet\”).</string>
+    <string name="t1_p4">Los bitcoins de la red principal tienen valor monetario, pueden ser utilizados como dinero para las transacciones entre personas y puede intercambiarse en las casas de cambio de criptomonedas.</string>
 
-    <string name="t1_h3">Testnet</string>
-    <string name="t1_p5">The testnet network (or \"testnet\") is not as well known as the mainnet network. The bitcoins on this network are called testnet coins and look and behave just like mainnet bitcoins. But unlike bitcoins, testnet coins have no monetary value.</string>
-    <string name="t1_p6">Testnet is used by software developers who create real-world applications that interact with bitcoin. These developers can use testnet to make sure their software is working properly, before launching on mainnet. But you don\'t need to be a software developer to use testnet!</string>
+    <string name="t1_h3">La red de pruebas (Testnet)</string>
+    <string name="t1_p5">La red de pruebas (o \"testnet\") no es una red tan conocida como la red principal. Los bitcoins de esta red se llaman monedas testnet y se parecen y comportan de la misma manera que los bitcoins de la red principal. Pero a diferencia de los de la red principal, las monedas testnet no tienen valor monetario.</string>
+    <string name="t1_p6">La red de pruebas es utilizada por los desarrolladores de software que crean aplicaciones que interactúan con la red principal de bitcoin en el mundo real. Estos desarrolladores pueden utilizar la red de pruebas para asegurarse de que su software funciona correctamente antes de ser lanzado en la red principal. ¡Pero no necesitas ser un desarrollador para utilizar la red de pruebas!</string>
 
     <string name="t1_h4">Padawan &amp; Testnet</string>
-    <string name="t1_p7">The testnet and its coins are an invaluable resource for curious people to learn, play, and get confident with bitcoin networks before handling \"real\" mainnet bitcoins! Remember that testnet bitcoins DO NOT have monetary value.</string>
-    <string name="t1_p8">Padawan will teach you the foundations of bitcoin, including making transactions and backing up wallets, all using the testnet network. You cannot receive or send mainnet bitcoins to or from your Padawan wallet. Any coins you have on Padawan or send to friends using the app are testnet coins with NO monetary value.</string>
-    <string name="t1_p9">Use Padawan to learn, practice, and test the boundaries of your bitcoin knowledge!</string>
+    <string name="t1_p7">La red de pruebas y sus monedas son un recurso incalculable para la gente curiosa que quiere aprender, jugar y coger confianza con las redes de bitcoin, ¡antes de manejar bitcoins \“reales\” en la red principal! Recuerda que los bitcoins en la red de pruebas NO tienen valor monetario.</string>
+    <string name="t1_p8">Padawan te enseñará los fundamentos de bitcoin, incluyendo como hacer transacciones y como respaldar tus carteras, todo ello utilizando la red de pruebas. No puedes enviar ni recibir bitcoins de la red principal desde o hacia tu Padawan Wallet. Cualquier moneda que tengas en Padawan o que envíes a tus amigos utilizando la aplicación, serán monedas de la red de pruebas SIN valor monetario.</string>
+    <string name="t1_p9">¡Utiliza Padawan para aprender, practicar, y probar los límites de tu conocimiento sobre bitcoin!</string>
 </resources>
