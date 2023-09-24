@@ -240,7 +240,7 @@ fun BalanceBox(
                         ),
                         shape = RoundedCornerShape(20.dp, 20.dp, 0.dp, 0.dp),
                         border = standardBorder,
-                        modifier = Modifier.width(110.dp),
+                        modifier = Modifier.width(134.dp),
                         enabled = !isRefreshing
                     ) {
                         Row(
@@ -255,7 +255,7 @@ fun BalanceBox(
                                     style = PadawanTypography.labelLarge,
                                     fontWeight = FontWeight.Normal,
                                     color = Color(0xffdbdeff),
-                                    modifier = Modifier.padding(horizontal = 8.dp)
+                                    modifier = Modifier.padding(horizontal = 2.dp)
                                 )
                             }
                         }
