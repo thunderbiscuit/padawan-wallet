@@ -30,7 +30,7 @@
     <string name="send_to_address">Send to</string>
     <string name="fee_rate">Fee rate:</string>
     <string name="amount">Amount</string>
-    <string name="verify_transaction">Verify and broadcast transaction</string>
+    <string name="verify_transaction">Verify transaction</string>
     <string name="network_fee">Network fee</string>
     <string name="amount_transacted">Amount transacted (satoshis):</string>
     <string name="broadcast_screen_title">Broadcast transaction (testnet)</string>
@@ -67,12 +67,28 @@
     <string name="close">Close drawer</string>
     <string name="reset_tutorials">Reset Done Tutorials</string>
     <string name="request_testnet_coins">Request Testnet Coins!</string>
-    <string name="privacyText">Padawan Wallet does not collect any information on its users, and does not use Firebase Crashlytics. This, however, means it\'s much harder for us to hear about the bugs from our users. If you have feedback, feel free to send a message to the Padawan Twitter account or to write us an email. You can read our full privacy policy here:</string>
+    <string name="privacyText">Padawan Wallet does not collect any information on its users, and does not use Firebase Crashlytics. This, however, means it\'s much harder for us to hear about the bugs from our users. If you have feedback, feel free to send a message to the Padawan Twitter/X account (@padawanwallet) or to write us an email. You can read our full privacy policy here:</string>
     <string name="privacyLink">https://github.com/thunderbiscuit/padawan-wallet/blob/master/PRIVACY</string>
     <string name="send_coins_back_address">tb1qk5238eluqllq2wps67lkxme3x43wll4k282s8q</string>
     <string name="copyAddrStr">Copy</string>
     <string name="errorFaucet">Error: Faucet Not Available</string>
     <string name="oneTimeFaucet">Error: you\'ve already received testnet coins!</string>
     <string name="textCopied">Copied</string>
+    <string name="cancel">Cancel</string>
+    <string name="generate_a_new_address">Generate a new address</string>
+    <string name="fees_sats_vbytes">Fees (sats/vbytes)</string>
+    <string name="enter_amount_sats">Enter amount (sats)</string>
+    <string name="enter_a_bitcoin_testnet_address">Enter a bitcoin testnet address</string>
+    <string name="padawan_journey">Padawan journey</string>
+    <string name="continue_on_your_journey">Continue on your journey of learning bitcoin.</string>
+    <string name="getting_started">Getting started</string>
+    <string name="transactions">Transactions</string>
+    <string name="wallets">Wallets</string>
+    <string name="chapter">Chapter %1$s</string>
+    <string name="start_chapter">Start Chapter</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+    <string name="finish">Finish</string>
+    <string name="back_to_lessons">Back to lessons</string>
 
 </resources>

@@ -52,6 +52,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
@@ -162,7 +163,7 @@ internal fun SendScreen(navController: NavHostController, walletViewModel: Walle
                     .verticalScroll(scrollState)) {
                     Row(modifier = Modifier.padding(top = 8.dp, bottom = 8.dp)) {
                         Text(
-                            text = "Amount",
+                            text = stringResource(R.string.amount),
                             fontWeight = FontWeight.Bold,
                             textAlign = TextAlign.Start,
                             fontSize = 20.sp,
@@ -188,7 +189,7 @@ internal fun SendScreen(navController: NavHostController, walletViewModel: Walle
                             amount.value = value.filter { it.isDigit() }
                         },
                         singleLine = true,
-                        placeholder = { Text("Enter amount (sats)") },
+                        placeholder = { Text(stringResource(R.string.enter_amount_sats)) },
                         colors = TextFieldDefaults.colors(
                             focusedContainerColor = padawan_theme_background_secondary,
                             unfocusedContainerColor = padawan_theme_background_secondary,
@@ -206,7 +207,7 @@ internal fun SendScreen(navController: NavHostController, walletViewModel: Walle
                     )
 
                     Text(
-                        text = "Address",
+                        text = stringResource(id = R.string.address),
                         fontWeight = FontWeight.Bold,
                         textAlign = TextAlign.Start,
                         fontSize = 20.sp,
@@ -219,7 +220,7 @@ internal fun SendScreen(navController: NavHostController, walletViewModel: Walle
                         value = recipientAddress.value,
                         onValueChange = { recipientAddress.value = it },
                         singleLine = true,
-                        placeholder = { Text(text = "Enter a bitcoin testnet address") },
+                        placeholder = { Text(text = stringResource(R.string.enter_a_bitcoin_testnet_address)) },
                         colors = TextFieldDefaults.colors(
                             focusedContainerColor = padawan_theme_background_secondary,
                             unfocusedContainerColor = padawan_theme_background_secondary,
@@ -252,7 +253,7 @@ internal fun SendScreen(navController: NavHostController, walletViewModel: Walle
                         })
 
                     Text(
-                        text = "Fees (sats/vbytes)",
+                        text = stringResource(R.string.fees_sats_vbytes),
                         fontWeight = FontWeight.Bold,
                         textAlign = TextAlign.Start,
                         fontSize = 20.sp,
@@ -325,7 +326,7 @@ internal fun SendScreen(navController: NavHostController, walletViewModel: Walle
                             modifier = Modifier.padding(vertical = 4.dp)
                         ) {
                             Text(
-                                text = "Verify transaction", color = Color(0xff000000)
+                                text = stringResource(id = R.string.verify_transaction), color = Color(0xff000000)
                             )
                         }
                     }

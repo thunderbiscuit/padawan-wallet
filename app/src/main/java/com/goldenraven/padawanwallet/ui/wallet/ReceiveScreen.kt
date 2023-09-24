@@ -36,11 +36,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
 import androidx.navigation.NavHostController
+import com.goldenraven.padawanwallet.R
 import com.goldenraven.padawanwallet.theme.ShareTechMono
 import com.goldenraven.padawanwallet.theme.padawan_theme_background
 import com.goldenraven.padawanwallet.theme.padawan_theme_button_primary
@@ -183,7 +185,7 @@ internal fun ReceiveScreen(
                         .standardShadow(20.dp)
                 ) {
                     Text(
-                        text = "Generate a new address",
+                        text = stringResource(R.string.generate_a_new_address),
                     )
                 }
             }

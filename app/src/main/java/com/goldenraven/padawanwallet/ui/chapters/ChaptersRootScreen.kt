@@ -118,13 +118,13 @@ fun ChapterHomeTitle() {
                 .padding(horizontal = 32.dp)
         ) {
             Text(
-                text = "Padawan journey",
+                text = stringResource(R.string.padawan_journey),
                 style = PadawanTypography.headlineSmall,
                 color = padawan_theme_text_headline
             )
             Spacer(modifier = Modifier.height(height = 16.dp))
             Text(
-                text = "Continue on your journey of learning bitcoin.",
+                text = stringResource(R.string.continue_on_your_journey),
                 style = PadawanTypography.bodyMedium,
                 color = padawan_theme_text_faded_secondary
             )
@@ -159,7 +159,11 @@ fun SectionsCarousel(
             ) {
                 Box(modifier = Modifier.fillMaxWidth()) {
                     Column(modifier = Modifier.align(alignment = Alignment.CenterStart)) {
-                        val sectionName: String = if (page == 0) "Getting started" else if (page == 1) "Transactions" else "Wallets"
+                        val sectionName: String = when (page) {
+                            0 -> stringResource(R.string.getting_started)
+                            1 -> stringResource(R.string.transactions)
+                            else -> stringResource(R.string.wallets)
+                        }
                         Text(
                             text = "Section ${page + 1}: $sectionName",
                             style = PadawanTypography.labelLarge,
@@ -255,7 +259,7 @@ fun LessonCircle(lessonNumber: Int, completed: Boolean, selected: Boolean, selec
 fun ChapterId(chapterData: Chapter) {
     Text(
         modifier = Modifier.padding(start = 32.dp, end = 32.dp, bottom = 12.dp),
-        text = "Chapter ${chapterData.id}",
+        text = stringResource(R.string.chapter, chapterData.id),
         style = PadawanTypography.labelLarge,
         color = padawan_theme_button_primary
     )
@@ -306,7 +310,7 @@ fun ChapterButton(chapterData: Chapter, navController: NavController) {
                 modifier = Modifier.padding(vertical = 8.dp)
             ) {
                 Text(
-                    text = "Start Chapter",
+                    text = stringResource(R.string.start_chapter),
                     style = PadawanTypography.labelLarge,
                 )
                 Icon(

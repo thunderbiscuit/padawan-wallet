@@ -40,11 +40,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLifecycleOwner
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.navigation.NavHostController
+import com.goldenraven.padawanwallet.R
 import com.goldenraven.padawanwallet.theme.md_theme_dark_background
 import com.goldenraven.padawanwallet.theme.standardShadow
 import com.goldenraven.padawanwallet.ui.standardBorder
@@ -166,7 +168,7 @@ internal fun QRScanScreen(navController: NavHostController) {
                     modifier = Modifier.padding(vertical = 4.dp)
                 ) {
                     Text(
-                        text = "Cancel",
+                        text = stringResource(R.string.cancel),
                         color = Color(0xff000000)
                     )
                 }

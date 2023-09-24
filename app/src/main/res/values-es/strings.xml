@@ -30,7 +30,7 @@
     <string name="send_to_address">Enviar a</string>
     <string name="fee_rate">Comisión:</string>
     <string name="amount">Cantidad</string>
-    <string name="verify_transaction">Verificar y emitir la transacción</string>
+    <string name="verify_transaction">Verificar la transacción</string>
     <string name="network_fee">Comisión de red</string>
     <string name="amount_transacted">Cantidad enviada/recibida (satoshis):</string>
     <string name="broadcast_screen_title">Emitir transacción (testnet)</string>
@@ -74,5 +74,21 @@
     <string name="errorFaucet">Error: Faucet No Disponible</string>
     <string name="oneTimeFaucet">Error: ¡ya has recibido monedas testnet!</string>
     <string name="textCopied">Copiado</string>
+    <string name="cancel">Cancel</string>
+    <string name="generate_a_new_address">Generate a new address</string>
+    <string name="fees_sats_vbytes">Fees (sats/vbytes)</string>
+    <string name="enter_amount_sats">Enter amount (sats)</string>
+    <string name="enter_a_bitcoin_testnet_address">Enter a bitcoin testnet address</string>
+    <string name="padawan_journey">Padawan journey</string>
+    <string name="continue_on_your_journey">Continue on your journey of learning bitcoin.</string>
+    <string name="getting_started">Getting started</string>
+    <string name="transactions">Transactions</string>
+    <string name="wallets">Wallets</string>
+    <string name="chapter">Chapter %1$s</string>
+    <string name="start_chapter">Start Chapter</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+    <string name="finish">Finish</string>
+    <string name="back_to_lessons">Back to lessons</string>
 
 </resources>

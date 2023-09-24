@@ -179,7 +179,7 @@ fun ChapterButtons(
 //                    )
 //                    Spacer(modifier = Modifier.width(width = 16.dp))
                     Text(
-                        text = "Previous",
+                        text = stringResource(R.string.previous),
                         style = PadawanTypography.labelLarge,
                     )
                 }
@@ -207,7 +207,7 @@ fun ChapterButtons(
                     modifier = Modifier.padding(vertical = 8.dp)
                 ) {
                     Text(
-                        text = "Next",
+                        text = stringResource(R.string.next),
                         style = PadawanTypography.labelLarge,
                     )
 //                    Spacer(modifier = Modifier.width(width = 16.dp))
@@ -236,7 +236,7 @@ fun ChapterButtons(
                     modifier = Modifier.padding(vertical = 8.dp)
                 ) {
                     Text(
-                        text = "Finish",
+                        text = stringResource(R.string.finish),
                         style = PadawanTypography.labelLarge,
                     )
                 }
@@ -267,7 +267,7 @@ internal fun ChapterAppBar(navController: NavHostController) {
             )
         }
         Text(
-            text = "Back to lessons",
+            text = stringResource(R.string.back_to_lessons),
             style = PadawanTypography.bodyMedium,
             modifier = Modifier.align(alignment = Alignment.CenterVertically)
         )
