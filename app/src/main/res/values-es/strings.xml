@@ -14,18 +14,6 @@
     <string name="intro_dialog_positive">Entiendo</string>
     <string name="intro_dialog_negative">Cancelar</string>
     <string name="recover_wallet">Recuperar cartera</string>
-    <string name="word1">word 1</string>
-    <string name="word2">word 2</string>
-    <string name="word3">word 3</string>
-    <string name="word4">word 4</string>
-    <string name="word5">word 5</string>
-    <string name="word6">word 6</string>
-    <string name="word7">word 7</string>
-    <string name="word8">word 8</string>
-    <string name="word9">word 9</string>
-    <string name="word10">word 10</string>
-    <string name="word11">word 11</string>
-    <string name="word12">word 12</string>
 
     <!-- wallet -->
     <string name="tab_wallet">Cartera</string>
