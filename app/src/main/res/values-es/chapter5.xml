@@ -6,7 +6,7 @@
     <string name="t5_p1">Ahora ya sabes un poco más sobre las transacciones. Muchas, muchas transacciones son enviadas, validadas, confirmadas y almacenadas en la red de bitcoin cada minuto de cada día. Lo que es algo muy costoso.</string>
     <string name="t5_p2">La red de bitcoin solo puede hacer frente a una demanda limitada del sistema. Para asegurarse de que la carga de la red se mantiene pequeña y ligera, hay una capacidad limitada en cuanto a la cantidad total de bytes que se pueden transaccionar a través de la red en una determinada cantidad de tiempo.</string>
 
-    <string name="t5_h1">La puja de las comisiones de las transacciones</string>
+    <string name="t5_h1">La puja en las comisiones de las transacciones</string>
     <string name="t5_p3">Como el espacio es limitado en términos de bytes por bloque y solo se mina un bloque aproximadamente cada 10 minutos, los usuarios de bitcoin compiten por el espacio en la cadena de bloques al proporcionar una comisión por sus transacciones.</string>
     <string name="t5_p4">Las transacciones con las comisiones más altas son las que tienen prioridad a la hora de construir nuevos bloques.</string>
 
