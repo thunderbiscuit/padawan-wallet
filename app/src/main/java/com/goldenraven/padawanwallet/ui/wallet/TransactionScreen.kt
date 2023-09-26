@@ -25,6 +25,7 @@ import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
@@ -80,7 +81,7 @@ internal fun TransactionScreen(
                     end.linkTo(parent.end)
                 }
         ) {
-            PadawanAppBar(navController = navController, title = "Transaction details")
+            PadawanAppBar(navController = navController, title = stringResource(R.string.transaction_details))
         }
 
         Column(
@@ -96,24 +97,28 @@ internal fun TransactionScreen(
                 }
         ) {
             Row(
-                modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(vertical = 8.dp),
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 val fee = transaction!!.fee ?: 0uL
                 val txInfo = parseTxAmounts(transaction)
                 Text(
-                    text = "Total transaction amount:",
+                    text = stringResource(R.string.total_transaction_amount),
                     style = PadawanTypography.titleSmall
                 )
                 Text("${txInfo.valueIn + txInfo.valueOut + fee } sats")
             }
             Row(
-                modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(vertical = 8.dp),
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 val isPayment: Boolean = isPayment(SatoshisOut(transaction!!.sent.toInt()), SatoshisIn(transaction.received.toInt()))
                 Text(
-                    text = "Transaction type:",
+                    text = stringResource(R.string.transaction_type),
                     style = PadawanTypography.titleSmall,
                 )
                 Box {
@@ -126,7 +131,7 @@ internal fun TransactionScreen(
                             )
                     ) {
                         Text(
-                            text = if (isPayment) "Sent" else "Receive",
+                            text = if (isPayment) stringResource(R.string.sent) else stringResource(R.string.received),
                             style = PadawanTypography.bodySmall,
                             modifier = Modifier
                                 .align(Alignment.CenterVertically)
@@ -145,36 +150,46 @@ internal fun TransactionScreen(
                 }
             }
             Divider(
-                modifier = Modifier.fillMaxWidth().padding(40.dp),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(40.dp),
                 color = Color(0xff8f8f8f),
                 thickness = 1.dp
             )
             Row(
-                modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(vertical = 8.dp),
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 Text(
-                    text = "Time:",
+                    text = stringResource(R.string.time),
                     style = PadawanTypography.titleSmall
                 )
-                Text(transaction!!.confirmationTime?.timestamp?.timestampToString() ?: "Pending")
+                Text(
+                    transaction!!.confirmationTime?.timestamp?.timestampToString() ?: stringResource(R.string.pending, ":")
+                )
             }
             Row(
-                modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(vertical = 8.dp),
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 Text(
                     text = "Block:",
                     style = PadawanTypography.titleSmall,
                 )
-                Text("${transaction!!.confirmationTime?.height ?: "Pending"}")
+                Text("${transaction!!.confirmationTime?.height ?: stringResource(id = R.string.pending)}")
             }
             Row(
-                modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(vertical = 8.dp),
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 Text(
-                    text = "Txid:",
+                    text = stringResource(R.string.txid),
                     style = PadawanTypography.titleSmall,
                 )
                 Text(
@@ -183,13 +198,15 @@ internal fun TransactionScreen(
                 )
             }
             Row(
-                modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(vertical = 8.dp),
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 val fee = transaction!!.fee ?: 0uL
 
                 Text(
-                    text = "Fees paid:",
+                    text = stringResource(R.string.fees_paid),
                     style = PadawanTypography.titleSmall,
                 )
                 Text("$fee sats")

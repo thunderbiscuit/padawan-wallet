@@ -18,8 +18,10 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
+import com.goldenraven.padawanwallet.R
 import com.goldenraven.padawanwallet.data.WalletRepository
 import com.goldenraven.padawanwallet.theme.padawan_theme_background_secondary
 import com.goldenraven.padawanwallet.ui.PadawanAppBar
@@ -39,7 +41,7 @@ internal fun RecoveryPhraseScreen(
             .fillMaxSize()
             .verticalScroll(state = scrollState)
     ){
-        PadawanAppBar(navController = navController, title = "Your recovery phrase")
+        PadawanAppBar(navController = navController, title = stringResource(R.string.your_recovery_phrase))
         wordList.forEachIndexed { index, item ->
             Row(
                 horizontalArrangement = Arrangement.Center,

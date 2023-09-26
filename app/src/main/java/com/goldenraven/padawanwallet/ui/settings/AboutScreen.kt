@@ -39,7 +39,7 @@ internal fun AboutScreen(
             .background(padawan_theme_background_secondary)
             .padding(bottom = 12.dp)
     ) {
-        PadawanAppBar(navController = navController, title = "About Padawan")
+        PadawanAppBar(navController = navController, title = stringResource(R.string.about_padawan))
         Text(
             text = stringResource(R.string.about_text),
             modifier = Modifier.padding(start = 24.dp, end = 24.dp),

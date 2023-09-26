@@ -5,9 +5,6 @@
 
 package com.goldenraven.padawanwallet.ui.settings
 
-import android.content.ClipData
-import android.content.ClipboardManager
-import android.content.Context
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -46,9 +43,6 @@ import com.goldenraven.padawanwallet.theme.padawan_theme_background_secondary
 import com.goldenraven.padawanwallet.theme.padawan_theme_text_faded_secondary
 import com.goldenraven.padawanwallet.ui.PadawanAppBar
 import com.goldenraven.padawanwallet.utils.copyToClipboard
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 
 @Composable
 internal fun SendCoinsBackScreen(
@@ -73,14 +67,14 @@ internal fun SendCoinsBackScreen(
             if (copyClicked) {
                 Image(
                     painter = painterResource(R.drawable.ic_checked),
-                    contentDescription = "Checkmark image",
+                    contentDescription = stringResource(R.string.checkmark_image),
                     colorFilter = ColorFilter.tint(Color.Green)
 
                 )
             } else {
                 Image(
                     painter = painterResource(R.drawable.hicon_add_square),
-                    contentDescription = "Copy to clipboard image",
+                    contentDescription = stringResource(R.string.copy_to_clipboard_image),
                 )
             }
         }
@@ -96,10 +90,10 @@ internal fun SendCoinsBackScreen(
                 .padding(padding)
         ) {
             val returnAddress: String = stringResource(R.string.send_coins_back_address)
-            PadawanAppBar(navController = navController, title = "Send your coins back to us!")
+            PadawanAppBar(navController = navController, title = stringResource(R.string.send_your_coins_back_to_us))
             Image(
                 painterResource(R.drawable.return_sats_faucet_address),
-                contentDescription = "Return sats faucet address image",
+                contentDescription = stringResource(R.string.return_sats_faucet_address_image),
                 modifier = Modifier.padding(start = 50.dp, end = 50.dp, bottom = 20.dp)
             )
             Column(
@@ -107,7 +101,13 @@ internal fun SendCoinsBackScreen(
                     .align(Alignment.CenterHorizontally)
                     .clickable(onClick = {
                         setCopyClicked(true)
-                        copyToClipboard(returnAddress, context, scope, snackbarHostState, setCopyClicked)
+                        copyToClipboard(
+                            returnAddress,
+                            context,
+                            scope,
+                            snackbarHostState,
+                            setCopyClicked
+                        )
                     })
                     .padding(start = 24.dp, end = 24.dp, bottom = 20.dp)
             ) {

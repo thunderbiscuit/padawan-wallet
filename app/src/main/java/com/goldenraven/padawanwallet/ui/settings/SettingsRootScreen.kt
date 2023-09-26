@@ -33,6 +33,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
@@ -69,14 +70,14 @@ internal fun SettingsRootScreen(
         ) {
             // Title
             Text(
-                text = "Settings",
+                text = stringResource(R.string.settings),
                 style = PadawanTypography.headlineSmall,
                 color = Color(0xff1f0208),
                 modifier = Modifier
                     .padding(top = 48.dp, start = 24.dp, end = 24.dp, bottom = 8.dp)
             )
             Text(
-                text = "A collection of everything else you need in the app.",
+                text = stringResource(R.string.everything_else),
                 color = Color(0xff787878),
                 modifier = Modifier
                     .padding(start = 24.dp, end = 24.dp, bottom = 12.dp)
@@ -94,7 +95,7 @@ internal fun SettingsRootScreen(
                     .padding(start = 24.dp, end = 24.dp, top = 24.dp)
             ) {
                 Text(
-                    text = "Recovery phrase",
+                    text = stringResource(R.string.recovery_phrase),
                     fontWeight = FontWeight.Normal,
                     color = Color(0xff2f2f2f)
 
@@ -102,7 +103,7 @@ internal fun SettingsRootScreen(
                 Spacer(modifier = Modifier.weight(1f))
                 Icon(
                     painter = painterResource(id = R.drawable.ic_hicon_right_2),
-                    contentDescription = "Scan icon",
+                    contentDescription = stringResource(R.string.scan_icon),
                     tint = Color(0xff2f2f2f)
                 )
             }
@@ -119,7 +120,7 @@ internal fun SettingsRootScreen(
                     .padding(start = 24.dp, end = 24.dp, top = 24.dp)
             ) {
                 Text(
-                    text = "Send testnet coins back",
+                    text = stringResource(R.string.send_testnet_coins_back),
                     fontWeight = FontWeight.Normal,
                     color = Color(0xff2f2f2f)
 
@@ -127,7 +128,7 @@ internal fun SettingsRootScreen(
                 Spacer(modifier = Modifier.weight(1f))
                 Icon(
                     painter = painterResource(id = R.drawable.ic_hicon_right_2),
-                    contentDescription = "Scan icon",
+                    contentDescription = stringResource(id = R.string.scan_icon),
                     tint = Color(0xff2f2f2f)
                 )
             }
@@ -152,7 +153,7 @@ internal fun SettingsRootScreen(
                 Spacer(modifier = Modifier.weight(1f))
                 Icon(
                     painter = painterResource(id = R.drawable.ic_hicon_right_2),
-                    contentDescription = "Scan icon",
+                    contentDescription = stringResource(id = R.string.scan_icon),
                     tint = Color(0xff2f2f2f)
                 )
             }
@@ -169,8 +170,9 @@ internal fun SettingsRootScreen(
                 horizontalArrangement = Arrangement.Center,
                 modifier = Modifier.fillMaxWidth()
             ) {
+                val padawanVersion = "${stringResource(R.string.padawan_wallet)} ${BuildConfig.VERSION_NAME}"
                 Text(
-                    text = "Padawan Wallet ${BuildConfig.VERSION_NAME}",
+                    text = padawanVersion,
                     style = PadawanTypography.bodySmall,
                     color = padawan_theme_text_faded_secondary
                 )
@@ -184,10 +186,11 @@ internal fun SettingsRootScreen(
                 thickness = 1.dp
             )
 
+            val chaptersResetMessage = stringResource(R.string.chapters_reset_successful)
             Button(
                 onClick = {
                     viewModel.unsetAllCompleted()
-                    scope.launch { snackbarHostState.showSnackbar("Chapters reset successful") }
+                    scope.launch { snackbarHostState.showSnackbar(chaptersResetMessage) }
                 },
                 colors = ButtonDefaults.buttonColors(containerColor = Color(0xffFEE6DE)),
                 shape = RoundedCornerShape(8.dp),
@@ -197,7 +200,7 @@ internal fun SettingsRootScreen(
                     .padding(start = 24.dp, end = 24.dp)
             ) {
                 Text(
-                    text = "Reset completed chapters",
+                    text = stringResource(R.string.reset_completed_chapters),
                     fontWeight = FontWeight.Normal,
                     color = Color(0xff2f2f2f)
                 )

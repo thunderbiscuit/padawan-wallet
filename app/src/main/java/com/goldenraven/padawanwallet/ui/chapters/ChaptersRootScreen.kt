@@ -5,6 +5,7 @@
 
 package com.goldenraven.padawanwallet.ui.chapters
 
+import android.content.Context
 import android.util.Log
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
@@ -165,7 +166,7 @@ fun SectionsCarousel(
                             else -> stringResource(R.string.wallets)
                         }
                         Text(
-                            text = "Section ${page + 1}: $sectionName",
+                            text = stringResource(R.string.section, page + 1, sectionName),
                             style = PadawanTypography.labelLarge,
                             fontSize = 18.sp,
                         )
@@ -180,7 +181,11 @@ fun SectionsCarousel(
                         ) {
                             ProgressBar(completionPercentage = calculateCompletionOfGroup(page, viewModel.getCompletedChapters()))
                             Text(
-                                text = calculateCompletionStringOfGroup(page, viewModel.getCompletedChapters()),
+                                text = calculateCompletionStringOfGroup(
+                                    page,
+                                    viewModel.getCompletedChapters(),
+                                    stringResource(R.string.of_3_done)
+                                ),
                                 style = PadawanTypography.bodyMedium
                             )
                         }
@@ -315,7 +320,7 @@ fun ChapterButton(chapterData: Chapter, navController: NavController) {
                 )
                 Icon(
                     painter = painterResource(id = R.drawable.ic_next),
-                    contentDescription = "Next Icon"
+                    contentDescription = stringResource(R.string.next_icon)
                 )
             }
         }
@@ -366,25 +371,29 @@ fun ProgressBar(
     }
 }
 
-fun calculateCompletionStringOfGroup(page: Int, completedChapters: Map<Int, Boolean>): String {
+fun calculateCompletionStringOfGroup(
+    page: Int,
+    completedChapters: Map<Int, Boolean>,
+    messageString: String,
+): String {
     return when (page) {
         0 -> {
             val count = completedChapters.count {
                 it.key <= 3 && it.value
             }
-            "$count of 3 done"
+            "$count $messageString"
         }
         1 -> {
             val count = completedChapters.count {
                 it.key in 4..6 && it.value
             }
-            "$count of 3 done"
+            "$count $messageString"
         }
         2 -> {
             val count = completedChapters.count {
                 it.key in 7..9 && it.value
             }
-            "$count of 3 done"
+            "$count $messageString"
         }
         else -> {
             Log.i(TAG, "We've made a terrible mistake")

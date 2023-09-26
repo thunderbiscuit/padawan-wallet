@@ -92,11 +92,11 @@ internal fun SmallOnboarding(
     ) {
         Image(
             painter = painterResource(id = R.drawable.ic_padawan_colour_foreground),
-            contentDescription = "Padawan Logo",
+            contentDescription = stringResource(R.string.padawan_logo),
             Modifier.size(140.dp)
         )
         Text(
-            text = "Padawan Wallet",
+            text = stringResource(R.string.padawan_wallet),
             style = PadawanTypography.headlineLarge,
             fontSize = 34.sp,
             color = Color(0xff1f0208),
@@ -131,7 +131,7 @@ internal fun SmallOnboarding(
                 modifier = Modifier.padding(vertical = 4.dp)
             ) {
                 Text(
-                    text = "Create a wallet",
+                    text = stringResource(R.string.create_a_wallet),
                     // style = GargoyleTypography.labelLarge,
                     color = Color(0xff000000)
                 )
@@ -146,7 +146,7 @@ internal fun SmallOnboarding(
                 .padding(bottom = 24.dp)
         ) {
             Text(
-                text = "Already have a wallet?",
+                text = stringResource(id = R.string.already_have_a_wallet),
                 color = Color(0xff787878),
                 modifier = Modifier
                     .padding(start = 24.dp, bottom = 8.dp)
@@ -157,7 +157,7 @@ internal fun SmallOnboarding(
                     .padding(start = 8.dp, bottom = 8.dp)
                     .height(40.dp)
                     .noRippleClickable { navController.navigate(Screen.WalletRecoveryScreen.route) },
-                text = "Recover it here",
+                text = stringResource(R.string.recover_it_here),
                 color = Color(0xff787878),
                 style = bodyMediumUnderlined
             )
@@ -193,7 +193,7 @@ internal fun PhoneOnboarding(
         ) {
             Image(
                 painter = painterResource(id = R.drawable.ic_padawan_colour_foreground),
-                contentDescription = "Padawan Logo",
+                contentDescription = stringResource(id = R.string.padawan_logo),
                 Modifier.size(140.dp)
             )
             // Icon(
@@ -203,7 +203,7 @@ internal fun PhoneOnboarding(
             //     modifier = Modifier.size(80.dp)
             // )
             Text(
-                text = "Padawan Wallet",
+                text = stringResource(R.string.padawan_wallet),
                 style = PadawanTypography.headlineLarge,
                 fontSize = 34.sp,
                 color = Color(0xff1f0208),
@@ -252,7 +252,7 @@ internal fun PhoneOnboarding(
                     modifier = Modifier.padding(vertical = 4.dp)
                 ) {
                     Text(
-                        text = "Create a wallet",
+                        text = stringResource(R.string.create_a_wallet),
                         // style = GargoyleTypography.labelLarge,
                         color = Color(0xff000000)
                     )
@@ -274,7 +274,7 @@ internal fun PhoneOnboarding(
                 .padding(bottom = 24.dp)
         ) {
             Text(
-                text = "Already have a wallet?",
+                text = stringResource(id = R.string.already_have_a_wallet),
                 color = Color(0xff787878),
                 modifier = Modifier
                     .padding(bottom = 8.dp)
@@ -285,7 +285,7 @@ internal fun PhoneOnboarding(
                     .padding(start = 8.dp, bottom = 8.dp)
                     .height(40.dp)
                     .noRippleClickable { navController.navigate(Screen.WalletRecoveryScreen.route) },
-                text = "Recover it here",
+                text = stringResource(R.string.recover_it_here),
                 color = Color(0xff787878),
                 style = bodyMediumUnderlined
             )

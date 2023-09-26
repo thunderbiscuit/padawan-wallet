@@ -149,7 +149,7 @@ internal fun SendScreen(navController: NavHostController, walletViewModel: Walle
                     start.linkTo(parent.start)
                     end.linkTo(parent.end)
                 }) {
-                    PadawanAppBar(navController = navController, title = "Send bitcoin")
+                    PadawanAppBar(navController = navController, title = stringResource(R.string.send_bitcoin))
                 }
 
                 Column(modifier = Modifier
@@ -162,6 +162,8 @@ internal fun SendScreen(navController: NavHostController, walletViewModel: Walle
                     }
                     .verticalScroll(scrollState)) {
                     Row(modifier = Modifier.padding(top = 8.dp, bottom = 8.dp)) {
+                        val balanceText = "${stringResource(id = R.string.balance)} $balance sat"
+
                         Text(
                             text = stringResource(R.string.amount),
                             fontWeight = FontWeight.Bold,
@@ -172,7 +174,7 @@ internal fun SendScreen(navController: NavHostController, walletViewModel: Walle
                                 .align(Alignment.Bottom)
                         )
                         Text(
-                            text = "Balance: $balance sats",
+                            text = balanceText,
                             textAlign = TextAlign.End,
                             modifier = Modifier
                                 .weight(weight = 0.5f)
@@ -246,7 +248,7 @@ internal fun SendScreen(navController: NavHostController, walletViewModel: Walle
                                 ) {
                                     Icon(
                                         painter = painterResource(id = R.drawable.ic_camera),
-                                        contentDescription = "Scan QR Icon",
+                                        contentDescription = stringResource(R.string.scan_qr_icon),
                                     )
                                 }
                             }
@@ -274,12 +276,19 @@ internal fun SendScreen(navController: NavHostController, walletViewModel: Walle
                         steps = 6
                     )
                     Text(text = sliderPosition.toString().take(3))
+                    val amountErrorMessage = stringResource(R.string.amount_error_message)
+                    val addressErrorMessage = stringResource(R.string.address_error_message)
+                    val feeRateErrorMessage = stringResource(R.string.fee_rate_error_message)
+
                     Button(
                         onClick = {
                             val inputsAreValid = verifyInputs(
                                 recipientAddress.value,
                                 amount.value,
                                 feeRate.value,
+                                amountErrorMessage,
+                                addressErrorMessage,
+                                feeRateErrorMessage,
                                 coroutineScope,
                                 bottomSheetScaffoldState
                             )
@@ -366,7 +375,7 @@ fun TransactionConfirmation(
             horizontalArrangement = Arrangement.Center
         ) {
             Text(
-                text = "Confirm Transaction",
+                text = stringResource(R.string.confirm_transaction),
                 style = PadawanTypography.headlineLarge,
                 fontSize = 24.sp,
             )
@@ -378,7 +387,7 @@ fun TransactionConfirmation(
             horizontalArrangement = Arrangement.Start
         ) {
             Text(
-                text = "Amount",
+                text = stringResource(id = R.string.amount_2),
                 style = PadawanTypography.headlineSmall,
                 fontSize = 20.sp,
             )
@@ -386,8 +395,9 @@ fun TransactionConfirmation(
         Row(
             Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Start
         ) {
+            val amountText = "${amount.value} satoshis"
             Text(
-                text = "${amount.value} satoshis",
+                text = amountText,
                 // text = "${txBuilderResult.value?.transactionDetails?.sent ?: 0}",
                 fontSize = 16.sp,
             )
@@ -399,7 +409,7 @@ fun TransactionConfirmation(
             horizontalArrangement = Arrangement.Start
         ) {
             Text(
-                text = "Address",
+                text = stringResource(id = R.string.address),
                 style = PadawanTypography.headlineSmall,
                 fontSize = 20.sp,
             )
@@ -433,6 +443,8 @@ fun TransactionConfirmation(
             )
         }
 
+        val snackbarMessage = stringResource(R.string.your_device_is_not_connected_to_the_internet)
+
         Button(
             onClick = {
                 val psbt = txBuilderResult.value?.psbt ?: throw Exception()
@@ -440,7 +452,7 @@ fun TransactionConfirmation(
                 if (!viewModel.isOnlineVariable.value) {
                     scope.launch {
                          scaffoldState.snackbarHostState.showSnackbar(
-                            "Your device is not connected to the internet!",
+                            message = snackbarMessage,
                             duration = SnackbarDuration.Short
                         )
                     }
@@ -468,7 +480,7 @@ fun TransactionConfirmation(
                 modifier = Modifier.padding(vertical = 4.dp)
             ) {
                 Text(
-                    text = "Confirm and broadcast", color = Color(0xff000000)
+                    text = stringResource(R.string.confirm_and_broadcast), color = Color(0xff000000)
                 )
             }
         }
@@ -480,22 +492,24 @@ fun verifyInputs(
     recipientAddress: String,
     amount: String,
     feeRate: String,
+    amountErrorMessage: String,
+    addressErrorMessage: String,
+    feeRateErrorMessage: String,
     scope: CoroutineScope,
     bottomSheetScaffoldState: BottomSheetScaffoldState,
 ): Boolean {
     if (amount.isBlank()) {
         scope.launch {
             bottomSheetScaffoldState.snackbarHostState.showSnackbar(
-                message = "Amount is missing!", duration = SnackbarDuration.Short
+                message = amountErrorMessage, duration = SnackbarDuration.Short
             )
         }
         return false
     }
     if (recipientAddress.isBlank()) {
         scope.launch {
-            Log.i(TAG, "Showing snackbar for missing address")
             bottomSheetScaffoldState.snackbarHostState.showSnackbar(
-                message = "Address is missing!", duration = SnackbarDuration.Short
+                message = addressErrorMessage, duration = SnackbarDuration.Short
             )
         }
         return false
@@ -503,7 +517,7 @@ fun verifyInputs(
     if (feeRate.isBlank()) {
         scope.launch {
             bottomSheetScaffoldState.snackbarHostState.showSnackbar(
-                message = "Fee Rate is missing!", duration = SnackbarDuration.Short
+                message = feeRateErrorMessage, duration = SnackbarDuration.Short
             )
         }
         return false

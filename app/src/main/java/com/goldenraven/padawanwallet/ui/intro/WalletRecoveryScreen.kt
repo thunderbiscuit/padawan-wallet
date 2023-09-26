@@ -120,14 +120,14 @@ internal fun WalletRecoveryScreen(onBuildWalletButtonClicked: (WalletCreateType)
                     }
             ) {
                 Text(
-                    text = "Recover a wallet",
+                    text = stringResource(R.string.recover_a_wallet),
                     style = PadawanTypography.headlineSmall,
                     color = Color(0xff1f0208),
                     modifier = Modifier
                         .padding(start = 24.dp, end = 24.dp, bottom = 8.dp)
                 )
                 Text(
-                    text = "Enter your 12-word recovery phrase below.",
+                    text = stringResource(R.string.enter_your_12_words),
                     style = PadawanTypography.bodyMedium,
                     color = Color(0xff787878),
                     modifier = Modifier

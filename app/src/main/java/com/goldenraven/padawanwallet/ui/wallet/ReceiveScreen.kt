@@ -102,7 +102,7 @@ internal fun ReceiveScreen(
                         end.linkTo(parent.end)
                     }
             ) {
-                PadawanAppBar(navController = navController, title = "Receive bitcoin")
+                PadawanAppBar(navController = navController, title = stringResource(R.string.receive_bitcoin))
             }
 
             Column(
@@ -126,7 +126,7 @@ internal fun ReceiveScreen(
                     QR?.let {
                         Image(
                             bitmap = it,
-                            contentDescription = "QR Code",
+                            contentDescription = stringResource(R.string.qr_code),
                             Modifier
                                 .size(250.dp)
                                 .clickable {

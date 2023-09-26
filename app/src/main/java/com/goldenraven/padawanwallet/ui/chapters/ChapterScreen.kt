@@ -262,7 +262,7 @@ internal fun ChapterAppBar(navController: NavHostController) {
         ) {
             Icon(
                 painter = painterResource(id = R.drawable.ic_drag_left),
-                contentDescription = "Back Icon",
+                contentDescription = stringResource(R.string.back_icon),
                 tint = padawan_theme_onPrimary
             )
         }
@@ -346,7 +346,7 @@ internal fun ChapterPage(chapterPages: List<Page>, currentPage: MutableState<Int
                     ) {
                         Image(
                             painter = painterResource(id = element.resourceId),
-                            contentDescription = "image"
+                            contentDescription = stringResource(R.string.image)
                         )
                     }
                 }
