@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="C5_title">What are transaction fees?</string>
-    <string name="C5_tagline">Transactions have fees? What? How? To who?</string>
+    <string name="C5_title">¿Qué son las comisiones de transacción?</string>
+    <string name="C5_tagline">¿Las transacciones tienen comisión? ¿Qué? ¿Cómo? ¿A quién se paga?</string>
 
-    <string name="t5_p1">Now you know a little bit more about transactions. There are many, many transactions being sent, validated, confirmed, and stored in the bitcoin network every minute of every day. This is a very costly affair.</string>
-    <string name="t5_p2">The bitcoin network can only keep up with so much demand on the system. To make sure the load on the network stays light and lean, there is a limited capacity for the total amount of bytes that can be transacted over the network per amount of time.</string>
+    <string name="t5_p1">Ahora ya sabes un poco más sobre las transacciones. Muchas, muchas transacciones son enviadas, validadas, confirmadas y almacenadas en la red de bitcoin cada minuto de cada día. Lo que es algo muy costoso.</string>
+    <string name="t5_p2">La red de bitcoin solo puede hacer frente a una demanda limitada del sistema. Para asegurarse de que la carga de la red se mantiene pequeña y ligera, hay una capacidad limitada en cuanto a la cantidad total de bytes que se pueden transaccionar a través de la red en una determinada cantidad de tiempo.</string>
 
-    <string name="t5_h1">Bidding using transaction fees</string>
-    <string name="t5_p3">Because the space is limited in terms of bytes per block and there is only 1 new block being mined every 10 minutes or so, bitcoin users compete for space on the blockchain by providing a fee for their transaction.</string>
-    <string name="t5_p4">The transactions with the highest fees are prioritized by the miners when building blocks.</string>
+    <string name="t5_h1">La puja en las comisiones de las transacciones</string>
+    <string name="t5_p3">Como el espacio es limitado en términos de bytes por bloque y solo se mina un bloque aproximadamente cada 10 minutos, los usuarios de bitcoin compiten por el espacio en la cadena de bloques al proporcionar una comisión por sus transacciones.</string>
+    <string name="t5_p4">Las transacciones con las comisiones más altas son las que tienen prioridad a la hora de construir nuevos bloques.</string>
 
-    <string name="t5_h2">Why does the network need a light load?</string>
-    <string name="t5_p5">One of the main advantages of the bitcoin network is its ability to stay synchronized and distributed across many computers linked to the network all over the world. The lighter and leaner the load on the network, the more resistant it is to attacks, and the more neutral and robust it stays so that all can benefit from its availability and robustness.</string>
+    <string name="t5_h2">¿Por qué la red necesita que la carga sea ligera?</string>
+    <string name="t5_p5">Una de las principales ventajas de la red de bitcoin es su habilidad para estar sincronizada y ser distribuida a través de muchos ordenadores conectados a la red por todo el mundo. Cuanto más pequeña y ligera sea la carga de la red, más resistente será frente a ataques, y cuanto más neutral y robusta se mantenga, más nos podremos beneficiar de su disponibilidad y robustez.</string>
 </resources>
