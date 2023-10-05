@@ -20,6 +20,7 @@ android {
     buildFeatures {
         viewBinding = true
         compose = true
+        buildConfig = true
     }
 
     defaultConfig {
@@ -39,6 +40,13 @@ android {
         buildConfigField("String", "FAUCET_USERNAME", faucetUsername)
         buildConfigField("String", "FAUCET_PASSWORD", faucetPassword)
     }
+
+    androidResources {
+        generateLocaleConfig = true
+    }
+
+    // TODO: Look into the R8 aggressive shrinking
+    //       https://developer.android.com/build/releases/past-releases/agp-8-0-0-release-notes
 
     buildTypes {
         getByName("debug") {
@@ -70,12 +78,12 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
 
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "17"
     }
 
     composeOptions {
