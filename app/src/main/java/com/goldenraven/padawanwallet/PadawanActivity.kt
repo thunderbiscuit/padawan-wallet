@@ -6,14 +6,19 @@
 package com.goldenraven.padawanwallet
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.os.LocaleListCompat
 import com.goldenraven.padawanwallet.data.WalletRepository
 import com.goldenraven.padawanwallet.data.Wallet
 import com.goldenraven.padawanwallet.ui.intro.IntroNavigation
 import com.goldenraven.padawanwallet.theme.PadawanTheme
 import com.goldenraven.padawanwallet.ui.HomeNavigation
+import com.goldenraven.padawanwallet.ui.settings.SupportedLanguage
 import com.goldenraven.padawanwallet.utils.SnackbarLevel
 import com.goldenraven.padawanwallet.utils.fireSnackbar
 
@@ -22,7 +27,6 @@ private const val TAG = "PadawanActivity"
 class PadawanActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         // ask the repository if a wallet already exists
         // if so, load it and launch into wallet activity, otherwise go to intro
         if (WalletRepository.doesWalletExist()) {
@@ -66,6 +70,34 @@ class PadawanActivity : AppCompatActivity() {
                     IntroNavigation(onBuildWalletButtonClicked)
                 }
             }
+        }
+
+        // TODO: This feels hacky but the AppCompatDelegate.getApplicationLocales() API returns an
+        //       an empty list if it hasn't been set manually. We also cannot set it directly inside
+        //       the onCreate() method, and so we need to schedule it to run right after onCreate().
+
+        // Languages: We check if the language has been manually set in the app (shared preferences)
+        // and if it has not we use the system default language.
+        Handler(Looper.getMainLooper()).post {
+            setLanguage()
+        }
+    }
+
+}
+
+fun setLanguage() {
+    val preferredLanguage: SupportedLanguage? = WalletRepository.getPreferredLanguage()
+    when (preferredLanguage) {
+        null -> {}
+        SupportedLanguage.ENGLISH -> {
+            Log.i(TAG, "Setting the language to English")
+            val appLocale: LocaleListCompat = LocaleListCompat.forLanguageTags("en-US")
+            AppCompatDelegate.setApplicationLocales(appLocale)
+        }
+        SupportedLanguage.SPANISH -> {
+            Log.i(TAG, "Setting the language to Spanish")
+            val appLocale: LocaleListCompat = LocaleListCompat.forLanguageTags("es-ES")
+            AppCompatDelegate.setApplicationLocales(appLocale)
         }
     }
 }
