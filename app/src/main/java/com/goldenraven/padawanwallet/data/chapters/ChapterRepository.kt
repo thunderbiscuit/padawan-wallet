@@ -16,7 +16,7 @@ class ChapterRepository(private val chapterDao: ChapterDao) {
     val readAllData: Flow<List<Chapter>> = chapterDao.readAllChapters()
 
     internal suspend fun getChapter(id: Int): Chapter {
-        Log.i(TAG, "Querying for chapter $id")
+        // Log.i(TAG, "Querying for chapter $id")
         return chapterDao.getChapter(id = id)
     }
 
@@ -40,7 +40,7 @@ class ChapterRepository(private val chapterDao: ChapterDao) {
         runBlocking {
             initialChapterList.forEach {
                 addChapter(chapter = it)
-                Log.i(TAG, "Loading initial chapter ${it.id}")
+                // Log.i(TAG, "Loading initial chapter ${it.id}")
             }
         }
     }

@@ -22,6 +22,7 @@ import com.goldenraven.padawanwallet.ui.settings.SendCoinsBackScreen
 import com.goldenraven.padawanwallet.ui.settings.SettingsRootScreen
 import com.goldenraven.padawanwallet.ui.chapters.ChaptersRootScreen
 import com.goldenraven.padawanwallet.ui.chapters.ChaptersViewModel
+import com.goldenraven.padawanwallet.ui.settings.LanguagesScreen
 import com.google.accompanist.navigation.animation.AnimatedNavHost
 import com.google.accompanist.navigation.animation.composable
 
@@ -238,7 +239,7 @@ fun WalletNavigation(
 
 
         // Settings
-        val settingsScreens: List<String> = listOf("about_screen", "recovery_phrase_screen", "send_coins_back_screen")
+        val settingsScreens: List<String> = listOf("about_screen", "recovery_phrase_screen", "send_coins_back_screen", "languages_screen")
         composable(
             route = Screen.SettingsRootScreen.route,
             enterTransition = {
@@ -320,5 +321,22 @@ fun WalletNavigation(
                 slideOutOfContainer(AnimatedContentScope.SlideDirection.Down, animationSpec = tween(animationDuration))
             }
         ) { SendCoinsBackScreen(navController = navControllerWalletNavigation) }
+
+        // Language
+        composable(
+            route = Screen.LanguagesScreen.route,
+            enterTransition = {
+                slideIntoContainer(AnimatedContentScope.SlideDirection.Up, animationSpec = tween(animationDuration))
+            },
+            popEnterTransition = {
+                slideIntoContainer(AnimatedContentScope.SlideDirection.Up, animationSpec = tween(animationDuration))
+            },
+            exitTransition = {
+                slideOutOfContainer(AnimatedContentScope.SlideDirection.Down, animationSpec = tween(animationDuration))
+            },
+            popExitTransition = {
+                slideOutOfContainer(AnimatedContentScope.SlideDirection.Down, animationSpec = tween(animationDuration))
+            }
+        ) { LanguagesScreen(navController = navControllerWalletNavigation) }
     }
 }

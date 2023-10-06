@@ -43,6 +43,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Devices
@@ -120,7 +121,7 @@ internal fun PadawanAppBar(navController: NavHostController, title: String) {
             ) {
                 Icon(
                     painter = painterResource(id = R.drawable.ic_back),
-                    contentDescription = "Back Icon",
+                    contentDescription = stringResource(id = R.string.back_icon),
                     tint = padawan_theme_onPrimary
                 )
             }
@@ -171,7 +172,7 @@ fun ConnectivityStatus(isConnected: Boolean) {
 @Composable
 fun ConnectivityStatusBox(isConnected: Boolean) {
     val backgroundColor by animateColorAsState(if (isConnected) connection_available else connection_unavailable)
-    val message = if (isConnected) "Back Online!" else "No Internet Connection!"
+    val message = if (isConnected) stringResource(R.string.back_online) else stringResource(R.string.no_internet_connection)
     val iconResource = if (isConnected) {
         R.drawable.ic_connectivity_available
     } else {
@@ -186,7 +187,7 @@ fun ConnectivityStatusBox(isConnected: Boolean) {
         contentAlignment = Alignment.Center
     ) {
         Row(verticalAlignment = Alignment.CenterVertically) {
-            Icon(painterResource(id = iconResource), "Connectivity Icon", tint = Color.White)
+            Icon(painterResource(id = iconResource), stringResource(R.string.connectivity_icon), tint = Color.White)
             Spacer(modifier = Modifier.size(8.dp))
             Text(message, color = Color.White, fontSize = 15.sp)
         }
@@ -233,7 +234,7 @@ fun LoadingAnimation(
                 modifier = Modifier
                     .size(size = circleSize)
                     .clip(shape = CircleShape)
-                    .background(circleColor.copy(alpha = animatable.value)                    )
+                    .background(circleColor.copy(alpha = animatable.value))
             )
         }
     }

@@ -140,7 +140,7 @@ internal fun TransactionScreen(
                         Icon(
                             painter = if (isPayment) painterResource(id = R.drawable.ic_send_secondary) else painterResource(id = R.drawable.ic_receive_secondary),
                             tint = padawan_disabled,
-                            contentDescription = if (isPayment) "Send Icon" else "Receive Icon",
+                            contentDescription = if (isPayment) stringResource(R.string.send_icon) else stringResource(R.string.receive_icon),
                             modifier = Modifier
                                 .align(Alignment.CenterVertically)
                                 .scale(scale = 0.75f)
@@ -177,7 +177,7 @@ internal fun TransactionScreen(
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 Text(
-                    text = "Block:",
+                    text = stringResource(R.string.block),
                     style = PadawanTypography.titleSmall,
                 )
                 Text("${transaction!!.confirmationTime?.height ?: stringResource(id = R.string.pending)}")

@@ -18,6 +18,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.goldenraven.padawanwallet.BuildConfig
+import com.goldenraven.padawanwallet.R
 import com.goldenraven.padawanwallet.data.Wallet
 import com.goldenraven.padawanwallet.data.WalletRepository
 import com.goldenraven.padawanwallet.data.tx.Tx
@@ -152,21 +153,25 @@ class WalletViewModel(
 
     // Refreshing & Syncing
     fun refresh(context: Context) {
+        val pendingString = context.getString(R.string.pending)
         if (isOnlineVariable.value == true) {
             if (!Wallet.blockchainIsInitialized()) { Wallet.createBlockchain() }
             viewModelScope.launch(Dispatchers.IO) {
                 _isRefreshing.value = true
                 updateBalance()
-                syncTransactionHistory()
+                syncTransactionHistory(pendingString)
             }.invokeOnCompletion {
                  _isRefreshing.value = false
             }
         } else {
-            Toast.makeText(context, "No Internet Access!", Toast.LENGTH_LONG).show()
+            Toast.makeText(
+                context,
+                context.getString(R.string.no_internet_access), Toast.LENGTH_LONG
+            ).show()
         }
     }
 
-    private fun syncTransactionHistory() {
+    private fun syncTransactionHistory(pendingString: String) {
         val txHistory = Wallet.listTransactions()
         Log.i(TAG,"Transactions history, number of transactions: ${txHistory.size}")
 
@@ -193,8 +198,8 @@ class WalletViewModel(
                 }
             }
             val time: String = when (tx.confirmationTime) {
-                null -> "Pending"
-                else -> tx.confirmationTime?.timestamp?.timestampToString() ?: "Pending"
+                null -> pendingString
+                else -> tx.confirmationTime?.timestamp?.timestampToString() ?: pendingString
             }
             val height: UInt = when (tx.confirmationTime) {
                 null -> 100_000_000u
@@ -252,11 +257,12 @@ class WalletViewModel(
     fun broadcastTransaction(
         psbt: PartiallySignedTransaction,
         snackbarHostState: SnackbarHostState,
+        successMessage: String
     ) {
             val snackbarMsg: String = try {
                 Wallet.sign(psbt)
                 Wallet.broadcast(psbt)
-                "Transaction was broadcast successfully"
+                successMessage
             } catch (e: Throwable) {
                 Log.i(TAG, "Broadcast error: ${e.message}")
                 "Error: ${e.message}"

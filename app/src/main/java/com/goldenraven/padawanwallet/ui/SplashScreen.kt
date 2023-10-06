@@ -16,6 +16,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.goldenraven.padawanwallet.R
@@ -48,7 +49,7 @@ internal fun SplashScreen(navController: NavController, moveToIntro: Boolean) {
     ) {
         Image(
             painter = painterResource(id = R.drawable.ic_padawan_colour_foreground),
-            contentDescription = "Padawan Logo",
+            contentDescription = stringResource(id = R.string.padawan_logo),
             Modifier.size(200.dp)
         )
     }

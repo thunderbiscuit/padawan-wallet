@@ -444,6 +444,7 @@ fun TransactionConfirmation(
         }
 
         val snackbarMessage = stringResource(R.string.your_device_is_not_connected_to_the_internet)
+        val txBroadcastSuccess = stringResource(R.string.transaction_was_broadcast_successfully)
 
         Button(
             onClick = {
@@ -458,7 +459,9 @@ fun TransactionConfirmation(
                     }
                 } else {
                     viewModel.broadcastTransaction(
-                        psbt, scaffoldState.snackbarHostState
+                        psbt,
+                        scaffoldState.snackbarHostState,
+                        txBroadcastSuccess
                     )
                     navController.popBackStack()
                 }
@@ -501,7 +504,8 @@ fun verifyInputs(
     if (amount.isBlank()) {
         scope.launch {
             bottomSheetScaffoldState.snackbarHostState.showSnackbar(
-                message = amountErrorMessage, duration = SnackbarDuration.Short
+                message = amountErrorMessage,
+                duration = SnackbarDuration.Short
             )
         }
         return false
@@ -509,7 +513,8 @@ fun verifyInputs(
     if (recipientAddress.isBlank()) {
         scope.launch {
             bottomSheetScaffoldState.snackbarHostState.showSnackbar(
-                message = addressErrorMessage, duration = SnackbarDuration.Short
+                message = addressErrorMessage,
+                duration = SnackbarDuration.Short
             )
         }
         return false
@@ -517,20 +522,22 @@ fun verifyInputs(
     if (feeRate.isBlank()) {
         scope.launch {
             bottomSheetScaffoldState.snackbarHostState.showSnackbar(
-                message = feeRateErrorMessage, duration = SnackbarDuration.Short
-            )
-        }
-        return false
-    }
-    if (feeRate.toFloat() < 1 || feeRate.toFloat() > 100) {
-        scope.launch {
-            bottomSheetScaffoldState.snackbarHostState.showSnackbar(
-                message = "Please input a fee rate between 1 and 100",
+                message = feeRateErrorMessage,
                 duration = SnackbarDuration.Short
             )
         }
         return false
     }
+    // TODO: I don't think this is possible anymore given the slider.
+    // if (feeRate.toFloat() < 1 || feeRate.toFloat() > 100) {
+    //     scope.launch {
+    //         bottomSheetScaffoldState.snackbarHostState.showSnackbar(
+    //             message = "Please input a fee rate between 1 and 100",
+    //             duration = SnackbarDuration.Short
+    //         )
+    //     }
+    //     return false
+    // }
     Log.i(TAG, "Inputs are valid")
     return true
 }

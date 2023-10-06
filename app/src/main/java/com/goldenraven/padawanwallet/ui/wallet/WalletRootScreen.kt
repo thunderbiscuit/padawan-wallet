@@ -115,7 +115,7 @@ fun NoNetworkBanner(walletViewModel: WalletViewModel, context: Context) {
             verticalAlignment = Alignment.CenterVertically,
         ) {
             Text(
-                text = "Currently unable to access network",
+                text = stringResource(R.string.currently_unable_to_access_network),
                 fontSize = fontSize
             )
         }
@@ -145,7 +145,7 @@ fun BalanceBox(
             val (cardName, currencyToggle, balanceText, currencyText, buttonRow) = createRefs()
             val currencyToggleState = remember { mutableStateOf(value = true) }
             Text(
-                text = "bitcoin testnet",
+                text = stringResource(R.string.bitcoin_testnet),
                 style = PadawanTypography.bodyMedium,
                 color = padawan_theme_text_faded,
                 modifier = Modifier.constrainAs(cardName) {
@@ -292,7 +292,10 @@ fun SendReceive(navController: NavHostController) {
                     style = PadawanTypography.labelLarge,
                 )
                 if (screenSizeWidth == ScreenSizeWidth.Phone) {
-                    Icon(painter = painterResource(id = R.drawable.ic_receive), contentDescription = "Receive Icon")
+                    Icon(
+                        painter = painterResource(id = R.drawable.ic_receive),
+                        contentDescription = stringResource(id = R.string.receive_icon)
+                    )
                 }
             }
         }
@@ -313,7 +316,10 @@ fun SendReceive(navController: NavHostController) {
                     style = PadawanTypography.labelLarge,
                 )
                 if (screenSizeWidth == ScreenSizeWidth.Phone) {
-                    Icon(painter = painterResource(id = R.drawable.ic_send), contentDescription = "Send Icon")
+                    Icon(
+                        painter = painterResource(id = R.drawable.ic_send,),
+                        contentDescription = stringResource(id = R.string.send_icon),
+                    )
                 }
             }
         }
@@ -328,7 +334,7 @@ fun TransactionListBox(
 ) {
     Row(modifier = Modifier.padding(top = 24.dp, bottom = 8.dp)) {
         Text(
-            text = "Transactions",
+            text = stringResource(id = R.string.transactions),
             style = PadawanTypography.headlineSmall,
             textAlign = TextAlign.Start,
             modifier = Modifier
@@ -357,7 +363,7 @@ fun TransactionListBox(
                     modifier = Modifier.verticalScroll(state = scrollState)
                 ) {
                     Text(
-                        text = "Hey! It looks like your transaction list is empty. Take a look around, and come back to get some coins so you can start playing with the wallet!",
+                        text = stringResource(R.string.looks_like_your_transaction_list_is_empty),
                         style = PadawanTypography.bodyMedium,
                         modifier = Modifier.padding(all = 8.dp)
                     )
@@ -372,7 +378,10 @@ fun TransactionListBox(
                     ) {
                         Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.padding(vertical = 8.dp)) {
                             Text(text = "Get coins", style = PadawanTypography.bodyMedium)
-                            Icon(painter = painterResource(id = R.drawable.ic_receive_secondary), contentDescription = "Get Coins Icon")
+                            Icon(
+                                painter = painterResource(id = R.drawable.ic_receive_secondary),
+                                contentDescription = stringResource(R.string.get_coins_icon)
+                            )
                         }
                     }
                 }
@@ -430,7 +439,7 @@ fun TransactionListBox(
                                         )
                                 ) {
                                     Text(
-                                        text = if (tx.isPayment) "Sent" else "Receive",
+                                        text = if (tx.isPayment) stringResource(id = R.string.sent) else stringResource(id = R.string.received),
                                         style = PadawanTypography.bodySmall,
                                         modifier = Modifier
                                             .align(Alignment.CenterVertically)
@@ -439,7 +448,7 @@ fun TransactionListBox(
                                     Icon(
                                         painter = if (tx.isPayment) painterResource(id = R.drawable.ic_send_secondary) else painterResource(id = R.drawable.ic_receive_secondary),
                                         tint = padawan_disabled,
-                                        contentDescription = if (tx.isPayment) "Send Icon" else "Receive Icon",
+                                        contentDescription = if (tx.isPayment) stringResource(id = R.string.send_icon) else stringResource(id = R.string.receive_icon),
                                         modifier = Modifier
                                             .align(Alignment.CenterVertically)
                                             .scale(scale = 0.75f)
@@ -465,11 +474,12 @@ fun CurrencyToggleText(currencyToggleState: MutableState<Boolean>, text: Currenc
     val currencyState = (!currencyToggleState.value && text == CurrencyType.BTC) || (currencyToggleState.value && text == CurrencyType.SATS)
 
     val colorTransition = updateTransition(
-        if (currencyState) padawan_theme_onBackground_faded else padawan_theme_onPrimary, label = "Currency Toggle Text"
+        targetState = if (currencyState) padawan_theme_onBackground_faded else padawan_theme_onPrimary,
+        label = stringResource(R.string.currency_toggle_text)
     )
     val color by colorTransition.animateColor(
         transitionSpec = { tween(durationMillis = 500) },
-        label = "Changing Color Animation",
+        label = stringResource(R.string.changing_color_animation),
     ) {
         if (it == padawan_theme_onBackground_faded) padawan_theme_onPrimary else padawan_theme_onBackground_faded
     }
@@ -489,14 +499,14 @@ private fun FaucetDialog(walletViewModel: WalletViewModel) {
         onDismissRequest = {},
         title = {
             Text(
-                text = "Hello there!",
+                text = stringResource(R.string.hello_there),
                 style = PadawanTypography.headlineMedium,
                 color = padawan_theme_text_headline
             )
         },
         text = {
             Text(
-                text = "To help you get started learning about bitcoin, Padawan Wallet can send you some coins so you can follow along the chapters and and send them around to friends!\nWould you like to receive some testnet bitcoin?",
+                text = stringResource(R.string.would_you_like_to_receive_some_testnet_bitcoin),
                 fontSize = 18.sp,
                 lineHeight = 24.sp,
                 color = padawan_theme_text_faded_secondary
@@ -531,7 +541,7 @@ private fun FaucetDialog(walletViewModel: WalletViewModel) {
                     // Spacer(modifier = Modifier.width(8.dp))
                     Icon(
                         painter = painterResource(id = R.drawable.ic_hicon_dislike),
-                        contentDescription = "No thank you icon",
+                        contentDescription = stringResource(R.string.no_thank_you_icon),
                         tint = Color(0xff000000)
                     )
                 }
@@ -567,7 +577,7 @@ private fun FaucetDialog(walletViewModel: WalletViewModel) {
                     // Spacer(modifier = Modifier.width(8.dp))
                     Icon(
                         painter = painterResource(id = R.drawable.ic_hicon_like),
-                        contentDescription = "Proceed icon",
+                        contentDescription = stringResource(R.string.proceed_icon),
                         tint = Color(0xff000000)
                     )
                 }

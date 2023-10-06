@@ -135,6 +135,31 @@ internal fun SettingsRootScreen(
 
             Button(
                 onClick = {
+                    navController.navigate(Screen.LanguagesScreen.route)
+                },
+                colors = ButtonDefaults.buttonColors(containerColor = Color(0xffffffff)),
+                shape = RoundedCornerShape(8.dp),
+                border = BorderStroke(1.dp, Color(0xff2f2f2f)),
+                modifier = Modifier
+                    .size(width = 400.dp, height = 80.dp)
+                    .padding(start = 24.dp, end = 24.dp, top = 24.dp)
+            ) {
+                Text(
+                    text = "Change language",
+                    fontWeight = FontWeight.Normal,
+                    color = Color(0xff2f2f2f)
+
+                )
+                Spacer(modifier = Modifier.weight(1f))
+                Icon(
+                    painter = painterResource(id = R.drawable.ic_hicon_right_2),
+                    contentDescription = stringResource(id = R.string.scan_icon),
+                    tint = Color(0xff2f2f2f)
+                )
+            }
+
+            Button(
+                onClick = {
                     navController.navigate(Screen.AboutScreen.route)
                 },
                 colors = ButtonDefaults.buttonColors(containerColor = Color(0xffffffff)),

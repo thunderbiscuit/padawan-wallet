@@ -28,6 +28,7 @@ sealed class Screen(val route: String) {
     // Settings screens
     object SettingsRootScreen : Screen("settings_root_screen")
     object AboutScreen : Screen("about_screen")
+    object LanguagesScreen : Screen("languages_screen")
     object RecoveryPhraseScreen : Screen("recovery_phrase_screen")
     object SendCoinsBackScreen : Screen("send_coins_back_screen")
 }

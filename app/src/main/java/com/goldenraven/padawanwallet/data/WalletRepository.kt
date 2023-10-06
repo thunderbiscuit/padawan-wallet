@@ -7,6 +7,7 @@ package com.goldenraven.padawanwallet.data
 
 import android.content.SharedPreferences
 import android.util.Log
+import com.goldenraven.padawanwallet.ui.settings.SupportedLanguage
 import com.goldenraven.padawanwallet.utils.RequiredInitialWalletData
 
 private const val TAG = "Repository"
@@ -16,6 +17,23 @@ object WalletRepository {
     private lateinit var sharedPreferences: SharedPreferences
     fun setSharedPreferences(sharedPref: SharedPreferences) {
         sharedPreferences = sharedPref
+    }
+
+    fun getPreferredLanguage(): SupportedLanguage? {
+        val preferredLanguage = sharedPreferences.getString("language", null)?.let {
+            when (it) {
+                SupportedLanguage.ENGLISH.name -> SupportedLanguage.ENGLISH
+                SupportedLanguage.SPANISH.name -> SupportedLanguage.SPANISH
+                else -> null
+            }
+        }
+        Log.i(TAG, "Preferred language is set in shared preferences to be: ${preferredLanguage?.name}")
+        return preferredLanguage
+    }
+
+    fun setPreferredLanguage(language: SupportedLanguage) {
+        Log.i(TAG, "Setting preferred language to: ${language.name}")
+        sharedPreferences.edit().putString("language", language.name).apply()
     }
 
     fun doesWalletExist(): Boolean {
