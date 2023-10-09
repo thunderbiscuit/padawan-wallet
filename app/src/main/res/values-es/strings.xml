@@ -119,7 +119,7 @@
     <string name="send_your_coins_back_to_us">¡Envianos tus monedas de vuelta!</string>
     <string name="return_sats_faucet_address_image">Return sats faucet address image</string>
     <string name="settings">Ajustes</string>
-    <string name="everything_else">A collection of everything else you need in the app.</string>
+    <string name="everything_else">El resto de cosas que necesitarás de la aplicación.</string>
     <string name="recovery_phrase">Palabras de recuperación</string>
     <string name="scan_icon">Scan icon</string>
     <string name="send_testnet_coins_back">Enviar monedas testnet de vuelta</string>
@@ -142,7 +142,7 @@
     <string name="send_icon">Send icon</string>
     <string name="receive_icon">Receive icon</string>
     <string name="block">Bloque:</string>
-    <string name="currently_unable_to_access_network">ctualmente no se puede acceder a la red</string>
+    <string name="currently_unable_to_access_network">Actualmente no se puede acceder a la red</string>
     <string name="bitcoin_testnet">bitcoin testnet</string>
     <string name="looks_like_your_transaction_list_is_empty">¡Oye! Parece que tu lista de transacciones está vacía. Echa un vistazo y vuelve para conseguir algunas monedas, ¡para que puedas comenzar a jugar con la cartera!</string>
     <string name="get_coins_icon">Get coins icon</string>
