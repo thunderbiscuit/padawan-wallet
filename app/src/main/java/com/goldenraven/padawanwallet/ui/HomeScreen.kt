@@ -23,12 +23,14 @@ import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
+import com.goldenraven.padawanwallet.R
 import com.goldenraven.padawanwallet.theme.PadawanTypography
 import com.goldenraven.padawanwallet.theme.padawan_theme_background_secondary
 import com.goldenraven.padawanwallet.theme.padawan_theme_button_primary
@@ -63,9 +65,9 @@ internal fun BottomNavigationBar(
 ) {
     var selectedItem by remember { mutableStateOf(0) }
     val items = listOf(
-        NavigationItem.Home,
-        NavigationItem.Chapters,
-        NavigationItem.Settings
+        NavigationItem.Home(title = stringResource(id = R.string.bottom_nav_wallet)),
+        NavigationItem.Chapters(title = stringResource(id = R.string.bottom_nav_chapters)),
+        NavigationItem.Settings(title = stringResource(id = R.string.bottom_nav_settings))
     )
 
     SystemBars()

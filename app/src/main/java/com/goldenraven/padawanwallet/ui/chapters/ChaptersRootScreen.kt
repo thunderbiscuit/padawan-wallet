@@ -5,7 +5,6 @@
 
 package com.goldenraven.padawanwallet.ui.chapters
 
-import android.content.Context
 import android.util.Log
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
@@ -44,6 +43,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
@@ -272,6 +272,11 @@ fun ChapterId(chapterData: Chapter) {
 
 @Composable
 fun ChapterTitle(chapterData: Chapter) {
+    // TODO: I assume there is a better way to do this
+    val resources = LocalContext.current.resources
+    val name = "C${chapterData.id}_title"
+    val chapterTitleResourceId = resources.getIdentifier(name, "string", LocalContext.current.packageName)
+
     Box(
         modifier = Modifier
             .fillMaxWidth()
@@ -279,7 +284,7 @@ fun ChapterTitle(chapterData: Chapter) {
             .padding(horizontal = 32.dp)
     ) {
         Text(
-            text = chapterData.title,
+            text = stringResource(id = chapterTitleResourceId),
             style = PadawanTypography.headlineSmall,
             fontSize = 20.sp,
             modifier = Modifier.align(alignment = Alignment.CenterStart)

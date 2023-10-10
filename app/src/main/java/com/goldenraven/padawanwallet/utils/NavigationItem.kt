@@ -9,23 +9,24 @@ import com.goldenraven.padawanwallet.R
 import com.goldenraven.padawanwallet.ui.Screen
 
 sealed class NavigationItem(val route: String, val iconOutline: Int, val title: String, val group: Set<String>) {
-    object Home : NavigationItem(
+    class Home(title: String) : NavigationItem(
         route = Screen.WalletRootScreen.route,
         iconOutline = R.drawable.ic_hicon_wallet,
-        title = "Wallet",
+        title = title,
         group = setOf("wallet_screen", "receive_screen", "send_screen", "transaction_screen/txid={txid}", "qr_scan_screen")
     )
 
-    object Chapters : NavigationItem(
+    class Chapters(title: String) : NavigationItem(
         route = Screen.ChaptersRootScreen.route,
         iconOutline = R.drawable.ic_hicon_education,
-        title = "Learn",
+        title = title,
         group = setOf("chapters_home_screen", "chapter_screen/{chapterId}")
     )
-    object Settings : NavigationItem(
+
+    class Settings(title: String) : NavigationItem(
         route = Screen.SettingsRootScreen.route,
         iconOutline = R.drawable.ic_hicon_menu,
-        title = "Menu",
+        title = title,
         group = setOf("settings_root_screen", "about_screen", "recovery_phrase_screen", "send_coins_back_screen")
     )
 }

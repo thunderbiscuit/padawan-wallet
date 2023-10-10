@@ -377,7 +377,7 @@ fun TransactionListBox(
                         border = standardBorder
                     ) {
                         Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.padding(vertical = 8.dp)) {
-                            Text(text = "Get coins", style = PadawanTypography.bodyMedium)
+                            Text(text = stringResource(R.string.get_coins), style = PadawanTypography.bodyMedium)
                             Icon(
                                 painter = painterResource(id = R.drawable.ic_receive_secondary),
                                 contentDescription = stringResource(R.string.get_coins_icon)
