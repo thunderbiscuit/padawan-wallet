@@ -145,7 +145,7 @@ internal fun SettingsRootScreen(
                     .padding(start = 24.dp, end = 24.dp, top = 24.dp)
             ) {
                 Text(
-                    text = "Change language",
+                    text = stringResource(R.string.change_language),
                     fontWeight = FontWeight.Normal,
                     color = Color(0xff2f2f2f)
 
@@ -170,7 +170,7 @@ internal fun SettingsRootScreen(
                     .padding(start = 24.dp, end = 24.dp, top = 24.dp)
             ) {
                 Text(
-                    text = "About",
+                    text = stringResource(R.string.about_padawan),
                     fontWeight = FontWeight.Normal,
                     color = Color(0xff2f2f2f)
 

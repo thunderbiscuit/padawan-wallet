@@ -112,7 +112,7 @@
     <string name="recover_a_wallet">Recover a wallet</string>
     <string name="enter_your_12_words">Enter your 12-word recovery phrase below.</string>
     <string name="about_padawan">About Padawan</string>
-    <string name="change_language">Change the Language</string>
+    <string name="change_language">Change the language</string>
     <string name="your_recovery_phrase">Your recovery phrase</string>
     <string name="checkmark_image">Checkmark image</string>
     <string name="copy_to_clipboard_image">Copy to clipboard image</string>
