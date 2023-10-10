@@ -158,5 +158,5 @@
     <string name="get_coins">Obtener monedas</string>
     <string name="bottom_nav_wallet">Cartera</string>
     <string name="bottom_nav_chapters">Aprende</string>
-    <string name="bottom_nav_settings">Ajustes</string>
+    <string name="bottom_nav_settings">Más</string>
 </resources>
