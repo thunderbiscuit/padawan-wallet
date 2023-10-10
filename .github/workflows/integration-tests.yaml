@@ -1,24 +1,8 @@
-name: Run Unit and Instrumentation Tests
+name: Run Instrumentation Tests
 
 on: [pull_request, workflow_dispatch]
 
-jobs: 
-  unit_tests:
-    name: "Run unit tests"
-    runs-on: ubuntu-22.04
-    steps:
-      - name: "Check out PR branch"
-        uses: actions/checkout@v2
-
-      - name: "Set up JDK"
-        uses: actions/setup-java@v3
-        with:
-          distribution: temurin
-          java-version: 17
-
-      - name: "Run unit tests"
-        run: ./gradlew test
-
+jobs:
   instrumentation_tests:
     name: "Run instrumentation tests"
     runs-on: macOS-13
