@@ -24,7 +24,7 @@
     <string name="send">Enviar</string>
     <string name="receive">Recibir</string>
     <string name="receive_screen_title">Recibir bitcoin de la red de pruebas (testnet)</string>
-    <string name="generate_new_address">Generar una nueva dirección</string>
+    <string name="generate_new_address">Generar una nueva\ndirección</string>
     <string name="back_to_wallet">Volver a la cartera</string>
     <string name="send_screen_title">Construir transacción (testnet)</string>
     <string name="send_to_address">Enviar a</string>

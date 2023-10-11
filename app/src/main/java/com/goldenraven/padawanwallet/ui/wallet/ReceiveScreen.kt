@@ -86,6 +86,9 @@ internal fun ReceiveScreen(
     Scaffold(
         snackbarHost = { SnackbarHost(snackbarHostState) }
     ) { paddingValues ->
+
+        PadawanAppBar(navController = navController, title = stringResource(R.string.receive_bitcoin))
+
         ConstraintLayout(
             modifier = Modifier
                 .fillMaxSize()
@@ -102,7 +105,7 @@ internal fun ReceiveScreen(
                         end.linkTo(parent.end)
                     }
             ) {
-                PadawanAppBar(navController = navController, title = stringResource(R.string.receive_bitcoin))
+                Spacer(modifier = Modifier.height(100.dp))
             }
 
             Column(
@@ -182,7 +185,7 @@ internal fun ReceiveScreen(
                         .height(100.dp)
                         .fillMaxWidth(0.9f)
                         .padding(vertical = 8.dp, horizontal = 8.dp)
-                        .standardShadow(20.dp)
+                        .standardShadow(20.dp),
                 ) {
                     Text(
                         text = stringResource(R.string.generate_a_new_address),
