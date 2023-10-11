@@ -82,9 +82,9 @@
     <string name="enter_a_bitcoin_testnet_address">Introduce una dirección de testnet de bitcoin</string>
     <string name="padawan_journey">El camino del Padawan</string>
     <string name="continue_on_your_journey">Continúa con tu camino de aprendizaje sobre bitcoin.</string>
-    <string name="getting_started">Primeros pasos</string>
-    <string name="transactions">Transacciones</string>
-    <string name="wallets">Carteras</string>
+    <string name="getting_started">\nPrimeros pasos</string>
+    <string name="transactions">\nTransacciones</string>
+    <string name="wallets">\nCarteras</string>
     <string name="chapter">Capítulo %1$s</string>
     <string name="start_chapter">Comenzar Capítulo</string>
     <string name="next">Siguiente</string>
@@ -93,13 +93,13 @@
     <string name="back_to_lessons">Volver a tutoriales</string>
     <string name="section">Sección %1$s: %2$s</string>
     <string name="transaction_details">Detalles de la transacción</string>
-    <string name="total_transaction_amount">Cantidad total de la transacción:</string>
+    <string name="total_transaction_amount">Cantidad total\nde la transacción:</string>
     <string name="transaction_type">Tipo de transacción:</string>
     <string name="sent">Enviado</string>
     <string name="received">Recibido</string>
     <string name="time">Fecha:</string>
     <string name="pending">Pendiente</string>
-    <string name="txid">Txid (identificador de la transacción):</string>
+    <string name="txid">Txid\n(identificador de\nla transacción):</string>
     <string name="fees_paid">Comisiones pagadas:</string>
     <string name="back_icon">Icono volver</string>
     <string name="image">imagen</string>
@@ -116,7 +116,7 @@
     <string name="your_recovery_phrase">Tus palabras de recuperación</string>
     <string name="checkmark_image">Imagen marca comprobación</string>
     <string name="copy_to_clipboard_image">Imagen copiado a portapapeles</string>
-    <string name="send_your_coins_back_to_us">¡Envianos tus monedas de vuelta!</string>
+    <string name="send_your_coins_back_to_us">¡Envianos tus monedas\nde vuelta!</string>
     <string name="return_sats_faucet_address_image">Imagen dirección para devolver sats</string>
     <string name="settings">Ajustes</string>
     <string name="everything_else">El resto de cosas que necesitarás de la aplicación.</string>
@@ -158,5 +158,5 @@
     <string name="get_coins">Obtener monedas</string>
     <string name="bottom_nav_wallet">Cartera</string>
     <string name="bottom_nav_chapters">Aprende</string>
-    <string name="bottom_nav_settings">Más</string>
+    <string name="bottom_nav_settings">Menú</string>
 </resources>
