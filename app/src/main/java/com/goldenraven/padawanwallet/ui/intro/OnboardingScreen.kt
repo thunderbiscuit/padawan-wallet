@@ -32,7 +32,6 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.constraintlayout.compose.ChainStyle
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.navigation.NavController
 import com.goldenraven.padawanwallet.R
@@ -132,10 +131,8 @@ internal fun SmallOnboarding(
             ) {
                 Text(
                     text = stringResource(R.string.create_a_wallet),
-                    // style = GargoyleTypography.labelLarge,
                     color = Color(0xff000000)
                 )
-                // Spacer(modifier = Modifier.width(8.dp))
             }
         }
 
@@ -176,7 +173,6 @@ internal fun PhoneOnboarding(
             .background(Color(0xffffffff))
     ) {
         val (header, body, recover) = createRefs()
-        val verticalChain = createVerticalChain(header, body, recover, chainStyle = ChainStyle.SpreadInside)
 
         Column(
             verticalArrangement = Arrangement.Center,
@@ -196,12 +192,6 @@ internal fun PhoneOnboarding(
                 contentDescription = stringResource(id = R.string.padawan_logo),
                 Modifier.size(140.dp)
             )
-            // Icon(
-            //     painter = painterResource(id = R.drawable.ic_keyring),
-            //     contentDescription = "Keyring logo",
-            //     tint = Color(0xff000000),
-            //     modifier = Modifier.size(80.dp)
-            // )
             Text(
                 text = stringResource(R.string.padawan_wallet),
                 style = PadawanTypography.headlineLarge,
@@ -253,16 +243,14 @@ internal fun PhoneOnboarding(
                 ) {
                     Text(
                         text = stringResource(R.string.create_a_wallet),
-                        // style = GargoyleTypography.labelLarge,
                         color = Color(0xff000000)
                     )
-                    // Spacer(modifier = Modifier.width(8.dp))
                 }
             }
         }
 
         Row(
-            horizontalArrangement = Arrangement.Center,
+            horizontalArrangement = Arrangement.SpaceAround,
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier
                 .constrainAs(recover) {
@@ -271,7 +259,7 @@ internal fun PhoneOnboarding(
                     end.linkTo(parent.end)
                     bottom.linkTo(parent.bottom)
                 }
-                .padding(bottom = 24.dp)
+                .padding(horizontal = 24.dp)
         ) {
             Text(
                 text = stringResource(id = R.string.already_have_a_wallet),

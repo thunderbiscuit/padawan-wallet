@@ -5,6 +5,7 @@
 
 package com.goldenraven.padawanwallet
 
+import android.content.Context
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -19,8 +20,10 @@ import com.goldenraven.padawanwallet.ui.intro.IntroNavigation
 import com.goldenraven.padawanwallet.theme.PadawanTheme
 import com.goldenraven.padawanwallet.ui.HomeNavigation
 import com.goldenraven.padawanwallet.ui.settings.SupportedLanguage
+import com.goldenraven.padawanwallet.ui.settings.getSupportedLanguageCode
 import com.goldenraven.padawanwallet.utils.SnackbarLevel
 import com.goldenraven.padawanwallet.utils.fireSnackbar
+import java.util.Locale
 
 private const val TAG = "PadawanActivity"
 
@@ -71,34 +74,42 @@ class PadawanActivity : AppCompatActivity() {
                 }
             }
         }
-
-        // TODO: This feels hacky but the AppCompatDelegate.getApplicationLocales() API returns an
-        //       an empty list if it hasn't been set manually. We also cannot set it directly inside
-        //       the onCreate() method, and so we need to schedule it to run right after onCreate().
-
-        // Languages: We check if the language has been manually set in the app (shared preferences)
-        // and if it has not we use the system default language.
-        Handler(Looper.getMainLooper()).post {
-            setLanguage()
-        }
     }
 
+    // TODO: This feels hacky but the AppCompatDelegate.getApplicationLocales() API returns an
+    //       an empty list if it hasn't been set manually. We cannot set it directly inside
+    //       the onCreate() method, and so we run it here.
+    // TODO: This can be cleaned up. The behaviour between API 33+ and > 33 are different, and not
+    //       handled optimally by this code.
+    // Languages: We check if the language has been manually set in the app
+    // and if it has not we use the system default language.
+    override fun attachBaseContext(newBase: Context?) {
+        super.attachBaseContext(newBase)
+        setLanguage()
+    }
 }
 
 fun setLanguage() {
-    val preferredLanguage: SupportedLanguage? = WalletRepository.getPreferredLanguage()
-    when (preferredLanguage) {
-        null -> {}
-        SupportedLanguage.ENGLISH -> {
-            Log.i(TAG, "Setting the language to English")
-            val appLocale: LocaleListCompat = LocaleListCompat.forLanguageTags("en-US")
+    val localeListCompat: LocaleListCompat = AppCompatDelegate.getApplicationLocales()
+    Log.i(TAG, "Current locale list compat is: $localeListCompat")
+
+    if (localeListCompat.isEmpty) {
+        Log.i(TAG, "Current LocaleListCompat is empty, we're calling AppCompatDelegate.setApplicationLocales()")
+        val defaultSystemLocale = Locale.getDefault().language
+
+        if (defaultSystemLocale.contains("es")) {
+            Log.i(TAG, "Default system locale is Spanish")
+            val languageCode: String = getSupportedLanguageCode(SupportedLanguage.SPANISH)
+            val appLocale: LocaleListCompat = LocaleListCompat.forLanguageTags(languageCode)
+            AppCompatDelegate.setApplicationLocales(appLocale)
+        } else {
+            Log.i(TAG, "Default system locale is not Spanish")
+            val languageCode: String = getSupportedLanguageCode(SupportedLanguage.ENGLISH)
+            val appLocale: LocaleListCompat = LocaleListCompat.forLanguageTags(languageCode)
             AppCompatDelegate.setApplicationLocales(appLocale)
         }
-        SupportedLanguage.SPANISH -> {
-            Log.i(TAG, "Setting the language to Spanish")
-            val appLocale: LocaleListCompat = LocaleListCompat.forLanguageTags("es-ES")
-            AppCompatDelegate.setApplicationLocales(appLocale)
-        }
+    } else {
+        Log.i(TAG, "Current language in AppCompatDelegate was already set to: $localeListCompat")
     }
 }
 

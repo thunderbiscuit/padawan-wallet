@@ -27,12 +27,10 @@ import androidx.compose.ui.unit.dp
 import androidx.core.os.LocaleListCompat
 import androidx.navigation.NavHostController
 import com.goldenraven.padawanwallet.R
-import com.goldenraven.padawanwallet.data.WalletRepository
 import com.goldenraven.padawanwallet.theme.PadawanTypography
 import com.goldenraven.padawanwallet.theme.padawan_theme_background_secondary
 import com.goldenraven.padawanwallet.theme.padawan_theme_text_faded_secondary
 import com.goldenraven.padawanwallet.ui.PadawanAppBar
-import java.util.Locale
 
 private const val TAG = "LanguagesScreen"
 
@@ -63,19 +61,13 @@ internal fun LanguagesScreen(
 @Composable
 fun LanguageChoiceRadioButtons() {
     val radioOptions = listOf(SupportedLanguage.ENGLISH, SupportedLanguage.SPANISH)
+    val localeListCompat: LocaleListCompat = AppCompatDelegate.getApplicationLocales()
+    Log.i(TAG, "Current locale list compat is: $localeListCompat")
 
-    val sharedPreferencesPreferredLanguage = WalletRepository.getPreferredLanguage()
-
-    val currentLanguage: SupportedLanguage = if (sharedPreferencesPreferredLanguage == null) {
-        Log.i(TAG, "Preferred language was not previously set and we're using the Locale.getDefault()")
-        val defaultSystemLocale = Locale.getDefault().language
-        if (defaultSystemLocale.contains("es")) {
-            SupportedLanguage.SPANISH
-        } else {
-            SupportedLanguage.ENGLISH
-        }
+    val currentLanguage: SupportedLanguage = if (localeListCompat[0]?.language == "es") {
+        SupportedLanguage.SPANISH
     } else {
-        sharedPreferencesPreferredLanguage
+        SupportedLanguage.ENGLISH
     }
 
     val (selectedOption, onOptionSelected) = remember { mutableStateOf(currentLanguage) }
@@ -90,9 +82,8 @@ fun LanguageChoiceRadioButtons() {
                         selected = (language == selectedOption),
                         onClick = {
                             onOptionSelected(language)
-                            WalletRepository.setPreferredLanguage(language)
                             val languageCode: String = getSupportedLanguageCode(language)
-                            val appLocale = LocaleListCompat.forLanguageTags(languageCode)
+                            val appLocale: LocaleListCompat = LocaleListCompat.forLanguageTags(languageCode)
                             AppCompatDelegate.setApplicationLocales(appLocale)
                         }
                     )
