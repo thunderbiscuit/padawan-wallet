@@ -7,9 +7,6 @@ package com.goldenraven.padawanwallet.ui.chapters
 
 import android.app.Application
 import android.util.Log
-import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.goldenraven.padawanwallet.R
@@ -35,8 +32,6 @@ import kotlinx.coroutines.runBlocking
 private const val TAG = "ChaptersViewModel"
 
 class ChaptersViewModel(application: Application) : AndroidViewModel(application) {
-    val selectedChapter: MutableState<Int> = mutableStateOf(1)
-
     private val readAllData: MutableStateFlow<List<Chapter>> = MutableStateFlow(emptyList())
     private val chapterRepository: ChapterRepository
 

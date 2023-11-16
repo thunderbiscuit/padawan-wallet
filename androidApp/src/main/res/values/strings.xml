@@ -44,7 +44,7 @@
     <string name="satoshi_vbyte">satoshi/vbyte</string>
     <string name="in_satoshis">(in satoshis)</string>
     <string name="scan">Scan</string>
-    <string name="address">address</string>
+    <string name="address">Address</string>
 
     <!-- chapters -->
     <string name="essentials_section_name">Essentials</string>
