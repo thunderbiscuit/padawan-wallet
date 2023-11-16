@@ -149,6 +149,9 @@ dependencies {
     implementation("androidx.room:room-ktx:2.5.0")
     ksp("androidx.room:room-compiler:2.5.0")
 
+    // KMP Shared library
+    implementation(project(":shared"))
+
     // Unit testing
     testImplementation("junit:junit:4.13.2")
     testRuntimeOnly("org.junit.vintage:junit-vintage-engine:5.8.2")

@@ -2,11 +2,16 @@
 .gradle
 .idea
 .DS_Store
+
 /build
+
 /androidApp/build
 /androidApp/release
 /androidApp/debug
 /androidApp/gradle.properties
+
+/shared/build
+
 output-metadata.json
 /captures
 .externalNativeBuild
