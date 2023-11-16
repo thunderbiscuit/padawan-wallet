@@ -2,13 +2,13 @@
   <h1>Padawan Wallet</h1>
   <br/>
   <br/>
-  <img src="./images/logo.png" alt="Logo 1.0.0" width="400">
+  <img src="./images/padawan.svg" alt="Logo 1.0.0" width="200">
 </div>
 <br/>
 <br/>
 
 [![GitHub](https://img.shields.io/github/license/thunderbiscuit/padawan-wallet?color=brightgreen)](https://github.com/thunderbiscuit/padawan-wallet/blob/master/LICENSE) 
-![Kotlin Version](https://img.shields.io/badge/kotlin-v1.8.0-orange) 
+![Kotlin Version](https://img.shields.io/badge/kotlin-v1.9.20-orange) 
 [![Conventional Commits](https://img.shields.io/badge/conventional%20commits-1.0.0-yellow.svg)](https://conventionalcommits.org) 
 [![GitHub release (latest by date)](https://img.shields.io/github/v/release/thunderbiscuit/padawan-wallet)](https://github.com/thunderbiscuit/padawan-wallet/releases)
 [![Twitter](https://img.shields.io/badge/twitter-%40padawanwallet-b8bb26)](https://twitter.com/padawanwallet)
