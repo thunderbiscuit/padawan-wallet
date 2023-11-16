@@ -5,7 +5,7 @@ import org.gradle.api.tasks.testing.logging.TestLogEvent.*
 plugins {
     id("com.android.application")
     id("kotlin-android")
-    id("kotlin-kapt")
+    id("com.google.devtools.ksp")
 }
 
 val faucetUrl: String by project
@@ -14,7 +14,6 @@ val faucetPassword: String by project
 
 android {
     compileSdk = 34
-    buildToolsVersion = "30.0.3"
     ndkVersion = "21.4.7075529"
 
     buildFeatures {
@@ -87,10 +86,10 @@ android {
     }
 
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.4.0"
+        kotlinCompilerExtensionVersion = "1.5.4"
     }
 
-    packagingOptions {
+    packaging {
         // for JNA and JNA-platform
         resources.excludes.add("META-INF/AL2.0")
         resources.excludes.add("META-INF/LGPL2.1")
@@ -148,7 +147,7 @@ dependencies {
     // Room
     implementation("androidx.room:room-runtime:2.5.0")
     implementation("androidx.room:room-ktx:2.5.0")
-    kapt("androidx.room:room-compiler:2.5.0")
+    ksp("androidx.room:room-compiler:2.5.0")
 
     // Unit testing
     testImplementation("junit:junit:4.13.2")
