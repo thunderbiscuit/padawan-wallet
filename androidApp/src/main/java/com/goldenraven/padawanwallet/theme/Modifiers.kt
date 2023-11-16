@@ -17,13 +17,14 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.composed
 import androidx.compose.ui.draw.drawBehind
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Paint
 import androidx.compose.ui.graphics.drawscope.drawIntoCanvas
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.goldenraven.padawanwallet.utils.BackgroundShape
 
 fun Modifier.advancedShadow(
     color: Color = Color.Black,
@@ -70,10 +71,22 @@ fun Modifier.standardShadow(cornerRadius: Dp): Modifier = this.then(
     )
 )
 
-fun Modifier.standardBackground(padding: Dp): Modifier = this.then(
-    fillMaxSize()
-        .background(padawan_theme_background_secondary, shape = BackgroundShape())
-        .padding(all = padding)
+val gradient = Brush.linearGradient(
+    colors = listOf(
+        Color(0xFF76dab3),
+        Color(0xFF76dab3),
+        Color(0xFFf3f4ff)
+    ),
+    start = Offset(0f, 0f),
+    end = Offset(0f, 500f)
+)
+
+fun Modifier.gradientBackground(): Modifier = this.then(
+    fillMaxSize().background(gradient)
+)
+
+fun Modifier.innerScreenPadding(padding: Dp = 0.dp): Modifier = this.then(
+    Modifier.padding(all = padding)
 )
 
 fun Modifier.wideTextField(): Modifier = this.then(

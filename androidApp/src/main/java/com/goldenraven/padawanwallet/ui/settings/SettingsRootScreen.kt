@@ -64,6 +64,7 @@ internal fun SettingsRootScreen(
         Column(
             modifier = Modifier
                 .fillMaxSize()
+                // .standardBackground()
                 .background(padawan_theme_background_secondary)
                 .padding(padding)
                 .verticalScroll(scrollState)

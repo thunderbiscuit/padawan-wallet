@@ -10,10 +10,8 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -35,10 +33,11 @@ import androidx.navigation.NavHostController
 import com.goldenraven.padawanwallet.R
 import com.goldenraven.padawanwallet.data.Wallet
 import com.goldenraven.padawanwallet.theme.PadawanTypography
+import com.goldenraven.padawanwallet.theme.innerScreenPadding
 import com.goldenraven.padawanwallet.theme.padawan_disabled
 import com.goldenraven.padawanwallet.theme.padawan_theme_receive_primary
 import com.goldenraven.padawanwallet.theme.padawan_theme_send_primary
-import com.goldenraven.padawanwallet.theme.standardBackground
+import com.goldenraven.padawanwallet.theme.gradientBackground
 import com.goldenraven.padawanwallet.ui.PadawanAppBar
 import com.goldenraven.padawanwallet.utils.SatoshisIn
 import com.goldenraven.padawanwallet.utils.SatoshisOut
@@ -68,12 +67,11 @@ internal fun TransactionScreen(
         ScreenSizeWidth.Phone -> 32.dp
     }
 
-    PadawanAppBar(navController = navController, title = stringResource(R.string.transaction_details))
 
     ConstraintLayout(
         modifier = Modifier
-            .standardBackground(padding)
             .fillMaxSize()
+            .gradientBackground()
     ) {
         val (screenTitle, QRCode) = createRefs()
 
@@ -85,13 +83,14 @@ internal fun TransactionScreen(
                     end.linkTo(parent.end)
                 }
         ) {
-            Spacer(modifier = Modifier.height(16.dp))
+            PadawanAppBar(navController = navController, title = stringResource(R.string.transaction_details))
         }
 
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center,
             modifier = Modifier
+                .innerScreenPadding(padding)
                 .constrainAs(QRCode) {
                     top.linkTo(screenTitle.bottom)
                     bottom.linkTo(parent.bottom)

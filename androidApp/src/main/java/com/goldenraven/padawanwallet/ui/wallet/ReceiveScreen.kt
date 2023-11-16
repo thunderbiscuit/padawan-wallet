@@ -46,7 +46,7 @@ import com.goldenraven.padawanwallet.R
 import com.goldenraven.padawanwallet.theme.ShareTechMono
 import com.goldenraven.padawanwallet.theme.padawan_theme_background
 import com.goldenraven.padawanwallet.theme.padawan_theme_button_primary
-import com.goldenraven.padawanwallet.theme.standardBackground
+import com.goldenraven.padawanwallet.theme.gradientBackground
 import com.goldenraven.padawanwallet.theme.standardShadow
 import com.goldenraven.padawanwallet.ui.LoadingAnimation
 import com.goldenraven.padawanwallet.ui.PadawanAppBar
@@ -87,13 +87,12 @@ internal fun ReceiveScreen(
         snackbarHost = { SnackbarHost(snackbarHostState) }
     ) { paddingValues ->
 
-        PadawanAppBar(navController = navController, title = stringResource(R.string.receive_bitcoin))
+        // PadawanAppBar(navController = navController, title = stringResource(R.string.receive_bitcoin))
 
         ConstraintLayout(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(paddingValues)
-                .standardBackground(padding)
+                .gradientBackground()
         ) {
             val (screenTitle, QRCode, bottomButtons) = createRefs()
 
@@ -105,7 +104,7 @@ internal fun ReceiveScreen(
                         end.linkTo(parent.end)
                     }
             ) {
-                Spacer(modifier = Modifier.height(100.dp))
+                PadawanAppBar(navController = navController, title = stringResource(R.string.receive_bitcoin))
             }
 
             Column(

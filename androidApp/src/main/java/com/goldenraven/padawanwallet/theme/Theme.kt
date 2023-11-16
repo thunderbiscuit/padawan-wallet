@@ -8,12 +8,15 @@ package com.goldenraven.padawanwallet.theme
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
 
 private val PadawanThemeColors = lightColorScheme(
     primary = padawan_theme_primary,
     onPrimary = padawan_theme_onPrimary,
-    background = padawan_theme_background,
-    onBackground = padawan_theme_onBackground,
+    // background = padawan_theme_background,
+    // onBackground = padawan_theme_onBackground,
 )
 
 @Composable

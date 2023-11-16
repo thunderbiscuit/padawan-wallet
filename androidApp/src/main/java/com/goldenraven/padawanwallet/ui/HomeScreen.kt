@@ -5,6 +5,7 @@
 
 package com.goldenraven.padawanwallet.ui
 
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Icon
@@ -86,6 +87,7 @@ internal fun BottomNavigationBar(
     ) {
         val navBackStackEntry by navControllerWalletNavigation.currentBackStackEntryAsState()
         val currentDestination = navBackStackEntry?.destination
+
         items.forEachIndexed { index, item ->
             NavigationBarItem(
                 icon = {

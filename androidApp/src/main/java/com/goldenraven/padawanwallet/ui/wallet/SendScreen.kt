@@ -67,12 +67,12 @@ import androidx.navigation.NavHostController
 import com.goldenraven.padawanwallet.R
 import com.goldenraven.padawanwallet.data.Wallet
 import com.goldenraven.padawanwallet.theme.PadawanTypography
-import com.goldenraven.padawanwallet.theme.padawan_theme_background
 import com.goldenraven.padawanwallet.theme.padawan_theme_background_secondary
 import com.goldenraven.padawanwallet.theme.padawan_theme_button_primary
 import com.goldenraven.padawanwallet.theme.padawan_theme_button_secondary
 import com.goldenraven.padawanwallet.theme.padawan_theme_onPrimary
-import com.goldenraven.padawanwallet.theme.standardBackground
+import com.goldenraven.padawanwallet.theme.gradientBackground
+import com.goldenraven.padawanwallet.theme.innerScreenPadding
 import com.goldenraven.padawanwallet.theme.standardShadow
 import com.goldenraven.padawanwallet.theme.wideTextField
 import com.goldenraven.padawanwallet.ui.PadawanAppBar
@@ -140,8 +140,7 @@ internal fun SendScreen(navController: NavHostController, walletViewModel: Walle
             ConstraintLayout(
                 modifier = Modifier
                     .fillMaxSize()
-                    .background(padawan_theme_background)
-                    .standardBackground(padding)
+                    .gradientBackground()
             ) {
                 val (screenTitle, content) = createRefs()
                 Row(Modifier.constrainAs(screenTitle) {
@@ -153,6 +152,7 @@ internal fun SendScreen(navController: NavHostController, walletViewModel: Walle
                 }
 
                 Column(modifier = Modifier
+                    .innerScreenPadding(padding)
                     .constrainAs(content) {
                         top.linkTo(screenTitle.bottom)
                         bottom.linkTo(parent.bottom)

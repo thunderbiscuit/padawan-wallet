@@ -106,18 +106,18 @@ internal fun PadawanAppBar(navController: NavHostController, title: String) {
     ) {
         val (fontSize, horizontalPadding) = when (screenSizeWidth) {
             ScreenSizeWidth.Small -> Pair(16.sp, 8.dp)
-            ScreenSizeWidth.Phone -> Pair(20.sp, 16.dp)
+            ScreenSizeWidth.Phone -> Pair(20.sp, 32.dp)
         }
 
         Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(horizontal = horizontalPadding)
                 .height(100.dp)
+                // .background(Color.Cyan)
         ) {
             IconButton(
                 onClick = { navController.popBackStack() },
-                modifier = Modifier.align(alignment = Alignment.CenterStart)
+                modifier = Modifier.align(alignment = Alignment.CenterStart).padding(horizontalPadding)
             ) {
                 Icon(
                     painter = painterResource(id = R.drawable.ic_back),

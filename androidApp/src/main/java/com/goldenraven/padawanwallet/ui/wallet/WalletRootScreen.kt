@@ -49,7 +49,6 @@ import com.goldenraven.padawanwallet.utils.ScreenSizeWidth
 import com.goldenraven.padawanwallet.utils.formatCurrency
 import com.goldenraven.padawanwallet.utils.formatInBtc
 import com.goldenraven.padawanwallet.utils.getScreenSizeWidth
-import com.goldenraven.padawanwallet.shared.Greeting
 
 // TODO Think about reintroducing refreshing
 // TODO Reuse composable more
@@ -81,14 +80,15 @@ internal fun WalletRootScreen(
         ScreenSizeWidth.Phone -> 32.dp
     }
 
-    Column(modifier = Modifier.standardBackground(padding)) {
+    Column(
+        modifier = Modifier.gradientBackground().innerScreenPadding(padding)
+    ) {
         // This text composable uses the shared code from the shared module
         // Text(
         //     modifier = Modifier.align(Alignment.CenterHorizontally),
         //     text = Greeting().greet()
         // )
         if (isOnlineStatus == false) { NoNetworkBanner(walletViewModel, context) }
-        // if (walletViewModel.isOnlineVariable.value == false) { NoNetworkBanner(walletViewModel, context) }
         BalanceBox(balance = balance ?: 0uL, viewModel = walletViewModel)
         Spacer(modifier = Modifier.height(height = 12.dp))
         SendReceive(navController = navController)
