@@ -22,7 +22,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.goldenraven.padawanwallet.R
-import com.goldenraven.padawanwallet.data.WalletRepository
+import com.goldenraven.padawanwallet.data.wallet.WalletRepository
 import com.goldenraven.padawanwallet.theme.padawan_theme_background_secondary
 import com.goldenraven.padawanwallet.ui.composables.PadawanAppBar
 import com.goldenraven.padawanwallet.ui.composables.standardBorder

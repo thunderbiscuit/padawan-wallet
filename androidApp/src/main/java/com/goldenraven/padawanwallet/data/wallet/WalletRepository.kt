@@ -1,18 +1,12 @@
-/*
- * Copyright 2020-2023 thunderbiscuit and contributors.
- * Use of this source code is governed by the Apache 2.0 license that can be found in the ./LICENSE file.
- */
-
-package com.goldenraven.padawanwallet.data
+package com.goldenraven.padawanwallet.data.wallet
 
 import android.content.SharedPreferences
 import android.util.Log
 import com.goldenraven.padawanwallet.utils.RequiredInitialWalletData
 
-private const val TAG = "Repository"
+private const val TAG = "WalletRepository"
 
 object WalletRepository {
-
     private lateinit var sharedPreferences: SharedPreferences
     fun setSharedPreferences(sharedPref: SharedPreferences) {
         sharedPreferences = sharedPref
@@ -33,7 +27,10 @@ object WalletRepository {
     }
 
     fun saveWallet(path: String, descriptor: String, changeDescriptor: String) {
-        Log.i(TAG, "Saved wallet: path -> $path, descriptor -> $descriptor, change descriptor -> $changeDescriptor")
+        Log.i(
+            TAG,
+            "Saved wallet: path -> $path, descriptor -> $descriptor, change descriptor -> $changeDescriptor"
+        )
         sharedPreferences.edit().apply {
             putBoolean("initialized", true)
             putString("path", path)
@@ -43,7 +40,7 @@ object WalletRepository {
     }
 
     fun saveMnemonic(mnemonic: String) {
-        Log.i(TAG,"The seed phrase is: $mnemonic")
+        Log.i(TAG, "The seed phrase is: $mnemonic")
         val editor = sharedPreferences.edit()
         editor.putString("mnemonic", mnemonic)
         editor.apply()

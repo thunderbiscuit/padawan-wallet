@@ -31,7 +31,7 @@ import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
 import androidx.navigation.NavHostController
 import com.goldenraven.padawanwallet.R
-import com.goldenraven.padawanwallet.data.Wallet
+import com.goldenraven.padawanwallet.data.wallet.Wallet
 import com.goldenraven.padawanwallet.theme.PadawanTypography
 import com.goldenraven.padawanwallet.theme.innerScreenPadding
 import com.goldenraven.padawanwallet.theme.padawan_disabled

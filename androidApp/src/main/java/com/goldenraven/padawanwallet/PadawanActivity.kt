@@ -7,15 +7,13 @@ package com.goldenraven.padawanwallet
 
 import android.content.Context
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.util.Log
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.os.LocaleListCompat
-import com.goldenraven.padawanwallet.data.WalletRepository
-import com.goldenraven.padawanwallet.data.Wallet
+import com.goldenraven.padawanwallet.data.wallet.WalletRepository
+import com.goldenraven.padawanwallet.data.wallet.Wallet
 import com.goldenraven.padawanwallet.ui.intro.IntroNavigation
 import com.goldenraven.padawanwallet.theme.PadawanTheme
 import com.goldenraven.padawanwallet.ui.HomeNavigation

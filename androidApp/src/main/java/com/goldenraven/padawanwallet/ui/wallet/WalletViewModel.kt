@@ -19,8 +19,8 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.goldenraven.padawanwallet.BuildConfig
 import com.goldenraven.padawanwallet.R
-import com.goldenraven.padawanwallet.data.Wallet
-import com.goldenraven.padawanwallet.data.WalletRepository
+import com.goldenraven.padawanwallet.data.wallet.Wallet
+import com.goldenraven.padawanwallet.data.wallet.WalletRepository
 import com.goldenraven.padawanwallet.data.tx.Tx
 import com.goldenraven.padawanwallet.data.tx.TxDao
 import com.goldenraven.padawanwallet.data.tx.TxDatabase

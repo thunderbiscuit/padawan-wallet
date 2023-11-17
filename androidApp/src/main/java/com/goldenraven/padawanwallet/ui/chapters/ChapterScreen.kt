@@ -1,6 +1,6 @@
 /*
  * Copyright 2020-2023 thunderbiscuit and contributors.
- * Use of this source code is governed by the Apache 2.0 license that can be found in the ./LICENSE file.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the ./LICENSE.txt file.
  */
 
 package com.goldenraven.padawanwallet.ui.chapters
@@ -53,8 +53,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.goldenraven.padawanwallet.R
-import com.goldenraven.padawanwallet.data.chapters.ElementType
-import com.goldenraven.padawanwallet.data.chapters.Page
+import com.goldenraven.padawanwallet.data.tutorials.ElementType
+import com.goldenraven.padawanwallet.data.tutorials.Page
 import com.goldenraven.padawanwallet.theme.PadawanTypography
 import com.goldenraven.padawanwallet.theme.padawan_theme_background_secondary
 import com.goldenraven.padawanwallet.theme.padawan_theme_button_primary
@@ -70,9 +70,8 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
 // TODO Add transition between pages smoother (pages & progress bar)
-// TODO Add chapter images
 
-private const val TAG = "ChapterScreen"
+private const val TAG = "TutorialScreen"
 
 @Composable
 fun ChapterScreen(
@@ -80,7 +79,7 @@ fun ChapterScreen(
     chaptersViewModel: ChaptersViewModel,
     navController: NavHostController
 ) {
-    val chapterPages = chaptersViewModel.getChapterPages(id = chapterId)
+    val chapterPages = chaptersViewModel.getSpecificTutorialPages(id = chapterId)
     Log.i(TAG, "We're dealing with chapter $chapterId and the chapterPageSize is ${chapterPages.size}")
     val currentPage = remember { mutableStateOf(1) }
     val pageScrollState = rememberScrollState()
@@ -219,7 +218,7 @@ fun ChapterButtons(
         } else if (currentPage.value == chapterPageSize - 1) {
             Button(
                 onClick = {
-                    chaptersViewModel.setCompleted(id = chapterId)
+                    chaptersViewModel.setCompleted(index = chapterId)
                     navController.popBackStack()
                 },
                 colors = ButtonDefaults.buttonColors(containerColor = padawan_theme_button_primary),

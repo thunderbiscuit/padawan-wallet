@@ -1,9 +1,4 @@
-/*
- * Copyright 2020-2023 thunderbiscuit and contributors.
- * Use of this source code is governed by the Apache 2.0 license that can be found in the ./LICENSE file.
- */
-
-package com.goldenraven.padawanwallet.data
+package com.goldenraven.padawanwallet.data.wallet
 
 import android.util.Log
 import com.goldenraven.padawanwallet.utils.RequiredInitialWalletData
@@ -26,14 +21,13 @@ import org.bitcoindevkit.TransactionDetails
 import org.bitcoindevkit.TxBuilder
 import org.bitcoindevkit.TxBuilderResult
 import org.bitcoindevkit.WordCount
-import org.bitcoindevkit.Wallet as BdkWallet
 
 private const val TAG = "Wallet"
 
 object Wallet {
 
     private const val electrumURL: String = "ssl://electrum.blockstream.info:60002"
-    private lateinit var wallet: BdkWallet
+    private lateinit var wallet: org.bitcoindevkit.Wallet
     private lateinit var path: String
     private lateinit var blockchain: Blockchain
 
@@ -53,7 +47,7 @@ object Wallet {
         changeDescriptor: Descriptor,
     ) {
         val database = DatabaseConfig.Sqlite(SqliteDbConfiguration("$path/bdk-sqlite"))
-        wallet = BdkWallet(
+        wallet = org.bitcoindevkit.Wallet(
             descriptor,
             changeDescriptor,
             Network.TESTNET,
@@ -62,14 +56,17 @@ object Wallet {
     }
 
     fun createBlockchain() {
-        val blockchainConfig = BlockchainConfig.Electrum(ElectrumConfig(electrumURL, null, 5u, null, 10u, true))
+        val blockchainConfig =
+            BlockchainConfig.Electrum(ElectrumConfig(electrumURL, null, 5u, null, 10u, true))
         blockchain = Blockchain(blockchainConfig)
     }
 
     fun loadExistingWallet() {
         val initialWalletData: RequiredInitialWalletData = WalletRepository.getInitialWalletData()
-        Log.i(TAG, "Loading existing wallet with descriptor: ${initialWalletData.descriptor}")
-        Log.i(TAG, "Loading existing wallet with change descriptor: ${initialWalletData.changeDescriptor}")
+        Log.i(TAG, "Loading existing wallet with descriptor: ${initialWalletData.descriptor}"
+        )
+        Log.i(TAG, "Loading existing wallet with change descriptor: ${initialWalletData.changeDescriptor}"
+        )
         initialize(
             descriptor = Descriptor(initialWalletData.descriptor, Network.TESTNET),
             changeDescriptor = Descriptor(initialWalletData.changeDescriptor, Network.TESTNET),
@@ -79,26 +76,38 @@ object Wallet {
     fun recoverWallet(recoveryPhrase: String) {
         val mnemonic = Mnemonic.fromString(recoveryPhrase)
         val bip32ExtendedRootKey = DescriptorSecretKey(Network.TESTNET, mnemonic, null)
-        val descriptor: Descriptor = Descriptor.newBip84(bip32ExtendedRootKey, KeychainKind.EXTERNAL, Network.TESTNET)
-        val changeDescriptor: Descriptor = Descriptor.newBip84(bip32ExtendedRootKey, KeychainKind.INTERNAL, Network.TESTNET)
+        val descriptor: Descriptor =
+            Descriptor.newBip84(bip32ExtendedRootKey, KeychainKind.EXTERNAL, Network.TESTNET)
+        val changeDescriptor: Descriptor =
+            Descriptor.newBip84(bip32ExtendedRootKey, KeychainKind.INTERNAL, Network.TESTNET)
         initialize(
             descriptor = descriptor,
             changeDescriptor = changeDescriptor,
         )
-        WalletRepository.saveWallet(path, descriptor.asStringPrivate(), changeDescriptor.asStringPrivate())
+        WalletRepository.saveWallet(
+            path,
+            descriptor.asStringPrivate(),
+            changeDescriptor.asStringPrivate()
+        )
         WalletRepository.saveMnemonic(mnemonic.asString())
     }
 
     fun createWallet() {
         val mnemonic = Mnemonic(WordCount.WORDS12)
         val bip32ExtendedRootKey = DescriptorSecretKey(Network.TESTNET, mnemonic, null)
-        val descriptor: Descriptor = Descriptor.newBip84(bip32ExtendedRootKey, KeychainKind.EXTERNAL, Network.TESTNET)
-        val changeDescriptor: Descriptor = Descriptor.newBip84(bip32ExtendedRootKey, KeychainKind.INTERNAL, Network.TESTNET)
+        val descriptor: Descriptor =
+            Descriptor.newBip84(bip32ExtendedRootKey, KeychainKind.EXTERNAL, Network.TESTNET)
+        val changeDescriptor: Descriptor =
+            Descriptor.newBip84(bip32ExtendedRootKey, KeychainKind.INTERNAL, Network.TESTNET)
         initialize(
             descriptor = descriptor,
             changeDescriptor = changeDescriptor,
         )
-        WalletRepository.saveWallet(path, descriptor.asStringPrivate(), changeDescriptor.asStringPrivate())
+        WalletRepository.saveWallet(
+            path,
+            descriptor.asStringPrivate(),
+            changeDescriptor.asStringPrivate()
+        )
         WalletRepository.saveMnemonic(mnemonic.asString())
     }
 

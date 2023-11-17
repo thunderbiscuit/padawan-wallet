@@ -12,6 +12,8 @@
 
 /shared/build
 
+xcuserdata/
+
 output-metadata.json
 /captures
 .externalNativeBuild

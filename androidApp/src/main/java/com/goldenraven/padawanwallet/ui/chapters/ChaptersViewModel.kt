@@ -1,130 +1,64 @@
 /*
  * Copyright 2020-2023 thunderbiscuit and contributors.
- * Use of this source code is governed by the Apache 2.0 license that can be found in the ./LICENSE file.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the ./LICENSE.txt file.
  */
 
 package com.goldenraven.padawanwallet.ui.chapters
 
 import android.app.Application
-import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
-import com.goldenraven.padawanwallet.R
-import com.goldenraven.padawanwallet.data.chapters.Chapter
-import com.goldenraven.padawanwallet.data.chapters.ChapterElement
-import com.goldenraven.padawanwallet.data.chapters.ChapterRepository
-import com.goldenraven.padawanwallet.data.chapters.ChaptersDatabase
-import com.goldenraven.padawanwallet.data.chapters.chapter1
-import com.goldenraven.padawanwallet.data.chapters.chapter2
-import com.goldenraven.padawanwallet.data.chapters.chapter3
-import com.goldenraven.padawanwallet.data.chapters.chapter4
-import com.goldenraven.padawanwallet.data.chapters.chapter5
-import com.goldenraven.padawanwallet.data.chapters.chapter6
-import com.goldenraven.padawanwallet.data.chapters.chapter7
-import com.goldenraven.padawanwallet.data.chapters.chapter8
-import com.goldenraven.padawanwallet.data.chapters.chapter9
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.async
-import kotlinx.coroutines.flow.MutableStateFlow
+import com.goldenraven.padawanwallet.data.tutorials.TutorialRepository
+import com.goldenraven.padawanwallet.data.tutorials.ChapterElement
+import com.goldenraven.padawanwallet.data.tutorials.chapter1
+import com.goldenraven.padawanwallet.data.tutorials.chapter2
+import com.goldenraven.padawanwallet.data.tutorials.chapter3
+import com.goldenraven.padawanwallet.data.tutorials.chapter4
+import com.goldenraven.padawanwallet.data.tutorials.chapter5
+import com.goldenraven.padawanwallet.data.tutorials.chapter6
+import com.goldenraven.padawanwallet.data.tutorials.chapter7
+import com.goldenraven.padawanwallet.data.tutorials.chapter8
+import com.goldenraven.padawanwallet.data.tutorials.chapter9
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 
 private const val TAG = "ChaptersViewModel"
 
 class ChaptersViewModel(application: Application) : AndroidViewModel(application) {
-    private val readAllData: MutableStateFlow<List<Chapter>> = MutableStateFlow(emptyList())
-    private val chapterRepository: ChapterRepository
-
-    val selectedChapterData: MutableStateFlow<Chapter> = MutableStateFlow<Chapter>(Chapter(id = 0, title = "", type = "", difficulty = "", completed = false))
-
-    private val _chapterPageMap: Map<Int, List<List<ChapterElement>>>
-
-    private val initialChapterList = listOf(
-        Chapter(id = 1, title = application.getString(R.string.C1_title), type = application.getString(R.string.concept), difficulty = application.getString(R.string.basic), completed = false),
-        Chapter(id = 2, title = application.getString(R.string.C2_title), type = application.getString(R.string.concept), difficulty = application.getString(R.string.basic), completed = false),
-        Chapter(id = 3, title = application.getString(R.string.C3_title), type = application.getString(R.string.skill), difficulty = application.getString(R.string.basic), completed = false),
-        Chapter(id = 4, title = application.getString(R.string.C4_title), type = application.getString(R.string.concept), difficulty = application.getString(R.string.basic), completed = false),
-        Chapter(id = 5, title = application.getString(R.string.C5_title), type = application.getString(R.string.skill), difficulty = application.getString(R.string.advanced), completed = false),
-        Chapter(id = 6, title = application.getString(R.string.C6_title), type = application.getString(R.string.concept), difficulty = application.getString(R.string.advanced), completed = false),
-        Chapter(id = 7, title = application.getString(R.string.C7_title), type = application.getString(R.string.concept), difficulty = application.getString(R.string.advanced), completed = false),
-        Chapter(id = 8, title = application.getString(R.string.C8_title), type = application.getString(R.string.skill), difficulty = application.getString(R.string.advanced), completed = false),
-        Chapter(id = 9, title = application.getString(R.string.C9_title), type = application.getString(R.string.concept), difficulty = application.getString(R.string.advanced), completed = false),
+    private val sharedPrefTutorialsRepository: TutorialRepository = TutorialRepository
+    private val chapterPageMap: Map<Int, List<List<ChapterElement>>> = mapOf(
+        Pair(1, chapter1),
+        Pair(2, chapter2),
+        Pair(3, chapter3),
+        Pair(4, chapter4),
+        Pair(5, chapter5),
+        Pair(6, chapter6),
+        Pair(7, chapter7),
+        Pair(8, chapter8),
+        Pair(9, chapter9),
     )
 
-    init {
-        val chapterDao = ChaptersDatabase.getInstance(application).chapterDao()
-        chapterRepository = ChapterRepository(chapterDao)
-        runBlocking(Dispatchers.IO) {
-            // TODO #2: this is a hack because of issue outlined in TODO #1
-            val dbIsEmpty = chapterRepository.dbIsEmpty()
-            Log.i(TAG, "Database was empty on first boot")
-            if (dbIsEmpty) {
-                chapterRepository.loadInitialData(initialChapterList)
-            }
-        }
-        // this variable is null on first access, and hence triggers the reinitialization of the database content
+    fun setCompleted(index: Int) {
         viewModelScope.launch {
-            chapterRepository.readAllData
-                .collect { result ->
-                    readAllData.value = result
-                }
-        }
-        Log.i(TAG, "readAllData variable is ${readAllData.value}")
-        updateSelectedChapter(1) // TODO Change to most recent chapter
-        _chapterPageMap = initChapterPageMap()
-    }
-
-    fun setCompleted(id: Int) {
-        viewModelScope.launch {
-            chapterRepository.setCompleted(id = id)
+            sharedPrefTutorialsRepository.setCompletedTutorial(index)
         }
     }
 
     fun unsetAllCompleted() {
         viewModelScope.launch {
-            (1..9).forEach {
-                chapterRepository.unsetAllCompleted(it)
-            }
+            sharedPrefTutorialsRepository.unsetAllCompleted()
         }
     }
 
     fun getCompletedChapters(): Map<Int, Boolean> {
-        val completedChapters = mutableMapOf<Int, Boolean>()
+        var completedTutorials: Map<Int, Boolean>
         runBlocking {
-            (1..9).forEach {
-                val completed: Boolean = chapterRepository.getChapter(it).completed
-                // Log.i(TAG, "Chapter $it was completed: $completed")
-                completedChapters[it] = completed
-            }
+            completedTutorials = sharedPrefTutorialsRepository.getCompletedTutorials()
         }
-        Log.i(TAG, "Completed chapters were $completedChapters")
-        return completedChapters
+        return completedTutorials.toMap()
     }
 
-    fun getChapterPages(id: Int): List<List<ChapterElement>> {
-        return _chapterPageMap.get(key = id)!!
-    }
-
-    fun updateSelectedChapter(id: Int) {
-        viewModelScope.launch {
-            val chapter: Chapter = async {
-                chapterRepository.getChapter(id)
-            }.await()
-            selectedChapterData.value = chapter
-        }
-    }
-
-    private fun initChapterPageMap(): Map<Int, List<List<ChapterElement>>> {
-        return mapOf(
-            Pair(1, chapter1),
-            Pair(2, chapter2),
-            Pair(3, chapter3),
-            Pair(4, chapter4),
-            Pair(5, chapter5),
-            Pair(6, chapter6),
-            Pair(7, chapter7),
-            Pair(8, chapter8),
-            Pair(9, chapter9),
-        )
+    fun getSpecificTutorialPages(id: Int): List<List<ChapterElement>> {
+        return chapterPageMap.get(key = id) ?: throw Exception("Tutorial with id $id does not exist")
     }
 }
