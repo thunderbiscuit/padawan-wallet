@@ -43,7 +43,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.geometry.Offset
-import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.platform.LocalConfiguration
@@ -64,8 +63,7 @@ import com.goldenraven.padawanwallet.theme.padawan_theme_onPrimary
 import com.goldenraven.padawanwallet.theme.padawan_theme_text_faded_secondary
 import com.goldenraven.padawanwallet.theme.padawan_theme_tutorial_background
 import com.goldenraven.padawanwallet.theme.standardShadow
-// import com.goldenraven.padawanwallet.theme.*
-import com.goldenraven.padawanwallet.ui.standardBorder
+import com.goldenraven.padawanwallet.ui.composables.standardBorder
 import com.goldenraven.padawanwallet.utils.ScreenSizeWidth
 import com.goldenraven.padawanwallet.utils.getScreenSizeWidth
 import kotlinx.coroutines.CoroutineScope

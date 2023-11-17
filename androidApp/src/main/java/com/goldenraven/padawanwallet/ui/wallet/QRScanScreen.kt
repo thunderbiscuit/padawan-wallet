@@ -49,7 +49,7 @@ import androidx.navigation.NavHostController
 import com.goldenraven.padawanwallet.R
 import com.goldenraven.padawanwallet.theme.md_theme_dark_background
 import com.goldenraven.padawanwallet.theme.standardShadow
-import com.goldenraven.padawanwallet.ui.standardBorder
+import com.goldenraven.padawanwallet.ui.composables.standardBorder
 import com.goldenraven.padawanwallet.utils.QRCodeAnalyzer
 
 @Composable

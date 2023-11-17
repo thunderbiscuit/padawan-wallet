@@ -24,8 +24,8 @@ import androidx.navigation.NavHostController
 import com.goldenraven.padawanwallet.R
 import com.goldenraven.padawanwallet.data.WalletRepository
 import com.goldenraven.padawanwallet.theme.padawan_theme_background_secondary
-import com.goldenraven.padawanwallet.ui.PadawanAppBar
-import com.goldenraven.padawanwallet.ui.standardBorder
+import com.goldenraven.padawanwallet.ui.composables.PadawanAppBar
+import com.goldenraven.padawanwallet.ui.composables.standardBorder
 
 @Composable
 internal fun RecoveryPhraseScreen(

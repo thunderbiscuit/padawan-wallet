@@ -75,10 +75,10 @@ import com.goldenraven.padawanwallet.theme.gradientBackground
 import com.goldenraven.padawanwallet.theme.innerScreenPadding
 import com.goldenraven.padawanwallet.theme.standardShadow
 import com.goldenraven.padawanwallet.theme.wideTextField
-import com.goldenraven.padawanwallet.ui.PadawanAppBar
+import com.goldenraven.padawanwallet.ui.composables.PadawanAppBar
 import com.goldenraven.padawanwallet.ui.Screen
-import com.goldenraven.padawanwallet.ui.VerticalTextFieldDivider
-import com.goldenraven.padawanwallet.ui.standardBorder
+import com.goldenraven.padawanwallet.ui.composables.VerticalTextFieldDivider
+import com.goldenraven.padawanwallet.ui.composables.standardBorder
 import com.goldenraven.padawanwallet.utils.ScreenSizeWidth
 import com.goldenraven.padawanwallet.utils.getScreenSizeWidth
 import kotlinx.coroutines.CoroutineScope

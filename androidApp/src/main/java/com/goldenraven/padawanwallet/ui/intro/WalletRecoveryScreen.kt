@@ -56,7 +56,7 @@ import com.goldenraven.padawanwallet.theme.md_theme_dark_onBackgroundFaded
 import com.goldenraven.padawanwallet.theme.md_theme_dark_onLightBackground
 import com.goldenraven.padawanwallet.theme.md_theme_dark_warning
 import com.goldenraven.padawanwallet.theme.standardShadow
-import com.goldenraven.padawanwallet.ui.standardBorder
+import com.goldenraven.padawanwallet.ui.composables.standardBorder
 import com.goldenraven.padawanwallet.utils.WordCheckResult
 import com.goldenraven.padawanwallet.utils.checkWords
 import kotlinx.coroutines.launch

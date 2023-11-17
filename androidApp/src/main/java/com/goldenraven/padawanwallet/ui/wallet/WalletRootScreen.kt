@@ -40,10 +40,10 @@ import androidx.navigation.compose.rememberNavController
 import com.goldenraven.padawanwallet.R
 import com.goldenraven.padawanwallet.data.tx.Tx
 import com.goldenraven.padawanwallet.theme.*
-import com.goldenraven.padawanwallet.ui.FadedVerticalDivider
-import com.goldenraven.padawanwallet.ui.LoadingAnimation
+import com.goldenraven.padawanwallet.ui.composables.FadedVerticalDivider
+import com.goldenraven.padawanwallet.ui.composables.LoadingAnimation
 import com.goldenraven.padawanwallet.ui.Screen
-import com.goldenraven.padawanwallet.ui.standardBorder
+import com.goldenraven.padawanwallet.ui.composables.standardBorder
 import com.goldenraven.padawanwallet.utils.ClickHelper
 import com.goldenraven.padawanwallet.utils.ScreenSizeWidth
 import com.goldenraven.padawanwallet.utils.formatCurrency
