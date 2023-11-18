@@ -4,7 +4,7 @@ import org.gradle.api.tasks.testing.logging.TestLogEvent.*
 
 plugins {
     id("com.android.application")
-    id("kotlin-android")
+    id("org.jetbrains.kotlin.android")
     id("com.google.devtools.ksp")
 }
 
