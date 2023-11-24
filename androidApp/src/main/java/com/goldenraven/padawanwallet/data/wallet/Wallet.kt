@@ -29,12 +29,11 @@ object Wallet {
     private const val electrumURL: String = "ssl://electrum.blockstream.info:60002"
     private lateinit var wallet: org.bitcoindevkit.Wallet
     private lateinit var path: String
-    private lateinit var blockchain: Blockchain
 
-    object LogProgress: Progress {
-        override fun update(progress: Float, message: String?) {
-            Log.d(TAG, "updating wallet $progress $message")
-        }
+    private val blockchain: Blockchain by lazy {
+        val blockchainConfig = BlockchainConfig.Electrum(ElectrumConfig(electrumURL, null, 5u, null, 10u, true))
+        val blockchain = Blockchain(blockchainConfig)
+        blockchain
     }
 
     // setting the path requires the application context and is done once by PadawanWalletApplication
@@ -55,11 +54,10 @@ object Wallet {
         )
     }
 
-    fun createBlockchain() {
-        val blockchainConfig =
-            BlockchainConfig.Electrum(ElectrumConfig(electrumURL, null, 5u, null, 10u, true))
-        blockchain = Blockchain(blockchainConfig)
-    }
+    // fun createBlockchain() {
+    //     val blockchainConfig = BlockchainConfig.Electrum(ElectrumConfig(electrumURL, null, 5u, null, 10u, true))
+    //     blockchain = Blockchain(blockchainConfig)
+    // }
 
     fun loadExistingWallet() {
         val initialWalletData: RequiredInitialWalletData = WalletRepository.getInitialWalletData()
@@ -185,5 +183,10 @@ object Wallet {
         return signedPsbt.txid()
     }
 
-    fun blockchainIsInitialized() = ::blockchain.isInitialized
+    // fun blockchainIsInitialized() = ::blockchain.isInitialized
+
+    object LogProgress: Progress {
+        override fun update(progress: Float, message: String?) = Unit
+    }
 }
+

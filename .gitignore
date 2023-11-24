@@ -2,6 +2,7 @@
 .gradle
 .idea
 .DS_Store
+.run
 
 /build
 

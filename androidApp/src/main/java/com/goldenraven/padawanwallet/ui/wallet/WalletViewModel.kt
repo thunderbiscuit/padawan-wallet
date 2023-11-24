@@ -75,7 +75,7 @@ class WalletViewModel(
     val isRefreshing: StateFlow<Boolean>
         get() = _isRefreshing.asStateFlow()
 
-    var isOnlineVariable: MutableStateFlow<Boolean> = MutableStateFlow(false)
+    var isOnline: MutableStateFlow<Boolean> = MutableStateFlow(false)
 
     init {
         Log.i(TAG, "The WalletScreen viewmodel is being initialized...")
@@ -89,15 +89,11 @@ class WalletViewModel(
                 }
         }
 
-        if (isOnlineVariable.value == true && !Wallet.blockchainIsInitialized()) {
-            Wallet.createBlockchain()
-        }
-
         updateConnectivityStatus(application)
 
-        // app will sync on initialization of the viewmodel
+        // app will sync on initialization of the viewmodel after an 4 seconds delay
         viewModelScope.launch {
-            delay(8000)
+            delay(4000)
             refresh(application)
         }
     }
@@ -112,17 +108,6 @@ class WalletViewModel(
     fun onNegativeDialogClick() {
         openFaucetDialog.value = false
     }
-
-    // private fun didWeOfferFaucet(): Boolean {
-    //     val faucetOfferDone = WalletRepository.didWeOfferFaucet()
-    //     Log.i(TAG, "We have already asked if they wanted testnet coins: $faucetOfferDone")
-    //     return faucetOfferDone
-    // }
-
-    // private fun faucetOfferWasMade() {
-    //     Log.i(TAG, "The offer to call the faucet was made")
-    //     WalletRepository.offerFaucetDone()
-    // }
 
     private fun faucetCallDone() {
         WalletRepository.faucetCallDone()
@@ -154,8 +139,8 @@ class WalletViewModel(
     // Refreshing & Syncing
     fun refresh(context: Context) {
         val pendingString = context.getString(R.string.pending)
-        if (isOnlineVariable.value == true) {
-            if (!Wallet.blockchainIsInitialized()) { Wallet.createBlockchain() }
+        if (isOnline.value) {
+            // if (!Wallet.blockchainIsInitialized()) { Wallet.createBlockchain() }
             viewModelScope.launch(Dispatchers.IO) {
                 _isRefreshing.value = true
                 updateBalance()
@@ -251,7 +236,7 @@ class WalletViewModel(
             false
         }
         Log.i(TAG, "Updating online status to $onlineStatus")
-        isOnlineVariable.value = onlineStatus
+        isOnline.value = onlineStatus
     }
 
     fun broadcastTransaction(

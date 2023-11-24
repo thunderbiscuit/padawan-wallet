@@ -50,12 +50,6 @@ import com.goldenraven.padawanwallet.utils.formatCurrency
 import com.goldenraven.padawanwallet.utils.formatInBtc
 import com.goldenraven.padawanwallet.utils.getScreenSizeWidth
 
-// TODO Think about reintroducing refreshing
-// TODO Reuse composable more
-// TODO Handle no internet connection situations
-// TODO Handle old faucet dialog
-// TODO Finish up send & receive screen
-
 private const val TAG = "WalletRootScreen"
 
 @Composable
@@ -65,7 +59,7 @@ internal fun WalletRootScreen(
 ) {
     val balance by walletViewModel.balance.collectAsState()
     val transactionList by walletViewModel.readAllData.collectAsState(initial = emptyList())
-    val isOnlineStatus by walletViewModel.isOnlineVariable.collectAsState()
+    val isOnline by walletViewModel.isOnline.collectAsState()
     val tempOpenFaucetDialog = walletViewModel.openFaucetDialog
     val context = LocalContext.current
 
@@ -88,11 +82,11 @@ internal fun WalletRootScreen(
         //     modifier = Modifier.align(Alignment.CenterHorizontally),
         //     text = Greeting().greet()
         // )
-        if (isOnlineStatus == false) { NoNetworkBanner(walletViewModel, context) }
+        if (!isOnline) { NoNetworkBanner(walletViewModel, context) }
         BalanceBox(balance = balance ?: 0uL, viewModel = walletViewModel)
         Spacer(modifier = Modifier.height(height = 12.dp))
-        SendReceive(navController = navController)
-        TransactionListBox(tempOpenFaucetDialog = tempOpenFaucetDialog, transactionList = transactionList, navController = navController)
+        SendReceive(navController, isOnline)
+        TransactionListBox(tempOpenFaucetDialog = tempOpenFaucetDialog, transactionList = transactionList, navController = navController, isOnline = isOnline)
     }
 }
 
@@ -273,7 +267,7 @@ fun BalanceBox(
 }
 
 @Composable
-fun SendReceive(navController: NavHostController) {
+fun SendReceive(navController: NavHostController, isOnline: Boolean) {
     val screenSizeWidth: ScreenSizeWidth = getScreenSizeWidth(LocalConfiguration.current.screenWidthDp)
 
     Row(
@@ -307,9 +301,13 @@ fun SendReceive(navController: NavHostController) {
         }
         Button(
             onClick = { ClickHelper.clickOnce { navController.navigate(Screen.SendScreen.route) }},
-            colors = ButtonDefaults.buttonColors(containerColor = padawan_theme_button_primary),
+            colors = ButtonDefaults.buttonColors(
+                containerColor = padawan_theme_button_primary,
+                disabledContainerColor = Color.White
+            ),
             shape = RoundedCornerShape(20.dp),
             border = standardBorder,
+            enabled = isOnline,
             modifier = Modifier
                 .padding(all = 4.dp)
                 .standardShadow(20.dp)
@@ -337,6 +335,7 @@ fun TransactionListBox(
     tempOpenFaucetDialog: MutableState<Boolean>,
     transactionList: List<Tx>,
     navController: NavHostController,
+    isOnline: Boolean
 ) {
     Row(modifier = Modifier.padding(top = 24.dp, bottom = 8.dp)) {
         Text(
@@ -375,10 +374,14 @@ fun TransactionListBox(
                     )
                     Button(
                         onClick = { tempOpenFaucetDialog.value = true },
+                        enabled = isOnline,
                         modifier = Modifier
                             .padding(all = 8.dp)
                             .standardShadow(20.dp),
-                        colors = ButtonDefaults.buttonColors(containerColor = padawan_theme_button_primary),
+                        colors = ButtonDefaults.buttonColors(
+                            containerColor = padawan_theme_button_primary,
+                            disabledContainerColor = Color.White
+                        ),
                         shape = RoundedCornerShape(20.dp),
                         border = standardBorder
                     ) {
@@ -412,7 +415,6 @@ fun TransactionListBox(
                                 text = "${tx.txid.take(n = 5)}.....${tx.txid.takeLast(n = 5)}",
                                 style = PadawanTypography.bodyMedium,
                                 fontWeight = FontWeight.SemiBold,
-                                // fontFamily = ShareTechMono,
                                 maxLines = 1,
                                 modifier = Modifier
                                     .align(Alignment.BottomStart)
@@ -428,7 +430,6 @@ fun TransactionListBox(
                         Box(modifier = Modifier
                             .fillMaxWidth()
                             .padding(vertical = 4.dp)) {
-                            // val message = if (tx.date == "Pending") "Pending" else "${getDateDifference(date = tx.date)} ago"
                             Text(
                                 text = tx.date,
                                 style = PadawanTypography.bodySmall,
@@ -603,6 +604,7 @@ internal fun PreviewSendReceiveRow() {
     PadawanTheme {
         SendReceive(
             rememberNavController(),
+            isOnline = true
         )
     }
 }

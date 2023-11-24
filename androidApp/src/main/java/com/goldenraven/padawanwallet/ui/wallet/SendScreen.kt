@@ -450,7 +450,7 @@ fun TransactionConfirmation(
             onClick = {
                 val psbt = txBuilderResult.value?.psbt ?: throw Exception()
                 viewModel.updateConnectivityStatus(context)
-                if (!viewModel.isOnlineVariable.value) {
+                if (!viewModel.isOnline.value) {
                     scope.launch {
                          scaffoldState.snackbarHostState.showSnackbar(
                             message = snackbarMessage,
