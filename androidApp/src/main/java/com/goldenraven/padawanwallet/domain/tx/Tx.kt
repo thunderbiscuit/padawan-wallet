@@ -3,7 +3,7 @@
  * Use of this source code is governed by the Apache 2.0 license that can be found in the ./LICENSE file.
  */
 
-package com.goldenraven.padawanwallet.data.tx
+package com.goldenraven.padawanwallet.domain.tx
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

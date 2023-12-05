@@ -7,9 +7,9 @@ package com.goldenraven.padawanwallet
 
 import android.app.Application
 import android.content.Context
-import com.goldenraven.padawanwallet.data.tutorials.TutorialRepository
-import com.goldenraven.padawanwallet.data.wallet.WalletRepository
-import com.goldenraven.padawanwallet.data.wallet.Wallet
+import com.goldenraven.padawanwallet.domain.tutorials.TutorialRepository
+import com.goldenraven.padawanwallet.domain.wallet.WalletRepository
+import com.goldenraven.padawanwallet.domain.wallet.Wallet
 
 class PadawanWalletApplication : Application() {
 

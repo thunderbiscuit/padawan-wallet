@@ -38,7 +38,7 @@ import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.goldenraven.padawanwallet.R
-import com.goldenraven.padawanwallet.data.tx.Tx
+import com.goldenraven.padawanwallet.domain.tx.Tx
 import com.goldenraven.padawanwallet.theme.*
 import com.goldenraven.padawanwallet.ui.composables.FadedVerticalDivider
 import com.goldenraven.padawanwallet.ui.composables.LoadingAnimation

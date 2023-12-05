@@ -53,8 +53,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.goldenraven.padawanwallet.R
-import com.goldenraven.padawanwallet.data.tutorials.ElementType
-import com.goldenraven.padawanwallet.data.tutorials.Page
+import com.goldenraven.padawanwallet.domain.tutorials.ElementType
+import com.goldenraven.padawanwallet.domain.tutorials.Page
 import com.goldenraven.padawanwallet.theme.PadawanTypography
 import com.goldenraven.padawanwallet.theme.padawan_theme_background_secondary
 import com.goldenraven.padawanwallet.theme.padawan_theme_button_primary
