@@ -16,6 +16,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.selection.selectable
 import androidx.compose.material3.RadioButton
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
@@ -30,7 +31,7 @@ import com.goldenraven.padawanwallet.R
 import com.goldenraven.padawanwallet.ui.theme.PadawanTypography
 import com.goldenraven.padawanwallet.ui.theme.padawan_theme_background_secondary
 import com.goldenraven.padawanwallet.ui.theme.padawan_theme_text_faded_secondary
-import com.goldenraven.padawanwallet.ui.components.PadawanAppBar
+import com.goldenraven.padawanwallet.ui.components.SecondaryScreenAppBar
 
 private const val TAG = "LanguagesScreen"
 
@@ -38,23 +39,32 @@ private const val TAG = "LanguagesScreen"
 internal fun LanguagesScreen(
     navController: NavHostController
 ) {
-    Column(
-        Modifier
-            .background(padawan_theme_background_secondary)
-            .padding(bottom = 12.dp)
-            .fillMaxSize()
-    ) {
-        PadawanAppBar(navController = navController, title = stringResource(R.string.change_language))
-        Text(
-            text = stringResource(R.string.select_your_preferred_language),
-            modifier = Modifier.padding(start = 24.dp, end = 24.dp),
-            style = PadawanTypography.bodyMedium,
-            color = padawan_theme_text_faded_secondary
-        )
+    Scaffold(
+        topBar = {
+            SecondaryScreenAppBar(
+                title = stringResource(R.string.change_language),
+                onClick = { navController.popBackStack() }
+            )
+        }
+    ) { paddingValues ->
+        Column(
+            Modifier
+                .background(padawan_theme_background_secondary)
+                .padding(paddingValues)
+                .padding(bottom = 12.dp)
+                .fillMaxSize()
+        ) {
+            Text(
+                text = stringResource(R.string.select_your_preferred_language),
+                modifier = Modifier.padding(start = 24.dp, end = 24.dp),
+                style = PadawanTypography.bodyMedium,
+                color = padawan_theme_text_faded_secondary
+            )
 
-        Spacer(modifier = Modifier.padding(vertical = 24.dp))
+            Spacer(modifier = Modifier.padding(vertical = 24.dp))
 
-        LanguageChoiceRadioButtons()
+            LanguageChoiceRadioButtons()
+        }
     }
 }
 
@@ -83,7 +93,8 @@ fun LanguageChoiceRadioButtons() {
                         onClick = {
                             onOptionSelected(language)
                             val languageCode: String = getSupportedLanguageCode(language)
-                            val appLocale: LocaleListCompat = LocaleListCompat.forLanguageTags(languageCode)
+                            val appLocale: LocaleListCompat =
+                                LocaleListCompat.forLanguageTags(languageCode)
                             AppCompatDelegate.setApplicationLocales(appLocale)
                         }
                     )

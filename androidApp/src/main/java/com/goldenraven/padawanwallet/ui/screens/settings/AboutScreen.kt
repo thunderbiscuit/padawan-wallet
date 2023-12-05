@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -26,44 +27,53 @@ import com.goldenraven.padawanwallet.ui.theme.PadawanTypography
 import com.goldenraven.padawanwallet.ui.theme.padawan_theme_background_secondary
 import com.goldenraven.padawanwallet.ui.theme.padawan_theme_button_primary
 import com.goldenraven.padawanwallet.ui.theme.padawan_theme_text_faded_secondary
-import com.goldenraven.padawanwallet.ui.components.PadawanAppBar
+import com.goldenraven.padawanwallet.ui.components.SecondaryScreenAppBar
 
 @Composable
 internal fun AboutScreen(
     navController: NavHostController
 ) {
-    val scrollState = rememberScrollState()
-    Column(
-        Modifier
-            .verticalScroll(state = scrollState)
-            .background(padawan_theme_background_secondary)
-            .padding(bottom = 12.dp)
-    ) {
-        PadawanAppBar(navController = navController, title = stringResource(R.string.about_padawan))
-        Text(
-            text = stringResource(R.string.about_text),
-            modifier = Modifier.padding(start = 24.dp, end = 24.dp),
-            style = PadawanTypography.bodyMedium,
-            color = padawan_theme_text_faded_secondary
-        )
-        Spacer(Modifier.height(24.dp))
-        Text(
-            text = stringResource(R.string.privacyText),
-            modifier = Modifier.padding(start = 24.dp, end = 24.dp),
-            style = PadawanTypography.bodyMedium,
-            color = padawan_theme_text_faded_secondary
-        )
-        Spacer(Modifier.height(24.dp))
-        val mUriHandler = LocalUriHandler.current
-        val privacyLink = stringResource(id = R.string.privacyLink)
-        Text(
-            text = privacyLink,
-            modifier = Modifier
-                .clickable { mUriHandler.openUri(privacyLink) }
-                .padding(start = 24.dp, end = 24.dp),
-            style = PadawanTypography.bodyMedium,
-            color = padawan_theme_button_primary,
-            textDecoration = TextDecoration.Underline
-        )
+    Scaffold(
+        topBar = {
+            SecondaryScreenAppBar(
+                title = stringResource(R.string.about_padawan),
+                onClick = { navController.popBackStack() }
+            )
+        }
+    ) { paddingValues ->
+        val scrollState = rememberScrollState()
+        Column(
+            Modifier
+                .verticalScroll(state = scrollState)
+                .background(padawan_theme_background_secondary)
+                .padding(paddingValues)
+                .padding(bottom = 12.dp)
+        ) {
+            Text(
+                text = stringResource(R.string.about_text),
+                modifier = Modifier.padding(start = 24.dp, end = 24.dp),
+                style = PadawanTypography.bodyMedium,
+                color = padawan_theme_text_faded_secondary
+            )
+            Spacer(Modifier.height(24.dp))
+            Text(
+                text = stringResource(R.string.privacyText),
+                modifier = Modifier.padding(start = 24.dp, end = 24.dp),
+                style = PadawanTypography.bodyMedium,
+                color = padawan_theme_text_faded_secondary
+            )
+            Spacer(Modifier.height(24.dp))
+            val mUriHandler = LocalUriHandler.current
+            val privacyLink = stringResource(id = R.string.privacyLink)
+            Text(
+                text = privacyLink,
+                modifier = Modifier
+                    .clickable { mUriHandler.openUri(privacyLink) }
+                    .padding(start = 24.dp, end = 24.dp),
+                style = PadawanTypography.bodyMedium,
+                color = padawan_theme_button_primary,
+                textDecoration = TextDecoration.Underline
+            )
+        }
     }
 }

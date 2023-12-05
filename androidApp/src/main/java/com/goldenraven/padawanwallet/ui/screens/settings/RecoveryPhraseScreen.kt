@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Card
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -24,7 +25,7 @@ import androidx.navigation.NavHostController
 import com.goldenraven.padawanwallet.R
 import com.goldenraven.padawanwallet.domain.wallet.WalletRepository
 import com.goldenraven.padawanwallet.ui.theme.padawan_theme_background_secondary
-import com.goldenraven.padawanwallet.ui.components.PadawanAppBar
+import com.goldenraven.padawanwallet.ui.components.SecondaryScreenAppBar
 import com.goldenraven.padawanwallet.ui.components.standardBorder
 
 @Composable
@@ -35,28 +36,36 @@ internal fun RecoveryPhraseScreen(
     val seedPhrase: String = WalletRepository.getMnemonic()
     val wordList: List<String> = seedPhrase.split(" ")
 
-    Column (
-        modifier = Modifier
-            .background(padawan_theme_background_secondary)
-            .fillMaxSize()
-            .verticalScroll(state = scrollState)
-    ){
-        PadawanAppBar(navController = navController, title = stringResource(R.string.your_recovery_phrase))
-        wordList.forEachIndexed { index, item ->
-            Row(
-                horizontalArrangement = Arrangement.Center,
-                verticalAlignment = Alignment.CenterVertically,
-                modifier = Modifier.padding(start = 24.dp, end = 24.dp, bottom = 12.dp),
-            ) {
-                Text(text = "${index + 1}: ")
-                Card(
-                    border = standardBorder,
+    Scaffold(
+        topBar = {
+            SecondaryScreenAppBar(
+                title = stringResource(R.string.your_recovery_phrase),
+                onClick = { navController.popBackStack() }
+            )
+        }
+    ) { paddingValues ->
+        Column (
+            modifier = Modifier
+                .background(padawan_theme_background_secondary)
+                .padding(paddingValues)
+                .fillMaxSize()
+                .verticalScroll(state = scrollState)
+        ){
+            wordList.forEachIndexed { index, item ->
+                Row(
+                    horizontalArrangement = Arrangement.Center,
+                    verticalAlignment = Alignment.CenterVertically,
+                    modifier = Modifier.padding(start = 24.dp, end = 24.dp, bottom = 12.dp),
                 ) {
-                    Text(
-                        text = item,
-                        modifier = Modifier
-                            .padding(start = 8.dp, end = 8.dp, top = 8.dp, bottom = 8.dp)
-                    )
+                    Text(text = "${index + 1}: ")
+                    Card(
+                        border = standardBorder,
+                    ) {
+                        Text(
+                            text = item,
+                            modifier = Modifier.padding(all = 8.dp)
+                        )
+                    }
                 }
             }
         }

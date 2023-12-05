@@ -86,14 +86,13 @@ internal fun ReceiveScreen(
     }
 
     Scaffold(
+        // topBar = { PadawanAppBar(navController = navController, title = stringResource(R.string.receive_bitcoin)) },
         snackbarHost = { SnackbarHost(snackbarHostState) }
     ) { paddingValues ->
-
-        // PadawanAppBar(navController = navController, title = stringResource(R.string.receive_bitcoin))
-
         ConstraintLayout(
             modifier = Modifier
                 .fillMaxSize()
+                .padding(paddingValues)
                 .gradientBackground()
         ) {
             val (screenTitle, QRCode, bottomButtons) = createRefs()

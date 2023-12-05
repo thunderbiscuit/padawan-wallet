@@ -53,8 +53,10 @@ internal fun HomeScreen(walletViewModel: WalletViewModel, chaptersViewModel: Cha
     // we need to bring them back on before continuing
     ShowBars()
 
-    Scaffold(bottomBar = { BottomNavigationBar(navControllerWalletNavigation) }) { innerPadding ->
-        Box(modifier = Modifier.padding(innerPadding)) {
+    Scaffold(
+        bottomBar = { BottomNavigationBar(navControllerWalletNavigation) }
+    ) { paddingValues ->
+        Box(modifier = Modifier.padding(paddingValues)) {
             WalletNavigation(navControllerWalletNavigation = navControllerWalletNavigation, walletViewModel = walletViewModel, chaptersViewModel = chaptersViewModel)
         }
     }

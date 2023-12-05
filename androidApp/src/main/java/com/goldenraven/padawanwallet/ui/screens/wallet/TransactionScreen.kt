@@ -67,7 +67,6 @@ internal fun TransactionScreen(
         ScreenSizeWidth.Phone -> 32.dp
     }
 
-
     ConstraintLayout(
         modifier = Modifier
             .fillMaxSize()

@@ -41,7 +41,7 @@ import com.goldenraven.padawanwallet.R
 import com.goldenraven.padawanwallet.ui.theme.PadawanTypography
 import com.goldenraven.padawanwallet.ui.theme.padawan_theme_background_secondary
 import com.goldenraven.padawanwallet.ui.theme.padawan_theme_text_faded_secondary
-import com.goldenraven.padawanwallet.ui.components.PadawanAppBar
+import com.goldenraven.padawanwallet.ui.components.SecondaryScreenAppBar
 import com.goldenraven.padawanwallet.utils.copyToClipboard
 
 @Composable
@@ -80,6 +80,12 @@ internal fun SendCoinsBackScreen(
         }
     )
     Scaffold(
+        topBar = {
+            SecondaryScreenAppBar(
+                title = stringResource(R.string.send_your_coins_back_to_us),
+                onClick = { navController.popBackStack() }
+            )
+        },
         snackbarHost = { SnackbarHost(snackbarHostState) }
     ) { padding ->
         Column(
@@ -90,7 +96,6 @@ internal fun SendCoinsBackScreen(
                 .padding(padding)
         ) {
             val returnAddress: String = stringResource(R.string.send_coins_back_address)
-            PadawanAppBar(navController = navController, title = stringResource(R.string.send_your_coins_back_to_us))
             Image(
                 painterResource(R.drawable.return_sats_faucet_address),
                 contentDescription = stringResource(R.string.return_sats_faucet_address_image),
