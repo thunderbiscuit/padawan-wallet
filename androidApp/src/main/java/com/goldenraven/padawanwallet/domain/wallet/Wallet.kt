@@ -20,7 +20,6 @@ import org.bitcoindevkit.KeychainKind
 import org.bitcoindevkit.Mnemonic
 import org.bitcoindevkit.Network
 import org.bitcoindevkit.PartiallySignedTransaction
-import org.bitcoindevkit.Progress
 import org.bitcoindevkit.SqliteDbConfiguration
 import org.bitcoindevkit.TransactionDetails
 import org.bitcoindevkit.TxBuilder
@@ -41,7 +40,7 @@ object Wallet {
         blockchain
     }
 
-    // setting the path requires the application context and is done once by PadawanWalletApplication
+    // Setting the path requires the application context and is done once by PadawanWalletApplication
     fun setPath(path: String) {
         Wallet.path = path
     }
@@ -58,11 +57,6 @@ object Wallet {
             database
         )
     }
-
-    // fun createBlockchain() {
-    //     val blockchainConfig = BlockchainConfig.Electrum(ElectrumConfig(electrumURL, null, 5u, null, 10u, true))
-    //     blockchain = Blockchain(blockchainConfig)
-    // }
 
     fun loadExistingWallet() {
         val initialWalletData: RequiredInitialWalletData = WalletRepository.getInitialWalletData()
@@ -114,35 +108,13 @@ object Wallet {
         WalletRepository.saveMnemonic(mnemonic.asString())
     }
 
-    // private fun generateExtendedKey(): ExtendedKeyInfo {
-    //     return generateExtendedKey(Network.TESTNET, WordCount.WORDS12, null)
-    // }
-
-    // private fun restoreExtendedKeyFromMnemonic(mnemonic: String): ExtendedKeyInfo {
-    //     return restoreExtendedKey(Network.TESTNET, mnemonic, null)
-    // }
-
-    // private fun createDescriptor(keys: ExtendedKeyInfo): String {
-    //     Log.i(TAG,"Descriptor for receive addresses is wpkh(${keys.xprv}/84'/1'/0'/0/*)")
-    //     return ("wpkh(${keys.xprv}/84'/1'/0'/0/*)")
-    // }
-
-    // private fun createChangeDescriptor(keys: ExtendedKeyInfo): String {
-    //     Log.i(TAG, "Descriptor for change addresses is wpkh(${keys.xprv}/84'/1'/0'/1/*)")
-    //     return ("wpkh(${keys.xprv}/84'/1'/0'/1/*)")
-    // }
-
     fun sync() {
-        wallet.sync(blockchain = blockchain, progress = LogProgress)
+        wallet.sync(blockchain = blockchain, progress = null)
     }
 
     fun getBalance(): ULong {
         return wallet.getBalance().total
     }
-
-    // fun getNewAddress(): AddressInfo {
-    //     return wallet.getAddress(AddressIndex.NEW)
-    // }
 
     fun getLastUnusedAddress(): AddressInfo {
         return wallet.getAddress(AddressIndex.LAST_UNUSED)
@@ -155,15 +127,6 @@ object Wallet {
             .feeRate(satPerVbyte = feeRate)
             .finish(wallet)
     }
-
-    // fun createSendAllTransaction(recipientAddress: String, feeRate: Float): TxBuilderResult {
-    //     val recipientScriptPubKey = Address(recipientAddress).scriptPubkey()
-    //     return TxBuilder()
-    //         .drainWallet()
-    //         .drainTo(recipientScriptPubKey)
-    //         .feeRate(satPerVbyte = feeRate)
-    //         .finish(wallet)
-    // }
 
     fun listTransactions(): List<TransactionDetails> {
         return wallet.listTransactions()
@@ -186,12 +149,6 @@ object Wallet {
     fun broadcast(signedPsbt: PartiallySignedTransaction): String {
         blockchain.broadcast(signedPsbt)
         return signedPsbt.txid()
-    }
-
-    // fun blockchainIsInitialized() = ::blockchain.isInitialized
-
-    object LogProgress: Progress {
-        override fun update(progress: Float, message: String?) = Unit
     }
 }
 
