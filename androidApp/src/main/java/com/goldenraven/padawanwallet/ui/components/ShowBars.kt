@@ -1,4 +1,4 @@
-package com.goldenraven.padawanwallet.ui.composables
+package com.goldenraven.padawanwallet.ui.components
 
 import androidx.compose.runtime.Composable
 import com.google.accompanist.systemuicontroller.rememberSystemUiController

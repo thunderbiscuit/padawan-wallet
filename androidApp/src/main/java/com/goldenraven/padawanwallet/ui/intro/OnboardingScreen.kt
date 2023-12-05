@@ -39,8 +39,8 @@ import com.goldenraven.padawanwallet.WalletCreateType
 import com.goldenraven.padawanwallet.theme.PadawanTypography
 import com.goldenraven.padawanwallet.theme.standardShadow
 import com.goldenraven.padawanwallet.ui.Screen
-import com.goldenraven.padawanwallet.ui.composables.ShowBars
-import com.goldenraven.padawanwallet.ui.composables.standardBorder
+import com.goldenraven.padawanwallet.ui.components.ShowBars
+import com.goldenraven.padawanwallet.ui.components.standardBorder
 import com.goldenraven.padawanwallet.utils.ScreenSizeHeight
 import com.goldenraven.padawanwallet.utils.getScreenSizeHeight
 import androidx.compose.material3.Text

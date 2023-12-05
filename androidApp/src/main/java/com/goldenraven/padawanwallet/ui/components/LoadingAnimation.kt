@@ -1,4 +1,4 @@
-package com.goldenraven.padawanwallet.ui.composables
+package com.goldenraven.padawanwallet.ui.components
 
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.RepeatMode

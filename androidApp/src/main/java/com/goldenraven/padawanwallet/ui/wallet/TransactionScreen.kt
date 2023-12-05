@@ -38,7 +38,7 @@ import com.goldenraven.padawanwallet.theme.padawan_disabled
 import com.goldenraven.padawanwallet.theme.padawan_theme_receive_primary
 import com.goldenraven.padawanwallet.theme.padawan_theme_send_primary
 import com.goldenraven.padawanwallet.theme.gradientBackground
-import com.goldenraven.padawanwallet.ui.composables.PadawanAppBar
+import com.goldenraven.padawanwallet.ui.components.PadawanAppBar
 import com.goldenraven.padawanwallet.utils.SatoshisIn
 import com.goldenraven.padawanwallet.utils.SatoshisOut
 import com.goldenraven.padawanwallet.utils.ScreenSizeWidth

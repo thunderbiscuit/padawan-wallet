@@ -63,7 +63,7 @@ import com.goldenraven.padawanwallet.theme.padawan_theme_onPrimary
 import com.goldenraven.padawanwallet.theme.padawan_theme_text_faded_secondary
 import com.goldenraven.padawanwallet.theme.padawan_theme_tutorial_background
 import com.goldenraven.padawanwallet.theme.standardShadow
-import com.goldenraven.padawanwallet.ui.composables.standardBorder
+import com.goldenraven.padawanwallet.ui.components.standardBorder
 import com.goldenraven.padawanwallet.utils.ScreenSizeWidth
 import com.goldenraven.padawanwallet.utils.getScreenSizeWidth
 import kotlinx.coroutines.CoroutineScope

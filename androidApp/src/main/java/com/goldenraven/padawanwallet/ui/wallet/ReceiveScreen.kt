@@ -48,9 +48,9 @@ import com.goldenraven.padawanwallet.theme.padawan_theme_background
 import com.goldenraven.padawanwallet.theme.padawan_theme_button_primary
 import com.goldenraven.padawanwallet.theme.gradientBackground
 import com.goldenraven.padawanwallet.theme.standardShadow
-import com.goldenraven.padawanwallet.ui.composables.LoadingAnimation
-import com.goldenraven.padawanwallet.ui.composables.PadawanAppBar
-import com.goldenraven.padawanwallet.ui.composables.standardBorder
+import com.goldenraven.padawanwallet.ui.components.LoadingAnimation
+import com.goldenraven.padawanwallet.ui.components.PadawanAppBar
+import com.goldenraven.padawanwallet.ui.components.standardBorder
 import com.goldenraven.padawanwallet.utils.ScreenSizeWidth
 import com.goldenraven.padawanwallet.utils.addressToQR
 import com.goldenraven.padawanwallet.utils.copyToClipboard

@@ -5,7 +5,6 @@
 
 package com.goldenraven.padawanwallet.ui
 
-import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Icon
@@ -37,7 +36,7 @@ import com.goldenraven.padawanwallet.theme.padawan_theme_background_secondary
 import com.goldenraven.padawanwallet.theme.padawan_theme_button_primary
 import com.goldenraven.padawanwallet.theme.padawan_theme_navigation_bar_unselected
 import com.goldenraven.padawanwallet.ui.chapters.ChaptersViewModel
-import com.goldenraven.padawanwallet.ui.composables.ShowBars
+import com.goldenraven.padawanwallet.ui.components.ShowBars
 import com.goldenraven.padawanwallet.utils.NavigationItem
 import com.goldenraven.padawanwallet.ui.wallet.WalletNavigation
 import com.goldenraven.padawanwallet.ui.wallet.WalletViewModel
