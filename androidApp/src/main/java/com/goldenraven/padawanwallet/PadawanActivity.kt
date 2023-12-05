@@ -14,11 +14,11 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.os.LocaleListCompat
 import com.goldenraven.padawanwallet.domain.wallet.WalletRepository
 import com.goldenraven.padawanwallet.domain.wallet.Wallet
-import com.goldenraven.padawanwallet.ui.intro.IntroNavigation
-import com.goldenraven.padawanwallet.theme.PadawanTheme
-import com.goldenraven.padawanwallet.ui.HomeNavigation
-import com.goldenraven.padawanwallet.ui.settings.SupportedLanguage
-import com.goldenraven.padawanwallet.ui.settings.getSupportedLanguageCode
+import com.goldenraven.padawanwallet.navigation.IntroNavigation
+import com.goldenraven.padawanwallet.ui.theme.PadawanTheme
+import com.goldenraven.padawanwallet.navigation.HomeNavigation
+import com.goldenraven.padawanwallet.ui.screens.settings.SupportedLanguage
+import com.goldenraven.padawanwallet.ui.screens.settings.getSupportedLanguageCode
 import com.goldenraven.padawanwallet.utils.SnackbarLevel
 import com.goldenraven.padawanwallet.utils.fireSnackbar
 import java.util.Locale

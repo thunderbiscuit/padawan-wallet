@@ -6,7 +6,6 @@
 package com.goldenraven.padawanwallet.utils
 
 import com.goldenraven.padawanwallet.R
-import com.goldenraven.padawanwallet.ui.Screen
 
 sealed class NavigationItem(val route: String, val iconOutline: Int, val title: String, val group: Set<String>) {
     class Home(title: String) : NavigationItem(

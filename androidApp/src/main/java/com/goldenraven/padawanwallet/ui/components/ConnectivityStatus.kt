@@ -27,8 +27,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.goldenraven.padawanwallet.R
-import com.goldenraven.padawanwallet.theme.connection_available
-import com.goldenraven.padawanwallet.theme.connection_unavailable
+import com.goldenraven.padawanwallet.ui.theme.connection_available
+import com.goldenraven.padawanwallet.ui.theme.connection_unavailable
 import kotlinx.coroutines.delay
 
 @Composable

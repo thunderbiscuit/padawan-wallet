@@ -25,10 +25,10 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.goldenraven.padawanwallet.R
-import com.goldenraven.padawanwallet.theme.Outfit
-import com.goldenraven.padawanwallet.theme.padawan_theme_background
-import com.goldenraven.padawanwallet.theme.padawan_theme_onBackground_secondary
-import com.goldenraven.padawanwallet.theme.standardShadow
+import com.goldenraven.padawanwallet.ui.theme.Outfit
+import com.goldenraven.padawanwallet.ui.theme.padawan_theme_background
+import com.goldenraven.padawanwallet.ui.theme.padawan_theme_onBackground_secondary
+import com.goldenraven.padawanwallet.ui.theme.standardShadow
 
 @Composable
 fun TutorialCard(

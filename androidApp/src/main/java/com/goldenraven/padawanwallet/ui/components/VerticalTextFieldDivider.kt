@@ -7,7 +7,7 @@ import androidx.compose.material3.Divider
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.goldenraven.padawanwallet.theme.padawan_theme_onPrimary
+import com.goldenraven.padawanwallet.ui.theme.padawan_theme_onPrimary
 
 @Composable
 internal fun VerticalTextFieldDivider() {

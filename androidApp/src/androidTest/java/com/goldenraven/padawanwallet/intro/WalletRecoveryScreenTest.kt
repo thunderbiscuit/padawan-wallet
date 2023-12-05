@@ -4,8 +4,8 @@ import android.util.Log
 import androidx.compose.ui.test.*
 import androidx.compose.ui.test.junit4.createComposeRule
 import com.goldenraven.padawanwallet.WalletCreateType
-import com.goldenraven.padawanwallet.theme.PadawanTheme
-import com.goldenraven.padawanwallet.ui.intro.WalletRecoveryScreen
+import com.goldenraven.padawanwallet.ui.theme.PadawanTheme
+import com.goldenraven.padawanwallet.ui.screens.intro.WalletRecoveryScreen
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
