@@ -68,15 +68,15 @@ internal fun ReceiveScreen(
     viewModel: WalletViewModel
 ) {
     val snackbarHostState = remember { SnackbarHostState() }
-    val address by viewModel.address.collectAsState("Generate new address")
+    val address: String by viewModel.address.collectAsState("1234")
     var QR by remember {
         mutableStateOf<ImageBitmap?>(null)
     }
     val qrUIState: QRUIState = viewModel.QRState.collectAsState(QRUIState.NoQR).value
 
-    LaunchedEffect(address){
-        withContext(Dispatchers.IO){
-            QR = addressToQR(address)
+    LaunchedEffect(address) {
+        withContext(Dispatchers.IO) {
+            if (address != "1234") QR = addressToQR(address)
         }
     }
 

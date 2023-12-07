@@ -65,7 +65,7 @@ class WalletViewModel(
     val balance: StateFlow<ULong>
         get() = _balance
 
-    private var _address: MutableStateFlow<String> = MutableStateFlow("")
+    private var _address: MutableStateFlow<String> = MutableStateFlow("1234")
     val address: StateFlow<String>
         get() = _address
 
