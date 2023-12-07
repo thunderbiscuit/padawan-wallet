@@ -9,7 +9,6 @@
 import Foundation
 import BitcoinDevKit
 
-
 extension TransactionDetails: Comparable {
     public static func == (lhs: BitcoinDevKit.TransactionDetails, rhs: BitcoinDevKit.TransactionDetails) -> Bool {
         
@@ -27,7 +26,6 @@ extension TransactionDetails: Comparable {
         return lhs_timestamp < rhs_timestamp
     }
 }
-
 
 enum HexConvertError: Error {
     case wrongInputStringLength
@@ -54,8 +52,8 @@ extension StringProtocol {
     }
 }
 
-
 struct WalletModel: Identifiable {
+    
     let id: String = UUID().uuidString //creates unique user id per model item
     let balance: UInt64
     let balanceText: String
@@ -87,9 +85,6 @@ class WalletViewModel: ObservableObject {
     @Published private(set) var transactions: [BitcoinDevKit.TransactionDetails] = []
     @Published private(set) var blockHeight: UInt32 = 0
     
-    
-    
-    
     func  getBlockHeight() {
         
         DispatchQueue.global().async { [weak self] in
@@ -105,7 +100,6 @@ class WalletViewModel: ObservableObject {
                     DispatchQueue.main.async {
                         self.blockHeight = tempBlockHeight
                     }
-                    
                 }
                 catch let error {
                     print(error)
@@ -150,7 +144,6 @@ class WalletViewModel: ObservableObject {
                 //                Pay-to-witness-script-hash scripts (P2WSH), through the wsh function.
                 //                Pay-to-taproot outputs (P2TR), through the tr function.
                 
-                
                 //from documentation
                 //                let descriptor = try Descriptor.init(descriptor: "wpkh(tprv8ZgxMBicQKsPdy6LMhUtFHAgpocR8GC6QmwMSFpZs7h6Eziw3SpThFfczTDh5rW2krkqffa11UpX3XkeTTB2FvzZKWXqPY54Y6Rq4AQ5R8L/84'/0'/0'/0/*)",network: network)
                 //                let changeDescriptor = try Descriptor.init(descriptor: "wpkh(tprv8ZgxMBicQKsPdy6LMhUtFHAgpocR8GC6QmwMSFpZs7h6Eziw3SpThFfczTDh5rW2krkqffa11UpX3XkeTTB2FvzZKWXqPY54Y6Rq4AQ5R8L/84'/0'/0'/1/*)",network: network)
@@ -167,7 +160,6 @@ class WalletViewModel: ObservableObject {
                 }
             }
         }
-        
     }
     
     func sync() {
@@ -204,5 +196,4 @@ class WalletViewModel: ObservableObject {
             }
         }
     }
-    
 }
