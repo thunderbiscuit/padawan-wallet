@@ -11,6 +11,8 @@
 		058557D9273AAEEB004C7B11 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 058557D8273AAEEB004C7B11 /* Preview Assets.xcassets */; };
 		2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2152FB032600AC8F00CF470E /* iOSApp.swift */; };
 		7555FF83242A565900829871 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7555FF82242A565900829871 /* ContentView.swift */; };
+		ED15662F2B30EE2B00366B32 /* ReceiveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED15662E2B30EE2B00366B32 /* ReceiveView.swift */; };
+		ED1566302B30EE2B00366B32 /* ReceiveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED15662E2B30EE2B00366B32 /* ReceiveView.swift */; };
 		ED71706D2B2208BD00354FC8 /* WalletView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED71706C2B2208BD00354FC8 /* WalletView.swift */; };
 		ED71706E2B2208BD00354FC8 /* WalletView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED71706C2B2208BD00354FC8 /* WalletView.swift */; };
 		ED7170702B2209D700354FC8 /* LearnView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED71706F2B2209D700354FC8 /* LearnView.swift */; };
@@ -58,6 +60,7 @@
 		7555FF82242A565900829871 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		7555FF8C242A565B00829871 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		ED08B9AD2B2100410094A442 /* iosAppNoJDK-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "iosAppNoJDK-Info.plist"; sourceTree = "<group>"; };
+		ED15662E2B30EE2B00366B32 /* ReceiveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiveView.swift; sourceTree = "<group>"; };
 		ED71706C2B2208BD00354FC8 /* WalletView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletView.swift; sourceTree = "<group>"; };
 		ED71706F2B2209D700354FC8 /* LearnView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnView.swift; sourceTree = "<group>"; };
 		ED7170722B220A8B00354FC8 /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
@@ -118,6 +121,7 @@
 				2152FB032600AC8F00CF470E /* iOSApp.swift */,
 				7555FF82242A565900829871 /* ContentView.swift */,
 				ED71706C2B2208BD00354FC8 /* WalletView.swift */,
+				ED15662E2B30EE2B00366B32 /* ReceiveView.swift */,
 				ED71706F2B2209D700354FC8 /* LearnView.swift */,
 				ED7170722B220A8B00354FC8 /* MenuView.swift */,
 				EDEBC8F82B1ECF44005974B4 /* WalletViewModel.swift */,
@@ -284,6 +288,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				ED7170702B2209D700354FC8 /* LearnView.swift in Sources */,
+				ED15662F2B30EE2B00366B32 /* ReceiveView.swift in Sources */,
 				ED7170732B220A8B00354FC8 /* MenuView.swift in Sources */,
 				EDEBC8F92B1ECF44005974B4 /* WalletViewModel.swift in Sources */,
 				2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */,
@@ -297,6 +302,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				ED7170712B2209D700354FC8 /* LearnView.swift in Sources */,
+				ED1566302B30EE2B00366B32 /* ReceiveView.swift in Sources */,
 				ED7170742B220A8B00354FC8 /* MenuView.swift in Sources */,
 				EDD84D0B2B1FAE1300816683 /* WalletViewModel.swift in Sources */,
 				EDD84D0C2B1FAE1300816683 /* iOSApp.swift in Sources */,

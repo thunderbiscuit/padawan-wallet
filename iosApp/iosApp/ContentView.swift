@@ -8,7 +8,7 @@ struct ContentView: View {
 //	let greet = Greeting().greet()
 
     enum Tab: Int {
-        case firstTab = 0, secondTab, thirdTab, fourthTab
+        case firstTab = 0, secondTab, thirdTab
     }
     
 // MARK: BODY

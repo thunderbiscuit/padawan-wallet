@@ -12,48 +12,64 @@ struct WalletView: View {
     
     @EnvironmentObject var viewModel: WalletViewModel
     @Binding var selectedTab: Int
-    
-    @State var isSelected: Bool = false
+   
+    @State var navigationPath: [String] = []
     
     var body: some View {
-        VStack(spacing: 40) {
+
+        NavigationStack(path: $navigationPath) {
             
-            RoundedRectangle(cornerRadius: 25)
-                .frame(height: 200)
-                .foregroundColor(isSelected ? Color.green : Color.red)
-            
-            Button(action: {
-                isSelected.toggle()
-            }, label: {
-                Text("Button")
-                    .font(.headline)
-                    .foregroundColor(.white)
-                    .frame(height: 55)
-                    .frame(maxWidth: .infinity)
-                    .background(Color.blue)
-                    .cornerRadius(25)
-            })
-            
-            Text("Double TAP Gesture")
-                .font(.headline)
-                .foregroundColor(.white)
-                .frame(height: 55)
-                .frame(maxWidth: .infinity)
-                .background(Color.blue)
-                .cornerRadius(25)
-//                .onTapGesture {
-//                    isSelected.toggle()
-//                }
-                .onTapGesture(count: 2, perform: {
-                    isSelected.toggle()
-                })
-            
-            Text("Wallet Item 1")
-            Text("Wallet Item 2")
-            
-            Spacer()
+            VStack(spacing: 40) {
+                
+                RoundedRectangle(cornerRadius: 20)
+                    .frame(height: 200)
+                    .foregroundColor( Color.purple)
+                
+                HStack {
+                    Button(action: {
+                        navigationPath.append("Receive ↓")
+                    }, label: {
+                        Text("Receive ↓")
+                            .font(.headline)
+                            .foregroundColor(.white)
+                            .frame(height: 55)
+                            .frame(maxWidth: .infinity)
+                            .background(Color.teal)
+                            .cornerRadius(20)
+                    })
+                    
+                    Button(action: {
+                        navigationPath.append("Send ↑")
+                    }, label: {
+                        Text("Send ↑")
+                            .font(.headline)
+                            .foregroundColor(.white)
+                            .frame(height: 55)
+                            .frame(maxWidth: .infinity)
+                            .background(Color.orange)
+                            .cornerRadius(20)
+                    })
+                    
+                }
+                .navigationDestination(for: String.self) { value in
+                    
+                    ReceiveView()
+                }
+                
+                HStack() {
+                    Text("Transactions")
+                        .font(.headline)
+                    Spacer()
+                }
+                
+                RoundedRectangle(cornerRadius: 20)
+                    .frame(height: 200)
+                    .foregroundColor(Color.yellow)
+                
+                Spacer()
+            }
+            .padding(40)
         }
-        .padding(40)
     }
 }
 
