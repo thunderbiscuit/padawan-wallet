@@ -11,6 +11,8 @@
 		058557D9273AAEEB004C7B11 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 058557D8273AAEEB004C7B11 /* Preview Assets.xcassets */; };
 		2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2152FB032600AC8F00CF470E /* iOSApp.swift */; };
 		7555FF83242A565900829871 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7555FF82242A565900829871 /* ContentView.swift */; };
+		ED10C4492B336CCB004C29D2 /* SendView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED10C4482B336CCB004C29D2 /* SendView.swift */; };
+		ED10C44A2B336CCB004C29D2 /* SendView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED10C4482B336CCB004C29D2 /* SendView.swift */; };
 		ED15662F2B30EE2B00366B32 /* ReceiveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED15662E2B30EE2B00366B32 /* ReceiveView.swift */; };
 		ED1566302B30EE2B00366B32 /* ReceiveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED15662E2B30EE2B00366B32 /* ReceiveView.swift */; };
 		ED71706D2B2208BD00354FC8 /* WalletView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED71706C2B2208BD00354FC8 /* WalletView.swift */; };
@@ -60,6 +62,7 @@
 		7555FF82242A565900829871 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		7555FF8C242A565B00829871 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		ED08B9AD2B2100410094A442 /* iosAppNoJDK-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "iosAppNoJDK-Info.plist"; sourceTree = "<group>"; };
+		ED10C4482B336CCB004C29D2 /* SendView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendView.swift; sourceTree = "<group>"; };
 		ED15662E2B30EE2B00366B32 /* ReceiveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiveView.swift; sourceTree = "<group>"; };
 		ED71706C2B2208BD00354FC8 /* WalletView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletView.swift; sourceTree = "<group>"; };
 		ED71706F2B2209D700354FC8 /* LearnView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnView.swift; sourceTree = "<group>"; };
@@ -122,6 +125,7 @@
 				7555FF82242A565900829871 /* ContentView.swift */,
 				ED71706C2B2208BD00354FC8 /* WalletView.swift */,
 				ED15662E2B30EE2B00366B32 /* ReceiveView.swift */,
+				ED10C4482B336CCB004C29D2 /* SendView.swift */,
 				ED71706F2B2209D700354FC8 /* LearnView.swift */,
 				ED7170722B220A8B00354FC8 /* MenuView.swift */,
 				EDEBC8F82B1ECF44005974B4 /* WalletViewModel.swift */,
@@ -293,6 +297,7 @@
 				EDEBC8F92B1ECF44005974B4 /* WalletViewModel.swift in Sources */,
 				2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */,
 				7555FF83242A565900829871 /* ContentView.swift in Sources */,
+				ED10C4492B336CCB004C29D2 /* SendView.swift in Sources */,
 				ED71706D2B2208BD00354FC8 /* WalletView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -307,6 +312,7 @@
 				EDD84D0B2B1FAE1300816683 /* WalletViewModel.swift in Sources */,
 				EDD84D0C2B1FAE1300816683 /* iOSApp.swift in Sources */,
 				EDD84D0D2B1FAE1300816683 /* ContentView.swift in Sources */,
+				ED10C44A2B336CCB004C29D2 /* SendView.swift in Sources */,
 				ED71706E2B2208BD00354FC8 /* WalletView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -104,7 +104,7 @@ struct ReceiveView: View {
             
             Spacer()
         }
-        .navigationTitle("Receive Address")
+        .navigationTitle("Receive Bitcoin")
         .padding(10)
         //.modifier(BackButtonMod())
         .onAppear(perform: {

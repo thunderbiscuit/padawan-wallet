@@ -53,7 +53,14 @@ struct WalletView: View {
                 }
                 .navigationDestination(for: String.self) { value in
                     
-                    ReceiveView()
+                    switch value {
+                    case "Receive ↓":
+                        ReceiveView()
+                    case "Send ↑":
+                        SendView()
+                    default:
+                        SendView()
+                    }
                 }
                 
                 HStack() {
