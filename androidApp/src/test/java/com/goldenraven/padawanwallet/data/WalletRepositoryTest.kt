@@ -1,7 +1,7 @@
 package com.goldenraven.padawanwallet.data
 
 import android.content.SharedPreferences
-import com.goldenraven.padawanwallet.data.wallet.WalletRepository
+import com.goldenraven.padawanwallet.domain.wallet.WalletRepository
 import com.goldenraven.padawanwallet.utils.RequiredInitialWalletData
 import org.junit.Assert.assertEquals
 import org.junit.Before
