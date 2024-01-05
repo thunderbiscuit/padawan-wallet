@@ -7,6 +7,7 @@ package com.goldenraven.padawanwallet.ui.screens.wallet
 
 import android.Manifest
 import android.content.pm.PackageManager
+import android.util.Log
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.camera.core.CameraSelector
@@ -51,6 +52,9 @@ import com.goldenraven.padawanwallet.ui.theme.md_theme_dark_background
 import com.goldenraven.padawanwallet.ui.theme.standardShadow
 import com.goldenraven.padawanwallet.ui.components.standardBorder
 import com.goldenraven.padawanwallet.utils.QRCodeAnalyzer
+import org.bitcointools.bip21.Bip21URI
+
+private const val TAG = "QRScanScreen"
 
 @Composable
 internal fun QRScanScreen(navController: NavHostController) {
@@ -118,9 +122,18 @@ internal fun QRScanScreen(navController: NavHostController) {
                                     ContextCompat.getMainExecutor(context),
                                     QRCodeAnalyzer { result ->
                                         result?.let {
+                                            Log.i(TAG, "QR Code detected: $it")
+
+                                            val address = try {
+                                                Bip21URI.fromUri(it).address.lowercase()
+                                            } catch (e: Exception) {
+                                                Log.i(TAG, "BIP21 parsing unsuccessful, $e")
+                                                it
+                                            }
+
                                             navController.previousBackStackEntry
                                                 ?.savedStateHandle
-                                                ?.set("BTC_Address", it)
+                                                ?.set("BTC_Address", address)
                                             imageAnalysis.clearAnalyzer()
                                             navController.popBackStack()
                                         }

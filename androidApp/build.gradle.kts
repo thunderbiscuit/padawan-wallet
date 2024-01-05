@@ -133,6 +133,7 @@ dependencies {
 
     // bitcoin
     implementation("org.bitcoindevkit:bdk-android:0.26.0")
+    implementation("org.kotlinbitcointools:bip21:0.0.5-SNAPSHOT")
 
     // Ktor
     implementation("io.ktor:ktor-client-cio:2.2.1")
