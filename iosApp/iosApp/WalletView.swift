@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import BitcoinDevKit
 
 struct WalletView: View {
     
@@ -14,6 +15,9 @@ struct WalletView: View {
     @Binding var selectedTab: Int
    
     @State var navigationPath: [String] = []
+    
+    @State private var satsBTC = "BTC"
+    var amountDisplayOptions = ["BTC", "sats"]
     
     var body: some View {
 
@@ -24,6 +28,50 @@ struct WalletView: View {
                 RoundedRectangle(cornerRadius: 20)
                     .frame(height: 200)
                     .foregroundColor( Color.purple)
+                    .overlay(
+                        VStack {
+                            Spacer()
+                            HStack {
+                                Text("Bitcoin Testnet")
+                                //VStack {
+                                    Picker("Display in BTC or sats?", selection: $satsBTC) {
+                                        ForEach(amountDisplayOptions, id: \.self) {
+                                            Text($0)
+                                        }
+                                    }
+                                    .pickerStyle(.segmented)
+                                    .onChange(of: satsBTC) {
+                                        if satsBTC == "BTC" {
+                                            viewModel.toggleBTCDisplay(displayOption: "BTC")
+                                        } else {
+                                            viewModel.toggleBTCDisplay(displayOption: "sats")
+                                        }
+                                    }
+                                //}
+                            }
+                            
+                            Spacer()
+                            VStack {
+                                Text(viewModel.balanceText).font(.largeTitle)
+                                Text("\(satsBTC)")
+                            }
+                            
+                            Spacer()
+                            Button(action: {
+                                viewModel.sync()
+                                satsBTC = amountDisplayOptions[0] //reset segment picker to display BTC
+                            }, label: {
+                                Text("Sync \(Image(systemName: "bitcoinsign.arrow.circlepath"))")
+                                .font(.headline)
+                                .foregroundColor(.white)
+                                .frame(height: 55)
+                                .frame(maxWidth: .infinity)
+                                .background(Color.black)
+                                .cornerRadius(20)
+                            }).padding(60)
+                            
+                        }.padding(20)
+                    )
                 
                 HStack {
                     Button(action: {
@@ -49,17 +97,40 @@ struct WalletView: View {
                             .background(Color.orange)
                             .cornerRadius(20)
                     })
-                    
                 }
-                .navigationDestination(for: String.self) { value in
+                .navigationDestination(for: String.self) { navigaionValue in
                     
-                    switch value {
-                    case "Receive ↓":
-                        ReceiveView()
-                    case "Send ↑":
-                        SendView()
-                    default:
-                        SendView()
+                    switch viewModel.state {
+                        
+                        case .loaded(let wallet, let blockchain):
+                            do {
+                                switch navigaionValue {
+                                    
+                                case "Receive ↓":
+                                    ReceiveView()
+                                case "Send ↑":
+                                    SendView(onSend: { recipient, amount, fee in
+                                        do {
+                                            let address = try Address(address: recipient)
+                                            let script = address.scriptPubkey()
+                                            let txBuilder = TxBuilder().addRecipient(script: script, amount: amount)
+                                                .feeRate(satPerVbyte: fee)
+                                            let details = try txBuilder.finish(wallet: wallet)
+                                            let _ = try wallet.sign(psbt: details.psbt, signOptions: nil)
+                                            let tx = details.psbt.extractTx()
+                                            try blockchain.broadcast(transaction: tx)
+                                            let txid = details.psbt.txid()
+                                            print(txid)
+                                           
+                                        } catch let error {
+                                            print(error)
+                                        }
+                                    })
+                                default:
+                                    Text("undefined button value")
+                                }
+                            }
+                        default: do { }
                     }
                 }
                 
@@ -69,14 +140,35 @@ struct WalletView: View {
                     Spacer()
                 }
                 
-                RoundedRectangle(cornerRadius: 20)
-                    .frame(height: 200)
-                    .foregroundColor(Color.yellow)
+                List {
+                    ForEach(0..<25) { _ in
+                      Text("txid")
+                    }
+                }
+//                        List {
+//                            ForEach(0..<viewModel.transactions.count) { each in
+//                                Text(viewModel.transactions[each].txid)
+//                            }
+//                        }
                 
-                Spacer()
+//                RoundedRectangle(cornerRadius: 20)
+//                    .frame(height: 200)
+//                    .foregroundColor(Color.yellow)
+//                    .overlay(
+//                        
+//                        List {
+//                            ForEach(0..<25) { _ in
+//                              Text("txid")
+//                            }
+//                        }
+//                    )
+                
+                Spacer(minLength: 0)
             }
             .padding(40)
-        }
+
+        }.onAppear(perform: viewModel.load)
+
     }
 }
 

@@ -85,6 +85,36 @@ class WalletViewModel: ObservableObject {
     @Published private(set) var transactions: [BitcoinDevKit.TransactionDetails] = []
     @Published private(set) var blockHeight: UInt32 = 0
     
+    
+    func onSend(recipient: String, amount: UInt64, fee: Float) -> Result<Int, Error> {
+        
+        switch state {
+            
+        case .loaded(let wallet, let blockchain):
+            
+                do {
+                    let address = try Address(address: recipient)
+                    let script = address.scriptPubkey()
+                    let txBuilder = TxBuilder().addRecipient(script: script, amount: amount).feeRate(satPerVbyte: fee)
+                    let details = try txBuilder.finish(wallet: wallet)
+                    let _ = try wallet.sign(psbt: details.psbt, signOptions: nil)
+                    let tx = details.psbt.extractTx()
+                    try blockchain.broadcast(transaction: tx)
+                    let txid = details.psbt.txid()
+                    print(txid)
+                    return(Result.success(1))
+                } 
+                catch let error {
+                    print(error)
+                    return(Result.failure(error))
+                }
+         
+        default:
+            print("error onSend")
+            return(Result.success(1))
+        }
+    }
+    
     func  getBlockHeight() {
         
         DispatchQueue.global().async { [weak self] in
@@ -94,7 +124,6 @@ class WalletViewModel: ObservableObject {
             case .loaded(_, let blockchain):
                 
                 do {
-                    
                     let tempBlockHeight = try blockchain.getHeight()
                     
                     DispatchQueue.main.async {
@@ -159,6 +188,16 @@ class WalletViewModel: ObservableObject {
                     self.state = State.failed(error)
                 }
             }
+        }
+    }
+    
+    func toggleBTCDisplay(displayOption: String) {
+        
+        if displayOption == "BTC" {
+            self.balanceText = String(format: "%.8f", Double(self.balance) / Double(100000000))
+        }
+        else {
+            self.balanceText = String(self.balance)
         }
     }
     

@@ -109,7 +109,7 @@ struct ReceiveView: View {
         //.modifier(BackButtonMod())
         .onAppear(perform: {
             getAddress()
-            viewModel.load()
+            viewModel.sync()
         })
     }
 }
