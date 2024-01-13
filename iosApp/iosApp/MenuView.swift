@@ -13,7 +13,10 @@ struct MenuView: View {
     @EnvironmentObject var viewModel: WalletViewModel
     @Binding var selectedTab: Int
     
-        @State var isSelected: Bool = false
+    @Environment(\.dismiss) var dismiss
+    @State private var isPresentedRecoverView = false
+    
+    @State var isSelected: Bool = false
     
         var body: some View {
     
@@ -28,7 +31,7 @@ struct MenuView: View {
                     Button(action: {
                         isSelected.toggle()
                     }, label: {
-                        Text("Receive ↓")
+                        Text("Do Nothing")
                             .font(.headline)
                             .foregroundColor(.white)
                             .frame(height: 55)
@@ -42,14 +45,18 @@ struct MenuView: View {
     
                     Button(action: {
                         isSelected.toggle()
+                        isPresentedRecoverView = true
                     }, label: {
-                        Text("Send ↑")
+                        Text("Recover Wallet")
                             .font(.headline)
                             .foregroundColor(.white)
                             .frame(height: 55)
                             .frame(maxWidth: .infinity)
                             .background(Color.orange)
                             .cornerRadius(20)
+                    })
+                    .fullScreenCover(isPresented: $isPresentedRecoverView, content: {
+                        RecoverView()
                     })
                 }
     
@@ -76,6 +83,6 @@ struct MenuView: View {
 }
 
 #Preview {
-    MenuView(selectedTab: .constant (0))
+    MenuView(selectedTab: .constant (2))
         .environmentObject(WalletViewModel())
 }

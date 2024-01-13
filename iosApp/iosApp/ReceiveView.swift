@@ -90,7 +90,7 @@ struct ReceiveView: View {
             Spacer()
             
             Button(action: getAddress) {
-                Text("Generate new address")
+                Text("Done")
                     //.font(.system(size: 16, design: .monospaced))
                     .font(.title)
                     .fontWeight(.bold)
@@ -101,6 +101,7 @@ struct ReceiveView: View {
                     .cornerRadius(20)
                     //.shadow(color: Color("Shadow"), radius: 1, x: 5, y: 5)
             }
+            .padding(40)
             
             Spacer()
         }

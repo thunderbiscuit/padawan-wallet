@@ -142,32 +142,28 @@ struct WalletView: View {
                 
                 List {
                     ForEach(0..<25) { _ in
-                      Text("txid")
+                      Text("txid 123456789abcdefghi")
                     }
                 }
-//                        List {
-//                            ForEach(0..<viewModel.transactions.count) { each in
-//                                Text(viewModel.transactions[each].txid)
-//                            }
-//                        }
                 
-//                RoundedRectangle(cornerRadius: 20)
-//                    .frame(height: 200)
-//                    .foregroundColor(Color.yellow)
-//                    .overlay(
-//                        
-//                        List {
-//                            ForEach(0..<25) { _ in
-//                              Text("txid")
-//                            }
-//                        }
-//                    )
+//                if viewModel.transactions.isEmpty {
+//                    Text("No transactions yet.").padding()
+//                }
+//                else {
+                    //                        List {
+                    //                            ForEach(0..<viewModel.transactions.count) { each in
+                    //                                Text(viewModel.transactions[each].txid)
+                    //                            }
+                    //                        }
+//                }
                 
-                Spacer(minLength: 0)
+                //Spacer(minLength: 0)
             }
             .padding(40)
 
-        }.onAppear(perform: viewModel.load)
+
+        } //navigation stack
+        .onAppear(perform: viewModel.load)
 
     }
 }

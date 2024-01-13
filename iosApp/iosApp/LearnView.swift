@@ -39,6 +39,6 @@ struct LearnView: View {
 }
 
 #Preview {
-    LearnView(selectedTab: .constant (0))
+    LearnView(selectedTab: .constant (1))
         .environmentObject(WalletViewModel())
 }

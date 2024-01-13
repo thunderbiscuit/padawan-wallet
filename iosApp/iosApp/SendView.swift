@@ -70,30 +70,26 @@ struct SendView: View {
                         .foregroundColor(isEditing ? .red : .blue)
             }
             .navigationTitle("Send Bitcoin")
-            
-        }.padding(40)
-        .onAppear(perform: viewModel.sync)
         
-        Spacer()
-        
-        Button(action: {
+            Spacer()
             
-            //btcAddress = "bc1qu5ujlp9dkvtgl98jakvw9ggj9uwyk79qhvwvrg" //for testing
-            //onSend(btcAddress, (UInt64(satsAmount) ?? 0), feeSatPerVbyte)
-            let sendResult = viewModel.onSend(recipient: btcAddress, amount: (UInt64(satsAmount) ?? 0), fee: feeSatPerVbyte)
-            
-            sendFailed = true //sendResult
-            
-        }, label: {
-            Text("Verify Transaction")
-                .font(.headline)
-                .foregroundColor(.white)
-                .frame(height: 55)
-                .frame(maxWidth: .infinity)
-                .background(Color.orange)
-                .cornerRadius(20)
-        })
-        .padding(40)
+            Button(action: {
+                
+                //btcAddress = "bc1qu5ujlp9dkvtgl98jakvw9ggj9uwyk79qhvwvrg" //for testing
+                //onSend(btcAddress, (UInt64(satsAmount) ?? 0), feeSatPerVbyte)
+                let sendResult = viewModel.onSend(recipient: btcAddress, amount: (UInt64(satsAmount) ?? 0), fee: feeSatPerVbyte)
+                
+                sendFailed = true //sendResult
+                
+            }, label: {
+                Text("Verify Transaction")
+                    .font(.headline)
+                    .foregroundColor(.white)
+                    .frame(height: 55)
+                    .frame(maxWidth: .infinity)
+                    .background(Color.orange)
+                    .cornerRadius(20)
+            })        
 //        .alert("Send Failed",
 //               isPresented: $sendFailed) {
 //               Button("Ok", role: .destructive) {
@@ -102,6 +98,9 @@ struct SendView: View {
 //        } message: {
 //               Text("Please, check entries")
 //        }
+            
+        }.padding(40)
+        .onAppear(perform: viewModel.sync)
     }
 }
 

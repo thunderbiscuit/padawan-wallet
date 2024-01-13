@@ -84,7 +84,14 @@ class WalletViewModel: ObservableObject {
     @Published private(set) var balanceText = "sync plz"
     @Published private(set) var transactions: [BitcoinDevKit.TransactionDetails] = []
     @Published private(set) var blockHeight: UInt32 = 0
+    @Published private(set) var firstTimeRunning: Bool = true
     
+    
+    func  firstTimeRunningToggle() {
+        
+        firstTimeRunning.toggle()
+        print(firstTimeRunning)
+    }
     
     func onSend(recipient: String, amount: UInt64, fee: Float) -> Result<Int, Error> {
         

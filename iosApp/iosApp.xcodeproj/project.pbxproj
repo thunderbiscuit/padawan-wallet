@@ -29,6 +29,10 @@
 		EDD84D122B1FAE1300816683 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 058557BA273AAA24004C7B11 /* Assets.xcassets */; };
 		EDEBC8F72B1E8289005974B4 /* BitcoinDevKit in Frameworks */ = {isa = PBXBuildFile; productRef = EDEBC8F62B1E8289005974B4 /* BitcoinDevKit */; };
 		EDEBC8F92B1ECF44005974B4 /* WalletViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDEBC8F82B1ECF44005974B4 /* WalletViewModel.swift */; };
+		EDFEA4102B520C5400662F84 /* RecoverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFEA40F2B520C5400662F84 /* RecoverView.swift */; };
+		EDFEA4112B520C5400662F84 /* RecoverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFEA40F2B520C5400662F84 /* RecoverView.swift */; };
+		EDFEA4132B5303C200662F84 /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFEA4122B5303C200662F84 /* WelcomeView.swift */; };
+		EDFEA4142B5303C200662F84 /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFEA4122B5303C200662F84 /* WelcomeView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -61,14 +65,16 @@
 		7555FF7B242A565900829871 /* iosApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iosApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7555FF82242A565900829871 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		7555FF8C242A565B00829871 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		ED08B9AD2B2100410094A442 /* iosAppNoJDK-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "iosAppNoJDK-Info.plist"; sourceTree = "<group>"; };
 		ED10C4482B336CCB004C29D2 /* SendView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendView.swift; sourceTree = "<group>"; };
 		ED15662E2B30EE2B00366B32 /* ReceiveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiveView.swift; sourceTree = "<group>"; };
 		ED71706C2B2208BD00354FC8 /* WalletView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletView.swift; sourceTree = "<group>"; };
 		ED71706F2B2209D700354FC8 /* LearnView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnView.swift; sourceTree = "<group>"; };
 		ED7170722B220A8B00354FC8 /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
+		ED7C197D2B51A362008365A4 /* iosAppNoJDK-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "iosAppNoJDK-Info.plist"; sourceTree = "<group>"; };
 		EDD84D172B1FAE1300816683 /* iosAppNoJDK.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iosAppNoJDK.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EDEBC8F82B1ECF44005974B4 /* WalletViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletViewModel.swift; sourceTree = "<group>"; };
+		EDFEA40F2B520C5400662F84 /* RecoverView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecoverView.swift; sourceTree = "<group>"; };
+		EDFEA4122B5303C200662F84 /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,6 +129,8 @@
 				058557BA273AAA24004C7B11 /* Assets.xcassets */,
 				2152FB032600AC8F00CF470E /* iOSApp.swift */,
 				7555FF82242A565900829871 /* ContentView.swift */,
+				EDFEA4122B5303C200662F84 /* WelcomeView.swift */,
+				EDFEA40F2B520C5400662F84 /* RecoverView.swift */,
 				ED71706C2B2208BD00354FC8 /* WalletView.swift */,
 				ED15662E2B30EE2B00366B32 /* ReceiveView.swift */,
 				ED10C4482B336CCB004C29D2 /* SendView.swift */,
@@ -130,7 +138,7 @@
 				ED7170722B220A8B00354FC8 /* MenuView.swift */,
 				EDEBC8F82B1ECF44005974B4 /* WalletViewModel.swift */,
 				7555FF8C242A565B00829871 /* Info.plist */,
-				ED08B9AD2B2100410094A442 /* iosAppNoJDK-Info.plist */,
+				ED7C197D2B51A362008365A4 /* iosAppNoJDK-Info.plist */,
 				058557D7273AAEEB004C7B11 /* Preview Content */,
 			);
 			path = iosApp;
@@ -293,8 +301,10 @@
 			files = (
 				ED7170702B2209D700354FC8 /* LearnView.swift in Sources */,
 				ED15662F2B30EE2B00366B32 /* ReceiveView.swift in Sources */,
+				EDFEA4102B520C5400662F84 /* RecoverView.swift in Sources */,
 				ED7170732B220A8B00354FC8 /* MenuView.swift in Sources */,
 				EDEBC8F92B1ECF44005974B4 /* WalletViewModel.swift in Sources */,
+				EDFEA4132B5303C200662F84 /* WelcomeView.swift in Sources */,
 				2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */,
 				7555FF83242A565900829871 /* ContentView.swift in Sources */,
 				ED10C4492B336CCB004C29D2 /* SendView.swift in Sources */,
@@ -308,8 +318,10 @@
 			files = (
 				ED7170712B2209D700354FC8 /* LearnView.swift in Sources */,
 				ED1566302B30EE2B00366B32 /* ReceiveView.swift in Sources */,
+				EDFEA4112B520C5400662F84 /* RecoverView.swift in Sources */,
 				ED7170742B220A8B00354FC8 /* MenuView.swift in Sources */,
 				EDD84D0B2B1FAE1300816683 /* WalletViewModel.swift in Sources */,
+				EDFEA4142B5303C200662F84 /* WelcomeView.swift in Sources */,
 				EDD84D0C2B1FAE1300816683 /* iOSApp.swift in Sources */,
 				EDD84D0D2B1FAE1300816683 /* ContentView.swift in Sources */,
 				ED10C44A2B336CCB004C29D2 /* SendView.swift in Sources */,
@@ -511,7 +523,7 @@
 					"$(inherited)",
 					"$(SRCROOT)/../shared/build/xcode-frameworks/$(CONFIGURATION)/$(SDK_NAME)",
 				);
-				INFOPLIST_FILE = "iosAppNoJDK-Info.plist";
+				INFOPLIST_FILE = "iosApp/iosAppNoJDK-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -536,7 +548,7 @@
 					"$(inherited)",
 					"$(SRCROOT)/../shared/build/xcode-frameworks/$(CONFIGURATION)/$(SDK_NAME)",
 				);
-				INFOPLIST_FILE = "iosAppNoJDK-Info.plist";
+				INFOPLIST_FILE = "iosApp/iosAppNoJDK-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
