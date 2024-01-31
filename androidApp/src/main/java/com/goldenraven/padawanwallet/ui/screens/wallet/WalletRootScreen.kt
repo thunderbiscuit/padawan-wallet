@@ -164,7 +164,7 @@ fun BalanceBox(
                 .fillMaxWidth()
         ) {
             val (cardName, currencyToggle, balanceText, currencyText, buttonRow) = createRefs()
-            val currencyToggleState = remember { mutableStateOf(value = true) }
+            var currencyToggleState by remember { mutableStateOf(true) }
             Text(
                 text = stringResource(R.string.bitcoin_testnet),
                 style = PadawanTypography.bodyMedium,
@@ -177,7 +177,7 @@ fun BalanceBox(
             Box(
                 modifier = Modifier
                     .noRippleClickable {
-                        currencyToggleState.value = !currencyToggleState.value
+                        currencyToggleState = !currencyToggleState
                     }
                     .background(
                         color = padawan_theme_button_secondary,
@@ -204,9 +204,9 @@ fun BalanceBox(
                     )
                 }
             }
-            var balanceDisplay: String = if (currencyToggleState.value) balance.toString() else balance.formatInBtc()
+            var balanceDisplay: String = if (currencyToggleState) balance.toString() else balance.formatInBtc()
             balanceDisplay = formatCurrency(balanceDisplay)
-            val currencyDisplay: String = if (currencyToggleState.value) {
+            val currencyDisplay: String = if (currencyToggleState) {
                 CurrencyType.SATS.toString().lowercase()
             } else {
                 CurrencyType.BTC.toString().lowercase()
@@ -498,8 +498,8 @@ fun TransactionListBox(
 }
 
 @Composable
-fun CurrencyToggleText(currencyToggleState: MutableState<Boolean>, text: CurrencyType) {
-    val currencyState = (!currencyToggleState.value && text == CurrencyType.BTC) || (currencyToggleState.value && text == CurrencyType.SATS)
+fun CurrencyToggleText(currencyToggleState: Boolean, text: CurrencyType) {
+    val currencyState = (!currencyToggleState && text == CurrencyType.BTC) || (currencyToggleState && text == CurrencyType.SATS)
 
     val colorTransition = updateTransition(
         targetState = if (currencyState) padawan_theme_onBackground_faded else padawan_theme_onPrimary,
@@ -560,13 +560,6 @@ private fun FaucetDialog(walletViewModel: WalletViewModel) {
                     verticalAlignment = Alignment.CenterVertically,
                     modifier = Modifier.padding(vertical = 4.dp)
                 ) {
-                    // Text(
-                    //     text = "Not now",
-                    //     style = PadawanTypography.labelMedium,
-                    //     fontSize = 12.sp,
-                    //     color = Color(0xff000000)
-                    // )
-                    // Spacer(modifier = Modifier.width(8.dp))
                     Icon(
                         painter = painterResource(id = R.drawable.ic_hicon_dislike),
                         contentDescription = stringResource(R.string.no_thank_you_icon),
@@ -596,13 +589,6 @@ private fun FaucetDialog(walletViewModel: WalletViewModel) {
                     verticalAlignment = Alignment.CenterVertically,
                     modifier = Modifier.padding(vertical = 4.dp)
                 ) {
-                    // Text(
-                    //     text = "Yes please!",
-                    //     style = PadawanTypography.labelMedium,
-                    //     fontSize = 12.sp,
-                    //     color = Color(0xff000000)
-                    // )
-                    // Spacer(modifier = Modifier.width(8.dp))
                     Icon(
                         painter = painterResource(id = R.drawable.ic_hicon_like),
                         contentDescription = stringResource(R.string.proceed_icon),

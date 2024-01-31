@@ -23,8 +23,10 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalConfiguration
@@ -45,17 +47,17 @@ import kotlinx.coroutines.delay
 @Composable
 internal fun PadawanAppBar(navController: NavHostController, title: String) {
     val screenSizeWidth = getScreenSizeWidth(LocalConfiguration.current.screenWidthDp)
-    val appBarVisibility = remember { mutableStateOf(value = false) }
+    var appBarVisibility by remember { mutableStateOf(value = false) }
 
 
     LaunchedEffect(key1 = true) {
         delay(500)
-        appBarVisibility.value = true
+        appBarVisibility = true
     }
-    if (!appBarVisibility.value) { Spacer(Modifier.height(100.dp)) }
+    if (!appBarVisibility) { Spacer(Modifier.height(100.dp)) }
 
     AnimatedVisibility(
-        visible = appBarVisibility.value,
+        visible = appBarVisibility,
         enter = fadeIn(tween(durationMillis = 500))
     ) {
         val (fontSize, horizontalPadding) = when (screenSizeWidth) {
