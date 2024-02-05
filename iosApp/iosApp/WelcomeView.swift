@@ -10,8 +10,11 @@ import SwiftUI
 
 struct WelcomeView: View {
     
+    @EnvironmentObject var viewModel: WalletViewModel
     @Environment(\.dismiss) var dismiss
     @State private var isPresentedRecoverView = false
+    
+    @AppStorage("isOnboarding") var isOnboarding: Bool?
     
     var body: some View {
         
@@ -33,7 +36,15 @@ struct WelcomeView: View {
             
             Spacer()
             Button(action: {
-                //TODO create a new wallet!
+                
+                do {
+                    try viewModel.createWallet(words: nil)
+                    
+                } catch {
+                    //                       self.walletViewError = .Generic(message: "Error Getting Transactions")
+                    print("error")
+                }
+                
                 dismiss()
             }, label: {
                 Text("Create a wallet")

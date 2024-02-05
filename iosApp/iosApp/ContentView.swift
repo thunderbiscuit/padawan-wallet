@@ -13,24 +13,16 @@ struct ContentView: View {
     
 // MARK: PROPERTIES
     
-   // @EnvironmentObject var viewModel: WalletViewModel
     @State var selectedTab: Int = 0
-//	let greet = Greeting().greet()
 
     enum Tab: Int {
         case firstTab = 0, secondTab, thirdTab
     }
     
-    @State public var firstTimeRunning: Bool = true
-    
 // MARK: BODY
 	var body: some View {
         
         Group {
-                    
-            //if viewModel.firstTimeRunning {
-                
-            //viewModel.firstTimeRunningToggle()
 
             TabView(selection: $selectedTab) {
                             
@@ -57,9 +49,9 @@ struct ContentView: View {
                     }
                     .tag(Tab.thirdTab.rawValue)
             }
-            .fullScreenCover(isPresented: $firstTimeRunning, content: {
-                WelcomeView()
-            })
+//            .fullScreenCover(isPresented: $firstTimeRunning, content: {
+//                WelcomeView()
+//            })
         }
 	}
 }

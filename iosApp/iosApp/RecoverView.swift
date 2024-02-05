@@ -8,7 +8,10 @@
 import SwiftUI
 
 struct RecoverView: View {
+    
+    @EnvironmentObject var viewModel: WalletViewModel
     @State private var words = Array(repeating: "", count: 12)
+
     @Environment(\.dismiss) var dismiss
     
     var body: some View {
@@ -33,14 +36,23 @@ struct RecoverView: View {
                     }
                     .disableAutocorrection(true).padding(.bottom, 10)
                     .textInputAutocapitalization(.never)
-                    
+                    Spacer()
                 }
                 .textFieldStyle(.roundedBorder)
                 
                 Spacer(minLength: 20)
                 
                 Button(action: {
-                    //TODO use $words to recover address
+                    
+                    if !words.isEmpty {
+                        do {
+                            let joinedWords = words.joined(separator: " ")
+                            try viewModel.createWallet(words: joinedWords)
+                        } catch {
+                            //                       self.walletViewError = .Generic(message: "Error Getting Transactions")
+                            print("error")
+                        }
+                    }
                     dismiss()
                 }, label: {
                     Text("Recover Wallet")

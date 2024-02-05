@@ -34,7 +34,10 @@ struct LearnView: View {
                 
             }
         }
-        .onAppear(perform: viewModel.load)
+        .onAppear{
+            viewModel.load()
+            viewModel.getBlockHeight()
+        }
     }
 }
 

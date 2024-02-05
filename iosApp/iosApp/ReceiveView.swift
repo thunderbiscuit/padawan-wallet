@@ -29,7 +29,7 @@ struct ReceiveView: View {
         switch viewModel.state {
             case .loaded(let wallet, _):
                 do {
-                    let addressInfo = try wallet.getAddress(addressIndex: AddressIndex.new)
+                    let addressInfo = try wallet.getAddress(addressIndex: AddressIndex.lastUnused)
                     address = addressInfo.address.asString()
                 } catch {
                     address = "ERROR"

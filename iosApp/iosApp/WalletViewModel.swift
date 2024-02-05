@@ -8,6 +8,7 @@
 
 import Foundation
 import BitcoinDevKit
+import SwiftUI
 
 extension TransactionDetails: Comparable {
     public static func == (lhs: BitcoinDevKit.TransactionDetails, rhs: BitcoinDevKit.TransactionDetails) -> Bool {
@@ -24,6 +25,12 @@ extension TransactionDetails: Comparable {
         let rhs_timestamp: UInt64 = rhs.confirmationTime?.timestamp ?? UInt64.max;
         
         return lhs_timestamp < rhs_timestamp
+    }
+}
+
+extension UInt64 {
+    func toDate() -> Date {
+        return Date(timeIntervalSince1970: TimeInterval(self))
     }
 }
 
@@ -61,7 +68,53 @@ struct WalletModel: Identifiable {
     let blockHeight: UInt32 = 0
 }
 
+struct EsploraServerURLNetwork {
+    struct Bitcoin {
+        private static let blockstream = "https://blockstream.info/api"
+        private static let kuutamo = "https://esplora.kuutamo.cloud"
+        private static let mempoolspace = "https://mempool.space/api"
+        private static let electrum = "ssl://electrum.blockstream.info:50002"
+        static let allValues = [
+            blockstream,
+            kuutamo,
+            mempoolspace,
+            electrum
+        ]
+    }
+    struct Regtest {
+        private static let local = "http://127.0.0.1:3002"
+        static let allValues = [
+            local
+        ]
+    }
+    struct Signet {
+        static let bdk = "https://signet.bitcoindevkit.net:3003/"
+        static let mutiny = "https://mutinynet.com/api"
+        static let allValues = [
+            bdk,
+            mutiny
+        ]
+    }
+    struct Testnet {
+        static let blockstream = "https://blockstream.info/testnet/api/"
+        static let kuutamo = "https://esplora.testnet.kuutamo.cloud"
+        static let mempoolspace = "https://mempool.space/testnet/api/"
+        static let electrum = "ssl://electrum.blockstream.info:60002" //"ssl://electrum.blockstream.info:50002"
+        static let allValues = [
+            blockstream,
+            kuutamo,
+            mempoolspace,
+            electrum
+        ]
+    }
+}
+
 class WalletViewModel: ObservableObject {
+    
+    @AppStorage("isOnboarding") var isOnboarding: Bool?
+    @AppStorage("secretMnemonic") var secretMnemonic: String? //TODO this will need to be stored in the keychain!!
+    @AppStorage("secretDescriptor") var secretDescriptor: String? //TODO this will need to be stored in the keychain!!
+    @AppStorage("secretChangeDescriptor") var secretChangeDescriptor: String? //TODO this will need to be stored in the keychain!!
     
     enum State {
         case empty
@@ -85,12 +138,18 @@ class WalletViewModel: ObservableObject {
     @Published private(set) var transactions: [BitcoinDevKit.TransactionDetails] = []
     @Published private(set) var blockHeight: UInt32 = 0
     @Published private(set) var firstTimeRunning: Bool = true
+    var network: Network = Network.testnet
+//    private var blockchainConfig: BlockchainConfig?
+//    private var wallet: Wallet?
     
-    
-    func  firstTimeRunningToggle() {
+    func toggleBTCDisplay(displayOption: String) {
         
-        firstTimeRunning.toggle()
-        print(firstTimeRunning)
+        if displayOption == "BTC" {
+            self.balanceText = String(format: "%.8f", Double(self.balance) / Double(100000000))
+        }
+        else {
+            self.balanceText = String(self.balance)
+        }
     }
     
     func onSend(recipient: String, amount: UInt64, fee: Float) -> Result<Int, Error> {
@@ -100,7 +159,7 @@ class WalletViewModel: ObservableObject {
         case .loaded(let wallet, let blockchain):
             
                 do {
-                    let address = try Address(address: recipient)
+                    let address = try Address(address: recipient, network: wallet.network())
                     let script = address.scriptPubkey()
                     let txBuilder = TxBuilder().addRecipient(script: script, amount: amount).feeRate(satPerVbyte: fee)
                     let details = try txBuilder.finish(wallet: wallet)
@@ -148,64 +207,139 @@ class WalletViewModel: ObservableObject {
         }
     }
     
-    func load() {
-        state = .loading
-        
-        DispatchQueue.global().async { [weak self] in
-            guard let self = self else { return }
+    func createWallet(words: String?) throws {
+
+        do {
+            let baseUrl =
+            //            try! keyService.getEsploraURL()
+            //            ?? Constants.Config.EsploraServerURLNetwork.Testnet.mempoolspace
+            EsploraServerURLNetwork.Testnet.electrum
             
-            let db = DatabaseConfig.memory
+            let esploraConfig = EsploraConfig(
+                baseUrl: baseUrl,
+                proxy: nil,
+                concurrency: nil,
+                stopGap: UInt64(20),
+                timeout: nil
+            )
+            let blockchainConfig = BlockchainConfig.esplora(config: esploraConfig)
+            //        self.blockchainConfig = blockchainConfig
+            let blockchain = try Blockchain(config: blockchainConfig)
             
-            do {
-                
-                let network = Network.testnet
-                //let network = Network.bitcoin
-                //let network = Network.signet
-                //let network = Network.regtest
-                
-                let blockChainUrl = "ssl://electrum.blockstream.info:50002"
-                //let blockChainUrlTestnet = "ssl://electrum.blockstream.info:60002"
-                
-                let electrum = ElectrumConfig(url: blockChainUrl, socks5: nil, retry: 5, timeout: nil, stopGap: 10, validateDomain: true)
-                
-                let blockchainConfig = BlockchainConfig.electrum(config: electrum)
-                let blockchain = try Blockchain(config: blockchainConfig)
-                
-                let descriptor = try Descriptor.init(descriptor: "wpkh(tprv8ZgxMBicQKsPeSitUfdxhsVaf4BXAASVAbHypn2jnPcjmQZvqZYkeqx7EHQTWvdubTSDa5ben7zHC7sUsx4d8tbTvWdUtHzR8uhHg2CW7MT/*)", network: network)
-                
-                //                Pay-to-pubkey scripts (P2PK), through the pk function.
-                //                Pay-to-pubkey-hash scripts (P2PKH), through the pkh function.
-                //                Pay-to-witness-pubkey-hash scripts (P2WPKH), through the wpkh function.
-                //                Pay-to-script-hash scripts (P2SH), through the sh function.
-                //                Pay-to-witness-script-hash scripts (P2WSH), through the wsh function.
-                //                Pay-to-taproot outputs (P2TR), through the tr function.
-                
-                //from documentation
-                //                let descriptor = try Descriptor.init(descriptor: "wpkh(tprv8ZgxMBicQKsPdy6LMhUtFHAgpocR8GC6QmwMSFpZs7h6Eziw3SpThFfczTDh5rW2krkqffa11UpX3XkeTTB2FvzZKWXqPY54Y6Rq4AQ5R8L/84'/0'/0'/0/*)",network: network)
-                //                let changeDescriptor = try Descriptor.init(descriptor: "wpkh(tprv8ZgxMBicQKsPdy6LMhUtFHAgpocR8GC6QmwMSFpZs7h6Eziw3SpThFfczTDh5rW2krkqffa11UpX3XkeTTB2FvzZKWXqPY54Y6Rq4AQ5R8L/84'/0'/0'/1/*)",network: network)
-                
-                let wallet = try Wallet(descriptor: descriptor, changeDescriptor: nil, network: network, databaseConfig: db)
-                
-                DispatchQueue.main.async {
-                    self.state = State.loaded(wallet, blockchain)
-                    self.getBlockHeight()
-                }
-            } catch let error {
-                DispatchQueue.main.async {
-                    self.state = State.failed(error)
-                }
+            var words12: String
+            if let words = words, !words.isEmpty {
+                words12 = words
+            } else {
+                let mnemonic = Mnemonic(wordCount: WordCount.words12)
+                words12 = mnemonic.asString()
+            }
+            
+            let mnemonic = try Mnemonic.fromString(mnemonic: words12)
+            
+            let secretKey = DescriptorSecretKey(
+                network: network,
+                mnemonic: mnemonic,
+                password: nil
+            )
+            
+            let descriptor = Descriptor.newBip86(
+                secretKey: secretKey,
+                keychain: .external,
+                network: network
+            )
+
+//use for testing
+//let descriptor = try Descriptor.init(descriptor: "wpkh(tprv8ZgxMBicQKsPeSitUfdxhsVaf4BXAASVAbHypn2jnPcjmQZvqZYkeqx7EHQTWvdubTSDa5ben7zHC7sUsx4d8tbTvWdUtHzR8uhHg2CW7MT/*)", network: network)
+            
+            let changeDescriptor = Descriptor.newBip86(
+                secretKey: secretKey,
+                keychain: .internal,
+                network: network
+            )
+
+//use for testing
+//let changeDescriptor = try Descriptor.init(descriptor: "wpkh(tprv8ZgxMBicQKsPdy6LMhUtFHAgpocR8GC6QmwMSFpZs7h6Eziw3SpThFfczTDh5rW2krkqffa11UpX3XkeTTB2FvzZKWXqPY54Y6Rq4AQ5R8L/84'/0'/0'/1/*)",network: network)
+            
+            secretMnemonic = mnemonic.asString() //TODO this will need to be stored in the keychain!!
+            secretDescriptor = descriptor.asString() //TODO this will need to be stored in the keychain!!
+            secretChangeDescriptor = changeDescriptor.asStringPrivate() //TODO this will need to be stored in the keychain!!
+            
+            let wallet = try Wallet(
+                descriptor: descriptor,
+                changeDescriptor: changeDescriptor,
+                network: network,
+                databaseConfig: .memory
+            )
+            //       self.wallet = wallet
+            DispatchQueue.main.async {
+                self.state = State.loaded(wallet, blockchain)
+                self.isOnboarding = false
+            }
+            
+        } catch let error {
+            DispatchQueue.main.async {
+                self.state = State.failed(error)
             }
         }
     }
     
-    func toggleBTCDisplay(displayOption: String) {
+    func load() {
+            
+        switch state {
+            
+        case .empty:
+            state = .loading
+            do {
+                
+                //TODO read secret data from storage. this will need to be stored in the keychain!!
+                if let mnemonic = secretMnemonic, secretMnemonic != "",
+                   let descriptor = secretDescriptor, secretDescriptor != "",
+                   let changeDescriptor = secretChangeDescriptor, secretChangeDescriptor != "" {
+                    
+                    let blockChainUrl = EsploraServerURLNetwork.Testnet.electrum //"ssl://electrum.blockstream.info:50002"
+                                    
+                    let electrum = ElectrumConfig(url: blockChainUrl, socks5: nil, retry: 5, timeout: nil, stopGap: 10, validateDomain: true)
+                                    
+                    let blockchainConfig = BlockchainConfig.electrum(config: electrum)
+                    let blockchain = try Blockchain(config: blockchainConfig)
+                        
+                    let wallet = try Wallet(descriptor: Descriptor(descriptor: descriptor, network: self.network),
+                                            changeDescriptor: Descriptor(descriptor: changeDescriptor, network: self.network),
+                                            network: self.network,
+                                            databaseConfig: .memory)
+                    
+                    DispatchQueue.main.async {
+                        self.state = State.loaded(wallet, blockchain)
+                        self.getBlockHeight()
+                        self.sync()
+                        return
+                    }
+                }
+                else {
+                    try createWallet(words: nil) //continue to create new wallet if one does not exist
+                }
+            }
+            catch {
+                print("error creating wallet")
+            }
+        case .loading:
+            return
+        default:
+            return //wallet already created
+        }
         
-        if displayOption == "BTC" {
-            self.balanceText = String(format: "%.8f", Double(self.balance) / Double(100000000))
-        }
-        else {
-            self.balanceText = String(self.balance)
-        }
+//        DispatchQueue.global().async { [weak self] in
+//            guard let self = self else { return }
+//
+//            do {
+//                Pay-to-pubkey scripts (P2PK), through the pk function.
+//                Pay-to-pubkey-hash scripts (P2PKH), through the pkh function.
+//                Pay-to-witness-pubkey-hash scripts (P2WPKH), through the wpkh function.
+//                Pay-to-script-hash scripts (P2SH), through the sh function.
+//                Pay-to-witness-script-hash scripts (P2WSH), through the wsh function.
+//                Pay-to-taproot outputs (P2TR), through the tr function.
+//            }
+//        }
     }
     
     func sync() {
