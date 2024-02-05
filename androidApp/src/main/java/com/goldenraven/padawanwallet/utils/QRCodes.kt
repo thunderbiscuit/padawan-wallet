@@ -16,6 +16,7 @@ import com.google.zxing.*
 import com.google.zxing.common.BitMatrix
 import com.google.zxing.common.HybridBinarizer
 import com.google.zxing.qrcode.QRCodeWriter
+import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel
 import java.nio.ByteBuffer
 
 private const val TAG = "QrCodes"
@@ -67,19 +68,30 @@ class QRCodeAnalyzer(
 }
 
 fun addressToQR(address: String): ImageBitmap? {
-    Log.i(TAG, "We are generating the QR code for address $address")
+    Log.i(TAG, "Generating the QR code for address $address")
+    val width = 1000
+    val height = 1000
+    val hints: Map<EncodeHintType, Any> = mapOf(
+        EncodeHintType.CHARACTER_SET to "UTF-8",
+        EncodeHintType.QR_VERSION to 7,
+        EncodeHintType.ERROR_CORRECTION to ErrorCorrectionLevel.H
+    )
+
     try {
-        val qrCodeWriter = QRCodeWriter()
-        val bitMatrix: BitMatrix = qrCodeWriter.encode(address, BarcodeFormat.QR_CODE, 1000, 1000)
-        val bitMap = createBitmap(1000, 1000)
-        for (x in 0 until 1000) {
-            for (y in 0 until 1000) {
+        val bitMatrix: BitMatrix = QRCodeWriter().encode(
+            address,
+            BarcodeFormat.QR_CODE,
+            width,
+            height,
+            hints
+        )
+        val bitMap = createBitmap(width, height)
+        for (x in 0 ..< 1000) {
+            for (y in 0 ..< 1000) {
                 // uses night1 and md_theme_dark_onPrimary for colors
-                bitMap.setPixel(x, y, if (bitMatrix[x, y]) 0xff000000.toInt() else 0xfff3f4ff.toInt())
-                // bitMap.setPixel(x, y, if (bitMatrix[x, y]) 0xFF3c3836.toInt() else 0xFFebdbb2.toInt())
+                bitMap.setPixel(x, y, if (bitMatrix[x, y]) 0xff000000.toInt() else 0x20f3f4ff)
             }
         }
-        // Log.i(TAG, "QR is ${bitMap.asImageBitmap()}")
         return bitMap.asImageBitmap()
     } catch (e: Throwable) {
         Log.i(TAG, "Error with QRCode generation, $e")

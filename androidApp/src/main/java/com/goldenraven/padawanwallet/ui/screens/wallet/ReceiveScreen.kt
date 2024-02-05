@@ -85,6 +85,11 @@ internal fun ReceiveScreen(
         ScreenSizeWidth.Phone -> 32.dp
     }
 
+    val qrCodeSize = when (getScreenSizeWidth(LocalConfiguration.current.screenWidthDp)) {
+        ScreenSizeWidth.Small -> 220.dp
+        ScreenSizeWidth.Phone -> 340.dp
+    }
+
     Scaffold(
         // topBar = { PadawanAppBar(navController = navController, title = stringResource(R.string.receive_bitcoin)) },
         snackbarHost = { SnackbarHost(snackbarHostState) }
@@ -131,7 +136,7 @@ internal fun ReceiveScreen(
                             bitmap = it,
                             contentDescription = stringResource(R.string.qr_code),
                             Modifier
-                                .size(250.dp)
+                                .size(qrCodeSize)
                                 .clickable {
                                     copyToClipboard(
                                         address,
