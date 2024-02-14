@@ -1,9 +1,9 @@
 //
 //  WalletView.swift
-//  iosApp
+//  iOSApp
 //
-//  Created by geigerzaehler on 2023-12-07.
-//  Copyright © 2023 orgName. All rights reserved.
+// Copyright 2024 thunderbiscuit, geigerzaehler, and contributors.
+// Use of this source code is governed by the Apache 2.0 license that can be found in the ./LICENSE file.
 //
 
 import SwiftUI
@@ -107,7 +107,7 @@ struct WalletView: View {
                                 switch navigaionValue {
                                     
                                 case "Receive ↓":
-                                    ReceiveView()
+                                    ReceiveView( navigationPath: $navigationPath)
                                 case "Send ↑":
                                     SendView(onSend: { recipient, amount, fee in
                                         do {

@@ -1,9 +1,9 @@
 //
 //  ReceiveView.swift
-//  iosApp
+//  iOSApp
 //
-//  Created by geigerzaehler on 2023-12-18.
-//  Copyright © 2023 orgName. All rights reserved.
+// Copyright 2024 thunderbiscuit, geigerzaehler, and contributors.
+// Use of this source code is governed by the Apache 2.0 license that can be found in the ./LICENSE file.
 //
 
 import SwiftUI
@@ -16,6 +16,8 @@ let filter = CIFilter.qrCodeGenerator()
 struct ReceiveView: View {
     
     @EnvironmentObject var viewModel: WalletViewModel
+    
+    @Binding var navigationPath: [String]
     
     @State private var address: String = "bc1qu5ujlp9dkvtgl98jakvw9ggj9uwyk79qhvwvrg"
     
@@ -89,7 +91,10 @@ struct ReceiveView: View {
             }
             Spacer()
             
-            Button(action: getAddress) {
+            Button(action: {
+                getAddress()
+                navigationPath.removeAll() //return to calling view
+            }) {
                 Text("Done")
                     //.font(.system(size: 16, design: .monospaced))
                     .font(.title)
@@ -117,7 +122,7 @@ struct ReceiveView: View {
 
 struct ReceiveView_Previews: PreviewProvider {
     static var previews: some View {
-        ReceiveView()
+        ReceiveView(navigationPath: .constant (["Receive ↓"]))
             .environmentObject(WalletViewModel())
     }
 }
