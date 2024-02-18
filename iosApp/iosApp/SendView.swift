@@ -13,7 +13,7 @@ struct SendView: View {
     
     @EnvironmentObject var viewModel: WalletViewModel
     
-    @State private var feesSatsPerVByte = 50.0
+    @State private var feesSatsPerVByte = 4.0
     @State private var isEditing = false
     @State private var satsAmount: String = ""
     @State private var btcAddress: String = ""
@@ -26,48 +26,79 @@ struct SendView: View {
     var body: some View {
         
         VStack{
+            
+            HStack{
+                Spacer()
+                Text("Balance")
+                    .font(.title)
+            }
+            
+            HStack{
+                Spacer()
+                Text(viewModel.balanceText)
+                    .font(.title2)
+                Text(" sats")
+                    .font(.title2)
+            }
+            
             HStack{
                 Text("Amount")
+                    .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
                 Spacer()
-                Text("Balance ")
-                Text(viewModel.balanceText)
-                Text(" sats")
             }
             
             VStack(alignment: .leading) {
                 TextField("Enter amount sats", text: $satsAmount)
+                    //.textFieldStyle(RoundedBorderTextFieldStyle())
+                    .keyboardType(.numberPad)
+                    .submitLabel(.return)
             }
+            .padding()
+            .overlay(RoundedRectangle(cornerRadius: 10)
+                .stroke(lineWidth: 1)
+                .foregroundColor(Color.gray))
             
             HStack{
                 Text("Address")
+                    .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
                 Spacer()
             }
             
-            VStack(alignment: .leading) {
+            HStack {
+                
                 TextField("Enter a bitcoin testnet address", text: $btcAddress)
+                    .keyboardType(.asciiCapable)
+                    .submitLabel(.return)
+                Image(systemName: "camera")
             }
-           
+            .padding()
+            .overlay(RoundedRectangle(cornerRadius: 10)
+                .stroke(lineWidth: 1)
+                .foregroundColor(Color.gray))
+            
             Spacer()
             HStack{
-                Text("Fees (sats/vbytes)")
+                Text("Fees")
+                    .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
                 Spacer()
             }
             
             VStack {
                 Slider(
                     value: $feesSatsPerVByte,
-                    in: 0...100,
+                    in: 1...8,
                     step: 1) {
                         Text("Speed")
                     } minimumValueLabel: {
-                        Text("0")
+                        Text("1")
                     } maximumValueLabel: {
-                        Text("100")
+                        Text("8")
                     } onEditingChanged: { editing in
                         isEditing = editing
                     }
-                    Text("\(feesSatsPerVByte)")
+                    Text("\(Int(feesSatsPerVByte)) sats/vByte")
                         .foregroundColor(isEditing ? .red : .blue)
+                        .font(.title2)
             }
             .navigationTitle("Send Bitcoin")
         
@@ -100,7 +131,11 @@ struct SendView: View {
 //        }
             
         }.padding(40)
-        .onAppear(perform: viewModel.sync)
+            .onAppear(perform: {
+                //viewModel.sync()
+                viewModel.toggleBTCDisplay(displayOption: "sats")
+            }
+        )
     }
 }
 
