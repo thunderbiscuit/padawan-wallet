@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="C5_title">What are transaction fees?</string>
+    <string name="C5_tagline">Transactions have fees? What? How? To who?</string>
+
+    <string name="t5_p1">Now you know a little bit more about transactions. There are many, many transactions being sent, validated, confirmed, and stored in the bitcoin network every minute of every day. This is a very costly affair.</string>
+    <string name="t5_p2">The bitcoin network can only keep up with so much demand on the system. To make sure the load on the network stays light and lean, there is a limited capacity for the total amount of bytes that can be transacted over the network per amount of time.</string>
+
+    <string name="t5_h1">Bidding using transaction fees</string>
+    <string name="t5_p3">Because the space is limited in terms of bytes per block and there is only 1 new block being mined every 10 minutes or so, bitcoin users compete for space on the blockchain by providing a fee for their transaction.</string>
+    <string name="t5_p4">The transactions with the highest fees are prioritized by the miners when building blocks.</string>
+
+    <string name="t5_h2">Why does the network need a light load?</string>
+    <string name="t5_p5">One of the main advantages of the bitcoin network is its ability to stay synchronized and distributed across many computers linked to the network all over the world. The lighter and leaner the load on the network, the more resistant it is to attacks, and the more neutral and robust it stays so that all can benefit from its availability and robustness.</string>
+</resources>

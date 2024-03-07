@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="C7_title">What is a recovery phrase?</string>
+    <string name="C7_tagline">Learn how to keep your wallet and your funds safe.</string>
+
+    <string name="C7_p1">You can think of your wallet as a tree, and the addresses it generates as its leaves (remember that you use a new address every time you receive bitcoin). The number of addresses that can be generated from this tree is near-infinite, but the only necessary part of backing up such a \"tree of addresses\" is to remember the root of the tree. Each new root will generate a completely new tree, but any wallet can recreate the whole tree simply by starting with the root.</string>
+    <string name="C7_p2">Modern bitcoin wallets use a process called deterministic key generation. Every new address your wallet produces is generated non-randomly. This gives them the property of being very flexible in terms of generating new addresses, while not having to remember them all individually (you do not have to make individual backups for all the addresses to which you received bitcoin).</string>
+    <string name="C7_p3">The \"root\" of your wallet is the wallet seed. This wallet seed is simply a really, really big number. But numbers are notoriously hard to remember, and humans are usually really bad at writing them down properly without making mistakes or typos.</string>
+    <string name="C7_p4">Instead, a standard for encoding these really big numbers has emerged in the bitcoin ecosystem. This standard uses a series of 12 or 24 words in a specific order, which together can always be used to recreate the wallet seed.</string>
+
+    <string name="C7_h1">Padawan and backups</string>
+    <string name="C7_p5">Padawan uses this standard to allow users to create backups for its wallets. You\'ll find the 12 words (often referred to as a recovery phrase) on a separate screen under the menu options.</string>
+    <string name="C7_p6">The words in your recovery phrase (or backup phrase) should be treated with the utmost care. They hold the key to all the bitcoin stored in a wallet, and they are indeed the only thing required to access all funds. We must be careful not to share this recovery phrase with potential attackers.</string>
+    <string name="C7_p7">But the value of this recovery phrase is immense: it means you can delete the application or lose your phone, and you will not lose your funds. As long as you have kept your 12-word recovery phrase safe, you can recover your wallet and all the bitcoin it holds. It is generally a good practice to write down this recovery phrase on physical objects like paper or metal (not saved on a computer) and store it in a safe place. Where/how you do this depends on how much your wallet holds and the level of security required for your use case.</string>
+</resources>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="C6_title">Bitcoin units</string>
+    <string name="C6_tagline">Satoshis, bitcoins, and beyond.</string>
+
+    <string name="t6_p1">The word bitcoin has a few meanings. When referring to bitcoin, people sometime mean
+        (a) the network, the protocol, the open source project, or (b) one of the units of value when transacting on the bitcoin network.</string>
+
+    <string name="t6_h1">Breaking it down</string>
+    <string name="t6_p3">Just like the kilometer can be broken down into meters and centimeters and the foot can be broken down into inches, a bitcoin can be broken into smaller units.
+</string>
+    <string name="t6_p4">The most important units to describe bitcoin are the bitcoin and the satoshi. Sometimes we shorten the bitcoin unit to \"btc\" and the satoshi unit to \"sat\". There are 100,000,000 satoshis in 1 bitcoin.</string>
+
+    <string name="t6_h2">Symbols</string>
+    <string name="t6_p5">There is not yet an \"official\" symbol for either unit (bitcoin or satoshi). You may see the following symbols on Padawan or in other cryptocurrency exchanges or applications.</string>
+    <string name="t6_p6">Symbols sometimes used for bitcoin:</string>
+    <string name="t6_p7">Symbols sometimes used for satoshis:</string>
+
+    <string name="t6_h3">Which unit should I use?</string>
+    <string name="t6_p8">We often use the bitcoin (btc) or satoshi (sat) unit depending on the size of the transaction.</string>
+    <string name="t6_p9">- A brand new car might be worth 1,700,000,000 sats, but it is more simple to say 1.7 bitcoin.</string>
+    <string name="t6_p10">- You could buy a candy for 0.00000250 bitcoin, but it\'s much simpler to say 250 satoshis.</string>
+    <string name="t6_p11">Someone using bitcoin applications must develop the skill to understand both bitcoin and satoshi units. Many transactions are denominated in bitcoin, but their network fee (see chapter 4) is almost always using the satoshi unit.</string>
+    <string name="t6_p12">In Padawan, you can switch between the two units in the main wallet display page by touching the btc/sats symbol.</string>
+</resources>

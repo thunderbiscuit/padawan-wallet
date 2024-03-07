@@ -70,14 +70,14 @@ internal fun LanguagesScreen(
 
 @Composable
 fun LanguageChoiceRadioButtons() {
-    val radioOptions = listOf(SupportedLanguage.ENGLISH, SupportedLanguage.SPANISH)
+    val radioOptions = listOf(SupportedLanguage.ENGLISH, SupportedLanguage.SPANISH, SupportedLanguage.PORTUGUESE)
     val localeListCompat: LocaleListCompat = AppCompatDelegate.getApplicationLocales()
     Log.i(TAG, "Current locale list compat is: $localeListCompat")
 
-    val currentLanguage: SupportedLanguage = if (localeListCompat[0]?.language == "es") {
-        SupportedLanguage.SPANISH
-    } else {
-        SupportedLanguage.ENGLISH
+    val currentLanguage: SupportedLanguage = when (localeListCompat[0]?.language) {
+        "es" -> SupportedLanguage.SPANISH
+        "pt" -> SupportedLanguage.PORTUGUESE
+        else -> SupportedLanguage.ENGLISH
     }
 
     val (selectedOption, onOptionSelected) = remember { mutableStateOf(currentLanguage) }
@@ -117,11 +117,13 @@ fun LanguageChoiceRadioButtons() {
 enum class SupportedLanguage {
     ENGLISH,
     SPANISH,
+    PORTUGUESE,
 }
 
 fun getSupportedLanguageCode(language: SupportedLanguage): String {
     return when (language) {
         SupportedLanguage.ENGLISH -> "en"
         SupportedLanguage.SPANISH -> "es"
+        SupportedLanguage.PORTUGUESE -> "pt"
     }
 }

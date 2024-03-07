@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="C4_title">What is the mempool?</string>
+    <string name="C4_tagline">When I send a transaction… where does it go?</string>
+
+    <string name="t4_p1">When you complete and broadcast a bitcoin transaction, this transaction is recorded across all computers connected to the bitcoin network usually within 2 to 5 seconds. Eventually the transaction is added to the blockchain, but when a node initially becomes aware of it, it simply adds it to a group of transactions it knows about but that have not yet been included in a block. This group of transaction is called the mempool (or \"memory pool\"), and each computer connected to the bitcoin network keeps its own memory pool. A transaction being \"in the mempool\" (meaning most nodes have seen and added the transaction to their memory pool) means it has been acknowledged by the network, but not yet made official on the blockchain.</string>
+    <string name="t4_p2">To be made official, bitcoin miners need to mine a block that has the transaction included in it.</string>
+
+    <string name="t4_h1">Imagine a bus</string>
+    <string name="t4_p3">Imagine a bus coming to pick up passengers every 10 or so minutes. The bus can only take a certain amount of weight. Since every passenger is a different weight, the amount of passengers that can fit on the bus changes every time.</string>
+    <string name="t4_p4">The mempool acts as the bus stop. A lineup of transactions wait in the mempool to be processed into a block on the blockchain. The transactions wait for their turn to be mined, and every time the bus comes by it takes as many passengers as it can fit.</string>
+
+    <string name="t4_h2">Some passengers</string>
+    <string name="t4_p5">Some passengers might be in a hurry to get on the next bus. They can pay an extra fare to make sure they are near the front of the line. These transactions will be prioritized in the mining process.</string>
+    <string name="t4_p6">On the other hand, some passengers might not be in a hurry at all! In that case, they might want to save their money by not paying a higher fare. Eventually, the line will clear and every transaction waiting in line does get through.</string>
+</resources>
