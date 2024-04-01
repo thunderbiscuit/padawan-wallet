@@ -248,7 +248,7 @@ struct WalletTransactionsListItemView: View {
             
             Spacer()
             Text(
-                transaction.sent > 0
+                transaction.sent > transaction.received
                 ? "- \(transaction.sent - transaction.received) sats"
                 : "+ \(transaction.received - transaction.sent) sats"
             )
