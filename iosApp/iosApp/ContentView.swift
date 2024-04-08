@@ -13,6 +13,7 @@ struct ContentView: View {
     
 // MARK: PROPERTIES
     
+    @EnvironmentObject var viewModel: WalletViewModel
     @State var selectedTab: Int = 0
 
     enum Tab: Int {
@@ -52,6 +53,9 @@ struct ContentView: View {
 //            .fullScreenCover(isPresented: $firstTimeRunning, content: {
 //                WelcomeView()
 //            })
+        }
+        .onAppear{
+            viewModel.load()
         }
 	}
 }

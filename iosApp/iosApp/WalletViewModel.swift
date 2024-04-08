@@ -28,7 +28,32 @@ extension TransactionDetails: Comparable {
     }
 }
 
+extension UInt32 {
+    private static var numberFormatter: NumberFormatter = {
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .decimal
+
+        return numberFormatter
+    }()
+
+    var delimiter: String {
+        return UInt32.numberFormatter.string(from: NSNumber(value: self)) ?? ""
+    }
+}
+
 extension UInt64 {
+    
+    private static var numberFormatter: NumberFormatter = {
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .decimal
+
+        return numberFormatter
+    }()
+
+    var delimiter: String {
+        return UInt64.numberFormatter.string(from: NSNumber(value: self)) ?? ""
+    }
+    
     func toDate() -> Date {
         return Date(timeIntervalSince1970: TimeInterval(self))
     }
@@ -123,7 +148,15 @@ class WalletViewModel: ObservableObject {
         case loaded(Wallet, Blockchain)
     }
     
-    enum SyncState {
+    enum SyncState : Equatable {
+        
+        static func == (lhs: WalletViewModel.SyncState, rhs: WalletViewModel.SyncState) -> Bool {
+            switch (lhs, rhs) {
+                case (.empty, .empty),(.syncing, .syncing), (.synced, .synced), (.failed, .failed): return true
+                default: return false
+            }
+        }
+        
         case empty
         case syncing
         case synced

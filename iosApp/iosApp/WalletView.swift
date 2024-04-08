@@ -23,7 +23,7 @@ struct WalletView: View {
 
         NavigationStack(path: $navigationPath) {
             
-            VStack(spacing: 40) {
+            VStack(spacing: 20) {
                 
                 RoundedRectangle(cornerRadius: 20)
                     .frame(height: 200)
@@ -33,21 +33,20 @@ struct WalletView: View {
                             Spacer()
                             HStack {
                                 Text("Bitcoin Testnet")
-                                //VStack {
-                                    Picker("Display in BTC or sats?", selection: $satsBTC) {
-                                        ForEach(amountDisplayOptions, id: \.self) {
-                                            Text($0)
-                                        }
+                                
+                                Picker("Display in BTC or sats?", selection: $satsBTC) {
+                                    ForEach(amountDisplayOptions, id: \.self) {
+                                        Text($0)
                                     }
-                                    .pickerStyle(.segmented)
-                                    .onChange(of: satsBTC) {
-                                        if satsBTC == "BTC" {
-                                            viewModel.toggleBTCDisplay(displayOption: "BTC")
-                                        } else {
-                                            viewModel.toggleBTCDisplay(displayOption: "sats")
-                                        }
+                                }
+                                .pickerStyle(.segmented)
+                                .onChange(of: satsBTC) {
+                                    if satsBTC == "BTC" {
+                                        viewModel.toggleBTCDisplay(displayOption: "BTC")
+                                    } else {
+                                        viewModel.toggleBTCDisplay(displayOption: "sats")
                                     }
-                                //}
+                                }
                             }
                             
                             Spacer()
@@ -136,18 +135,17 @@ struct WalletView: View {
                 
                 HStack() {
                     Text("Transactions")
-                        .font(.headline)
+                        .font(.title)
                     Spacer()
                 }
                 
-                List {
+                if viewModel.transactions.isEmpty {
                     
-                    if viewModel.transactions.isEmpty {
-                        Text("No Transactions")
-                            .font(.caption)
-                            .listRowInsets(EdgeInsets())
-                            .listRowSeparator(.hidden)
-                    } else {
+                    FaucetView()
+                    
+                } else {
+                    List {
+                                        
                         ForEach(
                             viewModel.transactions.sorted(
                                 by: {
@@ -156,37 +154,89 @@ struct WalletView: View {
                                 }
                             ),
                             id: \.txid
-                        ) { transaction in
-                            
-//                                NavigationLink(
-//                                    destination: TransactionDetailsView(
-//                                        transaction: transaction,
-//                                        amount:
-//                                            transaction.sent > 0
-//                                            ? transaction.sent - transaction.received
-//                                            : transaction.received - transaction.sent
-//                                    )
-//                                ) {
-//
-                                   WalletTransactionsListItemView(transaction: transaction)
-//                                }
-                        }
-                        .listRowInsets(EdgeInsets())
-                        .listRowSeparator(.hidden)
-                    }
+                        ) 
+                            { transaction in
+                                
+                                NavigationLink(
+                                    destination: TransactionDetailsView(
+                                        transaction: transaction,
+                                        amount:
+                                            transaction.sent > transaction.received
+                                            ? transaction.sent - transaction.received
+                                            : transaction.received - transaction.sent
+                                    )
+                                )
+                                    {
+            
+                                        WalletTransactionsListItemView(transaction: transaction)
+        //                                .refreshable {
+        //                                    viewModel.sync()
+        //                                    //viewModel.getBalance()
+        //                                    //viewModel.getTransactions()
+        //                                    //await viewModel.getPrices()
+        //                                }
+                                    }
+                            }
+                            .listRowInsets(EdgeInsets())
+                            .listRowSeparator(.hidden)
+                        
+                    }.listStyle(.plain)
                     
-                }
-                .listStyle(.plain)
+                }//viewModel.transactions.isEmpty
                 
-                //Spacer(minLength: 0)
-            }
-           .padding(30)
-
+            }//VStack
+            .padding(30)
+           
         } //navigation stack
         .onAppear{
             viewModel.load()
         }
     } //body
+}
+
+
+struct FaucetView: View {
+    
+    @EnvironmentObject var viewModel: WalletViewModel
+    @State private var faucetFailed = false
+    
+    var body: some View {
+        
+        VStack {
+            ZStack {
+                RoundedRectangle(cornerRadius: 25, style: .continuous)
+                        .stroke(Color.black , lineWidth: 1)
+                        .frame(width: 350, height: 150, alignment: Alignment.top   )
+                        .layoutPriority(1) // default is 0, now higher priority than Text()
+                Text("Hey! It looks like your transaction list is empty. Take a look around, and come back to get some coins so you can start playing with the wallet!").padding(20)
+            }
+        
+            if viewModel.syncState == .synced { //only show button once synced!
+                Button(action: {
+                    //TODO add nnetwork call to get testnet coins!!
+                    faucetFailed = true
+                }, label: {
+                    Text("Get coins \(Image(systemName: "bitcoinsign")) \(Image(systemName: "arrow.down.left"))")
+                        .font(.headline)
+                        .foregroundColor(.white)
+                        .frame(height: 55)
+                        .frame(maxWidth: .infinity)
+                        .background(Color.orange)
+                        .cornerRadius(20)
+                })
+                .padding(20)
+                .alert("Faucet Not Implemented Yet!",
+                       isPresented: $faucetFailed) {
+                       Button("Ok", role: .destructive) {
+                             // TODO
+                       }
+                } message: {
+                       Text("Try to recover a wallet instead")
+                }
+            }
+        
+        }
+    }
 }
 
 struct WalletTransactionsListItemView: View {
@@ -214,7 +264,7 @@ struct WalletTransactionsListItemView: View {
             } else {
                 Image(
                     systemName:
-                        transaction.sent > 0
+                        transaction.sent > transaction.received
                     ? "arrow.up.circle.fill" : "arrow.down.circle.fill"
                 )
                 .font(.largeTitle)
@@ -260,6 +310,134 @@ struct WalletTransactionsListItemView: View {
         .padding(.vertical, 15.0)
         .padding(.vertical, 5.0)
     }//body
+}
+
+struct TransactionDetailsView: View {
+//    @ObservedObject var viewModel: TransactionDetailsViewModel
+    @EnvironmentObject var viewModel: WalletViewModel
+    
+    let transaction: TransactionDetails
+    let amount: UInt64
+    @State private var isCopied = false
+    @State private var showCheckmark = false
+
+    var body: some View {
+
+        VStack {
+
+            VStack(spacing: 8) {
+                Image(systemName: "bitcoinsign.circle.fill")
+                    .resizable()
+                    .foregroundColor(.orange)
+                    .fontWeight(.bold)
+                    .frame(width: 100, height: 100, alignment: .center)
+                HStack(spacing: 3) {
+                    Text(
+                        transaction.sent > transaction.received ? "Send" : "Receive"
+                    )
+                    if transaction.confirmationTime == nil {
+                        Text("Unconfirmed")
+                    } else {
+                        Text("Confirmed")
+                    }
+                }
+                .fontWeight(.semibold)
+                if let height = transaction.confirmationTime?.height {
+                    Text("Block \(height.delimiter)")
+                        .foregroundColor(.secondary)
+                }
+            }
+            .font(.caption)
+
+            Spacer()
+
+            VStack(spacing: 8) {
+                HStack {
+                    Text(amount.delimiter)
+                    Text("sats")
+                }
+                .lineLimit(1)
+                .minimumScaleFactor(0.5)
+                .font(.largeTitle)
+                .foregroundColor(.primary)
+                .fontWeight(.bold)
+                .fontDesign(.rounded)
+                VStack(spacing: 4) {
+                    if transaction.confirmationTime == nil {
+                        Text("Unconfirmed")
+                    } else {
+                        VStack {
+                            if let timestamp = transaction.confirmationTime?.timestamp {
+                                Text(
+                                    timestamp.toDate().formatted(
+                                        date: .abbreviated,
+                                        time: Date.FormatStyle.TimeStyle.shortened
+                                    )
+                                )
+                            }
+                        }
+                    }
+                    if let fee = transaction.fee {
+                        Text("\(fee) sats fee")
+                    }
+                }
+                .foregroundColor(.secondary)
+                .font(.callout)
+            }
+
+            Spacer()
+
+            HStack {
+//                if viewModel.network != Network.regtest.description {
+//                    Button {
+//                        if let esploraURL = viewModel.esploraURL {
+//                            let urlString = "\(esploraURL)/tx/\(transaction.txid)"
+//                                .replacingOccurrences(of: "/api", with: "")
+//                            if let url = URL(string: urlString) {
+//                                UIApplication.shared.open(url)
+//                            }
+//                        }
+//                    } label: {
+//                        Image(systemName: "safari")
+//                            .fontWeight(.semibold)
+//                            .foregroundColor(.bitcoinOrange)
+//                    }
+//                    Spacer()
+//                }
+                Text(transaction.txid)
+                    .lineLimit(1)
+                    .truncationMode(.middle)
+                Spacer()
+                Button {
+                    UIPasteboard.general.string = transaction.txid
+                    isCopied = true
+                    showCheckmark = true
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                        isCopied = false
+                        showCheckmark = false
+                    }
+                } label: {
+                    HStack {
+                        withAnimation {
+                            Image(systemName: showCheckmark ? "checkmark" : "doc.on.doc")
+                        }
+                    }
+                    .fontWeight(.semibold)
+                    .foregroundColor(.orange)
+                }
+            }
+            .fontDesign(.monospaced)
+            .font(.caption)
+            .padding()
+            .onAppear {
+ //               viewModel.getNetwork()
+ //               viewModel.getEsploraUrl()
+            }
+
+        }
+        .padding()
+
+    }
 }
 
 #Preview {
