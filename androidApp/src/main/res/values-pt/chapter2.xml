@@ -3,7 +3,7 @@
     <string name="C2_title">Recebendo bitcoin</string>
     <string name="C2_tagline">Como você recebe bitcoin?</string>
 
-    <string name="t2_p1">Para receber bitcoin, você pede para sua carteira (como o Padawan) gerar um endereço de recebimento. Cada vez que você receber bitcoin, um novo endereço será gerado pela sua carteira.</string>
+    <string name="t2_p1">Para receber bitcoin, você pede para sua carteira (como o Padawan) gerar um endereço de recebimento. Cada vez que você pedir, um novo endereço será gerado pela sua carteira.</string>
     <string name="t2_p2">As duas maneiras de compartilhar o seu endereço de recebimento são:</string>
     <string name="t2_p3">1. Uma sequência de letras e números que pode ter esta aparência:</string>
     <string name="t2_p4">Ou</string>
