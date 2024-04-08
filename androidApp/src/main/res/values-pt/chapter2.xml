@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="C2_title">Receiving bitcoin</string>
-    <string name="C2_tagline">How do you receive bitcoin?</string>
+    <string name="C2_title">Recebendo bitcoin</string>
+    <string name="C2_tagline">Como você recebe bitcoin?</string>
 
-    <string name="t2_p1">To receive bitcoin, you ask your wallet software (like Padawan) to generate a receive address. Each time your receive bitcoin, a new address will be used by your wallet.</string>
-    <string name="t2_p2">To make it easier to share, we display this address in two common ways:</string>
-    <string name="t2_p3">1. A string of letters and numbers that might look like this:</string>
-    <string name="t2_p4">Or</string>
-    <string name="t2_p5">2. A QR code that might look like this:</string>
-    <string name="t2_p6">The two formats above refer to the same address, just in different ways.</string>
+    <string name="t2_p1">Para receber bitcoin, você pede para sua carteira (como o Padawan) gerar um endereço de recebimento. Cada vez que você receber bitcoin, um novo endereço será gerado pela sua carteira.</string>
+    <string name="t2_p2">As duas maneiras de compartilhar o seu endereço de recebimento são:</string>
+    <string name="t2_p3">1. Uma sequência de letras e números que pode ter esta aparência:</string>
+    <string name="t2_p4">Ou</string>
+    <string name="t2_p5">2. Um QR code parecido com este:</string>
+    <string name="t2_p6">Os dois formatos acima referem-se ao mesmo endereço, apenas de maneiras diferentes.</string>
 
-    <string name="t2_h1">Generating receive addresses</string>
-    <string name="t2_p7">To receive bitcoin, you have two options:</string>
-    <string name="t2_p8">1. The sender scans a QR code: If the person who wants to send you coins is nearby, generate a new receive address and ask them to use their phone to scan the QR code displayed by your wallet.</string>
-    <string name="t2_p9">2. Copy and paste the receive address to share it: Generate a new receive address, copy the string of letters and numbers (the address), and paste it in a message to the person who will send you the payment. If possible, you should try to send these messages on an encrypted platform so as to keep the address and the transaction private between you and the payer!</string>
-    <string name="t2_p10">On Padawan, you can long press the address and the wallet will offer you to put the address directly into your clipboard for pasting somewhere else.</string>
+    <string name="t2_h1">Gerando endereço de recebimento</string>
+    <string name="t2_p7">Para receber bitcoin, você tem duas opções:</string>
+    <string name="t2_p8">1. O remetente escaneia um QR code: Se a pessoa que deseja lhe enviar estiver por perto, gere um novo endereço de recebimento e peça para ela escanear o QR code exibido em sua carteira.</string>
+    <string name="t2_p9">2. O remetente recebe uma sequência de letras e números: Gere um novo endereço de recebimento. Copie esse endereço, cole e envie uma mensagem para a pessoa que fará o pagamento. Se possível, utilize um aplicativo de envio de mensagens criptografadas para manter o endereço e a transação privados entre você e o pagador!</string>
+    <string name="t2_p10">Você pode pressionar o endereço e segurar para copiá-lo. Em seguida, você pode colá-lo na sua mensagem para quem fará o pagamento.</string>
 
-    <string name="t2_h2">Be careful!</string>
-    <string name="t2_p11">It is very important to be careful when sending and receiving bitcoin. The person sending bitcoin must use the exact correct address.</string>
-    <string name="t2_p12">Even though the QR code system and the copy/paste function of our phones are an acceptable way of remaining cautious, you should always double check the complete receive address. At the very least, when you copy and paste your receive address, make sure the first and last 5–10 characters of the address match.</string>
-    <string name="t2_p13">Reminder: Padawan only uses testnet bitcoins. Do not try to send it real bitcoins!</string>
+    <string name="t2_h2">Tenha cuidado!</string>
+    <string name="t2_p11">É muito importante ter cuidado ao enviar e receber bitcoin. A pessoa que faz o envio deve sempre conferir o endereço. </string>
+    <string name="t2_p12">Embora o sistema de QR code e a função de copiar/colar dos nossos telefones sejam uma boa maneira de transmitir informações, você deve sempre verificar com bastante atenção o endereço de recebimento por completo. No mínimo, ao copiar e colar seu endereço de recebimento, certifique-se de que os primeiros e últimos 5 a 10 caracteres do endereço correspondam.</string>
+    <string name="t2_p13">Lembrete: Padawan usa apenas bitcoins de teste. Não tente enviar bitcoins reais!</string>
 </resources>
