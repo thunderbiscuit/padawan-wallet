@@ -1,5 +1,4 @@
 {
-  "originHash" : "ca3197f4ba2afd517d13387ef91c0c2e58f0be47e5ec0fae62ba8325d4605b8a",
   "pins" : [
     {
       "identity" : "bdk-swift",
@@ -11,5 +10,5 @@
       }
     }
   ],
-  "version" : 3
+  "version" : 2
 }
