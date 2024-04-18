@@ -3,7 +3,7 @@ package com.goldenraven.padawanwallet.intro
 import android.util.Log
 import androidx.compose.ui.test.*
 import androidx.compose.ui.test.junit4.createComposeRule
-import com.goldenraven.padawanwallet.WalletCreateType
+import com.goldenraven.padawanwallet.presentation.ui.WalletCreateType
 import com.goldenraven.padawanwallet.ui.theme.PadawanTheme
 import com.goldenraven.padawanwallet.ui.screens.intro.WalletRecoveryScreen
 import org.junit.Before
@@ -20,10 +20,10 @@ class WalletRecoveryScreenTest {
     @Before
     fun setUp() {
 
-        val onBuildWalletButtonClicked : (WalletCreateType) -> Unit = { walletCreateType ->
+        val onBuildWalletButtonClicked : (com.goldenraven.padawanwallet.presentation.ui.WalletCreateType) -> Unit = { walletCreateType ->
             when (walletCreateType) {
-                is WalletCreateType.FROMSCRATCH -> Log.i(TAG, "Successful wallet init")
-                is WalletCreateType.RECOVER -> Log.i(TAG, "Successful wallet recovery")
+                is com.goldenraven.padawanwallet.presentation.ui.WalletCreateType.FROMSCRATCH -> Log.i(TAG, "Successful wallet init")
+                is com.goldenraven.padawanwallet.presentation.ui.WalletCreateType.RECOVER -> Log.i(TAG, "Successful wallet recovery")
             }
         }
 

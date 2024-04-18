@@ -25,7 +25,7 @@
         </service>
 
         <activity
-            android:name=".PadawanActivity"
+            android:name=".presentation.ui.PadawanActivity"
             android:theme="@style/Theme.PadawanWallet"
             android:screenOrientation="portrait"
             android:exported="true">
