@@ -151,7 +151,7 @@ dependencies {
     ksp("androidx.room:room-compiler:2.5.0")
 
     // KMP Shared library
-    implementation(project(":shared"))
+    implementation(project(":padawankmp"))
 
     // Unit testing
     testImplementation("junit:junit:4.13.2")

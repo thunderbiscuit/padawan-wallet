@@ -1,4 +1,4 @@
-package com.goldenraven.padawanwallet.shared
+package com.goldenraven.padawanwallet.padawankmp
 
 class Greeting {
     fun greet(): String {

@@ -21,7 +21,7 @@ kotlin {
         iosSimulatorArm64()
     ).forEach {
         it.binaries.framework {
-            baseName = "SharedPadawan"
+            baseName = "PadawanKmp"
         }
     }
 
@@ -40,7 +40,7 @@ kotlin {
 }
 
 android {
-    namespace = "com.goldenraven.padawanwallet.shared"
+    namespace = "com.goldenraven.padawanwallet.padawankmp"
     compileSdk = 34
     defaultConfig {
         minSdk = 26
