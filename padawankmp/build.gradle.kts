@@ -5,6 +5,8 @@ plugins {
     id("com.android.library")
 }
 
+// version = 0.0.2 @ 73fc325
+
 @OptIn(org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi::class)
 kotlin {
     explicitApi()
