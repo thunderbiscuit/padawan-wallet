@@ -7,6 +7,7 @@ plugins {
 
 @OptIn(org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi::class)
 kotlin {
+    explicitApi()
     applyDefaultHierarchyTemplate()
 
     androidTarget {
