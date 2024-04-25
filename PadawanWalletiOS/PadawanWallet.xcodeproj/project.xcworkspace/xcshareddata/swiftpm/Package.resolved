@@ -8,6 +8,15 @@
         "revision" : "f2398109ebd8759322f601d9938779f3cdf99a12",
         "version" : "0.31.1"
       }
+    },
+    {
+      "identity" : "padawankmp",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/thunderbiscuit/padawankmp.git",
+      "state" : {
+        "revision" : "c6f843e5a00d615560f07038c762d5167d564b70",
+        "version" : "0.0.1"
+      }
     }
   ],
   "version" : 2
