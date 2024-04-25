@@ -28,7 +28,7 @@ import com.goldenraven.padawanwallet.presentation.ui.screens.wallet.ReceiveScree
 import com.goldenraven.padawanwallet.presentation.ui.screens.wallet.SendScreen
 import com.goldenraven.padawanwallet.presentation.ui.screens.wallet.TransactionScreen
 import com.goldenraven.padawanwallet.presentation.ui.screens.wallet.WalletRootScreen
-import com.goldenraven.padawanwallet.viewmodels.WalletViewModel
+import com.goldenraven.padawanwallet.presentation.viewmodels.WalletViewModel
 import com.google.accompanist.navigation.animation.AnimatedNavHost
 import com.google.accompanist.navigation.animation.composable
 

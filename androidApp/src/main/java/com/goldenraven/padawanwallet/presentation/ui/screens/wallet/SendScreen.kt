@@ -81,7 +81,7 @@ import com.goldenraven.padawanwallet.presentation.ui.components.VerticalTextFiel
 import com.goldenraven.padawanwallet.presentation.ui.components.standardBorder
 import com.goldenraven.padawanwallet.utils.ScreenSizeWidth
 import com.goldenraven.padawanwallet.utils.getScreenSizeWidth
-import com.goldenraven.padawanwallet.viewmodels.WalletViewModel
+import com.goldenraven.padawanwallet.presentation.viewmodels.WalletViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 import org.bitcoindevkit.TxBuilderResult

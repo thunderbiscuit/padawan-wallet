@@ -3,7 +3,7 @@
  * Use of this source code is governed by the Apache 2.0 license that can be found in the ./LICENSE file.
  */
 
-package com.goldenraven.padawanwallet.viewmodels
+package com.goldenraven.padawanwallet.presentation.viewmodels
 
 import android.app.Application
 import android.content.Context
@@ -25,23 +25,13 @@ import com.goldenraven.padawanwallet.domain.tx.Tx
 import com.goldenraven.padawanwallet.domain.tx.TxDao
 import com.goldenraven.padawanwallet.domain.tx.TxDatabase
 import com.goldenraven.padawanwallet.domain.tx.TxRepository
+import com.goldenraven.padawanwallet.padawankmp.FaucetCall
+import com.goldenraven.padawanwallet.padawankmp.FaucetRepository
 import com.goldenraven.padawanwallet.utils.SatoshisIn
 import com.goldenraven.padawanwallet.utils.SatoshisOut
 import com.goldenraven.padawanwallet.utils.isPayment
 import com.goldenraven.padawanwallet.utils.netSendWithoutFees
 import com.goldenraven.padawanwallet.utils.timestampToString
-import io.ktor.client.HttpClient
-import io.ktor.client.engine.cio.CIO
-import io.ktor.client.plugins.auth.Auth
-import io.ktor.client.plugins.auth.providers.BasicAuthCredentials
-import io.ktor.client.plugins.auth.providers.basic
-import io.ktor.client.request.request
-import io.ktor.client.request.setBody
-import io.ktor.client.statement.HttpResponse
-import io.ktor.client.statement.bodyAsText
-import io.ktor.http.ContentType
-import io.ktor.http.HttpMethod
-import io.ktor.http.content.TextContent
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -261,36 +251,30 @@ class WalletViewModel(
         val faucetUrl: String = BuildConfig.FAUCET_URL
         val faucetUsername: String = BuildConfig.FAUCET_USERNAME
         val faucetPassword: String = BuildConfig.FAUCET_PASSWORD
+        // val faucetPassword: String = "password" // Use for testing failed requests
 
+        val faucetRepository = FaucetRepository()
         viewModelScope.launch {
-            val ktorClient = HttpClient(CIO) {
-                install(Auth) {
-                    basic {
-                        credentials {
-                            BasicAuthCredentials(
-                                username = faucetUsername,
-                                password = faucetPassword
-                            )
-                        }
-                    }
+            val response = faucetRepository.callTatooineFaucet(
+                addressInfo.address,
+                faucetUrl,
+                faucetUsername,
+                faucetPassword
+            )
+            when (response) {
+                is FaucetCall.Success -> {
+                    WalletRepository.faucetCallDone()
+                    Log.i(TAG, "Faucet call succeeded with status: ${response.status}, description: ${response.description}")
                 }
-            }
 
-            Log.i(TAG, "API call to Tatooine will request coins at $addressInfo")
-            try {
-                val response: HttpResponse = ktorClient.request(faucetUrl) {
-                    method = HttpMethod.Post
-                    setBody(TextContent(addressInfo.address, ContentType.Text.Plain))
+                is FaucetCall.Error -> {
+                    Log.i(TAG, "Faucet call failed with status:${response.status}, description:${response.description}")
                 }
-                WalletRepository.faucetCallDone()
-                Log.i(
-                    TAG,
-                    "API call to Tatooine was performed. Response is ${response.status}, ${response.bodyAsText()}"
-                )
-            } catch (cause: Throwable) {
-                Log.i(TAG, "Tatooine call failed: $cause")
+
+                is FaucetCall.ExceptionThrown -> {
+                    Log.i(TAG, "Faucet call threw an exception: ${response.exception}")
+                }
             }
-            ktorClient.close()
         }
     }
 }

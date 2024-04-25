@@ -37,7 +37,12 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                // put your multiplatform dependencies here
+                // Coroutines
+                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3")
+
+                // Ktor
+                implementation("io.ktor:ktor-client-cio:2.2.1")
+                implementation("io.ktor:ktor-client-auth:2.2.1")
             }
         }
         val commonTest by getting {

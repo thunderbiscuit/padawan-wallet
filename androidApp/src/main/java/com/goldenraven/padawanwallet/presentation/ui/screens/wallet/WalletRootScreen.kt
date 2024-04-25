@@ -96,8 +96,8 @@ import com.goldenraven.padawanwallet.utils.ScreenSizeWidth
 import com.goldenraven.padawanwallet.utils.formatCurrency
 import com.goldenraven.padawanwallet.utils.formatInBtc
 import com.goldenraven.padawanwallet.utils.getScreenSizeWidth
-import com.goldenraven.padawanwallet.viewmodels.CurrencyType
-import com.goldenraven.padawanwallet.viewmodels.WalletViewModel
+import com.goldenraven.padawanwallet.presentation.viewmodels.CurrencyType
+import com.goldenraven.padawanwallet.presentation.viewmodels.WalletViewModel
 
 private const val TAG = "WalletRootScreen"
 

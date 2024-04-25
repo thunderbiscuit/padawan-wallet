@@ -39,7 +39,7 @@ import com.goldenraven.padawanwallet.viewmodels.ChaptersViewModel
 import com.goldenraven.padawanwallet.presentation.ui.components.ShowBars
 import com.goldenraven.padawanwallet.utils.NavigationItem
 import com.goldenraven.padawanwallet.presentation.navigation.WalletNavigation
-import com.goldenraven.padawanwallet.viewmodels.WalletViewModel
+import com.goldenraven.padawanwallet.presentation.viewmodels.WalletViewModel
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
