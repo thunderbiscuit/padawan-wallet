@@ -11,6 +11,12 @@
 		BFDF73E72BDA9DCC00AD758C /* WalletViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFDF73E62BDA9DCC00AD758C /* WalletViewModel.swift */; };
 		BFDF73EA2BDA9E9D00AD758C /* BitcoinDevKit in Frameworks */ = {isa = PBXBuildFile; productRef = BFDF73E92BDA9E9D00AD758C /* BitcoinDevKit */; };
 		BFDF73ED2BDAA08100AD758C /* PadawanKmp in Frameworks */ = {isa = PBXBuildFile; productRef = BFDF73EC2BDAA08100AD758C /* PadawanKmp */; };
+		BFDF73EF2BDAA2ED00AD758C /* WalletView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFDF73EE2BDAA2ED00AD758C /* WalletView.swift */; };
+		BFDF73F12BDAA32100AD758C /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFDF73F02BDAA32100AD758C /* MenuView.swift */; };
+		BFDF73F32BDAA34500AD758C /* LearnView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFDF73F22BDAA34500AD758C /* LearnView.swift */; };
+		BFDF73F52BDAA38C00AD758C /* SendView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFDF73F42BDAA38C00AD758C /* SendView.swift */; };
+		BFDF73F72BDAA3C200AD758C /* ReceiveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFDF73F62BDAA3C200AD758C /* ReceiveView.swift */; };
+		BFDF73F92BDAA3F700AD758C /* RecoverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFDF73F82BDAA3F700AD758C /* RecoverView.swift */; };
 		BFE0DB082BDA6BCD00BF19E3 /* PadawanWalletApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFE0DB072BDA6BCD00BF19E3 /* PadawanWalletApp.swift */; };
 		BFE0DB0A2BDA6BCD00BF19E3 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFE0DB092BDA6BCD00BF19E3 /* ContentView.swift */; };
 		BFE0DB0C2BDA6BCE00BF19E3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BFE0DB0B2BDA6BCE00BF19E3 /* Assets.xcassets */; };
@@ -40,6 +46,12 @@
 /* Begin PBXFileReference section */
 		BFDF73E42BDA9D3600AD758C /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
 		BFDF73E62BDA9DCC00AD758C /* WalletViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletViewModel.swift; sourceTree = "<group>"; };
+		BFDF73EE2BDAA2ED00AD758C /* WalletView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletView.swift; sourceTree = "<group>"; };
+		BFDF73F02BDAA32100AD758C /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
+		BFDF73F22BDAA34500AD758C /* LearnView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnView.swift; sourceTree = "<group>"; };
+		BFDF73F42BDAA38C00AD758C /* SendView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendView.swift; sourceTree = "<group>"; };
+		BFDF73F62BDAA3C200AD758C /* ReceiveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiveView.swift; sourceTree = "<group>"; };
+		BFDF73F82BDAA3F700AD758C /* RecoverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecoverView.swift; sourceTree = "<group>"; };
 		BFE0DB042BDA6BCD00BF19E3 /* PadawanWallet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PadawanWallet.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BFE0DB072BDA6BCD00BF19E3 /* PadawanWalletApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PadawanWalletApp.swift; sourceTree = "<group>"; };
 		BFE0DB092BDA6BCD00BF19E3 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -108,6 +120,12 @@
 				BFE0DB0D2BDA6BCE00BF19E3 /* Preview Content */,
 				BFDF73E42BDA9D3600AD758C /* WelcomeView.swift */,
 				BFDF73E62BDA9DCC00AD758C /* WalletViewModel.swift */,
+				BFDF73EE2BDAA2ED00AD758C /* WalletView.swift */,
+				BFDF73F02BDAA32100AD758C /* MenuView.swift */,
+				BFDF73F22BDAA34500AD758C /* LearnView.swift */,
+				BFDF73F42BDAA38C00AD758C /* SendView.swift */,
+				BFDF73F62BDAA3C200AD758C /* ReceiveView.swift */,
+				BFDF73F82BDAA3F700AD758C /* RecoverView.swift */,
 			);
 			path = PadawanWallet;
 			sourceTree = "<group>";
@@ -276,8 +294,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				BFE0DB0A2BDA6BCD00BF19E3 /* ContentView.swift in Sources */,
+				BFDF73F32BDAA34500AD758C /* LearnView.swift in Sources */,
+				BFDF73F12BDAA32100AD758C /* MenuView.swift in Sources */,
+				BFDF73EF2BDAA2ED00AD758C /* WalletView.swift in Sources */,
 				BFDF73E72BDA9DCC00AD758C /* WalletViewModel.swift in Sources */,
+				BFDF73F92BDAA3F700AD758C /* RecoverView.swift in Sources */,
 				BFDF73E52BDA9D3600AD758C /* WelcomeView.swift in Sources */,
+				BFDF73F72BDAA3C200AD758C /* ReceiveView.swift in Sources */,
+				BFDF73F52BDAA38C00AD758C /* SendView.swift in Sources */,
 				BFE0DB082BDA6BCD00BF19E3 /* PadawanWalletApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
