@@ -26,7 +26,7 @@ import com.goldenraven.padawanwallet.domain.tx.TxDao
 import com.goldenraven.padawanwallet.domain.tx.TxDatabase
 import com.goldenraven.padawanwallet.domain.tx.TxRepository
 import com.goldenraven.padawanwallet.padawankmp.FaucetCall
-import com.goldenraven.padawanwallet.padawankmp.FaucetRepository
+import com.goldenraven.padawanwallet.padawankmp.FaucetService
 import com.goldenraven.padawanwallet.utils.SatoshisIn
 import com.goldenraven.padawanwallet.utils.SatoshisOut
 import com.goldenraven.padawanwallet.utils.isPayment
@@ -90,7 +90,7 @@ class WalletViewModel(
 
     // Faucet Code
     fun onPositiveDialogClick() {
-        callTatooineFaucet(getLastUnusedAddress())
+        requestTestnetCoins(getLastUnusedAddress())
         faucetCallDone()
         openFaucetDialog.value = false
     }
@@ -247,15 +247,15 @@ class WalletViewModel(
             }
     }
 
-    private fun callTatooineFaucet(addressInfo: AddressInfo) {
+    private fun requestTestnetCoins(addressInfo: AddressInfo) {
         val faucetUrl: String = BuildConfig.FAUCET_URL
         val faucetUsername: String = BuildConfig.FAUCET_USERNAME
         val faucetPassword: String = BuildConfig.FAUCET_PASSWORD
         // val faucetPassword: String = "password" // Use for testing failed requests
 
-        val faucetRepository = FaucetRepository()
+        val faucetService = FaucetService()
         viewModelScope.launch {
-            val response = faucetRepository.callTatooineFaucet(
+            val response = faucetService.callTatooineFaucet(
                 addressInfo.address,
                 faucetUrl,
                 faucetUsername,
