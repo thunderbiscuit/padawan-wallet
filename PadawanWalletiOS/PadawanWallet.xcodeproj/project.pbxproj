@@ -7,10 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BF0198472BDAE00C0078840D /* PadawanKmp in Frameworks */ = {isa = PBXBuildFile; productRef = BF0198462BDAE00C0078840D /* PadawanKmp */; };
+		BF9619A92BDB3D00007DCA53 /* PadawanKmp in Frameworks */ = {isa = PBXBuildFile; productRef = BF9619A82BDB3D00007DCA53 /* PadawanKmp */; };
 		BFDF73E52BDA9D3600AD758C /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFDF73E42BDA9D3600AD758C /* WelcomeView.swift */; };
 		BFDF73E72BDA9DCC00AD758C /* WalletViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFDF73E62BDA9DCC00AD758C /* WalletViewModel.swift */; };
 		BFDF73EA2BDA9E9D00AD758C /* BitcoinDevKit in Frameworks */ = {isa = PBXBuildFile; productRef = BFDF73E92BDA9E9D00AD758C /* BitcoinDevKit */; };
-		BFDF73ED2BDAA08100AD758C /* PadawanKmp in Frameworks */ = {isa = PBXBuildFile; productRef = BFDF73EC2BDAA08100AD758C /* PadawanKmp */; };
 		BFDF73EF2BDAA2ED00AD758C /* WalletView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFDF73EE2BDAA2ED00AD758C /* WalletView.swift */; };
 		BFDF73F12BDAA32100AD758C /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFDF73F02BDAA32100AD758C /* MenuView.swift */; };
 		BFDF73F32BDAA34500AD758C /* LearnView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFDF73F22BDAA34500AD758C /* LearnView.swift */; };
@@ -69,8 +70,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BFDF73ED2BDAA08100AD758C /* PadawanKmp in Frameworks */,
+				BF0198472BDAE00C0078840D /* PadawanKmp in Frameworks */,
 				BFDF73EA2BDA9E9D00AD758C /* BitcoinDevKit in Frameworks */,
+				BF9619A92BDB3D00007DCA53 /* PadawanKmp in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -173,7 +175,8 @@
 			name = PadawanWallet;
 			packageProductDependencies = (
 				BFDF73E92BDA9E9D00AD758C /* BitcoinDevKit */,
-				BFDF73EC2BDAA08100AD758C /* PadawanKmp */,
+				BF0198462BDAE00C0078840D /* PadawanKmp */,
+				BF9619A82BDB3D00007DCA53 /* PadawanKmp */,
 			);
 			productName = PadawanWallet;
 			productReference = BFE0DB042BDA6BCD00BF19E3 /* PadawanWallet.app */;
@@ -249,7 +252,7 @@
 			mainGroup = BFE0DAFB2BDA6BCD00BF19E3;
 			packageReferences = (
 				BFDF73E82BDA9E9D00AD758C /* XCRemoteSwiftPackageReference "bdk-swift" */,
-				BFDF73EB2BDAA08100AD758C /* XCRemoteSwiftPackageReference "padawankmp" */,
+				BF9619A72BDB3D00007DCA53 /* XCRemoteSwiftPackageReference "PadawanKmp" */,
 			);
 			productRefGroup = BFE0DB052BDA6BCD00BF19E3 /* Products */;
 			projectDirPath = "";
@@ -628,6 +631,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		BF9619A72BDB3D00007DCA53 /* XCRemoteSwiftPackageReference "PadawanKmp" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/thunderbiscuit/PadawanKmp.git";
+			requirement = {
+				kind = exactVersion;
+				version = 0.0.2;
+			};
+		};
 		BFDF73E82BDA9E9D00AD758C /* XCRemoteSwiftPackageReference "bdk-swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/bitcoindevkit/bdk-swift.git";
@@ -636,26 +647,22 @@
 				version = 0.31.1;
 			};
 		};
-		BFDF73EB2BDAA08100AD758C /* XCRemoteSwiftPackageReference "padawankmp" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/thunderbiscuit/padawankmp.git";
-			requirement = {
-				kind = exactVersion;
-				version = 0.0.1;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		BF0198462BDAE00C0078840D /* PadawanKmp */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = PadawanKmp;
+		};
+		BF9619A82BDB3D00007DCA53 /* PadawanKmp */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BF9619A72BDB3D00007DCA53 /* XCRemoteSwiftPackageReference "PadawanKmp" */;
+			productName = PadawanKmp;
+		};
 		BFDF73E92BDA9E9D00AD758C /* BitcoinDevKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = BFDF73E82BDA9E9D00AD758C /* XCRemoteSwiftPackageReference "bdk-swift" */;
 			productName = BitcoinDevKit;
-		};
-		BFDF73EC2BDAA08100AD758C /* PadawanKmp */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = BFDF73EB2BDAA08100AD758C /* XCRemoteSwiftPackageReference "padawankmp" */;
-			productName = PadawanKmp;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

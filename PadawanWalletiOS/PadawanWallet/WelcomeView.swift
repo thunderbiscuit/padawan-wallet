@@ -38,9 +38,7 @@ struct WelcomeView: View {
             Button(action: {
                 do {
                     try viewModel.createWallet(words: nil)
-                    
                 } catch {
-                    //                       self.walletViewError = .Generic(message: "Error Getting Transactions")
                     print("error")
                 }
                 

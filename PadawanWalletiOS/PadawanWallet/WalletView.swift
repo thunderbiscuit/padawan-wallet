@@ -8,6 +8,8 @@
 
 import SwiftUI
 import BitcoinDevKit
+import class PadawanKmp.FaucetCall
+import class PadawanKmp.FaucetService
 
 struct WalletView: View {
     
@@ -213,7 +215,14 @@ struct FaucetView: View {
         
             if viewModel.syncState == .synced { //only show button once synced!
                 Button(action: {
-                    //TODO add nnetwork call to get testnet coins!!
+                    let faucetService = FaucetService()
+                    let response: FaucetCall = faucetService.callTatooineFaucet(
+                        address: "1234abcd",
+                        faucetUrl: "http://padawanwallet.com",
+                        faucetUsername: "padawan",
+                        faucetPassword: "password"
+                    )
+                    handleResponse(response: response)
                     faucetFailed = true
                 }, label: {
                     Text("Get coins \(Image(systemName: "bitcoinsign")) \(Image(systemName: "arrow.down.left"))")
@@ -225,16 +234,15 @@ struct FaucetView: View {
                         .cornerRadius(20)
                 })
                 .padding(20)
-                .alert("Faucet Not Implemented Yet!",
-                       isPresented: $faucetFailed) {
-                       Button("Ok", role: .destructive) {
-                             // TODO
-                       }
+                .alert(
+                    "Faucet Not Implemented Yet!",
+                    isPresented: $faucetFailed
+                ) {
+                    Button("Ok", role: .destructive) {  }
                 } message: {
-                       Text("Try to recover a wallet instead")
+                    Text("Try to recover a wallet instead")
                 }
             }
-        
         }
     }
 }
@@ -437,6 +445,22 @@ struct TransactionDetailsView: View {
         }
         .padding()
 
+    }
+}
+
+func handleResponse(response: FaucetCall) {
+    switch response {
+    case let success as FaucetCall.Success:
+        // Access properties like `status` and `description_`
+        print("Handling the Success: \(success.status) - \(success.description_)")
+    case let error as FaucetCall.Error:
+        // Note the property `description_` is used instead of `description` to avoid conflict with Swift’s default `description`
+        print("Handling the Error like a professional: \(error.status) - \(error.description_)")
+    case let exception as FaucetCall.ExceptionThrown:
+        // Handle exception, might need to access specific properties or methods
+        print("Exception is too bad: \(exception.exception)")
+    default:
+        print("Unknown response type")
     }
 }
 

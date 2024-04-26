@@ -12,10 +12,10 @@
     {
       "identity" : "padawankmp",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/thunderbiscuit/padawankmp.git",
+      "location" : "https://github.com/thunderbiscuit/PadawanKmp.git",
       "state" : {
-        "revision" : "c6f843e5a00d615560f07038c762d5167d564b70",
-        "version" : "0.0.1"
+        "revision" : "6319b4b54a62104dfe536161bc8a40edd96a4320",
+        "version" : "0.0.2"
       }
     }
   ],
