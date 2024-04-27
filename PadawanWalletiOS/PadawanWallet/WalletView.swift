@@ -103,30 +103,14 @@ struct WalletView: View {
                     
                     switch viewModel.state {
                         
-                        case .loaded(let wallet, let blockchain):
+                    case .loaded(_, _):
                             do {
                                 switch navigaionValue {
                                     
                                 case "Receive ↓":
                                     ReceiveView( navigationPath: $navigationPath)
                                 case "Send ↑":
-                                    SendView(onSend: { recipient, amount, fee in
-                                        do {
-                                            let address = try Address(address: recipient, network: wallet.network())
-                                            let script = address.scriptPubkey()
-                                            let txBuilder = TxBuilder().addRecipient(script: script, amount: amount)
-                                                .feeRate(satPerVbyte: fee)
-                                            let details = try txBuilder.finish(wallet: wallet)
-                                            let _ = try wallet.sign(psbt: details.psbt, signOptions: nil)
-                                            let tx = details.psbt.extractTx()
-                                            try blockchain.broadcast(transaction: tx)
-                                            let txid = details.psbt.txid()
-                                            print(txid)
-                                           
-                                        } catch let error {
-                                            print(error)
-                                        }
-                                    })
+                                    SendView(navigationPath: $navigationPath)
                                 default:
                                     Text("undefined button value")
                                 }

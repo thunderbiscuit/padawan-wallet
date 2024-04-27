@@ -10,80 +10,6 @@ import Foundation
 import BitcoinDevKit
 import SwiftUI
 
-extension TransactionDetails: Comparable {
-    public static func == (lhs: BitcoinDevKit.TransactionDetails, rhs: BitcoinDevKit.TransactionDetails) -> Bool {
-        
-        let lhs_timestamp: UInt64 = lhs.confirmationTime?.timestamp ?? UInt64.max;
-        let rhs_timestamp: UInt64 = rhs.confirmationTime?.timestamp ?? UInt64.max;
-       
-        return lhs_timestamp == rhs_timestamp
-    }
-    
-    public static func < (lhs: TransactionDetails, rhs: TransactionDetails) -> Bool {
-        
-        let lhs_timestamp: UInt64 = lhs.confirmationTime?.timestamp ?? UInt64.max;
-        let rhs_timestamp: UInt64 = rhs.confirmationTime?.timestamp ?? UInt64.max;
-        
-        return lhs_timestamp < rhs_timestamp
-    }
-}
-
-extension UInt32 {
-    private static var numberFormatter: NumberFormatter = {
-        let numberFormatter = NumberFormatter()
-        numberFormatter.numberStyle = .decimal
-
-        return numberFormatter
-    }()
-
-    var delimiter: String {
-        return UInt32.numberFormatter.string(from: NSNumber(value: self)) ?? ""
-    }
-}
-
-extension UInt64 {
-    
-    private static var numberFormatter: NumberFormatter = {
-        let numberFormatter = NumberFormatter()
-        numberFormatter.numberStyle = .decimal
-
-        return numberFormatter
-    }()
-
-    var delimiter: String {
-        return UInt64.numberFormatter.string(from: NSNumber(value: self)) ?? ""
-    }
-    
-    func toDate() -> Date {
-        return Date(timeIntervalSince1970: TimeInterval(self))
-    }
-}
-
-enum HexConvertError: Error {
-    case wrongInputStringLength
-    case wrongInputStringCharacters
-}
-
-extension StringProtocol {
-    
-    func asHexArrayFromNonValidatedSource() -> [UInt8] {
-        var startIndex = self.startIndex
-        return stride(from: 0, to: count, by: 2).compactMap { _ in
-            let endIndex = index(startIndex, offsetBy: 2, limitedBy: self.endIndex) ?? self.endIndex
-            defer { startIndex = endIndex }
-            return UInt8(self[startIndex..<endIndex], radix: 16)
-        }
-    }
-
-    func asHexArray() throws -> [UInt8] {
-        if count % 2 != 0 { throw HexConvertError.wrongInputStringLength }
-        let characterSet = "0123456789ABCDEFabcdef"
-        let wrongCharacter = first { return !characterSet.contains($0) }
-        if wrongCharacter != nil { throw HexConvertError.wrongInputStringCharacters }
-        return asHexArrayFromNonValidatedSource()
-    }
-}
-
 struct WalletModel: Identifiable {
     
     let id: String = UUID().uuidString //creates unique user id per model item
@@ -175,6 +101,9 @@ class WalletViewModel: ObservableObject {
 //    private var blockchainConfig: BlockchainConfig?
 //    private var wallet: Wallet?
     
+    @Published var sendViewError: BdkError?
+    @Published var showingSendViewErrorAlert = false
+    
     func toggleBTCDisplay(displayOption: String) {
         
         if displayOption == "BTC" {
@@ -185,32 +114,35 @@ class WalletViewModel: ObservableObject {
         }
     }
     
-    func onSend(recipient: String, amount: UInt64, fee: Float) -> Result<Int, Error> {
+    func send(recipient: String, amount: UInt64, fee: Float) {
         
         switch state {
             
         case .loaded(let wallet, let blockchain):
             
-                do {
-                    let address = try Address(address: recipient, network: wallet.network())
-                    let script = address.scriptPubkey()
-                    let txBuilder = TxBuilder().addRecipient(script: script, amount: amount).feeRate(satPerVbyte: fee)
-                    let details = try txBuilder.finish(wallet: wallet)
-                    let _ = try wallet.sign(psbt: details.psbt, signOptions: nil)
-                    let tx = details.psbt.extractTx()
-                    try blockchain.broadcast(transaction: tx)
-                    let txid = details.psbt.txid()
-                    print(txid)
-                    return(Result.success(1))
-                }
-                catch let error {
-                    print(error)
-                    return(Result.failure(error))
-                }
+            do {
+                let address = try Address(address: recipient, network: wallet.network())
+                let script = address.scriptPubkey()
+                let txBuilder = TxBuilder().addRecipient(script: script, amount: amount).feeRate(satPerVbyte: fee)
+                let details = try txBuilder.finish(wallet: wallet)
+                let _ = try wallet.sign(psbt: details.psbt, signOptions: nil)
+                let tx = details.psbt.extractTx()
+                try blockchain.broadcast(transaction: tx)
+                //let txid = details.psbt.txid()
+                //print(txid)
+            }
+            catch let error as BdkError {
+                self.sendViewError = .Generic(message: error.description)
+                self.showingSendViewErrorAlert = true
+            } catch {
+                self.sendViewError = .Generic(message: "Error Sending")
+                self.showingSendViewErrorAlert = true
+            }
          
         default:
-            print("error onSend")
-            return(Result.success(1))
+            self.sendViewError = .Generic(message:"no wallet loaded!")
+            self.showingSendViewErrorAlert = true
+            
         }
     }
     
@@ -275,23 +207,23 @@ class WalletViewModel: ObservableObject {
                 password: nil
             )
             
-            let descriptor = Descriptor.newBip86(
-                secretKey: secretKey,
-                keychain: .external,
-                network: network
-            )
+//            let descriptor = Descriptor.newBip86(
+//                secretKey: secretKey,
+//                keychain: .external,
+//                network: network
+//            )
 
 //use for testing
-//let descriptor = try Descriptor.init(descriptor: "wpkh(tprv8ZgxMBicQKsPeSitUfdxhsVaf4BXAASVAbHypn2jnPcjmQZvqZYkeqx7EHQTWvdubTSDa5ben7zHC7sUsx4d8tbTvWdUtHzR8uhHg2CW7MT/*)", network: network)
+let descriptor = try Descriptor.init(descriptor: "wpkh(tprv8ZgxMBicQKsPeSitUfdxhsVaf4BXAASVAbHypn2jnPcjmQZvqZYkeqx7EHQTWvdubTSDa5ben7zHC7sUsx4d8tbTvWdUtHzR8uhHg2CW7MT/*)", network: network)
             
-            let changeDescriptor = Descriptor.newBip86(
-                secretKey: secretKey,
-                keychain: .internal,
-                network: network
-            )
+//            let changeDescriptor = Descriptor.newBip86(
+//                secretKey: secretKey,
+//                keychain: .internal,
+//                network: network
+//            )
 
 //use for testing
-//let changeDescriptor = try Descriptor.init(descriptor: "wpkh(tprv8ZgxMBicQKsPdy6LMhUtFHAgpocR8GC6QmwMSFpZs7h6Eziw3SpThFfczTDh5rW2krkqffa11UpX3XkeTTB2FvzZKWXqPY54Y6Rq4AQ5R8L/84'/0'/0'/1/*)",network: network)
+let changeDescriptor = try Descriptor.init(descriptor: "wpkh(tprv8ZgxMBicQKsPdy6LMhUtFHAgpocR8GC6QmwMSFpZs7h6Eziw3SpThFfczTDh5rW2krkqffa11UpX3XkeTTB2FvzZKWXqPY54Y6Rq4AQ5R8L/84'/0'/0'/1/*)",network: network)
             
             secretMnemonic = mnemonic.asString() //TODO this will need to be stored in the keychain!!
             secretDescriptor = descriptor.asString() //TODO this will need to be stored in the keychain!!

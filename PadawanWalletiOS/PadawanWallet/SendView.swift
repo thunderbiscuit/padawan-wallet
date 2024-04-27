@@ -20,8 +20,11 @@ struct SendView: View {
     @State private var satsBalance: String = "0"
     @State private var feeSatPerVbyte: Float = 0.0
     
-    var onSend : (String, UInt64, Float) -> ()
-    @State private var sendFailed = false
+    @Binding var navigationPath: [String]
+    
+    @State private var sendNotReady = false
+    @State private var verifyReady = false
+    @State private var isSent: Bool = false
     
     var body: some View {
         
@@ -106,12 +109,13 @@ struct SendView: View {
             
             Button(action: {
                 
-                //btcAddress = "bc1qu5ujlp9dkvtgl98jakvw9ggj9uwyk79qhvwvrg" //for testing
-                //onSend(btcAddress, (UInt64(satsAmount) ?? 0), feeSatPerVbyte)
-                let sendResult = viewModel.onSend(recipient: btcAddress, amount: (UInt64(satsAmount) ?? 0), fee: feeSatPerVbyte)
-                
-                sendFailed = true //sendResult
-                
+                if (btcAddress == "" || satsAmount == "") {
+                    sendNotReady = true
+                }
+                else {
+                    verifyReady = true
+                    sendNotReady = false
+                }
             }, label: {
                 Text("Verify Transaction")
                     .font(.headline)
@@ -121,30 +125,138 @@ struct SendView: View {
                     .background(Color.orange)
                     .cornerRadius(20)
             })
-//        .alert("Send Failed",
-//               isPresented: $sendFailed) {
-//               Button("Ok", role: .destructive) {
-//                     // TODO
-//               }
-//        } message: {
-//               Text("Please, check entries")
-//        }
-            
-        }.padding(40)
-            .onAppear(perform: {
-                //viewModel.sync()
-                viewModel.toggleBTCDisplay(displayOption: "sats")
+            .alert("Alert",
+                   isPresented: $sendNotReady) {
+                   Button("Ok", role: .cancel) {
+                         // TODO
+                   }
+            } message: {
+                   Text("Please enter Amount and Address")
             }
-        )
+            
+        } //VStack
+        .padding(40)
+        .onAppear(perform: {
+            //viewModel.sync()
+            viewModel.toggleBTCDisplay(displayOption: "sats")
+        })
+        .sheet(isPresented: $verifyReady, onDismiss: {
+            
+            isSent == true ? navigationPath.removeAll() : () //navigate to wallet view if send sucessful
+        })
+        {
+            VerifyView(feesSatsPerVByte: $feesSatsPerVByte, satsAmount: $satsAmount, btcAddress: $btcAddress, verifyReady: $verifyReady, isSent: $isSent)
+                .presentationDetents([.medium]) //half height sheet
+                .presentationCornerRadius(50)
+                .presentationBackground(alignment: .bottom) {
+                    LinearGradient(colors: [Color.orange, Color.white], startPoint: .bottomLeading, endPoint: .topTrailing)
+                }
+                //.presentationBackground(.thinMaterial)
+        }
+        
+    } //body
+}
+
+struct VerifyView: View {
+    
+    @EnvironmentObject var viewModel: WalletViewModel
+    
+    @Binding var feesSatsPerVByte: Double
+    @Binding var satsAmount: String
+    @Binding var btcAddress: String
+    @Binding var verifyReady: Bool
+    @Binding var isSent: Bool
+
+    var body: some View {
+        
+        VStack {
+            Text("Confirm Transaction").font(.title)
+            
+            Spacer()
+            HStack {
+                Text("Send Amount").font(.headline)
+                Spacer()
+            }
+            HStack {
+                Text(satsAmount)
+                Text("satoshis")
+                Spacer()
+            }
+            
+            Spacer()
+            HStack {
+                Text("To Address").font(.headline)
+                Spacer()
+            }
+            HStack {
+                Text(btcAddress)
+                .fixedSize(horizontal: false, vertical: true)
+//                Text("bc1qu5ujlp9dkvtgl98jakvw9ggj9uwyk79qhvwvrg") //for testing
+//                .allowsTightening(true)
+//                .scaledToFit()
+//                .lineLimit(2)
+//                .minimumScaleFactor(0.7)
+                    
+                Spacer()
+            }
+            
+            Spacer()
+            HStack {
+                Text("Total Fee").font(.headline)
+                Spacer()
+            }
+            HStack {
+                Text("\(feesSatsPerVByte.formatted(.number.precision(.fractionLength(0))))")
+                Text("satoshis")
+                Spacer()
+            }
+            
+            Spacer()
+            
+        }
+        .padding(40)
+        
+        Button(action: {
+            
+            viewModel.send(recipient: btcAddress, amount: (UInt64(satsAmount) ?? 0), fee: Float(feesSatsPerVByte))
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                if self.viewModel.sendViewError == nil {
+                    self.isSent = true
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                        self.verifyReady.toggle() //cause verify sheet to dismiss
+                    }
+                } else {
+                    self.isSent = false
+                }
+            }
+            
+        }, label: {
+            Text("Confirm and Broadcast")
+                .font(.headline)
+                .foregroundColor(.black)
+                .frame(height: 55)
+                .frame(maxWidth: .infinity)
+                .background(Color.orange)
+                .cornerRadius(20)
+        })
+        .padding(40)
+        .alert(isPresented: $viewModel.showingSendViewErrorAlert) {
+            Alert(
+                title: Text("Send Error"),
+                message: Text(viewModel.sendViewError?.description ?? "Unknown"),
+                dismissButton: .default(Text("OK")) {
+                    viewModel.sendViewError = nil
+                }
+            )
+        }
     }
 }
 
 struct SendView_Previews: PreviewProvider {
-    static func onSend(to: String, amount: UInt64, fee: Float) -> () {
-        
-    }
+
     static var previews: some View {
-        SendView(onSend: self.onSend)
+        SendView(navigationPath: .constant (["Send ↑"]))
             .environmentObject(WalletViewModel())
     }
 }

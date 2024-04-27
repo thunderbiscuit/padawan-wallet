@@ -25,6 +25,9 @@
 		BFE0DB192BDA6BCE00BF19E3 /* PadawanWalletTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFE0DB182BDA6BCE00BF19E3 /* PadawanWalletTests.swift */; };
 		BFE0DB232BDA6BCE00BF19E3 /* PadawanWalletUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFE0DB222BDA6BCE00BF19E3 /* PadawanWalletUITests.swift */; };
 		BFE0DB252BDA6BCE00BF19E3 /* PadawanWalletUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFE0DB242BDA6BCE00BF19E3 /* PadawanWalletUITestsLaunchTests.swift */; };
+		ED48F4842BDDB8D30014ACF7 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED48F4832BDDB8D30014ACF7 /* String+Extensions.swift */; };
+		ED48F4862BDDB9560014ACF7 /* Int+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED48F4852BDDB9560014ACF7 /* Int+Extensions.swift */; };
+		EDECB89D2BDC7F2C00BB24D0 /* BDKError+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDECB89C2BDC7F2C00BB24D0 /* BDKError+Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,6 +66,9 @@
 		BFE0DB1E2BDA6BCE00BF19E3 /* PadawanWalletUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PadawanWalletUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BFE0DB222BDA6BCE00BF19E3 /* PadawanWalletUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PadawanWalletUITests.swift; sourceTree = "<group>"; };
 		BFE0DB242BDA6BCE00BF19E3 /* PadawanWalletUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PadawanWalletUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		ED48F4832BDDB8D30014ACF7 /* String+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
+		ED48F4852BDDB9560014ACF7 /* Int+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Int+Extensions.swift"; sourceTree = "<group>"; };
+		EDECB89C2BDC7F2C00BB24D0 /* BDKError+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "BDKError+Extensions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,6 +122,7 @@
 		BFE0DB062BDA6BCD00BF19E3 /* PadawanWallet */ = {
 			isa = PBXGroup;
 			children = (
+				EDECB89B2BDC7EDE00BB24D0 /* Extensions */,
 				BFE0DB072BDA6BCD00BF19E3 /* PadawanWalletApp.swift */,
 				BFE0DB092BDA6BCD00BF19E3 /* ContentView.swift */,
 				BFE0DB0B2BDA6BCE00BF19E3 /* Assets.xcassets */,
@@ -155,6 +162,16 @@
 				BFE0DB242BDA6BCE00BF19E3 /* PadawanWalletUITestsLaunchTests.swift */,
 			);
 			path = PadawanWalletUITests;
+			sourceTree = "<group>";
+		};
+		EDECB89B2BDC7EDE00BB24D0 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				ED48F4832BDDB8D30014ACF7 /* String+Extensions.swift */,
+				ED48F4852BDDB9560014ACF7 /* Int+Extensions.swift */,
+				EDECB89C2BDC7F2C00BB24D0 /* BDKError+Extensions.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -300,10 +317,13 @@
 				BFDF73F32BDAA34500AD758C /* LearnView.swift in Sources */,
 				BFDF73F12BDAA32100AD758C /* MenuView.swift in Sources */,
 				BFDF73EF2BDAA2ED00AD758C /* WalletView.swift in Sources */,
+				ED48F4842BDDB8D30014ACF7 /* String+Extensions.swift in Sources */,
+				ED48F4862BDDB9560014ACF7 /* Int+Extensions.swift in Sources */,
 				BFDF73E72BDA9DCC00AD758C /* WalletViewModel.swift in Sources */,
 				BFDF73F92BDAA3F700AD758C /* RecoverView.swift in Sources */,
 				BFDF73E52BDA9D3600AD758C /* WelcomeView.swift in Sources */,
 				BFDF73F72BDAA3C200AD758C /* ReceiveView.swift in Sources */,
+				EDECB89D2BDC7F2C00BB24D0 /* BDKError+Extensions.swift in Sources */,
 				BFDF73F52BDAA38C00AD758C /* SendView.swift in Sources */,
 				BFE0DB082BDA6BCD00BF19E3 /* PadawanWalletApp.swift in Sources */,
 			);
