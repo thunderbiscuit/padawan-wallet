@@ -207,23 +207,23 @@ class WalletViewModel: ObservableObject {
                 password: nil
             )
             
-//            let descriptor = Descriptor.newBip86(
-//                secretKey: secretKey,
-//                keychain: .external,
-//                network: network
-//            )
+            let descriptor = Descriptor.newBip86(
+                secretKey: secretKey,
+                keychain: .external,
+                network: network
+            )
 
 //use for testing
-let descriptor = try Descriptor.init(descriptor: "wpkh(tprv8ZgxMBicQKsPeSitUfdxhsVaf4BXAASVAbHypn2jnPcjmQZvqZYkeqx7EHQTWvdubTSDa5ben7zHC7sUsx4d8tbTvWdUtHzR8uhHg2CW7MT/*)", network: network)
+//let descriptor = try Descriptor.init(descriptor: "wpkh(tprv8ZgxMBicQKsPeSitUfdxhsVaf4BXAASVAbHypn2jnPcjmQZvqZYkeqx7EHQTWvdubTSDa5ben7zHC7sUsx4d8tbTvWdUtHzR8uhHg2CW7MT/*)", network: network)
             
-//            let changeDescriptor = Descriptor.newBip86(
-//                secretKey: secretKey,
-//                keychain: .internal,
-//                network: network
-//            )
+            let changeDescriptor = Descriptor.newBip86(
+                secretKey: secretKey,
+                keychain: .internal,
+                network: network
+            )
 
 //use for testing
-let changeDescriptor = try Descriptor.init(descriptor: "wpkh(tprv8ZgxMBicQKsPdy6LMhUtFHAgpocR8GC6QmwMSFpZs7h6Eziw3SpThFfczTDh5rW2krkqffa11UpX3XkeTTB2FvzZKWXqPY54Y6Rq4AQ5R8L/84'/0'/0'/1/*)",network: network)
+//let changeDescriptor = try Descriptor.init(descriptor: "wpkh(tprv8ZgxMBicQKsPdy6LMhUtFHAgpocR8GC6QmwMSFpZs7h6Eziw3SpThFfczTDh5rW2krkqffa11UpX3XkeTTB2FvzZKWXqPY54Y6Rq4AQ5R8L/84'/0'/0'/1/*)",network: network)
             
             secretMnemonic = mnemonic.asString() //TODO this will need to be stored in the keychain!!
             secretDescriptor = descriptor.asString() //TODO this will need to be stored in the keychain!!
