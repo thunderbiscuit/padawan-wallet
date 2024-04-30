@@ -1,5 +1,8 @@
-test:
-  ./gradlew test
+unittests:
+  ./gradlew test --console=plain
+
+instrumentationtests:
+  ./gradlew connectedAndroidTest --console=plain
 
 buildlocalkmplib:
   ./gradlew :padawankmp:assemblePadawanKmpXCFramework
