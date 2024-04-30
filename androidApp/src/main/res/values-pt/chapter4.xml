@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="C4_title">What is the mempool?</string>
-    <string name="C4_tagline">When I send a transaction… where does it go?</string>
+    <string name="C4_title">O que é a mempool?</string>
+    <string name="C4_tagline">Quando eu envio uma transação… para aonde ela vai?</string>
 
-    <string name="t4_p1">When you complete and broadcast a bitcoin transaction, this transaction is recorded across all computers connected to the bitcoin network usually within 2 to 5 seconds. Eventually the transaction is added to the blockchain, but when a node initially becomes aware of it, it simply adds it to a group of transactions it knows about but that have not yet been included in a block. This group of transaction is called the mempool (or \"memory pool\"), and each computer connected to the bitcoin network keeps its own memory pool. A transaction being \"in the mempool\" (meaning most nodes have seen and added the transaction to their memory pool) means it has been acknowledged by the network, but not yet made official on the blockchain.</string>
-    <string name="t4_p2">To be made official, bitcoin miners need to mine a block that has the transaction included in it.</string>
+    <string name="t4_p1">Quando você transmite uma transação, ela é registrada em todos os computadores conectados à rede Bitcoin, geralmente dentro de 2 a 5 segundos. Um nó toma conhecimento da sua transação e a adiciona a um grupo com várias transações que ele conhece, mas que ainda não foram incluídas em um bloco, para, posteriormente ser registrada na blockchain. Esse grupo de transações é chamado de mempool (ou “piscina de transações”), e cada computador conectado à rede Bitcoin mantém sua própria mempool. Uma transação “na mempool” (já vista por vários nós e adicionada à piscina de transações) significa que ela foi reconhecida pela rede, mas ainda não foi registrada na blockchain.</string>
+    <string name="t4_p2">Para se tornar oficial, os mineradores de bitcoin precisam minerar um bloco que inclua a sua transação nele.</string>
 
-    <string name="t4_h1">Imagine a bus</string>
-    <string name="t4_p3">Imagine a bus coming to pick up passengers every 10 or so minutes. The bus can only take a certain amount of weight. Since every passenger is a different weight, the amount of passengers that can fit on the bus changes every time.</string>
-    <string name="t4_p4">The mempool acts as the bus stop. A lineup of transactions wait in the mempool to be processed into a block on the blockchain. The transactions wait for their turn to be mined, and every time the bus comes by it takes as many passengers as it can fit.</string>
+    <string name="t4_h1">Imagine um ônibus</string>
+    <string name="t4_p3">Imagine um ônibus que pega passageiros a cada 10 minutos em média. O ônibus só pode levar uma determinada quantidade de peso. Como cada passageiro tem um peso diferente, a quantidade de pessoas que  cabem no ônibus muda toda vez.</string>
+    <string name="t4_p4">A mempool atua como um ponto de ônibus. Várias transações esperam para serem registradas em um bloco na blockchain. As transações aguardam sua vez de serem mineradas, e toda vez que o ônibus passa ele leva tantos passageiros quanto possa.</string>
 
-    <string name="t4_h2">Some passengers</string>
-    <string name="t4_p5">Some passengers might be in a hurry to get on the next bus. They can pay an extra fare to make sure they are near the front of the line. These transactions will be prioritized in the mining process.</string>
-    <string name="t4_p6">On the other hand, some passengers might not be in a hurry at all! In that case, they might want to save their money by not paying a higher fare. Eventually, the line will clear and every transaction waiting in line does get through.</string>
+    <string name="t4_h2">Alguns passageiros</string>
+    <string name="t4_p5">Alguns passageiros podem ter pressa em pegar o próximo ônibus. Assim, eles pagam uma tarifa mais cara para garantir que estejam perto do início da fila e consigam embarcar. Essas transações serão priorizadas no processo de mineração.</string>
+    <string name="t4_p6">Por outro lado, outros passageiros podem não ter pressa alguma! Nesse caso, eles não pagam uma tarifa mais cara. Eventualmente, a fila para entrar no ônibus terá diminuído e as transações que estão esperando serão processadas.</string>
 </resources>
