@@ -3,7 +3,7 @@
     <string name="C4_title">O que é a mempool?</string>
     <string name="C4_tagline">Quando eu envio uma transação… para aonde ela vai?</string>
 
-    <string name="t4_p1">Quando você transmite uma transação, ela é registrada em todos os computadores conectados à rede Bitcoin, geralmente dentro de 2 a 5 segundos. Um nó toma conhecimento da sua transação e a adiciona a um grupo com várias transações que ele conhece, mas que ainda não foram incluídas em um bloco, para, posteriormente ser registrada na blockchain. Esse grupo de transações é chamado de mempool (ou “piscina de transações”), e cada computador conectado à rede Bitcoin mantém sua própria mempool. Uma transação “na mempool” (já vista por vários nós e adicionada à piscina de transações) significa que ela foi reconhecida pela rede, mas ainda não foi registrada na blockchain.</string>
+    <string name="t4_p1">Quando você transmite uma transação, ela é registrada em todos os computadores conectados à rede Bitcoin, geralmente dentro de 2 a 5 segundos. Um nó toma conhecimento da sua transação e a adiciona a um grupo com várias transações que ele conhece, mas que ainda não foram incluídas em um bloco, para, posteriormente, ser registrada na blockchain. Esse grupo de transações é chamado de mempool (ou “piscina de transações”), e cada computador conectado à rede Bitcoin mantém sua própria mempool. Uma transação “na mempool” (já vista por vários nós e adicionada à piscina de transações) significa que ela foi reconhecida pela rede, mas ainda não foi registrada na blockchain.</string>
     <string name="t4_p2">Para se tornar oficial, os mineradores de bitcoin precisam minerar um bloco que inclua a sua transação nele.</string>
 
     <string name="t4_h1">Imagine um ônibus</string>
