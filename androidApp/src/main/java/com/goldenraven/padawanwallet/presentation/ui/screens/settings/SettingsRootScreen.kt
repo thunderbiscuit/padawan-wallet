@@ -44,7 +44,7 @@ import com.goldenraven.padawanwallet.presentation.theme.padawan_theme_background
 import com.goldenraven.padawanwallet.presentation.theme.padawan_theme_button_primary
 import com.goldenraven.padawanwallet.presentation.theme.padawan_theme_text_faded_secondary
 import com.goldenraven.padawanwallet.utils.Screen
-import com.goldenraven.padawanwallet.viewmodels.ChaptersViewModel
+import com.goldenraven.padawanwallet.presentation.viewmodels.ChaptersViewModel
 import kotlinx.coroutines.launch
 
 private const val TAG = "SettingsRootScreen"

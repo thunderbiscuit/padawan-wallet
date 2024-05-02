@@ -34,7 +34,7 @@ import com.goldenraven.padawanwallet.utils.Screen
 import com.goldenraven.padawanwallet.presentation.ui.components.TutorialCard
 import com.goldenraven.padawanwallet.utils.ScreenSizeWidth
 import com.goldenraven.padawanwallet.utils.getScreenSizeWidth
-import com.goldenraven.padawanwallet.viewmodels.ChaptersViewModel
+import com.goldenraven.padawanwallet.presentation.viewmodels.ChaptersViewModel
 
 // TODO: Remember "next up" chapter
 

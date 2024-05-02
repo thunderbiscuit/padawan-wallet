@@ -21,7 +21,7 @@ import com.goldenraven.padawanwallet.presentation.ui.screens.settings.RecoveryPh
 import com.goldenraven.padawanwallet.presentation.ui.screens.settings.SendCoinsBackScreen
 import com.goldenraven.padawanwallet.presentation.ui.screens.settings.SettingsRootScreen
 import com.goldenraven.padawanwallet.presentation.ui.screens.chapters.ChaptersRootScreen
-import com.goldenraven.padawanwallet.viewmodels.ChaptersViewModel
+import com.goldenraven.padawanwallet.presentation.viewmodels.ChaptersViewModel
 import com.goldenraven.padawanwallet.presentation.ui.screens.settings.LanguagesScreen
 import com.goldenraven.padawanwallet.presentation.ui.screens.wallet.QRScanScreen
 import com.goldenraven.padawanwallet.presentation.ui.screens.wallet.ReceiveScreen

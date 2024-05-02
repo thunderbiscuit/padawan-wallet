@@ -1,4 +1,5 @@
 package com.goldenraven.padawanwallet.viewmodels
+package com.goldenraven.padawanwallet.presentation.viewmodels
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel

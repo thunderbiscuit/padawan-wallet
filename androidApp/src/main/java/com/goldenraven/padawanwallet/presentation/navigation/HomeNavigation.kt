@@ -14,7 +14,7 @@ import androidx.navigation.NavHostController
 import com.goldenraven.padawanwallet.utils.Screen
 import com.goldenraven.padawanwallet.presentation.ui.screens.HomeScreen
 import com.goldenraven.padawanwallet.presentation.ui.screens.SplashScreen
-import com.goldenraven.padawanwallet.viewmodels.ChaptersViewModel
+import com.goldenraven.padawanwallet.presentation.viewmodels.ChaptersViewModel
 import com.goldenraven.padawanwallet.presentation.viewmodels.WalletViewModel
 import com.google.accompanist.navigation.animation.AnimatedNavHost
 import com.google.accompanist.navigation.animation.composable

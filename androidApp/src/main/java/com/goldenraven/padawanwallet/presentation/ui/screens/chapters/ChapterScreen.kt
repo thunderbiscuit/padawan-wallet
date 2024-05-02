@@ -66,7 +66,7 @@ import com.goldenraven.padawanwallet.presentation.theme.standardShadow
 import com.goldenraven.padawanwallet.presentation.ui.components.standardBorder
 import com.goldenraven.padawanwallet.utils.ScreenSizeWidth
 import com.goldenraven.padawanwallet.utils.getScreenSizeWidth
-import com.goldenraven.padawanwallet.viewmodels.ChaptersViewModel
+import com.goldenraven.padawanwallet.presentation.viewmodels.ChaptersViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 

@@ -35,7 +35,7 @@ import com.goldenraven.padawanwallet.presentation.theme.PadawanTypography
 import com.goldenraven.padawanwallet.presentation.theme.padawan_theme_background_secondary
 import com.goldenraven.padawanwallet.presentation.theme.padawan_theme_button_primary
 import com.goldenraven.padawanwallet.presentation.theme.padawan_theme_navigation_bar_unselected
-import com.goldenraven.padawanwallet.viewmodels.ChaptersViewModel
+import com.goldenraven.padawanwallet.presentation.viewmodels.ChaptersViewModel
 import com.goldenraven.padawanwallet.presentation.ui.components.ShowBars
 import com.goldenraven.padawanwallet.utils.NavigationItem
 import com.goldenraven.padawanwallet.presentation.navigation.WalletNavigation
