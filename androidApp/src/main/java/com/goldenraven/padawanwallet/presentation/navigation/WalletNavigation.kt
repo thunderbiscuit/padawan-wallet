@@ -28,6 +28,7 @@ import com.goldenraven.padawanwallet.presentation.ui.screens.wallet.ReceiveScree
 import com.goldenraven.padawanwallet.presentation.ui.screens.wallet.SendScreen
 import com.goldenraven.padawanwallet.presentation.ui.screens.wallet.TransactionScreen
 import com.goldenraven.padawanwallet.presentation.ui.screens.wallet.WalletRootScreen
+import com.goldenraven.padawanwallet.presentation.viewmodels.ReceiveViewModel
 import com.goldenraven.padawanwallet.presentation.viewmodels.WalletViewModel
 import com.google.accompanist.navigation.animation.AnimatedNavHost
 import com.google.accompanist.navigation.animation.composable
@@ -40,6 +41,7 @@ fun WalletNavigation(
     chaptersViewModel: ChaptersViewModel
 ) {
     val animationDuration = 400
+    val receiveViewModel = ReceiveViewModel()
 
     AnimatedNavHost(
         navController = navControllerWalletNavigation,
@@ -114,7 +116,7 @@ fun WalletNavigation(
             popExitTransition = {
                 slideOutOfContainer(AnimatedContentScope.SlideDirection.Down, animationSpec = tween(animationDuration))
             }
-        ) { ReceiveScreen(navController = navControllerWalletNavigation, walletViewModel) }
+        ) { ReceiveScreen(navController = navControllerWalletNavigation, walletViewModel, receiveViewModel) }
 
 
         // Send

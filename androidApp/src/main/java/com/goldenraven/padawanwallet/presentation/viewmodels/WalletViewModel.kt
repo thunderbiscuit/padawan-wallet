@@ -55,12 +55,6 @@ class WalletViewModel(
     val balance: StateFlow<ULong>
         get() = _balance
 
-    private var _address: MutableStateFlow<String> = MutableStateFlow("1234")
-    val address: StateFlow<String>
-        get() = _address
-
-    var QRState: MutableStateFlow<QRUIState> = MutableStateFlow(QRUIState.NoQR)
-
     private val _isRefreshing: MutableStateFlow<Boolean> = MutableStateFlow(false)
     val isRefreshing: StateFlow<Boolean>
         get() = _isRefreshing.asStateFlow()
@@ -105,18 +99,8 @@ class WalletViewModel(
 
     private fun getLastUnusedAddress(): AddressInfo {
         val address = Wallet.getLastUnusedAddress()
-        _address.value = address.address
+        // _address.value = address.address
         return address
-    }
-
-    fun updateLastUnusedAddress() {
-        viewModelScope.launch {
-            QRState.value = QRUIState.Loading
-            val address = Wallet.getLastUnusedAddress().address
-            delay(800)
-            QRState.value = QRUIState.QR
-            _address.value = address
-        }
     }
 
     private suspend fun updateBalance() {
@@ -277,12 +261,6 @@ class WalletViewModel(
             }
         }
     }
-}
-
-sealed class QRUIState {
-    object NoQR : QRUIState()
-    object Loading : QRUIState()
-    object QR : QRUIState()
 }
 
 enum class CurrencyType {

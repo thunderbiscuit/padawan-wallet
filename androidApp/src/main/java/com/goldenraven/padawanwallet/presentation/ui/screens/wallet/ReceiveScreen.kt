@@ -25,7 +25,6 @@ import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -55,8 +54,10 @@ import com.goldenraven.padawanwallet.utils.ScreenSizeWidth
 import com.goldenraven.padawanwallet.utils.addressToQR
 import com.goldenraven.padawanwallet.utils.copyToClipboard
 import com.goldenraven.padawanwallet.utils.getScreenSizeWidth
-import com.goldenraven.padawanwallet.presentation.viewmodels.QRUIState
+import com.goldenraven.padawanwallet.presentation.viewmodels.QrUiState
+import com.goldenraven.padawanwallet.presentation.viewmodels.ReceiveViewModel
 import com.goldenraven.padawanwallet.presentation.viewmodels.WalletViewModel
+import com.goldenraven.padawanwallet.presentation.viewmodels.mvi.ReceiveScreenAction
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
@@ -65,18 +66,22 @@ private const val TAG = "ReceiveScreen"
 @Composable
 internal fun ReceiveScreen(
     navController: NavHostController,
-    viewModel: WalletViewModel
+    viewModel: WalletViewModel,
+    receiveViewModel: ReceiveViewModel,
 ) {
-    val snackbarHostState = remember { SnackbarHostState() }
-    val address: String by viewModel.address.collectAsState("1234")
-    var QR by remember {
-        mutableStateOf<ImageBitmap?>(null)
-    }
-    val qrUIState: QRUIState = viewModel.QRState.collectAsState(QRUIState.NoQR).value
+    val state = receiveViewModel.state
+    val onAction = receiveViewModel::onAction
 
-    LaunchedEffect(address) {
-        withContext(Dispatchers.IO) {
-            if (address != "1234") QR = addressToQR(address)
+    val snackbarHostState = remember { SnackbarHostState() }
+    // val address: String by viewModel.address.collectAsState("1234")
+    var qr by remember { mutableStateOf<ImageBitmap?>(null) }
+    // val qrUIState: QrUiState = viewModel.QRState.collectAsState(QrUiState.NoQR).value
+
+    LaunchedEffect(state.address) {
+        if (state.address != null) {
+            withContext(Dispatchers.IO) {
+                qr = addressToQR(state.address)
+            }
         }
     }
 
@@ -128,10 +133,10 @@ internal fun ReceiveScreen(
                 val context = LocalContext.current
                 val scope = rememberCoroutineScope()
 
-                if (qrUIState == QRUIState.Loading) {
+                if (state.qrState == QrUiState.Loading) {
                     LoadingAnimation(circleColor = padawan_theme_background, circleSize = 38.dp)
-                } else if (qrUIState == QRUIState.QR) {
-                    QR?.let {
+                } else if (state.qrState == QrUiState.QR && state.address != null) {
+                    qr?.let {
                         Image(
                             bitmap = it,
                             contentDescription = stringResource(R.string.qr_code),
@@ -139,7 +144,7 @@ internal fun ReceiveScreen(
                                 .size(qrCodeSize)
                                 .clickable {
                                     copyToClipboard(
-                                        address,
+                                        state.address,
                                         context,
                                         scope,
                                         snackbarHostState,
@@ -153,7 +158,7 @@ internal fun ReceiveScreen(
                             modifier = Modifier
                                 .clickable {
                                     copyToClipboard(
-                                        address,
+                                        state.address,
                                         context,
                                         scope,
                                         snackbarHostState,
@@ -161,7 +166,7 @@ internal fun ReceiveScreen(
                                     )
                                 }
                                 .padding(12.dp),
-                            text = address,
+                            text = state.address,
                             fontFamily = ShareTechMono,
                             fontSize = 12.sp
                         )
@@ -182,7 +187,7 @@ internal fun ReceiveScreen(
                     .padding(bottom = bottomPadding)
             ) {
                 Button(
-                    onClick = { viewModel.updateLastUnusedAddress() },
+                    onClick = { onAction(ReceiveScreenAction.UpdateAddress) },
                     colors = ButtonDefaults.buttonColors(containerColor = padawan_theme_button_primary),
                     shape = RoundedCornerShape(20.dp),
                     border = standardBorder,
