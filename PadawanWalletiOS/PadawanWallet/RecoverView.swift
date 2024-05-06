@@ -10,7 +10,7 @@ import SwiftUI
 
 struct RecoverView: View {
     
-    @EnvironmentObject var viewModel: WalletViewModel
+    @Environment(WalletViewModel.self) private var walletViewModel
     @State private var words = Array(repeating: "", count: 12)
 
     @Environment(\.dismiss) var dismiss
@@ -48,7 +48,7 @@ struct RecoverView: View {
                     if !words.isEmpty {
                         do {
                             let joinedWords = words.joined(separator: " ")
-                            try viewModel.createWallet(words: joinedWords)
+                            try walletViewModel.createWallet(words: joinedWords)
                         } catch {
                             //                       self.walletViewError = .Generic(message: "Error Getting Transactions")
                             print("error")
@@ -94,5 +94,6 @@ struct RecoverView: View {
 struct RecoverView_Previews: PreviewProvider {
     static var previews: some View {
         RecoverView()
+            .environment(WalletViewModel())
     }
 }

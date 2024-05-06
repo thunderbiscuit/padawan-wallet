@@ -11,7 +11,8 @@ import BitcoinDevKit
 
 struct SendView: View {
     
-    @EnvironmentObject var viewModel: WalletViewModel
+    @Environment(WalletViewModel.self) private var walletViewModel
+    //@Bindable var viewModel: WalletViewModel
     
     @State private var feesSatsPerVByte = 4.0
     @State private var isEditing = false
@@ -38,7 +39,7 @@ struct SendView: View {
             
             HStack{
                 Spacer()
-                Text(viewModel.balanceText)
+                Text(walletViewModel.balanceText)
                     .font(.title2)
                 Text(" sats")
                     .font(.title2)
@@ -138,14 +139,14 @@ struct SendView: View {
         .padding(40)
         .onAppear(perform: {
             //viewModel.sync()
-            viewModel.toggleBTCDisplay(displayOption: "sats")
+            walletViewModel.toggleBTCDisplay(displayOption: "sats")
         })
         .sheet(isPresented: $verifyReady, onDismiss: {
             
             isSent == true ? navigationPath.removeAll() : () //navigate to wallet view if send sucessful
         })
         {
-            VerifyView(feesSatsPerVByte: $feesSatsPerVByte, satsAmount: $satsAmount, btcAddress: $btcAddress, verifyReady: $verifyReady, isSent: $isSent)
+            VerifyView(walletViewModel: walletViewModel,feesSatsPerVByte: $feesSatsPerVByte, satsAmount: $satsAmount, btcAddress: $btcAddress, verifyReady: $verifyReady, isSent: $isSent)
                 .presentationDetents([.medium]) //half height sheet
                 .presentationCornerRadius(50)
                 .presentationBackground(alignment: .bottom) {
@@ -159,7 +160,7 @@ struct SendView: View {
 
 struct VerifyView: View {
     
-    @EnvironmentObject var viewModel: WalletViewModel
+    @Bindable var walletViewModel: WalletViewModel
     
     @Binding var feesSatsPerVByte: Double
     @Binding var satsAmount: String
@@ -218,10 +219,10 @@ struct VerifyView: View {
         
         Button(action: {
             
-            viewModel.send(recipient: btcAddress, amount: (UInt64(satsAmount) ?? 0), fee: Float(feesSatsPerVByte))
+            walletViewModel.send(recipient: btcAddress, amount: (UInt64(satsAmount) ?? 0), fee: Float(feesSatsPerVByte))
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                if self.viewModel.sendViewError == nil {
+                if self.walletViewModel.sendViewError == nil {
                     self.isSent = true
                     DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
                         self.verifyReady.toggle() //cause verify sheet to dismiss
@@ -241,12 +242,12 @@ struct VerifyView: View {
                 .cornerRadius(20)
         })
         .padding(40)
-        .alert(isPresented: $viewModel.showingSendViewErrorAlert) {
+        .alert(isPresented: $walletViewModel.showingSendViewErrorAlert) {
             Alert(
                 title: Text("Send Error"),
-                message: Text(viewModel.sendViewError?.description ?? "Unknown"),
+                message: Text(walletViewModel.sendViewError?.description ?? "Unknown"),
                 dismissButton: .default(Text("OK")) {
-                    viewModel.sendViewError = nil
+                    walletViewModel.sendViewError = nil
                 }
             )
         }
@@ -257,6 +258,6 @@ struct SendView_Previews: PreviewProvider {
 
     static var previews: some View {
         SendView(navigationPath: .constant (["Send ↑"]))
-            .environmentObject(WalletViewModel())
+            .environment(WalletViewModel())
     }
 }

@@ -13,7 +13,7 @@ import class PadawanKmp.FaucetService
 
 struct WalletView: View {
     
-    @EnvironmentObject var viewModel: WalletViewModel
+    @Environment(WalletViewModel.self) private var walletViewModel
     @Binding var selectedTab: Int
    
     @State var navigationPath: [String] = []
@@ -44,22 +44,22 @@ struct WalletView: View {
                                 .pickerStyle(.segmented)
                                 .onChange(of: satsBTC) {
                                     if satsBTC == "BTC" {
-                                        viewModel.toggleBTCDisplay(displayOption: "BTC")
+                                        walletViewModel.toggleBTCDisplay(displayOption: "BTC")
                                     } else {
-                                        viewModel.toggleBTCDisplay(displayOption: "sats")
+                                        walletViewModel.toggleBTCDisplay(displayOption: "sats")
                                     }
                                 }
                             }
                             
                             Spacer()
                             VStack {
-                                Text(viewModel.balanceText).font(.largeTitle)
+                                Text(walletViewModel.balanceText).font(.largeTitle)
                                 Text("\(satsBTC)")
                             }
                             
                             Spacer()
                             Button(action: {
-                                viewModel.sync()
+                                walletViewModel.sync()
                                 satsBTC = amountDisplayOptions[0] //reset segment picker to display BTC
                             }, label: {
                                 Text("Sync \(Image(systemName: "bitcoinsign.arrow.circlepath"))")
@@ -101,7 +101,7 @@ struct WalletView: View {
                 }
                 .navigationDestination(for: String.self) { navigaionValue in
                     
-                    switch viewModel.state {
+                    switch walletViewModel.state {
                         
                     case .loaded(_, _):
                             do {
@@ -125,7 +125,7 @@ struct WalletView: View {
                     Spacer()
                 }
                 
-                if viewModel.transactions.isEmpty {
+                if walletViewModel.transactions.isEmpty {
                     
                     FaucetView()
                     
@@ -133,7 +133,7 @@ struct WalletView: View {
                     List {
                                         
                         ForEach(
-                            viewModel.transactions.sorted(
+                            walletViewModel.transactions.sorted(
                                 by: {
                                     $0.confirmationTime?.timestamp ?? $0.received > $1.confirmationTime?
                                         .timestamp ?? $1.received
@@ -175,7 +175,7 @@ struct WalletView: View {
            
         } //navigation stack
         .onAppear{
-            viewModel.load()
+            walletViewModel.load()
         }
     } //body
 }
@@ -183,7 +183,7 @@ struct WalletView: View {
 
 struct FaucetView: View {
     
-    @EnvironmentObject var viewModel: WalletViewModel
+    @Environment(WalletViewModel.self) var walletViewModel
     @State private var faucetFailed = false
     
     var body: some View {
@@ -197,7 +197,7 @@ struct FaucetView: View {
                 Text("Hey! It looks like your transaction list is empty. Take a look around, and come back to get some coins so you can start playing with the wallet!").padding(20)
             }
         
-            if viewModel.syncState == .synced { //only show button once synced!
+            if walletViewModel.syncState == .synced { //only show button once synced!
                 Button(action: {
                     let faucetService = FaucetService()
                     let response: FaucetCall = faucetService.callTatooineFaucet(
@@ -306,7 +306,7 @@ struct WalletTransactionsListItemView: View {
 
 struct TransactionDetailsView: View {
 //    @ObservedObject var viewModel: TransactionDetailsViewModel
-    @EnvironmentObject var viewModel: WalletViewModel
+    @Environment(WalletViewModel.self) var viewModel
     
     let transaction: TransactionDetails
     let amount: UInt64
@@ -450,5 +450,5 @@ func handleResponse(response: FaucetCall) {
 
 #Preview {
     WalletView(selectedTab: .constant (0))
-        .environmentObject(WalletViewModel())
+        .environment(WalletViewModel())
 }

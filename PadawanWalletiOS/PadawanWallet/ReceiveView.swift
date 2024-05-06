@@ -15,7 +15,7 @@ let filter = CIFilter.qrCodeGenerator()
 
 struct ReceiveView: View {
     
-    @EnvironmentObject var viewModel: WalletViewModel
+    @Environment(WalletViewModel.self) private var walletViewModel
     
     @Binding var navigationPath: [String]
     
@@ -28,7 +28,7 @@ struct ReceiveView: View {
     }
     
     func getAddress() {
-        switch viewModel.state {
+        switch walletViewModel.state {
             case .loaded(let wallet, _):
                 do {
                     let addressInfo = try wallet.getAddress(addressIndex: AddressIndex.lastUnused)
@@ -115,7 +115,7 @@ struct ReceiveView: View {
         //.modifier(BackButtonMod())
         .onAppear(perform: {
             getAddress()
-            viewModel.sync()
+            walletViewModel.sync()
         })
     }
 }
@@ -123,6 +123,6 @@ struct ReceiveView: View {
 struct ReceiveView_Previews: PreviewProvider {
     static var previews: some View {
         ReceiveView(navigationPath: .constant (["Receive ↓"]))
-            .environmentObject(WalletViewModel())
+            .environment(WalletViewModel())
     }
 }

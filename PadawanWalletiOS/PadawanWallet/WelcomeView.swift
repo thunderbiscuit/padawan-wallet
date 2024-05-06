@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct WelcomeView: View {
-    @EnvironmentObject var viewModel: WalletViewModel
+    @Environment(WalletViewModel.self) private var walletViewModel
     @Environment(\.dismiss) var dismiss
     @State private var isPresentedRecoverView = false
     
@@ -37,7 +37,7 @@ struct WelcomeView: View {
             
             Button(action: {
                 do {
-                    try viewModel.createWallet(words: nil)
+                    try walletViewModel.createWallet(words: nil)
                 } catch {
                     print("error")
                 }
@@ -77,4 +77,5 @@ struct WelcomeView: View {
 
 #Preview {
     WelcomeView()
+        .environment(WalletViewModel())
 }

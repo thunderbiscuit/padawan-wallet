@@ -12,7 +12,7 @@ struct ContentView: View {
     
 // MARK: PROPERTIES
     
-    @EnvironmentObject var viewModel: WalletViewModel
+    @Environment(WalletViewModel.self) private var walletViewModel
     @State var selectedTab: Int = 0
 
     enum Tab: Int {
@@ -54,7 +54,7 @@ struct ContentView: View {
 //            })
         }
         .onAppear{
-            viewModel.load()
+            walletViewModel.load()
         }
     }
 }
@@ -62,8 +62,9 @@ struct ContentView: View {
 // MARK: PREVIEW
 
 struct ContentView_Previews: PreviewProvider {
+    
     static var previews: some View {
         ContentView()
-            .environmentObject(WalletViewModel())
+            .environment(WalletViewModel())
     }
 }

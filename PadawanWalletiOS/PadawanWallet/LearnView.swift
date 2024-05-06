@@ -10,7 +10,7 @@ import SwiftUI
 
 struct LearnView: View {
 
-    @EnvironmentObject var viewModel: WalletViewModel
+    @Environment(WalletViewModel.self) private var walletViewModel
     @Binding var selectedTab: Int
 
     var body: some View {
@@ -25,7 +25,7 @@ struct LearnView: View {
                     .font(.largeTitle)
                     .foregroundColor(.blue)
                 
-                Text("\(String(viewModel.blockHeight))")
+                Text("\(String(walletViewModel.blockHeight))")
                     //.font(.largeTitle)
                     .font(.system(size: 60))
                     .foregroundColor(.blue)
@@ -35,13 +35,13 @@ struct LearnView: View {
             }
         }
         .onAppear{
-            viewModel.load()
-            viewModel.getBlockHeight()
+            walletViewModel.load()
+            walletViewModel.getBlockHeight()
         }
     }
 }
 
 #Preview {
     LearnView(selectedTab: .constant (1))
-        .environmentObject(WalletViewModel())
+        .environment(WalletViewModel())
 }

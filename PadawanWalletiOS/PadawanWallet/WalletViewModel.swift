@@ -60,12 +60,12 @@ struct EsploraServerURLNetwork {
     }
 }
 
-class WalletViewModel: ObservableObject {
+@Observable class WalletViewModel {
     
-    @AppStorage("isOnboarding") var isOnboarding: Bool?
-    @AppStorage("secretMnemonic") var secretMnemonic: String? //TODO this will need to be stored in the keychain!!
-    @AppStorage("secretDescriptor") var secretDescriptor: String? //TODO this will need to be stored in the keychain!!
-    @AppStorage("secretChangeDescriptor") var secretChangeDescriptor: String? //TODO this will need to be stored in the keychain!!
+    @ObservationIgnored @AppStorage("isOnboarding") var isOnboarding: Bool?
+    @ObservationIgnored @AppStorage("secretMnemonic") var secretMnemonic: String? //TODO this will need to be stored in the keychain!!
+    @ObservationIgnored @AppStorage("secretDescriptor") var secretDescriptor: String? //TODO this will need to be stored in the keychain!!
+    @ObservationIgnored @AppStorage("secretChangeDescriptor") var secretChangeDescriptor: String? //TODO this will need to be stored in the keychain!!
     
     enum State {
         case empty
@@ -90,19 +90,19 @@ class WalletViewModel: ObservableObject {
     }
     
     private(set) var key = "private_key"
-    @Published private(set) var state = State.empty
-    @Published private(set) var syncState = SyncState.empty
-    @Published private(set) var balance: UInt64 = 0
-    @Published private(set) var balanceText = "sync plz"
-    @Published private(set) var transactions: [BitcoinDevKit.TransactionDetails] = []
-    @Published private(set) var blockHeight: UInt32 = 0
-    @Published private(set) var firstTimeRunning: Bool = true
+    private(set) var state = State.empty
+    private(set) var syncState = SyncState.empty
+    private(set) var balance: UInt64 = 0
+    private(set) var balanceText = "sync plz"
+    private(set) var transactions: [BitcoinDevKit.TransactionDetails] = []
+    private(set) var blockHeight: UInt32 = 0
+    private(set) var firstTimeRunning: Bool = true
     var network: Network = Network.testnet
 //    private var blockchainConfig: BlockchainConfig?
 //    private var wallet: Wallet?
     
-    @Published var sendViewError: BdkError?
-    @Published var showingSendViewErrorAlert = false
+    var sendViewError: BdkError?
+    var showingSendViewErrorAlert = false
     
     func toggleBTCDisplay(displayOption: String) {
         

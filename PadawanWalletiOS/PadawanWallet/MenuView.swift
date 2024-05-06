@@ -10,7 +10,7 @@ import SwiftUI
 
 struct MenuView: View {
     
-    @EnvironmentObject var viewModel: WalletViewModel
+    @Environment(WalletViewModel.self) private var walletViewModel
     @Binding var selectedTab: Int
     
     @Environment(\.dismiss) var dismiss
@@ -84,5 +84,5 @@ struct MenuView: View {
 
 #Preview {
     MenuView(selectedTab: .constant (2))
-        .environmentObject(WalletViewModel())
+        .environment(WalletViewModel())
 }
