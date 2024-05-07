@@ -12,7 +12,6 @@ import BitcoinDevKit
 struct SendView: View {
     
     @Environment(WalletViewModel.self) private var walletViewModel
-    //@Bindable var viewModel: WalletViewModel
     
     @State private var feesSatsPerVByte = 4.0
     @State private var isEditing = false
