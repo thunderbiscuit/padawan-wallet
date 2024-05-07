@@ -66,7 +66,7 @@ struct WelcomeView: View {
                     Text("Recover it Here")
                 })
                 .fullScreenCover(isPresented: $isPresentedRecoverView, content: {
-//                    RecoverView()
+                    RecoverView()
                 })
             }
             
