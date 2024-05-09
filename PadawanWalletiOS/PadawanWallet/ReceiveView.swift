@@ -86,7 +86,7 @@ struct ReceiveView: View {
                 
                 Button(action: {
                     UIPasteboard.general.string = address}) {
-                        Text("Copy to clipboard")
+                        Text("copy_to_clipboard_image")
                     }
             }
             Spacer()
@@ -95,7 +95,7 @@ struct ReceiveView: View {
                 getAddress()
                 navigationPath.removeAll() //return to calling view
             }) {
-                Text("Done")
+                Text("back_to_wallet")
                     //.font(.system(size: 16, design: .monospaced))
                     .font(.title)
                     .fontWeight(.bold)
@@ -110,7 +110,7 @@ struct ReceiveView: View {
             
             Spacer()
         }
-        .navigationTitle("Receive Bitcoin")
+        .navigationTitle("receive_bitcoin")
         .padding(10)
         //.modifier(BackButtonMod())
         .onAppear(perform: {
@@ -122,7 +122,7 @@ struct ReceiveView: View {
 
 struct ReceiveView_Previews: PreviewProvider {
     static var previews: some View {
-        ReceiveView(navigationPath: .constant (["Receive ↓"]))
+        ReceiveView(navigationPath: .constant (["receive"]))
             .environment(WalletViewModel())
     }
 }

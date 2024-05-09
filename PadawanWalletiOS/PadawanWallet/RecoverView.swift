@@ -20,10 +20,10 @@ struct RecoverView: View {
         VStack {
             
             VStack {
-                Text("Recover a wallet")
+                Text("recover_a_wallet")
                     .bold()
                     .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
-                Text("Enter your 12 word recovery phrase below")
+                Text("enter_your_12_words")
             }
             
             VStack {
@@ -31,7 +31,7 @@ struct RecoverView: View {
                 ScrollView {
                     ForEach(0..<12) { i in
                         TextField(
-                            "Word \(i + 1)",
+                            "word \(i + 1)",
                             text: $words[i]
                         )
                     }
@@ -56,7 +56,7 @@ struct RecoverView: View {
                     }
                     dismiss()
                 }, label: {
-                    Text("Recover Wallet")
+                    Text("recover_wallet")
                 })
                 //.font(.system(size: 16, design: .monospaced))
                 .font(.title)
@@ -73,7 +73,7 @@ struct RecoverView: View {
                 Button(action: {
                     dismiss()
                 }, label: {
-                    Text("Cancel")
+                    Text("intro_dialog_negative")
                 })
                 //.font(.system(size: 16, design: .monospaced))
                 .font(.title)

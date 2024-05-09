@@ -20,20 +20,41 @@ struct WelcomeView: View {
             Image("logo")
                 .resizable()
                 .scaledToFill() // add if you need
-                .frame(width: 100.0, height: 100.0)
+                .frame(width: 80.0, height: 80.0)
                 .clipped()
             
             Spacer()
                     
-            Text("Padawan Wallet")
+            Text("padawan_wallet")
                 .bold()
                 .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
             
             Spacer()
             
-            Text("Welcome to Padawan!\n\nThis application is a place to learn the common features of mobile bitcoin wallets.\n\nIt uses bitcoin\'s _**testnet**_, an alternative bitcoin network used globally and built exclusively for testing. The coins on this network do not have any value, but they otherwise look and behave just like normal bitcoins!\n\nThis wallet is built for users of all ages to experiment and learn about bitcoin in a risk-free environment.")
+            VStack {
+                HStack{
+                    Text("welcome_statement_1")
+                    Spacer()
+                }
+                Text("\n")
+                HStack{
+                    Text("welcome_statement_2")
+                    Spacer()
+                }
+                Text("\n")
+                HStack{
+                    Text("welcome_statement_3").fixedSize(horizontal: false, vertical: true)
+                    Spacer()
+                }
+                Text("\n")
+                HStack{
+                    Text("welcome_statement_4").fixedSize(horizontal: false, vertical: true)
+                    Spacer()
+                    Text("\n")
+                }
+            }
             
-            Spacer()
+            Spacer(minLength: 20)
             
             Button(action: {
                 do {
@@ -44,7 +65,7 @@ struct WelcomeView: View {
                 
                 dismiss()
             }, label: {
-                Text("Create a wallet")
+                Text("create_a_wallet")
             })
                     //.font(.system(size: 16, design: .monospaced))
                     .font(.title)
@@ -58,12 +79,12 @@ struct WelcomeView: View {
             
             Spacer(minLength: 50)
             HStack {
-                Text("I already have a wallet?")
+                Text("already_have_a_wallet")
                 Spacer()
                 Button(action: {
                     isPresentedRecoverView = true
                 }, label: {
-                    Text("Recover it Here")
+                    Text("recover_it_here")
                 })
                 .fullScreenCover(isPresented: $isPresentedRecoverView, content: {
                     RecoverView()
