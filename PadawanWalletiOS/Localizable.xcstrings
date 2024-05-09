@@ -2,10 +2,24 @@
   "sourceLanguage" : "en",
   "strings" : {
     "%llu sats fee" : {
-
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%llu sata tarifa"
+          }
+        }
+      }
     },
     "+ %llu sats" : {
-
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%11u sats"
+          }
+        }
+      }
     },
     "about_padawan" : {
       "extractionState" : "manual",
@@ -14,6 +28,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "About Padawan"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sobre Padawan"
           }
         }
       }
@@ -26,6 +46,12 @@
             "state" : "translated",
             "value" : "Padawan is a testnet-only bitcoin wallet packed with tutorials on how to use bitcoin wallets. We\\'re building the app you will want to recommend to your friends that keep asking you questions about bitcoin!\\n\\nPadawan is for people of all ages and aims to be a self-study tool, getting its users acquainted with the usual workflow and basic jargon of mobile wallets in a risk-free environment perfect for experimentation and learning (testnet). We think testnet is an underused resource outside of software development circles, and believe it can be leveraged for bitcoin-curious people everywhere.\\n\\nPadawan is an open source (Apache 2.0 licenced), free collaborative project. If you have feedback for us, please leave us a review on the Play Store, or check out our GitHub repository!"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Padawan es una cartera que únicamente puede ser utilizada con monedas testnet y que contiene tutoriales sobre como utilizar las carteras bitcoin. ¡Estamos desarrollando la aplicación que querrás recomendar a los amigos que no paran de hacerte preguntas sobre bitcoin! Padawan es para gente de todas las edades y su objetivo es ser una herramienta autodidacta, para que sus usuarios se familiaricen con el funcionamiento y la jerga básica de las carteras móviles en un entorno sin riesgos perfecto para la experimentación y el aprendizaje (red de pruebas o testnet en inglés). Creemos que la red de pruebas de bitcoin es un recurso infrautilizado fuera de los círculos de desarrollo de software, y creemos que puede ser aprovechada por personas que sientan curiosidad por bitcoin en cualquier lugar. Padawan es un proyecto de código abierto (bajo licencia Apache 2.0). Si tienes cualquier comentario o sugerencia, ¡por favor déjanos una valoración en la Play Store, o echa un vistazo a nuestro repositorio en GitHub!"
+          }
         }
       }
     },
@@ -36,6 +62,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "About"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sobre"
           }
         }
       }
@@ -48,6 +80,12 @@
             "state" : "translated",
             "value" : "Address"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dirección"
+          }
         }
       }
     },
@@ -58,6 +96,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Address is missing!"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¡Falta introducir la dirección!"
           }
         }
       }
@@ -70,6 +114,12 @@
             "state" : "translated",
             "value" : "Advanced"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Avanzado"
+          }
         }
       }
     },
@@ -80,6 +130,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "I already have a wallet?"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ya tengo una Padawan wallet"
           }
         }
       }
@@ -92,6 +148,12 @@
             "state" : "translated",
             "value" : "Amount"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cantidad"
+          }
         }
       }
     },
@@ -102,6 +164,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "amount"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "cantidad"
           }
         }
       }
@@ -114,6 +182,12 @@
             "state" : "translated",
             "value" : "Amount is missing!"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¡Falta introducir la cantidad!"
+          }
         }
       }
     },
@@ -124,6 +198,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Amount transacted (satoshis):"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cantidad enviada/recibida (satoshis):"
           }
         }
       }
@@ -136,6 +216,12 @@
             "state" : "translated",
             "value" : "Back icon"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Icono volver"
+          }
         }
       }
     },
@@ -146,6 +232,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Back Online!"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¡Te has vuelto a conectar!"
           }
         }
       }
@@ -158,6 +250,12 @@
             "state" : "translated",
             "value" : "Back to lessons"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Volver a tutoriales"
+          }
         }
       }
     },
@@ -168,6 +266,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Back to tutorials list"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Volver a la lista de tutoriales"
           }
         }
       }
@@ -180,6 +284,12 @@
             "state" : "translated",
             "value" : "Back to transaction build"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Volver a la transacción"
+          }
         }
       }
     },
@@ -190,6 +300,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Back to wallet"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Volver a la cartera"
           }
         }
       }
@@ -202,6 +318,12 @@
             "state" : "translated",
             "value" : "Balance:"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Saldo:"
+          }
         }
       }
     },
@@ -213,6 +335,12 @@
             "state" : "translated",
             "value" : "Basics"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Básico"
+          }
         }
       }
     },
@@ -220,6 +348,12 @@
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ƀ"
+          }
+        },
+        "es" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ƀ"
@@ -235,6 +369,12 @@
             "state" : "translated",
             "value" : "bitcoin testnet"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "bitcoin testnet"
+          }
         }
       }
     },
@@ -245,6 +385,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Block:"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bloque:"
           }
         }
       }
@@ -257,6 +403,12 @@
             "state" : "translated",
             "value" : "Learn"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aprende"
+          }
         }
       }
     },
@@ -267,6 +419,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Menu"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Menú"
           }
         }
       }
@@ -279,6 +437,12 @@
             "state" : "translated",
             "value" : "Wallet"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cartera"
+          }
         }
       }
     },
@@ -289,6 +453,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Broadcast transaction (testnet)"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Emitir transacción (testnet)"
           }
         }
       }
@@ -301,6 +471,12 @@
             "state" : "translated",
             "value" : "Broadcast transaction"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Emitir transacción"
+          }
         }
       }
     },
@@ -311,6 +487,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Cancel"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cancelar"
           }
         }
       }
@@ -323,6 +505,12 @@
             "state" : "translated",
             "value" : "Change the language"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cambiar Idioma"
+          }
         }
       }
     },
@@ -333,6 +521,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Changing color animation"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Animación cambio colores"
           }
         }
       }
@@ -345,6 +539,12 @@
             "state" : "translated",
             "value" : "Chapter %1$s"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Capítulo %1$"
+          }
         }
       }
     },
@@ -355,6 +555,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Chapters reset successful"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Reinicio de capítulos satisfactorio"
           }
         }
       }
@@ -367,6 +573,12 @@
             "state" : "translated",
             "value" : "Checkmark image"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Imagen marca comprobación"
+          }
         }
       }
     },
@@ -377,6 +589,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Close drawer"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cerrar panel lateral"
           }
         }
       }
@@ -389,6 +607,12 @@
             "state" : "translated",
             "value" : "Concept"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Concepto"
+          }
         }
       }
     },
@@ -399,6 +623,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Confirm and broadcast"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Confirmar y emitir"
           }
         }
       }
@@ -411,6 +641,12 @@
             "state" : "translated",
             "value" : "Confirm Transaction"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Confirmar Transacción"
+          }
         }
       }
     },
@@ -421,6 +657,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Confirmed"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Confirmado"
           }
         }
       }
@@ -433,6 +675,12 @@
             "state" : "translated",
             "value" : "Connectivity icon"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Icono conectividad"
+          }
         }
       }
     },
@@ -443,6 +691,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Continue on your journey of learning bitcoin."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Continúa con tu camino de aprendizaje sobre bitcoin."
           }
         }
       }
@@ -455,6 +709,12 @@
             "state" : "translated",
             "value" : "copy address"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "copiar dirección"
+          }
         }
       }
     },
@@ -465,6 +725,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Copy to clipboard image"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Imagen copiado a portapapeles"
           }
         }
       }
@@ -477,6 +743,12 @@
             "state" : "translated",
             "value" : "Copy"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Copiar"
+          }
         }
       }
     },
@@ -488,6 +760,12 @@
             "state" : "translated",
             "value" : "Create a wallet"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Crear una cartera"
+          }
         }
       }
     },
@@ -497,7 +775,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "I want to create\\na new wallet"
+            "value" : "I want to create a new wallet"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Quiero crear una nueva cartera"
           }
         }
       }
@@ -510,6 +794,12 @@
             "state" : "translated",
             "value" : "Currency Toggle Text"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Texto para cambiar divisa"
+          }
         }
       }
     },
@@ -520,6 +810,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Currently unable to access network"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Actualmente no se puede acceder a la red"
           }
         }
       }
@@ -532,6 +828,12 @@
             "state" : "translated",
             "value" : "Enter a bitcoin testnet address"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Introduce una dirección de testnet de bitcoin"
+          }
         }
       }
     },
@@ -542,6 +844,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Enter amount (sats)"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Introduce la cantidad (sats)"
           }
         }
       }
@@ -554,6 +862,12 @@
             "state" : "translated",
             "value" : "Enter your 12-word recovery phrase below."
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ntroduce tus 12 palabras de recuperación a continuación."
+          }
         }
       }
     },
@@ -564,6 +878,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Let\\'s go!"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¡Vamos!"
           }
         }
       }
@@ -576,6 +896,12 @@
             "state" : "translated",
             "value" : "Error: Faucet Not Available"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Error: Faucet No Disponible"
+          }
         }
       }
     },
@@ -586,6 +912,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Essentials"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Esencial"
           }
         }
       }
@@ -598,6 +930,12 @@
             "state" : "translated",
             "value" : "A collection of everything else you need in the app."
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "El resto de cosas que necesitarás de la aplicación."
+          }
         }
       }
     },
@@ -608,6 +946,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Fee rate:"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Comisión:"
           }
         }
       }
@@ -620,6 +964,12 @@
             "state" : "translated",
             "value" : "Fee Rate is missing!"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¡Falta introducir la comisión de red!"
+          }
         }
       }
     },
@@ -630,6 +980,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Fees paid:"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Comisiones pagadas:"
           }
         }
       }
@@ -642,6 +998,12 @@
             "state" : "translated",
             "value" : "Fees (sats/vbytes)"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Comisión (sats/vbytes)"
+          }
         }
       }
     },
@@ -652,6 +1014,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Finish"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Finalizar"
           }
         }
       }
@@ -664,6 +1032,12 @@
             "state" : "translated",
             "value" : "Generate a new address"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Generar una nueva dirección"
+          }
         }
       }
     },
@@ -674,6 +1048,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Generate new address"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Generar una nueva dirección"
           }
         }
       }
@@ -686,6 +1066,12 @@
             "state" : "translated",
             "value" : "Get coins"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Obtener monedas"
+          }
         }
       }
     },
@@ -696,6 +1082,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Get coins icon"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Icono obtener monedas"
           }
         }
       }
@@ -708,6 +1100,12 @@
             "state" : "translated",
             "value" : "Getting started"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Primeros pasos"
+          }
         }
       }
     },
@@ -718,6 +1116,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Hello there!"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¡Hola!"
           }
         }
       }
@@ -730,6 +1134,12 @@
             "state" : "translated",
             "value" : "image"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "imagen"
+          }
         }
       }
     },
@@ -741,6 +1151,12 @@
             "state" : "translated",
             "value" : "(in satoshis)"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "(en satoshis)"
+          }
         }
       }
     },
@@ -750,7 +1166,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "It’s important you know that Padawan is not a bitcoin wallet that can handle normal bitcoins.\\n\\nThis application is built to help you learn and experiment with bitcoin wallets through a series of tutorials, and it uses testnet coins, a type of bitcoin that doesn\\'t have any value.\\n\\nThe wallet can only handle testnet coins, which are not compatible with normal bitcoins!"
+            "value" : "It’s important you know that Padawan is not a bitcoin wallet that can handle normal bitcoins. This application is built to help you learn and experiment with bitcoin wallets through a series of tutorials, and it uses testnet coins, a type of bitcoin that doesn\\'t have any value. The wallet can only handle testnet coins, which are not compatible with normal bitcoins!"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Es importante que sepas que Padawan no es una cartera de bitcoin que pueda manejar bitcoins normales. Esta aplicación ha sido desarrollada para ayudarte a aprender y a experimentar con las carteras de bitcoin a través de una serie de tutoriales, utilizando monedas de la red de pruebas (testnet) de bitcoin, un tipo de bitcoin que no tiene ningún valor. La cartera solo puede utilizar monedas de la red de pruebas, ¡las cuales NO son compatibles con la red normal de bitcoin!"
           }
         }
       }
@@ -763,6 +1185,12 @@
             "state" : "translated",
             "value" : "Cancel"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cancelar"
+          }
         }
       }
     },
@@ -773,6 +1201,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "I understand"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Entiendo"
           }
         }
       }
@@ -785,6 +1219,12 @@
             "state" : "translated",
             "value" : "Be careful!"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¡Ten cuidado!"
+          }
         }
       }
     },
@@ -795,6 +1235,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Hey! It looks like your transaction list is empty. Take a look around, and come back to get some coins so you can start playing with the wallet!"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¡Oye! Parece que tu lista de transacciones está vacía. Echa un vistazo y vuelve para conseguir algunas monedas, ¡para que puedas comenzar a jugar con la cartera!"
           }
         }
       }
@@ -807,6 +1253,12 @@
             "state" : "translated",
             "value" : "Network fee"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Comisión de red"
+          }
         }
       }
     },
@@ -817,6 +1269,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Next"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Siguiente"
           }
         }
       }
@@ -829,6 +1287,12 @@
             "state" : "translated",
             "value" : "Next icon"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Icono siguiente"
+          }
         }
       }
     },
@@ -839,6 +1303,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "No Internet Access!"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¡Sin acceso a internet!"
           }
         }
       }
@@ -851,6 +1321,12 @@
             "state" : "translated",
             "value" : "No Internet Connection!"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¡Sin conexión a internet!"
+          }
         }
       }
     },
@@ -861,6 +1337,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "No thank you icon"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Icono no gracias"
           }
         }
       }
@@ -873,6 +1355,12 @@
             "state" : "translated",
             "value" : "of 3 done"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "de 3 completado"
+          }
         }
       }
     },
@@ -883,6 +1371,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Error: you\\'ve already received testnet coins!"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Error: ¡ya has recibido monedas testnet!"
           }
         }
       }
@@ -895,6 +1389,12 @@
             "state" : "translated",
             "value" : "Open drawer"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Abrir panel lateral"
+          }
         }
       }
     },
@@ -906,6 +1406,12 @@
             "state" : "translated",
             "value" : "Padawan journey"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "El camino del Padawan"
+          }
         }
       }
     },
@@ -913,6 +1419,12 @@
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Padawan Logo"
+          }
+        },
+        "es" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Padawan Logo"
@@ -928,6 +1440,12 @@
             "state" : "translated",
             "value" : "Padawan Wallet"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Padawan Wallet"
+          }
         }
       }
     },
@@ -938,6 +1456,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Pending"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pendiente"
           }
         }
       }
@@ -950,6 +1474,12 @@
             "state" : "translated",
             "value" : "Please enter Amount and Address"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Por favor, introduzca la cantidad y la dirección"
+          }
         }
       }
     },
@@ -961,6 +1491,12 @@
             "state" : "translated",
             "value" : "Previous"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Anterior"
+          }
         }
       }
     },
@@ -968,6 +1504,12 @@
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "https://github.com/thunderbiscuit/padawan-wallet/blob/master/PRIVACY"
+          }
+        },
+        "es" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "https://github.com/thunderbiscuit/padawan-wallet/blob/master/PRIVACY"
@@ -983,6 +1525,12 @@
             "state" : "translated",
             "value" : "Padawan Wallet does not collect any information on its users, and does not use Firebase Crashlytics. This, however, means it\\'s much harder for us to hear about the bugs from our users. If you have feedback, feel free to send a message to the Padawan Twitter/X account (@padawanwallet) or to write us an email. You can read our full privacy policy here:"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Padawan Wallet no recopila ningún tipo de información de sus usuarios ni utiliza Firebase Crashlytics. Esto significa que es mucho más difícil para nosotros enterarnos sobre los errores de la aplicación por parte de nuestros usuarios. En caso de tener cualquier comentario, no dudes en enviar un mensaje a la cuenta de Twitter/X (@padawanwallet) o envíanos un email. Puedes leer nuestra política de privacidad aquí:"
+          }
         }
       }
     },
@@ -993,6 +1541,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Proceed icon"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Icono proceder"
           }
         }
       }
@@ -1005,6 +1559,12 @@
             "state" : "translated",
             "value" : "QR Code"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Código QR"
+          }
         }
       }
     },
@@ -1015,6 +1575,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Receive  ↓"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Recibir ↓"
           }
         }
       }
@@ -1027,6 +1593,12 @@
             "state" : "translated",
             "value" : "Receive bitcoin"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Recibir bitcoin"
+          }
         }
       }
     },
@@ -1037,6 +1609,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Receive icon"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Icono recibir"
           }
         }
       }
@@ -1049,6 +1627,12 @@
             "state" : "translated",
             "value" : "Receive bitcoin (testnet)"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Recibir bitcoin de la red de pruebas (testnet)"
+          }
         }
       }
     },
@@ -1059,6 +1643,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Received"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Recibido"
           }
         }
       }
@@ -1071,6 +1661,12 @@
             "state" : "translated",
             "value" : "Recover a wallet"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Recuperar una cartera"
+          }
         }
       }
     },
@@ -1081,6 +1677,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Recover it here"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Recupera tu cartera aquí"
           }
         }
       }
@@ -1093,6 +1695,12 @@
             "state" : "translated",
             "value" : "Recover Wallet"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Recuperar cartera"
+          }
         }
       }
     },
@@ -1103,6 +1711,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Recovery phrase"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Palabras de recuperación"
           }
         }
       }
@@ -1115,6 +1729,12 @@
             "state" : "translated",
             "value" : "Recovery Phrase"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Palabras de recuperación"
+          }
         }
       }
     },
@@ -1125,6 +1745,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Request Testnet Coins!"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¡Solicitar Monedas de la Red de Prueba (Testnet)!"
           }
         }
       }
@@ -1137,6 +1763,12 @@
             "state" : "translated",
             "value" : "Reset completed chapters"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Reiniciar capítulos completados"
+          }
         }
       }
     },
@@ -1147,6 +1779,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Reset Done Tutorials"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Reiniciar Tutoriales Completados"
           }
         }
       }
@@ -1159,6 +1797,12 @@
             "state" : "translated",
             "value" : "Return sats faucet address image"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Imagen dirección para devolver sats"
+          }
         }
       }
     },
@@ -1166,6 +1810,12 @@
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "satoshi/vbyte"
+          }
+        },
+        "es" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "satoshi/vbyte"
@@ -1181,6 +1831,12 @@
             "state" : "translated",
             "value" : "Scan"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Escanear"
+          }
         }
       }
     },
@@ -1191,6 +1847,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Scan icon"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Icono escanear"
           }
         }
       }
@@ -1203,6 +1865,12 @@
             "state" : "translated",
             "value" : "Scan QR Icon"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Icono escanear código QR"
+          }
         }
       }
     },
@@ -1213,6 +1881,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Section %1$s: %2$s"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sección %1$s: %2$s"
           }
         }
       }
@@ -1225,6 +1899,12 @@
             "state" : "translated",
             "value" : "Select your preferred language for Padawan Wallet."
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Selecciona tu idioma preferido para Padawan Wallet."
+          }
         }
       }
     },
@@ -1235,6 +1915,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Send ↑"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enviar ↑"
           }
         }
       }
@@ -1247,6 +1933,12 @@
             "state" : "translated",
             "value" : "Send Amount"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enviar cantidad"
+          }
         }
       }
     },
@@ -1257,6 +1949,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Send bitcoin"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enviar bitcoin"
           }
         }
       }
@@ -1269,6 +1967,12 @@
             "state" : "translated",
             "value" : "Testnet coins can be hard to acquire, and even though they have no market value, they are not infinite, and we should be careful not to waste them or let them get lost!\\n\\nOnce you are done with your testnet coins, please consider sending them back to the Padawan project so that we can continue sending coins to new users. Use the address above to send your coins back to us."
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Las monedas de testnet pueden ser difíciles de adquirir, incluso aunque no tengan valor comercial no son infinitas, por lo que, ¡debemos tener cuidado de no malgastarlas o perderlas!\\n\\nCuando hayas acabado de utilizar las monedas de testnet, por favor envíanoslas de vuelta al proyecto de Padawan para que podamos seguir enviando monedas a nuevos usuarios. Utiliza la dirección que aparece arriba para enviárnoslas de vuelta."
+          }
         }
       }
     },
@@ -1276,6 +1980,12 @@
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "tb1qk5238eluqllq2wps67lkxme3x43wll4k282s8q"
+          }
+        },
+        "es" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "tb1qk5238eluqllq2wps67lkxme3x43wll4k282s8q"
@@ -1291,6 +2001,12 @@
             "state" : "translated",
             "value" : "Send Coins Back"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enviar Monedas Testnet de Vuelta"
+          }
         }
       }
     },
@@ -1301,6 +2017,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Send Error"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Error de envío"
           }
         }
       }
@@ -1313,6 +2035,12 @@
             "state" : "translated",
             "value" : "Send icon"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Icono enviar"
+          }
         }
       }
     },
@@ -1323,6 +2051,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Build transaction (testnet)"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Construir transacción (testnet)"
           }
         }
       }
@@ -1335,6 +2069,12 @@
             "state" : "translated",
             "value" : "Send testnet coins back"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enviar monedas testnet de vuelta"
+          }
         }
       }
     },
@@ -1345,6 +2085,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Send to"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enviar a"
           }
         }
       }
@@ -1357,6 +2103,12 @@
             "state" : "translated",
             "value" : "Send your coins back to us!"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¡Envianos tus monedas de vuelta!"
+          }
         }
       }
     },
@@ -1367,6 +2119,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Sent"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enviado"
           }
         }
       }
@@ -1379,6 +2137,12 @@
             "state" : "translated",
             "value" : "Settings"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ajustes"
+          }
         }
       }
     },
@@ -1389,6 +2153,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Settings"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ajustes"
           }
         }
       }
@@ -1401,6 +2171,12 @@
             "state" : "translated",
             "value" : "Skill"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Habilidades"
+          }
         }
       }
     },
@@ -1410,6 +2186,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Speed"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Velocidad"
           }
         }
       }
@@ -1422,6 +2204,12 @@
             "state" : "translated",
             "value" : "Start Chapter"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Comenzar Capítulo"
+          }
         }
       }
     },
@@ -1433,6 +2221,12 @@
             "state" : "translated",
             "value" : "sync"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "sincronizar"
+          }
         }
       }
     },
@@ -1442,6 +2236,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Sync %@"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sincronizar %@"
           }
         }
       }
@@ -1454,6 +2254,12 @@
             "state" : "translated",
             "value" : "Chapters"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Capítulos"
+          }
         }
       }
     },
@@ -1464,6 +2270,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Wallet"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cartera"
           }
         }
       }
@@ -1476,6 +2288,12 @@
             "state" : "translated",
             "value" : "Copied"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Copiado"
+          }
         }
       }
     },
@@ -1486,6 +2304,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Time:"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fecha:"
           }
         }
       }
@@ -1498,6 +2322,12 @@
             "state" : "translated",
             "value" : "To the address:"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "A la dirección:"
+          }
         }
       }
     },
@@ -1509,6 +2339,12 @@
             "state" : "translated",
             "value" : "To Address"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "A la dirección:"
+          }
         }
       }
     },
@@ -1516,6 +2352,12 @@
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Total:"
+          }
+        },
+        "es" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Total:"
@@ -1531,6 +2373,12 @@
             "state" : "translated",
             "value" : "Total Fee"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tarifa total"
+          }
         }
       }
     },
@@ -1541,6 +2389,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Total transaction amount:"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cantidad total de la transacción:"
           }
         }
       }
@@ -1553,6 +2407,12 @@
             "state" : "translated",
             "value" : "Transaction details"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Detalles de la transacción"
+          }
         }
       }
     },
@@ -1563,6 +2423,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Transaction History"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Historial de Transacciones"
           }
         }
       }
@@ -1575,6 +2441,12 @@
             "state" : "translated",
             "value" : "Transaction type:"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tipo de transacción:"
+          }
         }
       }
     },
@@ -1585,6 +2457,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Transaction was broadcast successfully!"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "La transacción se emitió correctamente!"
           }
         }
       }
@@ -1597,6 +2475,12 @@
             "state" : "translated",
             "value" : "Transactions"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Transacciones"
+          }
         }
       }
     },
@@ -1607,6 +2491,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Try to recover a wallet instead"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Intenta recuperar una cartera en su lugar"
           }
         }
       }
@@ -1619,6 +2509,12 @@
             "state" : "translated",
             "value" : "Mark tutorial\\nas done"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Marcar tutorial como completado"
+          }
         }
       }
     },
@@ -1629,6 +2525,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Txid:"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Txid (identificador de la transacción):"
           }
         }
       }
@@ -1641,11 +2543,24 @@
             "state" : "translated",
             "value" : "Unconfirmed"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No confirmado"
+          }
         }
       }
     },
     "undefined button value" : {
-
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Valor de botón indefinido"
+          }
+        }
+      }
     },
     "verify_transaction" : {
       "extractionState" : "manual",
@@ -1654,6 +2569,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Verify transaction"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Verificar la transacción"
           }
         }
       }
@@ -1666,6 +2587,12 @@
             "state" : "translated",
             "value" : "Balance (testnet coins)"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Saldo (monedas de la red de pruebas (testnet)"
+          }
         }
       }
     },
@@ -1676,6 +2603,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Wallets"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Carteras"
           }
         }
       }
@@ -1688,6 +2621,12 @@
             "state" : "translated",
             "value" : "Welcome to Padawan! "
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¡Bienvenido a Padawan"
+          }
         }
       }
     },
@@ -1698,6 +2637,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "This application is a place to learn the common features of mobile bitcoin wallets."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Esta aplicación es un lugar para aprender las características comunes de las carteras móviles de bitcoin."
           }
         }
       }
@@ -1710,6 +2655,12 @@
             "state" : "translated",
             "value" : "It uses bitcoin\\'s _**testnet**_, an alternative bitcoin network used globally and built exclusively for testing. The coins on this network do not have any value, but they otherwise look and behave just like normal bitcoins!"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Utiliza la _**testnet**_ de bitcoin, una red alternativa de bitcoin utilizada a nivel mundial y construida exclusivamente para pruebas. Las monedas de esta red no tienen ningún valor, ¡pero por lo demás se ven y se comportan como los bitcoins normales!"
+          }
         }
       }
     },
@@ -1720,6 +2671,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "This wallet is built for users of all ages to experiment and learn about bitcoin in a risk-free environment."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Esta cartera está diseñada para que usuarios de todas las edades experimenten y aprendan sobre el bitcoin en un entorno libre de riesgos"
           }
         }
       }
@@ -1732,6 +2689,12 @@
             "state" : "translated",
             "value" : "Word %lld"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Palabra %lld"
+          }
         }
       }
     },
@@ -1742,6 +2705,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "To help you get started learning about bitcoin, Padawan Wallet can send you some coins so you can follow along the chapters and send them around to friends!\\n\\nWould you like to receive some testnet bitcoin?"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Para ayudarte a comenzar con el aprendizaje de bitcoin, Padawan Wallet puede enviarte unas monedas para que puedas seguir los capítulos y ¡enviárselas a tus amigos! ¿Quieres recibir bitcoin de la red de pruebas (testnet)?"
           }
         }
       }
@@ -1754,6 +2723,12 @@
             "state" : "translated",
             "value" : "Your device is not connected to the internet!"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¡Tu dispositivo no está conectado a internet!"
+          }
         }
       }
     },
@@ -1764,6 +2739,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Your recovery phrase"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tus palabras de recuperación"
           }
         }
       }
