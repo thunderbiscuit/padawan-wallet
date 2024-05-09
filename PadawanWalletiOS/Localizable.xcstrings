@@ -44,12 +44,12 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Padawan is a testnet-only bitcoin wallet packed with tutorials on how to use bitcoin wallets. We\\'re building the app you will want to recommend to your friends that keep asking you questions about bitcoin!\\n\\nPadawan is for people of all ages and aims to be a self-study tool, getting its users acquainted with the usual workflow and basic jargon of mobile wallets in a risk-free environment perfect for experimentation and learning (testnet). We think testnet is an underused resource outside of software development circles, and believe it can be leveraged for bitcoin-curious people everywhere.\\n\\nPadawan is an open source (Apache 2.0 licenced), free collaborative project. If you have feedback for us, please leave us a review on the Play Store, or check out our GitHub repository!"
+            "value" : "Padawan is a testnet-only bitcoin wallet packed with tutorials on how to use bitcoin wallets. We're building the app you will want to recommend to your friends that keep asking you questions about bitcoin! Padawan is for people of all ages and aims to be a self-study tool, getting its users acquainted with the usual workflow and basic jargon of mobile wallets in a risk-free environment perfect for experimentation and learning (testnet). We think testnet is an underused resource outside of software development circles, and believe it can be leveraged for bitcoin-curious people everywhere. Padawan is an open source (Apache 2.0 licenced), free collaborative project. If you have feedback for us, please leave us a review on the Play Store, or check out our GitHub repository!"
           }
         },
         "es" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "Padawan es una cartera que únicamente puede ser utilizada con monedas testnet y que contiene tutoriales sobre como utilizar las carteras bitcoin. ¡Estamos desarrollando la aplicación que querrás recomendar a los amigos que no paran de hacerte preguntas sobre bitcoin! Padawan es para gente de todas las edades y su objetivo es ser una herramienta autodidacta, para que sus usuarios se familiaricen con el funcionamiento y la jerga básica de las carteras móviles en un entorno sin riesgos perfecto para la experimentación y el aprendizaje (red de pruebas o testnet en inglés). Creemos que la red de pruebas de bitcoin es un recurso infrautilizado fuera de los círculos de desarrollo de software, y creemos que puede ser aprovechada por personas que sientan curiosidad por bitcoin en cualquier lugar. Padawan es un proyecto de código abierto (bajo licencia Apache 2.0). Si tienes cualquier comentario o sugerencia, ¡por favor déjanos una valoración en la Play Store, o echa un vistazo a nuestro repositorio en GitHub!"
           }
         }
@@ -1166,7 +1166,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "It’s important you know that Padawan is not a bitcoin wallet that can handle normal bitcoins. This application is built to help you learn and experiment with bitcoin wallets through a series of tutorials, and it uses testnet coins, a type of bitcoin that doesn\\'t have any value. The wallet can only handle testnet coins, which are not compatible with normal bitcoins!"
+            "value" : "It’s important you know that Padawan is not a bitcoin wallet that can handle normal bitcoins. This application is built to help you learn and experiment with bitcoin wallets through a series of tutorials, and it uses testnet coins, a type of bitcoin that doesn't have any value. The wallet can only handle testnet coins, which are not compatible with normal bitcoins!"
           }
         },
         "es" : {
@@ -1370,12 +1370,12 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Error: you\\'ve already received testnet coins!"
+            "value" : "Error: you've already received testnet coins!"
           }
         },
         "es" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "Error: ¡ya has recibido monedas testnet!"
           }
         }
@@ -1523,12 +1523,12 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Padawan Wallet does not collect any information on its users, and does not use Firebase Crashlytics. This, however, means it\\'s much harder for us to hear about the bugs from our users. If you have feedback, feel free to send a message to the Padawan Twitter/X account (@padawanwallet) or to write us an email. You can read our full privacy policy here:"
+            "value" : "Padawan Wallet does not collect any information on its users, and does not use Firebase Crashlytics. This, however, means it's much harder for us to hear about the bugs from our users. If you have feedback, feel free to send a message to the Padawan Twitter/X account (@padawanwallet) or to write us an email. You can read our full privacy policy here:"
           }
         },
         "es" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "Padawan Wallet no recopila ningún tipo de información de sus usuarios ni utiliza Firebase Crashlytics. Esto significa que es mucho más difícil para nosotros enterarnos sobre los errores de la aplicación por parte de nuestros usuarios. En caso de tener cualquier comentario, no dudes en enviar un mensaje a la cuenta de Twitter/X (@padawanwallet) o envíanos un email. Puedes leer nuestra política de privacidad aquí:"
           }
         }
@@ -1965,12 +1965,12 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Testnet coins can be hard to acquire, and even though they have no market value, they are not infinite, and we should be careful not to waste them or let them get lost!\\n\\nOnce you are done with your testnet coins, please consider sending them back to the Padawan project so that we can continue sending coins to new users. Use the address above to send your coins back to us."
+            "value" : "Testnet coins can be hard to acquire, and even though they have no market value, they are not infinite, and we should be careful not to waste them or let them get lost! Once you are done with your testnet coins, please consider sending them back to the Padawan project so that we can continue sending coins to new users. Use the address above to send your coins back to us."
           }
         },
         "es" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "Las monedas de testnet pueden ser difíciles de adquirir, incluso aunque no tengan valor comercial no son infinitas, por lo que, ¡debemos tener cuidado de no malgastarlas o perderlas!\\n\\nCuando hayas acabado de utilizar las monedas de testnet, por favor envíanoslas de vuelta al proyecto de Padawan para que podamos seguir enviando monedas a nuevos usuarios. Utiliza la dirección que aparece arriba para enviárnoslas de vuelta."
           }
         }
@@ -2653,12 +2653,12 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "It uses bitcoin\\'s _**testnet**_, an alternative bitcoin network used globally and built exclusively for testing. The coins on this network do not have any value, but they otherwise look and behave just like normal bitcoins!"
+            "value" : "It uses bitcoin's _**testnet**_, an alternative bitcoin network used globally and built exclusively for testing. The coins on this network do not have any value, but they otherwise look and behave just like normal bitcoins!"
           }
         },
         "es" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "Utiliza la _**testnet**_ de bitcoin, una red alternativa de bitcoin utilizada a nivel mundial y construida exclusivamente para pruebas. Las monedas de esta red no tienen ningún valor, ¡pero por lo demás se ven y se comportan como los bitcoins normales!"
           }
         }
@@ -2704,12 +2704,12 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "To help you get started learning about bitcoin, Padawan Wallet can send you some coins so you can follow along the chapters and send them around to friends!\\n\\nWould you like to receive some testnet bitcoin?"
+            "value" : "To help you get started learning about bitcoin, Padawan Wallet can send you some coins so you can follow along the chapters and send them around to friends! Would you like to receive some testnet bitcoin?"
           }
         },
         "es" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "Para ayudarte a comenzar con el aprendizaje de bitcoin, Padawan Wallet puede enviarte unas monedas para que puedas seguir los capítulos y ¡enviárselas a tus amigos! ¿Quieres recibir bitcoin de la red de pruebas (testnet)?"
           }
         }
