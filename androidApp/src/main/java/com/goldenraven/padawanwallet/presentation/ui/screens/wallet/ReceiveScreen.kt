@@ -55,9 +55,8 @@ import com.goldenraven.padawanwallet.utils.addressToQR
 import com.goldenraven.padawanwallet.utils.copyToClipboard
 import com.goldenraven.padawanwallet.utils.getScreenSizeWidth
 import com.goldenraven.padawanwallet.presentation.viewmodels.QrUiState
-import com.goldenraven.padawanwallet.presentation.viewmodels.ReceiveViewModel
-import com.goldenraven.padawanwallet.presentation.viewmodels.WalletViewModel
 import com.goldenraven.padawanwallet.presentation.viewmodels.mvi.ReceiveScreenAction
+import com.goldenraven.padawanwallet.presentation.viewmodels.mvi.ReceiveScreenState
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
@@ -66,16 +65,11 @@ private const val TAG = "ReceiveScreen"
 @Composable
 internal fun ReceiveScreen(
     navController: NavHostController,
-    viewModel: WalletViewModel,
-    receiveViewModel: ReceiveViewModel,
+    state: ReceiveScreenState,
+    onAction: (ReceiveScreenAction) -> Unit,
 ) {
-    val state = receiveViewModel.state
-    val onAction = receiveViewModel::onAction
-
     val snackbarHostState = remember { SnackbarHostState() }
-    // val address: String by viewModel.address.collectAsState("1234")
     var qr by remember { mutableStateOf<ImageBitmap?>(null) }
-    // val qrUIState: QrUiState = viewModel.QRState.collectAsState(QrUiState.NoQR).value
 
     LaunchedEffect(state.address) {
         if (state.address != null) {
@@ -96,7 +90,6 @@ internal fun ReceiveScreen(
     }
 
     Scaffold(
-        // topBar = { PadawanAppBar(navController = navController, title = stringResource(R.string.receive_bitcoin)) },
         snackbarHost = { SnackbarHost(snackbarHostState) }
     ) { paddingValues ->
         ConstraintLayout(

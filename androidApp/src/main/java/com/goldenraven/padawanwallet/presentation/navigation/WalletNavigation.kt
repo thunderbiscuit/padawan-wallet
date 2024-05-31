@@ -116,7 +116,13 @@ fun WalletNavigation(
             popExitTransition = {
                 slideOutOfContainer(AnimatedContentScope.SlideDirection.Down, animationSpec = tween(animationDuration))
             }
-        ) { ReceiveScreen(navController = navControllerWalletNavigation, walletViewModel, receiveViewModel) }
+        ) {
+            ReceiveScreen(
+                navController = navControllerWalletNavigation,
+                receiveViewModel.state,
+                receiveViewModel::onAction
+            )
+        }
 
 
         // Send
