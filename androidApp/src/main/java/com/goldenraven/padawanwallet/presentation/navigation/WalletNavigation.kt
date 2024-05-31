@@ -12,8 +12,6 @@ import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
-import androidx.navigation.NavType
-import androidx.navigation.navArgument
 import com.goldenraven.padawanwallet.utils.Screen
 import com.goldenraven.padawanwallet.presentation.ui.screens.chapters.ChapterScreen
 import com.goldenraven.padawanwallet.presentation.ui.screens.settings.AboutScreen
@@ -60,13 +58,6 @@ fun WalletNavigation(
                 } else {
                     slideIntoContainer(AnimatedContentScope.SlideDirection.End, animationSpec = tween(animationDuration))
                 }
-                // when (initialState.destination.route) {
-                //     "receive_screen" -> fadeIn(animationSpec = tween(1000))
-                //     "send_screen" -> fadeIn(animationSpec = tween(1000))
-                //     "transaction_screen" -> fadeIn(animationSpec = tween(1000))
-                //     "wallet_screen" -> null
-                //     else -> slideIntoContainer(AnimatedContentScope.SlideDirection.End, animationSpec = tween(animationDuration))
-                // }
             },
             popEnterTransition = {
                 val route = initialState.destination.route
@@ -226,13 +217,12 @@ fun WalletNavigation(
                     else -> fadeOut(animationSpec = tween(300))
                 }
             }
-        ) { ChaptersRootScreen(chaptersViewModel = chaptersViewModel, navController = navControllerWalletNavigation) }
+        ) { ChaptersRootScreen(chaptersViewModel.rootState, chaptersViewModel::onAction, navControllerWalletNavigation) }
 
 
         // Specific chapters
         composable(
-            route = Screen.ChapterScreen.route + "/{chapterId}",
-            arguments = listOf(navArgument("chapterId") { type = NavType.IntType }),
+            route = Screen.ChapterScreen.route,
             enterTransition = {
                 slideIntoContainer(AnimatedContentScope.SlideDirection.Up, animationSpec = tween(animationDuration))
             },
@@ -245,11 +235,7 @@ fun WalletNavigation(
             popExitTransition = {
                 slideOutOfContainer(AnimatedContentScope.SlideDirection.Down, animationSpec = tween(animationDuration))
             }
-        ) { backStackEntry ->
-            backStackEntry.arguments?.getInt("chapterId")?.let {
-                ChapterScreen(chapterId = it, chaptersViewModel = chaptersViewModel, navController = navControllerWalletNavigation)
-            }
-        }
+        ) { ChapterScreen(chaptersViewModel.pageState, chaptersViewModel::onAction, navControllerWalletNavigation) }
 
 
         // Settings
@@ -280,7 +266,12 @@ fun WalletNavigation(
                     else               -> slideOutOfContainer(AnimatedContentScope.SlideDirection.End, animationSpec = tween(animationDuration))
                 }
             },
-        ) { SettingsRootScreen(navController = navControllerWalletNavigation, viewModel = chaptersViewModel) }
+        ) {
+            SettingsRootScreen(
+                onAction = chaptersViewModel::onAction,
+                navController = navControllerWalletNavigation
+            )
+        }
 
 
         // About

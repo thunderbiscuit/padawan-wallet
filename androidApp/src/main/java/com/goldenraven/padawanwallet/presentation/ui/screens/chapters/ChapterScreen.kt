@@ -5,7 +5,6 @@
 
 package com.goldenraven.padawanwallet.presentation.ui.screens.chapters
 
-import android.util.Log
 import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.BorderStroke
@@ -30,14 +29,10 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -66,23 +61,19 @@ import com.goldenraven.padawanwallet.presentation.theme.standardShadow
 import com.goldenraven.padawanwallet.presentation.ui.components.standardBorder
 import com.goldenraven.padawanwallet.utils.ScreenSizeWidth
 import com.goldenraven.padawanwallet.utils.getScreenSizeWidth
-import com.goldenraven.padawanwallet.presentation.viewmodels.ChaptersViewModel
+import com.goldenraven.padawanwallet.presentation.viewmodels.mvi.ChaptersScreensAction
+import com.goldenraven.padawanwallet.presentation.viewmodels.mvi.PageState
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
-// TODO Add transition between pages smoother (pages & progress bar)
-
-private const val TAG = "TutorialScreen"
+private const val TAG = "ChapterScreen"
 
 @Composable
 fun ChapterScreen(
-    chapterId: Int,
-    chaptersViewModel: ChaptersViewModel,
+    state: PageState,
+    onAction: (ChaptersScreensAction) -> Unit,
     navController: NavHostController
 ) {
-    val chapterPages = chaptersViewModel.getSpecificTutorialPages(id = chapterId)
-    Log.i(TAG, "We're dealing with chapter $chapterId and the chapterPageSize is ${chapterPages.size}")
-    val currentPage = remember { mutableStateOf(1) }
     val pageScrollState = rememberScrollState()
     val coroutineScope = rememberCoroutineScope()
 
@@ -107,7 +98,10 @@ fun ChapterScreen(
         ) {
             Column(modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp)) {
                 ChapterAppBar(navController = navController)
-                ChapterProgressBar(completion = currentPage, total = chapterPages.size - 1)
+                ChapterProgressBar(
+                    currentPage = state.currentPage,
+                    totalPages = state.totalPages
+                )
             }
         }
 
@@ -123,14 +117,12 @@ fun ChapterScreen(
                 .padding(all = padding)
                 .fillMaxSize()
         ) {
-            ChapterPage(chapterPages = chapterPages, currentPage = currentPage)
+            ChapterPage(state.page ?: emptyList())
             ChapterButtons(
-                chapterPageSize = chapterPages.size,
-                currentPage = currentPage,
+                state = state,
+                onAction = onAction,
                 pageScrollState = pageScrollState,
                 coroutineScope = coroutineScope,
-                chaptersViewModel = chaptersViewModel,
-                chapterId = chapterId,
                 navController
             )
         }
@@ -139,12 +131,10 @@ fun ChapterScreen(
 
 @Composable
 fun ChapterButtons(
-    chapterPageSize: Int,
-    currentPage: MutableState<Int>,
+    state: PageState,
+    onAction: (ChaptersScreensAction) -> Unit,
     pageScrollState: ScrollState,
     coroutineScope: CoroutineScope,
-    chaptersViewModel: ChaptersViewModel,
-    chapterId: Int,
     navController: NavHostController
 ) {
     Row(
@@ -152,12 +142,10 @@ fun ChapterButtons(
             .fillMaxWidth()
             .padding(horizontal = 8.dp)
     ) {
-        Log.i(TAG, "We're on page ${currentPage.value}")
-        if (currentPage.value != 1) {
+        if (!state.isFirst) {
             Button(
                 onClick = {
-                    currentPage.value -= 1
-                    // chaptersViewModel.setCompletion(id = tutorialId - 1, completion = currentPage.value)
+                    onAction(ChaptersScreensAction.PreviousPage)
                     scrollUp(pageScrollState = pageScrollState, coroutineScope = coroutineScope)
                 },
                 colors = ButtonDefaults.buttonColors(containerColor = padawan_theme_button_secondary),
@@ -183,14 +171,12 @@ fun ChapterButtons(
                     )
                 }
             }
-        } else if (chapterPageSize > 1) {
-            // Spacer(modifier = Modifier.weight(weight = 0.5f))
         }
 
-        if (currentPage.value < chapterPageSize - 1) {
+        if (!state.isLast) {
             Button(
                 onClick = {
-                    currentPage.value += 1
+                    onAction(ChaptersScreensAction.NextPage)
                     scrollUp(pageScrollState = pageScrollState, coroutineScope = coroutineScope)
                 },
                 colors = ButtonDefaults.buttonColors(containerColor = padawan_theme_button_primary),
@@ -216,10 +202,10 @@ fun ChapterButtons(
 //                    )
                 }
             }
-        } else if (currentPage.value == chapterPageSize - 1) {
+        } else {
             Button(
                 onClick = {
-                    chaptersViewModel.setCompleted(index = chapterId)
+                    onAction(ChaptersScreensAction.SetCompleted)
                     navController.popBackStack()
                 },
                 colors = ButtonDefaults.buttonColors(containerColor = padawan_theme_button_primary),
@@ -240,8 +226,6 @@ fun ChapterButtons(
                     )
                 }
             }
-        } else {
-            Spacer(modifier = Modifier.weight(weight = 0.5f))
         }
     }
 }
@@ -279,8 +263,8 @@ fun ChapterProgressBar(
     spacer: Float = 30f,
     incompleteColor: Color = Color(0xfffbf5bf),
     completeColor: Color = Color(0xff1f0208),
-    completion: MutableState<Int>,
-    total: Int,
+    currentPage: Int,
+    totalPages: Int,
 ) {
     Canvas(
         modifier = Modifier
@@ -288,13 +272,11 @@ fun ChapterProgressBar(
             .padding(all = 16.dp)
             .height(height = height)
     ) {
-        val progressBarLength = ((size.width + spacer) / total - 1) - spacer
+        val progressBarLength = ((size.width + spacer) / totalPages) - spacer
 
-        // total -1 because the list of pages includes the description, which counts as 1 page
-        // for (i in 0 until total - 1) {
-        for (i in 0 until total) {
+        for (i in 0..< totalPages) {
             drawLine(
-                color = if (completion.value > i) completeColor else incompleteColor,
+                color = if (currentPage >= i) completeColor else incompleteColor,
                 strokeWidth = size.height,
                 start = Offset(x = i * (progressBarLength + spacer), y = 0f),
                 end = Offset(x = (i + 1) * (progressBarLength + spacer) - spacer, y = 0f)
@@ -303,10 +285,9 @@ fun ChapterProgressBar(
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-internal fun ChapterPage(chapterPages: List<Page>, currentPage: MutableState<Int>) {
-    for (element in chapterPages[currentPage.value]) {
+internal fun ChapterPage(page: Page) {
+    for (element in page) {
         when (element.elementType) {
             ElementType.TITLE -> {
                 Text(
@@ -330,7 +311,6 @@ internal fun ChapterPage(chapterPages: List<Page>, currentPage: MutableState<Int
             }
             ElementType.RESOURCE -> {
                 Card(
-                    // containerColor = padawan_theme_button_secondary,
                     colors = CardDefaults.cardColors(padawan_theme_button_secondary),
                     border = standardBorder,
                     modifier = Modifier

@@ -57,7 +57,11 @@ internal fun HomeScreen(walletViewModel: WalletViewModel, chaptersViewModel: Cha
         bottomBar = { BottomNavigationBar(navControllerWalletNavigation) }
     ) { paddingValues ->
         Box(modifier = Modifier.padding(paddingValues)) {
-            WalletNavigation(navControllerWalletNavigation = navControllerWalletNavigation, walletViewModel = walletViewModel, chaptersViewModel = chaptersViewModel)
+            WalletNavigation(
+                navControllerWalletNavigation = navControllerWalletNavigation,
+                walletViewModel = walletViewModel,
+                chaptersViewModel = chaptersViewModel
+            )
         }
     }
 }

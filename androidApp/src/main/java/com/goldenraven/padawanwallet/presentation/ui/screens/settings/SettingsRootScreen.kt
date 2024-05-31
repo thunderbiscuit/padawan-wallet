@@ -44,15 +44,15 @@ import com.goldenraven.padawanwallet.presentation.theme.padawan_theme_background
 import com.goldenraven.padawanwallet.presentation.theme.padawan_theme_button_primary
 import com.goldenraven.padawanwallet.presentation.theme.padawan_theme_text_faded_secondary
 import com.goldenraven.padawanwallet.utils.Screen
-import com.goldenraven.padawanwallet.presentation.viewmodels.ChaptersViewModel
+import com.goldenraven.padawanwallet.presentation.viewmodels.mvi.ChaptersScreensAction
 import kotlinx.coroutines.launch
 
 private const val TAG = "SettingsRootScreen"
 
 @Composable
 internal fun SettingsRootScreen(
+    onAction: (ChaptersScreensAction) -> Unit,
     navController: NavController,
-    viewModel: ChaptersViewModel
 ) {
     val scope = rememberCoroutineScope()
     val scrollState = rememberScrollState()
@@ -214,7 +214,7 @@ internal fun SettingsRootScreen(
             val chaptersResetMessage = stringResource(R.string.chapters_reset_successful)
             Button(
                 onClick = {
-                    viewModel.unsetAllCompleted()
+                    onAction(ChaptersScreensAction.ResetAllChapters)
                     scope.launch { snackbarHostState.showSnackbar(chaptersResetMessage) }
                 },
                 colors = ButtonDefaults.buttonColors(containerColor = Color(0xffFEE6DE)),
