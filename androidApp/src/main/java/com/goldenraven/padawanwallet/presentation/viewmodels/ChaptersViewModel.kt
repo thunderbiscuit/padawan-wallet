@@ -5,8 +5,7 @@
 
 package com.goldenraven.padawanwallet.presentation.viewmodels
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.goldenraven.padawanwallet.domain.tutorials.ChapterElement
 import com.goldenraven.padawanwallet.domain.tutorials.TutorialRepository
@@ -24,8 +23,7 @@ import kotlinx.coroutines.runBlocking
 
 private const val TAG = "ChaptersViewModel"
 
-class ChaptersViewModel(application: Application) : AndroidViewModel(application) {
-    private val sharedPrefTutorialsRepository: TutorialRepository = TutorialRepository
+class ChaptersViewModel() : ViewModel() {
     private val chapterPageMap: Map<Int, List<List<ChapterElement>>> = mapOf(
         Pair(1, chapter1),
         Pair(2, chapter2),
