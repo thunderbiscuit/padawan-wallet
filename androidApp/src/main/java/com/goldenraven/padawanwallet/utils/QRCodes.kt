@@ -98,3 +98,9 @@ fun addressToQR(address: String): ImageBitmap? {
     }
     return null
 }
+
+sealed class QrUiState {
+    data object NoQR : QrUiState()
+    data object Loading : QrUiState()
+    data object QR : QrUiState()
+}

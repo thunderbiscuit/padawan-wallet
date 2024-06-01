@@ -13,6 +13,7 @@ import androidx.lifecycle.viewModelScope
 import com.goldenraven.padawanwallet.domain.wallet.Wallet
 import com.goldenraven.padawanwallet.presentation.viewmodels.mvi.ReceiveScreenAction
 import com.goldenraven.padawanwallet.presentation.viewmodels.mvi.ReceiveScreenState
+import com.goldenraven.padawanwallet.utils.QrUiState
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -38,10 +39,4 @@ internal class ReceiveViewModel : ViewModel() {
             )
         }
     }
-}
-
-sealed class QrUiState {
-    data object NoQR : QrUiState()
-    data object Loading : QrUiState()
-    data object QR : QrUiState()
 }
