@@ -262,8 +262,3 @@ class WalletViewModel(
         }
     }
 }
-
-enum class BitcoinUnit {
-    SATS,
-    BTC,
-}

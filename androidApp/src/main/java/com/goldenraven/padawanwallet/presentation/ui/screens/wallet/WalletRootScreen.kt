@@ -66,6 +66,7 @@ import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.goldenraven.padawanwallet.R
+import com.goldenraven.padawanwallet.domain.bitcoin.BitcoinUnit
 import com.goldenraven.padawanwallet.domain.tx.Tx
 import com.goldenraven.padawanwallet.presentation.ui.components.FadedVerticalDivider
 import com.goldenraven.padawanwallet.presentation.ui.components.LoadingAnimation
@@ -96,7 +97,6 @@ import com.goldenraven.padawanwallet.utils.ScreenSizeWidth
 import com.goldenraven.padawanwallet.utils.formatCurrency
 import com.goldenraven.padawanwallet.utils.formatInBtc
 import com.goldenraven.padawanwallet.utils.getScreenSizeWidth
-import com.goldenraven.padawanwallet.presentation.viewmodels.BitcoinUnit
 import com.goldenraven.padawanwallet.presentation.viewmodels.WalletViewModel
 
 private const val TAG = "WalletRootScreen"
