@@ -96,7 +96,7 @@ import com.goldenraven.padawanwallet.utils.ScreenSizeWidth
 import com.goldenraven.padawanwallet.utils.formatCurrency
 import com.goldenraven.padawanwallet.utils.formatInBtc
 import com.goldenraven.padawanwallet.utils.getScreenSizeWidth
-import com.goldenraven.padawanwallet.presentation.viewmodels.CurrencyType
+import com.goldenraven.padawanwallet.presentation.viewmodels.BitcoinUnit
 import com.goldenraven.padawanwallet.presentation.viewmodels.WalletViewModel
 
 private const val TAG = "WalletRootScreen"
@@ -223,21 +223,21 @@ fun BalanceBox(
                 ) {
                     CurrencyToggleText(
                         currencyToggleState = currencyToggleState,
-                        text = CurrencyType.BTC
+                        text = BitcoinUnit.BTC
                     )
                     FadedVerticalDivider()
                     CurrencyToggleText(
                         currencyToggleState = currencyToggleState,
-                        text = CurrencyType.SATS
+                        text = BitcoinUnit.SATS
                     )
                 }
             }
             var balanceDisplay: String = if (currencyToggleState) balance.toString() else balance.formatInBtc()
             balanceDisplay = formatCurrency(balanceDisplay)
             val currencyDisplay: String = if (currencyToggleState) {
-                CurrencyType.SATS.toString().lowercase()
+                BitcoinUnit.SATS.toString().lowercase()
             } else {
-                CurrencyType.BTC.toString().lowercase()
+                BitcoinUnit.BTC.toString().lowercase()
             }
             val fontSize = when (getScreenSizeWidth(LocalConfiguration.current.screenWidthDp)) {
                 ScreenSizeWidth.Small -> 28.sp
@@ -470,7 +470,7 @@ fun TransactionListBox(
                                     .padding(top = 8.dp)
                             )
                             Text(
-                                text = "${if (tx.isPayment) tx.valueOut.toString() else tx.valueIn.toString()} ${CurrencyType.SATS.toString().lowercase()}",
+                                text = "${if (tx.isPayment) tx.valueOut.toString() else tx.valueIn.toString()} ${BitcoinUnit.SATS.toString().lowercase()}",
                                 style = PadawanTypography.bodyMedium,
                                 textAlign = TextAlign.End,
                                 modifier = Modifier.align(Alignment.BottomEnd)
@@ -526,8 +526,8 @@ fun TransactionListBox(
 }
 
 @Composable
-fun CurrencyToggleText(currencyToggleState: Boolean, text: CurrencyType) {
-    val currencyState = (!currencyToggleState && text == CurrencyType.BTC) || (currencyToggleState && text == CurrencyType.SATS)
+fun CurrencyToggleText(currencyToggleState: Boolean, text: BitcoinUnit) {
+    val currencyState = (!currencyToggleState && text == BitcoinUnit.BTC) || (currencyToggleState && text == BitcoinUnit.SATS)
 
     val colorTransition = updateTransition(
         targetState = if (currencyState) padawan_theme_onBackground_faded else padawan_theme_onPrimary,

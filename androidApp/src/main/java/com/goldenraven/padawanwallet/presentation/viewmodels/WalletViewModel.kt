@@ -263,7 +263,7 @@ class WalletViewModel(
     }
 }
 
-enum class CurrencyType {
+enum class BitcoinUnit {
     SATS,
     BTC,
 }
