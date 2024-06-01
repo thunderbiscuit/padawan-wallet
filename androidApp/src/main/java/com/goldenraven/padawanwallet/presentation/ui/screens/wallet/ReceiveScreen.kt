@@ -54,9 +54,9 @@ import com.goldenraven.padawanwallet.utils.ScreenSizeWidth
 import com.goldenraven.padawanwallet.utils.addressToQR
 import com.goldenraven.padawanwallet.utils.copyToClipboard
 import com.goldenraven.padawanwallet.utils.getScreenSizeWidth
-import com.goldenraven.padawanwallet.presentation.viewmodels.QrUiState
 import com.goldenraven.padawanwallet.presentation.viewmodels.mvi.ReceiveScreenAction
 import com.goldenraven.padawanwallet.presentation.viewmodels.mvi.ReceiveScreenState
+import com.goldenraven.padawanwallet.utils.QrUiState
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 

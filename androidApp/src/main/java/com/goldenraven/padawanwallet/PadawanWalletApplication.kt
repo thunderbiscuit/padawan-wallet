@@ -8,8 +8,8 @@ package com.goldenraven.padawanwallet
 import android.app.Application
 import android.content.Context
 import com.goldenraven.padawanwallet.domain.tutorials.TutorialRepository
-import com.goldenraven.padawanwallet.domain.wallet.WalletRepository
-import com.goldenraven.padawanwallet.domain.wallet.Wallet
+import com.goldenraven.padawanwallet.domain.bitcoin.WalletRepository
+import com.goldenraven.padawanwallet.domain.bitcoin.Wallet
 
 class PadawanWalletApplication : Application() {
 

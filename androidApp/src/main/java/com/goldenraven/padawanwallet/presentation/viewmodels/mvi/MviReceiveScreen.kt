@@ -5,7 +5,7 @@
 
 package com.goldenraven.padawanwallet.presentation.viewmodels.mvi
 
-import com.goldenraven.padawanwallet.presentation.viewmodels.QrUiState
+import com.goldenraven.padawanwallet.utils.QrUiState
 
 data class ReceiveScreenState(
     val address: String? = null,

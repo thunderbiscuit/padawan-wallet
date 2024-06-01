@@ -12,8 +12,8 @@ import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.os.LocaleListCompat
-import com.goldenraven.padawanwallet.domain.wallet.WalletRepository
-import com.goldenraven.padawanwallet.domain.wallet.Wallet
+import com.goldenraven.padawanwallet.domain.bitcoin.WalletRepository
+import com.goldenraven.padawanwallet.domain.bitcoin.Wallet
 import com.goldenraven.padawanwallet.presentation.navigation.IntroNavigation
 import com.goldenraven.padawanwallet.presentation.theme.PadawanTheme
 import com.goldenraven.padawanwallet.presentation.navigation.HomeNavigation

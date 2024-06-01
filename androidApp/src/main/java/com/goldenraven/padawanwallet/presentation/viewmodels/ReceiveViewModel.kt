@@ -10,7 +10,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.goldenraven.padawanwallet.domain.wallet.Wallet
+import com.goldenraven.padawanwallet.domain.bitcoin.Wallet
 import com.goldenraven.padawanwallet.presentation.viewmodels.mvi.ReceiveScreenAction
 import com.goldenraven.padawanwallet.presentation.viewmodels.mvi.ReceiveScreenState
 import com.goldenraven.padawanwallet.utils.QrUiState

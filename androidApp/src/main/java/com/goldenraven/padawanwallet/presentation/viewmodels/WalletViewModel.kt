@@ -19,8 +19,8 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.goldenraven.padawanwallet.BuildConfig
 import com.goldenraven.padawanwallet.R
-import com.goldenraven.padawanwallet.domain.wallet.Wallet
-import com.goldenraven.padawanwallet.domain.wallet.WalletRepository
+import com.goldenraven.padawanwallet.domain.bitcoin.Wallet
+import com.goldenraven.padawanwallet.domain.bitcoin.WalletRepository
 import com.goldenraven.padawanwallet.domain.tx.Tx
 import com.goldenraven.padawanwallet.domain.tx.TxDao
 import com.goldenraven.padawanwallet.domain.tx.TxDatabase
