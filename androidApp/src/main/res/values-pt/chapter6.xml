@@ -1,25 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="C6_title">Bitcoin units</string>
-    <string name="C6_tagline">Satoshis, bitcoins, and beyond.</string>
+    <string name="C6_title">Unidades de bitcoin</string>
+    <string name="C6_tagline">Satoshis, bitcoins e muito mais.</string>
 
-    <string name="t6_p1">The word bitcoin has a few meanings. When referring to bitcoin, people sometime mean
-        (a) the network, the protocol, the open source project, or (b) one of the units of value when transacting on the bitcoin network.</string>
+    <string name="t6_p1">A palavra bitcoin tem alguns significados. Ao se referir ao bitcoin, as pessoas às vezes querem dizer a) a rede, o protocolo, o projeto de código aberto ou b) uma das unidades de valor ao realizar transações na rede bitcoin.</string>
 
-    <string name="t6_h1">Breaking it down</string>
-    <string name="t6_p3">Just like the kilometer can be broken down into meters and centimeters and the foot can be broken down into inches, a bitcoin can be broken into smaller units.
+    <string name="t6_h1">Explicando:</string>
+    <string name="t6_p3">Assim como o quilômetro pode ser dividido em metros e centímetros, um pé pode ser dividido em polegadas, um bitcoin pode ser dividido em unidades menores.
 </string>
-    <string name="t6_p4">The most important units to describe bitcoin are the bitcoin and the satoshi. Sometimes we shorten the bitcoin unit to \"btc\" and the satoshi unit to \"sat\". There are 100,000,000 satoshis in 1 bitcoin.</string>
+    <string name="t6_p4">As unidades mais importantes para descrever o bitcoin são: bitcoin e satoshi. Às vezes abreviamos a unidade bitcoin para “btc” e a unidade satoshi para “sat”. Existem 100 milhões de satoshis em 1 bitcoin.</string>
 
-    <string name="t6_h2">Symbols</string>
-    <string name="t6_p5">There is not yet an \"official\" symbol for either unit (bitcoin or satoshi). You may see the following symbols on Padawan or in other cryptocurrency exchanges or applications.</string>
-    <string name="t6_p6">Symbols sometimes used for bitcoin:</string>
-    <string name="t6_p7">Symbols sometimes used for satoshis:</string>
+    <string name="t6_h2">Símbolos</string>
+    <string name="t6_p5">Ainda não existe um símbolo “oficial” para nenhuma das unidades (bitcoin ou satoshi). Você pode ver os seguintes símbolos para bitcoin no Padawan ou em outras exchanges ou aplicativos.</string>
+    <string name="t6_p6">Símbolos às vezes utilizados para representar o bitcoin:</string>
+    <string name="t6_p7">Símbolos às vezes utilizados para representar o satoshi:</string>
 
-    <string name="t6_h3">Which unit should I use?</string>
-    <string name="t6_p8">We often use the bitcoin (btc) or satoshi (sat) unit depending on the size of the transaction.</string>
-    <string name="t6_p9">- A brand new car might be worth 1,700,000,000 sats, but it is more simple to say 1.7 bitcoin.</string>
-    <string name="t6_p10">- You could buy a candy for 0.00000250 bitcoin, but it\'s much simpler to say 250 satoshis.</string>
-    <string name="t6_p11">Someone using bitcoin applications must develop the skill to understand both bitcoin and satoshi units. Many transactions are denominated in bitcoin, but their network fee (see chapter 4) is almost always using the satoshi unit.</string>
-    <string name="t6_p12">In Padawan, you can switch between the two units in the main wallet display page by touching the btc/sats symbol.</string>
+    <string name="t6_h3">Qual unidade devo usar?</string>
+    <string name="t6_p8">Frequentemente usamos a unidade bitcoin (btc) ou satoshi (sat), dependendo do tamanho da transação.</string>
+    <string name="t6_p9">- Um carro zero Km. (no Brasil) pode valer 25.000.000 sats, só que é mais simples dizer 0,25 bitcoin.</string>
+    <string name="t6_p10">- Você pode comprar um doce por 0,00002700 bitcoin, só que é mais simples dizer 2700 satoshis.</string>
+    <string name="t6_p11">Ao usar aplicativos/carteiras de bitcoin você deve compreender o que são as unidades bitcoin e satoshi. Muitas transações são representadas em bitcoin, mas a taxa de rede (ver capítulo 4) quase sempre usa a unidade satoshi.</string>
+    <string name="t6_p12">Na Padawan, você pode alternar entre as duas unidades na página principal de exibição da carteira tocando no símbolo btc/sats.</string>
 </resources>
