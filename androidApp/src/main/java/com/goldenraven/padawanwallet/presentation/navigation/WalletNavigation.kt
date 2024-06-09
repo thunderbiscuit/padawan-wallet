@@ -1,5 +1,5 @@
 /*
- * Copyright 2020-2023 thunderbiscuit and contributors.
+ * Copyright 2020-2024 thunderbiscuit and contributors.
  * Use of this source code is governed by the Apache 2.0 license that can be found in the ./LICENSE file.
  */
 
@@ -12,8 +12,6 @@ import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
-import androidx.navigation.NavType
-import androidx.navigation.navArgument
 import com.goldenraven.padawanwallet.utils.Screen
 import com.goldenraven.padawanwallet.presentation.ui.screens.chapters.ChapterScreen
 import com.goldenraven.padawanwallet.presentation.ui.screens.settings.AboutScreen
@@ -21,13 +19,14 @@ import com.goldenraven.padawanwallet.presentation.ui.screens.settings.RecoveryPh
 import com.goldenraven.padawanwallet.presentation.ui.screens.settings.SendCoinsBackScreen
 import com.goldenraven.padawanwallet.presentation.ui.screens.settings.SettingsRootScreen
 import com.goldenraven.padawanwallet.presentation.ui.screens.chapters.ChaptersRootScreen
-import com.goldenraven.padawanwallet.viewmodels.ChaptersViewModel
+import com.goldenraven.padawanwallet.presentation.viewmodels.ChaptersViewModel
 import com.goldenraven.padawanwallet.presentation.ui.screens.settings.LanguagesScreen
 import com.goldenraven.padawanwallet.presentation.ui.screens.wallet.QRScanScreen
 import com.goldenraven.padawanwallet.presentation.ui.screens.wallet.ReceiveScreen
 import com.goldenraven.padawanwallet.presentation.ui.screens.wallet.SendScreen
 import com.goldenraven.padawanwallet.presentation.ui.screens.wallet.TransactionScreen
 import com.goldenraven.padawanwallet.presentation.ui.screens.wallet.WalletRootScreen
+import com.goldenraven.padawanwallet.presentation.viewmodels.ReceiveViewModel
 import com.goldenraven.padawanwallet.presentation.viewmodels.WalletViewModel
 import com.google.accompanist.navigation.animation.AnimatedNavHost
 import com.google.accompanist.navigation.animation.composable
@@ -40,6 +39,7 @@ fun WalletNavigation(
     chaptersViewModel: ChaptersViewModel
 ) {
     val animationDuration = 400
+    val receiveViewModel = ReceiveViewModel()
 
     AnimatedNavHost(
         navController = navControllerWalletNavigation,
@@ -58,13 +58,6 @@ fun WalletNavigation(
                 } else {
                     slideIntoContainer(AnimatedContentScope.SlideDirection.End, animationSpec = tween(animationDuration))
                 }
-                // when (initialState.destination.route) {
-                //     "receive_screen" -> fadeIn(animationSpec = tween(1000))
-                //     "send_screen" -> fadeIn(animationSpec = tween(1000))
-                //     "transaction_screen" -> fadeIn(animationSpec = tween(1000))
-                //     "wallet_screen" -> null
-                //     else -> slideIntoContainer(AnimatedContentScope.SlideDirection.End, animationSpec = tween(animationDuration))
-                // }
             },
             popEnterTransition = {
                 val route = initialState.destination.route
@@ -114,7 +107,13 @@ fun WalletNavigation(
             popExitTransition = {
                 slideOutOfContainer(AnimatedContentScope.SlideDirection.Down, animationSpec = tween(animationDuration))
             }
-        ) { ReceiveScreen(navController = navControllerWalletNavigation, walletViewModel) }
+        ) {
+            ReceiveScreen(
+                navController = navControllerWalletNavigation,
+                receiveViewModel.state,
+                receiveViewModel::onAction
+            )
+        }
 
 
         // Send
@@ -218,13 +217,12 @@ fun WalletNavigation(
                     else -> fadeOut(animationSpec = tween(300))
                 }
             }
-        ) { ChaptersRootScreen(chaptersViewModel = chaptersViewModel, navController = navControllerWalletNavigation) }
+        ) { ChaptersRootScreen(chaptersViewModel.rootState, chaptersViewModel::onAction, navControllerWalletNavigation) }
 
 
         // Specific chapters
         composable(
-            route = Screen.ChapterScreen.route + "/{chapterId}",
-            arguments = listOf(navArgument("chapterId") { type = NavType.IntType }),
+            route = Screen.ChapterScreen.route,
             enterTransition = {
                 slideIntoContainer(AnimatedContentScope.SlideDirection.Up, animationSpec = tween(animationDuration))
             },
@@ -237,11 +235,7 @@ fun WalletNavigation(
             popExitTransition = {
                 slideOutOfContainer(AnimatedContentScope.SlideDirection.Down, animationSpec = tween(animationDuration))
             }
-        ) { backStackEntry ->
-            backStackEntry.arguments?.getInt("chapterId")?.let {
-                ChapterScreen(chapterId = it, chaptersViewModel = chaptersViewModel, navController = navControllerWalletNavigation)
-            }
-        }
+        ) { ChapterScreen(chaptersViewModel.pageState, chaptersViewModel::onAction, navControllerWalletNavigation) }
 
 
         // Settings
@@ -272,7 +266,12 @@ fun WalletNavigation(
                     else               -> slideOutOfContainer(AnimatedContentScope.SlideDirection.End, animationSpec = tween(animationDuration))
                 }
             },
-        ) { SettingsRootScreen(navController = navControllerWalletNavigation, viewModel = chaptersViewModel) }
+        ) {
+            SettingsRootScreen(
+                onAction = chaptersViewModel::onAction,
+                navController = navControllerWalletNavigation
+            )
+        }
 
 
         // About

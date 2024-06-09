@@ -13,7 +13,7 @@ import class PadawanKmp.FaucetService
 
 struct WalletView: View {
     
-    @EnvironmentObject var viewModel: WalletViewModel
+    @Environment(WalletViewModel.self) private var walletViewModel
     @Binding var selectedTab: Int
    
     @State var navigationPath: [String] = []
@@ -34,7 +34,7 @@ struct WalletView: View {
                         VStack {
                             Spacer()
                             HStack {
-                                Text("Bitcoin Testnet")
+                                Text("bitcoin_testnet")
                                 
                                 Picker("Display in BTC or sats?", selection: $satsBTC) {
                                     ForEach(amountDisplayOptions, id: \.self) {
@@ -44,25 +44,25 @@ struct WalletView: View {
                                 .pickerStyle(.segmented)
                                 .onChange(of: satsBTC) {
                                     if satsBTC == "BTC" {
-                                        viewModel.toggleBTCDisplay(displayOption: "BTC")
+                                        walletViewModel.toggleBTCDisplay(displayOption: "BTC")
                                     } else {
-                                        viewModel.toggleBTCDisplay(displayOption: "sats")
+                                        walletViewModel.toggleBTCDisplay(displayOption: "sats")
                                     }
                                 }
                             }
                             
                             Spacer()
                             VStack {
-                                Text(viewModel.balanceText).font(.largeTitle)
+                                Text(walletViewModel.balanceText).font(.largeTitle)
                                 Text("\(satsBTC)")
                             }
                             
                             Spacer()
                             Button(action: {
-                                viewModel.sync()
+                                walletViewModel.sync()
                                 satsBTC = amountDisplayOptions[0] //reset segment picker to display BTC
                             }, label: {
-                                Text("Sync \(Image(systemName: "bitcoinsign.arrow.circlepath"))")
+                                Text("sync \(Image(systemName: "bitcoinsign.arrow.circlepath"))")
                                 .font(.headline)
                                 .foregroundColor(.white)
                                 .frame(height: 55)
@@ -76,9 +76,9 @@ struct WalletView: View {
                 
                 HStack {
                     Button(action: {
-                        navigationPath.append("Receive ↓")
+                        navigationPath.append("receive")
                     }, label: {
-                        Text("Receive ↓")
+                        Text("receive")
                             .font(.headline)
                             .foregroundColor(.white)
                             .frame(height: 55)
@@ -88,9 +88,9 @@ struct WalletView: View {
                     })
                     
                     Button(action: {
-                        navigationPath.append("Send ↑")
+                        navigationPath.append("send")
                     }, label: {
-                        Text("Send ↑")
+                        Text("send")
                             .font(.headline)
                             .foregroundColor(.white)
                             .frame(height: 55)
@@ -101,15 +101,15 @@ struct WalletView: View {
                 }
                 .navigationDestination(for: String.self) { navigaionValue in
                     
-                    switch viewModel.state {
+                    switch walletViewModel.state {
                         
                     case .loaded(_, _):
                             do {
                                 switch navigaionValue {
                                     
-                                case "Receive ↓":
+                                case "receive":
                                     ReceiveView( navigationPath: $navigationPath)
-                                case "Send ↑":
+                                case "send":
                                     SendView(navigationPath: $navigationPath)
                                 default:
                                     Text("undefined button value")
@@ -120,12 +120,12 @@ struct WalletView: View {
                 }
                 
                 HStack() {
-                    Text("Transactions")
+                    Text("transactions")
                         .font(.title)
                     Spacer()
                 }
                 
-                if viewModel.transactions.isEmpty {
+                if walletViewModel.transactions.isEmpty {
                     
                     FaucetView()
                     
@@ -133,7 +133,7 @@ struct WalletView: View {
                     List {
                                         
                         ForEach(
-                            viewModel.transactions.sorted(
+                            walletViewModel.transactions.sorted(
                                 by: {
                                     $0.confirmationTime?.timestamp ?? $0.received > $1.confirmationTime?
                                         .timestamp ?? $1.received
@@ -175,7 +175,7 @@ struct WalletView: View {
            
         } //navigation stack
         .onAppear{
-            viewModel.load()
+            walletViewModel.load()
         }
     } //body
 }
@@ -183,7 +183,7 @@ struct WalletView: View {
 
 struct FaucetView: View {
     
-    @EnvironmentObject var viewModel: WalletViewModel
+    @Environment(WalletViewModel.self) var walletViewModel
     @State private var faucetFailed = false
     
     var body: some View {
@@ -194,10 +194,10 @@ struct FaucetView: View {
                         .stroke(Color.black , lineWidth: 1)
                         .frame(width: 350, height: 150, alignment: Alignment.top   )
                         .layoutPriority(1) // default is 0, now higher priority than Text()
-                Text("Hey! It looks like your transaction list is empty. Take a look around, and come back to get some coins so you can start playing with the wallet!").padding(20)
+                Text("looks_like_your_transaction_list_is_empty").padding(20)
             }
         
-            if viewModel.syncState == .synced { //only show button once synced!
+            if walletViewModel.syncState == .synced { //only show button once synced!
                 Button(action: {
                     let faucetService = FaucetService()
                     let response: FaucetCall = faucetService.callTatooineFaucet(
@@ -209,7 +209,9 @@ struct FaucetView: View {
                     handleResponse(response: response)
                     faucetFailed = true
                 }, label: {
-                    Text("Get coins \(Image(systemName: "bitcoinsign")) \(Image(systemName: "arrow.down.left"))")
+                    HStack{
+                        Text("get_coins") + Text(" ") + Text("bitcoin_sign")
+                    }
                         .font(.headline)
                         .foregroundColor(.white)
                         .frame(height: 55)
@@ -219,12 +221,12 @@ struct FaucetView: View {
                 })
                 .padding(20)
                 .alert(
-                    "Faucet Not Implemented Yet!",
+                    "errorFaucet",
                     isPresented: $faucetFailed
                 ) {
                     Button("Ok", role: .destructive) {  }
                 } message: {
-                    Text("Try to recover a wallet instead")
+                    Text("try_to_recover_a_wallet_instead")
                 }
             }
         }
@@ -280,7 +282,7 @@ struct WalletTransactionsListItemView: View {
                     transaction.confirmationTime?.timestamp.toDate().formatted(
                         .dateTime.day().month().hour().minute()
                     )
-                    ?? "Unconfirmed"
+                    ?? "unconfirmed"
                 )
             }
             .foregroundColor(.secondary)
@@ -306,7 +308,7 @@ struct WalletTransactionsListItemView: View {
 
 struct TransactionDetailsView: View {
 //    @ObservedObject var viewModel: TransactionDetailsViewModel
-    @EnvironmentObject var viewModel: WalletViewModel
+    @Environment(WalletViewModel.self) var viewModel
     
     let transaction: TransactionDetails
     let amount: UInt64
@@ -325,12 +327,12 @@ struct TransactionDetailsView: View {
                     .frame(width: 100, height: 100, alignment: .center)
                 HStack(spacing: 3) {
                     Text(
-                        transaction.sent > transaction.received ? "Send" : "Receive"
+                        transaction.sent > transaction.received ? "send" : "receive"
                     )
                     if transaction.confirmationTime == nil {
-                        Text("Unconfirmed")
+                        Text("unconfirmed")
                     } else {
-                        Text("Confirmed")
+                        Text("confirmed")
                     }
                 }
                 .fontWeight(.semibold)
@@ -356,7 +358,7 @@ struct TransactionDetailsView: View {
                 .fontDesign(.rounded)
                 VStack(spacing: 4) {
                     if transaction.confirmationTime == nil {
-                        Text("Unconfirmed")
+                        Text("unconfirmed")
                     } else {
                         VStack {
                             if let timestamp = transaction.confirmationTime?.timestamp {
@@ -450,5 +452,5 @@ func handleResponse(response: FaucetCall) {
 
 #Preview {
     WalletView(selectedTab: .constant (0))
-        .environmentObject(WalletViewModel())
+        .environment(WalletViewModel())
 }

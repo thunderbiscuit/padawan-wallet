@@ -1,5 +1,5 @@
 /*
- * Copyright 2020-2023 thunderbiscuit and contributors.
+ * Copyright 2020-2024 thunderbiscuit and contributors.
  * Use of this source code is governed by the Apache 2.0 license that can be found in the ./LICENSE file.
  */
 
@@ -14,7 +14,7 @@ import androidx.navigation.NavHostController
 import com.goldenraven.padawanwallet.utils.Screen
 import com.goldenraven.padawanwallet.presentation.ui.screens.HomeScreen
 import com.goldenraven.padawanwallet.presentation.ui.screens.SplashScreen
-import com.goldenraven.padawanwallet.viewmodels.ChaptersViewModel
+import com.goldenraven.padawanwallet.presentation.viewmodels.ChaptersViewModel
 import com.goldenraven.padawanwallet.presentation.viewmodels.WalletViewModel
 import com.google.accompanist.navigation.animation.AnimatedNavHost
 import com.google.accompanist.navigation.animation.composable

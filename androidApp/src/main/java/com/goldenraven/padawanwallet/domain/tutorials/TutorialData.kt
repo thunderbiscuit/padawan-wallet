@@ -1,5 +1,5 @@
 /*
- * Copyright 2020-2023 thunderbiscuit and contributors.
+ * Copyright 2020-2024 thunderbiscuit and contributors.
  * Use of this source code is governed by the Apache 2.0 license that can be found in the ./LICENSE file.
  */
 
@@ -19,9 +19,6 @@ enum class ElementType {
 }
 
 val chapter1: List<Page> = listOf(
-    listOf(
-        ChapterElement(ElementType.BODY, R.string.C1_tagline)
-    ),
     listOf(
         ChapterElement(ElementType.TITLE, R.string.C1_title),
         ChapterElement(ElementType.BODY, R.string.t1_p1),
@@ -46,9 +43,6 @@ val chapter1: List<Page> = listOf(
 )
 
 val chapter2: List<Page> = listOf(
-    listOf(
-        ChapterElement(ElementType.BODY, R.string.C2_tagline)
-    ),
     listOf(
         ChapterElement(ElementType.TITLE, R.string.C2_title),
         ChapterElement(ElementType.BODY, R.string.t2_p1),
@@ -77,9 +71,6 @@ val chapter2: List<Page> = listOf(
 
 val chapter3: List<Page> = listOf(
     listOf(
-        ChapterElement(ElementType.BODY, R.string.C3_tagline)
-    ),
-    listOf(
         ChapterElement(ElementType.TITLE, R.string.C3_title),
         ChapterElement(ElementType.BODY, R.string.t3_p1),
         ChapterElement(ElementType.BODY, R.string.t3_p2),
@@ -87,9 +78,6 @@ val chapter3: List<Page> = listOf(
 )
 
 val chapter4: List<Page> = listOf(
-    listOf(
-        ChapterElement(ElementType.BODY, R.string.C4_tagline)
-    ),
     listOf(
         ChapterElement(ElementType.TITLE, R.string.C4_title),
         ChapterElement(ElementType.BODY, R.string.t4_p1),
@@ -109,9 +97,6 @@ val chapter4: List<Page> = listOf(
 
 val chapter5: List<Page> = listOf(
     listOf(
-        ChapterElement(ElementType.BODY, R.string.C5_tagline)
-    ),
-    listOf(
         ChapterElement(ElementType.TITLE, R.string.C5_title),
         ChapterElement(ElementType.BODY, R.string.t5_p1),
         ChapterElement(ElementType.BODY, R.string.t5_p2),
@@ -128,9 +113,6 @@ val chapter5: List<Page> = listOf(
 )
 
 val chapter6: List<Page> = listOf(
-    listOf(
-        ChapterElement(ElementType.BODY, R.string.C6_tagline)
-    ),
     listOf(
         ChapterElement(ElementType.TITLE, R.string.C6_title),
         ChapterElement(ElementType.BODY, R.string.t6_p1),
@@ -161,9 +143,6 @@ val chapter6: List<Page> = listOf(
 
 val chapter7: List<Page> = listOf(
     listOf(
-        ChapterElement(ElementType.BODY, R.string.C7_tagline)
-    ),
-    listOf(
         ChapterElement(ElementType.SUBTITLE, R.string.C7_title),
         ChapterElement(ElementType.BODY, R.string.C7_p1),
         ChapterElement(ElementType.BODY, R.string.C7_p2),
@@ -179,9 +158,6 @@ val chapter7: List<Page> = listOf(
 )
 
 val chapter8: List<Page> = listOf(
-    listOf(
-        ChapterElement(ElementType.BODY, R.string.C8_tagline)
-    ),
     listOf(
         ChapterElement(ElementType.TITLE, R.string.C8_title),
         ChapterElement(ElementType.BODY, R.string.C8_p1),
@@ -199,9 +175,6 @@ val chapter8: List<Page> = listOf(
 )
 
 val chapter9: List<Page> = listOf(
-    listOf(
-        ChapterElement(ElementType.BODY, R.string.C9_tagline)
-    ),
     listOf(
         ChapterElement(ElementType.SUBTITLE, R.string.t9_h1),
         ChapterElement(ElementType.BODY, R.string.t9_p1),

@@ -1,5 +1,5 @@
 /*
- * Copyright 2020-2023 thunderbiscuit and contributors.
+ * Copyright 2020-2024 thunderbiscuit and contributors.
  * Use of this source code is governed by the Apache 2.0 license that can be found in the ./LICENSE file.
  */
 
@@ -35,7 +35,7 @@ import com.goldenraven.padawanwallet.presentation.theme.PadawanTypography
 import com.goldenraven.padawanwallet.presentation.theme.padawan_theme_background_secondary
 import com.goldenraven.padawanwallet.presentation.theme.padawan_theme_button_primary
 import com.goldenraven.padawanwallet.presentation.theme.padawan_theme_navigation_bar_unselected
-import com.goldenraven.padawanwallet.viewmodels.ChaptersViewModel
+import com.goldenraven.padawanwallet.presentation.viewmodels.ChaptersViewModel
 import com.goldenraven.padawanwallet.presentation.ui.components.ShowBars
 import com.goldenraven.padawanwallet.utils.NavigationItem
 import com.goldenraven.padawanwallet.presentation.navigation.WalletNavigation
@@ -57,7 +57,11 @@ internal fun HomeScreen(walletViewModel: WalletViewModel, chaptersViewModel: Cha
         bottomBar = { BottomNavigationBar(navControllerWalletNavigation) }
     ) { paddingValues ->
         Box(modifier = Modifier.padding(paddingValues)) {
-            WalletNavigation(navControllerWalletNavigation = navControllerWalletNavigation, walletViewModel = walletViewModel, chaptersViewModel = chaptersViewModel)
+            WalletNavigation(
+                navControllerWalletNavigation = navControllerWalletNavigation,
+                walletViewModel = walletViewModel,
+                chaptersViewModel = chaptersViewModel
+            )
         }
     }
 }

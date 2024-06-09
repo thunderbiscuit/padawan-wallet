@@ -11,13 +11,16 @@ import SwiftUI
 @main
 struct PadawanWalletApp: App {
     @AppStorage("isOnboarding") var isOnboarding: Bool = true
+    @State private var walletViewModel = WalletViewModel()
 
     var body: some Scene {
         WindowGroup {
             if isOnboarding {
-                WelcomeView().environmentObject(WalletViewModel())
+                WelcomeView()
+                    .environment(walletViewModel)
             } else {
-                ContentView().environmentObject(WalletViewModel())
+                ContentView()
+                    .environment(walletViewModel)
             }
         }
     }

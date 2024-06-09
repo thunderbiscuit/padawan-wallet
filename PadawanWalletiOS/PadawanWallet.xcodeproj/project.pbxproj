@@ -25,6 +25,7 @@
 		BFE0DB192BDA6BCE00BF19E3 /* PadawanWalletTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFE0DB182BDA6BCE00BF19E3 /* PadawanWalletTests.swift */; };
 		BFE0DB232BDA6BCE00BF19E3 /* PadawanWalletUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFE0DB222BDA6BCE00BF19E3 /* PadawanWalletUITests.swift */; };
 		BFE0DB252BDA6BCE00BF19E3 /* PadawanWalletUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFE0DB242BDA6BCE00BF19E3 /* PadawanWalletUITestsLaunchTests.swift */; };
+		ED3CAF442BEC355200C81D65 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = ED3CAF432BEC355200C81D65 /* Localizable.xcstrings */; };
 		ED48F4842BDDB8D30014ACF7 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED48F4832BDDB8D30014ACF7 /* String+Extensions.swift */; };
 		ED48F4862BDDB9560014ACF7 /* Int+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED48F4852BDDB9560014ACF7 /* Int+Extensions.swift */; };
 		EDECB89D2BDC7F2C00BB24D0 /* BDKError+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDECB89C2BDC7F2C00BB24D0 /* BDKError+Extensions.swift */; };
@@ -66,6 +67,7 @@
 		BFE0DB1E2BDA6BCE00BF19E3 /* PadawanWalletUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PadawanWalletUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BFE0DB222BDA6BCE00BF19E3 /* PadawanWalletUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PadawanWalletUITests.swift; sourceTree = "<group>"; };
 		BFE0DB242BDA6BCE00BF19E3 /* PadawanWalletUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PadawanWalletUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		ED3CAF432BEC355200C81D65 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		ED48F4832BDDB8D30014ACF7 /* String+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
 		ED48F4852BDDB9560014ACF7 /* Int+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Int+Extensions.swift"; sourceTree = "<group>"; };
 		EDECB89C2BDC7F2C00BB24D0 /* BDKError+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "BDKError+Extensions.swift"; sourceTree = "<group>"; };
@@ -102,6 +104,7 @@
 		BFE0DAFB2BDA6BCD00BF19E3 = {
 			isa = PBXGroup;
 			children = (
+				ED3CAF432BEC355200C81D65 /* Localizable.xcstrings */,
 				BFE0DB062BDA6BCD00BF19E3 /* PadawanWallet */,
 				BFE0DB172BDA6BCE00BF19E3 /* PadawanWalletTests */,
 				BFE0DB212BDA6BCE00BF19E3 /* PadawanWalletUITests */,
@@ -265,6 +268,9 @@
 			knownRegions = (
 				en,
 				Base,
+				fr,
+				"pt-PT",
+				es,
 			);
 			mainGroup = BFE0DAFB2BDA6BCD00BF19E3;
 			packageReferences = (
@@ -289,6 +295,7 @@
 			files = (
 				BFE0DB0F2BDA6BCE00BF19E3 /* Preview Assets.xcassets in Resources */,
 				BFE0DB0C2BDA6BCE00BF19E3 /* Assets.xcassets in Resources */,
+				ED3CAF442BEC355200C81D65 /* Localizable.xcstrings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

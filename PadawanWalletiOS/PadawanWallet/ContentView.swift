@@ -12,7 +12,7 @@ struct ContentView: View {
     
 // MARK: PROPERTIES
     
-    @EnvironmentObject var viewModel: WalletViewModel
+    @Environment(WalletViewModel.self) private var walletViewModel
     @State var selectedTab: Int = 0
 
     enum Tab: Int {
@@ -29,14 +29,14 @@ struct ContentView: View {
                 WalletView(selectedTab: $selectedTab)
                     .tabItem {
                         Image(systemName: "bitcoinsign.square.fill")
-                        Text("Wallet")
+                        Text("bottom_nav_wallet")
                     }
                     .tag(Tab.firstTab.rawValue)
                 
                 LearnView(selectedTab: $selectedTab)
                     .tabItem {
                         Image(systemName: "graduationcap.fill")
-                        Text("Learn")
+                        Text("bottom_nav_chapters")
                     }
                     .tag(Tab.secondTab.rawValue)
                 
@@ -45,7 +45,7 @@ struct ContentView: View {
                     .foregroundColor(.blue)
                     .tabItem{
                         Image(systemName: "text.justify.trailing")
-                        Text("Menu")
+                        Text("bottom_nav_settings")
                     }
                     .tag(Tab.thirdTab.rawValue)
             }
@@ -54,7 +54,7 @@ struct ContentView: View {
 //            })
         }
         .onAppear{
-            viewModel.load()
+            walletViewModel.load()
         }
     }
 }
@@ -62,8 +62,9 @@ struct ContentView: View {
 // MARK: PREVIEW
 
 struct ContentView_Previews: PreviewProvider {
+    
     static var previews: some View {
         ContentView()
-            .environmentObject(WalletViewModel())
+            .environment(WalletViewModel())
     }
 }

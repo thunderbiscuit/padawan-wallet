@@ -15,7 +15,7 @@ let filter = CIFilter.qrCodeGenerator()
 
 struct ReceiveView: View {
     
-    @EnvironmentObject var viewModel: WalletViewModel
+    @Environment(WalletViewModel.self) private var walletViewModel
     
     @Binding var navigationPath: [String]
     
@@ -28,7 +28,7 @@ struct ReceiveView: View {
     }
     
     func getAddress() {
-        switch viewModel.state {
+        switch walletViewModel.state {
             case .loaded(let wallet, _):
                 do {
                     let addressInfo = try wallet.getAddress(addressIndex: AddressIndex.lastUnused)
@@ -86,7 +86,7 @@ struct ReceiveView: View {
                 
                 Button(action: {
                     UIPasteboard.general.string = address}) {
-                        Text("Copy to clipboard")
+                        Text("copy_to_clipboard_image")
                     }
             }
             Spacer()
@@ -95,7 +95,7 @@ struct ReceiveView: View {
                 getAddress()
                 navigationPath.removeAll() //return to calling view
             }) {
-                Text("Done")
+                Text("back_to_wallet")
                     //.font(.system(size: 16, design: .monospaced))
                     .font(.title)
                     .fontWeight(.bold)
@@ -110,19 +110,19 @@ struct ReceiveView: View {
             
             Spacer()
         }
-        .navigationTitle("Receive Bitcoin")
+        .navigationTitle("receive_bitcoin")
         .padding(10)
         //.modifier(BackButtonMod())
         .onAppear(perform: {
             getAddress()
-            viewModel.sync()
+            walletViewModel.sync()
         })
     }
 }
 
 struct ReceiveView_Previews: PreviewProvider {
     static var previews: some View {
-        ReceiveView(navigationPath: .constant (["Receive ↓"]))
-            .environmentObject(WalletViewModel())
+        ReceiveView(navigationPath: .constant (["receive"]))
+            .environment(WalletViewModel())
     }
 }

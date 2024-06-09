@@ -1,5 +1,5 @@
 /*
- * Copyright 2020-2023 thunderbiscuit and contributors.
+ * Copyright 2020-2024 thunderbiscuit and contributors.
  * Use of this source code is governed by the Apache 2.0 license that can be found in the ./LICENSE file.
  */
 
@@ -34,15 +34,17 @@ import com.goldenraven.padawanwallet.utils.Screen
 import com.goldenraven.padawanwallet.presentation.ui.components.TutorialCard
 import com.goldenraven.padawanwallet.utils.ScreenSizeWidth
 import com.goldenraven.padawanwallet.utils.getScreenSizeWidth
-import com.goldenraven.padawanwallet.viewmodels.ChaptersViewModel
-
-// TODO: Remember "next up" chapter
+import com.goldenraven.padawanwallet.presentation.viewmodels.mvi.ChaptersRootState
+import com.goldenraven.padawanwallet.presentation.viewmodels.mvi.ChaptersScreensAction
 
 private const val TAG = "ChaptersRootScreen"
 
 @Composable
-internal fun ChaptersRootScreen(chaptersViewModel: ChaptersViewModel, navController: NavController) {
-    val completedChapters = chaptersViewModel.getCompletedChapters()
+internal fun ChaptersRootScreen(
+    state: ChaptersRootState,
+    onAction: (ChaptersScreensAction) -> Unit,
+    navController: NavController,
+) {
     val padding = when (getScreenSizeWidth(LocalConfiguration.current.screenWidthDp)) {
         ScreenSizeWidth.Small -> 12.dp
         ScreenSizeWidth.Phone -> 18.dp
@@ -72,54 +74,81 @@ internal fun ChaptersRootScreen(chaptersViewModel: ChaptersViewModel, navControl
             SectionDivider()
             TutorialCard(
                 title = "1. What is the Bitcoin testnet?",
-                done = completedChapters[1] ?: false,
-                onClick = { navController.navigate(route = "${Screen.ChapterScreen.route}/1") }
+                done = state.completedChapters[1] ?: false,
+                onClick = {
+                    onAction(ChaptersScreensAction.OpenChapter(1))
+                    navController.navigate(Screen.ChapterScreen.route)
+                }
             )
             TutorialCard(
                 title = "2. Receiving bitcoin",
-                done = completedChapters[2] ?: false,
-                onClick = { navController.navigate(route = "${Screen.ChapterScreen.route}/2") }
+                done = state.completedChapters[2] ?: false,
+                onClick = {
+                    onAction(ChaptersScreensAction.OpenChapter(2))
+                    navController.navigate(Screen.ChapterScreen.route)
+                }
             )
             TutorialCard(
                 title = "3. Sending bitcoin",
-                done = completedChapters[3] ?: false,
-                onClick = { navController.navigate(route = "${Screen.ChapterScreen.route}/3") }
+                done = state.completedChapters[3] ?: false,
+                onClick = {
+                    onAction(ChaptersScreensAction.OpenChapter(3))
+                    navController.navigate(Screen.ChapterScreen.route)
+                }
             )
 
             SectionTitle("Transactions", false)
             SectionDivider()
             TutorialCard(
                 title = "4. What is the mempool?",
-                done = completedChapters[4] ?: false,
-                onClick = { navController.navigate(route = "${Screen.ChapterScreen.route}/4") }
+                done = state.completedChapters[4] ?: false,
+                onClick = {
+                    onAction(ChaptersScreensAction.OpenChapter(4))
+                    navController.navigate(Screen.ChapterScreen.route)
+                }
             )
             TutorialCard(
                 title = "5. What are transaction fees?",
-                done = completedChapters[5] ?: false,
-                onClick = { navController.navigate(route = "${Screen.ChapterScreen.route}/5") }
+                done = state.completedChapters[5] ?: false,
+                onClick = {
+                    onAction(ChaptersScreensAction.OpenChapter(5))
+                    navController.navigate(Screen.ChapterScreen.route)
+                }
             )
             TutorialCard(
                 title = "6. Bitcoin units",
-                done = completedChapters[6] ?: false,
-                onClick = { navController.navigate(route = "${Screen.ChapterScreen.route}/6") }
+                done = state.completedChapters[6] ?: false,
+                onClick = {
+                    onAction(ChaptersScreensAction.OpenChapter(6))
+                    navController.navigate(Screen.ChapterScreen.route)
+                }
             )
 
             SectionTitle("Wallets", false)
             SectionDivider()
             TutorialCard(
                 title = "7. What is a recovery phrase?",
-                done = completedChapters[7] ?: false,
-                onClick = { navController.navigate(route = "${Screen.ChapterScreen.route}/7") }
+                done = state.completedChapters[7] ?: false,
+                onClick = {
+                    onAction(ChaptersScreensAction.OpenChapter(7))
+                    navController.navigate(Screen.ChapterScreen.route)
+                }
             )
             TutorialCard(
                 title = "8. Recovering your wallet",
-                done = completedChapters[8] ?: false,
-                onClick = { navController.navigate(route = "${Screen.ChapterScreen.route}/8") }
+                done = state.completedChapters[8] ?: false,
+                onClick = {
+                    onAction(ChaptersScreensAction.OpenChapter(8))
+                    navController.navigate(Screen.ChapterScreen.route)
+                }
             )
             TutorialCard(
                 title = "9. The different types of wallets",
-                done = completedChapters[9] ?: false,
-                onClick = { navController.navigate(route = "${Screen.ChapterScreen.route}/9") }
+                done = state.completedChapters[9] ?: false,
+                onClick = {
+                    onAction(ChaptersScreensAction.OpenChapter(9))
+                    navController.navigate(Screen.ChapterScreen.route)
+                }
             )
         }
     }

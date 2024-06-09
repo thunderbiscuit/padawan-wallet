@@ -10,7 +10,7 @@ import SwiftUI
 
 struct RecoverView: View {
     
-    @EnvironmentObject var viewModel: WalletViewModel
+    @Environment(WalletViewModel.self) private var walletViewModel
     @State private var words = Array(repeating: "", count: 12)
 
     @Environment(\.dismiss) var dismiss
@@ -20,10 +20,10 @@ struct RecoverView: View {
         VStack {
             
             VStack {
-                Text("Recover a wallet")
+                Text("recover_a_wallet")
                     .bold()
                     .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
-                Text("Enter your 12 word recovery phrase below")
+                Text("enter_your_12_words")
             }
             
             VStack {
@@ -31,7 +31,7 @@ struct RecoverView: View {
                 ScrollView {
                     ForEach(0..<12) { i in
                         TextField(
-                            "Word \(i + 1)",
+                            "word \(i + 1)",
                             text: $words[i]
                         )
                     }
@@ -48,7 +48,7 @@ struct RecoverView: View {
                     if !words.isEmpty {
                         do {
                             let joinedWords = words.joined(separator: " ")
-                            try viewModel.createWallet(words: joinedWords)
+                            try walletViewModel.createWallet(words: joinedWords)
                         } catch {
                             //                       self.walletViewError = .Generic(message: "Error Getting Transactions")
                             print("error")
@@ -56,7 +56,7 @@ struct RecoverView: View {
                     }
                     dismiss()
                 }, label: {
-                    Text("Recover Wallet")
+                    Text("recover_wallet")
                 })
                 //.font(.system(size: 16, design: .monospaced))
                 .font(.title)
@@ -73,7 +73,7 @@ struct RecoverView: View {
                 Button(action: {
                     dismiss()
                 }, label: {
-                    Text("Cancel")
+                    Text("intro_dialog_negative")
                 })
                 //.font(.system(size: 16, design: .monospaced))
                 .font(.title)
@@ -94,5 +94,6 @@ struct RecoverView: View {
 struct RecoverView_Previews: PreviewProvider {
     static var previews: some View {
         RecoverView()
+            .environment(WalletViewModel())
     }
 }
