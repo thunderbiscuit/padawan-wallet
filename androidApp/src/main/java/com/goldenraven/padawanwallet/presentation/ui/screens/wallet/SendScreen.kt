@@ -38,9 +38,7 @@ import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.material3.rememberBottomSheetScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
@@ -50,7 +48,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalConfiguration
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.contentDescription
@@ -81,7 +78,8 @@ import com.goldenraven.padawanwallet.presentation.ui.components.VerticalTextFiel
 import com.goldenraven.padawanwallet.presentation.ui.components.standardBorder
 import com.goldenraven.padawanwallet.utils.ScreenSizeWidth
 import com.goldenraven.padawanwallet.utils.getScreenSizeWidth
-import com.goldenraven.padawanwallet.presentation.viewmodels.WalletViewModel
+import com.goldenraven.padawanwallet.presentation.viewmodels.mvi.WalletAction
+import com.goldenraven.padawanwallet.presentation.viewmodels.mvi.WalletState
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 import org.bitcoindevkit.TxBuilderResult
@@ -91,27 +89,19 @@ private const val TAG = "SendScreen"
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterial3Api::class)
 @Composable
-internal fun SendScreen(navController: NavHostController, walletViewModel: WalletViewModel) {
+internal fun SendScreen(
+    state: WalletState,
+    onAction: (WalletAction) -> Unit,
+    navController: NavHostController,
+) {
 
     val coroutineScope = rememberCoroutineScope()
     val bottomSheetScaffoldState: BottomSheetScaffoldState = rememberBottomSheetScaffoldState()
 
-    val balance by walletViewModel.balance.collectAsState()
     val recipientAddress: MutableState<String> = rememberSaveable { mutableStateOf("") }
     val amount: MutableState<String> = rememberSaveable { mutableStateOf("") }
     val feeRate: MutableState<String> = rememberSaveable { mutableStateOf("1") }
     val txBuilderResult: MutableState<TxBuilderResult?> = remember { mutableStateOf(null) }
-
-    val qrCodeScanner = navController
-        .currentBackStackEntry
-        ?.savedStateHandle
-        ?.getLiveData<String>("BTC_Address")
-        ?.observeAsState()
-
-    qrCodeScanner?.value.let {
-        if (it != null) recipientAddress.value = it
-        navController.currentBackStackEntry?.savedStateHandle?.remove<String>("BTC_Address")
-    }
 
     BottomSheetScaffold(
         sheetShape = RoundedCornerShape(topEnd = 20.dp, topStart = 20.dp),
@@ -120,13 +110,15 @@ internal fun SendScreen(navController: NavHostController, walletViewModel: Walle
         sheetDragHandle = null,
         sheetContent = {
             TransactionConfirmation(
+                state,
+                onAction,
                 txBuilderResult,
                 recipientAddress,
                 amount,
                 bottomSheetScaffoldState,
                 coroutineScope,
                 navController,
-                walletViewModel
+                // walletViewModel
             )
         },
     ) {
@@ -163,7 +155,7 @@ internal fun SendScreen(navController: NavHostController, walletViewModel: Walle
                     }
                     .verticalScroll(scrollState)) {
                     Row(modifier = Modifier.padding(top = 8.dp, bottom = 8.dp)) {
-                        val balanceText = "${stringResource(id = R.string.balance)} $balance sat"
+                        val balanceText = "${stringResource(id = R.string.balance)} ${state.balance} sat"
 
                         Text(
                             text = stringResource(R.string.amount),
@@ -349,15 +341,15 @@ internal fun SendScreen(navController: NavHostController, walletViewModel: Walle
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TransactionConfirmation(
+    state: WalletState,
+    onAction: (WalletAction) -> Unit,
     txBuilderResult: MutableState<TxBuilderResult?>,
     recipientAddress: MutableState<String>,
     amount: MutableState<String>,
     scaffoldState: BottomSheetScaffoldState,
     scope: CoroutineScope,
     navController: NavHostController,
-    viewModel: WalletViewModel,
 ) {
-    val context = LocalContext.current // TODO: is this the right place to get this context?
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -450,8 +442,7 @@ fun TransactionConfirmation(
         Button(
             onClick = {
                 val psbt = txBuilderResult.value?.psbt ?: throw Exception()
-                viewModel.updateConnectivityStatus(context)
-                if (!viewModel.isOnline.value) {
+                if (!state.isOnline) {
                     scope.launch {
                          scaffoldState.snackbarHostState.showSnackbar(
                             message = snackbarMessage,
@@ -459,11 +450,7 @@ fun TransactionConfirmation(
                         )
                     }
                 } else {
-                    viewModel.broadcastTransaction(
-                        psbt,
-                        scaffoldState.snackbarHostState,
-                        txBroadcastSuccess
-                    )
+                    onAction(WalletAction.Broadcast(psbt))
                     navController.popBackStack()
                 }
             },

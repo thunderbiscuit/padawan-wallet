@@ -29,7 +29,6 @@ import org.bitcoindevkit.WordCount
 private const val TAG = "Wallet"
 
 object Wallet {
-
     private const val electrumURL: String = "ssl://electrum.blockstream.info:60002"
     private lateinit var wallet: org.bitcoindevkit.Wallet
     private lateinit var path: String

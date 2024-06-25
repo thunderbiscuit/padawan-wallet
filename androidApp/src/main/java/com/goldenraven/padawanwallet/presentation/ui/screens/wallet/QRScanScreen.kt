@@ -51,13 +51,17 @@ import com.goldenraven.padawanwallet.R
 import com.goldenraven.padawanwallet.presentation.theme.md_theme_dark_background
 import com.goldenraven.padawanwallet.presentation.theme.standardShadow
 import com.goldenraven.padawanwallet.presentation.ui.components.standardBorder
+import com.goldenraven.padawanwallet.presentation.viewmodels.mvi.WalletAction
 import com.goldenraven.padawanwallet.utils.QRCodeAnalyzer
 import org.bitcointools.bip21.Bip21URI
 
 private const val TAG = "QRScanScreen"
 
 @Composable
-internal fun QRScanScreen(navController: NavHostController) {
+internal fun QRScanScreen(
+    onAction: (WalletAction) -> Unit,
+    navController: NavHostController
+) {
 
     val context = LocalContext.current
     val lifecycleOwner = LocalLifecycleOwner.current
@@ -85,7 +89,6 @@ internal fun QRScanScreen(navController: NavHostController) {
 
     Scaffold(
         modifier = Modifier.fillMaxSize(),
-        // backgroundColor = md_theme_dark_background,
         snackbarHost = { SnackbarHost(snackbarHostState) }
     ) { padding ->
         ConstraintLayout(
@@ -131,9 +134,10 @@ internal fun QRScanScreen(navController: NavHostController) {
                                                 it
                                             }
 
-                                            navController.previousBackStackEntry
-                                                ?.savedStateHandle
-                                                ?.set("BTC_Address", address)
+                                            onAction(WalletAction.QRCodeScanned(address))
+                                            // navController.previousBackStackEntry
+                                            //     ?.savedStateHandle
+                                            //     ?.set("BTC_Address", address)
                                             imageAnalysis.clearAnalyzer()
                                             navController.popBackStack()
                                         }

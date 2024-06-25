@@ -10,6 +10,7 @@ import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.core.tween
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
+import com.goldenraven.padawanwallet.presentation.ui.WalletCreateType
 import com.goldenraven.padawanwallet.utils.Screen
 import com.goldenraven.padawanwallet.presentation.ui.screens.SplashScreen
 import com.goldenraven.padawanwallet.presentation.ui.screens.intro.OnboardingScreen
@@ -20,7 +21,7 @@ import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
-fun IntroNavigation(onBuildWalletButtonClicked: (com.goldenraven.padawanwallet.presentation.ui.WalletCreateType) -> Unit) {
+fun IntroNavigation(onBuildWalletButtonClicked: (WalletCreateType) -> Unit) {
     val navController: NavHostController = rememberAnimatedNavController()
     val animationDuration = 400
 

@@ -35,11 +35,9 @@ import com.goldenraven.padawanwallet.presentation.theme.PadawanTypography
 import com.goldenraven.padawanwallet.presentation.theme.padawan_theme_background_secondary
 import com.goldenraven.padawanwallet.presentation.theme.padawan_theme_button_primary
 import com.goldenraven.padawanwallet.presentation.theme.padawan_theme_navigation_bar_unselected
-import com.goldenraven.padawanwallet.presentation.viewmodels.ChaptersViewModel
 import com.goldenraven.padawanwallet.presentation.ui.components.ShowBars
 import com.goldenraven.padawanwallet.utils.NavigationItem
 import com.goldenraven.padawanwallet.presentation.navigation.WalletNavigation
-import com.goldenraven.padawanwallet.presentation.viewmodels.WalletViewModel
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
@@ -47,7 +45,7 @@ private const val TAG = "HomeScreen"
 
 @OptIn(androidx.compose.animation.ExperimentalAnimationApi::class)
 @Composable
-internal fun HomeScreen(walletViewModel: WalletViewModel, chaptersViewModel: ChaptersViewModel) {
+internal fun HomeScreen() {
     val navControllerWalletNavigation: NavHostController = rememberAnimatedNavController()
     // the splash screen hides the system bars
     // we need to bring them back on before continuing
@@ -58,9 +56,7 @@ internal fun HomeScreen(walletViewModel: WalletViewModel, chaptersViewModel: Cha
     ) { paddingValues ->
         Box(modifier = Modifier.padding(paddingValues)) {
             WalletNavigation(
-                navControllerWalletNavigation = navControllerWalletNavigation,
-                walletViewModel = walletViewModel,
-                chaptersViewModel = chaptersViewModel
+                navHostController = navControllerWalletNavigation,
             )
         }
     }

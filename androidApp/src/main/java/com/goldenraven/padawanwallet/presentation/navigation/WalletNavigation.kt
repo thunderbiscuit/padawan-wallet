@@ -11,6 +11,7 @@ import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.runtime.Composable
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import com.goldenraven.padawanwallet.utils.Screen
 import com.goldenraven.padawanwallet.presentation.ui.screens.chapters.ChapterScreen
@@ -26,26 +27,25 @@ import com.goldenraven.padawanwallet.presentation.ui.screens.wallet.ReceiveScree
 import com.goldenraven.padawanwallet.presentation.ui.screens.wallet.SendScreen
 import com.goldenraven.padawanwallet.presentation.ui.screens.wallet.TransactionScreen
 import com.goldenraven.padawanwallet.presentation.ui.screens.wallet.WalletRootScreen
-import com.goldenraven.padawanwallet.presentation.viewmodels.ReceiveViewModel
 import com.goldenraven.padawanwallet.presentation.viewmodels.WalletViewModel
+import com.goldenraven.padawanwallet.presentation.viewmodels.ReceiveViewModel
 import com.google.accompanist.navigation.animation.AnimatedNavHost
 import com.google.accompanist.navigation.animation.composable
 
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun WalletNavigation(
-    navControllerWalletNavigation: NavHostController,
-    walletViewModel: WalletViewModel,
-    chaptersViewModel: ChaptersViewModel
+    navHostController: NavHostController,
 ) {
+    val walletViewModel: WalletViewModel = viewModel()
+    val chaptersViewModel: ChaptersViewModel = viewModel()
+    val receiveViewModel: ReceiveViewModel = viewModel()
     val animationDuration = 400
-    val receiveViewModel = ReceiveViewModel()
 
     AnimatedNavHost(
-        navController = navControllerWalletNavigation,
+        navController = navHostController,
         startDestination = Screen.WalletRootScreen.route,
     ) {
-
         // Wallet
         composable(
             route = Screen.WalletRootScreen.route,
@@ -89,7 +89,13 @@ fun WalletNavigation(
                     slideOutOfContainer(AnimatedContentScope.SlideDirection.Start, animationSpec = tween(animationDuration))
                 }
             }
-        ) { WalletRootScreen(navController = navControllerWalletNavigation, walletViewModel = walletViewModel) }
+        ) {
+            WalletRootScreen(
+                state = walletViewModel.walletState,
+                onAction = walletViewModel::onAction,
+                navController = navHostController,
+            )
+        }
 
 
         // Receive
@@ -109,7 +115,7 @@ fun WalletNavigation(
             }
         ) {
             ReceiveScreen(
-                navController = navControllerWalletNavigation,
+                navController = navHostController,
                 receiveViewModel.state,
                 receiveViewModel::onAction
             )
@@ -144,7 +150,14 @@ fun WalletNavigation(
                     else           -> slideOutOfContainer(AnimatedContentScope.SlideDirection.Down, animationSpec = tween(animationDuration))
                 }
             },
-        ) { SendScreen(navController = navControllerWalletNavigation, walletViewModel = walletViewModel) }
+        ) {
+            SendScreen(
+                state = walletViewModel.walletState,
+                onAction = walletViewModel::onAction,
+                navController = navHostController,
+                // walletViewModel = walletViewModel
+            )
+        }
 
 
         // Transaction screen
@@ -162,9 +175,8 @@ fun WalletNavigation(
             popExitTransition = {
                 slideOutOfContainer(AnimatedContentScope.SlideDirection.Down, animationSpec = tween(animationDuration))
             }
-        ) { backStackEntry ->
-            backStackEntry.arguments?.getString("txid")?.let {
-                TransactionScreen(navControllerWalletNavigation, backStackEntry.arguments?.getString("txid"))
+        ) { backStackEntry -> backStackEntry.arguments?.getString("txid")?.let {
+                TransactionScreen(navHostController, backStackEntry.arguments?.getString("txid"))
             }
         }
 
@@ -183,7 +195,7 @@ fun WalletNavigation(
             popExitTransition = {
                 slideOutOfContainer(AnimatedContentScope.SlideDirection.Down, animationSpec = tween(animationDuration))
             }
-        ) { QRScanScreen(navController = navControllerWalletNavigation) }
+        ) { QRScanScreen(onAction = walletViewModel::onAction, navController = navHostController) }
 
 
         // Chapters home
@@ -217,7 +229,7 @@ fun WalletNavigation(
                     else -> fadeOut(animationSpec = tween(300))
                 }
             }
-        ) { ChaptersRootScreen(chaptersViewModel.rootState, chaptersViewModel::onAction, navControllerWalletNavigation) }
+        ) { ChaptersRootScreen(chaptersViewModel.rootState, chaptersViewModel::onAction, navHostController) }
 
 
         // Specific chapters
@@ -235,7 +247,7 @@ fun WalletNavigation(
             popExitTransition = {
                 slideOutOfContainer(AnimatedContentScope.SlideDirection.Down, animationSpec = tween(animationDuration))
             }
-        ) { ChapterScreen(chaptersViewModel.pageState, chaptersViewModel::onAction, navControllerWalletNavigation) }
+        ) { ChapterScreen(chaptersViewModel.pageState, chaptersViewModel::onAction, navHostController) }
 
 
         // Settings
@@ -269,7 +281,7 @@ fun WalletNavigation(
         ) {
             SettingsRootScreen(
                 onAction = chaptersViewModel::onAction,
-                navController = navControllerWalletNavigation
+                navController = navHostController
             )
         }
 
@@ -289,7 +301,7 @@ fun WalletNavigation(
             popExitTransition = {
                 slideOutOfContainer(AnimatedContentScope.SlideDirection.Down, animationSpec = tween(animationDuration))
             }
-        ) { AboutScreen(navController = navControllerWalletNavigation) }
+        ) { AboutScreen(navController = navHostController) }
 
 
         // Recovery phrase
@@ -307,7 +319,7 @@ fun WalletNavigation(
             popExitTransition = {
                 slideOutOfContainer(AnimatedContentScope.SlideDirection.Down, animationSpec = tween(animationDuration))
             }
-        ) { RecoveryPhraseScreen(navController = navControllerWalletNavigation) }
+        ) { RecoveryPhraseScreen(navController = navHostController) }
 
 
         // Send coins back
@@ -325,7 +337,7 @@ fun WalletNavigation(
             popExitTransition = {
                 slideOutOfContainer(AnimatedContentScope.SlideDirection.Down, animationSpec = tween(animationDuration))
             }
-        ) { SendCoinsBackScreen(navController = navControllerWalletNavigation) }
+        ) { SendCoinsBackScreen(navController = navHostController) }
 
         // Language
         composable(
@@ -342,6 +354,6 @@ fun WalletNavigation(
             popExitTransition = {
                 slideOutOfContainer(AnimatedContentScope.SlideDirection.Down, animationSpec = tween(animationDuration))
             }
-        ) { LanguagesScreen(navController = navControllerWalletNavigation) }
+        ) { LanguagesScreen(navController = navHostController) }
     }
 }

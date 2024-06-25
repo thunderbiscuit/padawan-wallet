@@ -1,8 +1,3 @@
-/*
- * Copyright 2020-2024 thunderbiscuit and contributors.
- * Use of this source code is governed by the Apache 2.0 license that can be found in the ./LICENSE file.
- */
-
 package com.goldenraven.padawanwallet.presentation.viewmodels
 
 import android.app.Application
@@ -10,15 +5,12 @@ import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.util.Log
-import android.widget.Toast
-import androidx.compose.material3.SnackbarDuration
-import androidx.compose.material3.SnackbarHostState
-import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.goldenraven.padawanwallet.BuildConfig
-import com.goldenraven.padawanwallet.R
 import com.goldenraven.padawanwallet.domain.bitcoin.Wallet
 import com.goldenraven.padawanwallet.domain.bitcoin.WalletRepository
 import com.goldenraven.padawanwallet.domain.tx.Tx
@@ -27,6 +19,9 @@ import com.goldenraven.padawanwallet.domain.tx.TxDatabase
 import com.goldenraven.padawanwallet.domain.tx.TxRepository
 import com.goldenraven.padawanwallet.padawankmp.FaucetCall
 import com.goldenraven.padawanwallet.padawankmp.FaucetService
+import com.goldenraven.padawanwallet.presentation.viewmodels.mvi.MessageType
+import com.goldenraven.padawanwallet.presentation.viewmodels.mvi.WalletAction
+import com.goldenraven.padawanwallet.presentation.viewmodels.mvi.WalletState
 import com.goldenraven.padawanwallet.utils.SatoshisIn
 import com.goldenraven.padawanwallet.utils.SatoshisOut
 import com.goldenraven.padawanwallet.utils.isPayment
@@ -34,105 +29,154 @@ import com.goldenraven.padawanwallet.utils.netSendWithoutFees
 import com.goldenraven.padawanwallet.utils.timestampToString
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
-import org.bitcoindevkit.AddressInfo
 import org.bitcoindevkit.PartiallySignedTransaction
 
 private const val TAG = "WalletViewModel"
 
-class WalletViewModel(
-    application: Application,
-) : AndroidViewModel(application) {
-    val readAllData: MutableStateFlow<List<Tx>> = MutableStateFlow<List<Tx>>(emptyList<Tx>())
+class WalletViewModel(application: Application) : AndroidViewModel(application) {
+    private var txList: List<Tx> by mutableStateOf(emptyList())
+    private var isOnline: Boolean by mutableStateOf(false)
+    private var qrCode: String? by mutableStateOf(null)
     private val repository: TxRepository
-    var openFaucetDialog: MutableState<Boolean> = mutableStateOf(false)
-
-    private var _balance: MutableStateFlow<ULong> = MutableStateFlow(0u)
-    val balance: StateFlow<ULong>
-        get() = _balance
-
-    private val _isRefreshing: MutableStateFlow<Boolean> = MutableStateFlow(false)
-    val isRefreshing: StateFlow<Boolean>
-        get() = _isRefreshing.asStateFlow()
-
-    var isOnline: MutableStateFlow<Boolean> = MutableStateFlow(false)
 
     init {
-        Log.i(TAG, "The WalletScreen viewmodel is being initialized...")
-
+        isOnline = updateNetworkStatus(application)
+        firstSync()
         val txDao: TxDao = TxDatabase.getDatabase(application).txDao()
         repository = TxRepository(txDao)
         viewModelScope.launch {
             repository.readAllData
                 .collect { result ->
-                    readAllData.value = result
+                    txList = result
                 }
         }
+    }
 
-        updateConnectivityStatus(application)
+    var walletState: WalletState by mutableStateOf(WalletState(0u, txList, isOnline, currentlySyncing = false))
+        private set
 
-        // app will sync on initialization of the viewmodel after an 4 seconds delay
-        viewModelScope.launch {
-            delay(4000)
-            refresh(application)
+    fun onAction(action: WalletAction) {
+        when (action) {
+            is WalletAction.Sync -> sync()
+            is WalletAction.RequestCoins -> requestCoins()
+            is WalletAction.CheckNetworkStatus -> updateNetworkStatus()
+            is WalletAction.QRCodeScanned -> updateQRCode(action.address)
+            is WalletAction.Broadcast -> broadcastTransaction(action.tx)
+            is WalletAction.UiMessageDelivered -> uiMessageDelivered()
         }
     }
 
-    // Faucet Code
-    fun onPositiveDialogClick() {
-        requestTestnetCoins(getLastUnusedAddress())
-        faucetCallDone()
-        openFaucetDialog.value = false
-    }
+    private fun sync() {
+        if (isOnline) {
+            walletState = walletState.copy(currentlySyncing = true)
 
-    fun onNegativeDialogClick() {
-        openFaucetDialog.value = false
-    }
-
-    private fun faucetCallDone() {
-        WalletRepository.faucetCallDone()
-    }
-
-    private fun getLastUnusedAddress(): AddressInfo {
-        val address = Wallet.getLastUnusedAddress()
-        // _address.value = address.address
-        return address
-    }
-
-    private suspend fun updateBalance() {
-        Wallet.sync()
-        withContext(Dispatchers.Main) {
-            _balance.value = Wallet.getBalance()
-        }
-    }
-
-    // Refreshing & Syncing
-    fun refresh(context: Context) {
-        val pendingString = context.getString(R.string.pending)
-        if (isOnline.value) {
-            // if (!Wallet.blockchainIsInitialized()) { Wallet.createBlockchain() }
             viewModelScope.launch(Dispatchers.IO) {
-                _isRefreshing.value = true
                 updateBalance()
-                syncTransactionHistory(pendingString)
-            }.invokeOnCompletion {
-                 _isRefreshing.value = false
+                syncTransactionHistory()
+                walletState = walletState.copy(currentlySyncing = false)
+            }
+        }
+        // else {
+        //     Toast.makeText(
+        //         context,
+        //         context.getString(R.string.no_internet_access), Toast.LENGTH_LONG
+        //     ).show()
+        // }
+    }
+
+    // TODO: Not sure about this getApplication() call
+    private fun updateNetworkStatus(context: Context = getApplication()): Boolean {
+        val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val capabilities = connectivityManager.getNetworkCapabilities(connectivityManager.activeNetwork)
+
+        val isOnlineNow: Boolean = if (capabilities != null) {
+            when {
+                capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI)     -> true
+                capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> true
+                capabilities.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET) -> true
+                else -> false
             }
         } else {
-            Toast.makeText(
-                context,
-                context.getString(R.string.no_internet_access), Toast.LENGTH_LONG
-            ).show()
+            false
+        }
+        Log.i(TAG, "Updating online status to $isOnlineNow")
+        return isOnlineNow
+    }
+
+    private fun updateBalance() {
+        Log.i(TAG, "Updating balance...")
+        Wallet.sync()
+        val balance = Wallet.getBalance()
+        Log.i(TAG, "Balance updated to: $balance")
+        walletState = walletState.copy(balance = balance)
+    }
+
+    private fun requestCoins() {
+        val address = Wallet.getLastUnusedAddress().address
+        val faucetUrl: String = BuildConfig.FAUCET_URL
+        val faucetUsername: String = BuildConfig.FAUCET_USERNAME
+        val faucetPassword: String = BuildConfig.FAUCET_PASSWORD
+        // val faucetPassword: String = "password" // Use for testing failed requests
+
+        val faucetService = FaucetService()
+        viewModelScope.launch {
+            val response = faucetService.callTatooineFaucet(
+                address,
+                faucetUrl,
+                faucetUsername,
+                faucetPassword
+            )
+            when (response) {
+                is FaucetCall.Success -> {
+                    WalletRepository.faucetCallDone()
+                    Log.i(TAG, "Faucet call succeeded with status: ${response.status}, description: ${response.description}")
+                }
+                is FaucetCall.Error -> {
+                    sendMessageToUi(MessageType.Error, "Status ${response.status}, ${response.description}")
+                    Log.i(TAG, "Faucet call failed with status:${response.status}, description:${response.description}")
+                }
+                is FaucetCall.ExceptionThrown -> {
+                    Log.i(TAG, "Faucet call threw an exception: ${response.exception}")
+                }
+            }
+            delay(4000)
+            sync()
         }
     }
 
-    private fun syncTransactionHistory(pendingString: String) {
+    private fun sendMessageToUi(type: MessageType, message: String) {
+        walletState = walletState.copy(messageForUi = Pair(type, message))
+    }
+
+    private fun updateQRCode(address: String) {
+        qrCode = address
+    }
+
+    private fun broadcastTransaction(psbt: PartiallySignedTransaction) {
+        try {
+            Wallet.sign(psbt)
+            Wallet.broadcast(psbt)
+        } catch (e: Throwable) {
+            Log.i(TAG, "Broadcast error: ${e.message}")
+            "Error: ${e.message}"
+        }
+    }
+
+    private fun uiMessageDelivered() {
+        walletState = walletState.copy(messageForUi = null)
+    }
+
+    private fun firstSync() {
+        viewModelScope.launch {
+            delay(4000)
+            sync()
+        }
+    }
+
+    private fun syncTransactionHistory() {
         val txHistory = Wallet.listTransactions()
-        Log.i(TAG,"Transactions history, number of transactions: ${txHistory.size}")
+        Log.i(TAG, "Transactions history, number of transactions: ${txHistory.size}")
 
         for (tx in txHistory) {
             // val details = when (tx.confirmationTime) {
@@ -157,8 +201,8 @@ class WalletViewModel(
                 }
             }
             val time: String = when (tx.confirmationTime) {
-                null -> pendingString
-                else -> tx.confirmationTime?.timestamp?.timestampToString() ?: pendingString
+                null -> "pending"
+                else -> tx.confirmationTime?.timestamp?.timestampToString() ?: "pending"
             }
             val height: UInt = when (tx.confirmationTime) {
                 null -> 100_000_000u
@@ -181,84 +225,6 @@ class WalletViewModel(
         viewModelScope.launch(Dispatchers.IO) {
             Log.i(TAG, "Adding transaction to DB: $tx")
             repository.addTx(tx)
-        }
-    }
-
-    fun updateConnectivityStatus(context: Context) {
-        Log.i(TAG, "Updating connectivity status...")
-        val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-        val capabilities = connectivityManager.getNetworkCapabilities(connectivityManager.activeNetwork)
-
-        val onlineStatus: Boolean = if (capabilities != null) {
-            Log.i(TAG, "updateConnectivityStatus function returned $capabilities")
-            when {
-                capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) -> {
-                    Log.i(TAG, "Network capabilities: TRANSPORT_WIFI")
-                    true
-                }
-                capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> {
-                    Log.i(TAG, "Network capabilities: TRANSPORT_CELLULAR")
-                    true
-                }
-                capabilities.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET) -> {
-                    Log.i(TAG, "Network capabilities: TRANSPORT_ETHERNET")
-                    true
-                }
-                else -> false
-            }
-        } else {
-            false
-        }
-        Log.i(TAG, "Updating online status to $onlineStatus")
-        isOnline.value = onlineStatus
-    }
-
-    fun broadcastTransaction(
-        psbt: PartiallySignedTransaction,
-        snackbarHostState: SnackbarHostState,
-        successMessage: String
-    ) {
-            val snackbarMsg: String = try {
-                Wallet.sign(psbt)
-                Wallet.broadcast(psbt)
-                successMessage
-            } catch (e: Throwable) {
-                Log.i(TAG, "Broadcast error: ${e.message}")
-                "Error: ${e.message}"
-            }
-            viewModelScope.launch {
-                snackbarHostState.showSnackbar(message = snackbarMsg, duration = SnackbarDuration.Short)
-            }
-    }
-
-    private fun requestTestnetCoins(addressInfo: AddressInfo) {
-        val faucetUrl: String = BuildConfig.FAUCET_URL
-        val faucetUsername: String = BuildConfig.FAUCET_USERNAME
-        val faucetPassword: String = BuildConfig.FAUCET_PASSWORD
-        // val faucetPassword: String = "password" // Use for testing failed requests
-
-        val faucetService = FaucetService()
-        viewModelScope.launch {
-            val response = faucetService.callTatooineFaucet(
-                addressInfo.address,
-                faucetUrl,
-                faucetUsername,
-                faucetPassword
-            )
-            when (response) {
-                is FaucetCall.Success -> {
-                    WalletRepository.faucetCallDone()
-                    Log.i(TAG, "Faucet call succeeded with status: ${response.status}, description: ${response.description}")
-                }
-
-                is FaucetCall.Error -> {
-                    Log.i(TAG, "Faucet call failed with status:${response.status}, description:${response.description}")
-                }
-
-                is FaucetCall.ExceptionThrown -> {
-                    Log.i(TAG, "Faucet call threw an exception: ${response.exception}")
-                }
-            }
         }
     }
 }

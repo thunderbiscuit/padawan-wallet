@@ -5,7 +5,7 @@
 
 package com.goldenraven.padawanwallet.presentation.ui.screens.wallet
 
-import android.content.Context
+import android.widget.Toast
 import androidx.compose.animation.animateColor
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.core.updateTransition
@@ -41,8 +41,6 @@ import androidx.compose.material3.LocalMinimumTouchTargetEnforcement
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
-import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -97,50 +95,53 @@ import com.goldenraven.padawanwallet.utils.ScreenSizeWidth
 import com.goldenraven.padawanwallet.utils.formatCurrency
 import com.goldenraven.padawanwallet.utils.formatInBtc
 import com.goldenraven.padawanwallet.utils.getScreenSizeWidth
-import com.goldenraven.padawanwallet.presentation.viewmodels.WalletViewModel
+import com.goldenraven.padawanwallet.presentation.viewmodels.mvi.WalletAction
+import com.goldenraven.padawanwallet.presentation.viewmodels.mvi.WalletState
 
 private const val TAG = "WalletRootScreen"
 
 @Composable
 internal fun WalletRootScreen(
+    state: WalletState,
+    onAction: (WalletAction) -> Unit,
     navController: NavHostController,
-    walletViewModel: WalletViewModel
 ) {
-    val balance by walletViewModel.balance.collectAsState()
-    val transactionList by walletViewModel.readAllData.collectAsState(initial = emptyList())
-    val isOnline by walletViewModel.isOnline.collectAsState()
-    val tempOpenFaucetDialog = walletViewModel.openFaucetDialog
-    val context = LocalContext.current
+    val (openDialog, setOpenDialog) = remember { mutableStateOf(false) }
 
-    if (tempOpenFaucetDialog.value) {
-        FaucetDialog(
-            walletViewModel = walletViewModel
-        )
-    }
+    if (openDialog) FaucetDialog(onAction, setOpenDialog)
 
     val padding = when (getScreenSizeWidth(LocalConfiguration.current.screenWidthDp)) {
         ScreenSizeWidth.Small -> 12.dp
         ScreenSizeWidth.Phone -> 32.dp
     }
 
+    if (state.messageForUi != null) {
+        Toast.makeText(
+            LocalContext.current,
+            state.messageForUi.second,
+            Toast.LENGTH_LONG
+        ).show()
+        onAction(WalletAction.UiMessageDelivered)
+    }
+
     Column(
         modifier = Modifier.gradientBackground().innerScreenPadding(padding)
     ) {
-        // This text composable uses the shared code from the shared module
-        // Text(
-        //     modifier = Modifier.align(Alignment.CenterHorizontally),
-        //     text = Greeting().greet()
-        // )
-        if (!isOnline) { NoNetworkBanner(walletViewModel = walletViewModel, context = context) }
-        BalanceBox(balance = balance, viewModel = walletViewModel)
+        if (!state.isOnline) { NoNetworkBanner(onAction) }
+        BalanceBox(balance = state.balance, currentlySyncing = state.currentlySyncing, onAction = onAction)
         Spacer(modifier = Modifier.height(height = 12.dp))
-        SendReceive(navController, isOnline)
-        TransactionListBox(tempOpenFaucetDialog = tempOpenFaucetDialog, transactionList = transactionList, navController = navController, isOnline = isOnline)
+        SendReceive(navController, state.isOnline)
+        TransactionListBox(
+            setOpenDialog = setOpenDialog,
+            transactionList = state.transactions,
+            isOnline = state.isOnline,
+            navController = navController,
+        )
     }
 }
 
 @Composable
-fun NoNetworkBanner(walletViewModel: WalletViewModel, context: Context) {
+fun NoNetworkBanner(onAction: (WalletAction) -> Unit) {
     val screenSizeWidth = getScreenSizeWidth(LocalConfiguration.current.screenWidthDp)
     val fontSize = when (screenSizeWidth) {
         ScreenSizeWidth.Small -> 12.sp
@@ -152,9 +153,7 @@ fun NoNetworkBanner(walletViewModel: WalletViewModel, context: Context) {
             .fillMaxWidth()
             .padding(bottom = 8.dp)
             .height(40.dp)
-            .clickable {
-                walletViewModel.updateConnectivityStatus(context)
-            },
+            .clickable { onAction(WalletAction.CheckNetworkStatus) },
         border = standardBorder,
         colors = CardDefaults.cardColors(Color(0xfff6cf47)),
     ) {
@@ -175,9 +174,9 @@ fun NoNetworkBanner(walletViewModel: WalletViewModel, context: Context) {
 @Composable
 fun BalanceBox(
     balance: ULong,
-    viewModel: WalletViewModel
+    currentlySyncing: Boolean,
+    onAction: (WalletAction) -> Unit,
 ) {
-    val context = LocalContext.current // TODO #4: Is this the right place to get this context?
     Card(
         border = standardBorder,
         shape = RoundedCornerShape(20.dp),
@@ -274,15 +273,12 @@ fun BalanceBox(
                         end.linkTo(parent.end)
                     }
             ) {
-                val isRefreshing by viewModel.isRefreshing.collectAsState()
+                // val isRefreshing by viewModel.isRefreshing.collectAsState()
                 CompositionLocalProvider(
                     LocalMinimumTouchTargetEnforcement provides false,
                 ) {
                     Button(
-                        onClick = {
-                            viewModel.updateConnectivityStatus(context)
-                            viewModel.refresh(context)
-                        },
+                        onClick = { onAction(WalletAction.Sync) },
                         colors = ButtonDefaults.buttonColors(
                             containerColor = Color.Black,
                             disabledContainerColor = Color.Black
@@ -290,13 +286,13 @@ fun BalanceBox(
                         shape = RoundedCornerShape(20.dp, 20.dp, 0.dp, 0.dp),
                         border = standardBorder,
                         modifier = Modifier.width(134.dp),
-                        enabled = !isRefreshing
+                        enabled = !currentlySyncing
                     ) {
                         Row(
                             verticalAlignment = Alignment.CenterVertically,
                             horizontalArrangement = Arrangement.Center
                         ) {
-                            if (isRefreshing) {
+                            if (currentlySyncing) {
                                 LoadingAnimation()
                             } else {
                                 Text(
@@ -381,10 +377,10 @@ fun SendReceive(navController: NavHostController, isOnline: Boolean) {
 
 @Composable
 fun TransactionListBox(
-    tempOpenFaucetDialog: MutableState<Boolean>,
+    setOpenDialog: (Boolean) -> Unit,
     transactionList: List<Tx>,
+    isOnline: Boolean,
     navController: NavHostController,
-    isOnline: Boolean
 ) {
     Row(modifier = Modifier.padding(top = 24.dp, bottom = 8.dp)) {
         Text(
@@ -422,7 +418,7 @@ fun TransactionListBox(
                         modifier = Modifier.padding(all = 8.dp)
                     )
                     Button(
-                        onClick = { tempOpenFaucetDialog.value = true },
+                        onClick = { setOpenDialog(true) },
                         enabled = isOnline,
                         modifier = Modifier
                             .padding(all = 8.dp)
@@ -550,7 +546,10 @@ fun CurrencyToggleText(currencyToggleState: Boolean, text: BitcoinUnit) {
 }
 
 @Composable
-private fun FaucetDialog(walletViewModel: WalletViewModel) {
+private fun FaucetDialog(
+    onAction: (WalletAction) -> Unit,
+    setOpenDialog: (Boolean) -> Unit,
+) {
     AlertDialog(
         onDismissRequest = {},
         title = {
@@ -571,10 +570,7 @@ private fun FaucetDialog(walletViewModel: WalletViewModel) {
 
         dismissButton = {
             Button(
-                onClick = {
-                    walletViewModel.onNegativeDialogClick()
-                    walletViewModel.openFaucetDialog.value = false
-                },
+                onClick = { setOpenDialog(false) },
                 colors = ButtonDefaults.buttonColors(containerColor = Color(0xfffc4f4f)),
                 shape = RoundedCornerShape(20.dp),
                 border = standardBorder,
@@ -600,8 +596,8 @@ private fun FaucetDialog(walletViewModel: WalletViewModel) {
         confirmButton = {
             Button(
                 onClick = {
-                    walletViewModel.onPositiveDialogClick()
-                    walletViewModel.openFaucetDialog.value = false
+                    setOpenDialog(false)
+                    onAction(WalletAction.RequestCoins)
                 },
                 colors = ButtonDefaults.buttonColors(containerColor = padawan_theme_background),
                 shape = RoundedCornerShape(20.dp),
