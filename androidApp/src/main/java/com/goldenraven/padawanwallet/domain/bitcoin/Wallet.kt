@@ -27,14 +27,14 @@ import org.bitcoindevkit.TxBuilderResult
 import org.bitcoindevkit.WordCount
 
 private const val TAG = "Wallet"
+private const val SIGNET_ELECTRUM_URL: String = "ssl://mempool.space:60602"
 
 object Wallet {
-    private const val electrumURL: String = "ssl://electrum.blockstream.info:60002"
     private lateinit var wallet: org.bitcoindevkit.Wallet
     private lateinit var path: String
 
     private val blockchain: Blockchain by lazy {
-        val blockchainConfig = BlockchainConfig.Electrum(ElectrumConfig(electrumURL, null, 5u, null, 10u, true))
+        val blockchainConfig = BlockchainConfig.Electrum(ElectrumConfig(SIGNET_ELECTRUM_URL, null, 5u, null, 10u, true))
         val blockchain = Blockchain(blockchainConfig)
         blockchain
     }
@@ -52,7 +52,7 @@ object Wallet {
         wallet = org.bitcoindevkit.Wallet(
             descriptor,
             changeDescriptor,
-            Network.TESTNET,
+            Network.SIGNET,
             database
         )
     }
@@ -64,18 +64,18 @@ object Wallet {
         Log.i(TAG, "Loading existing wallet with change descriptor: ${initialWalletData.changeDescriptor}"
         )
         initialize(
-            descriptor = Descriptor(initialWalletData.descriptor, Network.TESTNET),
-            changeDescriptor = Descriptor(initialWalletData.changeDescriptor, Network.TESTNET),
+            descriptor = Descriptor(initialWalletData.descriptor, Network.SIGNET),
+            changeDescriptor = Descriptor(initialWalletData.changeDescriptor, Network.SIGNET),
         )
     }
 
     fun recoverWallet(recoveryPhrase: String) {
         val mnemonic = Mnemonic.fromString(recoveryPhrase)
-        val bip32ExtendedRootKey = DescriptorSecretKey(Network.TESTNET, mnemonic, null)
+        val bip32ExtendedRootKey = DescriptorSecretKey(Network.SIGNET, mnemonic, null)
         val descriptor: Descriptor =
-            Descriptor.newBip84(bip32ExtendedRootKey, KeychainKind.EXTERNAL, Network.TESTNET)
+            Descriptor.newBip84(bip32ExtendedRootKey, KeychainKind.EXTERNAL, Network.SIGNET)
         val changeDescriptor: Descriptor =
-            Descriptor.newBip84(bip32ExtendedRootKey, KeychainKind.INTERNAL, Network.TESTNET)
+            Descriptor.newBip84(bip32ExtendedRootKey, KeychainKind.INTERNAL, Network.SIGNET)
         initialize(
             descriptor = descriptor,
             changeDescriptor = changeDescriptor,
@@ -90,11 +90,11 @@ object Wallet {
 
     fun createWallet() {
         val mnemonic = Mnemonic(WordCount.WORDS12)
-        val bip32ExtendedRootKey = DescriptorSecretKey(Network.TESTNET, mnemonic, null)
+        val bip32ExtendedRootKey = DescriptorSecretKey(Network.SIGNET, mnemonic, null)
         val descriptor: Descriptor =
-            Descriptor.newBip84(bip32ExtendedRootKey, KeychainKind.EXTERNAL, Network.TESTNET)
+            Descriptor.newBip84(bip32ExtendedRootKey, KeychainKind.EXTERNAL, Network.SIGNET)
         val changeDescriptor: Descriptor =
-            Descriptor.newBip84(bip32ExtendedRootKey, KeychainKind.INTERNAL, Network.TESTNET)
+            Descriptor.newBip84(bip32ExtendedRootKey, KeychainKind.INTERNAL, Network.SIGNET)
         initialize(
             descriptor = descriptor,
             changeDescriptor = changeDescriptor,
@@ -150,4 +150,3 @@ object Wallet {
         return signedPsbt.txid()
     }
 }
-
