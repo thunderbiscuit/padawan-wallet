@@ -193,7 +193,7 @@ fun BalanceBox(
             val (cardName, currencyToggle, balanceText, currencyText, buttonRow) = createRefs()
             var currencyToggleState by remember { mutableStateOf(true) }
             Text(
-                text = stringResource(R.string.bitcoin_testnet),
+                text = stringResource(R.string.bitcoin_signet),
                 style = PadawanTypography.bodyMedium,
                 color = padawan_theme_text_faded,
                 modifier = Modifier.constrainAs(cardName) {
@@ -561,7 +561,7 @@ private fun FaucetDialog(
         },
         text = {
             Text(
-                text = stringResource(R.string.would_you_like_to_receive_some_testnet_bitcoin),
+                text = stringResource(R.string.would_you_like_to_receive_some_signet_bitcoin),
                 fontSize = 18.sp,
                 lineHeight = 24.sp,
                 color = padawan_theme_text_faded_secondary

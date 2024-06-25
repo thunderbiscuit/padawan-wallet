@@ -215,7 +215,7 @@ internal fun SendScreen(
                         value = recipientAddress.value,
                         onValueChange = { recipientAddress.value = it },
                         singleLine = true,
-                        placeholder = { Text(text = stringResource(R.string.enter_a_bitcoin_testnet_address)) },
+                        placeholder = { Text(text = stringResource(R.string.enter_a_bitcoin_signet_address)) },
                         colors = TextFieldDefaults.colors(
                             focusedContainerColor = padawan_theme_background_secondary,
                             unfocusedContainerColor = padawan_theme_background_secondary,

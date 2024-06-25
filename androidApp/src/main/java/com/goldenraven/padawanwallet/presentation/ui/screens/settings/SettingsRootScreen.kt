@@ -120,7 +120,7 @@ internal fun SettingsRootScreen(
                     .padding(start = 24.dp, end = 24.dp, top = 24.dp)
             ) {
                 Text(
-                    text = stringResource(R.string.send_testnet_coins_back),
+                    text = stringResource(R.string.send_signet_coins_back),
                     fontWeight = FontWeight.Normal,
                     color = Color(0xff2f2f2f)
 

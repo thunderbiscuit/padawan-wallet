@@ -19,5 +19,5 @@
     <string name="t2_h2">Be careful!</string>
     <string name="t2_p11">It is very important to be careful when sending and receiving bitcoin. The person sending bitcoin must use the exact correct address.</string>
     <string name="t2_p12">Even though the QR code system and the copy/paste function of our phones are an acceptable way of remaining cautious, you should always double check the complete receive address. At the very least, when you copy and paste your receive address, make sure the first and last 5–10 characters of the address match.</string>
-    <string name="t2_p13">Reminder: Padawan only uses testnet bitcoins. Do not try to send it real bitcoins!</string>
+    <string name="t2_p13">Reminder: Padawan only uses signet bitcoins. Do not try to send it real bitcoins!</string>
 </resources>

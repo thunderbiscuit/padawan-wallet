@@ -73,7 +73,7 @@ internal fun ChaptersRootScreen(
             SectionTitle("Getting Started", true)
             SectionDivider()
             TutorialCard(
-                title = "1. What is the Bitcoin testnet?",
+                title = "1. ${stringResource(id = R.string.C1_title)}",
                 done = state.completedChapters[1] ?: false,
                 onClick = {
                     onAction(ChaptersScreensAction.OpenChapter(1))
@@ -81,7 +81,7 @@ internal fun ChaptersRootScreen(
                 }
             )
             TutorialCard(
-                title = "2. Receiving bitcoin",
+                title = "2. ${stringResource(id = R.string.C2_title)}",
                 done = state.completedChapters[2] ?: false,
                 onClick = {
                     onAction(ChaptersScreensAction.OpenChapter(2))
@@ -89,7 +89,7 @@ internal fun ChaptersRootScreen(
                 }
             )
             TutorialCard(
-                title = "3. Sending bitcoin",
+                title = "3. ${stringResource(id = R.string.C3_title)}",
                 done = state.completedChapters[3] ?: false,
                 onClick = {
                     onAction(ChaptersScreensAction.OpenChapter(3))
@@ -100,7 +100,7 @@ internal fun ChaptersRootScreen(
             SectionTitle("Transactions", false)
             SectionDivider()
             TutorialCard(
-                title = "4. What is the mempool?",
+                title = "4. ${stringResource(id = R.string.C4_title)}",
                 done = state.completedChapters[4] ?: false,
                 onClick = {
                     onAction(ChaptersScreensAction.OpenChapter(4))
@@ -108,7 +108,7 @@ internal fun ChaptersRootScreen(
                 }
             )
             TutorialCard(
-                title = "5. What are transaction fees?",
+                title = "5. ${stringResource(id = R.string.C5_title)}",
                 done = state.completedChapters[5] ?: false,
                 onClick = {
                     onAction(ChaptersScreensAction.OpenChapter(5))
@@ -116,7 +116,7 @@ internal fun ChaptersRootScreen(
                 }
             )
             TutorialCard(
-                title = "6. Bitcoin units",
+                title = "6. ${stringResource(id = R.string.C6_title)}",
                 done = state.completedChapters[6] ?: false,
                 onClick = {
                     onAction(ChaptersScreensAction.OpenChapter(6))
@@ -127,7 +127,7 @@ internal fun ChaptersRootScreen(
             SectionTitle("Wallets", false)
             SectionDivider()
             TutorialCard(
-                title = "7. What is a recovery phrase?",
+                title = "7. ${stringResource(id = R.string.C7_title)}",
                 done = state.completedChapters[7] ?: false,
                 onClick = {
                     onAction(ChaptersScreensAction.OpenChapter(7))
@@ -135,7 +135,7 @@ internal fun ChaptersRootScreen(
                 }
             )
             TutorialCard(
-                title = "8. Recovering your wallet",
+                title = "8. ${stringResource(id = R.string.C8_title)}",
                 done = state.completedChapters[8] ?: false,
                 onClick = {
                     onAction(ChaptersScreensAction.OpenChapter(8))
@@ -143,7 +143,7 @@ internal fun ChaptersRootScreen(
                 }
             )
             TutorialCard(
-                title = "9. The different types of wallets",
+                title = "9. ${stringResource(id = R.string.C9_title)}",
                 done = state.completedChapters[9] ?: false,
                 onClick = {
                     onAction(ChaptersScreensAction.OpenChapter(9))
