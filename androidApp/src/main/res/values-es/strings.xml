@@ -70,7 +70,7 @@
     <string name="request_signet_coins">¡Solicitar Monedas de la Red de Prueba (Signet)!</string>
     <string name="privacyText">Padawan Wallet no recopila ningún tipo de información de sus usuarios ni utiliza Firebase Crashlytics. Esto significa que es mucho más difícil para nosotros enterarnos sobre los errores de la aplicación por parte de nuestros usuarios. En caso de tener cualquier comentario, no dudes en enviar un mensaje a la cuenta de Twitter/X (@padawanwallet) o envíanos un email. Puedes leer nuestra política de privacidad aquí:</string>
     <string name="privacyLink">https://github.com/thunderbiscuit/padawan-wallet/blob/master/PRIVACY</string>
-    <string name="send_coins_back_address">tb1qk5238eluqllq2wps67lkxme3x43wll4k282s8q</string>
+    <string name="send_coins_back_address">tb1pjeu9rw9cwpmya0p85x9l27vp8hqd2hx2lwggta2fgm7u0gvua6asf8zrqw</string>
     <string name="copy_address_string">Copiar</string>
     <string name="error_faucet">Error: Faucet No Disponible</string>
     <string name="one_time_faucet">Error: ¡ya has recibido monedas signet!</string>

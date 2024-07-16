@@ -13,9 +13,9 @@ data class Tx(
     @PrimaryKey(autoGenerate = false)
     val txid: String,
     val date: String,
-    val valueIn: Int,
-    val valueOut: Int,
-    val fees: Int,
+    val valueIn: Long,
+    val valueOut: Long,
+    val fee: Long,
     val isPayment: Boolean,
     val height: Int,
 )

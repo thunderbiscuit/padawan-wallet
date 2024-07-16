@@ -5,6 +5,7 @@
 
 package com.goldenraven.padawanwallet.presentation.ui.screens.wallet
 
+import android.util.Log
 import android.widget.Toast
 import androidx.compose.animation.animateColor
 import androidx.compose.animation.core.tween
@@ -37,7 +38,7 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
-import androidx.compose.material3.LocalMinimumTouchTargetEnforcement
+import androidx.compose.material3.LocalMinimumInteractiveComponentEnforcement
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
@@ -60,7 +61,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
-import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.goldenraven.padawanwallet.R
@@ -135,6 +135,7 @@ internal fun WalletRootScreen(
             setOpenDialog = setOpenDialog,
             transactionList = state.transactions,
             isOnline = state.isOnline,
+            onAction = onAction,
             navController = navController,
         )
     }
@@ -275,7 +276,7 @@ fun BalanceBox(
             ) {
                 // val isRefreshing by viewModel.isRefreshing.collectAsState()
                 CompositionLocalProvider(
-                    LocalMinimumTouchTargetEnforcement provides false,
+                    LocalMinimumInteractiveComponentEnforcement provides false,
                 ) {
                     Button(
                         onClick = { onAction(WalletAction.Sync) },
@@ -380,6 +381,7 @@ fun TransactionListBox(
     setOpenDialog: (Boolean) -> Unit,
     transactionList: List<Tx>,
     isOnline: Boolean,
+    onAction: (WalletAction) -> Unit,
     navController: NavHostController,
 ) {
     Row(modifier = Modifier.padding(top = 24.dp, bottom = 8.dp)) {
@@ -451,7 +453,10 @@ fun TransactionListBox(
                         Spacer(modifier = Modifier.height(24.dp))
                     }
                     Column(
-                        modifier = Modifier.noRippleClickable { viewTransaction(navController, txid = tx.txid) }
+                        modifier = Modifier.noRippleClickable {
+                            onAction(WalletAction.SeeSingleTx(tx.txid))
+                            navController.navigate(Screen.TransactionScreen.route)
+                        }
                     ) {
                         Box(modifier = Modifier
                             .fillMaxWidth()
@@ -491,7 +496,7 @@ fun TransactionListBox(
                                         )
                                 ) {
                                     Text(
-                                        text = if (tx.isPayment) stringResource(id = R.string.sent) else stringResource(id = R.string.received),
+                                        text = if (tx.isPayment) stringResource(id = R.string.send) else stringResource(id = R.string.receive),
                                         style = PadawanTypography.bodySmall,
                                         modifier = Modifier
                                             .align(Alignment.CenterVertically)
@@ -624,9 +629,9 @@ private fun FaucetDialog(
     )
 }
 
-private fun viewTransaction(navController: NavController, txid: String) {
-    navController.navigate("${Screen.TransactionScreen.route}/txid=$txid")
-}
+// private fun viewTransaction(navController: NavController, txid: String) {
+//     navController.navigate("${Screen.TransactionScreen.route}/txid=$txid")
+// }
 
 @Preview(name = "PIXEL 4", device = Devices.PIXEL_4, showBackground = true)
 @Preview(name = "PIXEL 2, 270 Wide", device = Devices.PIXEL_2, widthDp = 270)

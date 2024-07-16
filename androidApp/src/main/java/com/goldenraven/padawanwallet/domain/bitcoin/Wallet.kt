@@ -7,23 +7,24 @@ package com.goldenraven.padawanwallet.domain.bitcoin
 
 import android.util.Log
 import com.goldenraven.padawanwallet.utils.RequiredInitialWalletData
+import com.goldenraven.padawanwallet.utils.TxType
+import com.goldenraven.padawanwallet.utils.txType
 import org.bitcoindevkit.Address
-import org.bitcoindevkit.AddressIndex
 import org.bitcoindevkit.AddressInfo
-import org.bitcoindevkit.Blockchain
-import org.bitcoindevkit.BlockchainConfig
-import org.bitcoindevkit.DatabaseConfig
+import org.bitcoindevkit.ChainPosition as BdkChainPosition
+import org.bitcoindevkit.Amount
 import org.bitcoindevkit.Descriptor
 import org.bitcoindevkit.DescriptorSecretKey
-import org.bitcoindevkit.ElectrumConfig
+import org.bitcoindevkit.ElectrumClient
+import org.bitcoindevkit.FeeRate
 import org.bitcoindevkit.KeychainKind
 import org.bitcoindevkit.Mnemonic
 import org.bitcoindevkit.Network
-import org.bitcoindevkit.PartiallySignedTransaction
-import org.bitcoindevkit.SqliteDbConfiguration
-import org.bitcoindevkit.TransactionDetails
+import org.bitcoindevkit.Psbt
+import org.bitcoindevkit.SqliteStore
+import org.bitcoindevkit.Transaction
 import org.bitcoindevkit.TxBuilder
-import org.bitcoindevkit.TxBuilderResult
+import org.bitcoindevkit.Update
 import org.bitcoindevkit.WordCount
 
 private const val TAG = "Wallet"
@@ -31,41 +32,60 @@ private const val SIGNET_ELECTRUM_URL: String = "ssl://mempool.space:60602"
 
 object Wallet {
     private lateinit var wallet: org.bitcoindevkit.Wallet
-    private lateinit var path: String
+    private lateinit var dbPath: String
+    private lateinit var db: SqliteStore
 
-    private val blockchain: Blockchain by lazy {
-        val blockchainConfig = BlockchainConfig.Electrum(ElectrumConfig(SIGNET_ELECTRUM_URL, null, 5u, null, 10u, true))
-        val blockchain = Blockchain(blockchainConfig)
-        blockchain
-    }
+    private val blockchainClient: ElectrumClient by lazy { ElectrumClient(SIGNET_ELECTRUM_URL) }
 
     // Setting the path requires the application context and is done once by PadawanWalletApplication
-    fun setPath(path: String) {
-        Wallet.path = path
+    fun setPathAndConnectDb(path: String) {
+        dbPath = "$path/padawanDB.sqlite"
+        db = SqliteStore(dbPath)
+    }
+
+    fun createWallet() {
+        val mnemonic = Mnemonic(WordCount.WORDS12)
+        val bip32ExtendedRootKey = DescriptorSecretKey(Network.SIGNET, mnemonic, null)
+        val descriptor: Descriptor =
+            Descriptor.newBip84(bip32ExtendedRootKey, KeychainKind.EXTERNAL, Network.SIGNET)
+        val changeDescriptor: Descriptor =
+            Descriptor.newBip84(bip32ExtendedRootKey, KeychainKind.INTERNAL, Network.SIGNET)
+        initialize(
+            descriptor = descriptor,
+            changeDescriptor = changeDescriptor,
+        )
+        WalletRepository.saveWallet(
+            dbPath,
+            descriptor.toStringWithSecret(),
+            changeDescriptor.toStringWithSecret()
+        )
+        WalletRepository.saveMnemonic(mnemonic.toString())
     }
 
     private fun initialize(
         descriptor: Descriptor,
         changeDescriptor: Descriptor,
     ) {
-        val database = DatabaseConfig.Sqlite(SqliteDbConfiguration("$path/bdk-sqlite"))
         wallet = org.bitcoindevkit.Wallet(
             descriptor,
             changeDescriptor,
             Network.SIGNET,
-            database
         )
     }
 
-    fun loadExistingWallet() {
+    fun loadWallet() {
         val initialWalletData: RequiredInitialWalletData = WalletRepository.getInitialWalletData()
-        Log.i(TAG, "Loading existing wallet with descriptor: ${initialWalletData.descriptor}"
-        )
-        Log.i(TAG, "Loading existing wallet with change descriptor: ${initialWalletData.changeDescriptor}"
-        )
-        initialize(
-            descriptor = Descriptor(initialWalletData.descriptor, Network.SIGNET),
-            changeDescriptor = Descriptor(initialWalletData.changeDescriptor, Network.SIGNET),
+        Log.i(TAG, "Loading existing wallet with descriptor: ${initialWalletData.descriptor}")
+        Log.i(TAG, "Loading existing wallet with change descriptor: ${initialWalletData.changeDescriptor}")
+        val descriptor = Descriptor(initialWalletData.descriptor, Network.SIGNET)
+        val changeDescriptor = Descriptor(initialWalletData.changeDescriptor, Network.SIGNET)
+        val changeSet = db.read()
+
+        wallet = org.bitcoindevkit.Wallet.newOrLoad(
+            descriptor,
+            changeDescriptor,
+            changeSet,
+            Network.SIGNET,
         )
     }
 
@@ -81,54 +101,80 @@ object Wallet {
             changeDescriptor = changeDescriptor,
         )
         WalletRepository.saveWallet(
-            path,
-            descriptor.asStringPrivate(),
-            changeDescriptor.asStringPrivate()
+            dbPath,
+            descriptor.toStringWithSecret(),
+            changeDescriptor.toStringWithSecret()
         )
-        WalletRepository.saveMnemonic(mnemonic.asString())
+        WalletRepository.saveMnemonic(mnemonic.toString())
     }
 
-    fun createWallet() {
-        val mnemonic = Mnemonic(WordCount.WORDS12)
-        val bip32ExtendedRootKey = DescriptorSecretKey(Network.SIGNET, mnemonic, null)
-        val descriptor: Descriptor =
-            Descriptor.newBip84(bip32ExtendedRootKey, KeychainKind.EXTERNAL, Network.SIGNET)
-        val changeDescriptor: Descriptor =
-            Descriptor.newBip84(bip32ExtendedRootKey, KeychainKind.INTERNAL, Network.SIGNET)
-        initialize(
-            descriptor = descriptor,
-            changeDescriptor = changeDescriptor,
+    fun fullScan() {
+        val fullScanRequest = wallet.startFullScan()
+        val update: Update = blockchainClient.fullScan(
+            fullScanRequest = fullScanRequest,
+            stopGap = 20u,
+            batchSize = 10u,
+            fetchPrevTxouts = true
         )
-        WalletRepository.saveWallet(
-            path,
-            descriptor.asStringPrivate(),
-            changeDescriptor.asStringPrivate()
-        )
-        WalletRepository.saveMnemonic(mnemonic.asString())
+        wallet.applyUpdate(update)
+        val changeset = wallet.takeStaged()
+        if (changeset != null) db.write(changeset)
     }
 
     fun sync() {
-        wallet.sync(blockchain = blockchain, progress = null)
+        val syncRequest = wallet.startSyncWithRevealedSpks()
+        val update = blockchainClient.sync(
+            syncRequest = syncRequest,
+            batchSize = 10u,
+            fetchPrevTxouts = true
+        )
+        wallet.applyUpdate(update)
+        val changeset = wallet.takeStaged()
+        if (changeset != null) db.write(changeset)
     }
 
     fun getBalance(): ULong {
-        return wallet.getBalance().total
+        return wallet.balance().total.toSat()
     }
 
     fun getLastUnusedAddress(): AddressInfo {
-        return wallet.getAddress(AddressIndex.LAST_UNUSED)
+        return wallet.revealNextAddress(KeychainKind.EXTERNAL)
     }
 
-    fun createTransaction(recipientAddress: String, amount: ULong, feeRate: Float): TxBuilderResult {
-        val recipientScriptPubKey = Address(recipientAddress).scriptPubkey()
+    fun createPsbt(recipientAddress: String, amount: Amount, feeRate: FeeRate): Psbt {
+        val recipientScriptPubKey = Address(recipientAddress, Network.SIGNET).scriptPubkey()
         return TxBuilder()
             .addRecipient(recipientScriptPubKey, amount)
-            .feeRate(satPerVbyte = feeRate)
+            .feeRate(feeRate)
             .finish(wallet)
     }
 
+    fun sign(psbt: Psbt) {
+        wallet.sign(psbt)
+    }
+    
     fun listTransactions(): List<TransactionDetails> {
-        return wallet.listTransactions()
+        val transactions = wallet.transactions()
+        return transactions.map { tx ->
+            val (sent, received) = wallet.sentAndReceived(tx.transaction)
+            val fee = wallet.calculateFee(tx.transaction)
+            val feeRate = wallet.calculateFeeRate(tx.transaction)
+            val txType: TxType = txType(sent = sent.toSat(), received = received.toSat())
+            val chainPosition: ChainPosition = when (val position = tx.chainPosition) {
+                is BdkChainPosition.Unconfirmed -> ChainPosition.Unconfirmed
+                is BdkChainPosition.Confirmed -> ChainPosition.Confirmed(position.height, position.timestamp)
+            }
+
+            TransactionDetails(
+                txid = tx.transaction.computeTxid(),
+                sent = sent,
+                received = received,
+                fee = fee,
+                feeRate = feeRate,
+                txType = txType,
+                chainPosition = chainPosition
+            )
+        }
     }
 
     fun getTransaction(txid: String): TransactionDetails? {
@@ -141,12 +187,8 @@ object Wallet {
         return null
     }
 
-    fun sign(psbt: PartiallySignedTransaction) {
-        wallet.sign(psbt)
-    }
-
-    fun broadcast(signedPsbt: PartiallySignedTransaction): String {
-        blockchain.broadcast(signedPsbt)
-        return signedPsbt.txid()
+    fun broadcast(tx: Transaction): String {
+        blockchainClient.broadcast(tx)
+        return tx.computeTxid()
     }
 }

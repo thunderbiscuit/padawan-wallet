@@ -162,7 +162,7 @@ fun WalletNavigation(
 
         // Transaction screen
         composable(
-            route = "${Screen.TransactionScreen.route}/txid={txid}",
+            route = Screen.TransactionScreen.route,
             enterTransition = {
                 slideIntoContainer(AnimatedContentScope.SlideDirection.Up, animationSpec = tween(animationDuration))
             },
@@ -175,8 +175,11 @@ fun WalletNavigation(
             popExitTransition = {
                 slideOutOfContainer(AnimatedContentScope.SlideDirection.Down, animationSpec = tween(animationDuration))
             }
-        ) { backStackEntry -> backStackEntry.arguments?.getString("txid")?.let {
-                TransactionScreen(navHostController, backStackEntry.arguments?.getString("txid"))
+        ) {
+            // TODO: Check that this will work by not navigating if txDetails is null
+            val singleTxDetails = walletViewModel.getSingleTxDetails()
+            if (singleTxDetails != null) {
+                TransactionScreen(singleTxDetails, navHostController)
             }
         }
 

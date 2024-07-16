@@ -11,6 +11,8 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.goldenraven.padawanwallet.BuildConfig
+import com.goldenraven.padawanwallet.domain.bitcoin.ChainPosition
+import com.goldenraven.padawanwallet.domain.bitcoin.TransactionDetails
 import com.goldenraven.padawanwallet.domain.bitcoin.Wallet
 import com.goldenraven.padawanwallet.domain.bitcoin.WalletRepository
 import com.goldenraven.padawanwallet.domain.tx.Tx
@@ -22,15 +24,16 @@ import com.goldenraven.padawanwallet.padawankmp.FaucetService
 import com.goldenraven.padawanwallet.presentation.viewmodels.mvi.MessageType
 import com.goldenraven.padawanwallet.presentation.viewmodels.mvi.WalletAction
 import com.goldenraven.padawanwallet.presentation.viewmodels.mvi.WalletState
-import com.goldenraven.padawanwallet.utils.SatoshisIn
-import com.goldenraven.padawanwallet.utils.SatoshisOut
-import com.goldenraven.padawanwallet.utils.isPayment
+import com.goldenraven.padawanwallet.utils.TxType
 import com.goldenraven.padawanwallet.utils.netSendWithoutFees
 import com.goldenraven.padawanwallet.utils.timestampToString
+import com.goldenraven.padawanwallet.utils.txType
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import org.bitcoindevkit.PartiallySignedTransaction
+import org.bitcoindevkit.Amount
+import org.bitcoindevkit.FeeRate
+import org.bitcoindevkit.Transaction
 
 private const val TAG = "WalletViewModel"
 
@@ -39,6 +42,7 @@ class WalletViewModel(application: Application) : AndroidViewModel(application) 
     private var isOnline: Boolean by mutableStateOf(false)
     private var qrCode: String? by mutableStateOf(null)
     private val repository: TxRepository
+    private var singleTxDetails: TransactionDetails? = null
 
     init {
         isOnline = updateNetworkStatus(application)
@@ -46,14 +50,21 @@ class WalletViewModel(application: Application) : AndroidViewModel(application) 
         val txDao: TxDao = TxDatabase.getDatabase(application).txDao()
         repository = TxRepository(txDao)
         viewModelScope.launch {
-            repository.readAllData
-                .collect { result ->
-                    txList = result
-                }
+            repository.readAllTxs.collect { result ->
+                txList = result
+            }
         }
     }
 
-    var walletState: WalletState by mutableStateOf(WalletState(0u, txList, isOnline, currentlySyncing = false))
+    var walletState by mutableStateOf(
+        WalletState(
+            balance = 0u,
+            transactions = txList,
+            txAndFee = null,
+            isOnline = isOnline,
+            currentlySyncing = false
+        )
+    )
         private set
 
     fun onAction(action: WalletAction) {
@@ -64,25 +75,21 @@ class WalletViewModel(application: Application) : AndroidViewModel(application) 
             is WalletAction.QRCodeScanned -> updateQRCode(action.address)
             is WalletAction.Broadcast -> broadcastTransaction(action.tx)
             is WalletAction.UiMessageDelivered -> uiMessageDelivered()
+            is WalletAction.SeeSingleTx -> { setSingleTxDetails(action.tx) }
+            is WalletAction.BuildAndSignPsbt -> { buildAndSignPsbt(action.address, action.amount, action.feeRate) }
         }
     }
 
-    private fun sync() {
+    private fun sync(firstSync: Boolean = false) {
         if (isOnline) {
             walletState = walletState.copy(currentlySyncing = true)
 
             viewModelScope.launch(Dispatchers.IO) {
-                updateBalance()
+                updateBalance(firstSync)
                 syncTransactionHistory()
                 walletState = walletState.copy(currentlySyncing = false)
             }
         }
-        // else {
-        //     Toast.makeText(
-        //         context,
-        //         context.getString(R.string.no_internet_access), Toast.LENGTH_LONG
-        //     ).show()
-        // }
     }
 
     // TODO: Not sure about this getApplication() call
@@ -104,9 +111,9 @@ class WalletViewModel(application: Application) : AndroidViewModel(application) 
         return isOnlineNow
     }
 
-    private fun updateBalance() {
+    private fun updateBalance(firstSync: Boolean = false) {
         Log.i(TAG, "Updating balance...")
-        Wallet.sync()
+        if (firstSync) Wallet.fullScan() else Wallet.sync()
         val balance = Wallet.getBalance()
         Log.i(TAG, "Balance updated to: $balance")
         walletState = walletState.copy(balance = balance)
@@ -122,7 +129,7 @@ class WalletViewModel(application: Application) : AndroidViewModel(application) 
         val faucetService = FaucetService()
         viewModelScope.launch {
             val response = faucetService.callTatooineFaucet(
-                address,
+                address.toString(),
                 faucetUrl,
                 faucetUsername,
                 faucetPassword
@@ -153,10 +160,9 @@ class WalletViewModel(application: Application) : AndroidViewModel(application) 
         qrCode = address
     }
 
-    private fun broadcastTransaction(psbt: PartiallySignedTransaction) {
+    private fun broadcastTransaction(tx: Transaction) {
         try {
-            Wallet.sign(psbt)
-            Wallet.broadcast(psbt)
+            Wallet.broadcast(tx)
         } catch (e: Throwable) {
             Log.i(TAG, "Broadcast error: ${e.message}")
             "Error: ${e.message}"
@@ -170,7 +176,7 @@ class WalletViewModel(application: Application) : AndroidViewModel(application) 
     private fun firstSync() {
         viewModelScope.launch {
             delay(4000)
-            sync()
+            sync(firstSync = true)
         }
     }
 
@@ -179,45 +185,46 @@ class WalletViewModel(application: Application) : AndroidViewModel(application) 
         Log.i(TAG, "Transactions history, number of transactions: ${txHistory.size}")
 
         for (tx in txHistory) {
-            // val details = when (tx.confirmationTime) {
-            //     null -> tx.details
-            //     is BlockTime -> tx.details
-            // }
-            var valueIn = 0
-            var valueOut = 0
-            val satoshisIn = SatoshisIn(tx.received.toInt())
-            val satoshisOut = SatoshisOut(tx.sent.toInt())
-            val isPayment = isPayment(satoshisOut, satoshisIn)
-            when (isPayment) {
-                true -> {
+            var valueIn = 0uL
+            var valueOut = 0uL
+            val txType = txType(sent = tx.sent.toSat(), received = tx.received.toSat())
+            when (txType) {
+                TxType.PAYMENT -> {
                     valueOut = netSendWithoutFees(
-                        txSatsOut = satoshisOut,
-                        txSatsIn = satoshisIn,
-                        fees = tx.fee?.toInt() ?: 0
+                        txSatsOut = tx.sent.toSat(),
+                        txSatsIn = tx.received.toSat(),
+                        fee = tx.fee.toSat()
                     )
                 }
-                false -> {
-                    valueIn = tx.received.toInt()
+                TxType.RECEIVE -> {
+                    valueIn = tx.received.toSat()
                 }
             }
-            val time: String = when (tx.confirmationTime) {
-                null -> "pending"
-                else -> tx.confirmationTime?.timestamp?.timestampToString() ?: "pending"
+            val time: String = when (tx.chainPosition) {
+                is ChainPosition.Unconfirmed -> "pending"
+                is ChainPosition.Confirmed -> tx.chainPosition.timestamp.timestampToString()
             }
-            val height: UInt = when (tx.confirmationTime) {
-                null -> 100_000_000u
-                else -> tx.confirmationTime?.height ?: 100_000_000u
+            val height: UInt = when (tx.chainPosition) {
+                is ChainPosition.Unconfirmed -> 100_000_000u
+                is ChainPosition.Confirmed -> tx.chainPosition.height
             }
             val transaction = Tx(
                 txid = tx.txid,
                 date = time,
-                valueIn = valueIn,
-                valueOut = valueOut,
-                fees = tx.fee?.toInt() ?: 0,
-                isPayment = isPayment,
+                valueIn = valueIn.toLong(),
+                valueOut = valueOut.toLong(),
+                fee = tx.fee.toSat().toLong(),
+                isPayment = txType == TxType.PAYMENT,
                 height = height.toInt()
             )
             addTx(transaction)
+        }
+        viewModelScope.launch {
+            repository.readAllTxs.collect { result ->
+                Log.i(TAG, "Updating transactions list with $result")
+                txList = result
+                walletState = walletState.copy(transactions = txList)
+            }
         }
     }
 
@@ -226,5 +233,23 @@ class WalletViewModel(application: Application) : AndroidViewModel(application) 
             Log.i(TAG, "Adding transaction to DB: $tx")
             repository.addTx(tx)
         }
+    }
+
+    private fun setSingleTxDetails(tx: String) {
+        Wallet.getTransaction(tx)?.let {
+            singleTxDetails = it
+        }
+    }
+
+    fun getSingleTxDetails(): TransactionDetails? {
+        return singleTxDetails
+    }
+
+    private fun buildAndSignPsbt(address: String, amount: Amount, feeRate: FeeRate) {
+        val psbt = Wallet.createPsbt(address, amount, feeRate)
+        Wallet.sign(psbt)
+        val fee = psbt.fee()
+        val tx: Transaction = psbt.extractTx()
+        walletState = walletState.copy(txAndFee = Pair(tx, Amount.fromSat(fee)))
     }
 }

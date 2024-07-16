@@ -33,7 +33,7 @@ internal class ReceiveViewModel : ViewModel() {
             val address = Wallet.getLastUnusedAddress()
             delay(800)
             state = ReceiveScreenState(
-                address = address.address,
+                address = address.address.toString(),
                 addressIndex = address.index,
                 qrState = QrUiState.QR
             )

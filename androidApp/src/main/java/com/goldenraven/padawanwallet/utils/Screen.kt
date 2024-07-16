@@ -7,28 +7,28 @@ package com.goldenraven.padawanwallet.utils
 
 sealed class Screen(val route: String) {
     // onboarding screens
-    object OnboardingScreen : Screen("onboarding_screen")
-    object WalletRecoveryScreen : Screen("wallet_recovery_screen")
+    data object OnboardingScreen : Screen("onboarding_screen")
+    data object WalletRecoveryScreen : Screen("wallet_recovery_screen")
 
     // Home screen
-    object SplashScreen : Screen("splash_screen")
-    object HomeScreen : Screen("home_screen")
+    data object SplashScreen : Screen("splash_screen")
+    data object HomeScreen : Screen("home_screen")
 
     // Wallet screens
-    object WalletRootScreen : Screen("wallet_screen")
-    object ReceiveScreen : Screen("receive_screen")
-    object SendScreen : Screen("send_screen")
-    object TransactionScreen : Screen("transaction_screen")
-    object QRScanScreen : Screen("qr_scan_screen")
+    data object WalletRootScreen : Screen("wallet_screen")
+    data object ReceiveScreen : Screen("receive_screen")
+    data object SendScreen : Screen("send_screen")
+    data object TransactionScreen : Screen("transaction_screen")
+    data object QRScanScreen : Screen("qr_scan_screen")
 
     // Chapters screens
-    object ChaptersRootScreen : Screen("chapters_home_screen")
-    object ChapterScreen : Screen("chapter_screen")
+    data object ChaptersRootScreen : Screen("chapters_home_screen")
+    data object ChapterScreen : Screen("chapter_screen")
 
     // Settings screens
-    object SettingsRootScreen : Screen("settings_root_screen")
-    object AboutScreen : Screen("about_screen")
-    object LanguagesScreen : Screen("languages_screen")
-    object RecoveryPhraseScreen : Screen("recovery_phrase_screen")
-    object SendCoinsBackScreen : Screen("send_coins_back_screen")
+    data object SettingsRootScreen : Screen("settings_root_screen")
+    data object AboutScreen : Screen("about_screen")
+    data object LanguagesScreen : Screen("languages_screen")
+    data object RecoveryPhraseScreen : Screen("recovery_phrase_screen")
+    data object SendCoinsBackScreen : Screen("send_coins_back_screen")
 }

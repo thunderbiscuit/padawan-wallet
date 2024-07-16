@@ -31,7 +31,7 @@ class PadawanActivity : AppCompatActivity() {
         // ask the repository if a wallet already exists
         // if so, load it and launch into wallet activity, otherwise go to intro
         if (WalletRepository.doesWalletExist()) {
-            Wallet.loadExistingWallet()
+            Wallet.loadWallet()
             Log.i(TAG, "Wallet already exists!")
 
             setContent {

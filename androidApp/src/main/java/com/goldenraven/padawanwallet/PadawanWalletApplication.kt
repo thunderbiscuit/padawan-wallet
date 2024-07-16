@@ -17,7 +17,7 @@ class PadawanWalletApplication : Application() {
         super.onCreate()
 
         // initialize Wallet object with path variable
-        Wallet.setPath(applicationContext.filesDir.toString())
+        Wallet.setPathAndConnectDb(applicationContext.filesDir.toString())
 
         // initialize repositories and set shared preferences
         WalletRepository.setSharedPreferences(applicationContext.getSharedPreferences("wallet", Context.MODE_PRIVATE))

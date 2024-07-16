@@ -62,7 +62,6 @@ import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
 import androidx.navigation.NavHostController
 import com.goldenraven.padawanwallet.R
-import com.goldenraven.padawanwallet.domain.bitcoin.Wallet
 import com.goldenraven.padawanwallet.presentation.theme.PadawanTypography
 import com.goldenraven.padawanwallet.presentation.theme.padawan_theme_background_secondary
 import com.goldenraven.padawanwallet.presentation.theme.padawan_theme_button_primary
@@ -82,7 +81,9 @@ import com.goldenraven.padawanwallet.presentation.viewmodels.mvi.WalletAction
 import com.goldenraven.padawanwallet.presentation.viewmodels.mvi.WalletState
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
-import org.bitcoindevkit.TxBuilderResult
+import org.bitcoindevkit.Amount
+import org.bitcoindevkit.FeeRate
+import org.bitcoindevkit.Transaction
 
 private const val TAG = "SendScreen"
 
@@ -100,8 +101,7 @@ internal fun SendScreen(
 
     val recipientAddress: MutableState<String> = rememberSaveable { mutableStateOf("") }
     val amount: MutableState<String> = rememberSaveable { mutableStateOf("") }
-    val feeRate: MutableState<String> = rememberSaveable { mutableStateOf("1") }
-    val txBuilderResult: MutableState<TxBuilderResult?> = remember { mutableStateOf(null) }
+    val feeRate: MutableState<Long> = rememberSaveable { mutableStateOf(0L) }
 
     BottomSheetScaffold(
         sheetShape = RoundedCornerShape(topEnd = 20.dp, topStart = 20.dp),
@@ -109,18 +109,23 @@ internal fun SendScreen(
         sheetPeekHeight = 0.dp,
         sheetDragHandle = null,
         sheetContent = {
-            TransactionConfirmation(
-                state,
-                onAction,
-                txBuilderResult,
-                recipientAddress,
-                amount,
-                bottomSheetScaffoldState,
-                coroutineScope,
-                navController,
-                // walletViewModel
-            )
-        },
+            if (state.txAndFee != null) {
+                TransactionConfirmation(
+                    state,
+                    onAction,
+                    state.txAndFee,
+                    recipientAddress,
+                    amount.value.toULong(),
+                    bottomSheetScaffoldState,
+                    coroutineScope,
+                    navController,
+                )
+            } else {
+                Column {
+                    Text("No transaction to confirm")
+                }
+            }
+        }
     ) {
         Column(modifier = Modifier.fillMaxSize()) {
             val padding = when (getScreenSizeWidth(LocalConfiguration.current.screenWidthDp)) {
@@ -180,7 +185,7 @@ internal fun SendScreen(
                             .height(IntrinsicSize.Min),
                         shape = RoundedCornerShape(20.dp),
                         value = amount.value,
-                        onValueChange = { value ->
+                        onValueChange = { value: String ->
                             amount.value = value.filter { it.isDigit() }
                         },
                         singleLine = true,
@@ -264,7 +269,7 @@ internal fun SendScreen(
                         onValueChange = { sliderPosition = it },
                         valueRange = 1f..8f,
                         onValueChangeFinished = {
-                            feeRate.value = sliderPosition.toString().take(3)
+                            feeRate.value = sliderPosition.toString().take(1).toLong()
                         },
                         steps = 6
                     )
@@ -278,7 +283,7 @@ internal fun SendScreen(
                             val inputsAreValid = verifyInputs(
                                 recipientAddress.value,
                                 amount.value,
-                                feeRate.value,
+                                feeRate.value.toString(),
                                 amountErrorMessage,
                                 addressErrorMessage,
                                 feeRateErrorMessage,
@@ -287,12 +292,13 @@ internal fun SendScreen(
                             )
                             try {
                                 if (inputsAreValid) {
-                                    val txBR = Wallet.createTransaction(
-                                        recipientAddress.value,
-                                        amount.value.toULong(),
-                                        feeRate.value.toFloat()
+                                    onAction(
+                                        WalletAction.BuildAndSignPsbt(
+                                            recipientAddress.value,
+                                            Amount.fromSat(amount.value.toULong()),
+                                            FeeRate.fromSatPerVb(feeRate.value.toULong())
+                                        )
                                     )
-                                    txBuilderResult.value = txBR
 
                                     if (bottomSheetScaffoldState.bottomSheetState.currentValue == SheetValue.PartiallyExpanded) {
                                         coroutineScope.launch {
@@ -343,9 +349,9 @@ internal fun SendScreen(
 fun TransactionConfirmation(
     state: WalletState,
     onAction: (WalletAction) -> Unit,
-    txBuilderResult: MutableState<TxBuilderResult?>,
+    txAndFee: Pair<Transaction, Amount>,
     recipientAddress: MutableState<String>,
-    amount: MutableState<String>,
+    amount: ULong,
     scaffoldState: BottomSheetScaffoldState,
     scope: CoroutineScope,
     navController: NavHostController,
@@ -388,10 +394,9 @@ fun TransactionConfirmation(
         Row(
             Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Start
         ) {
-            val amountText = "${amount.value} satoshis"
+            val amountText = "$amount satoshis"
             Text(
                 text = amountText,
-                // text = "${txBuilderResult.value?.transactionDetails?.sent ?: 0}",
                 fontSize = 16.sp,
             )
         }
@@ -431,7 +436,7 @@ fun TransactionConfirmation(
             Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Start
         ) {
             Text(
-                text = "${txBuilderResult.value?.transactionDetails?.fee ?: 0} satoshis",
+                text = "${txAndFee.second.toSat()} satoshis",
                 fontSize = 16.sp,
             )
         }
@@ -441,7 +446,6 @@ fun TransactionConfirmation(
 
         Button(
             onClick = {
-                val psbt = txBuilderResult.value?.psbt ?: throw Exception()
                 if (!state.isOnline) {
                     scope.launch {
                          scaffoldState.snackbarHostState.showSnackbar(
@@ -450,7 +454,7 @@ fun TransactionConfirmation(
                         )
                     }
                 } else {
-                    onAction(WalletAction.Broadcast(psbt))
+                    onAction(WalletAction.Broadcast(txAndFee.first))
                     navController.popBackStack()
                 }
             },
@@ -516,16 +520,6 @@ fun verifyInputs(
         }
         return false
     }
-    // TODO: I don't think this is possible anymore given the slider.
-    // if (feeRate.toFloat() < 1 || feeRate.toFloat() > 100) {
-    //     scope.launch {
-    //         bottomSheetScaffoldState.snackbarHostState.showSnackbar(
-    //             message = "Please input a fee rate between 1 and 100",
-    //             duration = SnackbarDuration.Short
-    //         )
-    //     }
-    //     return false
-    // }
     Log.i(TAG, "Inputs are valid")
     return true
 }

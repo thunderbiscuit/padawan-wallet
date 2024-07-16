@@ -8,7 +8,7 @@ package com.goldenraven.padawanwallet.domain.tx
 import kotlinx.coroutines.flow.Flow
 
 class TxRepository(private val txDao: TxDao) {
-    val readAllData: Flow<List<Tx>> = txDao.readAllTx()
+    val readAllTxs: Flow<List<Tx>> = txDao.readAllTx()
 
     fun addTx(tx: Tx) {
         txDao.addTx(tx = tx)
