@@ -66,7 +66,7 @@ internal fun AboutScreen(
             val mUriHandler = LocalUriHandler.current
             val privacyLink = stringResource(id = R.string.privacyLink)
             Text(
-                text = privacyLink,
+                text = "Read our privacy policy here.",
                 modifier = Modifier
                     .clickable { mUriHandler.openUri(privacyLink) }
                     .padding(start = 24.dp, end = 24.dp),
