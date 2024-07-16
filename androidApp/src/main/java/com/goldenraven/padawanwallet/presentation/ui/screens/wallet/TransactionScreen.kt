@@ -6,6 +6,7 @@
 package com.goldenraven.padawanwallet.presentation.ui.screens.wallet
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -24,8 +25,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
@@ -39,6 +42,7 @@ import com.goldenraven.padawanwallet.presentation.theme.padawan_disabled
 import com.goldenraven.padawanwallet.presentation.theme.padawan_theme_receive_primary
 import com.goldenraven.padawanwallet.presentation.theme.padawan_theme_send_primary
 import com.goldenraven.padawanwallet.presentation.theme.gradientBackground
+import com.goldenraven.padawanwallet.presentation.theme.padawan_theme_button_primary
 import com.goldenraven.padawanwallet.presentation.ui.components.PadawanAppBar
 import com.goldenraven.padawanwallet.utils.ScreenSizeWidth
 import com.goldenraven.padawanwallet.utils.TxType
@@ -192,6 +196,17 @@ internal fun TransactionScreen(
                 Text(
                     modifier = Modifier.width(170.dp),
                     text = txDetails.txid
+                )
+                val mUriHandler = LocalUriHandler.current
+                val link: String = "https://mempool.space/signet/tx/${txDetails.txid}"
+                Text(
+                    text = link,
+                    modifier = Modifier
+                        .clickable { mUriHandler.openUri(link) }
+                        .padding(start = 24.dp, end = 24.dp),
+                    style = PadawanTypography.bodyMedium,
+                    color = padawan_theme_button_primary,
+                    textDecoration = TextDecoration.Underline
                 )
             }
             Row(
