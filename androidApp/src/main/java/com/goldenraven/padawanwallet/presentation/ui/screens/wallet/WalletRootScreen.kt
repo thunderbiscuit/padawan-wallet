@@ -399,7 +399,6 @@ fun TransactionListBox(
         modifier = Modifier.fillMaxWidth(),
         border = standardBorder,
         shape = RoundedCornerShape(20.dp),
-        // containerColor = padawan_theme_background_secondary,
         colors = CardDefaults.cardColors(padawan_theme_background_secondary),
     ) {
         val padding = when (getScreenSizeWidth(LocalConfiguration.current.screenWidthDp)) {

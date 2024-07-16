@@ -18,29 +18,8 @@ fun netSendWithoutFees(txSatsOut: ULong, txSatsIn: ULong, fee: ULong): ULong {
  * Determines whether a transaction is a payment or a receive.
  */
 fun txType(sent: ULong, received: ULong): TxType {
-    return if (sent - received > 0u) TxType.PAYMENT else TxType.RECEIVE
+    return if (sent > received) TxType.PAYMENT else TxType.RECEIVE
 }
-
-// fun parseTxAmounts(txDetails: TransactionDetails): TxInfo {
-//     if (txDetails.sent == 0uL) {
-//         val fee = txDetails.fee ?: 0uL
-//         return TxInfo(type = TxType.RECEIVE, valueIn = txDetails.received, valueOut = 0uL, fee = fee)
-//     } else {
-//         val fee = txDetails.fee ?: 0uL
-//         val netSend: Int = netSendWithoutFees(
-//             txSatsOut = SatoshisOut(txDetails.sent.toInt()),
-//             txSatsIn = SatoshisIn(txDetails.received.toInt()),
-//             fees = fee.toInt()
-//         )
-//         return TxInfo(type = TxType.PAYMENT, valueIn = 0uL, valueOut = netSend.toULong(), fee = fee)
-//     }
-// }
-
-// @JvmInline
-// value class SatoshisIn(val satoshis: ULong)
-//
-// @JvmInline
-// value class SatoshisOut(val satoshis: ULong)
 
 enum class TxType {
     PAYMENT,

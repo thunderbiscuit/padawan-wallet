@@ -52,6 +52,7 @@ class WalletViewModel(application: Application) : AndroidViewModel(application) 
         viewModelScope.launch {
             repository.readAllTxs.collect { result ->
                 txList = result
+                walletState = walletState.copy(transactions = txList)
             }
         }
     }
@@ -188,6 +189,9 @@ class WalletViewModel(application: Application) : AndroidViewModel(application) 
             var valueIn = 0uL
             var valueOut = 0uL
             val txType = txType(sent = tx.sent.toSat(), received = tx.received.toSat())
+            Log.i(TAG, "Sent: ${tx.sent.toSat()}")
+            Log.i(TAG, "Received: ${tx.received.toSat()}")
+            Log.i(TAG, "Transaction type: $txType")
             when (txType) {
                 TxType.PAYMENT -> {
                     valueOut = netSendWithoutFees(
