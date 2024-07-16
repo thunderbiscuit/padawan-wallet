@@ -193,17 +193,13 @@ internal fun TransactionScreen(
                     text = stringResource(R.string.txid),
                     style = PadawanTypography.titleSmall,
                 )
-                Text(
-                    modifier = Modifier.width(170.dp),
-                    text = txDetails.txid
-                )
                 val mUriHandler = LocalUriHandler.current
                 val link: String = "https://mempool.space/signet/tx/${txDetails.txid}"
                 Text(
-                    text = link,
+                    text = "${txDetails.txid} (mempool.space)",
                     modifier = Modifier
                         .clickable { mUriHandler.openUri(link) }
-                        .padding(start = 24.dp, end = 24.dp),
+                        .width(270.dp),
                     style = PadawanTypography.bodyMedium,
                     color = padawan_theme_button_primary,
                     textDecoration = TextDecoration.Underline
