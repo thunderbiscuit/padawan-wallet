@@ -95,8 +95,6 @@
     <string name="transaction_details">Transaction details</string>
     <string name="total_transaction_amount">Total transaction amount:</string>
     <string name="transaction_type">Transaction type:</string>
-    <string name="sent">Sent</string>
-    <string name="received">Received</string>
     <string name="time">Time:</string>
     <string name="pending">Pending</string>
     <string name="txid">Txid:</string>
