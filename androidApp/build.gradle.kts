@@ -13,7 +13,7 @@ val faucetUsername: String by project
 val faucetPassword: String by project
 
 android {
-    compileSdk = 34
+    compileSdk = 35
     ndkVersion = "21.4.7075529"
 
     buildFeatures {
@@ -25,7 +25,7 @@ android {
     defaultConfig {
         applicationId = "com.goldenraven.padawanwallet"
         minSdk = 26
-        targetSdk = 34
+        targetSdk = 35
         versionCode = 17
         versionName = "v0.13.0-SNAPSHOT"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
