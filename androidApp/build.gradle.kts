@@ -71,7 +71,7 @@ android {
         abi {
             isEnable = true
             reset()
-            include("arm64-v8a", "armeabi-v7a", "x86_64")
+            include("arm64-v8a", "x86_64")
             isUniversalApk = true
         }
     }
@@ -177,7 +177,8 @@ tasks.withType<Test> {
     }
 }
 
-val abiCodes = mapOf("armeabi-v7a" to 1, "x86_64" to 2, "arm64-v8a" to 3)
+val abiCodes = mapOf("x86_64" to 1, "arm64-v8a" to 2)
+// val abiCodes = mapOf("armeabi-v7a" to 1, "x86_64" to 2, "arm64-v8a" to 3)
 
 androidComponents {
     onVariants { variant ->
@@ -196,7 +197,7 @@ androidComponents {
             if (baseAbiCode != null) {
                 // Assigns the new version code to output.versionCode, which changes the version code
                 // for only the output APK, not for the variant itself.
-                output.versionCode.set(baseAbiCode * 1000 + (output.versionCode.get()  ?: 0))
+                output.versionCode.set(baseAbiCode * 1000 + (output.versionCode.get() ?: 0))
             }
         }
     }
