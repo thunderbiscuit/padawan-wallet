@@ -95,8 +95,6 @@
     <string name="transaction_details">Detalles de la transacción</string>
     <string name="total_transaction_amount">Cantidad total\nde la transacción:</string>
     <string name="transaction_type">Tipo de transacción:</string>
-    <string name="sent">Enviado</string>
-    <string name="received">Recibido</string>
     <string name="time">Fecha:</string>
     <string name="pending">Pendiente</string>
     <string name="txid">Txid\n(identificador de\nla transacción):</string>
