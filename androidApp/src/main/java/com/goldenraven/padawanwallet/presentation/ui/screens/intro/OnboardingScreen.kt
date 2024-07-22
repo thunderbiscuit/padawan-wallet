@@ -38,7 +38,7 @@ import com.goldenraven.padawanwallet.R
 import com.goldenraven.padawanwallet.presentation.theme.PadawanTypography
 import com.goldenraven.padawanwallet.presentation.theme.standardShadow
 import com.goldenraven.padawanwallet.utils.Screen
-import com.goldenraven.padawanwallet.presentation.ui.components.ShowBars
+import com.goldenraven.padawanwallet.presentation.ui.components.SystemBars
 import com.goldenraven.padawanwallet.presentation.ui.components.standardBorder
 import com.goldenraven.padawanwallet.utils.ScreenSizeHeight
 import com.goldenraven.padawanwallet.utils.getScreenSizeHeight
@@ -57,7 +57,7 @@ internal fun OnboardingScreen(
     val screenSizeHeight: ScreenSizeHeight = getScreenSizeHeight(LocalConfiguration.current.screenHeightDp)
     val pageScrollState: ScrollState = rememberScrollState()
 
-    ShowBars()
+    SystemBars()
 
     if (screenSizeHeight == ScreenSizeHeight.Small) {
         SmallOnboarding(

@@ -1,6 +1,6 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
     <style
         name="Theme.PadawanWallet"
-        parent="Theme.MaterialComponents.NoActionBar">
+        parent="Theme.Material3.Light.NoActionBar">
     </style>
 </resources>

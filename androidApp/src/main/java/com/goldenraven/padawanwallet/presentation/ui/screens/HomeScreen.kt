@@ -15,13 +15,12 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.geometry.Offset
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -35,21 +34,20 @@ import com.goldenraven.padawanwallet.presentation.theme.PadawanTypography
 import com.goldenraven.padawanwallet.presentation.theme.padawan_theme_background_secondary
 import com.goldenraven.padawanwallet.presentation.theme.padawan_theme_button_primary
 import com.goldenraven.padawanwallet.presentation.theme.padawan_theme_navigation_bar_unselected
-import com.goldenraven.padawanwallet.presentation.ui.components.ShowBars
+import com.goldenraven.padawanwallet.presentation.ui.components.SystemBars
 import com.goldenraven.padawanwallet.utils.NavigationItem
 import com.goldenraven.padawanwallet.presentation.navigation.WalletNavigation
-import com.google.accompanist.navigation.animation.rememberAnimatedNavController
-import com.google.accompanist.systemuicontroller.rememberSystemUiController
+import androidx.navigation.compose.rememberNavController
 
 private const val TAG = "HomeScreen"
 
 @OptIn(androidx.compose.animation.ExperimentalAnimationApi::class)
 @Composable
 internal fun HomeScreen() {
-    val navControllerWalletNavigation: NavHostController = rememberAnimatedNavController()
+    val navControllerWalletNavigation: NavHostController = rememberNavController()
     // the splash screen hides the system bars
     // we need to bring them back on before continuing
-    ShowBars()
+    SystemBars()
 
     Scaffold(
         bottomBar = { BottomNavigationBar(navControllerWalletNavigation) }
@@ -66,14 +64,14 @@ internal fun HomeScreen() {
 internal fun BottomNavigationBar(
     navControllerWalletNavigation: NavController,
 ) {
-    var selectedItem by remember { mutableStateOf(0) }
+    var selectedItem by remember { mutableIntStateOf(0) }
     val items = listOf(
         NavigationItem.Home(title = stringResource(id = R.string.bottom_nav_wallet)),
         NavigationItem.Chapters(title = stringResource(id = R.string.bottom_nav_chapters)),
         NavigationItem.Settings(title = stringResource(id = R.string.bottom_nav_settings))
     )
 
-    SystemBars()
+    // SystemBars()
 
     NavigationBar(
         tonalElevation = 0.dp,
@@ -126,19 +124,18 @@ internal fun BottomNavigationBar(
     }
 }
 
-@Composable
-internal fun SystemBars() {
-    rememberSystemUiController().apply {
-        // setStatusBarColor(
-        //     color = Color.Transparent,
-        //     darkIcons = false
-        // )
-        // this.isStatusBarVisible = false
-
-        setNavigationBarColor(
-            color = Color.Transparent,
-            darkIcons = false
-        )
-        this.isNavigationBarVisible = false
-    }
-}
+// @Composable
+// internal fun SystemBars() {
+//     val systemUiController = rememberSystemUiController()
+//     systemUiController.setSystemBarsColor(
+//             color = Color.Transparent,
+//             darkIcons = false
+//     )
+//     systemUiController.isStatusBarVisible = true
+//     systemUiController.isNavigationBarVisible = false
+//
+//     // systemUiController.setNavigationBarColor(
+//     //     color = Color.Transparent,
+//     //     darkIcons = false
+//     // )
+// }
