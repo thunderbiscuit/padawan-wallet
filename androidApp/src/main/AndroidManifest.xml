@@ -26,7 +26,7 @@
 
         <activity
             android:name=".presentation.ui.PadawanActivity"
-            android:theme="@style/Theme.PadawanWallet"
+            android:theme="@style/SplashScreen"
             android:screenOrientation="portrait"
             android:exported="true">
             <intent-filter>

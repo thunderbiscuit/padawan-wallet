@@ -11,8 +11,6 @@ interface Destination
 
 // Onboarding screens
 @Serializable
-object SplashScreen : Destination
-@Serializable
 object OnboardingScreen : Destination
 @Serializable
 object WalletRecoveryScreen : Destination

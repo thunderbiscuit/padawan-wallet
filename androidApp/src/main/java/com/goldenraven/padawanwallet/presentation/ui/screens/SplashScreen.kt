@@ -25,37 +25,37 @@ import com.goldenraven.padawanwallet.presentation.navigation.OnboardingScreen
 import kotlinx.coroutines.delay
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
-@Composable
-internal fun SplashScreen(navController: NavController, moveToIntro: Boolean) {
-
-    HideBars()
-
-    LaunchedEffect(key1 = true) {
-        delay(1000)
-        if (moveToIntro) {
-            navController.navigate(OnboardingScreen) {
-                popUpTo(0)
-            }
-        } else {
-            navController.navigate(HomeScreen) {
-                popUpTo(0)
-            }
-        }
-    }
-
-    Box(
-        contentAlignment = Alignment.Center,
-        modifier = Modifier
-            .fillMaxSize()
-            .background(Color.White)
-    ) {
-        Image(
-            painter = painterResource(id = R.drawable.ic_padawan_colour_foreground),
-            contentDescription = stringResource(id = R.string.padawan_logo),
-            Modifier.size(200.dp)
-        )
-    }
-}
+// @Composable
+// internal fun SplashScreen(navController: NavController, moveToIntro: Boolean) {
+//
+//     HideBars()
+//
+//     LaunchedEffect(key1 = true) {
+//         delay(1000)
+//         if (moveToIntro) {
+//             navController.navigate(OnboardingScreen) {
+//                 popUpTo(0)
+//             }
+//         } else {
+//             navController.navigate(HomeScreen) {
+//                 popUpTo(0)
+//             }
+//         }
+//     }
+//
+//     Box(
+//         contentAlignment = Alignment.Center,
+//         modifier = Modifier
+//             .fillMaxSize()
+//             .background(Color.White)
+//     ) {
+//         Image(
+//             painter = painterResource(id = R.drawable.ic_padawan_colour_foreground),
+//             contentDescription = stringResource(id = R.string.padawan_logo),
+//             Modifier.size(200.dp)
+//         )
+//     }
+// }
 
 @Composable
 internal fun HideBars() {

@@ -13,7 +13,7 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.goldenraven.padawanwallet.presentation.ui.screens.HomeScreen
-import com.goldenraven.padawanwallet.presentation.ui.screens.SplashScreen
+// import com.goldenraven.padawanwallet.presentation.ui.screens.SplashScreen
 
 @Composable
 fun HomeNavigation() {
@@ -22,13 +22,13 @@ fun HomeNavigation() {
 
     NavHost(
         navController = navController,
-        startDestination = SplashScreen,
+        startDestination = HomeScreen,
     ) {
 
         // Splash
-        composable<SplashScreen> {
-            SplashScreen(navController = navController, moveToIntro = false)
-        }
+        // composable<SplashScreen> {
+        //     SplashScreen(navController = navController, moveToIntro = false)
+        // }
 
 
         // Home
