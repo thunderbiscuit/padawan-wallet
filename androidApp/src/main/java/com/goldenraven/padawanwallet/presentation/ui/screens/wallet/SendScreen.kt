@@ -62,6 +62,7 @@ import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
 import androidx.navigation.NavHostController
 import com.goldenraven.padawanwallet.R
+import com.goldenraven.padawanwallet.presentation.navigation.QRScanScreen
 import com.goldenraven.padawanwallet.presentation.theme.PadawanTypography
 import com.goldenraven.padawanwallet.presentation.theme.padawan_theme_background_secondary
 import com.goldenraven.padawanwallet.presentation.theme.padawan_theme_button_primary
@@ -72,7 +73,6 @@ import com.goldenraven.padawanwallet.presentation.theme.innerScreenPadding
 import com.goldenraven.padawanwallet.presentation.theme.standardShadow
 import com.goldenraven.padawanwallet.presentation.theme.wideTextField
 import com.goldenraven.padawanwallet.presentation.ui.components.PadawanAppBar
-import com.goldenraven.padawanwallet.utils.Screen
 import com.goldenraven.padawanwallet.presentation.ui.components.VerticalTextFieldDivider
 import com.goldenraven.padawanwallet.presentation.ui.components.standardBorder
 import com.goldenraven.padawanwallet.utils.ScreenSizeWidth
@@ -239,7 +239,7 @@ internal fun SendScreen(
                                 VerticalTextFieldDivider()
                                 IconButton(
                                     onClick = {
-                                        navController.navigate(Screen.QRScanScreen.route) {
+                                        navController.navigate(QRScanScreen) {
                                             launchSingleTop = true
                                         }
                                     }, modifier = Modifier.align(Alignment.CenterVertically)

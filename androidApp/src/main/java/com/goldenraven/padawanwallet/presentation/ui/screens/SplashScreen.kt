@@ -20,7 +20,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.goldenraven.padawanwallet.R
-import com.goldenraven.padawanwallet.utils.Screen
+import com.goldenraven.padawanwallet.presentation.navigation.HomeScreen
+import com.goldenraven.padawanwallet.presentation.navigation.OnboardingScreen
 import kotlinx.coroutines.delay
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
@@ -32,11 +33,11 @@ internal fun SplashScreen(navController: NavController, moveToIntro: Boolean) {
     LaunchedEffect(key1 = true) {
         delay(1000)
         if (moveToIntro) {
-            navController.navigate(Screen.OnboardingScreen.route) {
+            navController.navigate(OnboardingScreen) {
                 popUpTo(0)
             }
         } else {
-            navController.navigate(Screen.HomeScreen.route) {
+            navController.navigate(HomeScreen) {
                 popUpTo(0)
             }
         }

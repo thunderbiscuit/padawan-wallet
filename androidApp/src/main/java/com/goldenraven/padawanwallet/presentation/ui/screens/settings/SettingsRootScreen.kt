@@ -39,11 +39,14 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.goldenraven.padawanwallet.BuildConfig
 import com.goldenraven.padawanwallet.R
+import com.goldenraven.padawanwallet.presentation.navigation.AboutScreen
+import com.goldenraven.padawanwallet.presentation.navigation.LanguagesScreen
+import com.goldenraven.padawanwallet.presentation.navigation.RecoveryPhraseScreen
+import com.goldenraven.padawanwallet.presentation.navigation.SendCoinsBackScreen
 import com.goldenraven.padawanwallet.presentation.theme.PadawanTypography
 import com.goldenraven.padawanwallet.presentation.theme.padawan_theme_background_secondary
 import com.goldenraven.padawanwallet.presentation.theme.padawan_theme_button_primary
 import com.goldenraven.padawanwallet.presentation.theme.padawan_theme_text_faded_secondary
-import com.goldenraven.padawanwallet.utils.Screen
 import com.goldenraven.padawanwallet.presentation.viewmodels.mvi.ChaptersScreensAction
 import kotlinx.coroutines.launch
 
@@ -85,7 +88,7 @@ internal fun SettingsRootScreen(
 
             Button(
                 onClick = {
-                    navController.navigate(Screen.RecoveryPhraseScreen.route)
+                    navController.navigate(RecoveryPhraseScreen)
                 },
                 colors = ButtonDefaults.buttonColors(containerColor = Color(0xffffffff)),
                 shape = RoundedCornerShape(8.dp),
@@ -110,7 +113,7 @@ internal fun SettingsRootScreen(
 
             Button(
                 onClick = {
-                    navController.navigate(Screen.SendCoinsBackScreen.route)
+                    navController.navigate(SendCoinsBackScreen)
                 },
                 colors = ButtonDefaults.buttonColors(containerColor = Color(0xffffffff)),
                 shape = RoundedCornerShape(8.dp),
@@ -135,7 +138,7 @@ internal fun SettingsRootScreen(
 
             Button(
                 onClick = {
-                    navController.navigate(Screen.LanguagesScreen.route)
+                    navController.navigate(LanguagesScreen)
                 },
                 colors = ButtonDefaults.buttonColors(containerColor = Color(0xffffffff)),
                 shape = RoundedCornerShape(8.dp),
@@ -160,7 +163,7 @@ internal fun SettingsRootScreen(
 
             Button(
                 onClick = {
-                    navController.navigate(Screen.AboutScreen.route)
+                    navController.navigate(AboutScreen)
                 },
                 colors = ButtonDefaults.buttonColors(containerColor = Color(0xffffffff)),
                 shape = RoundedCornerShape(8.dp),

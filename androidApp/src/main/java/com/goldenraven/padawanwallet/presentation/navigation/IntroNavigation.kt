@@ -13,7 +13,6 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.NavHostController
 import com.goldenraven.padawanwallet.presentation.ui.WalletCreateType
-import com.goldenraven.padawanwallet.utils.Screen
 import com.goldenraven.padawanwallet.presentation.ui.screens.SplashScreen
 import com.goldenraven.padawanwallet.presentation.ui.screens.intro.OnboardingScreen
 import com.goldenraven.padawanwallet.presentation.ui.screens.intro.WalletRecoveryScreen
@@ -25,15 +24,14 @@ fun IntroNavigation(onBuildWalletButtonClicked: (WalletCreateType) -> Unit) {
 
     NavHost(
         navController = navController,
-        startDestination = Screen.SplashScreen.route,
+        startDestination = SplashScreen,
     ) {
 
-        composable(
-            route = Screen.SplashScreen.route
-        ) { SplashScreen(navController = navController, moveToIntro = true) }
+        composable<SplashScreen> {
+            SplashScreen(navController = navController, moveToIntro = true)
+        }
 
-        composable(
-            route = Screen.OnboardingScreen.route,
+        composable<OnboardingScreen>(
             exitTransition = {
                 slideOutOfContainer(AnimatedContentTransitionScope.SlideDirection.Start, animationSpec = tween(animationDuration))
             },
@@ -42,8 +40,7 @@ fun IntroNavigation(onBuildWalletButtonClicked: (WalletCreateType) -> Unit) {
             },
         ) { OnboardingScreen(navController = navController, onBuildWalletButtonClicked) }
 
-        composable(
-            route = Screen.WalletRecoveryScreen.route,
+        composable<WalletRecoveryScreen>(
             enterTransition = {
                 slideIntoContainer(AnimatedContentTransitionScope.SlideDirection.Start, animationSpec = tween(animationDuration))
             },

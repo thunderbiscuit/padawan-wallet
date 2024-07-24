@@ -14,7 +14,6 @@ import androidx.navigation.NavHostController
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.goldenraven.padawanwallet.utils.Screen
 import com.goldenraven.padawanwallet.presentation.ui.screens.chapters.ChapterScreen
 import com.goldenraven.padawanwallet.presentation.ui.screens.settings.AboutScreen
 import com.goldenraven.padawanwallet.presentation.ui.screens.settings.RecoveryPhraseScreen
@@ -42,11 +41,10 @@ fun WalletNavigation(
 
     NavHost(
         navController = navHostController,
-        startDestination = Screen.WalletRootScreen.route,
+        startDestination = WalletRootScreen,
     ) {
         // Wallet
-        composable(
-            route = Screen.WalletRootScreen.route,
+        composable<WalletRootScreen>(
             enterTransition = {
                 val route = initialState.destination.route
                 if (route == null) {
@@ -97,8 +95,7 @@ fun WalletNavigation(
 
 
         // Receive
-        composable(
-            route = Screen.ReceiveScreen.route,
+        composable<ReceiveScreen>(
             enterTransition = {
                 slideIntoContainer(AnimatedContentTransitionScope.SlideDirection.Up, animationSpec = tween(animationDuration))
             },
@@ -122,8 +119,7 @@ fun WalletNavigation(
 
         // Send
         val sendScreens: List<String> = listOf("qr_scan_screen")
-        composable(
-            route = Screen.SendScreen.route,
+        composable<SendScreen>(
             enterTransition = {
                 when (initialState.destination.route) {
                     in sendScreens -> fadeIn(animationSpec = tween(400))
@@ -159,8 +155,7 @@ fun WalletNavigation(
 
 
         // Transaction screen
-        composable(
-            route = Screen.TransactionScreen.route,
+        composable<TransactionScreen>(
             enterTransition = {
                 slideIntoContainer(AnimatedContentTransitionScope.SlideDirection.Up, animationSpec = tween(animationDuration))
             },
@@ -182,8 +177,7 @@ fun WalletNavigation(
         }
 
         // QR Scanner Screen
-        composable(
-            route = Screen.QRScanScreen.route,
+        composable<QRScanScreen>(
             enterTransition = {
                 slideIntoContainer(AnimatedContentTransitionScope.SlideDirection.Up, animationSpec = tween(animationDuration))
             },
@@ -200,8 +194,7 @@ fun WalletNavigation(
 
 
         // Chapters home
-        composable(
-            route = Screen.ChaptersRootScreen.route,
+        composable<ChaptersRootScreen>(
             enterTransition = {
                 when (initialState.destination.route) {
                     "wallet_screen" -> slideIntoContainer(AnimatedContentTransitionScope.SlideDirection.Start, animationSpec = tween(animationDuration))
@@ -234,8 +227,7 @@ fun WalletNavigation(
 
 
         // Specific chapters
-        composable(
-            route = Screen.ChapterScreen.route,
+        composable<ChapterScreen>(
             enterTransition = {
                 slideIntoContainer(AnimatedContentTransitionScope.SlideDirection.Up, animationSpec = tween(animationDuration))
             },
@@ -253,8 +245,7 @@ fun WalletNavigation(
 
         // Settings
         val settingsScreens: List<String> = listOf("about_screen", "recovery_phrase_screen", "send_coins_back_screen", "languages_screen")
-        composable(
-            route = Screen.SettingsRootScreen.route,
+        composable<SettingsRootScreen>(
             enterTransition = {
                 when (initialState.destination.route) {
                     in settingsScreens -> fadeIn(animationSpec = tween(400))
@@ -264,7 +255,7 @@ fun WalletNavigation(
             popEnterTransition = {
                 when (initialState.destination.route) {
                     in settingsScreens -> fadeIn(animationSpec = tween(400))
-                    else -> slideIntoContainer(AnimatedContentTransitionScope.SlideDirection.Start, animationSpec = tween(animationDuration))
+                    else               -> slideIntoContainer(AnimatedContentTransitionScope.SlideDirection.Start, animationSpec = tween(animationDuration))
                 }
             },
             exitTransition = {
@@ -288,8 +279,7 @@ fun WalletNavigation(
 
 
         // About
-        composable(
-            route = Screen.AboutScreen.route,
+        composable<AboutScreen>(
             enterTransition = {
                 slideIntoContainer(AnimatedContentTransitionScope.SlideDirection.Up, animationSpec = tween(animationDuration))
             },
@@ -306,8 +296,7 @@ fun WalletNavigation(
 
 
         // Recovery phrase
-        composable(
-            route = Screen.RecoveryPhraseScreen.route,
+        composable<RecoveryPhraseScreen>(
             enterTransition = {
                 slideIntoContainer(AnimatedContentTransitionScope.SlideDirection.Up, animationSpec = tween(animationDuration))
             },
@@ -324,8 +313,7 @@ fun WalletNavigation(
 
 
         // Send coins back
-        composable(
-            route = Screen.SendCoinsBackScreen.route,
+        composable<SendCoinsBackScreen>(
             enterTransition = {
                 slideIntoContainer(AnimatedContentTransitionScope.SlideDirection.Up, animationSpec = tween(animationDuration))
             },
@@ -341,8 +329,7 @@ fun WalletNavigation(
         ) { SendCoinsBackScreen(navController = navHostController) }
 
         // Language
-        composable(
-            route = Screen.LanguagesScreen.route,
+        composable<LanguagesScreen>(
             enterTransition = {
                 slideIntoContainer(AnimatedContentTransitionScope.SlideDirection.Up, animationSpec = tween(animationDuration))
             },

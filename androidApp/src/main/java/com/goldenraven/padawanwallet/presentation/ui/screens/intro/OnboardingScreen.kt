@@ -35,9 +35,9 @@ import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.navigation.NavController
 import com.goldenraven.padawanwallet.R
+import com.goldenraven.padawanwallet.presentation.navigation.WalletRecoveryScreen
 import com.goldenraven.padawanwallet.presentation.theme.PadawanTypography
 import com.goldenraven.padawanwallet.presentation.theme.standardShadow
-import com.goldenraven.padawanwallet.utils.Screen
 import com.goldenraven.padawanwallet.presentation.ui.components.SystemBars
 import com.goldenraven.padawanwallet.presentation.ui.components.standardBorder
 import com.goldenraven.padawanwallet.utils.ScreenSizeHeight
@@ -153,7 +153,7 @@ internal fun SmallOnboarding(
                 modifier = Modifier
                     .padding(start = 8.dp, bottom = 8.dp)
                     .height(40.dp)
-                    .noRippleClickable { navController.navigate(Screen.WalletRecoveryScreen.route) },
+                    .noRippleClickable { navController.navigate(WalletRecoveryScreen) },
                 text = stringResource(R.string.recover_it_here),
                 color = Color(0xff787878),
                 style = bodyMediumUnderlined
@@ -272,7 +272,7 @@ internal fun PhoneOnboarding(
                 modifier = Modifier
                     .padding(start = 8.dp, bottom = 8.dp)
                     .height(40.dp)
-                    .noRippleClickable { navController.navigate(Screen.WalletRecoveryScreen.route) },
+                    .noRippleClickable { navController.navigate(WalletRecoveryScreen) },
                 text = stringResource(R.string.recover_it_here),
                 color = Color(0xff787878),
                 style = bodyMediumUnderlined

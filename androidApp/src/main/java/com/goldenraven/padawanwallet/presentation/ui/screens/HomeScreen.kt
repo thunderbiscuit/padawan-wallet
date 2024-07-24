@@ -25,10 +25,8 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
-import androidx.navigation.compose.currentBackStackEntryAsState
 import com.goldenraven.padawanwallet.R
 import com.goldenraven.padawanwallet.presentation.theme.PadawanTypography
 import com.goldenraven.padawanwallet.presentation.theme.padawan_theme_background_secondary
@@ -71,8 +69,6 @@ internal fun BottomNavigationBar(
         NavigationItem.Settings(title = stringResource(id = R.string.bottom_nav_settings))
     )
 
-    // SystemBars()
-
     NavigationBar(
         tonalElevation = 0.dp,
         containerColor = padawan_theme_background_secondary,
@@ -85,9 +81,6 @@ internal fun BottomNavigationBar(
             )
         },
     ) {
-        val navBackStackEntry by navControllerWalletNavigation.currentBackStackEntryAsState()
-        val currentDestination = navBackStackEntry?.destination
-
         items.forEachIndexed { index, item ->
             NavigationBarItem(
                 icon = {
@@ -99,7 +92,7 @@ internal fun BottomNavigationBar(
                         style = PadawanTypography.labelSmall
                     )
                 },
-                selected = currentDestination?.hierarchy?.any { it.route in item.group } == true,
+                selected = selectedItem == index,
                 onClick = {
                     if (selectedItem != index) {
                         selectedItem = index
@@ -123,19 +116,3 @@ internal fun BottomNavigationBar(
         }
     }
 }
-
-// @Composable
-// internal fun SystemBars() {
-//     val systemUiController = rememberSystemUiController()
-//     systemUiController.setSystemBarsColor(
-//             color = Color.Transparent,
-//             darkIcons = false
-//     )
-//     systemUiController.isStatusBarVisible = true
-//     systemUiController.isNavigationBarVisible = false
-//
-//     // systemUiController.setNavigationBarColor(
-//     //     color = Color.Transparent,
-//     //     darkIcons = false
-//     // )
-// }

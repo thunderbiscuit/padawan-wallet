@@ -64,11 +64,13 @@ import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.goldenraven.padawanwallet.R
+import com.goldenraven.padawanwallet.presentation.navigation.SendScreen
+import com.goldenraven.padawanwallet.presentation.navigation.ReceiveScreen
+import com.goldenraven.padawanwallet.presentation.navigation.TransactionScreen
 import com.goldenraven.padawanwallet.domain.bitcoin.BitcoinUnit
 import com.goldenraven.padawanwallet.domain.tx.Tx
 import com.goldenraven.padawanwallet.presentation.ui.components.FadedVerticalDivider
 import com.goldenraven.padawanwallet.presentation.ui.components.LoadingAnimation
-import com.goldenraven.padawanwallet.utils.Screen
 import com.goldenraven.padawanwallet.presentation.ui.components.standardBorder
 import com.goldenraven.padawanwallet.presentation.theme.PadawanTheme
 import com.goldenraven.padawanwallet.presentation.theme.PadawanTypography
@@ -322,7 +324,7 @@ fun SendReceive(navController: NavHostController, isOnline: Boolean) {
             .height(70.dp)
     ) {
         Button(
-            onClick = { ClickHelper.clickOnce { navController.navigate(Screen.ReceiveScreen.route) }},
+            onClick = { ClickHelper.clickOnce { navController.navigate(ReceiveScreen) }},
             colors = ButtonDefaults.buttonColors(containerColor = padawan_theme_button_secondary),
             shape = RoundedCornerShape(20.dp),
             border = standardBorder,
@@ -346,7 +348,7 @@ fun SendReceive(navController: NavHostController, isOnline: Boolean) {
             }
         }
         Button(
-            onClick = { ClickHelper.clickOnce { navController.navigate(Screen.SendScreen.route) }},
+            onClick = { ClickHelper.clickOnce { navController.navigate(SendScreen) }},
             colors = ButtonDefaults.buttonColors(
                 containerColor = padawan_theme_button_primary,
                 disabledContainerColor = Color.White
@@ -454,7 +456,7 @@ fun TransactionListBox(
                     Column(
                         modifier = Modifier.noRippleClickable {
                             onAction(WalletAction.SeeSingleTx(tx.txid))
-                            navController.navigate(Screen.TransactionScreen.route)
+                            navController.navigate(TransactionScreen)
                         }
                     ) {
                         Box(modifier = Modifier

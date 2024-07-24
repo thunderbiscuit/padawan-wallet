@@ -6,26 +6,38 @@
 package com.goldenraven.padawanwallet.utils
 
 import com.goldenraven.padawanwallet.R
+import com.goldenraven.padawanwallet.presentation.navigation.AboutScreen
+import com.goldenraven.padawanwallet.presentation.navigation.ChapterScreen
+import com.goldenraven.padawanwallet.presentation.navigation.ChaptersRootScreen
+import com.goldenraven.padawanwallet.presentation.navigation.Destination
+import com.goldenraven.padawanwallet.presentation.navigation.QRScanScreen
+import com.goldenraven.padawanwallet.presentation.navigation.ReceiveScreen
+import com.goldenraven.padawanwallet.presentation.navigation.RecoveryPhraseScreen
+import com.goldenraven.padawanwallet.presentation.navigation.SendCoinsBackScreen
+import com.goldenraven.padawanwallet.presentation.navigation.SendScreen
+import com.goldenraven.padawanwallet.presentation.navigation.SettingsRootScreen
+import com.goldenraven.padawanwallet.presentation.navigation.TransactionScreen
+import com.goldenraven.padawanwallet.presentation.navigation.WalletRootScreen
 
-sealed class NavigationItem(val route: String, val iconOutline: Int, val title: String, val group: Set<String>) {
+sealed class NavigationItem(val route: Destination, val iconOutline: Int, val title: String, val group: Set<Destination>) {
     class Home(title: String) : NavigationItem(
-        route = Screen.WalletRootScreen.route,
+        route = WalletRootScreen,
         iconOutline = R.drawable.ic_hicon_wallet,
         title = title,
-        group = setOf("wallet_screen", "receive_screen", "send_screen", "transaction_screen/txid={txid}", "qr_scan_screen")
+        group = setOf(WalletRootScreen, ReceiveScreen, SendScreen, TransactionScreen, QRScanScreen)
     )
 
     class Chapters(title: String) : NavigationItem(
-        route = Screen.ChaptersRootScreen.route,
+        route = ChaptersRootScreen,
         iconOutline = R.drawable.ic_hicon_education,
         title = title,
-        group = setOf("chapters_home_screen", "chapter_screen/{chapterId}")
+        group = setOf(ChaptersRootScreen, ChapterScreen)
     )
 
     class Settings(title: String) : NavigationItem(
-        route = Screen.SettingsRootScreen.route,
+        route = SettingsRootScreen,
         iconOutline = R.drawable.ic_hicon_menu,
         title = title,
-        group = setOf("settings_root_screen", "about_screen", "recovery_phrase_screen", "send_coins_back_screen")
+        group = setOf(SettingsRootScreen, AboutScreen, RecoveryPhraseScreen, SendCoinsBackScreen)
     )
 }
