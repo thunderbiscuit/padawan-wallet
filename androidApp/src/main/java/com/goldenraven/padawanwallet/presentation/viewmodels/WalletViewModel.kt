@@ -40,7 +40,7 @@ private const val TAG = "WalletViewModel"
 class WalletViewModel(application: Application) : AndroidViewModel(application) {
     private var txList: List<Tx> by mutableStateOf(emptyList())
     private var isOnline: Boolean by mutableStateOf(false)
-    private var qrCode: String? by mutableStateOf(null)
+    private var sendAddress: String? by mutableStateOf(null)
     private val repository: TxRepository
     private var singleTxDetails: TransactionDetails? = null
 
@@ -73,7 +73,7 @@ class WalletViewModel(application: Application) : AndroidViewModel(application) 
             is WalletAction.Sync -> sync()
             is WalletAction.RequestCoins -> requestCoins()
             is WalletAction.CheckNetworkStatus -> updateNetworkStatus()
-            is WalletAction.QRCodeScanned -> updateQRCode(action.address)
+            is WalletAction.QRCodeScanned -> updateSendAddress(action.address)
             is WalletAction.Broadcast -> broadcastTransaction(action.tx)
             is WalletAction.UiMessageDelivered -> uiMessageDelivered()
             is WalletAction.SeeSingleTx -> { setSingleTxDetails(action.tx) }
@@ -157,8 +157,9 @@ class WalletViewModel(application: Application) : AndroidViewModel(application) 
         walletState = walletState.copy(messageForUi = Pair(type, message))
     }
 
-    private fun updateQRCode(address: String) {
-        qrCode = address
+    private fun updateSendAddress(address: String) {
+        Log.i(TAG, "Updating send address to $address")
+        walletState = walletState.copy(sendAddress = address)
     }
 
     private fun broadcastTransaction(tx: Transaction) {

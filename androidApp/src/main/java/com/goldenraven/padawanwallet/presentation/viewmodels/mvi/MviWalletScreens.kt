@@ -17,6 +17,7 @@ data class WalletState(
     val isOnline: Boolean,
     val currentlySyncing: Boolean,
     val messageForUi: Pair<MessageType, String>? = null,
+    val sendAddress: String? = null
 )
 
 enum class MessageType {

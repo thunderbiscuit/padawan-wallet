@@ -100,6 +100,9 @@ internal fun SendScreen(
     val bottomSheetScaffoldState: BottomSheetScaffoldState = rememberBottomSheetScaffoldState()
 
     val recipientAddress: MutableState<String> = rememberSaveable { mutableStateOf("") }
+    if (state.sendAddress != null) {
+        recipientAddress.value = state.sendAddress
+    }
     val amount: MutableState<String> = rememberSaveable { mutableStateOf("") }
     val feeRate: MutableState<Long> = rememberSaveable { mutableStateOf(0L) }
 

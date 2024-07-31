@@ -142,6 +142,7 @@ dependencies {
 
     // QR codes
     implementation("com.google.zxing:core:3.4.1")
+    implementation("com.google.mlkit:barcode-scanning:17.2.0")
     implementation("androidx.camera:camera-camera2:1.3.4")
     implementation("androidx.camera:camera-lifecycle:1.3.4")
     implementation("androidx.camera:camera-view:1.3.4")
