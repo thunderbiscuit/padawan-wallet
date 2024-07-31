@@ -9,6 +9,7 @@ import com.goldenraven.padawanwallet.utils.QrUiState
 
 data class ReceiveScreenState(
     val address: String? = null,
+    val bip21Uri: String? = null,
     val addressIndex: UInt? = null,
     val qrState: QrUiState = QrUiState.NoQR
 )

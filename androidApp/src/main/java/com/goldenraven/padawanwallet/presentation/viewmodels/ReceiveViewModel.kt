@@ -5,6 +5,7 @@
 
 package com.goldenraven.padawanwallet.presentation.viewmodels
 
+import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -16,6 +17,9 @@ import com.goldenraven.padawanwallet.presentation.viewmodels.mvi.ReceiveScreenSt
 import com.goldenraven.padawanwallet.utils.QrUiState
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import org.bitcointools.bip21.Bip21URI
+
+private const val TAG = "ReceiveViewModel"
 
 internal class ReceiveViewModel : ViewModel() {
     var state: ReceiveScreenState by mutableStateOf(ReceiveScreenState())
@@ -31,9 +35,13 @@ internal class ReceiveViewModel : ViewModel() {
         viewModelScope.launch {
             state = state.copy(qrState = QrUiState.Loading)
             val address = Wallet.getLastUnusedAddress()
-            delay(800)
+            delay(400)
+            val uri = Bip21URI(address = address.address.toString()).toURI()
+            Log.i(TAG, "New address URI: $uri")
+
             state = ReceiveScreenState(
                 address = address.address.toString(),
+                bip21Uri = uri,
                 addressIndex = address.index,
                 qrState = QrUiState.QR
             )

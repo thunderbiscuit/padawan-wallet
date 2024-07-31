@@ -72,9 +72,9 @@ internal fun ReceiveScreen(
     var qr by remember { mutableStateOf<ImageBitmap?>(null) }
 
     LaunchedEffect(state.address) {
-        if (state.address != null) {
+        if (state.bip21Uri != null) {
             withContext(Dispatchers.IO) {
-                qr = addressToQR(state.address)
+                qr = addressToQR(state.bip21Uri)
             }
         }
     }
@@ -128,7 +128,7 @@ internal fun ReceiveScreen(
 
                 if (state.qrState == QrUiState.Loading) {
                     LoadingAnimation(circleColor = padawan_theme_background, circleSize = 38.dp)
-                } else if (state.qrState == QrUiState.QR && state.address != null) {
+                } else if (state.qrState == QrUiState.QR && state.bip21Uri != null && state.address != null) {
                     qr?.let {
                         Image(
                             bitmap = it,
