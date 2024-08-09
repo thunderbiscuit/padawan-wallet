@@ -29,7 +29,7 @@
     <string name="send_screen_title">Construir transação (signet)</string>
     <string name="send_to_address">Enviar para</string>
     <string name="fee_rate">Taxa:</string>
-    <string name="amount">Quantidade/string>
+    <string name="amount">Quantidade</string>
     <string name="amount_2">quantidade</string>
     <string name="verify_transaction">Conferir transação</string>
     <string name="network_fee">Taxa de rede</string>
