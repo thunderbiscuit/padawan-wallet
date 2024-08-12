@@ -153,7 +153,7 @@
     <string name="no_internet_access">¡Sin acceso a internet!</string>
     <string name="select_your_preferred_language">Selecciona tu idioma preferido para Padawan Wallet.</string>
     <string name="transaction_was_broadcast_successfully">La transacción se emitió correctamente!</string>
-    <string name="get_coins">Obtener monedas</string>
+    <string name="get_coins">Obtener Signet monedas</string>
     <string name="bottom_nav_wallet">Cartera</string>
     <string name="bottom_nav_chapters">Aprende</string>
     <string name="bottom_nav_settings">Menú</string>

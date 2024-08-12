@@ -20,7 +20,7 @@
     <string name="tab_chapters">Capítulos</string>
     <string name="wallet_balance_section">Saldo (bitcoins de signet)</string>
     <string name="transaction_history_section">Histórico de transações</string>
-    <string name="sync">sinscronizar</string>
+    <string name="sync">atualizar</string>
     <string name="send">Enviar</string>
     <string name="receive">Receber</string>
     <string name="receive_screen_title">Receber bitcoin (signet)</string>
