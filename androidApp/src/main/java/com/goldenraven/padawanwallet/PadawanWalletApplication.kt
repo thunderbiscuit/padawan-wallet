@@ -16,11 +16,13 @@ class PadawanWalletApplication : Application() {
     override fun onCreate() {
         super.onCreate()
 
-        // initialize Wallet object with path variable
-        Wallet.setPathAndConnectDb(applicationContext.filesDir.toString())
+        val filesDirectoryPath: String = applicationContext.filesDir.toString()
 
         // initialize repositories and set shared preferences
-        WalletRepository.setSharedPreferences(applicationContext.getSharedPreferences("wallet", Context.MODE_PRIVATE))
+        WalletRepository.setSharedPreferences(applicationContext.getSharedPreferences("wallet", Context.MODE_PRIVATE), filesDirectoryPath)
         TutorialRepository.setSharedPreferences(applicationContext.getSharedPreferences("tutorials", Context.MODE_PRIVATE))
+
+        // initialize Wallet object with path variable
+        Wallet.setPathAndConnectDb(filesDirectoryPath)
     }
 }

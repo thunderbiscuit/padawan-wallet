@@ -5,22 +5,30 @@
 
 package com.goldenraven.padawanwallet.domain.bitcoin
 
+import android.content.Context
 import android.content.SharedPreferences
 import android.util.Log
 import com.goldenraven.padawanwallet.utils.RequiredInitialWalletData
+import java.io.File
 
 private const val TAG = "WalletRepository"
 
 object WalletRepository {
     private lateinit var sharedPreferences: SharedPreferences
-    fun setSharedPreferences(sharedPref: SharedPreferences) {
+    private var currentWalletExists: Boolean = false
+
+    fun setSharedPreferences(sharedPref: SharedPreferences, filesPath: String) {
         sharedPreferences = sharedPref
+        checkIfWalletExists(filesPath)
+    }
+
+    private fun checkIfWalletExists(filesPath: String) {
+        val file = File("$filesPath/padawanDB_v1.sqlite")
+        currentWalletExists = file.exists()
+        Log.i(TAG, "We checked at $filesPath and the value of currentWalletExists is $currentWalletExists")
     }
 
     fun doesWalletExist(): Boolean {
-        // val currentWallet: SharedPreferences = applicationContext.getSharedPreferences("current_wallet", Context.MODE_PRIVATE)
-        val currentWalletExists: Boolean = sharedPreferences.getBoolean("initialized", false)
-        Log.i(TAG, "Value of currentWalletExists at launch: $currentWalletExists")
         return currentWalletExists
     }
 
