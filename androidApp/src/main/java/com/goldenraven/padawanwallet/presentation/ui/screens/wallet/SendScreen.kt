@@ -81,8 +81,8 @@ import com.goldenraven.padawanwallet.presentation.viewmodels.mvi.WalletAction
 import com.goldenraven.padawanwallet.presentation.viewmodels.mvi.WalletState
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
-import org.bitcoindevkit.Amount
-import org.bitcoindevkit.FeeRate
+import org.rustbitcoin.bitcoin.Amount
+import org.rustbitcoin.bitcoin.FeeRate
 import org.bitcoindevkit.Transaction
 
 private const val TAG = "SendScreen"

@@ -6,8 +6,8 @@
 package com.goldenraven.padawanwallet.presentation.viewmodels.mvi
 
 import com.goldenraven.padawanwallet.domain.tx.Tx
-import org.bitcoindevkit.Amount
-import org.bitcoindevkit.FeeRate
+import org.rustbitcoin.bitcoin.Amount
+import org.rustbitcoin.bitcoin.FeeRate
 import org.bitcoindevkit.Transaction
 
 data class WalletState(

@@ -133,7 +133,7 @@ dependencies {
     implementation("com.google.accompanist:accompanist-swiperefresh:0.23.1")
 
     // Bitcoin
-    implementation("org.bitcoindevkit:bdk-android:1.0.0-alpha.13-SNAPSHOT")
+    implementation("org.bitcoindevkit:bdk-android:1.0.0-beta.2")
     implementation("org.kotlinbitcointools:bip21:0.0.5-SNAPSHOT")
 
     // Ktor

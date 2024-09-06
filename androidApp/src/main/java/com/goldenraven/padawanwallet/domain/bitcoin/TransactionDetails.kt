@@ -1,8 +1,8 @@
 package com.goldenraven.padawanwallet.domain.bitcoin
 
 import com.goldenraven.padawanwallet.utils.TxType
-import org.bitcoindevkit.Amount
-import org.bitcoindevkit.FeeRate
+import org.rustbitcoin.bitcoin.Amount
+import org.rustbitcoin.bitcoin.FeeRate
 
 data class TransactionDetails(
     val txid: String,
@@ -15,6 +15,6 @@ data class TransactionDetails(
 )
 
 sealed interface ChainPosition {
-    data class Confirmed(val height: UInt, val timestamp: ULong) : ChainPosition
     data object Unconfirmed : ChainPosition
+    data class Confirmed(val height: UInt, val timestamp: ULong) : ChainPosition
 }

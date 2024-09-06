@@ -11,17 +11,17 @@ import com.goldenraven.padawanwallet.utils.TxType
 import com.goldenraven.padawanwallet.utils.txType
 import org.bitcoindevkit.Address
 import org.bitcoindevkit.AddressInfo
+import org.bitcoindevkit.Connection
 import org.bitcoindevkit.ChainPosition as BdkChainPosition
-import org.bitcoindevkit.Amount
+import org.rustbitcoin.bitcoin.Amount
 import org.bitcoindevkit.Descriptor
 import org.bitcoindevkit.DescriptorSecretKey
 import org.bitcoindevkit.ElectrumClient
-import org.bitcoindevkit.FeeRate
+import org.rustbitcoin.bitcoin.FeeRate
 import org.bitcoindevkit.KeychainKind
 import org.bitcoindevkit.Mnemonic
-import org.bitcoindevkit.Network
+import org.rustbitcoin.bitcoin.Network
 import org.bitcoindevkit.Psbt
-import org.bitcoindevkit.SqliteStore
 import org.bitcoindevkit.Transaction
 import org.bitcoindevkit.TxBuilder
 import org.bitcoindevkit.Update
@@ -33,14 +33,14 @@ private const val SIGNET_ELECTRUM_URL: String = "ssl://mempool.space:60602"
 object Wallet {
     private lateinit var wallet: org.bitcoindevkit.Wallet
     private lateinit var dbPath: String
-    private lateinit var db: SqliteStore
+    private lateinit var dbConnection: Connection
 
     private val blockchainClient: ElectrumClient by lazy { ElectrumClient(SIGNET_ELECTRUM_URL) }
 
     // Setting the path requires the application context and is done once by PadawanWalletApplication
     fun setPathAndConnectDb(path: String) {
-        dbPath = "$path/padawanDB.sqlite"
-        db = SqliteStore(dbPath)
+        dbPath = "$path/padawanDB_v1.sqlite"
+        dbConnection = Connection(dbPath)
     }
 
     fun createWallet() {
@@ -70,6 +70,7 @@ object Wallet {
             descriptor,
             changeDescriptor,
             Network.SIGNET,
+            dbConnection
         )
     }
 
@@ -79,13 +80,11 @@ object Wallet {
         Log.i(TAG, "Loading existing wallet with change descriptor: ${initialWalletData.changeDescriptor}")
         val descriptor = Descriptor(initialWalletData.descriptor, Network.SIGNET)
         val changeDescriptor = Descriptor(initialWalletData.changeDescriptor, Network.SIGNET)
-        val changeSet = db.read()
 
-        wallet = org.bitcoindevkit.Wallet.newOrLoad(
+        wallet = org.bitcoindevkit.Wallet.load(
             descriptor,
             changeDescriptor,
-            changeSet,
-            Network.SIGNET,
+            dbConnection,
         )
     }
 
@@ -109,7 +108,7 @@ object Wallet {
     }
 
     fun fullScan() {
-        val fullScanRequest = wallet.startFullScan()
+        val fullScanRequest = wallet.startFullScan().build()
         val update: Update = blockchainClient.fullScan(
             fullScanRequest = fullScanRequest,
             stopGap = 20u,
@@ -117,20 +116,18 @@ object Wallet {
             fetchPrevTxouts = true
         )
         wallet.applyUpdate(update)
-        val changeset = wallet.takeStaged()
-        if (changeset != null) db.write(changeset)
+        wallet.persist(dbConnection)
     }
 
     fun sync() {
-        val syncRequest = wallet.startSyncWithRevealedSpks()
+        val syncRequest = wallet.startSyncWithRevealedSpks().build()
         val update = blockchainClient.sync(
             syncRequest = syncRequest,
             batchSize = 10u,
             fetchPrevTxouts = true
         )
         wallet.applyUpdate(update)
-        val changeset = wallet.takeStaged()
-        if (changeset != null) db.write(changeset)
+        wallet.persist(dbConnection)
     }
 
     fun getBalance(): ULong {
@@ -162,7 +159,10 @@ object Wallet {
             val txType: TxType = txType(sent = sent.toSat(), received = received.toSat())
             val chainPosition: ChainPosition = when (val position = tx.chainPosition) {
                 is BdkChainPosition.Unconfirmed -> ChainPosition.Unconfirmed
-                is BdkChainPosition.Confirmed -> ChainPosition.Confirmed(position.height, position.timestamp)
+                is BdkChainPosition.Confirmed -> ChainPosition.Confirmed(
+                    position.confirmationBlockTime.blockId.height,
+                    position.confirmationBlockTime.confirmationTime
+                )
             }
 
             TransactionDetails(
