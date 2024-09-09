@@ -5,6 +5,11 @@
 
 package com.goldenraven.padawanwallet.presentation.ui.screens
 
+import androidx.compose.foundation.Indication
+import androidx.compose.foundation.LocalIndication
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.indication
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Icon
@@ -21,6 +26,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -81,15 +87,54 @@ internal fun BottomNavigationBar(
             )
         },
     ) {
+        // This odd code is necessary to ensure the ripple effect is not shown on any part of the
+        // navigation bar item. See commit 1f4b1b1 for more information.
         items.forEachIndexed { index, item ->
             NavigationBarItem(
                 icon = {
-                    Icon(painter = painterResource(id = item.iconOutline), contentDescription = item.title)
+                    Icon(
+                        painter = painterResource(id = item.iconOutline),
+                        contentDescription = item.title,
+                        modifier = Modifier.clickable(
+                            interactionSource = null,
+                            indication = null,
+                            enabled = true,
+                            onClick = {
+                                if (selectedItem != index) {
+                                    selectedItem = index
+                                    navControllerWalletNavigation.navigate(item.route) {
+                                        popUpTo(navControllerWalletNavigation.graph.findStartDestination().id) {
+                                            saveState = true
+                                        }
+                                        launchSingleTop = true
+                                        restoreState = true
+                                    }
+                                }
+                            }
+                        )
+                    )
                 },
                 label = {
                     Text(
                         text = item.title,
-                        style = PadawanTypography.labelSmall
+                        style = PadawanTypography.labelSmall,
+                        modifier = Modifier.clickable(
+                            interactionSource = null,
+                            indication = null,
+                            enabled = true,
+                            onClick = {
+                                if (selectedItem != index) {
+                                    selectedItem = index
+                                    navControllerWalletNavigation.navigate(item.route) {
+                                        popUpTo(navControllerWalletNavigation.graph.findStartDestination().id) {
+                                            saveState = true
+                                        }
+                                        launchSingleTop = true
+                                        restoreState = true
+                                    }
+                                }
+                            }
+                        )
                     )
                 },
                 selected = selectedItem == index,
@@ -110,8 +155,8 @@ internal fun BottomNavigationBar(
                     selectedTextColor = padawan_theme_button_primary,
                     unselectedIconColor = padawan_theme_navigation_bar_unselected,
                     unselectedTextColor = padawan_theme_navigation_bar_unselected,
-                    indicatorColor = padawan_theme_background_secondary,
-                )
+                    indicatorColor = Color.Transparent,
+                ),
             )
         }
     }
