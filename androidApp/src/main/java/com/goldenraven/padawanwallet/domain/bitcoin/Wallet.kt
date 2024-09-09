@@ -27,7 +27,7 @@ import org.bitcoindevkit.TxBuilder
 import org.bitcoindevkit.Update
 import org.bitcoindevkit.WordCount
 
-private const val TAG = "Wallet"
+private const val TAG = "WalletObject"
 private const val SIGNET_ELECTRUM_URL: String = "ssl://mempool.space:60602"
 
 object Wallet {
@@ -36,6 +36,7 @@ object Wallet {
     private lateinit var dbConnection: Connection
 
     private val blockchainClient: ElectrumClient by lazy { ElectrumClient(SIGNET_ELECTRUM_URL) }
+    private var fullScanRequired: Boolean = !WalletRepository.isFullScanCompleted()
 
     // Setting the path requires the application context and is done once by PadawanWalletApplication
     fun setPathAndConnectDb(path: String) {
@@ -107,7 +108,7 @@ object Wallet {
         WalletRepository.saveMnemonic(mnemonic.toString())
     }
 
-    fun fullScan() {
+    private fun fullScan() {
         val fullScanRequest = wallet.startFullScan().build()
         val update: Update = blockchainClient.fullScan(
             fullScanRequest = fullScanRequest,
@@ -120,14 +121,22 @@ object Wallet {
     }
 
     fun sync() {
-        val syncRequest = wallet.startSyncWithRevealedSpks().build()
-        val update = blockchainClient.sync(
-            syncRequest = syncRequest,
-            batchSize = 10u,
-            fetchPrevTxouts = true
-        )
-        wallet.applyUpdate(update)
-        wallet.persist(dbConnection)
+        if (fullScanRequired) {
+            Log.i(TAG, "Full scan required")
+            fullScan()
+            WalletRepository.fullScanCompleted()
+            fullScanRequired = false
+        } else {
+            Log.i(TAG, "Just a normal sync!")
+            val syncRequest = wallet.startSyncWithRevealedSpks().build()
+            val update = blockchainClient.sync(
+                syncRequest = syncRequest,
+                batchSize = 10u,
+                fetchPrevTxouts = true
+            )
+            wallet.applyUpdate(update)
+            wallet.persist(dbConnection)
+        }
     }
 
     fun getBalance(): ULong {

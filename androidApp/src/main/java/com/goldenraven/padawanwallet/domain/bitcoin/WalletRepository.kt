@@ -78,4 +78,14 @@ object WalletRepository {
         editor.putBoolean("offerFaucetDone", true)
         editor.apply()
     }
+
+    fun fullScanCompleted() {
+        val editor = sharedPreferences.edit()
+        editor.putBoolean("fullSyncCompleted", true)
+        editor.apply()
+    }
+
+    fun isFullScanCompleted(): Boolean {
+        return sharedPreferences.getBoolean("fullSyncCompleted", false)
+    }
 }

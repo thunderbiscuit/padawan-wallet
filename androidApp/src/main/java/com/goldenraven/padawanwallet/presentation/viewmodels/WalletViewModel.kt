@@ -46,7 +46,7 @@ class WalletViewModel(application: Application) : AndroidViewModel(application) 
 
     init {
         isOnline = updateNetworkStatus(application)
-        firstSync()
+        firstAutoSync()
         val txDao: TxDao = TxDatabase.getDatabase(application).txDao()
         repository = TxRepository(txDao)
         viewModelScope.launch {
@@ -81,12 +81,12 @@ class WalletViewModel(application: Application) : AndroidViewModel(application) 
         }
     }
 
-    private fun sync(firstSync: Boolean = false) {
+    private fun sync() {
         if (isOnline) {
             walletState = walletState.copy(currentlySyncing = true)
 
             viewModelScope.launch(Dispatchers.IO) {
-                updateBalance(firstSync)
+                updateBalance()
                 syncTransactionHistory()
                 walletState = walletState.copy(currentlySyncing = false)
             }
@@ -114,7 +114,7 @@ class WalletViewModel(application: Application) : AndroidViewModel(application) 
 
     private fun updateBalance(firstSync: Boolean = false) {
         Log.i(TAG, "Updating balance...")
-        if (firstSync) Wallet.fullScan() else Wallet.sync()
+        Wallet.sync()
         val balance = Wallet.getBalance()
         Log.i(TAG, "Balance updated to: $balance")
         walletState = walletState.copy(balance = balance)
@@ -175,10 +175,10 @@ class WalletViewModel(application: Application) : AndroidViewModel(application) 
         walletState = walletState.copy(messageForUi = null)
     }
 
-    private fun firstSync() {
+    private fun firstAutoSync() {
         viewModelScope.launch {
             delay(4000)
-            sync(firstSync = true)
+            sync()
         }
     }
 
