@@ -88,7 +88,7 @@ internal fun BottomNavigationBar(
         },
     ) {
         // This odd code is necessary to ensure the ripple effect is not shown on any part of the
-        // navigation bar item. See commit 1f4b1b1 for more information.
+        // navigation bar item. See commit a1fceda for more information.
         items.forEachIndexed { index, item ->
             NavigationBarItem(
                 icon = {
