@@ -7,6 +7,7 @@ package com.goldenraven.padawanwallet.presentation.ui.screens.chapters
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -29,7 +30,6 @@ import com.goldenraven.padawanwallet.R
 import com.goldenraven.padawanwallet.presentation.navigation.ChapterScreen
 import com.goldenraven.padawanwallet.presentation.theme.Outfit
 import com.goldenraven.padawanwallet.presentation.theme.PadawanTypography
-import com.goldenraven.padawanwallet.presentation.theme.innerScreenPadding
 import com.goldenraven.padawanwallet.presentation.theme.padawan_theme_background_secondary
 import com.goldenraven.padawanwallet.presentation.theme.padawan_theme_text_headline
 import com.goldenraven.padawanwallet.presentation.ui.components.TutorialCard
@@ -44,6 +44,7 @@ private const val TAG = "ChaptersRootScreen"
 internal fun ChaptersRootScreen(
     state: ChaptersRootState,
     onAction: (ChaptersScreensAction) -> Unit,
+    paddingValues: PaddingValues,
     navController: NavController,
 ) {
     val padding = when (getScreenSizeWidth(LocalConfiguration.current.screenWidthDp)) {
@@ -52,7 +53,9 @@ internal fun ChaptersRootScreen(
     }
 
     Column(
-        Modifier.background(padawan_theme_background_secondary)
+        Modifier
+            .background(padawan_theme_background_secondary)
+            .padding(paddingValues)
     ) {
         Column(
             modifier = Modifier

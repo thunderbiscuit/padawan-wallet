@@ -7,15 +7,14 @@ package com.goldenraven.padawanwallet.presentation.ui.screens.chapters
 
 import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.tween
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -39,7 +38,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -72,6 +70,7 @@ private const val TAG = "ChapterScreen"
 fun ChapterScreen(
     state: PageState,
     onAction: (ChaptersScreensAction) -> Unit,
+    paddingValues: PaddingValues,
     navController: NavHostController
 ) {
     val pageScrollState = rememberScrollState()
@@ -79,18 +78,18 @@ fun ChapterScreen(
 
     Column(
         modifier = Modifier
-            .background(color = padawan_theme_background_secondary)
             .fillMaxSize()
+            .background(color = padawan_theme_background_secondary)
     ) {
         Box(
             modifier = Modifier
                 .background(color = padawan_theme_tutorial_background)
-                .border(BorderStroke(1.dp, SolidColor(padawan_theme_onPrimary)))
+                .padding(top = paddingValues.calculateTopPadding())
                 .fillMaxWidth()
                 .drawBehind {
                     drawLine(
                         color = padawan_theme_onPrimary,
-                        strokeWidth = 15f,
+                        strokeWidth = 4.dp.toPx(),
                         start = Offset(x = 0f, y = size.height),
                         end = Offset(x = size.width, y = size.height)
                     )

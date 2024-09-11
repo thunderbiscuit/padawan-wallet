@@ -226,7 +226,7 @@ fun WalletNavigation(
                     else -> fadeOut(animationSpec = tween(300))
                 }
             }
-        ) { ChaptersRootScreen(chaptersViewModel.rootState, chaptersViewModel::onAction, navHostController) }
+        ) { ChaptersRootScreen(chaptersViewModel.rootState, chaptersViewModel::onAction, paddingValues, navHostController) }
 
 
         // Specific chapters
@@ -243,7 +243,7 @@ fun WalletNavigation(
             popExitTransition = {
                 slideOutOfContainer(AnimatedContentTransitionScope.SlideDirection.Down, animationSpec = tween(animationDuration))
             }
-        ) { ChapterScreen(chaptersViewModel.pageState, chaptersViewModel::onAction, navHostController) }
+        ) { ChapterScreen(chaptersViewModel.pageState, chaptersViewModel::onAction, paddingValues, navHostController) }
 
 
         // Settings
@@ -276,6 +276,7 @@ fun WalletNavigation(
         ) {
             SettingsRootScreen(
                 onAction = chaptersViewModel::onAction,
+                paddingValues = paddingValues,
                 navController = navHostController
             )
         }
