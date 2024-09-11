@@ -2,7 +2,7 @@
   <h1>Padawan Wallet</h1>
   <br/>
   <br/>
-  <img src="./images/padawan.svg" alt="Logo 1.0.0" width="200">
+  <img src="./padawan.svg" alt="Logo 1.0.0" width="200">
 </div>
 <br/>
 <br/>
@@ -25,7 +25,7 @@ You can download the latest APK for this app on the [`v0.12.0: Daring Droid` rel
 
 ## Screenshots
 <div align="center">
-  <img src="./images/screenshots.jpg" alt="" width="900">
+  <img src="./screenshots.jpg" alt="" width="900">
 </div>
 
 <br>
