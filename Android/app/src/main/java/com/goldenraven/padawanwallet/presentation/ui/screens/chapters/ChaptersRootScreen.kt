@@ -7,6 +7,7 @@ package com.goldenraven.padawanwallet.presentation.ui.screens.chapters
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -53,23 +54,23 @@ internal fun ChaptersRootScreen(
     Column(
         Modifier.background(padawan_theme_background_secondary)
     ) {
-        Text(
-            text = stringResource(R.string.padawan_journey),
-            style = PadawanTypography.headlineSmall,
-            color = Color(0xff1f0208),
-            modifier = Modifier.padding(top = 48.dp, start = 24.dp, end = 24.dp, bottom = 8.dp)
-        )
-        Text(
-            text = stringResource(R.string.continue_on_your_journey),
-            color = Color(0xff787878),
-            modifier = Modifier.padding(start = 24.dp, end = 24.dp, bottom = 4.dp)
-        )
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .innerScreenPadding(padding)
+                .padding(horizontal = padding)
                 .verticalScroll(rememberScrollState())
         ) {
+            Text(
+                text = stringResource(R.string.padawan_journey),
+                style = PadawanTypography.headlineSmall,
+                color = Color(0xff1f0208),
+                modifier = Modifier.padding(top = 32.dp, end = 24.dp, bottom = 8.dp)
+            )
+            Text(
+                text = stringResource(R.string.continue_on_your_journey),
+                color = Color(0xff787878),
+                modifier = Modifier.padding(bottom = 16.dp)
+            )
             SectionTitle("Getting Started", true)
             SectionDivider()
             TutorialCard(
@@ -150,6 +151,7 @@ internal fun ChaptersRootScreen(
                     navController.navigate(ChapterScreen)
                 }
             )
+            Spacer(modifier = Modifier.padding(bottom = 16.dp))
         }
     }
 }
