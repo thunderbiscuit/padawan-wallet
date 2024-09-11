@@ -15,7 +15,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.InlineTextContent
 import androidx.compose.foundation.text.appendInlineContent
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.Divider
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
@@ -120,7 +120,7 @@ internal fun SendCoinsBackScreen(
                     text = stringResource(R.string.send_coins_back_address),
                     fontSize = 14.sp
                 )
-                Divider(
+                HorizontalDivider(
                     color = padawan_theme_text_faded_secondary,
                     thickness = 1.dp,
                     modifier = Modifier.padding(all = 3.dp)

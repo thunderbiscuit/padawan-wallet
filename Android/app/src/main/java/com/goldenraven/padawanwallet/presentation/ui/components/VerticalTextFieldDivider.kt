@@ -8,7 +8,7 @@ package com.goldenraven.padawanwallet.presentation.ui.components
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
-import androidx.compose.material3.Divider
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -16,7 +16,7 @@ import com.goldenraven.padawanwallet.presentation.theme.padawan_theme_onPrimary
 
 @Composable
 internal fun VerticalTextFieldDivider() {
-    Divider(
+    HorizontalDivider(
         color = padawan_theme_onPrimary,
         modifier = Modifier
             .fillMaxHeight()
