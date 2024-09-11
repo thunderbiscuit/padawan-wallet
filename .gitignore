@@ -4,14 +4,14 @@
 .DS_Store
 .run
 
-/build
+/build/
 
-/androidApp/build
-/androidApp/release
-/androidApp/debug
-/androidApp/gradle.properties
+/Android/app/build
+/Android/release
+/Android/debug
+/Android/app/gradle.properties
 
-/padawankmp/build
+/Android/padawankmp/build
 
 xcuserdata/
 

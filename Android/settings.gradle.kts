@@ -1,6 +1,6 @@
 rootProject.name = "Padawan Wallet"
 
-include(":androidApp")
+include(":app")
 include(":padawankmp")
 
 pluginManagement {

@@ -125,6 +125,11 @@ class WalletViewModel(application: Application) : AndroidViewModel(application) 
         val faucetUrl: String = BuildConfig.FAUCET_URL
         val faucetUsername: String = BuildConfig.FAUCET_USERNAME
         val faucetPassword: String = BuildConfig.FAUCET_PASSWORD
+        Log.i(TAG, "############################################")
+        Log.i(TAG, "Calling server with url: $faucetUrl")
+        Log.i(TAG, "Calling server with username: $faucetUsername")
+        Log.i(TAG, "Calling server with password: $faucetPassword")
+        Log.i(TAG, "############################################")
         // val faucetPassword: String = "password" // Use for testing failed requests
 
         val faucetService = FaucetService()
