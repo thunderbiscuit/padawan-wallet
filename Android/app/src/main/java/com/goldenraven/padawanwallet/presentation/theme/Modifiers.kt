@@ -9,6 +9,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -87,6 +88,10 @@ fun Modifier.gradientBackground(): Modifier = this.then(
 
 fun Modifier.innerScreenPadding(padding: Dp = 0.dp): Modifier = this.then(
     Modifier.padding(all = padding)
+)
+
+fun Modifier.innerScreenPadding2(paddingValues: PaddingValues): Modifier = this.then(
+    Modifier.padding(paddingValues)
 )
 
 fun Modifier.wideTextField(): Modifier = this.then(

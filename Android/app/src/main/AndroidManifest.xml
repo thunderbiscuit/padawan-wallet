@@ -27,6 +27,7 @@
         <activity
             android:name=".presentation.ui.PadawanActivity"
             android:theme="@style/SplashScreen"
+            android:windowSoftInputMode="adjustResize"
             android:screenOrientation="portrait"
             android:exported="true">
             <intent-filter>

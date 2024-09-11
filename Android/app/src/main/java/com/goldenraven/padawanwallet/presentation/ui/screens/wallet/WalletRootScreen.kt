@@ -5,7 +5,6 @@
 
 package com.goldenraven.padawanwallet.presentation.ui.screens.wallet
 
-import android.util.Log
 import android.widget.Toast
 import androidx.compose.animation.animateColor
 import androidx.compose.animation.core.tween
@@ -75,7 +74,7 @@ import com.goldenraven.padawanwallet.presentation.ui.components.standardBorder
 import com.goldenraven.padawanwallet.presentation.theme.PadawanTheme
 import com.goldenraven.padawanwallet.presentation.theme.PadawanTypography
 import com.goldenraven.padawanwallet.presentation.theme.gradientBackground
-import com.goldenraven.padawanwallet.presentation.theme.innerScreenPadding
+import com.goldenraven.padawanwallet.presentation.theme.innerScreenPadding2
 import com.goldenraven.padawanwallet.presentation.theme.noRippleClickable
 import com.goldenraven.padawanwallet.presentation.theme.padawan_disabled
 import com.goldenraven.padawanwallet.presentation.theme.padawan_theme_background
@@ -106,6 +105,7 @@ private const val TAG = "WalletRootScreen"
 internal fun WalletRootScreen(
     state: WalletState,
     onAction: (WalletAction) -> Unit,
+    paddingValues: PaddingValues,
     navController: NavHostController,
 ) {
     val (openDialog, setOpenDialog) = remember { mutableStateOf(false) }
@@ -113,8 +113,8 @@ internal fun WalletRootScreen(
     if (openDialog) FaucetDialog(onAction, setOpenDialog)
 
     val padding = when (getScreenSizeWidth(LocalConfiguration.current.screenWidthDp)) {
-        ScreenSizeWidth.Small -> 12.dp
-        ScreenSizeWidth.Phone -> 32.dp
+        ScreenSizeWidth.Small -> PaddingValues(start = 12.dp, top = 0.dp, end = 12.dp, bottom = 0.dp)
+        ScreenSizeWidth.Phone -> PaddingValues(start = 32.dp, top = 12.dp, end = 32.dp, bottom = 0.dp)
     }
 
     if (state.messageForUi != null) {
@@ -127,7 +127,10 @@ internal fun WalletRootScreen(
     }
 
     Column(
-        modifier = Modifier.gradientBackground().innerScreenPadding(padding)
+        modifier = Modifier
+            .gradientBackground()
+            .padding(paddingValues)
+            .innerScreenPadding2(padding)
     ) {
         if (!state.isOnline) { NoNetworkBanner(onAction) }
         BalanceBox(balance = state.balance, currentlySyncing = state.currentlySyncing, onAction = onAction)

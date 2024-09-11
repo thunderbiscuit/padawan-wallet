@@ -5,13 +5,8 @@
 
 package com.goldenraven.padawanwallet.presentation.ui.screens
 
-import androidx.compose.foundation.Indication
-import androidx.compose.foundation.LocalIndication
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.indication
-import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
@@ -51,13 +46,16 @@ internal fun HomeScreen() {
     val navControllerWalletNavigation: NavHostController = rememberNavController()
     // the splash screen hides the system bars
     // we need to bring them back on before continuing
-    SystemBars()
+    // SystemBars()
 
     Scaffold(
-        bottomBar = { BottomNavigationBar(navControllerWalletNavigation) }
+        bottomBar = { BottomNavigationBar(navControllerWalletNavigation) },
     ) { paddingValues ->
-        Box(modifier = Modifier.padding(paddingValues)) {
+        // We used to apply the padding values here on the box, but now we pass the insets for the
+        // system bars down to the composables that need them.
+        Box {
             WalletNavigation(
+                paddingValues = paddingValues,
                 navHostController = navControllerWalletNavigation,
             )
         }

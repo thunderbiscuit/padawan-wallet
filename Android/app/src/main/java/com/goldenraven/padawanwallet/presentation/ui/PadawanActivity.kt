@@ -9,6 +9,7 @@ import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.compose.setContent
+import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.os.LocaleListCompat
@@ -28,8 +29,10 @@ private const val TAG = "PadawanActivity"
 
 class PadawanActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
         installSplashScreen()
+
+        super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
         // ask the repository if a wallet already exists
         // if so, load it and launch into wallet activity, otherwise go to intro
         if (WalletRepository.doesWalletExist()) {

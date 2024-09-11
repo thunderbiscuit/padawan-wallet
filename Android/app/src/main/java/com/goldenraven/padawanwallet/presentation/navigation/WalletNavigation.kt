@@ -13,6 +13,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.NavHostController
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.goldenraven.padawanwallet.presentation.ui.screens.chapters.ChapterScreen
 import com.goldenraven.padawanwallet.presentation.ui.screens.settings.AboutScreen
@@ -32,6 +33,7 @@ import com.goldenraven.padawanwallet.presentation.viewmodels.ReceiveViewModel
 
 @Composable
 fun WalletNavigation(
+    paddingValues: PaddingValues,
     navHostController: NavHostController,
 ) {
     val walletViewModel: WalletViewModel = viewModel()
@@ -89,6 +91,7 @@ fun WalletNavigation(
             WalletRootScreen(
                 state = walletViewModel.walletState,
                 onAction = walletViewModel::onAction,
+                paddingValues = paddingValues,
                 navController = navHostController,
             )
         }
