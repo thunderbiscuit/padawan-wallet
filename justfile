@@ -1,14 +1,14 @@
 unittests:
-  ./gradlew test --console=plain
+  cd ./Android/ && ./gradlew test --console=plain
 
 instrumentationtests:
-  ./gradlew connectedAndroidTest --console=plain
+  cd ./Android/ && ./gradlew connectedAndroidTest --console=plain
 
 buildlocalkmplib:
-  ./gradlew :padawankmp:assemblePadawanKmpXCFramework
-  cp ./PadawanWalletiOS/Package.swift ./padawankmp/build/XCFrameworks/release/
+  cd ./Android/ && ./gradlew :padawankmp:assemblePadawanKmpXCFramework
+  cp ./iOS/Package.swift ./Android/padawankmp/build/XCFrameworks/release/
 
 prepkmplibrelease:
-  ./gradlew :padawankmp:assemblePadawanKmpXCFramework
-  zip -r ./padawankmp/build/XCFrameworks/release/PadawanKmp.xcframework.zip ./padawankmp/build/XCFrameworks/release/PadawanKmp.xcframework
-  swift package compute-checksum ./padawankmp/build/XCFrameworks/release/PadawanKmp.xcframework.zip
+  cd ./Android/ && ./gradlew :padawankmp:assemblePadawanKmpXCFramework
+  zip -r ./Android/padawankmp/build/XCFrameworks/release/PadawanKmp.xcframework.zip ./Android/padawankmp/build/XCFrameworks/release/PadawanKmp.xcframework
+  swift package compute-checksum ./Android/padawankmp/build/XCFrameworks/release/PadawanKmp.xcframework.zip
