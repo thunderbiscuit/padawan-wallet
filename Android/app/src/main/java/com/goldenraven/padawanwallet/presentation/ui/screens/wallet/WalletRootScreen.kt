@@ -74,7 +74,7 @@ import com.goldenraven.padawanwallet.presentation.ui.components.standardBorder
 import com.goldenraven.padawanwallet.presentation.theme.PadawanTheme
 import com.goldenraven.padawanwallet.presentation.theme.PadawanTypography
 import com.goldenraven.padawanwallet.presentation.theme.gradientBackground
-import com.goldenraven.padawanwallet.presentation.theme.innerScreenPadding2
+import com.goldenraven.padawanwallet.presentation.theme.innerScreenPadding
 import com.goldenraven.padawanwallet.presentation.theme.noRippleClickable
 import com.goldenraven.padawanwallet.presentation.theme.padawan_disabled
 import com.goldenraven.padawanwallet.presentation.theme.padawan_theme_background
@@ -130,7 +130,7 @@ internal fun WalletRootScreen(
         modifier = Modifier
             .gradientBackground()
             .padding(paddingValues)
-            .innerScreenPadding2(padding)
+            .innerScreenPadding(padding)
     ) {
         if (!state.isOnline) { NoNetworkBanner(onAction) }
         BalanceBox(balance = state.balance, currentlySyncing = state.currentlySyncing, onAction = onAction)

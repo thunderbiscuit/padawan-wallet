@@ -12,6 +12,7 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.IntrinsicSize
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -132,8 +133,8 @@ internal fun SendScreen(
     ) {
         Column(modifier = Modifier.fillMaxSize()) {
             val padding = when (getScreenSizeWidth(LocalConfiguration.current.screenWidthDp)) {
-                ScreenSizeWidth.Small -> 12.dp
-                ScreenSizeWidth.Phone -> 32.dp
+                ScreenSizeWidth.Small -> PaddingValues(12.dp)
+                ScreenSizeWidth.Phone -> PaddingValues(32.dp)
             }
 
             val scrollState = rememberScrollState()

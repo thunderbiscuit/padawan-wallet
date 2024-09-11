@@ -86,11 +86,7 @@ fun Modifier.gradientBackground(): Modifier = this.then(
     fillMaxSize().background(gradient)
 )
 
-fun Modifier.innerScreenPadding(padding: Dp = 0.dp): Modifier = this.then(
-    Modifier.padding(all = padding)
-)
-
-fun Modifier.innerScreenPadding2(paddingValues: PaddingValues): Modifier = this.then(
+fun Modifier.innerScreenPadding(paddingValues: PaddingValues): Modifier = this.then(
     Modifier.padding(paddingValues)
 )
 
