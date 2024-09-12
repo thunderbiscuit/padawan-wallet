@@ -39,10 +39,10 @@ object ChapterScreen : Destination
 @Serializable
 object SettingsRootScreen : Destination
 @Serializable
-object AboutScreen : Destination
-@Serializable
-object LanguagesScreen : Destination
-@Serializable
 object RecoveryPhraseScreen : Destination
 @Serializable
 object SendCoinsBackScreen : Destination
+@Serializable
+object LanguagesScreen : Destination
+@Serializable
+object AboutScreen : Destination

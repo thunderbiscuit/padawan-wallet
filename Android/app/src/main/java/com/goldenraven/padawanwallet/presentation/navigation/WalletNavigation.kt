@@ -31,6 +31,8 @@ import com.goldenraven.padawanwallet.presentation.ui.screens.wallet.WalletRootSc
 import com.goldenraven.padawanwallet.presentation.viewmodels.WalletViewModel
 import com.goldenraven.padawanwallet.presentation.viewmodels.ReceiveViewModel
 
+private const val TAG = "WalletNavigation"
+
 @Composable
 fun WalletNavigation(
     paddingValues: PaddingValues,
@@ -40,59 +42,45 @@ fun WalletNavigation(
     val chaptersViewModel: ChaptersViewModel = viewModel()
     val receiveViewModel: ReceiveViewModel = viewModel()
     val animationDuration = 400
+    val slowAnimationDuration = 1000
 
     NavHost(
         navController = navHostController,
         startDestination = WalletRootScreen,
     ) {
         // Wallet
+        val fades: List<String> = listOf("ReceiveScreen", "SendScreen", "TransactionScreen")
         composable<WalletRootScreen>(
             enterTransition = {
-                val route = initialState.destination.route
-                if (route == null) {
-                    slideIntoContainer(AnimatedContentTransitionScope.SlideDirection.End, animationSpec = tween(animationDuration))
-                } else if (route.contains("receive") || route.contains("send") || route.contains("transaction")) {
-                    fadeIn(animationSpec = tween(1000))
-                } else {
-                    slideIntoContainer(AnimatedContentTransitionScope.SlideDirection.End, animationSpec = tween(animationDuration))
+                when (initialState.destination.route?.substringAfterLast(".")) {
+                    in fades -> fadeIn(animationSpec = tween(animationDuration))
+                    else -> slideIntoContainer(AnimatedContentTransitionScope.SlideDirection.End, animationSpec = tween(animationDuration))
                 }
             },
             popEnterTransition = {
-                val route = initialState.destination.route
-                if (route == null) {
-                    slideIntoContainer(AnimatedContentTransitionScope.SlideDirection.End, animationSpec = tween(animationDuration))
-                } else if (route.contains("receive") || route.contains("send") || route.contains("transaction")) {
-                    fadeIn(animationSpec = tween(1000))
-                } else {
-                    slideIntoContainer(AnimatedContentTransitionScope.SlideDirection.End, animationSpec = tween(animationDuration))
+                when (initialState.destination.route?.substringAfterLast(".")) {
+                    in fades -> fadeIn(animationSpec = tween(animationDuration))
+                    else -> slideIntoContainer(AnimatedContentTransitionScope.SlideDirection.End, animationSpec = tween(animationDuration))
                 }
             },
             exitTransition = {
-                val route = targetState.destination.route
-                if (route == null) {
-                    slideOutOfContainer(AnimatedContentTransitionScope.SlideDirection.Start, animationSpec = tween(animationDuration))
-                } else if (route.contains("receive") || route.contains("send") || route.contains("transaction")) {
-                    fadeOut(animationSpec = tween(300))
-                } else {
-                    slideOutOfContainer(AnimatedContentTransitionScope.SlideDirection.Start, animationSpec = tween(animationDuration))
+                when (targetState.destination.route?.substringAfterLast(".")) {
+                    in fades -> fadeOut(animationSpec = tween(slowAnimationDuration))
+                    else -> slideOutOfContainer(AnimatedContentTransitionScope.SlideDirection.Start, animationSpec = tween(animationDuration))
                 }
             },
             popExitTransition = {
-                val route = targetState.destination.route
-                if (route == null) {
-                    slideOutOfContainer(AnimatedContentTransitionScope.SlideDirection.Start, animationSpec = tween(animationDuration))
-                } else if (route.contains("receive") || route.contains("send") || route.contains("transaction")) {
-                    fadeOut(animationSpec = tween(300))
-                } else {
-                    slideOutOfContainer(AnimatedContentTransitionScope.SlideDirection.Start, animationSpec = tween(animationDuration))
+                when (targetState.destination.route?.substringAfterLast(".")) {
+                    in fades -> fadeOut(animationSpec = tween(slowAnimationDuration))
+                    else -> slideOutOfContainer(AnimatedContentTransitionScope.SlideDirection.Start, animationSpec = tween(animationDuration))
                 }
             }
         ) {
             WalletRootScreen(
                 state = walletViewModel.walletState,
                 onAction = walletViewModel::onAction,
-                paddingValues = paddingValues,
                 navController = navHostController,
+                paddingValues = paddingValues,
             )
         }
 
@@ -113,37 +101,36 @@ fun WalletNavigation(
             }
         ) {
             ReceiveScreen(
+                state = receiveViewModel.state,
+                onAction = receiveViewModel::onAction,
                 navController = navHostController,
-                receiveViewModel.state,
-                receiveViewModel::onAction
             )
         }
 
 
         // Send
-        val sendScreens: List<String> = listOf("qr_scan_screen")
         composable<SendScreen>(
             enterTransition = {
-                when (initialState.destination.route) {
-                    in sendScreens -> fadeIn(animationSpec = tween(400))
+                when (initialState.destination.route?.substringAfterLast(".")) {
+                    "QRScanScreen" -> fadeIn(animationSpec = tween(400))
                     else           -> slideIntoContainer(AnimatedContentTransitionScope.SlideDirection.Up, animationSpec = tween(animationDuration))
                 }
             },
             popEnterTransition = {
-                when (initialState.destination.route) {
-                    in sendScreens -> fadeIn(animationSpec = tween(400))
-                    else -> slideIntoContainer(AnimatedContentTransitionScope.SlideDirection.Up, animationSpec = tween(animationDuration))
+                when (initialState.destination.route?.substringAfterLast(".")) {
+                    "QRScanScreen" -> fadeIn(animationSpec = tween(400))
+                    else           -> slideIntoContainer(AnimatedContentTransitionScope.SlideDirection.Up, animationSpec = tween(animationDuration))
                 }
             },
             exitTransition = {
-                when (targetState.destination.route) {
-                    in sendScreens -> fadeOut(animationSpec = tween(400))
+                when (targetState.destination.route?.substringAfterLast(".")) {
+                    "QRScanScreen" -> fadeOut(animationSpec = tween(400))
                     else           -> slideOutOfContainer(AnimatedContentTransitionScope.SlideDirection.Down, animationSpec = tween(animationDuration))
                 }
             },
             popExitTransition = {
-                when (targetState.destination.route) {
-                    in sendScreens -> fadeOut(animationSpec = tween(400))
+                when (targetState.destination.route?.substringAfterLast(".")) {
+                    "QRScanScreen" -> fadeOut(animationSpec = tween(400))
                     else           -> slideOutOfContainer(AnimatedContentTransitionScope.SlideDirection.Down, animationSpec = tween(animationDuration))
                 }
             },
@@ -152,7 +139,6 @@ fun WalletNavigation(
                 state = walletViewModel.walletState,
                 onAction = walletViewModel::onAction,
                 navController = navHostController,
-                // walletViewModel = walletViewModel
             )
         }
 
@@ -193,40 +179,52 @@ fun WalletNavigation(
             popExitTransition = {
                 slideOutOfContainer(AnimatedContentTransitionScope.SlideDirection.Down, animationSpec = tween(animationDuration))
             }
-        ) { QRScanScreen(onAction = walletViewModel::onAction, navController = navHostController) }
+        ) {
+            QRScanScreen(
+                onAction = walletViewModel::onAction,
+                navController = navHostController
+            )
+        }
 
 
-        // Chapters home
+        // Chapters Root Screen
         composable<ChaptersRootScreen>(
             enterTransition = {
-                when (initialState.destination.route) {
-                    "wallet_screen" -> slideIntoContainer(AnimatedContentTransitionScope.SlideDirection.Start, animationSpec = tween(animationDuration))
-                    "settings_root_screen" -> slideIntoContainer(AnimatedContentTransitionScope.SlideDirection.End, animationSpec = tween(animationDuration))
+                when (initialState.destination.route?.substringAfterLast(".")) {
+                    "WalletRootScreen"   -> slideIntoContainer(AnimatedContentTransitionScope.SlideDirection.Start, animationSpec = tween(animationDuration))
+                    "SettingsRootScreen" -> slideIntoContainer(AnimatedContentTransitionScope.SlideDirection.End, animationSpec = tween(animationDuration))
                     else -> fadeIn(animationSpec = tween(1000))
                 }
             },
             popEnterTransition = {
-                when (initialState.destination.route) {
-                    "wallet_screen" -> slideIntoContainer(AnimatedContentTransitionScope.SlideDirection.Start, animationSpec = tween(animationDuration))
-                    "settings_root_screen" -> slideIntoContainer(AnimatedContentTransitionScope.SlideDirection.End, animationSpec = tween(animationDuration))
+                when (initialState.destination.route?.substringAfterLast(".")) {
+                    "WalletRootScreen"   -> slideIntoContainer(AnimatedContentTransitionScope.SlideDirection.Start, animationSpec = tween(animationDuration))
+                    "SettingsRootScreen" -> slideIntoContainer(AnimatedContentTransitionScope.SlideDirection.End, animationSpec = tween(animationDuration))
                     else -> fadeIn(animationSpec = tween(1000))
                 }
             },
             exitTransition = {
-                when (targetState.destination.route) {
-                    "wallet_screen" -> slideOutOfContainer(AnimatedContentTransitionScope.SlideDirection.End, animationSpec = tween(animationDuration))
-                    "settings_root_screen" -> slideOutOfContainer(AnimatedContentTransitionScope.SlideDirection.Start, animationSpec = tween(animationDuration))
+                when (targetState.destination.route?.substringAfterLast(".")) {
+                    "WalletRootScreen"   -> slideOutOfContainer(AnimatedContentTransitionScope.SlideDirection.End, animationSpec = tween(animationDuration))
+                    "SettingsRootScreen" -> slideOutOfContainer(AnimatedContentTransitionScope.SlideDirection.Start, animationSpec = tween(animationDuration))
                     else -> fadeOut(animationSpec = tween(300))
                 }
             },
             popExitTransition = {
-                when (targetState.destination.route) {
-                    "wallet_screen" -> slideOutOfContainer(AnimatedContentTransitionScope.SlideDirection.End, animationSpec = tween(animationDuration))
-                    "settings_root_screen" -> slideOutOfContainer(AnimatedContentTransitionScope.SlideDirection.Start, animationSpec = tween(animationDuration))
+                when (targetState.destination.route?.substringAfterLast(".")) {
+                    "WalletRootScreen"   -> slideOutOfContainer(AnimatedContentTransitionScope.SlideDirection.End, animationSpec = tween(animationDuration))
+                    "SettingsRootScreen" -> slideOutOfContainer(AnimatedContentTransitionScope.SlideDirection.Start, animationSpec = tween(animationDuration))
                     else -> fadeOut(animationSpec = tween(300))
                 }
             }
-        ) { ChaptersRootScreen(chaptersViewModel.rootState, chaptersViewModel::onAction, paddingValues, navHostController) }
+        ) {
+            ChaptersRootScreen(
+                state = chaptersViewModel.rootState,
+                onAction = chaptersViewModel::onAction,
+                paddingValues = paddingValues,
+                navController = navHostController
+            )
+        }
 
 
         // Specific chapters
@@ -243,32 +241,39 @@ fun WalletNavigation(
             popExitTransition = {
                 slideOutOfContainer(AnimatedContentTransitionScope.SlideDirection.Down, animationSpec = tween(animationDuration))
             }
-        ) { ChapterScreen(chaptersViewModel.pageState, chaptersViewModel::onAction, paddingValues, navHostController) }
+        ) {
+            ChapterScreen(
+                state = chaptersViewModel.pageState,
+                onAction = chaptersViewModel::onAction,
+                paddingValues = paddingValues,
+                navController = navHostController
+            )
+        }
 
 
         // Settings
-        val settingsScreens: List<String> = listOf("about_screen", "recovery_phrase_screen", "send_coins_back_screen", "languages_screen")
+        val settingsScreens: List<String> = listOf("RecoveryPhraseScreen", "SendCoinsBackScreen", "LanguagesScreen", "AboutScreen")
         composable<SettingsRootScreen>(
             enterTransition = {
-                when (initialState.destination.route) {
+                when (initialState.destination.route?.substringAfterLast(".")) {
                     in settingsScreens -> fadeIn(animationSpec = tween(400))
                     else               -> slideIntoContainer(AnimatedContentTransitionScope.SlideDirection.Start, animationSpec = tween(animationDuration))
                 }
             },
             popEnterTransition = {
-                when (initialState.destination.route) {
+                when (initialState.destination.route?.substringAfterLast(".")) {
                     in settingsScreens -> fadeIn(animationSpec = tween(400))
                     else               -> slideIntoContainer(AnimatedContentTransitionScope.SlideDirection.Start, animationSpec = tween(animationDuration))
                 }
             },
             exitTransition = {
-                when (targetState.destination.route) {
+                when (targetState.destination.route?.substringAfterLast(".")) {
                     in settingsScreens -> fadeOut(animationSpec = tween(400))
                     else               -> slideOutOfContainer(AnimatedContentTransitionScope.SlideDirection.End, animationSpec = tween(animationDuration))
                 }
             },
             popExitTransition = {
-                when (targetState.destination.route) {
+                when (targetState.destination.route?.substringAfterLast(".")) {
                     in settingsScreens -> fadeOut(animationSpec = tween(400))
                     else               -> slideOutOfContainer(AnimatedContentTransitionScope.SlideDirection.End, animationSpec = tween(animationDuration))
                 }
@@ -296,7 +301,11 @@ fun WalletNavigation(
             popExitTransition = {
                 slideOutOfContainer(AnimatedContentTransitionScope.SlideDirection.Down, animationSpec = tween(animationDuration))
             }
-        ) { AboutScreen(navController = navHostController) }
+        ) {
+            AboutScreen(
+                navController = navHostController
+            )
+        }
 
 
         // Recovery phrase
@@ -313,7 +322,11 @@ fun WalletNavigation(
             popExitTransition = {
                 slideOutOfContainer(AnimatedContentTransitionScope.SlideDirection.Down, animationSpec = tween(animationDuration))
             }
-        ) { RecoveryPhraseScreen(navController = navHostController) }
+        ) {
+            RecoveryPhraseScreen(
+                navController = navHostController
+            )
+        }
 
 
         // Send coins back
@@ -330,7 +343,11 @@ fun WalletNavigation(
             popExitTransition = {
                 slideOutOfContainer(AnimatedContentTransitionScope.SlideDirection.Down, animationSpec = tween(animationDuration))
             }
-        ) { SendCoinsBackScreen(navController = navHostController) }
+        ) {
+            SendCoinsBackScreen(
+                navController = navHostController
+            )
+        }
 
         // Language
         composable<LanguagesScreen>(
@@ -346,6 +363,10 @@ fun WalletNavigation(
             popExitTransition = {
                 slideOutOfContainer(AnimatedContentTransitionScope.SlideDirection.Down, animationSpec = tween(animationDuration))
             }
-        ) { LanguagesScreen(navController = navHostController) }
+        ) {
+            LanguagesScreen(
+                navController = navHostController
+            )
+        }
     }
 }
