@@ -106,17 +106,18 @@ fun ChapterScreen(
 
         val screenSizeWidth = getScreenSizeWidth(LocalConfiguration.current.screenWidthDp)
         val padding = when (screenSizeWidth) {
-            ScreenSizeWidth.Small -> 16.dp
-            ScreenSizeWidth.Phone -> 32.dp
+            ScreenSizeWidth.Small -> PaddingValues(all = 16.dp)
+            ScreenSizeWidth.Phone -> PaddingValues(all = 32.dp)
         }
 
         Column(
             modifier = Modifier
                 .verticalScroll(pageScrollState)
-                .padding(all = padding)
-                .fillMaxSize()
+                .padding(padding)
+                .padding(bottom = paddingValues.calculateBottomPadding())
+                .weight(1f),
         ) {
-            ChapterPage(state.page ?: emptyList())
+            ChapterPage(state.page)
             ChapterButtons(
                 state = state,
                 onAction = onAction,
@@ -141,37 +142,6 @@ fun ChapterButtons(
             .fillMaxWidth()
             .padding(horizontal = 8.dp)
     ) {
-        if (!state.isFirst) {
-            Button(
-                onClick = {
-                    onAction(ChaptersScreensAction.PreviousPage)
-                    scrollUp(pageScrollState = pageScrollState, coroutineScope = coroutineScope)
-                },
-                colors = ButtonDefaults.buttonColors(containerColor = padawan_theme_button_secondary),
-                shape = RoundedCornerShape(20.dp),
-                border = standardBorder,
-                modifier = Modifier
-                    .padding(all = 4.dp)
-                    .standardShadow(20.dp)
-                    .weight(weight = 0.5f)
-            ) {
-                Row(
-                    verticalAlignment = Alignment.CenterVertically,
-                    modifier = Modifier.padding(vertical = 8.dp)
-                ) {
-//                    Icon(
-//                        painter = painterResource(id = R.drawable.ic_back),
-//                        contentDescription = "Previous Chapter Icon"
-//                    )
-//                    Spacer(modifier = Modifier.width(width = 16.dp))
-                    Text(
-                        text = stringResource(R.string.previous),
-                        style = PadawanTypography.labelLarge,
-                    )
-                }
-            }
-        }
-
         if (!state.isLast) {
             Button(
                 onClick = {
@@ -182,7 +152,7 @@ fun ChapterButtons(
                 shape = RoundedCornerShape(20.dp),
                 border = standardBorder,
                 modifier = Modifier
-                    .padding(all = 4.dp)
+                    .padding(vertical = 4.dp)
                     .standardShadow(20.dp)
                     .weight(weight = 0.5f)
             ) {
@@ -194,11 +164,6 @@ fun ChapterButtons(
                         text = stringResource(R.string.next),
                         style = PadawanTypography.labelLarge,
                     )
-//                    Spacer(modifier = Modifier.width(width = 16.dp))
-//                    Icon(
-//                        painter = painterResource(id = R.drawable.ic_front),
-//                        contentDescription = "Next Chapter Icon"
-//                    )
                 }
             }
         } else {
@@ -211,7 +176,7 @@ fun ChapterButtons(
                 shape = RoundedCornerShape(20.dp),
                 border = standardBorder,
                 modifier = Modifier
-                    .padding(all = 4.dp)
+                    .padding(vertical = 4.dp)
                     .standardShadow(20.dp)
                     .weight(weight = 0.5f),
             ) {
