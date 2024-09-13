@@ -31,7 +31,7 @@ import com.goldenraven.padawanwallet.R
 import com.goldenraven.padawanwallet.presentation.theme.PadawanTypography
 import com.goldenraven.padawanwallet.presentation.theme.padawan_theme_background_secondary
 import com.goldenraven.padawanwallet.presentation.theme.padawan_theme_text_faded_secondary
-import com.goldenraven.padawanwallet.presentation.ui.components.SecondaryScreenAppBar
+import com.goldenraven.padawanwallet.presentation.ui.components.PadawanAppBar
 
 private const val TAG = "LanguagesScreen"
 
@@ -41,7 +41,7 @@ internal fun LanguagesScreen(
 ) {
     Scaffold(
         topBar = {
-            SecondaryScreenAppBar(
+            PadawanAppBar(
                 title = stringResource(R.string.change_language),
                 onClick = { navController.popBackStack() }
             )

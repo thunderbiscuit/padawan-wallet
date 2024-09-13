@@ -77,7 +77,10 @@ internal fun TransactionScreen(
                     end.linkTo(parent.end)
                 }
         ) {
-            PadawanAppBar(navController = navController, title = stringResource(R.string.transaction_details))
+            PadawanAppBar(
+                title = stringResource(R.string.transaction_details),
+                onClick = { navController.popBackStack() }
+            )
         }
 
         Column(

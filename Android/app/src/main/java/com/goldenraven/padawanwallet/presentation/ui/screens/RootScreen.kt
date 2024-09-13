@@ -5,6 +5,7 @@
 
 package com.goldenraven.padawanwallet.presentation.ui.screens
 
+import android.util.Log
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.material3.Icon
@@ -33,24 +34,25 @@ import com.goldenraven.padawanwallet.presentation.theme.PadawanTypography
 import com.goldenraven.padawanwallet.presentation.theme.padawan_theme_background_secondary
 import com.goldenraven.padawanwallet.presentation.theme.padawan_theme_button_primary
 import com.goldenraven.padawanwallet.presentation.theme.padawan_theme_navigation_bar_unselected
-import com.goldenraven.padawanwallet.presentation.ui.components.SystemBars
 import com.goldenraven.padawanwallet.utils.NavigationItem
 import com.goldenraven.padawanwallet.presentation.navigation.WalletNavigation
 import androidx.navigation.compose.rememberNavController
 
-private const val TAG = "HomeScreen"
+private const val TAG = "RootScreen"
 
 @OptIn(androidx.compose.animation.ExperimentalAnimationApi::class)
 @Composable
-internal fun HomeScreen() {
+internal fun RootScreen() {
     val navControllerWalletNavigation: NavHostController = rememberNavController()
     // the splash screen hides the system bars
     // we need to bring them back on before continuing
     // SystemBars()
 
     Scaffold(
+        topBar = {  },
         bottomBar = { BottomNavigationBar(navControllerWalletNavigation) },
     ) { paddingValues ->
+        Log.i(TAG, "The padding values are: $paddingValues")
         // We used to apply the padding values here on the box, but now we pass the insets for the
         // system bars down to the composables that need them.
         Box {

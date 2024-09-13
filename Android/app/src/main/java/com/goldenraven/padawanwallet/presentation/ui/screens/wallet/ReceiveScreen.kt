@@ -9,6 +9,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -64,9 +65,10 @@ private const val TAG = "ReceiveScreen"
 
 @Composable
 internal fun ReceiveScreen(
-    navController: NavHostController,
     state: ReceiveScreenState,
     onAction: (ReceiveScreenAction) -> Unit,
+    insetsPaddingValues: PaddingValues,
+    navController: NavHostController,
 ) {
     val snackbarHostState = remember { SnackbarHostState() }
     var qr by remember { mutableStateOf<ImageBitmap?>(null) }
@@ -95,7 +97,6 @@ internal fun ReceiveScreen(
         ConstraintLayout(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(paddingValues)
                 .gradientBackground()
         ) {
             val (screenTitle, QRCode, bottomButtons) = createRefs()
@@ -108,7 +109,10 @@ internal fun ReceiveScreen(
                         end.linkTo(parent.end)
                     }
             ) {
-                PadawanAppBar(navController = navController, title = stringResource(R.string.receive_bitcoin))
+                PadawanAppBar(
+                    title = stringResource(R.string.receive_bitcoin),
+                    onClick = { navController.popBackStack() }
+                )
             }
 
             Column(
@@ -177,7 +181,7 @@ internal fun ReceiveScreen(
                         start.linkTo(parent.start)
                         end.linkTo(parent.end)
                     }
-                    .padding(bottom = bottomPadding)
+                    .padding(bottom = insetsPaddingValues.calculateBottomPadding())
             ) {
                 Button(
                     onClick = { onAction(ReceiveScreenAction.UpdateAddress) },

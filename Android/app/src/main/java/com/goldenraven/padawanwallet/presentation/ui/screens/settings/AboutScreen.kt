@@ -27,7 +27,7 @@ import com.goldenraven.padawanwallet.presentation.theme.PadawanTypography
 import com.goldenraven.padawanwallet.presentation.theme.padawan_theme_background_secondary
 import com.goldenraven.padawanwallet.presentation.theme.padawan_theme_button_primary
 import com.goldenraven.padawanwallet.presentation.theme.padawan_theme_text_faded_secondary
-import com.goldenraven.padawanwallet.presentation.ui.components.SecondaryScreenAppBar
+import com.goldenraven.padawanwallet.presentation.ui.components.PadawanAppBar
 
 @Composable
 internal fun AboutScreen(
@@ -35,7 +35,7 @@ internal fun AboutScreen(
 ) {
     Scaffold(
         topBar = {
-            SecondaryScreenAppBar(
+            PadawanAppBar(
                 title = stringResource(R.string.about_padawan),
                 onClick = { navController.popBackStack() }
             )

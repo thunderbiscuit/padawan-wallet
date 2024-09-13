@@ -94,6 +94,7 @@ private const val TAG = "SendScreen"
 internal fun SendScreen(
     state: WalletState,
     onAction: (WalletAction) -> Unit,
+    paddingValues: PaddingValues,
     navController: NavHostController,
 ) {
 
@@ -150,7 +151,10 @@ internal fun SendScreen(
                     start.linkTo(parent.start)
                     end.linkTo(parent.end)
                 }) {
-                    PadawanAppBar(navController = navController, title = stringResource(R.string.send_bitcoin))
+                    PadawanAppBar(
+                        title = stringResource(R.string.send_bitcoin),
+                        onClick = { navController.popBackStack() }
+                    )
                 }
 
                 Column(modifier = Modifier

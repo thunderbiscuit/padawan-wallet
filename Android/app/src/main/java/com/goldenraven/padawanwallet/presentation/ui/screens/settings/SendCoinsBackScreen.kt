@@ -41,7 +41,7 @@ import com.goldenraven.padawanwallet.R
 import com.goldenraven.padawanwallet.presentation.theme.PadawanTypography
 import com.goldenraven.padawanwallet.presentation.theme.padawan_theme_background_secondary
 import com.goldenraven.padawanwallet.presentation.theme.padawan_theme_text_faded_secondary
-import com.goldenraven.padawanwallet.presentation.ui.components.SecondaryScreenAppBar
+import com.goldenraven.padawanwallet.presentation.ui.components.PadawanAppBar
 import com.goldenraven.padawanwallet.utils.copyToClipboard
 
 @Composable
@@ -81,7 +81,7 @@ internal fun SendCoinsBackScreen(
     )
     Scaffold(
         topBar = {
-            SecondaryScreenAppBar(
+            PadawanAppBar(
                 title = stringResource(R.string.send_your_coins_back_to_us),
                 onClick = { navController.popBackStack() }
             )

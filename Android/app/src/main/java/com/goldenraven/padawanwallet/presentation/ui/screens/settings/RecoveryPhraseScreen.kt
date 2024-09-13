@@ -25,7 +25,7 @@ import androidx.navigation.NavHostController
 import com.goldenraven.padawanwallet.R
 import com.goldenraven.padawanwallet.domain.bitcoin.WalletRepository
 import com.goldenraven.padawanwallet.presentation.theme.padawan_theme_background_secondary
-import com.goldenraven.padawanwallet.presentation.ui.components.SecondaryScreenAppBar
+import com.goldenraven.padawanwallet.presentation.ui.components.PadawanAppBar
 import com.goldenraven.padawanwallet.presentation.ui.components.standardBorder
 
 @Composable
@@ -38,7 +38,7 @@ internal fun RecoveryPhraseScreen(
 
     Scaffold(
         topBar = {
-            SecondaryScreenAppBar(
+            PadawanAppBar(
                 title = stringResource(R.string.your_recovery_phrase),
                 onClick = { navController.popBackStack() }
             )

@@ -103,6 +103,7 @@ fun WalletNavigation(
             ReceiveScreen(
                 state = receiveViewModel.state,
                 onAction = receiveViewModel::onAction,
+                insetsPaddingValues = paddingValues,
                 navController = navHostController,
             )
         }
@@ -139,6 +140,7 @@ fun WalletNavigation(
                 state = walletViewModel.walletState,
                 onAction = walletViewModel::onAction,
                 navController = navHostController,
+                paddingValues = paddingValues,
             )
         }
 
