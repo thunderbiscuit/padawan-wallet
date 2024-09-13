@@ -7,6 +7,7 @@ package com.goldenraven.padawanwallet.presentation.ui.screens.wallet
 
 import android.annotation.SuppressLint
 import android.util.Log
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
@@ -14,11 +15,14 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Slider
@@ -373,7 +377,8 @@ fun TransactionConfirmation(
                 padawan_theme_button_primary,
                 RoundedCornerShape(20.dp, 20.dp, 0.dp, 0.dp)
             )
-            .padding(horizontal = 24.dp)
+            .navigationBarsPadding()
+            .padding(horizontal = 24.dp, vertical = 24.dp)
     ) {
         Row(
             Modifier
@@ -394,7 +399,7 @@ fun TransactionConfirmation(
             horizontalArrangement = Arrangement.Start
         ) {
             Text(
-                text = stringResource(id = R.string.amount_2),
+                text = stringResource(id = R.string.amount),
                 style = PadawanTypography.headlineSmall,
                 fontSize = 20.sp,
             )
