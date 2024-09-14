@@ -7,7 +7,7 @@
 /build/
 
 /Android/app/build
-/Android/release
+/Android/app/release/
 /Android/debug
 /Android/app/gradle.properties
 
