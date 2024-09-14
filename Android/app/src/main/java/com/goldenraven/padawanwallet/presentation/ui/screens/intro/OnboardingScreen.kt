@@ -38,7 +38,6 @@ import com.goldenraven.padawanwallet.R
 import com.goldenraven.padawanwallet.presentation.navigation.WalletRecoveryScreen
 import com.goldenraven.padawanwallet.presentation.theme.PadawanTypography
 import com.goldenraven.padawanwallet.presentation.theme.standardShadow
-import com.goldenraven.padawanwallet.presentation.ui.components.SystemBars
 import com.goldenraven.padawanwallet.presentation.ui.components.standardBorder
 import com.goldenraven.padawanwallet.utils.ScreenSizeHeight
 import com.goldenraven.padawanwallet.utils.getScreenSizeHeight
@@ -57,7 +56,7 @@ internal fun OnboardingScreen(
     val screenSizeHeight: ScreenSizeHeight = getScreenSizeHeight(LocalConfiguration.current.screenHeightDp)
     val pageScrollState: ScrollState = rememberScrollState()
 
-    SystemBars()
+    // SystemBars()
 
     if (screenSizeHeight == ScreenSizeHeight.Small) {
         SmallOnboarding(
@@ -179,7 +178,7 @@ internal fun PhoneOnboarding(
             horizontalAlignment = Alignment.CenterHorizontally,
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(top = 70.dp)
+                .padding(top = 60.dp)
                 .constrainAs(header) {
                     top.linkTo(parent.top)
                     start.linkTo(parent.start)
@@ -259,14 +258,14 @@ internal fun PhoneOnboarding(
                     end.linkTo(parent.end)
                     bottom.linkTo(parent.bottom)
                 }
-                .padding(horizontal = 24.dp)
+                .padding(start = 24.dp, end = 24.dp, bottom = 12.dp)
         ) {
             Text(
                 text = stringResource(id = R.string.already_have_a_wallet),
                 color = Color(0xff787878),
                 modifier = Modifier
                     .padding(bottom = 8.dp)
-                    .height(40.dp)
+                    .height(80.dp)
             )
             Text(
                 modifier = Modifier
