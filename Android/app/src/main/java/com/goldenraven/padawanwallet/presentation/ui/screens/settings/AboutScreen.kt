@@ -9,6 +9,8 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
@@ -33,21 +35,23 @@ import com.goldenraven.padawanwallet.presentation.ui.components.PadawanAppBar
 internal fun AboutScreen(
     navController: NavHostController
 ) {
+    val scrollState = rememberScrollState()
+
     Scaffold(
         topBar = {
             PadawanAppBar(
                 title = stringResource(R.string.about_padawan),
                 onClick = { navController.popBackStack() }
             )
-        }
+        },
+        modifier = Modifier.fillMaxHeight()
     ) { paddingValues ->
-        val scrollState = rememberScrollState()
         Column(
             Modifier
-                .verticalScroll(state = scrollState)
                 .background(padawan_theme_background_secondary)
                 .padding(paddingValues)
-                .padding(bottom = 12.dp)
+                .fillMaxSize()
+                .verticalScroll(state = scrollState)
         ) {
             Text(
                 text = stringResource(R.string.about_text),
