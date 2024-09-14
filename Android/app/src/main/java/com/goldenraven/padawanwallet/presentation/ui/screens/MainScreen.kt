@@ -7,7 +7,6 @@ package com.goldenraven.padawanwallet.presentation.ui.screens
 
 import android.util.Log
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Box
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
@@ -43,7 +42,7 @@ private const val TAG = "RootScreen"
 
 @OptIn(androidx.compose.animation.ExperimentalAnimationApi::class)
 @Composable
-internal fun RootScreen() {
+internal fun MainScreen() {
     val navControllerWalletNavigation: NavHostController = rememberNavController()
     // the splash screen hides the system bars
     // we need to bring them back on before continuing

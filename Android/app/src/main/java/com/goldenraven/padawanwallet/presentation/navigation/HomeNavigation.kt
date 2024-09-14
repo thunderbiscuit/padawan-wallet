@@ -12,7 +12,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.goldenraven.padawanwallet.presentation.ui.screens.RootScreen
+import com.goldenraven.padawanwallet.presentation.ui.screens.MainScreen
 
 @Composable
 fun HomeNavigation() {
@@ -21,16 +21,16 @@ fun HomeNavigation() {
 
     NavHost(
         navController = navController,
-        startDestination = HomeScreen,
+        startDestination = MainScreen,
     ) {
         // Home
-        composable<HomeScreen>(
+        composable<MainScreen>(
             popEnterTransition = {
                 slideIntoContainer(AnimatedContentTransitionScope.SlideDirection.End, animationSpec = tween(animationDuration))
             },
             exitTransition = {
                 slideOutOfContainer(AnimatedContentTransitionScope.SlideDirection.Start, animationSpec = tween(animationDuration))
             },
-        ) { RootScreen() }
+        ) { MainScreen() }
     }
 }

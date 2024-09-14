@@ -17,7 +17,7 @@ object WalletRecoveryScreen : Destination
 
 // Wallet screens
 @Serializable
-object HomeScreen : Destination
+object MainScreen : Destination
 @Serializable
 object WalletRootScreen : Destination
 @Serializable
