@@ -75,7 +75,11 @@ import com.goldenraven.padawanwallet.presentation.theme.padawan_theme_button_sec
 import com.goldenraven.padawanwallet.presentation.theme.padawan_theme_onPrimary
 import com.goldenraven.padawanwallet.presentation.theme.gradientBackground
 import com.goldenraven.padawanwallet.presentation.theme.innerScreenPadding
+import com.goldenraven.padawanwallet.presentation.theme.padawan_theme_background
+import com.goldenraven.padawanwallet.presentation.theme.padawan_theme_button_secondary_faded
+import com.goldenraven.padawanwallet.presentation.theme.padawan_theme_onBackground_secondary
 import com.goldenraven.padawanwallet.presentation.theme.standardShadow
+import com.goldenraven.padawanwallet.presentation.theme.white
 import com.goldenraven.padawanwallet.presentation.theme.wideTextField
 import com.goldenraven.padawanwallet.presentation.ui.components.PadawanAppBar
 import com.goldenraven.padawanwallet.presentation.ui.components.VerticalTextFieldDivider
@@ -371,14 +375,14 @@ fun TransactionConfirmation(
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .background(padawan_theme_button_secondary)
+            .background(padawan_theme_button_secondary_faded)
             .border(
                 3.dp,
                 padawan_theme_button_primary,
                 RoundedCornerShape(20.dp, 20.dp, 0.dp, 0.dp)
             )
             .navigationBarsPadding()
-            .padding(horizontal = 24.dp, vertical = 24.dp)
+            .padding(horizontal = 24.dp, vertical = 12.dp)
     ) {
         Row(
             Modifier
