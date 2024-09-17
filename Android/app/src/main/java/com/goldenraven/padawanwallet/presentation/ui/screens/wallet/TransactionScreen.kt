@@ -106,7 +106,7 @@ internal fun TransactionScreen(
                     text = stringResource(R.string.total_transaction_amount),
                     style = PadawanTypography.titleSmall
                 )
-                Text("${txDetails.received.toSat() + txDetails.sent.toSat() + txDetails.fee.toSat() } sats")
+                Text("${txDetails.received.toSat() + txDetails.sent.toSat()} sats")
             }
             Row(
                 modifier = Modifier
