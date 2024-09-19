@@ -69,7 +69,6 @@
     <string name="reset_tutorials">Resetar tutoriais concluídos</string>
     <string name="request_signet_coins">Solicite bitcoins de signet!</string>
     <string name="privacyText">A Padawan Wallet não coleta nenhuma informação sobre seus usuários e não usa Firebase Crashlytics. Isto, no entanto, significa que é muito mais difícil para nós ouvir sobre os bugs dos nossos usuários. Se você tiver comentários, sinta-se à vontade para enviar uma mensagem para a conta da Padawan no Twitter/X (@padawanwallet) ou nos escrever um e-mail. Você pode ler nossa política de privacidade completa aqui:</string>
-    <string name="privacyLink">https://github.com/thunderbiscuit/padawan-wallet/blob/master/PRIVACY</string>
     <string name="send_coins_back_address">tb1pjeu9rw9cwpmya0p85x9l27vp8hqd2hx2lwggta2fgm7u0gvua6asf8zrqw</string>
     <string name="copy_address_string">Copiar</string>
     <string name="error_faucet">Erro: bitcoins de treino (signet) não disponíveis</string>
