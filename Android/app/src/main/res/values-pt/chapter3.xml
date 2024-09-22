@@ -4,5 +4,5 @@
     <string name="C3_tagline">Como enviar bitcoins?</string>
 
     <string name="t3_p1">Para enviar bitcoin, você deve solicitar um endereço de recebimento. Se for oferecido a você um QR code, escaneie-o usando a câmera do seu telefone. Se você receber uma sequência de letras e números, copie e cole no local do endereço destinatário. Lembre-se de verificar o endereço depois de colar!</string>
-    <string name="t3_p2">Depois de inserir o endereço, coloque a quantidade de bitcoin a enviar (bitcoin inteiro ou em satoshis) e transmita a transação para a rede. Sua transação será captada por nós em todo o mundo e registrada em um bloco!.</string>
+    <string name="t3_p2">Depois de inserir o endereço, coloque a quantidade de bitcoin a enviar (bitcoin inteiro ou em satoshis) e transmita a transação para a rede. Sua transação será captada por nós em todo o mundo e registrada em um bloco!</string>
 </resources>
