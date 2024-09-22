@@ -6,15 +6,15 @@
 <!--  p1: parágrafo 1  -->
 
 <resources>
-    <string name="C1_title">O que é o Bitcoin Signet?</string>
+    <string name="C1_title">O que é o bitcoin Signet?</string>
 
-    <string name="t1_h1">O que é o Bitcoin Signet?</string>
+    <string name="t1_h1">O que é o bitcoin Signet?</string>
 
     <string name="t1_p1">As redes Bitcoin são compostas por milhares de computadores em todo o mundo. Esses computadores falam uma linguagem comum e se comunicam diretamente uns com os outros através da internet.</string>
-    <string name="t1_p2">Você pode não saber, mas existem muitas redes de bitcoin! Elas se dividem em duas famílias: a rede principal (há apenas uma dessas) e as redes de teste (há muitas dessas!).</string>
+    <string name="t1_p2">Talvez você não saiba, mas existem muitas redes de bitcoin! Elas se dividem em duas famílias: a rede principal (há apenas uma dessa) e as redes de teste (há muitas dessas!).</string>
 
     <string name="t1_h2">Mainnet</string>
-    <string name="t1_p3">Quando as pessoas falam sobre "a rede bitcoin", elas geralmente se referem à rede bitcoin mainnet.</string>
+    <string name="t1_p3">Quando as pessoas falam sobre "a rede Bitcoin", elas geralmente se referem à rede Bitcoin mainnet.</string>
     <string name="t1_p4">Os bitcoins na mainnet têm valor monetário, são usados como dinheiro para transações entre pessoas e podem ser negociados em exchanges de criptomoedas.</string>
 
     <string name="t1_h3">Redes de Teste</string>
