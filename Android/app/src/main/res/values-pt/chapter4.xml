@@ -3,14 +3,14 @@
     <string name="C4_title">O que é a mempool?</string>
     <string name="C4_tagline">Quando eu envio uma transação… para aonde ela vai?</string>
 
-    <string name="t4_p1">Quando você transmite uma transação, ela é registrada em todos os computadores conectados à rede Bitcoin, geralmente dentro de 2 a 5 segundos. Um nó toma conhecimento da sua transação e a adiciona a um grupo com várias transações que ele conhece, mas que ainda não foram incluídas em um bloco, para, posteriormente, ser registrada na blockchain. Esse grupo de transações é chamado de mempool (ou “piscina de transações”), e cada computador conectado à rede Bitcoin mantém sua própria mempool. Uma transação “na mempool” (já vista por vários nós e adicionada à piscina de transações) significa que ela foi reconhecida pela rede, mas ainda não foi registrada na blockchain.</string>
+    <string name="t4_p1">Quando você envia uma transação, ela é registrada em todos os computadores (nó ou node) conectados à rede Bitcoin, geralmente dentro de 2 a 5 segundos. Um nó toma conhecimento da sua transação e a adiciona a um grupo com várias transações que ele conhece, mas que ainda não foram incluídas em um bloco, para, posteriormente, ser registrada na blockchain. Esse grupo de transações é chamado de mempool (ou “piscina de transações”), e cada computador conectado à rede Bitcoin mantém sua própria mempool. Uma transação “na mempool” (já vista por vários nós e adicionada à piscina de transações) significa que ela foi reconhecida pela rede, mas ainda não foi registrada na blockchain.</string>
     <string name="t4_p2">Para se tornar oficial, os mineradores de bitcoin precisam minerar um bloco que inclua a sua transação nele.</string>
 
     <string name="t4_h1">Imagine um ônibus</string>
-    <string name="t4_p3">Imagine um ônibus que pega passageiros a cada 10 minutos em média. O ônibus só pode levar uma determinada quantidade de peso. Como cada passageiro tem um peso diferente, a quantidade de pessoas que  cabem no ônibus muda toda vez.</string>
-    <string name="t4_p4">A mempool atua como um ponto de ônibus. Várias transações esperam para serem registradas em um bloco na blockchain. As transações aguardam sua vez de serem mineradas, e toda vez que o ônibus passa ele leva tantos passageiros quanto possa.</string>
+    <string name="t4_p3">Imagine um ônibus que pega passageiros a cada 10 minutos em média. O ônibus só pode levar uma determinada carga. Como cada passageiro tem um peso diferente, a quantidade de pessoas que  cabem no ônibus muda toda vez.</string>
+    <string name="t4_p4">A mempool atua como um ponto de ônibus. Várias transações esperam para serem registradas em um bloco na blockchain. As transações aguardam sua vez de serem mineradas e toda vez que o ônibus passa ele leva tantos passageiros quanto possa.</string>
 
-    <string name="t4_h2">Alguns passageiros</string>
+    <string name="t4_h2">A tarifa depende da pressa</string>
     <string name="t4_p5">Alguns passageiros podem ter pressa em pegar o próximo ônibus. Assim, eles pagam uma tarifa mais cara para garantir que estejam perto do início da fila e consigam embarcar. Essas transações serão priorizadas no processo de mineração.</string>
     <string name="t4_p6">Por outro lado, outros passageiros podem não ter pressa alguma! Nesse caso, eles não pagam uma tarifa mais cara. Eventualmente, a fila para entrar no ônibus terá diminuído e as transações que estão esperando serão processadas.</string>
 </resources>
