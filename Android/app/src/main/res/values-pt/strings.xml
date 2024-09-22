@@ -141,7 +141,7 @@
     <string name="block">Bloco:</string>
     <string name="currently_unable_to_access_network">Não é possível acessar a rede no momento</string>
     <string name="bitcoin_signet">bitcoin signet</string>
-    <string name="looks_like_your_transaction_list_is_empty">Opa! Parece que sua lista de transações está vazia. Dê uma olhada e volte para pegar alguns bitcoins signet para começar a treinar com a carteira!</string>
+    <string name="looks_like_your_transaction_list_is_empty">Opa! Parece que sua lista de transações está vazia e você não tem nenhum saldo. Clique abaixo em "Receber bitcoins signet, carregue seu saldo para poder treinar.</string>
     <string name="get_coins_icon">Ícone de receber bitcoins</string>
     <string name="currency_toggle_text">Texto de alteração de moeda</string>
     <string name="changing_color_animation">Alterando animação de cores</string>
