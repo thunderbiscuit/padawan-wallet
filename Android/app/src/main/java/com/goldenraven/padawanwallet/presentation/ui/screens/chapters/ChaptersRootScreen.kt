@@ -74,7 +74,7 @@ internal fun ChaptersRootScreen(
                 color = Color(0xff787878),
                 modifier = Modifier.padding(bottom = 16.dp)
             )
-            SectionTitle("Getting Started", true)
+            SectionTitle(stringResource(id = R.string.getting_started), true)
             SectionDivider()
             TutorialCard(
                 title = "1. ${stringResource(id = R.string.C1_title)}",
