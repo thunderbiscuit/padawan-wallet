@@ -27,8 +27,8 @@ android {
         applicationId = "com.goldenraven.padawanwallet"
         minSdk = 26
         targetSdk = 35
-        versionCode = 21
-        versionName = "v0.14.1"
+        versionCode = 22
+        versionName = "v0.14.2"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
         resValue(
