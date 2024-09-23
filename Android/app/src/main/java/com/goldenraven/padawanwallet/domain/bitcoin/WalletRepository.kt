@@ -5,7 +5,6 @@
 
 package com.goldenraven.padawanwallet.domain.bitcoin
 
-import android.content.Context
 import android.content.SharedPreferences
 import android.util.Log
 import com.goldenraven.padawanwallet.utils.RequiredInitialWalletData
@@ -15,25 +14,34 @@ private const val TAG = "WalletRepository"
 
 object WalletRepository {
     private lateinit var sharedPreferences: SharedPreferences
-    private var currentWalletExists: Boolean = false
+    private var validDbExists: Boolean = false
 
     fun setSharedPreferences(sharedPref: SharedPreferences, filesPath: String) {
         sharedPreferences = sharedPref
-        checkIfWalletExists(filesPath)
+        checkIfDbExists(filesPath)
     }
 
-    private fun checkIfWalletExists(filesPath: String) {
-        val file = File("$filesPath/padawanDB_v1.sqlite")
-        currentWalletExists = file.exists()
-        Log.i(TAG, "We checked at $filesPath and the value of currentWalletExists is $currentWalletExists")
+    // This method checks if the wallet file version X exists in the given path. It's a bit hacky,
+    // but allows us to upgrade the app even if the persistence is incompatible; we simply name the
+    // persistence file with a new version name, the wallet will not find this file, and the user
+    // will have to recover the wallet, creating a new persistence instead of handling a database
+    // migration.
+    private fun checkIfDbExists(filesPath: String) {
+        val file = File("$filesPath/padawanDB_v2.sqlite")
+        validDbExists = file.exists()
+        Log.i(TAG, "We checked at $filesPath and the value of validDbExists is $validDbExists")
+    }
+
+    private fun walletInitialized(): Boolean {
+        return sharedPreferences.getBoolean("initialized", false)
     }
 
     fun doesWalletExist(): Boolean {
-        return currentWalletExists
+        Log.i(TAG, "Can we go to Root Wallet Screen? -> Valid DB exists: $validDbExists, Wallet is initialized: ${walletInitialized()}")
+        return validDbExists && walletInitialized()
     }
 
     fun getInitialWalletData(): RequiredInitialWalletData {
-        // val currentWallet: SharedPreferences = applicationContext.getSharedPreferences("current_wallet", Context.MODE_PRIVATE)
         val descriptor: String = sharedPreferences.getString("descriptor", null)!!
         val changeDescriptor: String = sharedPreferences.getString("changeDescriptor", null)!!
         return RequiredInitialWalletData(descriptor, changeDescriptor)
