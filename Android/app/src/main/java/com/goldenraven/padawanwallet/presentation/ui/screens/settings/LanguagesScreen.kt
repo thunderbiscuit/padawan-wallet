@@ -93,8 +93,7 @@ fun LanguageChoiceRadioButtons() {
                         onClick = {
                             onOptionSelected(language)
                             val languageCode: String = getSupportedLanguageCode(language)
-                            val appLocale: LocaleListCompat =
-                                LocaleListCompat.forLanguageTags(languageCode)
+                            val appLocale: LocaleListCompat = LocaleListCompat.forLanguageTags(languageCode)
                             AppCompatDelegate.setApplicationLocales(appLocale)
                         }
                     )
@@ -102,10 +101,14 @@ fun LanguageChoiceRadioButtons() {
             ) {
                 RadioButton(
                     selected = (language == selectedOption),
-                    onClick = { onOptionSelected(language) }
+                    onClick = {
+                        onOptionSelected(language)
+                        val languageCode: String = getSupportedLanguageCode(language)
+                        val appLocale: LocaleListCompat = LocaleListCompat.forLanguageTags(languageCode)
+                        AppCompatDelegate.setApplicationLocales(appLocale)
+                    }
                 )
                 Text(
-                    // text = language,
                     text = language.name.lowercase().replaceFirstChar { it.uppercase() },
                     modifier = Modifier.padding(start = 16.dp)
                 )
