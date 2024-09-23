@@ -111,7 +111,7 @@ fun setLanguage() {
             val appLocale: LocaleListCompat = LocaleListCompat.forLanguageTags(languageCode)
             AppCompatDelegate.setApplicationLocales(appLocale)
         } else {
-            Log.i(TAG, "Default system locale is not Spanish")
+            Log.i(TAG, "Default system locale is neither Spanish nor Portuguese, defaulting to English")
             val languageCode: String = getSupportedLanguageCode(SupportedLanguage.ENGLISH)
             val appLocale: LocaleListCompat = LocaleListCompat.forLanguageTags(languageCode)
             AppCompatDelegate.setApplicationLocales(appLocale)
