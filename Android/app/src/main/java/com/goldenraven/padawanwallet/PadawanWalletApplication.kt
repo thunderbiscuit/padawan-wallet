@@ -19,7 +19,7 @@ class PadawanWalletApplication : Application() {
         val filesDirectoryPath: String = applicationContext.filesDir.toString()
 
         // initialize repositories and set shared preferences
-        WalletRepository.setSharedPreferences(applicationContext.getSharedPreferences("wallet", Context.MODE_PRIVATE), filesDirectoryPath)
+        WalletRepository.setSharedPreferences(applicationContext.getSharedPreferences("wallet", Context.MODE_PRIVATE))
         TutorialRepository.setSharedPreferences(applicationContext.getSharedPreferences("tutorials", Context.MODE_PRIVATE))
 
         // initialize Wallet object with path variable

@@ -8,37 +8,20 @@ package com.goldenraven.padawanwallet.domain.bitcoin
 import android.content.SharedPreferences
 import android.util.Log
 import com.goldenraven.padawanwallet.utils.RequiredInitialWalletData
-import java.io.File
 
 private const val TAG = "WalletRepository"
 
 object WalletRepository {
     private lateinit var sharedPreferences: SharedPreferences
-    private var validDbExists: Boolean = false
 
-    fun setSharedPreferences(sharedPref: SharedPreferences, filesPath: String) {
+    fun setSharedPreferences(sharedPref: SharedPreferences) {
         sharedPreferences = sharedPref
-        checkIfDbExists(filesPath)
-    }
-
-    // This method checks if the wallet file version X exists in the given path. It's a bit hacky,
-    // but allows us to upgrade the app even if the persistence is incompatible; we simply name the
-    // persistence file with a new version name, the wallet will not find this file, and the user
-    // will have to recover the wallet, creating a new persistence instead of handling a database
-    // migration.
-    private fun checkIfDbExists(filesPath: String) {
-        val file = File("$filesPath/padawanDB_v2.sqlite")
-        validDbExists = file.exists()
-        Log.i(TAG, "We checked at $filesPath and the value of validDbExists is $validDbExists")
-    }
-
-    private fun walletInitialized(): Boolean {
-        return sharedPreferences.getBoolean("initialized", false)
     }
 
     fun doesWalletExist(): Boolean {
-        Log.i(TAG, "Can we go to Root Wallet Screen? -> Valid DB exists: $validDbExists, Wallet is initialized: ${walletInitialized()}")
-        return validDbExists && walletInitialized()
+        val compatibleWalletInitialized = sharedPreferences.getBoolean("initialized$PERSISTENCE_VERSION", false)
+        Log.i(TAG, "Checking whether the wallet persistence is compatible with $PERSISTENCE_VERSION: $compatibleWalletInitialized")
+        return compatibleWalletInitialized
     }
 
     fun getInitialWalletData(): RequiredInitialWalletData {
@@ -48,12 +31,9 @@ object WalletRepository {
     }
 
     fun saveWallet(path: String, descriptor: String, changeDescriptor: String) {
-        Log.i(
-            TAG,
-            "Saved wallet: path -> $path, descriptor -> $descriptor, change descriptor -> $changeDescriptor"
-        )
+        Log.i(TAG, "Saved wallet: path -> $path, descriptor -> $descriptor, change descriptor -> $changeDescriptor")
         sharedPreferences.edit().apply {
-            putBoolean("initialized", true)
+            putBoolean("initialized$PERSISTENCE_VERSION", true)
             putString("path", path)
             putString("descriptor", descriptor)
             putString("changeDescriptor", changeDescriptor)

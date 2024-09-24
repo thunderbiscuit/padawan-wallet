@@ -29,6 +29,7 @@ import org.bitcoindevkit.WordCount
 
 private const val TAG = "WalletObject"
 private const val SIGNET_ELECTRUM_URL: String = "ssl://mempool.space:60602"
+const val PERSISTENCE_VERSION = "V1"
 
 object Wallet {
     private lateinit var wallet: org.bitcoindevkit.Wallet
@@ -40,7 +41,7 @@ object Wallet {
 
     // Setting the path requires the application context and is done once by PadawanWalletApplication
     fun setPathAndConnectDb(path: String) {
-        dbPath = "$path/padawanDB_v1.sqlite"
+        dbPath = "$path/padawanDB_$PERSISTENCE_VERSION.sqlite3"
         dbConnection = Connection(dbPath)
     }
 
