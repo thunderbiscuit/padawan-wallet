@@ -63,6 +63,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.composables.core.DragIndication
 import com.composables.core.ModalBottomSheet
+import com.composables.core.Scrim
 import com.composables.core.Sheet
 import com.composables.core.SheetDetent
 import com.composables.core.SheetDetent.Companion.FullyExpanded
@@ -344,6 +345,7 @@ internal fun SendScreen(
     }
 
     ModalBottomSheet(state = sheetState) {
+        Scrim()
         Sheet(
             modifier = Modifier
                 .padding(top = 12.dp)
