@@ -10,7 +10,6 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -92,6 +91,12 @@ internal fun ReceiveScreen(
     }
 
     Scaffold(
+        topBar = {
+            PadawanAppBar(
+                title = stringResource(R.string.receive_bitcoin),
+                onClick = { navController.popBackStack() }
+            )
+        },
         snackbarHost = { SnackbarHost(snackbarHostState) }
     ) { paddingValues ->
         ConstraintLayout(
@@ -99,28 +104,14 @@ internal fun ReceiveScreen(
                 .fillMaxSize()
                 .gradientBackground()
         ) {
-            val (screenTitle, QRCode, bottomButtons) = createRefs()
-
-            Row(
-                Modifier
-                    .constrainAs(screenTitle) {
-                        top.linkTo(parent.top)
-                        start.linkTo(parent.start)
-                        end.linkTo(parent.end)
-                    }
-            ) {
-                PadawanAppBar(
-                    title = stringResource(R.string.receive_bitcoin),
-                    onClick = { navController.popBackStack() }
-                )
-            }
+            val (QRCode, bottomButtons) = createRefs()
 
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Center,
                 modifier = Modifier
                     .constrainAs(QRCode) {
-                        top.linkTo(screenTitle.bottom)
+                        top.linkTo(parent.top)
                         bottom.linkTo(bottomButtons.top)
                         start.linkTo(parent.start)
                         end.linkTo(parent.end)
