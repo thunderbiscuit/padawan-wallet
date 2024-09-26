@@ -8,6 +8,7 @@ package com.goldenraven.padawanwallet.presentation.ui.screens.wallet
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
@@ -38,8 +39,6 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.constraintlayout.compose.ConstraintLayout
-import androidx.constraintlayout.compose.Dimension
 import androidx.navigation.NavHostController
 import com.goldenraven.padawanwallet.R
 import com.goldenraven.padawanwallet.presentation.theme.ShareTechMono
@@ -56,6 +55,8 @@ import com.goldenraven.padawanwallet.utils.copyToClipboard
 import com.goldenraven.padawanwallet.utils.getScreenSizeWidth
 import com.goldenraven.padawanwallet.presentation.viewmodels.mvi.ReceiveScreenAction
 import com.goldenraven.padawanwallet.presentation.viewmodels.mvi.ReceiveScreenState
+import androidx.compose.ui.Alignment.Companion.BottomCenter
+import androidx.compose.ui.Alignment.Companion.Center
 import com.goldenraven.padawanwallet.utils.QrUiState
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -90,6 +91,9 @@ internal fun ReceiveScreen(
         ScreenSizeWidth.Phone -> 340.dp
     }
 
+    val context = LocalContext.current
+    val scope = rememberCoroutineScope()
+
     Scaffold(
         topBar = {
             PadawanAppBar(
@@ -98,29 +102,20 @@ internal fun ReceiveScreen(
             )
         },
         snackbarHost = { SnackbarHost(snackbarHostState) }
-    ) { paddingValues ->
-        ConstraintLayout(
+    ) { scaffoldPadding ->
+        Box(
             modifier = Modifier
                 .fillMaxSize()
                 .gradientBackground()
+                .padding(scaffoldPadding)
         ) {
-            val (QRCode, bottomButtons) = createRefs()
 
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Center,
                 modifier = Modifier
-                    .constrainAs(QRCode) {
-                        top.linkTo(parent.top)
-                        bottom.linkTo(bottomButtons.top)
-                        start.linkTo(parent.start)
-                        end.linkTo(parent.end)
-                        height = Dimension.fillToConstraints
-                    }
+                    .align(Center)
             ) {
-                val context = LocalContext.current
-                val scope = rememberCoroutineScope()
-
                 if (state.qrState == QrUiState.Loading) {
                     LoadingAnimation(circleColor = padawan_theme_background, circleSize = 38.dp)
                 } else if (state.qrState == QrUiState.QR && state.bip21Uri != null && state.address != null) {
@@ -161,37 +156,24 @@ internal fun ReceiveScreen(
                     }
                 }
             }
-            val bottomPadding = when (getScreenSizeWidth(LocalConfiguration.current.screenWidthDp)) {
-                ScreenSizeWidth.Small -> 12.dp
-                ScreenSizeWidth.Phone -> 24.dp
-            }
-            Column(
-                Modifier
-                    .constrainAs(bottomButtons) {
-                        bottom.linkTo(parent.bottom)
-                        start.linkTo(parent.start)
-                        end.linkTo(parent.end)
-                    }
-                    .padding(bottom = insetsPaddingValues.calculateBottomPadding())
+
+            Button(
+                onClick = { onAction(ReceiveScreenAction.UpdateAddress) },
+                colors = ButtonDefaults.buttonColors(containerColor = padawan_theme_button_primary),
+                shape = RoundedCornerShape(20.dp),
+                border = standardBorder,
+                modifier = Modifier
+                    .height(100.dp)
+                    .fillMaxWidth(0.9f)
+                    .padding(vertical = 8.dp, horizontal = 8.dp)
+                    .standardShadow(20.dp)
+                    .align(BottomCenter)
             ) {
-                Button(
-                    onClick = { onAction(ReceiveScreenAction.UpdateAddress) },
-                    colors = ButtonDefaults.buttonColors(containerColor = padawan_theme_button_primary),
-                    shape = RoundedCornerShape(20.dp),
-                    border = standardBorder,
-                    modifier = Modifier
-                        .height(100.dp)
-                        .fillMaxWidth(0.9f)
-                        .padding(vertical = 8.dp, horizontal = 8.dp)
-                        .standardShadow(20.dp),
-                ) {
-                    Text(
-                        text = stringResource(R.string.generate_a_new_address),
-                    )
-                }
+                Text(
+                    text = stringResource(R.string.generate_a_new_address),
+                )
             }
         }
-
     }
 }
 
