@@ -12,13 +12,13 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -31,18 +31,16 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
-import androidx.constraintlayout.compose.ConstraintLayout
-import androidx.constraintlayout.compose.Dimension
 import androidx.navigation.NavHostController
 import com.goldenraven.padawanwallet.R
 import com.goldenraven.padawanwallet.domain.bitcoin.ChainPosition
 import com.goldenraven.padawanwallet.domain.bitcoin.TransactionDetails
 import com.goldenraven.padawanwallet.presentation.theme.PadawanTypography
+import com.goldenraven.padawanwallet.presentation.theme.gradientBackground
 import com.goldenraven.padawanwallet.presentation.theme.innerScreenPadding
 import com.goldenraven.padawanwallet.presentation.theme.padawan_disabled
 import com.goldenraven.padawanwallet.presentation.theme.padawan_theme_receive_primary
 import com.goldenraven.padawanwallet.presentation.theme.padawan_theme_send_primary
-import com.goldenraven.padawanwallet.presentation.theme.gradientBackground
 import com.goldenraven.padawanwallet.presentation.theme.padawan_theme_button_primary
 import com.goldenraven.padawanwallet.presentation.ui.components.PadawanAppBar
 import com.goldenraven.padawanwallet.utils.ScreenSizeWidth
@@ -62,167 +60,150 @@ internal fun TransactionScreen(
         ScreenSizeWidth.Phone -> PaddingValues(32.dp)
     }
 
-    ConstraintLayout(
-        modifier = Modifier
-            .fillMaxSize()
-            .gradientBackground()
-    ) {
-        val (screenTitle, QRCode) = createRefs()
-
-        Row(
-            Modifier
-                .constrainAs(screenTitle) {
-                    top.linkTo(parent.top)
-                    start.linkTo(parent.start)
-                    end.linkTo(parent.end)
-                }
-        ) {
+    Scaffold(
+        topBar = {
             PadawanAppBar(
                 title = stringResource(R.string.transaction_details),
                 onClick = { navController.popBackStack() }
             )
-        }
-
-        Column(
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center,
-            modifier = Modifier
-                .innerScreenPadding(padding)
-                .constrainAs(QRCode) {
-                    top.linkTo(screenTitle.bottom)
-                    bottom.linkTo(parent.bottom)
-                    start.linkTo(parent.start)
-                    end.linkTo(parent.end)
-                    height = Dimension.fillToConstraints
-                }
-        ) {
-            Row(
+        },
+        content = { scaffoldPadding ->
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center,
                 modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(vertical = 8.dp),
-                horizontalArrangement = Arrangement.SpaceBetween
+                    .gradientBackground()
+                    .padding(scaffoldPadding)
+                    .innerScreenPadding(padding)
             ) {
-                Text(
-                    text = stringResource(R.string.total_transaction_amount),
-                    style = PadawanTypography.titleSmall
-                )
-                Text("${txDetails.received.toSat() + txDetails.sent.toSat()} sats")
-            }
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(vertical = 8.dp),
-                horizontalArrangement = Arrangement.SpaceBetween
-            ) {
-                Text(
-                    text = stringResource(R.string.transaction_type),
-                    style = PadawanTypography.titleSmall,
-                )
-                Box {
-                    Row(
-                        modifier = Modifier
-                            .align(Alignment.CenterEnd)
-                            .background(
-                                color = if (txDetails.txType == TxType.PAYMENT) padawan_theme_send_primary else padawan_theme_receive_primary,
-                                shape = RoundedCornerShape(size = 5.dp)
-                            )
-                    ) {
-                        Text(
-                            text = if (txDetails.txType == TxType.PAYMENT) stringResource(R.string.send) else stringResource(R.string.receive),
-                            style = PadawanTypography.bodySmall,
-                            modifier = Modifier
-                                .align(Alignment.CenterVertically)
-                                .padding(start = 8.dp, top = 4.dp, bottom = 4.dp)
-                        )
-                        Icon(
-                            painter = if (txDetails.txType == TxType.PAYMENT) painterResource(id = R.drawable.ic_send_secondary) else painterResource(id = R.drawable.ic_receive_secondary),
-                            tint = padawan_disabled,
-                            contentDescription = if (txDetails.txType == TxType.PAYMENT) stringResource(R.string.send_icon) else stringResource(R.string.receive_icon),
-                            modifier = Modifier
-                                .align(Alignment.CenterVertically)
-                                .scale(scale = 0.75f)
-                                .padding(end = 8.dp),
-                        )
-                    }
-                }
-            }
-            HorizontalDivider(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(40.dp),
-                color = Color(0xff8f8f8f),
-                thickness = 1.dp
-            )
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(vertical = 8.dp),
-                horizontalArrangement = Arrangement.SpaceBetween
-            ) {
-                Text(
-                    text = stringResource(R.string.time),
-                    style = PadawanTypography.titleSmall
-                )
-                Text(
-                    when (txDetails.chainPosition) {
-                        is ChainPosition.Confirmed -> txDetails.chainPosition.timestamp.timestampToString()
-                        is ChainPosition.Unconfirmed -> stringResource(R.string.pending, ":")
-                    }
-                )
-            }
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(vertical = 8.dp),
-                horizontalArrangement = Arrangement.SpaceBetween
-            ) {
-                Text(
-                    text = stringResource(R.string.block),
-                    style = PadawanTypography.titleSmall,
-                )
-                Text(
-                    when (txDetails.chainPosition) {
-                        is ChainPosition.Confirmed -> txDetails.chainPosition.height.toString()
-                        is ChainPosition.Unconfirmed -> stringResource(R.string.pending, ":")
-                    }
-                )
-            }
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(vertical = 8.dp),
-                horizontalArrangement = Arrangement.SpaceBetween
-            ) {
-                Text(
-                    text = stringResource(R.string.txid),
-                    style = PadawanTypography.titleSmall,
-                )
-                val mUriHandler = LocalUriHandler.current
-                val link: String = "https://mempool.space/signet/tx/${txDetails.txid}"
-                Text(
-                    text = "${txDetails.txid} (mempool.space)",
+                Row(
                     modifier = Modifier
-                        .clickable { mUriHandler.openUri(link) }
-                        .width(270.dp),
-                    style = PadawanTypography.bodyMedium,
-                    color = padawan_theme_button_primary,
-                    textDecoration = TextDecoration.Underline
+                        .fillMaxWidth()
+                        .padding(vertical = 8.dp),
+                    horizontalArrangement = Arrangement.SpaceBetween
+                ) {
+                    Text(
+                        text = stringResource(R.string.total_transaction_amount),
+                        style = PadawanTypography.titleSmall
+                    )
+                    Text("${txDetails.received.toSat() + txDetails.sent.toSat()} sats")
+                }
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(vertical = 8.dp),
+                    horizontalArrangement = Arrangement.SpaceBetween
+                ) {
+                    Text(
+                        text = stringResource(R.string.transaction_type),
+                        style = PadawanTypography.titleSmall,
+                    )
+                    Box {
+                        Row(
+                            modifier = Modifier
+                                .align(Alignment.CenterEnd)
+                                .background(
+                                    color = if (txDetails.txType == TxType.PAYMENT) padawan_theme_send_primary else padawan_theme_receive_primary,
+                                    shape = RoundedCornerShape(size = 5.dp)
+                                )
+                        ) {
+                            Text(
+                                text = if (txDetails.txType == TxType.PAYMENT) stringResource(R.string.send) else stringResource(R.string.receive),
+                                style = PadawanTypography.bodySmall,
+                                modifier = Modifier
+                                    .align(Alignment.CenterVertically)
+                                    .padding(start = 8.dp, top = 4.dp, bottom = 4.dp)
+                            )
+                            Icon(
+                                painter = if (txDetails.txType == TxType.PAYMENT) painterResource(id = R.drawable.ic_send_secondary) else painterResource(id = R.drawable.ic_receive_secondary),
+                                tint = padawan_disabled,
+                                contentDescription = if (txDetails.txType == TxType.PAYMENT) stringResource(R.string.send_icon) else stringResource(R.string.receive_icon),
+                                modifier = Modifier
+                                    .align(Alignment.CenterVertically)
+                                    .scale(scale = 0.75f)
+                                    .padding(end = 8.dp),
+                            )
+                        }
+                    }
+                }
+                HorizontalDivider(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(40.dp),
+                    color = Color(0xff8f8f8f),
+                    thickness = 1.dp
                 )
-            }
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(vertical = 8.dp),
-                horizontalArrangement = Arrangement.SpaceBetween
-            ) {
-                val fee = txDetails.fee
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(vertical = 8.dp),
+                    horizontalArrangement = Arrangement.SpaceBetween
+                ) {
+                    Text(
+                        text = stringResource(R.string.time),
+                        style = PadawanTypography.titleSmall
+                    )
+                    Text(
+                        when (txDetails.chainPosition) {
+                            is ChainPosition.Confirmed -> txDetails.chainPosition.timestamp.timestampToString()
+                            is ChainPosition.Unconfirmed -> stringResource(R.string.pending, ":")
+                        }
+                    )
+                }
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(vertical = 8.dp),
+                    horizontalArrangement = Arrangement.SpaceBetween
+                ) {
+                    Text(
+                        text = stringResource(R.string.block),
+                        style = PadawanTypography.titleSmall,
+                    )
+                    Text(
+                        when (txDetails.chainPosition) {
+                            is ChainPosition.Confirmed -> txDetails.chainPosition.height.toString()
+                            is ChainPosition.Unconfirmed -> stringResource(R.string.pending, ":")
+                        }
+                    )
+                }
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(vertical = 8.dp),
+                    horizontalArrangement = Arrangement.SpaceBetween
+                ) {
+                    Text(
+                        text = stringResource(R.string.txid),
+                        style = PadawanTypography.titleSmall,
+                    )
+                    val mUriHandler = LocalUriHandler.current
+                    val link: String = "https://mempool.space/signet/tx/${txDetails.txid}"
+                    Text(
+                        text = "${txDetails.txid} (mempool.space)",
+                        modifier = Modifier
+                            .clickable { mUriHandler.openUri(link) }
+                            .width(270.dp),
+                        style = PadawanTypography.bodyMedium,
+                        color = padawan_theme_button_primary,
+                        textDecoration = TextDecoration.Underline
+                    )
+                }
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(vertical = 8.dp),
+                    horizontalArrangement = Arrangement.SpaceBetween
+                ) {
+                    val fee = txDetails.fee
 
-                Text(
-                    text = stringResource(R.string.fees_paid),
-                    style = PadawanTypography.titleSmall,
-                )
-                Text("${fee.toSat()} sats")
+                    Text(
+                        text = stringResource(R.string.fees_paid),
+                        style = PadawanTypography.titleSmall,
+                    )
+                    Text("${fee.toSat()} sats")
+                }
             }
         }
-    }
+    )
 }
