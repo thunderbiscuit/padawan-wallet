@@ -268,7 +268,8 @@ internal fun SendScreen(
                     scope.launch {
                         snackbarHostState.showSnackbar(
                             message = it,
-                            duration = SnackbarDuration.Short
+                            duration = SnackbarDuration.Indefinite,
+                            withDismissAction = true
                         )
                     }
                 }
