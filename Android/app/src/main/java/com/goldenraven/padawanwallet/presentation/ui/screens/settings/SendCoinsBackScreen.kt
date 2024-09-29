@@ -34,10 +34,14 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.Placeholder
 import androidx.compose.ui.text.PlaceholderVerticalAlign
 import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.tooling.preview.Devices
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import com.goldenraven.padawanwallet.R
+import com.goldenraven.padawanwallet.presentation.theme.PadawanTheme
 import com.goldenraven.padawanwallet.presentation.theme.PadawanTypography
 import com.goldenraven.padawanwallet.presentation.theme.padawan_theme_background_secondary
 import com.goldenraven.padawanwallet.presentation.theme.padawan_theme_text_faded_secondary
@@ -141,13 +145,10 @@ internal fun SendCoinsBackScreen(
     }
 }
 
-// fun copyToClipboard(context: Context, scope: CoroutineScope, snackbarHostState: SnackbarHostState, setCopyClicked: (Boolean) -> Unit) {
-//     val clipboard: ClipboardManager = context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-//     val clip: ClipData = ClipData.newPlainText("", context.getString(R.string.send_coins_back_address))
-//     clipboard.setPrimaryClip(clip)
-//     scope.launch {
-//         snackbarHostState.showSnackbar("Copied address to clipboard!")
-//         delay(1000)
-//         setCopyClicked(false)
-//     }
-// }
+@Preview(device = Devices.PIXEL_7, showBackground = true)
+@Composable
+internal fun PreviewSendCoinsBackScreen() {
+    PadawanTheme {
+        SendCoinsBackScreen(navController = rememberNavController())
+    }
+}
