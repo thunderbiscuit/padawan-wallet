@@ -45,11 +45,14 @@ import androidx.compose.ui.semantics.testTag
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Devices
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
 import com.goldenraven.padawanwallet.R
+import com.goldenraven.padawanwallet.presentation.theme.PadawanTheme
 import com.goldenraven.padawanwallet.presentation.theme.PadawanTypography
 import com.goldenraven.padawanwallet.presentation.theme.md_theme_dark_onBackgroundFaded
 import com.goldenraven.padawanwallet.presentation.theme.md_theme_dark_onLightBackground
@@ -64,13 +67,12 @@ import kotlinx.coroutines.launch
 private const val TAG = "WalletRecoveryScreen"
 
 @Composable
-internal fun WalletRecoveryScreen(onBuildWalletButtonClicked: (WalletCreateType) -> Unit) {
-
+internal fun WalletRecoveryScreen(
+    onBuildWalletButtonClicked: (WalletCreateType) -> Unit
+) {
     val snackbarHostState = remember { SnackbarHostState() }
-    // val scope = rememberCoroutineScope()
 
     Scaffold(
-        // snackbarHost = { SnackbarHost(snackbarHostState) }
         snackbarHost = {
             // reuse default SnackbarHost to have default animation and timing handling
             SnackbarHost(snackbarHostState) { data ->
@@ -257,10 +259,12 @@ fun WordField(
     )
 }
 
-// @Preview(device = Devices.PIXEL_4, showBackground = true)
-// @Composable
-// internal fun PreviewWalletRecoveryScreen() {
-//     PadawanTheme {
-//         WalletRecoveryScreen({ })
-//     }
-// }
+@Preview(device = Devices.PIXEL_7, showBackground = true)
+@Composable
+internal fun PreviewWalletRecoveryScreen() {
+    PadawanTheme {
+        WalletRecoveryScreen(
+            onBuildWalletButtonClicked = { }
+        )
+    }
+}

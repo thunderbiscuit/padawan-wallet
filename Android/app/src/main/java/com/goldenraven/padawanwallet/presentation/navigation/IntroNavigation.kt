@@ -38,7 +38,7 @@ fun IntroNavigation(onBuildWalletButtonClicked: (WalletCreateType) -> Unit) {
             popEnterTransition = {
                 slideIntoContainer(AnimatedContentTransitionScope.SlideDirection.End, animationSpec = tween(animationDuration))
             },
-        ) { OnboardingScreen(navController = navController, onBuildWalletButtonClicked) }
+        ) { OnboardingScreen(onBuildWalletButtonClicked, navController = navController) }
 
         composable<WalletRecoveryScreen>(
             enterTransition = {

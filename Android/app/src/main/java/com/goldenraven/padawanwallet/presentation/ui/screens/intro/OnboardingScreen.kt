@@ -42,6 +42,11 @@ import com.goldenraven.padawanwallet.presentation.ui.components.standardBorder
 import com.goldenraven.padawanwallet.utils.ScreenSizeHeight
 import com.goldenraven.padawanwallet.utils.getScreenSizeHeight
 import androidx.compose.material3.Text
+import androidx.compose.ui.tooling.preview.Devices
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.compose.rememberNavController
+import com.goldenraven.padawanwallet.presentation.navigation.OnboardingScreen
+import com.goldenraven.padawanwallet.presentation.theme.PadawanTheme
 import com.goldenraven.padawanwallet.presentation.theme.bodyMediumUnderlined
 import com.goldenraven.padawanwallet.presentation.theme.noRippleClickable
 import com.goldenraven.padawanwallet.presentation.ui.WalletCreateType
@@ -50,13 +55,11 @@ private const val TAG = "OnboardingScreen"
 
 @Composable
 internal fun OnboardingScreen(
-    navController: NavController,
-    onBuildWalletButtonClicked: (WalletCreateType) -> Unit
+    onBuildWalletButtonClicked: (WalletCreateType) -> Unit,
+    navController: NavController
 ) {
     val screenSizeHeight: ScreenSizeHeight = getScreenSizeHeight(LocalConfiguration.current.screenHeightDp)
     val pageScrollState: ScrollState = rememberScrollState()
-
-    // SystemBars()
 
     if (screenSizeHeight == ScreenSizeHeight.Small) {
         SmallOnboarding(
@@ -280,10 +283,13 @@ internal fun PhoneOnboarding(
     }
 }
 
-// @Preview(device = Devices.PIXEL_4, showBackground = true)
-// @Composable
-// internal fun PreviewIntroScreen() {
-//     PadawanTheme {
-//         IntroScreen(rememberNavController())
-//     }
-// }
+@Preview(device = Devices.PIXEL_7, showBackground = true)
+@Composable
+internal fun PreviewOnboardingScreen() {
+    PadawanTheme {
+        OnboardingScreen(
+            onBuildWalletButtonClicked = {},
+            rememberNavController()
+        )
+    }
+}
