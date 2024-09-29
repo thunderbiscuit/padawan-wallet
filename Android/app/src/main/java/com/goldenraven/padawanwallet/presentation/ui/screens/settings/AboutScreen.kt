@@ -18,6 +18,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.res.stringResource
@@ -40,6 +41,9 @@ internal fun AboutScreen(
     navController: NavHostController
 ) {
     val scrollState = rememberScrollState()
+    val mUriHandler = LocalUriHandler.current
+    val privacyLink = stringResource(id = R.string.privacyLink)
+    val openPrivacyLink = remember { { mUriHandler.openUri(privacyLink) } }
 
     Scaffold(
         topBar = {
@@ -49,38 +53,33 @@ internal fun AboutScreen(
             )
         },
         modifier = Modifier.fillMaxHeight()
-    ) { paddingValues ->
+    ) { scaffoldPadding ->
         Column(
             Modifier
                 .background(padawan_theme_background_secondary)
-                .padding(paddingValues)
+                .padding(scaffoldPadding)
+                .padding(horizontal = 24.dp)
                 .fillMaxSize()
                 .verticalScroll(state = scrollState)
         ) {
             Text(
                 text = stringResource(R.string.about_text),
-                modifier = Modifier.padding(start = 24.dp, end = 24.dp),
                 style = PadawanTypography.bodyMedium,
-                color = padawan_theme_text_faded_secondary
+                color = padawan_theme_text_faded_secondary,
             )
             Spacer(Modifier.height(24.dp))
             Text(
                 text = stringResource(R.string.privacyText),
-                modifier = Modifier.padding(start = 24.dp, end = 24.dp),
                 style = PadawanTypography.bodyMedium,
-                color = padawan_theme_text_faded_secondary
+                color = padawan_theme_text_faded_secondary,
             )
             Spacer(Modifier.height(24.dp))
-            val mUriHandler = LocalUriHandler.current
-            val privacyLink = stringResource(id = R.string.privacyLink)
             Text(
                 text = "Read our privacy policy here.",
-                modifier = Modifier
-                    .clickable { mUriHandler.openUri(privacyLink) }
-                    .padding(start = 24.dp, end = 24.dp),
                 style = PadawanTypography.bodyMedium,
                 color = padawan_theme_button_primary,
-                textDecoration = TextDecoration.Underline
+                textDecoration = TextDecoration.Underline,
+                modifier = Modifier.clickable(onClick = openPrivacyLink)
             )
         }
     }
