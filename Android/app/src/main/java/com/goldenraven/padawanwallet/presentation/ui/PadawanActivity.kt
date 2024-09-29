@@ -19,10 +19,10 @@ import com.goldenraven.padawanwallet.domain.bitcoin.Wallet
 import com.goldenraven.padawanwallet.presentation.navigation.IntroNavigation
 import com.goldenraven.padawanwallet.presentation.theme.PadawanTheme
 import com.goldenraven.padawanwallet.presentation.navigation.HomeNavigation
-import com.goldenraven.padawanwallet.presentation.ui.screens.settings.SupportedLanguage
-import com.goldenraven.padawanwallet.presentation.ui.screens.settings.getSupportedLanguageCode
 import com.goldenraven.padawanwallet.utils.SnackbarLevel
+import com.goldenraven.padawanwallet.utils.SupportedLanguage
 import com.goldenraven.padawanwallet.utils.fireSnackbar
+import com.goldenraven.padawanwallet.utils.getSupportedLanguageCode
 import java.util.Locale
 
 private const val TAG = "PadawanActivity"

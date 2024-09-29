@@ -45,7 +45,6 @@ import androidx.compose.material3.Text
 import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.rememberNavController
-import com.goldenraven.padawanwallet.presentation.navigation.OnboardingScreen
 import com.goldenraven.padawanwallet.presentation.theme.PadawanTheme
 import com.goldenraven.padawanwallet.presentation.theme.bodyMediumUnderlined
 import com.goldenraven.padawanwallet.presentation.theme.noRippleClickable
