@@ -27,10 +27,13 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Devices
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.goldenraven.padawanwallet.R
 import com.goldenraven.padawanwallet.presentation.theme.Outfit
+import com.goldenraven.padawanwallet.presentation.theme.PadawanTheme
 import com.goldenraven.padawanwallet.presentation.theme.padawan_theme_background
 import com.goldenraven.padawanwallet.presentation.theme.padawan_theme_onBackground_secondary
 import com.goldenraven.padawanwallet.presentation.theme.standardShadow
@@ -41,89 +44,62 @@ fun TutorialCard(
     done: Boolean,
     onClick: () -> Unit,
 ) {
-    // if (done) {
-        Card(
-            border = standardBorder,
-            shape = RoundedCornerShape(20.dp),
-            colors = if (done) CardDefaults.cardColors(padawan_theme_background) else CardDefaults.cardColors(
-                padawan_theme_onBackground_secondary
-            ),
-            modifier = Modifier
-                .padding(vertical = 4.dp)
-                .standardShadow(20.dp)
-                .height(70.dp)
-                .fillMaxWidth()
-                .clickable { onClick() }
+    Card(
+        border = standardBorder,
+        shape = RoundedCornerShape(20.dp),
+        colors = if (done) CardDefaults.cardColors(padawan_theme_background) else CardDefaults.cardColors(padawan_theme_onBackground_secondary),
+        modifier = Modifier
+            .padding(vertical = 4.dp)
+            .standardShadow(20.dp)
+            .height(70.dp)
+            .fillMaxWidth()
+            .clickable { onClick() }
+    ) {
+        Row(
+            modifier = Modifier.fillMaxSize(),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.SpaceBetween
         ) {
-            Row(
-                modifier = Modifier.fillMaxSize(),
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.SpaceBetween
-            ) {
-                Text(
-                    text = title,
-                    modifier = Modifier.padding(all = 16.dp),
-                    style = TextStyle(
-                        fontFamily = Outfit,
-                        fontWeight = FontWeight.Medium,
-                        fontSize = 18.sp,
-                    ),
-                )
-                Image(
-                    painter = if (done) painterResource(id = R.drawable.ic_hicon_star) else painterResource(
-                        id = R.drawable.ic_hicon_circle
-                    ),
-                    contentDescription = "Done",
-                    modifier = Modifier
-                        .size(48.dp)
-                        .padding(end = 16.dp)
-                )
-            }
+            Text(
+                text = title,
+                modifier = Modifier.padding(all = 16.dp),
+                style = TextStyle(
+                    fontFamily = Outfit,
+                    fontWeight = FontWeight.Medium,
+                    fontSize = 18.sp,
+                ),
+            )
+            Image(
+                painter = if (done) painterResource(R.drawable.ic_hicon_star) else painterResource(R.drawable.ic_hicon_circle),
+                contentDescription = "Done",
+                modifier = Modifier
+                    .size(48.dp)
+                    .padding(end = 16.dp)
+            )
         }
-    // } else {
-    //     Card(
-    //         border = standardBorder,
-    //         shape = RoundedCornerShape(20.dp),
-    //         modifier = Modifier
-    //             .padding(vertical = 4.dp)
-    //             .standardShadow(20.dp)
-    //             .height(70.dp)
-    //             .fillMaxWidth()
-    //     ) {
-    //         Row(
-    //             modifier = Modifier.fillMaxSize().background(tutorialGradient),
-    //             verticalAlignment = Alignment.CenterVertically,
-    //             horizontalArrangement = Arrangement.SpaceBetween
-    //         ) {
-    //             Text(
-    //                 text = title,
-    //                 modifier = Modifier.padding(all = 16.dp),
-    //                 style = TextStyle(
-    //                     fontFamily = Outfit,
-    //                     fontWeight = FontWeight.Medium,
-    //                     fontSize = 18.sp,
-    //                 ),
-    //             )
-    //             Image(
-    //                 painter = if (done) painterResource(id = R.drawable.ic_hicon_star) else painterResource(
-    //                     id = R.drawable.ic_hicon_circle
-    //                 ),
-    //                 contentDescription = "Done",
-    //                 modifier = Modifier
-    //                     .size(48.dp)
-    //                     .padding(end = 16.dp)
-    //             )
-    //         }
-    //     }
-    // }
+    }
 }
 
-val tutorialGradient = Brush.linearGradient(
-    colors = listOf(
-        Color(0xFF76dab3),
-        Color(0xFF76dab3),
-        Color(0xFFf3f4ff)
-    ),
-    start = Offset(0f, 0f),
-    end = Offset(750f, 0f)
-)
+@Preview(device = Devices.PIXEL_7, showBackground = true)
+@Composable
+internal fun PreviewNotCompletedTutorialCard() {
+    PadawanTheme {
+        TutorialCard(
+            title = "Tutorial Card",
+            done = false,
+            onClick = { }
+        )
+    }
+}
+
+@Preview(device = Devices.PIXEL_7, showBackground = true)
+@Composable
+internal fun PreviewCompletedTutorialCard() {
+    PadawanTheme {
+        TutorialCard(
+            title = "Tutorial Card",
+            done = true,
+            onClick = { }
+        )
+    }
+}

@@ -17,7 +17,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Devices
+import androidx.compose.ui.tooling.preview.Preview
 import com.goldenraven.padawanwallet.R
+import com.goldenraven.padawanwallet.presentation.theme.PadawanTheme
 import com.goldenraven.padawanwallet.presentation.theme.padawan_theme_onPrimary
 
 private const val TAG = "PadawanAppBar"
@@ -45,4 +48,15 @@ fun PadawanAppBar(title: String, onClick: () -> Unit) {
             containerColor = Color.Transparent
         )
     )
+}
+
+@Preview(device = Devices.PIXEL_7, showBackground = true)
+@Composable
+internal fun PreviewPadawanAppBar() {
+    PadawanTheme {
+        PadawanAppBar(
+            title = "Preview App Bar",
+            onClick = { }
+        )
+    }
 }
