@@ -12,10 +12,9 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.NavHostController
-import com.goldenraven.padawanwallet.presentation.ui.WalletCreateType
-// import com.goldenraven.padawanwallet.presentation.ui.screens.SplashScreen
 import com.goldenraven.padawanwallet.presentation.ui.screens.intro.OnboardingScreen
 import com.goldenraven.padawanwallet.presentation.ui.screens.intro.WalletRecoveryScreen
+import com.goldenraven.padawanwallet.utils.WalletCreateType
 
 @Composable
 fun IntroNavigation(onBuildWalletButtonClicked: (WalletCreateType) -> Unit) {
@@ -26,11 +25,6 @@ fun IntroNavigation(onBuildWalletButtonClicked: (WalletCreateType) -> Unit) {
         navController = navController,
         startDestination = OnboardingScreen,
     ) {
-
-        // composable<SplashScreen> {
-        //     SplashScreen(navController = navController, moveToIntro = true)
-        // }
-
         composable<OnboardingScreen>(
             exitTransition = {
                 slideOutOfContainer(AnimatedContentTransitionScope.SlideDirection.Start, animationSpec = tween(animationDuration))

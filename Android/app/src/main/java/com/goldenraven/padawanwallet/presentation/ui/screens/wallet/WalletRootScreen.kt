@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.compose.animation.animateColor
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.core.updateTransition
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -62,6 +63,9 @@ import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import com.composables.icons.lucide.ArrowDownToLine
+import com.composables.icons.lucide.ArrowUpFromLine
+import com.composables.icons.lucide.Lucide
 import com.goldenraven.padawanwallet.R
 import com.goldenraven.padawanwallet.presentation.navigation.SendScreen
 import com.goldenraven.padawanwallet.presentation.navigation.ReceiveScreen
@@ -109,11 +113,10 @@ internal fun WalletRootScreen(
     navController: NavHostController,
 ) {
     val (openDialog, setOpenDialog) = remember { mutableStateOf(false) }
-
     if (openDialog) FaucetDialog(onAction, setOpenDialog)
 
     val padding = when (getScreenSizeWidth(LocalConfiguration.current.screenWidthDp)) {
-        ScreenSizeWidth.Small -> PaddingValues(start = 12.dp, top = 0.dp, end = 12.dp, bottom = 0.dp)
+        ScreenSizeWidth.Small -> PaddingValues(horizontal = 12.dp)
         ScreenSizeWidth.Phone -> PaddingValues(start = 32.dp, top = 12.dp, end = 32.dp, bottom = 0.dp)
     }
 
@@ -343,9 +346,9 @@ fun SendReceive(navController: NavHostController, isOnline: Boolean) {
                     style = PadawanTypography.labelLarge,
                 )
                 if (screenSizeWidth == ScreenSizeWidth.Phone) {
-                    Icon(
-                        painter = painterResource(id = R.drawable.ic_receive),
-                        contentDescription = stringResource(id = R.string.receive_icon)
+                    Image(
+                        imageVector = Lucide.ArrowDownToLine,
+                        contentDescription  = stringResource(id = R.string.receive_icon),
                     )
                 }
             }
@@ -371,8 +374,8 @@ fun SendReceive(navController: NavHostController, isOnline: Boolean) {
                     style = PadawanTypography.labelLarge,
                 )
                 if (screenSizeWidth == ScreenSizeWidth.Phone) {
-                    Icon(
-                        painter = painterResource(id = R.drawable.ic_send,),
+                    Image(
+                        imageVector = Lucide.ArrowUpFromLine,
                         contentDescription = stringResource(id = R.string.send_icon),
                     )
                 }
@@ -633,11 +636,7 @@ private fun FaucetDialog(
     )
 }
 
-// private fun viewTransaction(navController: NavController, txid: String) {
-//     navController.navigate("${Screen.TransactionScreen.route}/txid=$txid")
-// }
-
-@Preview(name = "PIXEL 4", device = Devices.PIXEL_4, showBackground = true)
+@Preview(name = "PIXEL 7", device = Devices.PIXEL_7, showBackground = true)
 @Preview(name = "PIXEL 2, 270 Wide", device = Devices.PIXEL_2, widthDp = 270)
 @Composable
 internal fun PreviewSendReceiveRow() {
