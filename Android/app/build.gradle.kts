@@ -137,6 +137,9 @@ dependencies {
     // composables.com
     implementation("com.composables:core:1.11.2")
 
+    // Lucide Icons
+    implementation("com.composables:icons-lucide:1.0.0")
+
     // Bitcoin
     implementation("org.bitcoindevkit:bdk-android:1.0.0-beta.2")
     implementation("org.kotlinbitcointools:bip21:0.0.5-SNAPSHOT")
