@@ -10,7 +10,6 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -58,6 +57,7 @@ import com.goldenraven.padawanwallet.presentation.viewmodels.mvi.ReceiveScreenSt
 import androidx.compose.ui.Alignment.Companion.BottomCenter
 import androidx.compose.ui.Alignment.Companion.Center
 import com.goldenraven.padawanwallet.utils.QrUiState
+import com.goldenraven.padawanwallet.utils.logRecomposition
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
@@ -67,9 +67,9 @@ private const val TAG = "ReceiveScreen"
 internal fun ReceiveScreen(
     state: ReceiveScreenState,
     onAction: (ReceiveScreenAction) -> Unit,
-    insetsPaddingValues: PaddingValues,
     navController: NavHostController,
 ) {
+    logRecomposition(TAG)
     val snackbarHostState = remember { SnackbarHostState() }
     var qr by remember { mutableStateOf<ImageBitmap?>(null) }
 
@@ -79,11 +79,6 @@ internal fun ReceiveScreen(
                 qr = addressToQR(state.bip21Uri)
             }
         }
-    }
-
-    val padding = when (getScreenSizeWidth(LocalConfiguration.current.screenWidthDp)) {
-        ScreenSizeWidth.Small -> 12.dp
-        ScreenSizeWidth.Phone -> 32.dp
     }
 
     val qrCodeSize = when (getScreenSizeWidth(LocalConfiguration.current.screenWidthDp)) {
@@ -109,7 +104,6 @@ internal fun ReceiveScreen(
                 .gradientBackground()
                 .padding(scaffoldPadding)
         ) {
-
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Center,

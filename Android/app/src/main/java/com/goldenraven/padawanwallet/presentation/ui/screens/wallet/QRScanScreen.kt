@@ -90,11 +90,11 @@ internal fun QRScanScreen(
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         snackbarHost = { SnackbarHost(snackbarHostState) }
-    ) { padding ->
+    ) { scaffoldPadding ->
         ConstraintLayout(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(padding)
+                .padding(scaffoldPadding)
         ) {
             val (camera, cancelButton) = createRefs()
 

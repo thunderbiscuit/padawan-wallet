@@ -49,14 +49,13 @@ internal fun MainScreen() {
     // SystemBars()
 
     Scaffold(
-        topBar = {  },
         bottomBar = { BottomNavigationBar(navControllerWalletNavigation) },
-    ) { paddingValues ->
-        Log.i(TAG, "The padding values are: $paddingValues")
+    ) { scaffoldPadding ->
+        Log.i(TAG, "The padding values are: $scaffoldPadding")
         // We used to apply the padding values here on the box, but now we pass the insets for the
         // system bars down to the composables that need them.
         WalletNavigation(
-            paddingValues = paddingValues,
+            paddingValues = scaffoldPadding,
             navHostController = navControllerWalletNavigation,
         )
     }

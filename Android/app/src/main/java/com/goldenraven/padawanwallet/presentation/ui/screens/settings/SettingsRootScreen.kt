@@ -77,7 +77,7 @@ internal fun SettingsRootScreen(
                     .padding(bottom = 70.dp)
             )
         }
-    ) { padding ->
+    ) { scaffoldPadding ->
         Column(
             modifier = Modifier
                 .fillMaxSize()

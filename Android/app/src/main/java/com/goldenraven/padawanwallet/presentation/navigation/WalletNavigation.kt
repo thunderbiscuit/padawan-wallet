@@ -14,6 +14,8 @@ import androidx.navigation.NavHostController
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.padding
+import androidx.compose.ui.Modifier
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.goldenraven.padawanwallet.presentation.ui.screens.chapters.ChapterScreen
 import com.goldenraven.padawanwallet.presentation.ui.screens.settings.AboutScreen
@@ -47,9 +49,11 @@ fun WalletNavigation(
     NavHost(
         navController = navHostController,
         startDestination = WalletRootScreen,
+        // modifier = Modifier.padding(paddingValues),
     ) {
         // Wallet
         val fades: List<String> = listOf("ReceiveScreen", "SendScreen", "TransactionScreen")
+
         composable<WalletRootScreen>(
             enterTransition = {
                 when (initialState.destination.route?.substringAfterLast(".")) {
@@ -84,7 +88,6 @@ fun WalletNavigation(
             )
         }
 
-
         // Receive
         composable<ReceiveScreen>(
             enterTransition = {
@@ -103,11 +106,9 @@ fun WalletNavigation(
             ReceiveScreen(
                 state = receiveViewModel.state,
                 onAction = receiveViewModel::onAction,
-                insetsPaddingValues = paddingValues,
                 navController = navHostController,
             )
         }
-
 
         // Send
         composable<SendScreen>(

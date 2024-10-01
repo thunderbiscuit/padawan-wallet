@@ -91,13 +91,13 @@ internal fun SendCoinsBackScreen(
             )
         },
         snackbarHost = { SnackbarHost(snackbarHostState) }
-    ) { padding ->
+    ) { scaffoldPadding ->
         Column(
             Modifier
                 .fillMaxSize()
                 .verticalScroll(state = scrollState)
                 .background(padawan_theme_background_secondary)
-                .padding(padding)
+                .padding(scaffoldPadding)
         ) {
             val returnAddress: String = stringResource(R.string.send_coins_back_address)
             Image(

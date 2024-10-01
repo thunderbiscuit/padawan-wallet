@@ -5,8 +5,10 @@
 
 package com.goldenraven.padawanwallet.presentation.viewmodels.mvi
 
+import androidx.compose.runtime.Stable
 import com.goldenraven.padawanwallet.utils.QrUiState
 
+@Stable
 data class ReceiveScreenState(
     val address: String? = null,
     val bip21Uri: String? = null,
