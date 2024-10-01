@@ -58,8 +58,8 @@ import com.goldenraven.padawanwallet.presentation.theme.md_theme_dark_onBackgrou
 import com.goldenraven.padawanwallet.presentation.theme.md_theme_dark_onLightBackground
 import com.goldenraven.padawanwallet.presentation.theme.md_theme_dark_warning
 import com.goldenraven.padawanwallet.presentation.theme.standardShadow
-import com.goldenraven.padawanwallet.presentation.ui.WalletCreateType
 import com.goldenraven.padawanwallet.presentation.ui.components.standardBorder
+import com.goldenraven.padawanwallet.utils.WalletCreateType
 import com.goldenraven.padawanwallet.utils.WordCheckResult
 import com.goldenraven.padawanwallet.utils.checkWords
 import kotlinx.coroutines.launch

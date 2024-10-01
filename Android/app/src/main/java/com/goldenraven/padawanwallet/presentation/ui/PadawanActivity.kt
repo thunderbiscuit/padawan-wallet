@@ -11,8 +11,6 @@ import android.util.Log
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.app.AppCompatDelegate
-import androidx.core.os.LocaleListCompat
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.goldenraven.padawanwallet.domain.bitcoin.WalletRepository
 import com.goldenraven.padawanwallet.domain.bitcoin.Wallet
@@ -20,10 +18,9 @@ import com.goldenraven.padawanwallet.presentation.navigation.IntroNavigation
 import com.goldenraven.padawanwallet.presentation.theme.PadawanTheme
 import com.goldenraven.padawanwallet.presentation.navigation.HomeNavigation
 import com.goldenraven.padawanwallet.utils.SnackbarLevel
-import com.goldenraven.padawanwallet.utils.SupportedLanguage
+import com.goldenraven.padawanwallet.utils.WalletCreateType
 import com.goldenraven.padawanwallet.utils.fireSnackbar
-import com.goldenraven.padawanwallet.utils.getSupportedLanguageCode
-import java.util.Locale
+import com.goldenraven.padawanwallet.utils.setLanguage
 
 private const val TAG = "PadawanActivity"
 
@@ -90,38 +87,4 @@ class PadawanActivity : AppCompatActivity() {
         super.attachBaseContext(newBase)
         setLanguage()
     }
-}
-
-fun setLanguage() {
-    val localeListCompat: LocaleListCompat = AppCompatDelegate.getApplicationLocales()
-    Log.i(TAG, "Current locale list compat is: $localeListCompat")
-
-    if (localeListCompat.isEmpty) {
-        Log.i(TAG, "Current LocaleListCompat is empty, we're calling AppCompatDelegate.setApplicationLocales()")
-        val defaultSystemLocale = Locale.getDefault().language
-
-        if (defaultSystemLocale.contains("es")) {
-            Log.i(TAG, "Default system locale is Spanish")
-            val languageCode: String = getSupportedLanguageCode(SupportedLanguage.SPANISH)
-            val appLocale: LocaleListCompat = LocaleListCompat.forLanguageTags(languageCode)
-            AppCompatDelegate.setApplicationLocales(appLocale)
-        } else if (defaultSystemLocale.contains("pt")) {
-            Log.i(TAG, "Default system locale is Portuguese")
-            val languageCode: String = getSupportedLanguageCode(SupportedLanguage.PORTUGUESE)
-            val appLocale: LocaleListCompat = LocaleListCompat.forLanguageTags(languageCode)
-            AppCompatDelegate.setApplicationLocales(appLocale)
-        } else {
-            Log.i(TAG, "Default system locale is neither Spanish nor Portuguese, defaulting to English")
-            val languageCode: String = getSupportedLanguageCode(SupportedLanguage.ENGLISH)
-            val appLocale: LocaleListCompat = LocaleListCompat.forLanguageTags(languageCode)
-            AppCompatDelegate.setApplicationLocales(appLocale)
-        }
-    } else {
-        Log.i(TAG, "Current language in AppCompatDelegate was already set to: $localeListCompat")
-    }
-}
-
-sealed class WalletCreateType {
-    object FROMSCRATCH : WalletCreateType()
-    class RECOVER(val recoveryPhrase: String) : WalletCreateType()
 }
