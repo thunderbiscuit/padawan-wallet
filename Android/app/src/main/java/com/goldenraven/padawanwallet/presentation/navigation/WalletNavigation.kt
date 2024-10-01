@@ -284,7 +284,6 @@ fun WalletNavigation(
         ) {
             SettingsRootScreen(
                 onAction = chaptersViewModel::onAction,
-                paddingValues = paddingValues,
                 navController = navHostController
             )
         }

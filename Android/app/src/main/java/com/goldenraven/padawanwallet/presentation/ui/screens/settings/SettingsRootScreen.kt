@@ -9,7 +9,6 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -61,7 +60,6 @@ private const val TAG = "SettingsRootScreen"
 @Composable
 internal fun SettingsRootScreen(
     onAction: (ChaptersScreensAction) -> Unit,
-    paddingValues: PaddingValues,
     navController: NavController,
 ) {
     val scope = rememberCoroutineScope()
@@ -82,7 +80,7 @@ internal fun SettingsRootScreen(
             modifier = Modifier
                 .fillMaxSize()
                 .background(padawan_theme_background_secondary)
-                .padding(top = paddingValues.calculateTopPadding())
+                .padding(scaffoldPadding)
                 .verticalScroll(scrollState)
         ) {
             // Title
@@ -259,7 +257,6 @@ internal fun PreviewSettingsRootScreen() {
     PadawanTheme {
         SettingsRootScreen(
             onAction = { },
-            paddingValues = PaddingValues(0.dp),
             navController = rememberNavController()
         )
     }
