@@ -17,7 +17,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.HorizontalDivider
-import androidx.compose.material3.Icon
+// import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -32,6 +32,11 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
+import com.composables.core.Icon
+import com.composables.icons.lucide.ArrowDownToLine
+import com.composables.icons.lucide.ArrowUpFromLine
+import com.composables.icons.lucide.Lucide
+import com.composables.icons.lucide.Send
 import com.goldenraven.padawanwallet.R
 import com.goldenraven.padawanwallet.domain.bitcoin.ChainPosition
 import com.goldenraven.padawanwallet.domain.bitcoin.TransactionDetails
@@ -115,7 +120,7 @@ internal fun TransactionScreen(
                                     .padding(start = 8.dp, top = 4.dp, bottom = 4.dp)
                             )
                             Icon(
-                                painter = if (txDetails.txType == TxType.PAYMENT) painterResource(id = R.drawable.ic_send_secondary) else painterResource(id = R.drawable.ic_receive_secondary),
+                                imageVector = if (txDetails.txType == TxType.PAYMENT) Lucide.ArrowUpFromLine else Lucide.ArrowDownToLine,
                                 tint = padawan_disabled,
                                 contentDescription = if (txDetails.txType == TxType.PAYMENT) stringResource(R.string.send_icon) else stringResource(R.string.receive_icon),
                                 modifier = Modifier

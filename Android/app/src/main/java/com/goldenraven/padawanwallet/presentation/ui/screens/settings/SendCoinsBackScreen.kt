@@ -9,6 +9,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
@@ -40,12 +41,17 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import com.composables.icons.lucide.CheckCheck
+import com.composables.icons.lucide.CircleCheck
+import com.composables.icons.lucide.ClipboardCopy
+import com.composables.icons.lucide.Lucide
 import com.goldenraven.padawanwallet.R
 import com.goldenraven.padawanwallet.presentation.theme.PadawanTheme
 import com.goldenraven.padawanwallet.presentation.theme.PadawanTypography
 import com.goldenraven.padawanwallet.presentation.theme.padawan_theme_background_secondary
 import com.goldenraven.padawanwallet.presentation.theme.padawan_theme_text_faded_secondary
 import com.goldenraven.padawanwallet.presentation.ui.components.PadawanAppBar
+import com.goldenraven.padawanwallet.presentation.ui.components.VerticalTextFieldDivider
 import com.goldenraven.padawanwallet.utils.copyToClipboard
 
 @Composable
@@ -60,7 +66,7 @@ internal fun SendCoinsBackScreen(
     val (copyClicked, setCopyClicked) = remember { mutableStateOf(false) }
 
     val copyAddressString = buildAnnotatedString {
-        appendInlineContent(id = "copyAddressImageId")
+        // appendInlineContent(id = "copyAddressImageId")
         if (!copyClicked) append(stringResource(id = R.string.copy_address_string)) else append(stringResource(R.string.textCopied))
     }
 
@@ -70,14 +76,13 @@ internal fun SendCoinsBackScreen(
         ) {
             if (copyClicked) {
                 Image(
-                    painter = painterResource(R.drawable.ic_checked),
+                    imageVector = Lucide.CircleCheck,
                     contentDescription = stringResource(R.string.checkmark_image),
                     colorFilter = ColorFilter.tint(Color.Green)
-
                 )
             } else {
                 Image(
-                    painter = painterResource(R.drawable.hicon_add_square),
+                    imageVector = Lucide.ClipboardCopy,
                     contentDescription = stringResource(R.string.copy_to_clipboard_image),
                 )
             }
@@ -105,9 +110,9 @@ internal fun SendCoinsBackScreen(
                 contentDescription = stringResource(R.string.return_sats_faucet_address_image),
                 modifier = Modifier.padding(start = 50.dp, end = 50.dp, bottom = 20.dp)
             )
-            Column(
+            Row(
                 Modifier
-                    .align(Alignment.CenterHorizontally)
+                    // .align(Alignment.CenterHorizontally)
                     .clickable(onClick = {
                         setCopyClicked(true)
                         copyToClipboard(
@@ -124,17 +129,51 @@ internal fun SendCoinsBackScreen(
                     text = stringResource(R.string.send_coins_back_address),
                     fontSize = 14.sp
                 )
-                HorizontalDivider(
-                    color = padawan_theme_text_faded_secondary,
-                    thickness = 1.dp,
-                    modifier = Modifier.padding(all = 3.dp)
+                VerticalTextFieldDivider()
+                Image(
+                    imageVector = Lucide.ClipboardCopy,
+                    contentDescription = stringResource(R.string.copy_to_clipboard_image),
                 )
-                Text(
-                    text = copyAddressString,
-                    inlineContent = inlineContentMap,
-                    modifier = Modifier.align(Alignment.End)
-                )
+                // Text(
+                //     text = copyAddressString,
+                //     inlineContent = inlineContentMap,
+                //     modifier = Modifier.align(Alignment.End)
+                // )
             }
+            // Column(
+            //     Modifier
+            //         .align(Alignment.CenterHorizontally)
+            //         .clickable(onClick = {
+            //             setCopyClicked(true)
+            //             copyToClipboard(
+            //                 returnAddress,
+            //                 context,
+            //                 scope,
+            //                 snackbarHostState,
+            //                 setCopyClicked
+            //             )
+            //         })
+            //         .padding(start = 24.dp, end = 24.dp, bottom = 20.dp)
+            // ) {
+            //     Text(
+            //         text = stringResource(R.string.send_coins_back_address),
+            //         fontSize = 14.sp
+            //     )
+            //     HorizontalDivider(
+            //         color = padawan_theme_text_faded_secondary,
+            //         thickness = 1.dp,
+            //         modifier = Modifier.padding(all = 3.dp)
+            //     )
+            //     Image(
+            //         imageVector = Lucide.ClipboardCopy,
+            //         contentDescription = stringResource(R.string.copy_to_clipboard_image),
+            //     )
+            //     // Text(
+            //     //     text = copyAddressString,
+            //     //     inlineContent = inlineContentMap,
+            //     //     modifier = Modifier.align(Alignment.End)
+            //     // )
+            // }
             Text(
                 text = stringResource(id = R.string.send_coins_back),
                 style = PadawanTypography.bodyMedium,

@@ -23,7 +23,6 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.HorizontalDivider
-import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
@@ -41,6 +40,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import com.composables.icons.lucide.ChevronsRight
+import com.composables.icons.lucide.Lucide
 import com.goldenraven.padawanwallet.BuildConfig
 import com.goldenraven.padawanwallet.R
 import com.goldenraven.padawanwallet.presentation.navigation.AboutScreen
@@ -53,6 +54,7 @@ import com.goldenraven.padawanwallet.presentation.theme.padawan_theme_background
 import com.goldenraven.padawanwallet.presentation.theme.padawan_theme_button_primary
 import com.goldenraven.padawanwallet.presentation.theme.padawan_theme_text_faded_secondary
 import com.goldenraven.padawanwallet.presentation.viewmodels.mvi.ChaptersScreensAction
+import com.composables.core.Icon
 import kotlinx.coroutines.launch
 
 private const val TAG = "SettingsRootScreen"
@@ -117,9 +119,9 @@ internal fun SettingsRootScreen(
                 )
                 Spacer(modifier = Modifier.weight(1f))
                 Icon(
-                    painter = painterResource(id = R.drawable.ic_hicon_right_2),
+                    imageVector = Lucide.ChevronsRight,
                     contentDescription = stringResource(R.string.scan_icon),
-                    tint = Color(0xff2f2f2f)
+                    tint = Color(0xFF76dab3)
                 )
             }
 
@@ -142,9 +144,9 @@ internal fun SettingsRootScreen(
                 )
                 Spacer(modifier = Modifier.weight(1f))
                 Icon(
-                    painter = painterResource(id = R.drawable.ic_hicon_right_2),
+                    imageVector = Lucide.ChevronsRight,
                     contentDescription = stringResource(id = R.string.scan_icon),
-                    tint = Color(0xff2f2f2f)
+                    tint = Color(0xFF76dab3)
                 )
             }
 
@@ -167,9 +169,9 @@ internal fun SettingsRootScreen(
                 )
                 Spacer(modifier = Modifier.weight(1f))
                 Icon(
-                    painter = painterResource(id = R.drawable.ic_hicon_right_2),
+                    imageVector = Lucide.ChevronsRight,
                     contentDescription = stringResource(id = R.string.scan_icon),
-                    tint = Color(0xff2f2f2f)
+                    tint = Color(0xFF76dab3)
                 )
             }
 
@@ -192,9 +194,9 @@ internal fun SettingsRootScreen(
                 )
                 Spacer(modifier = Modifier.weight(1f))
                 Icon(
-                    painter = painterResource(id = R.drawable.ic_hicon_right_2),
+                    imageVector = Lucide.ChevronsRight,
                     contentDescription = stringResource(id = R.string.scan_icon),
-                    tint = Color(0xff2f2f2f)
+                    tint = Color(0xFF76dab3)
                 )
             }
 

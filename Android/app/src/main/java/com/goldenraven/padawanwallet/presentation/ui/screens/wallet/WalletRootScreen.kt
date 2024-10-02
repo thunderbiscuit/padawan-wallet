@@ -66,6 +66,8 @@ import androidx.navigation.compose.rememberNavController
 import com.composables.icons.lucide.ArrowDownToLine
 import com.composables.icons.lucide.ArrowUpFromLine
 import com.composables.icons.lucide.Lucide
+import com.composables.icons.lucide.ThumbsDown
+import com.composables.icons.lucide.ThumbsUp
 import com.goldenraven.padawanwallet.R
 import com.goldenraven.padawanwallet.presentation.navigation.SendScreen
 import com.goldenraven.padawanwallet.presentation.navigation.ReceiveScreen
@@ -349,6 +351,7 @@ fun SendReceive(navController: NavHostController, isOnline: Boolean) {
                     Image(
                         imageVector = Lucide.ArrowDownToLine,
                         contentDescription  = stringResource(id = R.string.receive_icon),
+                        modifier = Modifier.padding(start = 8.dp)
                     )
                 }
             }
@@ -377,6 +380,7 @@ fun SendReceive(navController: NavHostController, isOnline: Boolean) {
                     Image(
                         imageVector = Lucide.ArrowUpFromLine,
                         contentDescription = stringResource(id = R.string.send_icon),
+                        modifier = Modifier.padding(start = 8.dp)
                     )
                 }
             }
@@ -441,10 +445,6 @@ fun TransactionListBox(
                     ) {
                         Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.padding(vertical = 8.dp)) {
                             Text(text = stringResource(R.string.get_coins), style = PadawanTypography.bodyMedium)
-                            Icon(
-                                painter = painterResource(id = R.drawable.ic_receive_secondary),
-                                contentDescription = stringResource(R.string.get_coins_icon)
-                            )
                         }
                     }
                 }
@@ -510,7 +510,7 @@ fun TransactionListBox(
                                             .padding(start = 8.dp, top = 4.dp, bottom = 4.dp)
                                     )
                                     Icon(
-                                        painter = if (tx.isPayment) painterResource(id = R.drawable.ic_send_secondary) else painterResource(id = R.drawable.ic_receive_secondary),
+                                        imageVector = if (tx.isPayment) Lucide.ArrowUpFromLine else Lucide.ArrowDownToLine,
                                         tint = padawan_disabled,
                                         contentDescription = if (tx.isPayment) stringResource(id = R.string.send_icon) else stringResource(id = R.string.receive_icon),
                                         modifier = Modifier
@@ -597,7 +597,7 @@ private fun FaucetDialog(
                     modifier = Modifier.padding(vertical = 4.dp)
                 ) {
                     Icon(
-                        painter = painterResource(id = R.drawable.ic_hicon_dislike),
+                        imageVector = Lucide.ThumbsDown,
                         contentDescription = stringResource(R.string.no_thank_you_icon),
                         tint = Color(0xff000000)
                     )
@@ -626,7 +626,7 @@ private fun FaucetDialog(
                     modifier = Modifier.padding(vertical = 4.dp)
                 ) {
                     Icon(
-                        painter = painterResource(id = R.drawable.ic_hicon_like),
+                        imageVector = Lucide.ThumbsUp,
                         contentDescription = stringResource(R.string.proceed_icon),
                         tint = Color(0xff000000)
                     )

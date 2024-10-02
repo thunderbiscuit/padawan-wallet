@@ -28,7 +28,6 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -41,10 +40,14 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
+import com.composables.core.Icon
+import com.composables.icons.lucide.ArrowLeft
+import com.composables.icons.lucide.Lucide
 import com.goldenraven.padawanwallet.R
 import com.goldenraven.padawanwallet.domain.tutorials.ElementType
 import com.goldenraven.padawanwallet.domain.tutorials.Page
@@ -208,14 +211,14 @@ internal fun ChapterAppBar(navController: NavHostController) {
             modifier = Modifier.align(alignment = Alignment.CenterVertically)
         ) {
             Icon(
-                painter = painterResource(id = R.drawable.ic_drag_left),
+                imageVector = Lucide.ArrowLeft,
                 contentDescription = stringResource(R.string.back_icon),
                 tint = padawan_theme_onPrimary
             )
         }
         Text(
             text = stringResource(R.string.back_to_lessons),
-            style = PadawanTypography.bodyMedium,
+            fontWeight = FontWeight.Medium,
             modifier = Modifier.align(alignment = Alignment.CenterVertically)
         )
     }

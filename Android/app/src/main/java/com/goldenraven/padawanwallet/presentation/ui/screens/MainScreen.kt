@@ -22,7 +22,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
@@ -96,7 +95,7 @@ internal fun BottomNavigationBar(
                 NavigationBarItem(
                     icon = {
                         Icon(
-                            painter = painterResource(id = item.iconOutline),
+                            imageVector = item.icon,
                             contentDescription = item.title,
                             modifier = Modifier.clickable(
                                 interactionSource = null,
@@ -120,7 +119,7 @@ internal fun BottomNavigationBar(
                     label = {
                         Text(
                             text = item.title,
-                            style = PadawanTypography.labelSmall,
+                            style = PadawanTypography.labelMedium,
                             modifier = Modifier.clickable(
                                 interactionSource = null,
                                 indication = null,

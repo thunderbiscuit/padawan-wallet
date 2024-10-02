@@ -5,11 +5,8 @@
 
 package com.goldenraven.padawanwallet.presentation.ui.components
 
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.rounded.ArrowBack
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
@@ -22,6 +19,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.goldenraven.padawanwallet.R
 import com.goldenraven.padawanwallet.presentation.theme.PadawanTheme
 import com.goldenraven.padawanwallet.presentation.theme.padawan_theme_onPrimary
+import com.composables.core.Icon
+import com.composables.icons.lucide.ArrowLeft
+import com.composables.icons.lucide.Lucide
 
 private const val TAG = "PadawanAppBar"
 
@@ -38,7 +38,7 @@ fun PadawanAppBar(title: String, onClick: () -> Unit) {
         navigationIcon = {
             IconButton(onClick = onClick) {
                 Icon(
-                    imageVector = Icons.AutoMirrored.Rounded.ArrowBack,
+                    imageVector = Lucide.ArrowLeft,
                     contentDescription = stringResource(id = R.string.back_icon),
                     tint = padawan_theme_onPrimary
                 )

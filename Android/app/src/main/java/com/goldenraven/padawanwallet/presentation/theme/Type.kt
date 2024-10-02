@@ -103,7 +103,7 @@ val PadawanTypography = Typography(
 	),
 	labelMedium = TextStyle(
 		fontFamily = Outfit,
-		fontWeight = FontWeight.Normal,
+		fontWeight = FontWeight.Medium,
 		fontSize = 12.sp,
 		lineHeight = 20.sp,
 	),

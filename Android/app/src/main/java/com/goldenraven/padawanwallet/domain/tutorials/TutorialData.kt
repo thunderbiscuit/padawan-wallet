@@ -51,7 +51,7 @@ val chapter2: List<Page> = listOf(
         ChapterElement(ElementType.RESOURCE, R.drawable.address),
         ChapterElement(ElementType.BODY, R.string.t2_p4),
         ChapterElement(ElementType.BODY, R.string.t2_p5),
-        ChapterElement(ElementType.RESOURCE, R.drawable.qr_code),
+        ChapterElement(ElementType.RESOURCE, R.drawable.return_sats_faucet_address),
         ChapterElement(ElementType.BODY, R.string.t2_p6),
     ),
     listOf(

@@ -31,6 +31,9 @@ import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.composables.core.Icon
+import com.composables.icons.lucide.Circle
+import com.composables.icons.lucide.Lucide
 import com.goldenraven.padawanwallet.R
 import com.goldenraven.padawanwallet.presentation.theme.Outfit
 import com.goldenraven.padawanwallet.presentation.theme.PadawanTheme
@@ -69,13 +72,23 @@ fun TutorialCard(
                     fontSize = 18.sp,
                 ),
             )
-            Image(
-                painter = if (done) painterResource(R.drawable.ic_hicon_star) else painterResource(R.drawable.ic_hicon_circle),
-                contentDescription = "Done",
-                modifier = Modifier
-                    .size(48.dp)
-                    .padding(end = 16.dp)
-            )
+            if (done) {
+                Image(
+                    painter = painterResource(id = R.drawable.lucide_star),
+                    contentDescription = "Done",
+                    modifier = Modifier
+                        .size(48.dp)
+                        .padding(end = 16.dp)
+                )
+            } else {
+                Image(
+                    imageVector = Lucide.Circle,
+                    contentDescription = "Not done",
+                    modifier = Modifier
+                        .size(48.dp)
+                        .padding(end = 16.dp)
+                )
+            }
         }
     }
 }
