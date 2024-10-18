@@ -39,6 +39,8 @@ import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableFloatStateOf
+import androidx.compose.runtime.mutableLongStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
@@ -106,7 +108,7 @@ internal fun SendScreen(
         recipientAddress.value = state.sendAddress
     }
     val amount: MutableState<String> = rememberSaveable { mutableStateOf("") }
-    val feeRate: MutableState<Long> = rememberSaveable { mutableStateOf(0L) }
+    val feeRate: MutableState<Long> = rememberSaveable { mutableLongStateOf(1L) }
 
     val Peek = SheetDetent(identifier = "peek") { containerHeight, sheetHeight ->
         containerHeight * 0.6f
@@ -249,7 +251,7 @@ internal fun SendScreen(
                     modifier = Modifier.padding(top = 16.dp)
                 )
 
-                var sliderPosition by remember { mutableStateOf(1f) }
+                var sliderPosition by remember { mutableFloatStateOf(1f) }
                 Slider(
                     modifier = Modifier.semantics {
                         contentDescription = "Localized Description"
@@ -292,7 +294,6 @@ internal fun SendScreen(
                             showSnackbar(feeRateErrorMessage)
                             inputsAreValid = false
                         }
-                        Log.i(TAG, "Inputs are valid")
                         try {
                             if (inputsAreValid) {
                                 onAction(
