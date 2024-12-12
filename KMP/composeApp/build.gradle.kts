@@ -16,9 +16,9 @@ kotlin {
             jvmTarget.set(JvmTarget.JVM_11)
         }
     }
-    
+
     listOf(
-        iosX64(),
+        // iosX64(),
         iosArm64(),
         iosSimulatorArm64()
     ).forEach { iosTarget ->
@@ -26,8 +26,25 @@ kotlin {
             baseName = "ComposeApp"
             isStatic = true
         }
+        iosTarget.compilations.getByName("main") {
+            cinterops {
+                create("PadawanBdkWrapper") {
+                    definitionFile = file("src/nativeInterop/cinterop/PadawanBdkWrapperExample.def")
+
+                    // Use this locally by defining the path to the framework headers using an absolute path
+                    // definitionFile = file("src/nativeInterop/cinterop/PadawanBdkWrapper.def")
+
+                    // These don't work for some reason when I try to use a relative path for the
+                    // header variable in the .def file
+                    // compilerOpts(
+                    //     "-F${projectDir}/src/nativeInterop/cinterop/",
+                    //     "-I${projectDir}/src/nativeInterop/cinterop/PadawanBdkWrapper.xcframework/ios-arm64/PadawanBdkWrapper.framework/Headers"
+                    // )
+                }
+            }
+        }
     }
-    
+
     jvm("desktop")
     
     sourceSets {
@@ -51,6 +68,9 @@ kotlin {
             implementation(compose.desktop.currentOs)
             implementation(libs.kotlinx.coroutines.swing)
         }
+        // iosMain.dependencies {
+        //     implementation(files("build/classes/kotlin/iosArm64/main/cinterop/composeApp-cinterop-WalletWrapper.klib"))
+        // }
     }
 }
 
@@ -94,5 +114,11 @@ compose.desktop {
             packageName = "com.coyotebitcoin.padawanwallet"
             packageVersion = "1.0.0"
         }
+    }
+}
+
+tasks.withType<org.jetbrains.kotlin.gradle.tasks.CInteropProcess>().configureEach {
+    doFirst {
+        println("CInterop Task: Current Project Directory: ${project.projectDir}")
     }
 }

@@ -1,0 +1,3 @@
+language = Objective-C
+headers = /absolute/path/to/PadawanBdkWrapper-Swift.h
+linkerOpts = -framework PadawanBdkWrapper
