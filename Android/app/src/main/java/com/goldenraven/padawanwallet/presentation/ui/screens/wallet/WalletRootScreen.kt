@@ -52,7 +52,6 @@ import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -73,7 +72,8 @@ import com.goldenraven.padawanwallet.presentation.navigation.SendScreen
 import com.goldenraven.padawanwallet.presentation.navigation.ReceiveScreen
 import com.goldenraven.padawanwallet.presentation.navigation.TransactionScreen
 import com.goldenraven.padawanwallet.domain.bitcoin.BitcoinUnit
-import com.goldenraven.padawanwallet.domain.tx.Tx
+import com.goldenraven.padawanwallet.domain.bitcoin.ChainPosition
+import com.goldenraven.padawanwallet.domain.bitcoin.TransactionDetails
 import com.goldenraven.padawanwallet.presentation.ui.components.FadedVerticalDivider
 import com.goldenraven.padawanwallet.presentation.ui.components.LoadingAnimation
 import com.goldenraven.padawanwallet.presentation.ui.components.standardBorder
@@ -104,6 +104,8 @@ import com.goldenraven.padawanwallet.utils.formatInBtc
 import com.goldenraven.padawanwallet.utils.getScreenSizeWidth
 import com.goldenraven.padawanwallet.presentation.viewmodels.mvi.WalletAction
 import com.goldenraven.padawanwallet.presentation.viewmodels.mvi.WalletState
+import com.goldenraven.padawanwallet.utils.TxType
+import com.goldenraven.padawanwallet.utils.timestampToString
 
 private const val TAG = "WalletRootScreen"
 
@@ -391,7 +393,7 @@ fun SendReceive(navController: NavHostController, isOnline: Boolean) {
 @Composable
 fun TransactionListBox(
     setOpenDialog: (Boolean) -> Unit,
-    transactionList: List<Tx>,
+    transactionList: List<TransactionDetails>,
     isOnline: Boolean,
     onAction: (WalletAction) -> Unit,
     navController: NavHostController,
@@ -478,7 +480,7 @@ fun TransactionListBox(
                                     .padding(top = 8.dp)
                             )
                             Text(
-                                text = "${if (tx.isPayment) tx.valueOut.toString() else tx.valueIn.toString()} ${BitcoinUnit.SATS.toString().lowercase()}",
+                                text = "${if (tx.txType == TxType.PAYMENT) tx.paymentAmount.toString() else tx.received.toSat()} ${BitcoinUnit.SATS.toString().lowercase()}",
                                 style = PadawanTypography.bodyMedium,
                                 textAlign = TextAlign.End,
                                 modifier = Modifier.align(Alignment.BottomEnd)
@@ -486,9 +488,14 @@ fun TransactionListBox(
                         }
                         Box(modifier = Modifier
                             .fillMaxWidth()
-                            .padding(vertical = 4.dp)) {
+                            .padding(vertical = 4.dp)
+                        ) {
+                            val confirmationText: String = when (tx.chainPosition) {
+                                is ChainPosition.Unconfirmed -> stringResource(id = R.string.pending)
+                                is ChainPosition.Confirmed -> tx.chainPosition.timestamp.timestampToString()
+                            }
                             Text(
-                                text = tx.date,
+                                text = confirmationText,
                                 style = PadawanTypography.bodySmall,
                                 maxLines = 1,
                                 modifier = Modifier.align(Alignment.CenterStart)
@@ -498,21 +505,21 @@ fun TransactionListBox(
                                     modifier = Modifier
                                         .align(Alignment.CenterEnd)
                                         .background(
-                                            color = if (tx.isPayment) padawan_theme_send_primary else padawan_theme_receive_primary,
+                                            color = if (tx.txType == TxType.PAYMENT) padawan_theme_send_primary else padawan_theme_receive_primary,
                                             shape = RoundedCornerShape(size = 5.dp)
                                         )
                                 ) {
                                     Text(
-                                        text = if (tx.isPayment) stringResource(id = R.string.send) else stringResource(id = R.string.receive),
+                                        text = if (tx.txType == TxType.PAYMENT) stringResource(id = R.string.send) else stringResource(id = R.string.receive),
                                         style = PadawanTypography.bodySmall,
                                         modifier = Modifier
                                             .align(Alignment.CenterVertically)
                                             .padding(start = 8.dp, top = 4.dp, bottom = 4.dp)
                                     )
                                     Icon(
-                                        imageVector = if (tx.isPayment) Lucide.ArrowUpFromLine else Lucide.ArrowDownToLine,
+                                        imageVector = if (tx.txType == TxType.PAYMENT) Lucide.ArrowUpFromLine else Lucide.ArrowDownToLine,
                                         tint = padawan_disabled,
-                                        contentDescription = if (tx.isPayment) stringResource(id = R.string.send_icon) else stringResource(id = R.string.receive_icon),
+                                        contentDescription = if (tx.txType == TxType.PAYMENT) stringResource(id = R.string.send_icon) else stringResource(id = R.string.receive_icon),
                                         modifier = Modifier
                                             .align(Alignment.CenterVertically)
                                             .scale(scale = 0.75f)

@@ -11,23 +11,14 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.goldenraven.padawanwallet.BuildConfig
-import com.goldenraven.padawanwallet.domain.bitcoin.ChainPosition
 import com.goldenraven.padawanwallet.domain.bitcoin.TransactionDetails
 import com.goldenraven.padawanwallet.domain.bitcoin.Wallet
 import com.goldenraven.padawanwallet.domain.bitcoin.WalletRepository
-import com.goldenraven.padawanwallet.domain.tx.Tx
-import com.goldenraven.padawanwallet.domain.tx.TxDao
-import com.goldenraven.padawanwallet.domain.tx.TxDatabase
-import com.goldenraven.padawanwallet.domain.tx.TxRepository
 import com.goldenraven.padawanwallet.padawankmp.FaucetCall
 import com.goldenraven.padawanwallet.padawankmp.FaucetService
 import com.goldenraven.padawanwallet.presentation.viewmodels.mvi.MessageType
 import com.goldenraven.padawanwallet.presentation.viewmodels.mvi.WalletAction
 import com.goldenraven.padawanwallet.presentation.viewmodels.mvi.WalletState
-import com.goldenraven.padawanwallet.utils.TxType
-import com.goldenraven.padawanwallet.utils.netSendWithoutFees
-import com.goldenraven.padawanwallet.utils.timestampToString
-import com.goldenraven.padawanwallet.utils.txType
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -38,24 +29,10 @@ import org.bitcoindevkit.Transaction
 private const val TAG = "WalletViewModel"
 
 class WalletViewModel(application: Application) : AndroidViewModel(application) {
-    private var txList: List<Tx> by mutableStateOf(emptyList())
+    private var txList: List<TransactionDetails> by mutableStateOf(emptyList())
     private var isOnline: Boolean by mutableStateOf(false)
     private var sendAddress: String? by mutableStateOf(null)
-    private val repository: TxRepository
     private var singleTxDetails: TransactionDetails? = null
-
-    init {
-        isOnline = updateNetworkStatus(application)
-        firstAutoSync()
-        val txDao: TxDao = TxDatabase.getDatabase(application).txDao()
-        repository = TxRepository(txDao)
-        viewModelScope.launch {
-            repository.readAllTxs.collect { result ->
-                txList = result
-                walletState = walletState.copy(transactions = txList)
-            }
-        }
-    }
 
     var walletState by mutableStateOf(
         WalletState(
@@ -67,6 +44,15 @@ class WalletViewModel(application: Application) : AndroidViewModel(application) 
         )
     )
         private set
+
+    init {
+        isOnline = updateNetworkStatus(application)
+        firstAutoSync()
+        Log.i(TAG, "First sync")
+        val txList: List<TransactionDetails> = Wallet.listTransactions()
+        walletState = walletState.copy(transactions = txList, isOnline = isOnline)
+    }
+
 
     fun onAction(action: WalletAction) {
         when (action) {
@@ -189,60 +175,8 @@ class WalletViewModel(application: Application) : AndroidViewModel(application) 
 
     private fun syncTransactionHistory() {
         val txHistory = Wallet.listTransactions()
-        Log.i(TAG, "Transactions history, number of transactions: ${txHistory.size}")
-
-        for (tx in txHistory) {
-            var valueIn = 0uL
-            var valueOut = 0uL
-            val txType = txType(sent = tx.sent.toSat(), received = tx.received.toSat())
-            Log.i(TAG, "Sent: ${tx.sent.toSat()}")
-            Log.i(TAG, "Received: ${tx.received.toSat()}")
-            Log.i(TAG, "Transaction type: $txType")
-            when (txType) {
-                TxType.PAYMENT -> {
-                    valueOut = netSendWithoutFees(
-                        txSatsOut = tx.sent.toSat(),
-                        txSatsIn = tx.received.toSat(),
-                        fee = tx.fee.toSat()
-                    )
-                }
-                TxType.RECEIVE -> {
-                    valueIn = tx.received.toSat()
-                }
-            }
-            val time: String = when (tx.chainPosition) {
-                is ChainPosition.Unconfirmed -> "pending"
-                is ChainPosition.Confirmed -> tx.chainPosition.timestamp.timestampToString()
-            }
-            val height: UInt = when (tx.chainPosition) {
-                is ChainPosition.Unconfirmed -> 100_000_000u
-                is ChainPosition.Confirmed -> tx.chainPosition.height
-            }
-            val transaction = Tx(
-                txid = tx.txid,
-                date = time,
-                valueIn = valueIn.toLong(),
-                valueOut = valueOut.toLong(),
-                fee = tx.fee.toSat().toLong(),
-                isPayment = txType == TxType.PAYMENT,
-                height = height.toInt()
-            )
-            addTx(transaction)
-        }
-        viewModelScope.launch {
-            repository.readAllTxs.collect { result ->
-                Log.i(TAG, "Updating transactions list with $result")
-                txList = result
-                walletState = walletState.copy(transactions = txList)
-            }
-        }
-    }
-
-    private fun addTx(tx: Tx) {
-        viewModelScope.launch(Dispatchers.IO) {
-            Log.i(TAG, "Adding transaction to DB: $tx")
-            repository.addTx(tx)
-        }
+        Log.i(TAG, "Transaction history synced, number of transactions: ${txHistory.size}")
+        walletState = walletState.copy(transactions = txHistory)
     }
 
     private fun setSingleTxDetails(tx: String) {

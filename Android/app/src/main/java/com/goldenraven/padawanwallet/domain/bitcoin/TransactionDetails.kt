@@ -8,6 +8,7 @@ data class TransactionDetails(
     val txid: String,
     val sent: Amount,
     val received: Amount,
+    val paymentAmount: ULong,
     val fee: Amount,
     val feeRate: FeeRate,
     val txType: TxType,

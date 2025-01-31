@@ -5,14 +5,14 @@
 
 package com.goldenraven.padawanwallet.presentation.viewmodels.mvi
 
-import com.goldenraven.padawanwallet.domain.tx.Tx
+import com.goldenraven.padawanwallet.domain.bitcoin.TransactionDetails
 import org.rustbitcoin.bitcoin.Amount
 import org.rustbitcoin.bitcoin.FeeRate
 import org.bitcoindevkit.Transaction
 
 data class WalletState(
     val balance: ULong,
-    val transactions: List<Tx>,
+    val transactions: List<TransactionDetails>,
     val txAndFee: Pair<Transaction, Amount>? = null,
     val isOnline: Boolean,
     val currentlySyncing: Boolean,

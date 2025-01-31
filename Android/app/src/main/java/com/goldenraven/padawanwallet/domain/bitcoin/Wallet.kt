@@ -8,6 +8,7 @@ package com.goldenraven.padawanwallet.domain.bitcoin
 import android.util.Log
 import com.goldenraven.padawanwallet.utils.RequiredInitialWalletData
 import com.goldenraven.padawanwallet.utils.TxType
+import com.goldenraven.padawanwallet.utils.netSendWithoutFees
 import com.goldenraven.padawanwallet.utils.txType
 import org.bitcoindevkit.Address
 import org.bitcoindevkit.AddressInfo
@@ -167,6 +168,15 @@ object Wallet {
             val fee = wallet.calculateFee(tx.transaction)
             val feeRate = wallet.calculateFeeRate(tx.transaction)
             val txType: TxType = txType(sent = sent.toSat(), received = received.toSat())
+            val paymentAmount = if (txType == TxType.PAYMENT) {
+                netSendWithoutFees(
+                    txSatsOut = sent.toSat(),
+                    txSatsIn = received.toSat(),
+                    fee = fee.toSat()
+                )
+            } else {
+                0uL
+            }
             val chainPosition: ChainPosition = when (val position = tx.chainPosition) {
                 is BdkChainPosition.Unconfirmed -> ChainPosition.Unconfirmed
                 is BdkChainPosition.Confirmed -> ChainPosition.Confirmed(
@@ -179,6 +189,7 @@ object Wallet {
                 txid = tx.transaction.computeTxid(),
                 sent = sent,
                 received = received,
+                paymentAmount = paymentAmount,
                 fee = fee,
                 feeRate = feeRate,
                 txType = txType,

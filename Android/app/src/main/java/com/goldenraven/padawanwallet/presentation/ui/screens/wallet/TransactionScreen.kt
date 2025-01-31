@@ -91,7 +91,12 @@ internal fun TransactionScreen(
                         text = stringResource(R.string.total_transaction_amount),
                         style = PadawanTypography.titleSmall
                     )
-                    Text("${txDetails.received.toSat() + txDetails.sent.toSat()} sats")
+                    val amount = if (txDetails.txType == TxType.PAYMENT) {
+                        txDetails.sent.toSat()
+                    } else {
+                        txDetails.received.toSat()
+                    }
+                    Text("$amount sats")
                 }
                 Row(
                     modifier = Modifier
