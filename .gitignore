@@ -22,3 +22,11 @@ output-metadata.json
 local.properties
 .project
 Notes.md
+
+# KMP
+.kotlin
+**/build/
+PadawanBdkWrapper.xcframework/
+DerivedData-device/
+DerivedData-simulator/
+PadawanBdkWrapper.def
