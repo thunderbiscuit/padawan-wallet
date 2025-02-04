@@ -27,7 +27,6 @@ import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalUriHandler
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
@@ -36,7 +35,6 @@ import com.composables.core.Icon
 import com.composables.icons.lucide.ArrowDownToLine
 import com.composables.icons.lucide.ArrowUpFromLine
 import com.composables.icons.lucide.Lucide
-import com.composables.icons.lucide.Send
 import com.goldenraven.padawanwallet.R
 import com.goldenraven.padawanwallet.domain.bitcoin.ChainPosition
 import com.goldenraven.padawanwallet.domain.bitcoin.TransactionDetails
@@ -91,7 +89,7 @@ internal fun TransactionScreen(
                         text = stringResource(R.string.total_transaction_amount),
                         style = PadawanTypography.titleSmall
                     )
-                    val amount = if (txDetails.txType == TxType.PAYMENT) {
+                    val amount = if (txDetails.txType == TxType.OUTBOUND) {
                         txDetails.sent.toSat()
                     } else {
                         txDetails.received.toSat()
@@ -113,21 +111,21 @@ internal fun TransactionScreen(
                             modifier = Modifier
                                 .align(Alignment.CenterEnd)
                                 .background(
-                                    color = if (txDetails.txType == TxType.PAYMENT) padawan_theme_send_primary else padawan_theme_receive_primary,
+                                    color = if (txDetails.txType == TxType.OUTBOUND) padawan_theme_send_primary else padawan_theme_receive_primary,
                                     shape = RoundedCornerShape(size = 5.dp)
                                 )
                         ) {
                             Text(
-                                text = if (txDetails.txType == TxType.PAYMENT) stringResource(R.string.send) else stringResource(R.string.receive),
+                                text = if (txDetails.txType == TxType.OUTBOUND) stringResource(R.string.send) else stringResource(R.string.receive),
                                 style = PadawanTypography.bodySmall,
                                 modifier = Modifier
                                     .align(Alignment.CenterVertically)
                                     .padding(start = 8.dp, top = 4.dp, bottom = 4.dp)
                             )
                             Icon(
-                                imageVector = if (txDetails.txType == TxType.PAYMENT) Lucide.ArrowUpFromLine else Lucide.ArrowDownToLine,
+                                imageVector = if (txDetails.txType == TxType.OUTBOUND) Lucide.ArrowUpFromLine else Lucide.ArrowDownToLine,
                                 tint = padawan_disabled,
-                                contentDescription = if (txDetails.txType == TxType.PAYMENT) stringResource(R.string.send_icon) else stringResource(R.string.receive_icon),
+                                contentDescription = if (txDetails.txType == TxType.OUTBOUND) stringResource(R.string.send_icon) else stringResource(R.string.receive_icon),
                                 modifier = Modifier
                                     .align(Alignment.CenterVertically)
                                     .scale(scale = 0.75f)

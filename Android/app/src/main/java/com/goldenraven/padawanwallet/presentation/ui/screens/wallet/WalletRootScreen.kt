@@ -480,7 +480,7 @@ fun TransactionListBox(
                                     .padding(top = 8.dp)
                             )
                             Text(
-                                text = "${if (tx.txType == TxType.PAYMENT) tx.paymentAmount.toString() else tx.received.toSat()} ${BitcoinUnit.SATS.toString().lowercase()}",
+                                text = "${if (tx.txType == TxType.OUTBOUND) tx.paymentAmount.toString() else tx.received.toSat()} ${BitcoinUnit.SATS.toString().lowercase()}",
                                 style = PadawanTypography.bodyMedium,
                                 textAlign = TextAlign.End,
                                 modifier = Modifier.align(Alignment.BottomEnd)
@@ -505,21 +505,21 @@ fun TransactionListBox(
                                     modifier = Modifier
                                         .align(Alignment.CenterEnd)
                                         .background(
-                                            color = if (tx.txType == TxType.PAYMENT) padawan_theme_send_primary else padawan_theme_receive_primary,
+                                            color = if (tx.txType == TxType.OUTBOUND) padawan_theme_send_primary else padawan_theme_receive_primary,
                                             shape = RoundedCornerShape(size = 5.dp)
                                         )
                                 ) {
                                     Text(
-                                        text = if (tx.txType == TxType.PAYMENT) stringResource(id = R.string.send) else stringResource(id = R.string.receive),
+                                        text = if (tx.txType == TxType.OUTBOUND) stringResource(id = R.string.send) else stringResource(id = R.string.receive),
                                         style = PadawanTypography.bodySmall,
                                         modifier = Modifier
                                             .align(Alignment.CenterVertically)
                                             .padding(start = 8.dp, top = 4.dp, bottom = 4.dp)
                                     )
                                     Icon(
-                                        imageVector = if (tx.txType == TxType.PAYMENT) Lucide.ArrowUpFromLine else Lucide.ArrowDownToLine,
+                                        imageVector = if (tx.txType == TxType.OUTBOUND) Lucide.ArrowUpFromLine else Lucide.ArrowDownToLine,
                                         tint = padawan_disabled,
-                                        contentDescription = if (tx.txType == TxType.PAYMENT) stringResource(id = R.string.send_icon) else stringResource(id = R.string.receive_icon),
+                                        contentDescription = if (tx.txType == TxType.OUTBOUND) stringResource(id = R.string.send_icon) else stringResource(id = R.string.receive_icon),
                                         modifier = Modifier
                                             .align(Alignment.CenterVertically)
                                             .scale(scale = 0.75f)

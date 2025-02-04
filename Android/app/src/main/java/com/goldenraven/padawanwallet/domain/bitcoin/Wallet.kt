@@ -168,7 +168,7 @@ object Wallet {
             val fee = wallet.calculateFee(tx.transaction)
             val feeRate = wallet.calculateFeeRate(tx.transaction)
             val txType: TxType = txType(sent = sent.toSat(), received = received.toSat())
-            val paymentAmount = if (txType == TxType.PAYMENT) {
+            val paymentAmount = if (txType == TxType.OUTBOUND) {
                 netSendWithoutFees(
                     txSatsOut = sent.toSat(),
                     txSatsIn = received.toSat(),

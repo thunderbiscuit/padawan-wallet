@@ -15,13 +15,19 @@ fun netSendWithoutFees(txSatsOut: ULong, txSatsIn: ULong, fee: ULong): ULong {
 }
 
 /**
- * Determines whether a transaction is a payment or a receive.
+ * Determines whether a transaction is a payment (outbound) or a receive (inbound). We define an
+ * outbound transaction as one where the amount sent is greater than the amount received, and vice
+ * versa for inbound transactions.
  */
 fun txType(sent: ULong, received: ULong): TxType {
-    return if (sent > received) TxType.PAYMENT else TxType.RECEIVE
+    return if (sent > received) TxType.OUTBOUND else TxType.INBOUND
 }
 
+/**
+ * We define an outbound transaction as one where the amount sent is greater than the amount
+ * received, and vice versa for inbound transactions.
+ */
 enum class TxType {
-    PAYMENT,
-    RECEIVE,
+    OUTBOUND,
+    INBOUND,
 }
