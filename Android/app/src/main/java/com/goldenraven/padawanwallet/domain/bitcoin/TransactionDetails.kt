@@ -1,6 +1,10 @@
+/*
+ * Copyright 2020-2025 thunderbiscuit and contributors.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the ./LICENSE file.
+ */
+
 package com.goldenraven.padawanwallet.domain.bitcoin
 
-import com.goldenraven.padawanwallet.utils.TxType
 import org.rustbitcoin.bitcoin.Amount
 import org.rustbitcoin.bitcoin.FeeRate
 

@@ -7,9 +7,7 @@ package com.goldenraven.padawanwallet.domain.bitcoin
 
 import android.util.Log
 import com.goldenraven.padawanwallet.utils.RequiredInitialWalletData
-import com.goldenraven.padawanwallet.utils.TxType
 import com.goldenraven.padawanwallet.utils.netSendWithoutFees
-import com.goldenraven.padawanwallet.utils.txType
 import org.bitcoindevkit.Address
 import org.bitcoindevkit.AddressInfo
 import org.bitcoindevkit.Connection
@@ -167,7 +165,7 @@ object Wallet {
             val (sent, received) = wallet.sentAndReceived(tx.transaction)
             val fee = wallet.calculateFee(tx.transaction)
             val feeRate = wallet.calculateFeeRate(tx.transaction)
-            val txType: TxType = txType(sent = sent.toSat(), received = received.toSat())
+            val txType: TxType = TxType.fromAmounts(sent, received)
             val paymentAmount = if (txType == TxType.OUTBOUND) {
                 netSendWithoutFees(
                     txSatsOut = sent.toSat(),

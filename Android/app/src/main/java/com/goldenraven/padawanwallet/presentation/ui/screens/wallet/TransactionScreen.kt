@@ -17,7 +17,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.HorizontalDivider
-// import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -38,6 +37,7 @@ import com.composables.icons.lucide.Lucide
 import com.goldenraven.padawanwallet.R
 import com.goldenraven.padawanwallet.domain.bitcoin.ChainPosition
 import com.goldenraven.padawanwallet.domain.bitcoin.TransactionDetails
+import com.goldenraven.padawanwallet.domain.bitcoin.TxType
 import com.goldenraven.padawanwallet.presentation.theme.PadawanTypography
 import com.goldenraven.padawanwallet.presentation.theme.gradientBackground
 import com.goldenraven.padawanwallet.presentation.theme.innerScreenPadding
@@ -47,7 +47,6 @@ import com.goldenraven.padawanwallet.presentation.theme.padawan_theme_send_prima
 import com.goldenraven.padawanwallet.presentation.theme.padawan_theme_button_primary
 import com.goldenraven.padawanwallet.presentation.ui.components.PadawanAppBar
 import com.goldenraven.padawanwallet.utils.ScreenSizeWidth
-import com.goldenraven.padawanwallet.utils.TxType
 import com.goldenraven.padawanwallet.utils.getScreenSizeWidth
 import com.goldenraven.padawanwallet.utils.timestampToString
 
