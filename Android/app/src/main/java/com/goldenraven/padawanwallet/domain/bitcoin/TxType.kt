@@ -5,7 +5,7 @@
 
 package com.goldenraven.padawanwallet.domain.bitcoin
 
-import org.rustbitcoin.bitcoin.Amount
+import org.bitcoindevkit.Amount
 
 /**
  * We define an outbound transaction as one where the amount sent is greater than the amount

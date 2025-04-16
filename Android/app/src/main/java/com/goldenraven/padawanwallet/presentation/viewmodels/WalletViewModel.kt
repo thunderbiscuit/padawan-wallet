@@ -22,8 +22,8 @@ import com.goldenraven.padawanwallet.presentation.viewmodels.mvi.WalletState
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import org.rustbitcoin.bitcoin.Amount
-import org.rustbitcoin.bitcoin.FeeRate
+import org.bitcoindevkit.Amount
+import org.bitcoindevkit.FeeRate
 import org.bitcoindevkit.Transaction
 
 private const val TAG = "WalletViewModel"

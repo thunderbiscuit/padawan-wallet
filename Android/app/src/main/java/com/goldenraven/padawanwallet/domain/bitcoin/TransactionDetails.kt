@@ -5,8 +5,8 @@
 
 package com.goldenraven.padawanwallet.domain.bitcoin
 
-import org.rustbitcoin.bitcoin.Amount
-import org.rustbitcoin.bitcoin.FeeRate
+import org.bitcoindevkit.Amount
+import org.bitcoindevkit.FeeRate
 
 data class TransactionDetails(
     val txid: String,

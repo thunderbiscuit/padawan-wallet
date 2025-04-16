@@ -12,14 +12,14 @@ import org.bitcoindevkit.Address
 import org.bitcoindevkit.AddressInfo
 import org.bitcoindevkit.Connection
 import org.bitcoindevkit.ChainPosition as BdkChainPosition
-import org.rustbitcoin.bitcoin.Amount
+import org.bitcoindevkit.Amount
 import org.bitcoindevkit.Descriptor
 import org.bitcoindevkit.DescriptorSecretKey
 import org.bitcoindevkit.ElectrumClient
-import org.rustbitcoin.bitcoin.FeeRate
+import org.bitcoindevkit.FeeRate
 import org.bitcoindevkit.KeychainKind
 import org.bitcoindevkit.Mnemonic
-import org.rustbitcoin.bitcoin.Network
+import org.bitcoindevkit.Network
 import org.bitcoindevkit.Psbt
 import org.bitcoindevkit.Transaction
 import org.bitcoindevkit.TxBuilder
@@ -111,7 +111,7 @@ object Wallet {
     private fun fullScan() {
         val fullScanRequest = wallet.startFullScan().build()
         val update: Update = blockchainClient.fullScan(
-            fullScanRequest = fullScanRequest,
+            request = fullScanRequest,
             stopGap = 20u,
             batchSize = 10u,
             fetchPrevTxouts = true
@@ -130,7 +130,7 @@ object Wallet {
             Log.i(TAG, "Just a normal sync!")
             val syncRequest = wallet.startSyncWithRevealedSpks().build()
             val update = blockchainClient.sync(
-                syncRequest = syncRequest,
+                request = syncRequest,
                 batchSize = 10u,
                 fetchPrevTxouts = true
             )
@@ -207,7 +207,7 @@ object Wallet {
     }
 
     fun broadcast(tx: Transaction): String {
-        blockchainClient.broadcast(tx)
+        blockchainClient.transactionBroadcast(tx)
         return tx.computeTxid()
     }
 }
