@@ -2,7 +2,7 @@
 //  PadawanWalletUITestsLaunchTests.swift
 //  PadawanWalletUITests
 //
-//  Created by thunderbiscuit on 2024-04-25.
+//  Created by thunderbiscuit on 2025-04-16.
 //
 
 import XCTest
@@ -17,6 +17,7 @@ final class PadawanWalletUITestsLaunchTests: XCTestCase {
         continueAfterFailure = false
     }
 
+    @MainActor
     func testLaunch() throws {
         let app = XCUIApplication()
         app.launch()
