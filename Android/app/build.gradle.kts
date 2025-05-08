@@ -31,7 +31,7 @@ android {
         // This version code must be updated for each release but the version on the master branch
         // stays at 1.
         versionCode = 1
-        versionName = "v0.15.0-SNAPSHOT"
+        versionName = "v0.16.0-SNAPSHOT"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
         resValue(
