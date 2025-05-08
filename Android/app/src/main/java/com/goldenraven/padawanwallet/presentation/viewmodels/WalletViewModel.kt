@@ -11,11 +11,11 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.goldenraven.padawanwallet.BuildConfig
+import com.goldenraven.padawanwallet.domain.bitcoin.FaucetCall
+import com.goldenraven.padawanwallet.domain.bitcoin.FaucetService
 import com.goldenraven.padawanwallet.domain.bitcoin.TransactionDetails
 import com.goldenraven.padawanwallet.domain.bitcoin.Wallet
 import com.goldenraven.padawanwallet.domain.bitcoin.WalletRepository
-import com.goldenraven.padawanwallet.padawankmp.FaucetCall
-import com.goldenraven.padawanwallet.padawankmp.FaucetService
 import com.goldenraven.padawanwallet.presentation.viewmodels.mvi.MessageType
 import com.goldenraven.padawanwallet.presentation.viewmodels.mvi.WalletAction
 import com.goldenraven.padawanwallet.presentation.viewmodels.mvi.WalletState
