@@ -6,6 +6,7 @@
 package com.goldenraven.padawanwallet.presentation.ui.screens.wallet
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -17,8 +18,10 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.selection.SelectionContainer
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
@@ -56,6 +59,9 @@ import com.goldenraven.padawanwallet.presentation.viewmodels.mvi.ReceiveScreenAc
 import com.goldenraven.padawanwallet.presentation.viewmodels.mvi.ReceiveScreenState
 import androidx.compose.ui.Alignment.Companion.BottomCenter
 import androidx.compose.ui.Alignment.Companion.Center
+import androidx.compose.ui.graphics.Color
+import com.composables.icons.lucide.ClipboardCopy
+import com.composables.icons.lucide.Lucide
 import com.goldenraven.padawanwallet.utils.QrUiState
 import com.goldenraven.padawanwallet.utils.logRecomposition
 import kotlinx.coroutines.Dispatchers
@@ -109,6 +115,7 @@ internal fun ReceiveScreen(
                 verticalArrangement = Arrangement.Center,
                 modifier = Modifier
                     .align(Center)
+                    .padding(bottom = 120.dp)
             ) {
                 if (state.qrState == QrUiState.Loading) {
                     LoadingAnimation(circleColor = padawan_theme_background, circleSize = 38.dp)
@@ -130,23 +137,42 @@ internal fun ReceiveScreen(
                                 }
                                 .padding(12.dp),
                         )
-                        Spacer(modifier = Modifier.padding(vertical = 8.dp))
-                        Text(
-                            modifier = Modifier
-                                .clickable {
-                                    copyToClipboard(
-                                        state.address,
-                                        context,
-                                        scope,
-                                        snackbarHostState,
-                                        null
-                                    )
-                                }
-                                .padding(12.dp),
-                            text = state.address,
-                            fontFamily = ShareTechMono,
-                            fontSize = 12.sp
-                        )
+                        Box(
+                            modifier = Modifier.padding(horizontal = 8.dp)
+                        ) {
+                            SelectionContainer {
+                                Text(
+                                    modifier = Modifier
+                                        .clickable {
+                                            copyToClipboard(
+                                                state.address,
+                                                context,
+                                                scope,
+                                                snackbarHostState,
+                                                null,
+                                            )
+                                        }
+                                        .background(
+                                            color = padawan_theme_background,
+                                            shape = RoundedCornerShape(16.dp)
+                                        )
+                                        .padding(12.dp),
+                                    text = state.address,
+                                        // .chunked(4).joinToString(" "),
+                                    fontFamily = ShareTechMono,
+                                    fontSize = 18.sp
+                                )
+                            }
+                            Icon(
+                                Lucide.ClipboardCopy,
+                                tint = Color.Black,
+                                contentDescription = "Copy to clipboard",
+                                modifier = Modifier
+                                    .padding(8.dp)
+                                    .size(20.dp)
+                                    .align(Alignment.BottomEnd)
+                            )
+                        }
                     }
                 }
             }
