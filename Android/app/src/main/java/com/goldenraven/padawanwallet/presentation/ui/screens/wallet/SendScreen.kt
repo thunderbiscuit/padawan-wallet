@@ -258,11 +258,11 @@ internal fun SendScreen(
                     },
                     value = sliderPosition,
                     onValueChange = { sliderPosition = it },
-                    valueRange = 1f..8f,
+                    valueRange = 1f..12f,
                     onValueChangeFinished = {
                         feeRate.value = sliderPosition.toString().take(1).toLong()
                     },
-                    steps = 6
+                    steps = 10
                 )
                 Text(text = sliderPosition.toString().take(3))
 
