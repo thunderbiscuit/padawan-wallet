@@ -18,7 +18,7 @@ import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import com.goldenraven.padawanwallet.R
 import com.goldenraven.padawanwallet.presentation.theme.PadawanTheme
-import com.goldenraven.padawanwallet.presentation.theme.padawan_theme_onPrimary
+import com.goldenraven.padawanwallet.presentation.theme.PadawanColors
 import com.composables.core.Icon
 import com.composables.icons.lucide.ArrowLeft
 import com.composables.icons.lucide.Lucide
@@ -40,7 +40,7 @@ fun PadawanAppBar(title: String, onClick: () -> Unit) {
                 Icon(
                     imageVector = Lucide.ArrowLeft,
                     contentDescription = stringResource(id = R.string.back_icon),
-                    tint = padawan_theme_onPrimary
+                    tint = PadawanColors.padawan_theme_onPrimary
                 )
             }
         },

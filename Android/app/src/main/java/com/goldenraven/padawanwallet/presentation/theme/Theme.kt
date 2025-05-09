@@ -10,8 +10,8 @@ import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 
 private val PadawanThemeColors = lightColorScheme(
-    primary = padawan_theme_primary,
-    onPrimary = padawan_theme_onPrimary,
+    primary = PadawanColors.padawan_theme_primary,
+    onPrimary = PadawanColors.padawan_theme_onPrimary,
 )
 
 @Composable

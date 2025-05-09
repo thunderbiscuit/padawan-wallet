@@ -30,9 +30,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.goldenraven.padawanwallet.R
 import com.goldenraven.padawanwallet.presentation.theme.PadawanTypography
-import com.goldenraven.padawanwallet.presentation.theme.padawan_theme_background_secondary
-import com.goldenraven.padawanwallet.presentation.theme.padawan_theme_button_primary
-import com.goldenraven.padawanwallet.presentation.theme.padawan_theme_navigation_bar_unselected
+import com.goldenraven.padawanwallet.presentation.theme.PadawanColors
 import com.goldenraven.padawanwallet.utils.NavigationItem
 import com.goldenraven.padawanwallet.presentation.navigation.WalletNavigation
 import androidx.navigation.compose.rememberNavController
@@ -79,10 +77,10 @@ internal fun BottomNavigationBar(
     if (showNavigationBar) {
         NavigationBar(
             tonalElevation = 0.dp,
-            containerColor = padawan_theme_background_secondary,
+            containerColor = PadawanColors.padawan_theme_background_secondary,
             modifier = Modifier.drawBehind {
                 drawLine(
-                    padawan_theme_navigation_bar_unselected,
+                    PadawanColors.padawan_theme_navigation_bar_unselected,
                     Offset(0f, 0f),
                     Offset(size.width, 0f),
                     2.dp.toPx()
@@ -153,10 +151,10 @@ internal fun BottomNavigationBar(
                         }
                     },
                     colors = NavigationBarItemDefaults.colors(
-                        selectedIconColor = padawan_theme_button_primary,
-                        selectedTextColor = padawan_theme_button_primary,
-                        unselectedIconColor = padawan_theme_navigation_bar_unselected,
-                        unselectedTextColor = padawan_theme_navigation_bar_unselected,
+                        selectedIconColor = PadawanColors.padawan_theme_button_primary,
+                        selectedTextColor = PadawanColors.padawan_theme_button_primary,
+                        unselectedIconColor = PadawanColors.padawan_theme_navigation_bar_unselected,
+                        unselectedTextColor = PadawanColors.padawan_theme_navigation_bar_unselected,
                         indicatorColor = Color.Transparent,
                     ),
                 )

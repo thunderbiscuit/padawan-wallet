@@ -96,7 +96,7 @@ fun Modifier.wideTextField(): Modifier = this.then(
         .fillMaxWidth()
         .border(
             width = 2.dp,
-            color = padawan_theme_onPrimary,
+            color = PadawanColors.padawan_theme_onPrimary,
             shape = RoundedCornerShape(20.dp)
         )
         .advancedShadow(

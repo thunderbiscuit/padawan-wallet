@@ -28,7 +28,7 @@ import com.goldenraven.padawanwallet.R
 import com.goldenraven.padawanwallet.presentation.navigation.ChapterScreen
 import com.goldenraven.padawanwallet.presentation.theme.PadawanTheme
 import com.goldenraven.padawanwallet.presentation.theme.PadawanTypography
-import com.goldenraven.padawanwallet.presentation.theme.padawan_theme_background_secondary
+import com.goldenraven.padawanwallet.presentation.theme.PadawanColors
 import com.goldenraven.padawanwallet.presentation.ui.components.SectionDivider
 import com.goldenraven.padawanwallet.presentation.ui.components.SectionTitle
 import com.goldenraven.padawanwallet.presentation.ui.components.TutorialCard
@@ -53,7 +53,7 @@ internal fun ChaptersRootScreen(
 
     Column(
         Modifier
-            .background(padawan_theme_background_secondary)
+            .background(PadawanColors.padawan_theme_background_secondary)
             .padding(paddingValues)
     ) {
         Column(

@@ -74,12 +74,9 @@ import com.composables.core.rememberModalBottomSheetState
 import com.goldenraven.padawanwallet.R
 import com.goldenraven.padawanwallet.presentation.navigation.QRScanScreen
 import com.goldenraven.padawanwallet.presentation.theme.PadawanTypography
-import com.goldenraven.padawanwallet.presentation.theme.padawan_theme_background_secondary
-import com.goldenraven.padawanwallet.presentation.theme.padawan_theme_button_primary
-import com.goldenraven.padawanwallet.presentation.theme.padawan_theme_onPrimary
+import com.goldenraven.padawanwallet.presentation.theme.PadawanColors
 import com.goldenraven.padawanwallet.presentation.theme.gradientBackground
 import com.goldenraven.padawanwallet.presentation.theme.innerScreenPadding
-import com.goldenraven.padawanwallet.presentation.theme.padawan_theme_button_secondary_faded
 import com.goldenraven.padawanwallet.presentation.theme.standardShadow
 import com.goldenraven.padawanwallet.presentation.theme.wideTextField
 import com.goldenraven.padawanwallet.presentation.ui.components.PadawanAppBar
@@ -180,10 +177,10 @@ internal fun SendScreen(
                     singleLine = true,
                     placeholder = { Text(stringResource(R.string.enter_amount_sats)) },
                     colors = TextFieldDefaults.colors(
-                        focusedContainerColor = padawan_theme_background_secondary,
-                        unfocusedContainerColor = padawan_theme_background_secondary,
-                        disabledContainerColor = padawan_theme_background_secondary,
-                        cursorColor = padawan_theme_onPrimary,
+                        focusedContainerColor = PadawanColors.padawan_theme_background_secondary,
+                        unfocusedContainerColor = PadawanColors.padawan_theme_background_secondary,
+                        disabledContainerColor = PadawanColors.padawan_theme_background_secondary,
+                        cursorColor = PadawanColors.padawan_theme_onPrimary,
                         focusedIndicatorColor = Color.Transparent,
                         unfocusedIndicatorColor = Color.Transparent,
                         disabledIndicatorColor = Color.Transparent,
@@ -212,10 +209,10 @@ internal fun SendScreen(
                     singleLine = true,
                     placeholder = { Text(text = stringResource(R.string.enter_a_bitcoin_signet_address)) },
                     colors = TextFieldDefaults.colors(
-                        focusedContainerColor = padawan_theme_background_secondary,
-                        unfocusedContainerColor = padawan_theme_background_secondary,
-                        disabledContainerColor = padawan_theme_background_secondary,
-                        cursorColor = padawan_theme_onPrimary,
+                        focusedContainerColor = PadawanColors.padawan_theme_background_secondary,
+                        unfocusedContainerColor = PadawanColors.padawan_theme_background_secondary,
+                        disabledContainerColor = PadawanColors.padawan_theme_background_secondary,
+                        cursorColor = PadawanColors.padawan_theme_onPrimary,
                         focusedIndicatorColor = Color.Transparent,
                         unfocusedIndicatorColor = Color.Transparent,
                         disabledIndicatorColor = Color.Transparent,
@@ -312,7 +309,7 @@ internal fun SendScreen(
                             }
                         }
                     },
-                    colors = ButtonDefaults.buttonColors(containerColor = padawan_theme_button_primary),
+                    colors = ButtonDefaults.buttonColors(containerColor = PadawanColors.padawan_theme_button_primary),
                     shape = RoundedCornerShape(20.dp),
                     border = standardBorder,
                     modifier = Modifier
@@ -354,7 +351,7 @@ internal fun SendScreen(
                 .shadow(4.dp, RoundedCornerShape(topStart = 28.dp, topEnd = 28.dp))
                 .clip(RoundedCornerShape(topStart = 28.dp, topEnd = 28.dp))
                 .background(Color.White)
-                .background(padawan_theme_button_secondary_faded)
+                .background(PadawanColors.padawan_theme_button_secondary_faded)
                 .widthIn(max = 640.dp)
                 .fillMaxWidth()
                 .imePadding(),
@@ -491,7 +488,7 @@ fun TransactionConfirmation(
                     navController.popBackStack()
                 }
             },
-            colors = ButtonDefaults.buttonColors(containerColor = padawan_theme_button_primary),
+            colors = ButtonDefaults.buttonColors(containerColor = PadawanColors.padawan_theme_button_primary),
             shape = RoundedCornerShape(20.dp),
             border = standardBorder,
             modifier = Modifier

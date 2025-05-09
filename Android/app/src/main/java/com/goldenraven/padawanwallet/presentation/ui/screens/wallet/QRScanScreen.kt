@@ -48,7 +48,6 @@ import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.navigation.NavHostController
 import com.goldenraven.padawanwallet.R
-import com.goldenraven.padawanwallet.presentation.theme.md_theme_dark_background
 import com.goldenraven.padawanwallet.presentation.theme.standardShadow
 import com.goldenraven.padawanwallet.presentation.ui.components.standardBorder
 import com.goldenraven.padawanwallet.presentation.viewmodels.mvi.WalletAction
@@ -100,7 +99,6 @@ internal fun QRScanScreen(
 
             Box(
                 modifier = Modifier
-                    .background(md_theme_dark_background)
                     .constrainAs(camera) {
                         top.linkTo(parent.top)
                         absoluteLeft.linkTo(parent.absoluteLeft)

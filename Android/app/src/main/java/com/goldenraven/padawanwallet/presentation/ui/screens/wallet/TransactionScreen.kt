@@ -41,10 +41,7 @@ import com.goldenraven.padawanwallet.domain.bitcoin.TxType
 import com.goldenraven.padawanwallet.presentation.theme.PadawanTypography
 import com.goldenraven.padawanwallet.presentation.theme.gradientBackground
 import com.goldenraven.padawanwallet.presentation.theme.innerScreenPadding
-import com.goldenraven.padawanwallet.presentation.theme.padawan_disabled
-import com.goldenraven.padawanwallet.presentation.theme.padawan_theme_receive_primary
-import com.goldenraven.padawanwallet.presentation.theme.padawan_theme_send_primary
-import com.goldenraven.padawanwallet.presentation.theme.padawan_theme_button_primary
+import com.goldenraven.padawanwallet.presentation.theme.PadawanColors
 import com.goldenraven.padawanwallet.presentation.ui.components.PadawanAppBar
 import com.goldenraven.padawanwallet.utils.ScreenSizeWidth
 import com.goldenraven.padawanwallet.utils.getScreenSizeWidth
@@ -110,7 +107,7 @@ internal fun TransactionScreen(
                             modifier = Modifier
                                 .align(Alignment.CenterEnd)
                                 .background(
-                                    color = if (txDetails.txType == TxType.OUTBOUND) padawan_theme_send_primary else padawan_theme_receive_primary,
+                                    color = if (txDetails.txType == TxType.OUTBOUND) PadawanColors.padawan_theme_send_primary else PadawanColors.padawan_theme_receive_primary,
                                     shape = RoundedCornerShape(size = 5.dp)
                                 )
                         ) {
@@ -123,7 +120,7 @@ internal fun TransactionScreen(
                             )
                             Icon(
                                 imageVector = if (txDetails.txType == TxType.OUTBOUND) Lucide.ArrowUpFromLine else Lucide.ArrowDownToLine,
-                                tint = padawan_disabled,
+                                tint = PadawanColors.padawan_disabled,
                                 contentDescription = if (txDetails.txType == TxType.OUTBOUND) stringResource(R.string.send_icon) else stringResource(R.string.receive_icon),
                                 modifier = Modifier
                                     .align(Alignment.CenterVertically)
@@ -192,7 +189,7 @@ internal fun TransactionScreen(
                             .clickable { mUriHandler.openUri(link) }
                             .width(270.dp),
                         style = PadawanTypography.bodyMedium,
-                        color = padawan_theme_button_primary,
+                        color = PadawanColors.padawan_theme_button_primary,
                         textDecoration = TextDecoration.Underline
                     )
                 }

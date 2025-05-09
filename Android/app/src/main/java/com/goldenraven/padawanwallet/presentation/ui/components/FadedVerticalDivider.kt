@@ -12,12 +12,12 @@ import androidx.compose.material3.HorizontalDivider
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.goldenraven.padawanwallet.presentation.theme.padawan_theme_onBackground_faded
+import com.goldenraven.padawanwallet.presentation.theme.PadawanColors
 
 @Composable
 internal fun FadedVerticalDivider() {
     HorizontalDivider(
-        color = padawan_theme_onBackground_faded,
+        color = PadawanColors.padawan_theme_onBackground_faded,
         modifier = Modifier
             .fillMaxHeight()
             .width(3.dp)

@@ -44,8 +44,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.goldenraven.padawanwallet.R
 import com.goldenraven.padawanwallet.presentation.theme.ShareTechMono
-import com.goldenraven.padawanwallet.presentation.theme.padawan_theme_background
-import com.goldenraven.padawanwallet.presentation.theme.padawan_theme_button_primary
+import com.goldenraven.padawanwallet.presentation.theme.PadawanColors
 import com.goldenraven.padawanwallet.presentation.theme.gradientBackground
 import com.goldenraven.padawanwallet.presentation.theme.standardShadow
 import com.goldenraven.padawanwallet.presentation.ui.components.LoadingAnimation
@@ -118,7 +117,7 @@ internal fun ReceiveScreen(
                     .padding(bottom = 120.dp)
             ) {
                 if (state.qrState == QrUiState.Loading) {
-                    LoadingAnimation(circleColor = padawan_theme_background, circleSize = 38.dp)
+                    LoadingAnimation(circleColor = PadawanColors.padawan_theme_background, circleSize = 38.dp)
                 } else if (state.qrState == QrUiState.QR && state.bip21Uri != null && state.address != null) {
                     qr?.let {
                         Image(
@@ -153,7 +152,7 @@ internal fun ReceiveScreen(
                                             )
                                         }
                                         .background(
-                                            color = padawan_theme_background,
+                                            color = PadawanColors.padawan_theme_background,
                                             shape = RoundedCornerShape(16.dp)
                                         )
                                         .padding(12.dp),
@@ -179,7 +178,7 @@ internal fun ReceiveScreen(
 
             Button(
                 onClick = { onAction(ReceiveScreenAction.UpdateAddress) },
-                colors = ButtonDefaults.buttonColors(containerColor = padawan_theme_button_primary),
+                colors = ButtonDefaults.buttonColors(containerColor = PadawanColors.padawan_theme_button_primary),
                 shape = RoundedCornerShape(20.dp),
                 border = standardBorder,
                 modifier = Modifier

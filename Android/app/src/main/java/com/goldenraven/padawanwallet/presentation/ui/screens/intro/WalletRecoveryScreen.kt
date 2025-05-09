@@ -54,9 +54,7 @@ import androidx.constraintlayout.compose.Dimension
 import com.goldenraven.padawanwallet.R
 import com.goldenraven.padawanwallet.presentation.theme.PadawanTheme
 import com.goldenraven.padawanwallet.presentation.theme.PadawanTypography
-import com.goldenraven.padawanwallet.presentation.theme.md_theme_dark_onBackgroundFaded
-import com.goldenraven.padawanwallet.presentation.theme.md_theme_dark_onLightBackground
-import com.goldenraven.padawanwallet.presentation.theme.md_theme_dark_warning
+import com.goldenraven.padawanwallet.presentation.theme.PadawanColors
 import com.goldenraven.padawanwallet.presentation.theme.standardShadow
 import com.goldenraven.padawanwallet.presentation.ui.components.standardBorder
 import com.goldenraven.padawanwallet.utils.WalletCreateType
@@ -79,14 +77,14 @@ internal fun WalletRecoveryScreen(
                 Snackbar(
                     modifier = Modifier
                         .padding(12.dp)
-                        .background(md_theme_dark_warning)
+                        .background(PadawanColors.md_theme_dark_warning)
                         .semantics { testTag = "Intro WalletRecoveryScreen Snackbar" },
-                    containerColor = md_theme_dark_warning,
+                    containerColor = PadawanColors.md_theme_dark_warning,
 
                 ) {
                     Text(
                         text = data.visuals.message,
-                        style = TextStyle(md_theme_dark_onLightBackground)
+                        style = TextStyle(PadawanColors.md_theme_dark_onLightBackground)
                     )
                 }
             }
@@ -234,7 +232,7 @@ fun WordField(
         label = {
             Text(
                 text = "Word $wordNumber",
-                color = md_theme_dark_onBackgroundFaded,
+                color = PadawanColors.md_theme_dark_onBackgroundFaded,
             )
         },
         textStyle = TextStyle(

@@ -49,9 +49,7 @@ import com.goldenraven.padawanwallet.presentation.navigation.RecoveryPhraseScree
 import com.goldenraven.padawanwallet.presentation.navigation.SendCoinsBackScreen
 import com.goldenraven.padawanwallet.presentation.theme.PadawanTheme
 import com.goldenraven.padawanwallet.presentation.theme.PadawanTypography
-import com.goldenraven.padawanwallet.presentation.theme.padawan_theme_background_secondary
-import com.goldenraven.padawanwallet.presentation.theme.padawan_theme_button_primary
-import com.goldenraven.padawanwallet.presentation.theme.padawan_theme_text_faded_secondary
+import com.goldenraven.padawanwallet.presentation.theme.PadawanColors
 import com.goldenraven.padawanwallet.presentation.viewmodels.mvi.ChaptersScreensAction
 import com.composables.core.Icon
 import kotlinx.coroutines.launch
@@ -80,7 +78,7 @@ internal fun SettingsRootScreen(
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .background(padawan_theme_background_secondary)
+                .background(PadawanColors.padawan_theme_background_secondary)
                 .padding(scaffoldPadding)
                 .verticalScroll(scrollState)
         ) {
@@ -215,7 +213,7 @@ internal fun SettingsRootScreen(
                 Text(
                     text = padawanVersion,
                     style = PadawanTypography.bodySmall,
-                    color = padawan_theme_text_faded_secondary
+                    color = PadawanColors.padawan_theme_text_faded_secondary
                 )
             }
 
@@ -235,7 +233,7 @@ internal fun SettingsRootScreen(
                 },
                 colors = ButtonDefaults.buttonColors(containerColor = Color(0xffFEE6DE)),
                 shape = RoundedCornerShape(8.dp),
-                border = BorderStroke(1.dp, padawan_theme_button_primary),
+                border = BorderStroke(1.dp, PadawanColors.padawan_theme_button_primary),
                 modifier = Modifier
                     .size(width = 400.dp, height = 60.dp)
                     .padding(start = 24.dp, end = 24.dp)

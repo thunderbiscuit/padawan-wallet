@@ -52,12 +52,7 @@ import com.goldenraven.padawanwallet.R
 import com.goldenraven.padawanwallet.domain.tutorials.ElementType
 import com.goldenraven.padawanwallet.domain.tutorials.Page
 import com.goldenraven.padawanwallet.presentation.theme.PadawanTypography
-import com.goldenraven.padawanwallet.presentation.theme.padawan_theme_background_secondary
-import com.goldenraven.padawanwallet.presentation.theme.padawan_theme_button_primary
-import com.goldenraven.padawanwallet.presentation.theme.padawan_theme_button_secondary
-import com.goldenraven.padawanwallet.presentation.theme.padawan_theme_onPrimary
-import com.goldenraven.padawanwallet.presentation.theme.padawan_theme_text_faded_secondary
-import com.goldenraven.padawanwallet.presentation.theme.padawan_theme_tutorial_background
+import com.goldenraven.padawanwallet.presentation.theme.PadawanColors
 import com.goldenraven.padawanwallet.presentation.theme.standardShadow
 import com.goldenraven.padawanwallet.presentation.ui.components.standardBorder
 import com.goldenraven.padawanwallet.utils.ScreenSizeWidth
@@ -82,16 +77,16 @@ fun ChapterScreen(
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(color = padawan_theme_background_secondary)
+            .background(color = PadawanColors.padawan_theme_background_secondary)
     ) {
         Box(
             modifier = Modifier
-                .background(color = padawan_theme_tutorial_background)
+                .background(color = PadawanColors.padawan_theme_tutorial_background)
                 .padding(top = paddingValues.calculateTopPadding())
                 .fillMaxWidth()
                 .drawBehind {
                     drawLine(
-                        color = padawan_theme_onPrimary,
+                        color = PadawanColors.padawan_theme_onPrimary,
                         strokeWidth = 4.dp.toPx(),
                         start = Offset(x = 0f, y = size.height),
                         end = Offset(x = size.width, y = size.height)
@@ -151,7 +146,7 @@ fun ChapterButtons(
                     onAction(ChaptersScreensAction.NextPage)
                     scrollUp(pageScrollState = pageScrollState, coroutineScope = coroutineScope)
                 },
-                colors = ButtonDefaults.buttonColors(containerColor = padawan_theme_button_primary),
+                colors = ButtonDefaults.buttonColors(containerColor = PadawanColors.padawan_theme_button_primary),
                 shape = RoundedCornerShape(20.dp),
                 border = standardBorder,
                 modifier = Modifier
@@ -175,7 +170,7 @@ fun ChapterButtons(
                     onAction(ChaptersScreensAction.SetCompleted)
                     navController.popBackStack()
                 },
-                colors = ButtonDefaults.buttonColors(containerColor = padawan_theme_button_primary),
+                colors = ButtonDefaults.buttonColors(containerColor = PadawanColors.padawan_theme_button_primary),
                 shape = RoundedCornerShape(20.dp),
                 border = standardBorder,
                 modifier = Modifier
@@ -213,7 +208,7 @@ internal fun ChapterAppBar(navController: NavHostController) {
             Icon(
                 imageVector = Lucide.ArrowLeft,
                 contentDescription = stringResource(R.string.back_icon),
-                tint = padawan_theme_onPrimary
+                tint = PadawanColors.padawan_theme_onPrimary
             )
         }
         Text(
@@ -273,12 +268,12 @@ internal fun ChapterPage(page: Page) {
                 Text(
                     text = stringResource(id = element.resourceId),
                     style = PadawanTypography.bodyMedium,
-                    color = padawan_theme_text_faded_secondary
+                    color = PadawanColors.padawan_theme_text_faded_secondary
                 )
             }
             ElementType.RESOURCE -> {
                 Card(
-                    colors = CardDefaults.cardColors(padawan_theme_button_secondary),
+                    colors = CardDefaults.cardColors(PadawanColors.padawan_theme_button_secondary),
                     border = standardBorder,
                     modifier = Modifier
                         .height(height = 150.dp)

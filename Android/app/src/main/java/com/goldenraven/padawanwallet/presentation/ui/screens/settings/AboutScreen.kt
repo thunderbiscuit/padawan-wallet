@@ -31,9 +31,7 @@ import androidx.navigation.compose.rememberNavController
 import com.goldenraven.padawanwallet.R
 import com.goldenraven.padawanwallet.presentation.theme.PadawanTheme
 import com.goldenraven.padawanwallet.presentation.theme.PadawanTypography
-import com.goldenraven.padawanwallet.presentation.theme.padawan_theme_background_secondary
-import com.goldenraven.padawanwallet.presentation.theme.padawan_theme_button_primary
-import com.goldenraven.padawanwallet.presentation.theme.padawan_theme_text_faded_secondary
+import com.goldenraven.padawanwallet.presentation.theme.PadawanColors
 import com.goldenraven.padawanwallet.presentation.ui.components.PadawanAppBar
 
 @Composable
@@ -56,7 +54,7 @@ internal fun AboutScreen(
     ) { scaffoldPadding ->
         Column(
             Modifier
-                .background(padawan_theme_background_secondary)
+                .background(PadawanColors.padawan_theme_background_secondary)
                 .padding(scaffoldPadding)
                 .padding(horizontal = 24.dp)
                 .fillMaxSize()
@@ -65,19 +63,19 @@ internal fun AboutScreen(
             Text(
                 text = stringResource(R.string.about_text),
                 style = PadawanTypography.bodyMedium,
-                color = padawan_theme_text_faded_secondary,
+                color = PadawanColors.padawan_theme_text_faded_secondary,
             )
             Spacer(Modifier.height(24.dp))
             Text(
                 text = stringResource(R.string.privacyText),
                 style = PadawanTypography.bodyMedium,
-                color = padawan_theme_text_faded_secondary,
+                color = PadawanColors.padawan_theme_text_faded_secondary,
             )
             Spacer(Modifier.height(24.dp))
             Text(
                 text = "Read our privacy policy here.",
                 style = PadawanTypography.bodyMedium,
-                color = padawan_theme_button_primary,
+                color = PadawanColors.padawan_theme_button_primary,
                 textDecoration = TextDecoration.Underline,
                 modifier = Modifier.clickable(onClick = openPrivacyLink)
             )

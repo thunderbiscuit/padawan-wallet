@@ -21,9 +21,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.geometry.Offset
-import androidx.compose.ui.graphics.Brush
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -31,14 +28,12 @@ import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.composables.core.Icon
 import com.composables.icons.lucide.Circle
 import com.composables.icons.lucide.Lucide
 import com.goldenraven.padawanwallet.R
 import com.goldenraven.padawanwallet.presentation.theme.Outfit
 import com.goldenraven.padawanwallet.presentation.theme.PadawanTheme
-import com.goldenraven.padawanwallet.presentation.theme.padawan_theme_background
-import com.goldenraven.padawanwallet.presentation.theme.padawan_theme_onBackground_secondary
+import com.goldenraven.padawanwallet.presentation.theme.PadawanColors
 import com.goldenraven.padawanwallet.presentation.theme.standardShadow
 
 @Composable
@@ -50,7 +45,7 @@ fun TutorialCard(
     Card(
         border = standardBorder,
         shape = RoundedCornerShape(20.dp),
-        colors = if (done) CardDefaults.cardColors(padawan_theme_background) else CardDefaults.cardColors(padawan_theme_onBackground_secondary),
+        colors = if (done) CardDefaults.cardColors(PadawanColors.padawan_theme_background) else CardDefaults.cardColors(PadawanColors.padawan_theme_onBackground_secondary),
         modifier = Modifier
             .padding(vertical = 4.dp)
             .standardShadow(20.dp)
