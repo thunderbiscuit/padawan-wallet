@@ -45,7 +45,7 @@ fun TutorialCard(
     Card(
         border = standardBorder,
         shape = RoundedCornerShape(20.dp),
-        colors = if (done) CardDefaults.cardColors(PadawanColors.padawan_theme_background) else CardDefaults.cardColors(PadawanColors.padawan_theme_onBackground_secondary),
+        colors = if (done) CardDefaults.cardColors(PadawanColors.background) else CardDefaults.cardColors(PadawanColors.onBackgroundSecondary),
         modifier = Modifier
             .padding(vertical = 4.dp)
             .standardShadow(20.dp)

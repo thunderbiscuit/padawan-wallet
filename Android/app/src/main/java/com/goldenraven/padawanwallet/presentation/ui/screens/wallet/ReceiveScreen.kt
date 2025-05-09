@@ -11,7 +11,6 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -117,7 +116,7 @@ internal fun ReceiveScreen(
                     .padding(bottom = 120.dp)
             ) {
                 if (state.qrState == QrUiState.Loading) {
-                    LoadingAnimation(circleColor = PadawanColors.padawan_theme_background, circleSize = 38.dp)
+                    LoadingAnimation(circleColor = PadawanColors.background, circleSize = 38.dp)
                 } else if (state.qrState == QrUiState.QR && state.bip21Uri != null && state.address != null) {
                     qr?.let {
                         Image(
@@ -152,7 +151,7 @@ internal fun ReceiveScreen(
                                             )
                                         }
                                         .background(
-                                            color = PadawanColors.padawan_theme_background,
+                                            color = PadawanColors.background,
                                             shape = RoundedCornerShape(16.dp)
                                         )
                                         .padding(12.dp),
@@ -178,7 +177,7 @@ internal fun ReceiveScreen(
 
             Button(
                 onClick = { onAction(ReceiveScreenAction.UpdateAddress) },
-                colors = ButtonDefaults.buttonColors(containerColor = PadawanColors.padawan_theme_button_primary),
+                colors = ButtonDefaults.buttonColors(containerColor = PadawanColors.buttonPrimary),
                 shape = RoundedCornerShape(20.dp),
                 border = standardBorder,
                 modifier = Modifier

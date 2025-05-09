@@ -107,7 +107,7 @@ internal fun TransactionScreen(
                             modifier = Modifier
                                 .align(Alignment.CenterEnd)
                                 .background(
-                                    color = if (txDetails.txType == TxType.OUTBOUND) PadawanColors.padawan_theme_send_primary else PadawanColors.padawan_theme_receive_primary,
+                                    color = if (txDetails.txType == TxType.OUTBOUND) PadawanColors.sendPrimary else PadawanColors.receivePrimary,
                                     shape = RoundedCornerShape(size = 5.dp)
                                 )
                         ) {
@@ -120,7 +120,7 @@ internal fun TransactionScreen(
                             )
                             Icon(
                                 imageVector = if (txDetails.txType == TxType.OUTBOUND) Lucide.ArrowUpFromLine else Lucide.ArrowDownToLine,
-                                tint = PadawanColors.padawan_disabled,
+                                tint = PadawanColors.padawanFaded,
                                 contentDescription = if (txDetails.txType == TxType.OUTBOUND) stringResource(R.string.send_icon) else stringResource(R.string.receive_icon),
                                 modifier = Modifier
                                     .align(Alignment.CenterVertically)
@@ -189,7 +189,7 @@ internal fun TransactionScreen(
                             .clickable { mUriHandler.openUri(link) }
                             .width(270.dp),
                         style = PadawanTypography.bodyMedium,
-                        color = PadawanColors.padawan_theme_button_primary,
+                        color = PadawanColors.buttonPrimary,
                         textDecoration = TextDecoration.Underline
                     )
                 }

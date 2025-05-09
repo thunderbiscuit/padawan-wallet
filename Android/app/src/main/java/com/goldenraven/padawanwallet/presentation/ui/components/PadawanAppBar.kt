@@ -40,7 +40,7 @@ fun PadawanAppBar(title: String, onClick: () -> Unit) {
                 Icon(
                     imageVector = Lucide.ArrowLeft,
                     contentDescription = stringResource(id = R.string.back_icon),
-                    tint = PadawanColors.padawan_theme_onPrimary
+                    tint = PadawanColors.onPrimary
                 )
             }
         },

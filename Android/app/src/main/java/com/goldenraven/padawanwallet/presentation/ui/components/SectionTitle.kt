@@ -23,7 +23,7 @@ fun SectionTitle(title: String, first: Boolean) {
         text = title,
         style = TextStyle(
             fontFamily = Outfit,
-            color = PadawanColors.padawan_theme_text_headline,
+            color = PadawanColors.textHeadline,
             fontSize = 20.sp,
             fontWeight = FontWeight.SemiBold
         )

@@ -10,4 +10,4 @@ import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.unit.dp
 import com.goldenraven.padawanwallet.presentation.theme.PadawanColors
 
-val standardBorder = BorderStroke(2.dp, SolidColor(PadawanColors.padawan_theme_onPrimary))
+val standardBorder = BorderStroke(2.dp, SolidColor(PadawanColors.onPrimary))

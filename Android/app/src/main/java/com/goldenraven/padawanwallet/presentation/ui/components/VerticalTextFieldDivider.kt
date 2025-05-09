@@ -17,7 +17,7 @@ import com.goldenraven.padawanwallet.presentation.theme.PadawanColors
 @Composable
 internal fun VerticalTextFieldDivider() {
     HorizontalDivider(
-        color = PadawanColors.padawan_theme_onPrimary,
+        color = PadawanColors.onPrimary,
         modifier = Modifier
             .fillMaxHeight()
             .width(3.dp)

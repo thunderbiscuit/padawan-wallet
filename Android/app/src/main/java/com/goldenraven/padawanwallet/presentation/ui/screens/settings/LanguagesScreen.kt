@@ -43,7 +43,7 @@ internal fun LanguagesScreen(
     ) { scaffoldPadding ->
         Column(
             Modifier
-                .background(PadawanColors.padawan_theme_background_secondary)
+                .background(PadawanColors.backgroundSecondary)
                 .padding(scaffoldPadding)
                 .padding(horizontal = 24.dp)
                 .fillMaxSize()
@@ -51,7 +51,7 @@ internal fun LanguagesScreen(
             Text(
                 text = stringResource(R.string.select_your_preferred_language),
                 style = PadawanTypography.bodyMedium,
-                color = PadawanColors.padawan_theme_text_faded_secondary
+                color = PadawanColors.textFadedSecondary
             )
             Spacer(modifier = Modifier.padding(vertical = 16.dp))
             SupportedLanguagesPicker()

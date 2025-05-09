@@ -77,10 +77,10 @@ internal fun BottomNavigationBar(
     if (showNavigationBar) {
         NavigationBar(
             tonalElevation = 0.dp,
-            containerColor = PadawanColors.padawan_theme_background_secondary,
+            containerColor = PadawanColors.backgroundSecondary,
             modifier = Modifier.drawBehind {
                 drawLine(
-                    PadawanColors.padawan_theme_navigation_bar_unselected,
+                    PadawanColors.navigationBarUnselected,
                     Offset(0f, 0f),
                     Offset(size.width, 0f),
                     2.dp.toPx()
@@ -151,10 +151,10 @@ internal fun BottomNavigationBar(
                         }
                     },
                     colors = NavigationBarItemDefaults.colors(
-                        selectedIconColor = PadawanColors.padawan_theme_button_primary,
-                        selectedTextColor = PadawanColors.padawan_theme_button_primary,
-                        unselectedIconColor = PadawanColors.padawan_theme_navigation_bar_unselected,
-                        unselectedTextColor = PadawanColors.padawan_theme_navigation_bar_unselected,
+                        selectedIconColor = PadawanColors.buttonPrimary,
+                        selectedTextColor = PadawanColors.buttonPrimary,
+                        unselectedIconColor = PadawanColors.navigationBarUnselected,
+                        unselectedTextColor = PadawanColors.navigationBarUnselected,
                         indicatorColor = Color.Transparent,
                     ),
                 )

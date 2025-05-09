@@ -78,7 +78,7 @@ internal fun SettingsRootScreen(
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .background(PadawanColors.padawan_theme_background_secondary)
+                .background(PadawanColors.backgroundSecondary)
                 .padding(scaffoldPadding)
                 .verticalScroll(scrollState)
         ) {
@@ -213,7 +213,7 @@ internal fun SettingsRootScreen(
                 Text(
                     text = padawanVersion,
                     style = PadawanTypography.bodySmall,
-                    color = PadawanColors.padawan_theme_text_faded_secondary
+                    color = PadawanColors.textFadedSecondary
                 )
             }
 
@@ -233,7 +233,7 @@ internal fun SettingsRootScreen(
                 },
                 colors = ButtonDefaults.buttonColors(containerColor = Color(0xffFEE6DE)),
                 shape = RoundedCornerShape(8.dp),
-                border = BorderStroke(1.dp, PadawanColors.padawan_theme_button_primary),
+                border = BorderStroke(1.dp, PadawanColors.buttonPrimary),
                 modifier = Modifier
                     .size(width = 400.dp, height = 60.dp)
                     .padding(start = 24.dp, end = 24.dp)

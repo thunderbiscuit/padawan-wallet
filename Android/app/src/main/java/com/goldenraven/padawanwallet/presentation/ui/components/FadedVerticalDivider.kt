@@ -17,7 +17,7 @@ import com.goldenraven.padawanwallet.presentation.theme.PadawanColors
 @Composable
 internal fun FadedVerticalDivider() {
     HorizontalDivider(
-        color = PadawanColors.padawan_theme_onBackground_faded,
+        color = PadawanColors.onBackgroundFaded,
         modifier = Modifier
             .fillMaxHeight()
             .width(3.dp)

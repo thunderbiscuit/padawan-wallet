@@ -46,7 +46,7 @@ internal fun RecoveryPhraseScreen(
     ) { scaffoldPadding ->
         Column (
             modifier = Modifier
-                .background(PadawanColors.padawan_theme_background_secondary)
+                .background(PadawanColors.backgroundSecondary)
                 .padding(scaffoldPadding)
                 .fillMaxSize()
                 .verticalScroll(state = scrollState)

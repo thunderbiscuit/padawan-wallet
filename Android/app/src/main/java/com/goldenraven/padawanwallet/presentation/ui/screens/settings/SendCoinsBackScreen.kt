@@ -14,9 +14,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.InlineTextContent
-import androidx.compose.foundation.text.appendInlineContent
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
@@ -25,7 +23,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
@@ -41,7 +38,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
-import com.composables.icons.lucide.CheckCheck
 import com.composables.icons.lucide.CircleCheck
 import com.composables.icons.lucide.ClipboardCopy
 import com.composables.icons.lucide.Lucide
@@ -100,7 +96,7 @@ internal fun SendCoinsBackScreen(
             Modifier
                 .fillMaxSize()
                 .verticalScroll(state = scrollState)
-                .background(PadawanColors.padawan_theme_background_secondary)
+                .background(PadawanColors.backgroundSecondary)
                 .padding(scaffoldPadding)
         ) {
             val returnAddress: String = stringResource(R.string.send_coins_back_address)
@@ -176,7 +172,7 @@ internal fun SendCoinsBackScreen(
             Text(
                 text = stringResource(id = R.string.send_coins_back),
                 style = PadawanTypography.bodyMedium,
-                color = PadawanColors.padawan_theme_text_faded_secondary,
+                color = PadawanColors.textFadedSecondary,
                 modifier = Modifier.padding(start = 24.dp, end = 24.dp)
             )
         }

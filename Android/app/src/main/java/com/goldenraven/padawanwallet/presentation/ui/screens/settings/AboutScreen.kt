@@ -54,7 +54,7 @@ internal fun AboutScreen(
     ) { scaffoldPadding ->
         Column(
             Modifier
-                .background(PadawanColors.padawan_theme_background_secondary)
+                .background(PadawanColors.backgroundSecondary)
                 .padding(scaffoldPadding)
                 .padding(horizontal = 24.dp)
                 .fillMaxSize()
@@ -63,19 +63,19 @@ internal fun AboutScreen(
             Text(
                 text = stringResource(R.string.about_text),
                 style = PadawanTypography.bodyMedium,
-                color = PadawanColors.padawan_theme_text_faded_secondary,
+                color = PadawanColors.textFadedSecondary,
             )
             Spacer(Modifier.height(24.dp))
             Text(
                 text = stringResource(R.string.privacyText),
                 style = PadawanTypography.bodyMedium,
-                color = PadawanColors.padawan_theme_text_faded_secondary,
+                color = PadawanColors.textFadedSecondary,
             )
             Spacer(Modifier.height(24.dp))
             Text(
                 text = "Read our privacy policy here.",
                 style = PadawanTypography.bodyMedium,
-                color = PadawanColors.padawan_theme_button_primary,
+                color = PadawanColors.buttonPrimary,
                 textDecoration = TextDecoration.Underline,
                 modifier = Modifier.clickable(onClick = openPrivacyLink)
             )

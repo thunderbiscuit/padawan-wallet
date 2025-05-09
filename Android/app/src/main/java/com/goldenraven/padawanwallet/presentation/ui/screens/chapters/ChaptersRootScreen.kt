@@ -53,7 +53,7 @@ internal fun ChaptersRootScreen(
 
     Column(
         Modifier
-            .background(PadawanColors.padawan_theme_background_secondary)
+            .background(PadawanColors.backgroundSecondary)
             .padding(paddingValues)
     ) {
         Column(
