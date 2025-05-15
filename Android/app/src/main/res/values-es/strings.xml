@@ -109,7 +109,7 @@
     <string name="recover_a_wallet">Recuperar una cartera</string>
     <string name="enter_your_12_words">ntroduce tus 12 palabras de recuperación a continuación.</string>
     <string name="about_padawan">Sobre Padawan</string>
-    <string name="change_language">Cambiar Idioma</string>
+    <string name="change_language">Idiomas y tema de color</string>
     <string name="your_recovery_phrase">Tus palabras de recuperación</string>
     <string name="checkmark_image">Imagen marca comprobación</string>
     <string name="copy_to_clipboard_image">Imagen copiado a portapapeles</string>
@@ -150,7 +150,7 @@
     <string name="no_thank_you_icon">Icono no gracias</string>
     <string name="proceed_icon">Icono proceder</string>
     <string name="no_internet_access">¡Sin acceso a internet!</string>
-    <string name="select_your_preferred_language">Selecciona tu idioma preferido para Padawan Wallet.</string>
+    <string name="select_your_preferred_language">Selecciona tu idioma preferido y tema de color para Padawan Wallet.</string>
     <string name="transaction_was_broadcast_successfully">La transacción se emitió correctamente!</string>
     <string name="get_coins">Obtener Signet monedas</string>
     <string name="bottom_nav_wallet">Cartera</string>

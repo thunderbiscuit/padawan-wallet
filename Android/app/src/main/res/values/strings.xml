@@ -110,7 +110,7 @@
     <string name="recover_a_wallet">Recover a wallet</string>
     <string name="enter_your_12_words">Enter your 12-word recovery phrase below.</string>
     <string name="about_padawan">About Padawan</string>
-    <string name="change_language">Change the language</string>
+    <string name="change_language">Language + Color Theme</string>
     <string name="your_recovery_phrase">Your recovery phrase</string>
     <string name="checkmark_image">Checkmark image</string>
     <string name="copy_to_clipboard_image">Copy to clipboard image</string>
@@ -151,7 +151,7 @@
     <string name="no_thank_you_icon">No thank you icon</string>
     <string name="proceed_icon">Proceed icon</string>
     <string name="no_internet_access">No Internet Access!</string>
-    <string name="select_your_preferred_language">Select your preferred language for Padawan Wallet.</string>
+    <string name="select_your_preferred_language">Select your preferred language and color theme for Padawan Wallet.</string>
     <string name="transaction_was_broadcast_successfully">Transaction was broadcast successfully!</string>
     <string name="get_coins">Get Signet coins</string>
     <string name="bottom_nav_wallet">Wallet</string>

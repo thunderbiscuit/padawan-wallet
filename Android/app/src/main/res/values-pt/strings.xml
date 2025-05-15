@@ -110,7 +110,7 @@
     <string name="recover_a_wallet">Recupere a carteira</string>
     <string name="enter_your_12_words">Insira abaixo suas 12 palavras da frase de recuperação</string>
     <string name="about_padawan">Sobre a Padawan</string>
-    <string name="change_language">Mudar o idioma</string>
+    <string name="change_language">Idiomas e tema de cores</string>
     <string name="your_recovery_phrase">Sua frase de recuperação</string>
     <string name="checkmark_image">Imagem de marcação de concluído</string>
     <string name="copy_to_clipboard_image">Imagem de copiar para área de transferência</string>
@@ -151,7 +151,7 @@
     <string name="no_thank_you_icon">Ícone de não, obrigado</string>
     <string name="proceed_icon">ícone de prosseguir</string>
     <string name="no_internet_access">Sem acesso à internet!</string>
-    <string name="select_your_preferred_language">Selecione seu idioma preferido para usar a Carteira Padawan.</string>
+    <string name="select_your_preferred_language">Selecione seu idioma preferido e tema de cores para usar a Carteira Padawan.</string>
     <string name="transaction_was_broadcast_successfully">Transação enviada com sucesso!</string>
     <string name="get_coins">Receber bitcoins signet</string>
     <string name="bottom_nav_wallet">Carteira</string>

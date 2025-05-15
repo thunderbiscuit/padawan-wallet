@@ -8,17 +8,34 @@ package com.goldenraven.padawanwallet.presentation.theme
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.staticCompositionLocalOf
+import com.goldenraven.padawanwallet.domain.PadawanColorTheme
+
+val LocalPadawanColors = staticCompositionLocalOf<PadawanColors> { PadawanColorsTatooineDesert }
 
 private val PadawanThemeColors = lightColorScheme(
-    primary = PadawanColors.primary,
-    onPrimary = PadawanColors.onPrimary,
+    primary = PadawanMaterialColors.primary,
+    onPrimary = PadawanMaterialColors.onPrimary,
+    surface = PadawanMaterialColors.surface
 )
 
 @Composable
-fun PadawanTheme(content: @Composable () -> Unit) {
+fun PadawanTheme(
+    theme: PadawanColorTheme = PadawanColorTheme.TATOOINE_DESERT,
+    content: @Composable () -> Unit
+) {
+    val PadawanColors = when (theme) {
+        PadawanColorTheme.TATOOINE_DESERT -> PadawanColorsTatooineDesert
+        PadawanColorTheme.VADER_DARK -> PadawanColorsVaderDark
+    }
+
     MaterialTheme(
         colorScheme = PadawanThemeColors,
         typography = PadawanTypography,
-        content = content
-    )
+    ) {
+        CompositionLocalProvider(LocalPadawanColors provides PadawanColors) {
+            content()
+        }
+    }
 }
