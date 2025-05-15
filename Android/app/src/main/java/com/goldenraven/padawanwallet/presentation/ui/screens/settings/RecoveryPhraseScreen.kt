@@ -14,6 +14,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Card
+import androidx.compose.material3.CardColors
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -24,6 +26,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.goldenraven.padawanwallet.R
 import com.goldenraven.padawanwallet.domain.bitcoin.WalletRepository
+import com.goldenraven.padawanwallet.presentation.theme.LocalPadawanColors
 import com.goldenraven.padawanwallet.presentation.theme.PadawanColorsTatooineDesert
 import com.goldenraven.padawanwallet.presentation.ui.components.PadawanAppBar
 import com.goldenraven.padawanwallet.presentation.ui.components.standardBorder
@@ -35,6 +38,7 @@ internal fun RecoveryPhraseScreen(
     val scrollState = rememberScrollState()
     val seedPhrase: String = WalletRepository.getMnemonic()
     val wordList: List<String> = seedPhrase.split(" ")
+    val colors = LocalPadawanColors.current
 
     Scaffold(
         topBar = {
@@ -46,7 +50,6 @@ internal fun RecoveryPhraseScreen(
     ) { scaffoldPadding ->
         Column (
             modifier = Modifier
-                .background(PadawanColorsTatooineDesert.backgroundSecondary)
                 .padding(scaffoldPadding)
                 .fillMaxSize()
                 .verticalScroll(state = scrollState)
@@ -59,7 +62,7 @@ internal fun RecoveryPhraseScreen(
                 ) {
                     Text(text = "${index + 1}: ")
                     Card(
-                        border = standardBorder,
+                        colors = CardDefaults.cardColors(colors.background2)
                     ) {
                         Text(
                             text = item,
