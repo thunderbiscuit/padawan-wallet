@@ -7,6 +7,7 @@ package com.goldenraven.padawanwallet
 
 import android.app.Application
 import android.content.Context
+import com.goldenraven.padawanwallet.domain.SettingsRepository
 import com.goldenraven.padawanwallet.domain.tutorials.TutorialRepository
 import com.goldenraven.padawanwallet.domain.bitcoin.WalletRepository
 import com.goldenraven.padawanwallet.domain.bitcoin.Wallet
@@ -21,6 +22,7 @@ class PadawanWalletApplication : Application() {
         // initialize repositories and set shared preferences
         WalletRepository.setSharedPreferences(applicationContext.getSharedPreferences("wallet", Context.MODE_PRIVATE))
         TutorialRepository.setSharedPreferences(applicationContext.getSharedPreferences("tutorials", Context.MODE_PRIVATE))
+        SettingsRepository.setSharedPreferences(applicationContext.getSharedPreferences("settings", Context.MODE_PRIVATE))
 
         // initialize Wallet object with path variable
         Wallet.setPathAndConnectDb(filesDirectoryPath)

@@ -14,11 +14,6 @@ import com.goldenraven.padawanwallet.domain.PadawanColorTheme
 
 val LocalPadawanColors = staticCompositionLocalOf<PadawanColors> { PadawanColorsTatooineDesert }
 
-private val PadawanThemeColors = lightColorScheme(
-    primary = PadawanMaterialColors.primary,
-    onPrimary = PadawanMaterialColors.onPrimary,
-    surface = PadawanMaterialColors.surface
-)
 
 @Composable
 fun PadawanTheme(
@@ -30,8 +25,14 @@ fun PadawanTheme(
         PadawanColorTheme.VADER_DARK -> PadawanColorsVaderDark
     }
 
+    val PadawanMaterialThemeColors = lightColorScheme(
+        onPrimary = PadawanMaterialColors.onPrimary, // This is the default text color on buttons
+        background = PadawanColors.background,
+        surface = PadawanMaterialColors.surface
+    )
+
     MaterialTheme(
-        colorScheme = PadawanThemeColors,
+        colorScheme = PadawanMaterialThemeColors,
         typography = PadawanTypography,
     ) {
         CompositionLocalProvider(LocalPadawanColors provides PadawanColors) {

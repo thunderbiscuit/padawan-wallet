@@ -12,12 +12,12 @@ import androidx.compose.material3.HorizontalDivider
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.goldenraven.padawanwallet.presentation.theme.PadawanColors
+import com.goldenraven.padawanwallet.presentation.theme.PadawanColorsTatooineDesert
 
 @Composable
 internal fun VerticalTextFieldDivider() {
     HorizontalDivider(
-        color = PadawanColors.onPrimary,
+        color = PadawanColorsTatooineDesert.onPrimary,
         modifier = Modifier
             .fillMaxHeight()
             .width(3.dp)

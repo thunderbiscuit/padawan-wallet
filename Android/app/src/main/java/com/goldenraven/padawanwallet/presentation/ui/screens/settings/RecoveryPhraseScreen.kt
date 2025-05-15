@@ -24,7 +24,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.goldenraven.padawanwallet.R
 import com.goldenraven.padawanwallet.domain.bitcoin.WalletRepository
-import com.goldenraven.padawanwallet.presentation.theme.PadawanColors
+import com.goldenraven.padawanwallet.presentation.theme.PadawanColorsTatooineDesert
 import com.goldenraven.padawanwallet.presentation.ui.components.PadawanAppBar
 import com.goldenraven.padawanwallet.presentation.ui.components.standardBorder
 
@@ -46,7 +46,7 @@ internal fun RecoveryPhraseScreen(
     ) { scaffoldPadding ->
         Column (
             modifier = Modifier
-                .background(PadawanColors.backgroundSecondary)
+                .background(PadawanColorsTatooineDesert.backgroundSecondary)
                 .padding(scaffoldPadding)
                 .fillMaxSize()
                 .verticalScroll(state = scrollState)

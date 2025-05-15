@@ -51,8 +51,9 @@ import com.composables.icons.lucide.Lucide
 import com.goldenraven.padawanwallet.R
 import com.goldenraven.padawanwallet.domain.tutorials.ElementType
 import com.goldenraven.padawanwallet.domain.tutorials.Page
+import com.goldenraven.padawanwallet.presentation.theme.LocalPadawanColors
 import com.goldenraven.padawanwallet.presentation.theme.PadawanTypography
-import com.goldenraven.padawanwallet.presentation.theme.PadawanColors
+import com.goldenraven.padawanwallet.presentation.theme.PadawanColorsTatooineDesert
 import com.goldenraven.padawanwallet.presentation.theme.standardShadow
 import com.goldenraven.padawanwallet.presentation.ui.components.standardBorder
 import com.goldenraven.padawanwallet.utils.ScreenSizeWidth
@@ -73,20 +74,21 @@ fun ChapterScreen(
 ) {
     val pageScrollState = rememberScrollState()
     val coroutineScope = rememberCoroutineScope()
+    val colors = LocalPadawanColors.current
 
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(color = PadawanColors.backgroundSecondary)
+            .background(color = PadawanColorsTatooineDesert.background)
     ) {
         Box(
             modifier = Modifier
-                .background(color = PadawanColors.tutorialBackground)
+                .background(color = colors.accent1)
                 .padding(top = paddingValues.calculateTopPadding())
                 .fillMaxWidth()
                 .drawBehind {
                     drawLine(
-                        color = PadawanColors.onPrimary,
+                        color = PadawanColorsTatooineDesert.onPrimary,
                         strokeWidth = 4.dp.toPx(),
                         start = Offset(x = 0f, y = size.height),
                         end = Offset(x = size.width, y = size.height)
@@ -96,6 +98,8 @@ fun ChapterScreen(
             Column(modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp)) {
                 ChapterAppBar(navController = navController)
                 ChapterProgressBar(
+                    incompleteColor = colors.background,
+                    completeColor = colors.text,
                     currentPage = state.currentPage,
                     totalPages = state.totalPages
                 )
@@ -146,7 +150,7 @@ fun ChapterButtons(
                     onAction(ChaptersScreensAction.NextPage)
                     scrollUp(pageScrollState = pageScrollState, coroutineScope = coroutineScope)
                 },
-                colors = ButtonDefaults.buttonColors(containerColor = PadawanColors.buttonPrimary),
+                colors = ButtonDefaults.buttonColors(containerColor = PadawanColorsTatooineDesert.accent2),
                 shape = RoundedCornerShape(20.dp),
                 border = standardBorder,
                 modifier = Modifier
@@ -170,7 +174,7 @@ fun ChapterButtons(
                     onAction(ChaptersScreensAction.SetCompleted)
                     navController.popBackStack()
                 },
-                colors = ButtonDefaults.buttonColors(containerColor = PadawanColors.buttonPrimary),
+                colors = ButtonDefaults.buttonColors(containerColor = PadawanColorsTatooineDesert.accent2),
                 shape = RoundedCornerShape(20.dp),
                 border = standardBorder,
                 modifier = Modifier
@@ -200,6 +204,8 @@ fun scrollUp(pageScrollState: ScrollState, coroutineScope: CoroutineScope) {
 
 @Composable
 internal fun ChapterAppBar(navController: NavHostController) {
+    val colors = LocalPadawanColors.current
+
     Row(modifier = Modifier.fillMaxWidth()) {
         IconButton(
             onClick = { navController.popBackStack() },
@@ -208,7 +214,7 @@ internal fun ChapterAppBar(navController: NavHostController) {
             Icon(
                 imageVector = Lucide.ArrowLeft,
                 contentDescription = stringResource(R.string.back_icon),
-                tint = PadawanColors.onPrimary
+                tint = colors.text
             )
         }
         Text(
@@ -223,8 +229,8 @@ internal fun ChapterAppBar(navController: NavHostController) {
 fun ChapterProgressBar(
     height: Dp = 8.dp,
     spacer: Float = 30f,
-    incompleteColor: Color = Color(0xfffbf5bf),
-    completeColor: Color = Color(0xff1f0208),
+    incompleteColor: Color,
+    completeColor: Color,
     currentPage: Int,
     totalPages: Int,
 ) {
@@ -268,12 +274,12 @@ internal fun ChapterPage(page: Page) {
                 Text(
                     text = stringResource(id = element.resourceId),
                     style = PadawanTypography.bodyMedium,
-                    color = PadawanColors.textFadedSecondary
+                    color = PadawanColorsTatooineDesert.text
                 )
             }
             ElementType.RESOURCE -> {
                 Card(
-                    colors = CardDefaults.cardColors(PadawanColors.buttonSecondary),
+                    colors = CardDefaults.cardColors(PadawanColorsTatooineDesert.tealAccent),
                     border = standardBorder,
                     modifier = Modifier
                         .height(height = 150.dp)

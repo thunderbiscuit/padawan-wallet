@@ -11,6 +11,7 @@ import androidx.camera.core.ImageProxy
 import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.graphics.asImageBitmap
 import androidx.core.graphics.createBitmap
+import com.goldenraven.padawanwallet.presentation.theme.PadawanColorsTatooineDesert
 import com.google.mlkit.vision.barcode.BarcodeScannerOptions
 import com.google.mlkit.vision.barcode.BarcodeScanning
 import com.google.mlkit.vision.barcode.common.Barcode
@@ -87,8 +88,8 @@ fun addressToQR(address: String): ImageBitmap? {
         val bitMap = createBitmap(width, height)
         for (x in 0 ..< 1000) {
             for (y in 0 ..< 1000) {
-                // uses night1 and md_theme_dark_onPrimary for colors
-                bitMap.setPixel(x, y, if (bitMatrix[x, y]) 0xff000000.toInt() else 0x20f3f4ff)
+                // Uses PadawanColorsTatooineDesert.navigationBar for light and PadawanColorsTatooineDesert.darkBackground for dark
+                bitMap.setPixel(x, y, if (bitMatrix[x, y]) 0xFF2E1B0A.toInt() else 0xFFEAD1B4.toInt())
             }
         }
         return bitMap.asImageBitmap()

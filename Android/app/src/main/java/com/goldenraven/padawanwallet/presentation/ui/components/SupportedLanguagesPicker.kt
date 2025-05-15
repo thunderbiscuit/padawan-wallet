@@ -21,6 +21,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.core.os.LocaleListCompat
+import com.goldenraven.padawanwallet.domain.PadawanColorTheme
 import com.goldenraven.padawanwallet.presentation.theme.PadawanTheme
 import com.goldenraven.padawanwallet.utils.SupportedLanguage
 import com.goldenraven.padawanwallet.utils.getSupportedLanguageCode
@@ -77,7 +78,7 @@ fun SupportedLanguagesPicker() {
 @Preview(device = Devices.PIXEL_7, showBackground = true)
 @Composable
 fun PreviewSupportedLanguagesPicker() {
-    PadawanTheme {
+    PadawanTheme(PadawanColorTheme.TATOOINE_DESERT) {
         SupportedLanguagesPicker()
     }
 }

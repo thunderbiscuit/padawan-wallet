@@ -74,15 +74,13 @@ import com.goldenraven.padawanwallet.presentation.navigation.TransactionScreen
 import com.goldenraven.padawanwallet.domain.bitcoin.BitcoinUnit
 import com.goldenraven.padawanwallet.domain.bitcoin.ChainPosition
 import com.goldenraven.padawanwallet.domain.bitcoin.TransactionDetails
-import com.goldenraven.padawanwallet.presentation.ui.components.FadedVerticalDivider
 import com.goldenraven.padawanwallet.presentation.ui.components.LoadingAnimation
 import com.goldenraven.padawanwallet.presentation.ui.components.standardBorder
 import com.goldenraven.padawanwallet.presentation.theme.PadawanTheme
 import com.goldenraven.padawanwallet.presentation.theme.PadawanTypography
-import com.goldenraven.padawanwallet.presentation.theme.gradientBackground
 import com.goldenraven.padawanwallet.presentation.theme.innerScreenPadding
 import com.goldenraven.padawanwallet.presentation.theme.noRippleClickable
-import com.goldenraven.padawanwallet.presentation.theme.PadawanColors
+import com.goldenraven.padawanwallet.presentation.theme.PadawanColorsTatooineDesert
 import com.goldenraven.padawanwallet.presentation.theme.standardShadow
 import com.goldenraven.padawanwallet.utils.ClickHelper
 import com.goldenraven.padawanwallet.utils.ScreenSizeWidth
@@ -92,6 +90,7 @@ import com.goldenraven.padawanwallet.utils.getScreenSizeWidth
 import com.goldenraven.padawanwallet.presentation.viewmodels.mvi.WalletAction
 import com.goldenraven.padawanwallet.presentation.viewmodels.mvi.WalletState
 import com.goldenraven.padawanwallet.domain.bitcoin.TxType
+import com.goldenraven.padawanwallet.presentation.theme.LocalPadawanColors
 import com.goldenraven.padawanwallet.utils.timestampToString
 
 private const val TAG = "WalletRootScreen"
@@ -103,6 +102,7 @@ internal fun WalletRootScreen(
     paddingValues: PaddingValues,
     navController: NavHostController,
 ) {
+    val PadawanColors = LocalPadawanColors.current
     val (openDialog, setOpenDialog) = remember { mutableStateOf(false) }
     if (openDialog) FaucetDialog(onAction, setOpenDialog)
 
@@ -122,7 +122,9 @@ internal fun WalletRootScreen(
 
     Column(
         modifier = Modifier
-            .gradientBackground()
+            // .gradientBackground()
+            .background(PadawanColors.background)
+            .fillMaxHeight()
             .padding(paddingValues)
             .innerScreenPadding(padding)
     ) {
@@ -130,6 +132,18 @@ internal fun WalletRootScreen(
         BalanceBox(balance = state.balance, currentlySyncing = state.currentlySyncing, onAction = onAction)
         Spacer(modifier = Modifier.height(height = 12.dp))
         SendReceive(navController, state.isOnline)
+        // Text(
+        //     text = stringResource(id = R.string.transactions),
+        //     style = PadawanTypography.headlineSmall,
+        //     color = PadawanColors.text,
+        //     textAlign = TextAlign.Start,
+        // )
+        // HorizontalDivider(
+        //     modifier = Modifier
+        //         .fillMaxWidth().padding(top = 21.dp),
+        //     color = PadawanColors.text,
+        //     thickness = 2.dp
+        // )
         TransactionListBox(
             setOpenDialog = setOpenDialog,
             transactionList = state.transactions,
@@ -180,7 +194,7 @@ fun BalanceBox(
     Card(
         border = standardBorder,
         shape = RoundedCornerShape(20.dp),
-        colors = CardDefaults.cardColors(PadawanColors.onBackgroundSecondary),
+        colors = CardDefaults.cardColors(PadawanColorsTatooineDesert.accent1),
         modifier = Modifier
             .standardShadow(20.dp)
             .fillMaxWidth()
@@ -195,7 +209,7 @@ fun BalanceBox(
             Text(
                 text = stringResource(R.string.bitcoin_signet),
                 style = PadawanTypography.bodyMedium,
-                color = PadawanColors.textFaded,
+                color = Color(0x771a1a1a), // Standard text color with some transparency
                 modifier = Modifier.constrainAs(cardName) {
                     top.linkTo(parent.top)
                     start.linkTo(parent.start)
@@ -206,9 +220,10 @@ fun BalanceBox(
                     .noRippleClickable {
                         currencyToggleState = !currencyToggleState
                     }
+                    // .border(width = 2.dp, color = PadawanColors.text)
                     .background(
-                        color = PadawanColors.buttonSecondary,
-                        shape = RoundedCornerShape(size = 10.dp)
+                        shape = RoundedCornerShape(size = 10.dp),
+                        color = PadawanColorsTatooineDesert.tealAccent,
                     )
                     .constrainAs(currencyToggle) {
                         top.linkTo(parent.top)
@@ -224,7 +239,7 @@ fun BalanceBox(
                         currencyToggleState = currencyToggleState,
                         text = BitcoinUnit.BTC
                     )
-                    FadedVerticalDivider()
+                    // FadedVerticalDivider()
                     CurrencyToggleText(
                         currencyToggleState = currencyToggleState,
                         text = BitcoinUnit.SATS
@@ -322,7 +337,7 @@ fun SendReceive(navController: NavHostController, isOnline: Boolean) {
     ) {
         Button(
             onClick = { ClickHelper.clickOnce { navController.navigate(ReceiveScreen) }},
-            colors = ButtonDefaults.buttonColors(containerColor = PadawanColors.buttonSecondary),
+            colors = ButtonDefaults.buttonColors(containerColor = PadawanColorsTatooineDesert.accent2),
             shape = RoundedCornerShape(20.dp),
             border = standardBorder,
             modifier = Modifier
@@ -348,7 +363,7 @@ fun SendReceive(navController: NavHostController, isOnline: Boolean) {
         Button(
             onClick = { ClickHelper.clickOnce { navController.navigate(SendScreen) }},
             colors = ButtonDefaults.buttonColors(
-                containerColor = PadawanColors.buttonPrimary,
+                containerColor = PadawanColorsTatooineDesert.accent2,
                 disabledContainerColor = Color.White
             ),
             shape = RoundedCornerShape(20.dp),
@@ -389,6 +404,7 @@ fun TransactionListBox(
         Text(
             text = stringResource(id = R.string.transactions),
             style = PadawanTypography.headlineSmall,
+            color = PadawanColorsTatooineDesert.text,
             textAlign = TextAlign.Start,
             modifier = Modifier
                 .align(Alignment.Bottom)
@@ -397,10 +413,10 @@ fun TransactionListBox(
     }
 
     Card(
-        modifier = Modifier.fillMaxWidth(),
+        modifier = Modifier.fillMaxWidth().standardShadow(20.dp),
         border = standardBorder,
         shape = RoundedCornerShape(20.dp),
-        colors = CardDefaults.cardColors(PadawanColors.backgroundSecondary),
+        colors = CardDefaults.cardColors(PadawanColorsTatooineDesert.background),
     ) {
         val padding = when (getScreenSizeWidth(LocalConfiguration.current.screenWidthDp)) {
             ScreenSizeWidth.Small -> 12.dp
@@ -408,11 +424,13 @@ fun TransactionListBox(
         }
 
         if (transactionList.isEmpty()) {
-            Row(modifier = Modifier.padding(all = padding)) {
+            Row(
+                modifier = Modifier.padding(all = padding).background(PadawanColorsTatooineDesert.background2)
+            ) {
                 val scrollState = rememberScrollState()
 
                 Column(
-                    modifier = Modifier.verticalScroll(state = scrollState)
+                    modifier = Modifier.verticalScroll(state = scrollState).background(PadawanColorsTatooineDesert.background)
                 ) {
                     Text(
                         text = stringResource(R.string.looks_like_your_transaction_list_is_empty),
@@ -426,7 +444,7 @@ fun TransactionListBox(
                             .padding(all = 8.dp)
                             .standardShadow(20.dp),
                         colors = ButtonDefaults.buttonColors(
-                            containerColor = PadawanColors.buttonPrimary,
+                            containerColor = PadawanColorsTatooineDesert.accent2,
                             disabledContainerColor = Color.White
                         ),
                         shape = RoundedCornerShape(20.dp),
@@ -441,7 +459,7 @@ fun TransactionListBox(
         } else {
             LazyColumn(
                 modifier = Modifier
-                    .background(color = PadawanColors.lazyColumnBackground)
+                    .background(color = PadawanColorsTatooineDesert.background2)
                     .padding(horizontal = 24.dp)
             ) {
                 itemsIndexed(transactionList) { index, tx ->
@@ -492,7 +510,8 @@ fun TransactionListBox(
                                     modifier = Modifier
                                         .align(Alignment.CenterEnd)
                                         .background(
-                                            color = if (tx.txType == TxType.OUTBOUND) PadawanColors.sendPrimary else PadawanColors.receivePrimary,
+                                            color = Color(0xFFEDE0C4),
+                                            // color = if (tx.txType == TxType.OUTBOUND) PadawanColors.sendPrimary else PadawanColors.receivePrimary,
                                             shape = RoundedCornerShape(size = 5.dp)
                                         )
                                 ) {
@@ -505,7 +524,7 @@ fun TransactionListBox(
                                     )
                                     Icon(
                                         imageVector = if (tx.txType == TxType.OUTBOUND) Lucide.ArrowUpFromLine else Lucide.ArrowDownToLine,
-                                        tint = PadawanColors.padawanFaded,
+                                        tint = PadawanColorsTatooineDesert.padawanFaded,
                                         contentDescription = if (tx.txType == TxType.OUTBOUND) stringResource(id = R.string.send_icon) else stringResource(id = R.string.receive_icon),
                                         modifier = Modifier
                                             .align(Alignment.CenterVertically)
@@ -532,14 +551,14 @@ fun CurrencyToggleText(currencyToggleState: Boolean, text: BitcoinUnit) {
     val currencyState = (!currencyToggleState && text == BitcoinUnit.BTC) || (currencyToggleState && text == BitcoinUnit.SATS)
 
     val colorTransition = updateTransition(
-        targetState = if (currencyState) PadawanColors.onBackgroundFaded else PadawanColors.onPrimary,
+        targetState = if (currencyState) PadawanColorsTatooineDesert.textFaded else PadawanColorsTatooineDesert.text,
         label = stringResource(R.string.currency_toggle_text)
     )
     val color by colorTransition.animateColor(
         transitionSpec = { tween(durationMillis = 500) },
         label = stringResource(R.string.changing_color_animation),
     ) {
-        if (it == PadawanColors.onBackgroundFaded) PadawanColors.onPrimary else PadawanColors.onBackgroundFaded
+        if (it == PadawanColorsTatooineDesert.textFaded) PadawanColorsTatooineDesert.text else PadawanColorsTatooineDesert.textFaded
     }
 
     Text(
@@ -562,7 +581,7 @@ private fun FaucetDialog(
             Text(
                 text = stringResource(R.string.hello_there),
                 style = PadawanTypography.headlineMedium,
-                color = PadawanColors.textHeadline
+                color = PadawanColorsTatooineDesert.textHeadline
             )
         },
         text = {
@@ -570,7 +589,7 @@ private fun FaucetDialog(
                 text = stringResource(R.string.would_you_like_to_receive_some_signet_bitcoin),
                 fontSize = 18.sp,
                 lineHeight = 24.sp,
-                color = PadawanColors.textFadedSecondary
+                color = PadawanColorsTatooineDesert.textFadedSecondary
             )
         },
 
@@ -605,7 +624,7 @@ private fun FaucetDialog(
                     setOpenDialog(false)
                     onAction(WalletAction.RequestCoins)
                 },
-                colors = ButtonDefaults.buttonColors(containerColor = PadawanColors.background),
+                colors = ButtonDefaults.buttonColors(containerColor = PadawanColorsTatooineDesert.background),
                 shape = RoundedCornerShape(20.dp),
                 contentPadding = PaddingValues(0.dp),
                 border = standardBorder,

@@ -31,7 +31,7 @@ import androidx.navigation.compose.rememberNavController
 import com.goldenraven.padawanwallet.R
 import com.goldenraven.padawanwallet.presentation.theme.PadawanTheme
 import com.goldenraven.padawanwallet.presentation.theme.PadawanTypography
-import com.goldenraven.padawanwallet.presentation.theme.PadawanColors
+import com.goldenraven.padawanwallet.presentation.theme.PadawanColorsTatooineDesert
 import com.goldenraven.padawanwallet.presentation.ui.components.PadawanAppBar
 
 @Composable
@@ -54,7 +54,7 @@ internal fun AboutScreen(
     ) { scaffoldPadding ->
         Column(
             Modifier
-                .background(PadawanColors.backgroundSecondary)
+                .background(PadawanColorsTatooineDesert.background)
                 .padding(scaffoldPadding)
                 .padding(horizontal = 24.dp)
                 .fillMaxSize()
@@ -63,19 +63,19 @@ internal fun AboutScreen(
             Text(
                 text = stringResource(R.string.about_text),
                 style = PadawanTypography.bodyMedium,
-                color = PadawanColors.textFadedSecondary,
+                color = PadawanColorsTatooineDesert.textFadedSecondary,
             )
             Spacer(Modifier.height(24.dp))
             Text(
                 text = stringResource(R.string.privacyText),
                 style = PadawanTypography.bodyMedium,
-                color = PadawanColors.textFadedSecondary,
+                color = PadawanColorsTatooineDesert.textFadedSecondary,
             )
             Spacer(Modifier.height(24.dp))
             Text(
                 text = "Read our privacy policy here.",
                 style = PadawanTypography.bodyMedium,
-                color = PadawanColors.buttonPrimary,
+                color = PadawanColorsTatooineDesert.accent2,
                 textDecoration = TextDecoration.Underline,
                 modifier = Modifier.clickable(onClick = openPrivacyLink)
             )

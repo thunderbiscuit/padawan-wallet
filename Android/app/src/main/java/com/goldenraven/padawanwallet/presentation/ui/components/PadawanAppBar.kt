@@ -18,10 +18,11 @@ import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import com.goldenraven.padawanwallet.R
 import com.goldenraven.padawanwallet.presentation.theme.PadawanTheme
-import com.goldenraven.padawanwallet.presentation.theme.PadawanColors
+import com.goldenraven.padawanwallet.presentation.theme.PadawanColorsTatooineDesert
 import com.composables.core.Icon
 import com.composables.icons.lucide.ArrowLeft
 import com.composables.icons.lucide.Lucide
+import com.goldenraven.padawanwallet.domain.PadawanColorTheme
 
 private const val TAG = "PadawanAppBar"
 
@@ -40,7 +41,7 @@ fun PadawanAppBar(title: String, onClick: () -> Unit) {
                 Icon(
                     imageVector = Lucide.ArrowLeft,
                     contentDescription = stringResource(id = R.string.back_icon),
-                    tint = PadawanColors.onPrimary
+                    tint = PadawanColorsTatooineDesert.onPrimary
                 )
             }
         },
@@ -53,7 +54,7 @@ fun PadawanAppBar(title: String, onClick: () -> Unit) {
 @Preview(device = Devices.PIXEL_7, showBackground = true)
 @Composable
 internal fun PreviewPadawanAppBar() {
-    PadawanTheme {
+    PadawanTheme(PadawanColorTheme.TATOOINE_DESERT) {
         PadawanAppBar(
             title = "Preview App Bar",
             onClick = { }

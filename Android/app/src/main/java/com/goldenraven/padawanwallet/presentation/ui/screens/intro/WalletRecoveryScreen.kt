@@ -54,7 +54,7 @@ import androidx.constraintlayout.compose.Dimension
 import com.goldenraven.padawanwallet.R
 import com.goldenraven.padawanwallet.presentation.theme.PadawanTheme
 import com.goldenraven.padawanwallet.presentation.theme.PadawanTypography
-import com.goldenraven.padawanwallet.presentation.theme.PadawanColors
+import com.goldenraven.padawanwallet.presentation.theme.PadawanColorsTatooineDesert
 import com.goldenraven.padawanwallet.presentation.theme.standardShadow
 import com.goldenraven.padawanwallet.presentation.ui.components.standardBorder
 import com.goldenraven.padawanwallet.utils.WalletCreateType
@@ -77,14 +77,13 @@ internal fun WalletRecoveryScreen(
                 Snackbar(
                     modifier = Modifier
                         .padding(12.dp)
-                        .background(PadawanColors.md_theme_dark_warning)
+                        .background(PadawanColorsTatooineDesert.background)
                         .semantics { testTag = "Intro WalletRecoveryScreen Snackbar" },
-                    containerColor = PadawanColors.md_theme_dark_warning,
+                    containerColor = PadawanColorsTatooineDesert.background,
 
                 ) {
                     Text(
                         text = data.visuals.message,
-                        style = TextStyle(PadawanColors.md_theme_dark_onLightBackground)
                     )
                 }
             }
@@ -232,7 +231,7 @@ fun WordField(
         label = {
             Text(
                 text = "Word $wordNumber",
-                color = PadawanColors.md_theme_dark_onBackgroundFaded,
+                color = PadawanColorsTatooineDesert.text,
             )
         },
         textStyle = TextStyle(

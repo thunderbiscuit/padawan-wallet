@@ -25,10 +25,11 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.goldenraven.padawanwallet.R
+import com.goldenraven.padawanwallet.domain.PadawanColorTheme
 import com.goldenraven.padawanwallet.presentation.navigation.ChapterScreen
 import com.goldenraven.padawanwallet.presentation.theme.PadawanTheme
 import com.goldenraven.padawanwallet.presentation.theme.PadawanTypography
-import com.goldenraven.padawanwallet.presentation.theme.PadawanColors
+import com.goldenraven.padawanwallet.presentation.theme.PadawanColorsTatooineDesert
 import com.goldenraven.padawanwallet.presentation.ui.components.SectionDivider
 import com.goldenraven.padawanwallet.presentation.ui.components.SectionTitle
 import com.goldenraven.padawanwallet.presentation.ui.components.TutorialCard
@@ -53,7 +54,7 @@ internal fun ChaptersRootScreen(
 
     Column(
         Modifier
-            .background(PadawanColors.backgroundSecondary)
+            .background(PadawanColorsTatooineDesert.background)
             .padding(paddingValues)
     ) {
         Column(
@@ -161,7 +162,7 @@ internal fun ChaptersRootScreen(
 @Preview(device = Devices.PIXEL_7, showBackground = true)
 @Composable
 internal fun PreviewChaptersRootScreen() {
-    PadawanTheme {
+    PadawanTheme(PadawanColorTheme.TATOOINE_DESERT) {
         ChaptersRootScreen(
             state = ChaptersRootState(),
             onAction = {},

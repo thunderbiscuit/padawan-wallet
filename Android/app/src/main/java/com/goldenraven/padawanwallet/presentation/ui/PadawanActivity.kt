@@ -12,6 +12,8 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import com.goldenraven.padawanwallet.domain.PadawanColorTheme
+import com.goldenraven.padawanwallet.domain.SettingsRepository
 import com.goldenraven.padawanwallet.domain.bitcoin.WalletRepository
 import com.goldenraven.padawanwallet.domain.bitcoin.Wallet
 import com.goldenraven.padawanwallet.presentation.navigation.IntroNavigation
@@ -37,7 +39,7 @@ class PadawanActivity : AppCompatActivity() {
             Log.i(TAG, "Wallet already exists!")
 
             setContent {
-                PadawanTheme {
+                PadawanTheme(SettingsRepository.getTheme()) {
                     HomeNavigation()
                 }
             }
@@ -54,7 +56,7 @@ class PadawanActivity : AppCompatActivity() {
                     }
 
                     setContent {
-                        PadawanTheme {
+                        PadawanTheme(SettingsRepository.getTheme()) {
                             HomeNavigation()
                         }
                     }
@@ -69,7 +71,7 @@ class PadawanActivity : AppCompatActivity() {
             }
 
             setContent {
-                PadawanTheme {
+                PadawanTheme(SettingsRepository.getTheme()) {
                     IntroNavigation(onBuildWalletButtonClicked)
                 }
             }

@@ -31,9 +31,10 @@ import androidx.compose.ui.unit.sp
 import com.composables.icons.lucide.Circle
 import com.composables.icons.lucide.Lucide
 import com.goldenraven.padawanwallet.R
+import com.goldenraven.padawanwallet.domain.PadawanColorTheme
 import com.goldenraven.padawanwallet.presentation.theme.Outfit
 import com.goldenraven.padawanwallet.presentation.theme.PadawanTheme
-import com.goldenraven.padawanwallet.presentation.theme.PadawanColors
+import com.goldenraven.padawanwallet.presentation.theme.PadawanColorsTatooineDesert
 import com.goldenraven.padawanwallet.presentation.theme.standardShadow
 
 @Composable
@@ -45,7 +46,7 @@ fun TutorialCard(
     Card(
         border = standardBorder,
         shape = RoundedCornerShape(20.dp),
-        colors = if (done) CardDefaults.cardColors(PadawanColors.background) else CardDefaults.cardColors(PadawanColors.onBackgroundSecondary),
+        colors = if (done) CardDefaults.cardColors(PadawanColorsTatooineDesert.accent1) else CardDefaults.cardColors(PadawanColorsTatooineDesert.background2),
         modifier = Modifier
             .padding(vertical = 4.dp)
             .standardShadow(20.dp)
@@ -91,7 +92,7 @@ fun TutorialCard(
 @Preview(device = Devices.PIXEL_7, showBackground = true)
 @Composable
 internal fun PreviewNotCompletedTutorialCard() {
-    PadawanTheme {
+    PadawanTheme(PadawanColorTheme.TATOOINE_DESERT) {
         TutorialCard(
             title = "Tutorial Card",
             done = false,
@@ -103,7 +104,7 @@ internal fun PreviewNotCompletedTutorialCard() {
 @Preview(device = Devices.PIXEL_7, showBackground = true)
 @Composable
 internal fun PreviewCompletedTutorialCard() {
-    PadawanTheme {
+    PadawanTheme(PadawanColorTheme.TATOOINE_DESERT) {
         TutorialCard(
             title = "Tutorial Card",
             done = true,

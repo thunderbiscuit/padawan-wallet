@@ -14,7 +14,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.goldenraven.padawanwallet.presentation.theme.Outfit
-import com.goldenraven.padawanwallet.presentation.theme.PadawanColors
+import com.goldenraven.padawanwallet.presentation.theme.PadawanColorsTatooineDesert
 
 @Composable
 fun SectionTitle(title: String, first: Boolean) {
@@ -23,7 +23,7 @@ fun SectionTitle(title: String, first: Boolean) {
         text = title,
         style = TextStyle(
             fontFamily = Outfit,
-            color = PadawanColors.textHeadline,
+            color = PadawanColorsTatooineDesert.textHeadline,
             fontSize = 20.sp,
             fontWeight = FontWeight.SemiBold
         )

@@ -6,7 +6,6 @@
 package com.goldenraven.padawanwallet.presentation.ui.screens.settings
 
 import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -49,9 +48,11 @@ import com.goldenraven.padawanwallet.presentation.navigation.RecoveryPhraseScree
 import com.goldenraven.padawanwallet.presentation.navigation.SendCoinsBackScreen
 import com.goldenraven.padawanwallet.presentation.theme.PadawanTheme
 import com.goldenraven.padawanwallet.presentation.theme.PadawanTypography
-import com.goldenraven.padawanwallet.presentation.theme.PadawanColors
+import com.goldenraven.padawanwallet.presentation.theme.PadawanColorsTatooineDesert
 import com.goldenraven.padawanwallet.presentation.viewmodels.mvi.ChaptersScreensAction
 import com.composables.core.Icon
+import com.goldenraven.padawanwallet.presentation.theme.LocalPadawanColors
+import com.goldenraven.padawanwallet.presentation.ui.components.ExtraButton
 import kotlinx.coroutines.launch
 
 private const val TAG = "SettingsRootScreen"
@@ -64,6 +65,7 @@ internal fun SettingsRootScreen(
     val scope = rememberCoroutineScope()
     val scrollState = rememberScrollState()
     val snackbarHostState = remember { SnackbarHostState() }
+    val colors = LocalPadawanColors.current
 
     Scaffold(
         snackbarHost = {
@@ -78,7 +80,6 @@ internal fun SettingsRootScreen(
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .background(PadawanColors.backgroundSecondary)
                 .padding(scaffoldPadding)
                 .verticalScroll(scrollState)
         ) {
@@ -86,122 +87,43 @@ internal fun SettingsRootScreen(
             Text(
                 text = stringResource(R.string.settings),
                 style = PadawanTypography.headlineSmall,
-                color = Color(0xff1f0208),
+                color = colors.text,
                 modifier = Modifier
                     .padding(top = 32.dp, start = 24.dp, end = 24.dp, bottom = 8.dp)
             )
             Text(
                 text = stringResource(R.string.everything_else),
-                color = Color(0xff787878),
+                color = colors.textLight,
                 modifier = Modifier
                     .padding(start = 24.dp, end = 24.dp, bottom = 12.dp)
             )
 
-            Button(
-                onClick = {
-                    navController.navigate(RecoveryPhraseScreen)
-                },
-                colors = ButtonDefaults.buttonColors(containerColor = Color(0xffffffff)),
-                shape = RoundedCornerShape(8.dp),
-                border = BorderStroke(1.dp, Color(0xff2f2f2f)),
-                modifier = Modifier
-                    .size(width = 400.dp, height = 80.dp)
-                    .padding(start = 24.dp, end = 24.dp, top = 24.dp)
-            ) {
-                Text(
-                    text = stringResource(R.string.recovery_phrase),
-                    fontWeight = FontWeight.Normal,
-                    color = Color(0xff2f2f2f)
 
-                )
-                Spacer(modifier = Modifier.weight(1f))
-                Icon(
-                    imageVector = Lucide.ChevronsRight,
-                    contentDescription = stringResource(R.string.scan_icon),
-                    tint = Color(0xFF76dab3)
-                )
-            }
+            ExtraButton(
+                label = stringResource(R.string.recovery_phrase),
+                onClick = { navController.navigate(RecoveryPhraseScreen) }
+            )
 
-            Button(
-                onClick = {
-                    navController.navigate(SendCoinsBackScreen)
-                },
-                colors = ButtonDefaults.buttonColors(containerColor = Color(0xffffffff)),
-                shape = RoundedCornerShape(8.dp),
-                border = BorderStroke(1.dp, Color(0xff2f2f2f)),
-                modifier = Modifier
-                    .size(width = 400.dp, height = 80.dp)
-                    .padding(start = 24.dp, end = 24.dp, top = 24.dp)
-            ) {
-                Text(
-                    text = stringResource(R.string.send_signet_coins_back),
-                    fontWeight = FontWeight.Normal,
-                    color = Color(0xff2f2f2f)
+            ExtraButton(
+                label = stringResource(R.string.send_signet_coins_back),
+                onClick = { navController.navigate(SendCoinsBackScreen) }
+            )
 
-                )
-                Spacer(modifier = Modifier.weight(1f))
-                Icon(
-                    imageVector = Lucide.ChevronsRight,
-                    contentDescription = stringResource(id = R.string.scan_icon),
-                    tint = Color(0xFF76dab3)
-                )
-            }
+            ExtraButton(
+                label = stringResource(R.string.change_language),
+                onClick = { navController.navigate(LanguagesScreen) }
+            )
 
-            Button(
-                onClick = {
-                    navController.navigate(LanguagesScreen)
-                },
-                colors = ButtonDefaults.buttonColors(containerColor = Color(0xffffffff)),
-                shape = RoundedCornerShape(8.dp),
-                border = BorderStroke(1.dp, Color(0xff2f2f2f)),
-                modifier = Modifier
-                    .size(width = 400.dp, height = 80.dp)
-                    .padding(start = 24.dp, end = 24.dp, top = 24.dp)
-            ) {
-                Text(
-                    text = stringResource(R.string.change_language),
-                    fontWeight = FontWeight.Normal,
-                    color = Color(0xff2f2f2f)
-
-                )
-                Spacer(modifier = Modifier.weight(1f))
-                Icon(
-                    imageVector = Lucide.ChevronsRight,
-                    contentDescription = stringResource(id = R.string.scan_icon),
-                    tint = Color(0xFF76dab3)
-                )
-            }
-
-            Button(
-                onClick = {
-                    navController.navigate(AboutScreen)
-                },
-                colors = ButtonDefaults.buttonColors(containerColor = Color(0xffffffff)),
-                shape = RoundedCornerShape(8.dp),
-                border = BorderStroke(1.dp, Color(0xff2f2f2f)),
-                modifier = Modifier
-                    .size(width = 400.dp, height = 80.dp)
-                    .padding(start = 24.dp, end = 24.dp, top = 24.dp)
-            ) {
-                Text(
-                    text = stringResource(R.string.about_padawan),
-                    fontWeight = FontWeight.Normal,
-                    color = Color(0xff2f2f2f)
-
-                )
-                Spacer(modifier = Modifier.weight(1f))
-                Icon(
-                    imageVector = Lucide.ChevronsRight,
-                    contentDescription = stringResource(id = R.string.scan_icon),
-                    tint = Color(0xFF76dab3)
-                )
-            }
+            ExtraButton(
+                label = stringResource(R.string.about_padawan),
+                onClick = { navController.navigate(AboutScreen) }
+            )
 
             HorizontalDivider(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(top = 40.dp, bottom = 8.dp, start = 40.dp, end = 40.dp),
-                color = Color(0xff8f8f8f),
+                color = colors.textLight,
                 thickness = 1.dp
             )
 
@@ -213,7 +135,7 @@ internal fun SettingsRootScreen(
                 Text(
                     text = padawanVersion,
                     style = PadawanTypography.bodySmall,
-                    color = PadawanColors.textFadedSecondary
+                    color = PadawanColorsTatooineDesert.textLight
                 )
             }
 
@@ -221,7 +143,7 @@ internal fun SettingsRootScreen(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(top = 8.dp, bottom = 40.dp, start = 40.dp, end = 40.dp),
-                color = Color(0xff8f8f8f),
+                color = colors.textLight,
                 thickness = 1.dp
             )
 
@@ -231,9 +153,8 @@ internal fun SettingsRootScreen(
                     onAction(ChaptersScreensAction.ResetAllChapters)
                     scope.launch { snackbarHostState.showSnackbar(chaptersResetMessage) }
                 },
-                colors = ButtonDefaults.buttonColors(containerColor = Color(0xffFEE6DE)),
+                colors = ButtonDefaults.buttonColors(containerColor = colors.accent1),
                 shape = RoundedCornerShape(8.dp),
-                border = BorderStroke(1.dp, PadawanColors.buttonPrimary),
                 modifier = Modifier
                     .size(width = 400.dp, height = 60.dp)
                     .padding(start = 24.dp, end = 24.dp)
@@ -241,7 +162,7 @@ internal fun SettingsRootScreen(
                 Text(
                     text = stringResource(R.string.reset_completed_chapters),
                     fontWeight = FontWeight.Normal,
-                    color = Color(0xff2f2f2f)
+                    color = colors.text
                 )
             }
 

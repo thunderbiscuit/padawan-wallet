@@ -41,7 +41,7 @@ import com.goldenraven.padawanwallet.domain.bitcoin.TxType
 import com.goldenraven.padawanwallet.presentation.theme.PadawanTypography
 import com.goldenraven.padawanwallet.presentation.theme.gradientBackground
 import com.goldenraven.padawanwallet.presentation.theme.innerScreenPadding
-import com.goldenraven.padawanwallet.presentation.theme.PadawanColors
+import com.goldenraven.padawanwallet.presentation.theme.PadawanColorsTatooineDesert
 import com.goldenraven.padawanwallet.presentation.ui.components.PadawanAppBar
 import com.goldenraven.padawanwallet.utils.ScreenSizeWidth
 import com.goldenraven.padawanwallet.utils.getScreenSizeWidth
@@ -107,7 +107,7 @@ internal fun TransactionScreen(
                             modifier = Modifier
                                 .align(Alignment.CenterEnd)
                                 .background(
-                                    color = if (txDetails.txType == TxType.OUTBOUND) PadawanColors.sendPrimary else PadawanColors.receivePrimary,
+                                    color = if (txDetails.txType == TxType.OUTBOUND) PadawanColorsTatooineDesert.sendPrimary else PadawanColorsTatooineDesert.receivePrimary,
                                     shape = RoundedCornerShape(size = 5.dp)
                                 )
                         ) {
@@ -120,7 +120,7 @@ internal fun TransactionScreen(
                             )
                             Icon(
                                 imageVector = if (txDetails.txType == TxType.OUTBOUND) Lucide.ArrowUpFromLine else Lucide.ArrowDownToLine,
-                                tint = PadawanColors.padawanFaded,
+                                tint = PadawanColorsTatooineDesert.padawanFaded,
                                 contentDescription = if (txDetails.txType == TxType.OUTBOUND) stringResource(R.string.send_icon) else stringResource(R.string.receive_icon),
                                 modifier = Modifier
                                     .align(Alignment.CenterVertically)
@@ -189,7 +189,7 @@ internal fun TransactionScreen(
                             .clickable { mUriHandler.openUri(link) }
                             .width(270.dp),
                         style = PadawanTypography.bodyMedium,
-                        color = PadawanColors.buttonPrimary,
+                        color = PadawanColorsTatooineDesert.accent2,
                         textDecoration = TextDecoration.Underline
                     )
                 }

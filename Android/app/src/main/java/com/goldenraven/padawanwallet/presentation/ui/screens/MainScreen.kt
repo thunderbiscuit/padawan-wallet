@@ -19,8 +19,6 @@ import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.drawBehind
-import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -30,7 +28,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.goldenraven.padawanwallet.R
 import com.goldenraven.padawanwallet.presentation.theme.PadawanTypography
-import com.goldenraven.padawanwallet.presentation.theme.PadawanColors
+import com.goldenraven.padawanwallet.presentation.theme.PadawanColorsTatooineDesert
 import com.goldenraven.padawanwallet.utils.NavigationItem
 import com.goldenraven.padawanwallet.presentation.navigation.WalletNavigation
 import androidx.navigation.compose.rememberNavController
@@ -77,15 +75,16 @@ internal fun BottomNavigationBar(
     if (showNavigationBar) {
         NavigationBar(
             tonalElevation = 0.dp,
-            containerColor = PadawanColors.backgroundSecondary,
-            modifier = Modifier.drawBehind {
-                drawLine(
-                    PadawanColors.navigationBarUnselected,
-                    Offset(0f, 0f),
-                    Offset(size.width, 0f),
-                    2.dp.toPx()
-                )
-            },
+            containerColor = PadawanColorsTatooineDesert.background2,
+            // containerColor = PadawanColors.background,
+            // modifier = Modifier.drawBehind {
+            //     drawLine(
+            //         Color(0xFFDFC8AF) ,
+            //         Offset(0f, 0f),
+            //         Offset(size.width, 0f),
+            //         3.dp.toPx()
+            //     )
+            // },
         ) {
             // This odd code is necessary to ensure the ripple effect is not shown on any part of the
             // navigation bar item. See commit a1fceda for more information.
@@ -151,10 +150,10 @@ internal fun BottomNavigationBar(
                         }
                     },
                     colors = NavigationBarItemDefaults.colors(
-                        selectedIconColor = PadawanColors.buttonPrimary,
-                        selectedTextColor = PadawanColors.buttonPrimary,
-                        unselectedIconColor = PadawanColors.navigationBarUnselected,
-                        unselectedTextColor = PadawanColors.navigationBarUnselected,
+                        selectedIconColor = PadawanColorsTatooineDesert.accent1,
+                        selectedTextColor = PadawanColorsTatooineDesert.accent1,
+                        unselectedIconColor = PadawanColorsTatooineDesert.navigationBarUnselected,
+                        unselectedTextColor = PadawanColorsTatooineDesert.navigationBarUnselected,
                         indicatorColor = Color.Transparent,
                     ),
                 )

@@ -7,7 +7,6 @@ package com.goldenraven.padawanwallet.presentation.ui.screens.settings
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
@@ -23,8 +22,11 @@ import androidx.navigation.compose.rememberNavController
 import com.goldenraven.padawanwallet.R
 import com.goldenraven.padawanwallet.presentation.theme.PadawanTheme
 import com.goldenraven.padawanwallet.presentation.theme.PadawanTypography
-import com.goldenraven.padawanwallet.presentation.theme.PadawanColors
+import com.goldenraven.padawanwallet.presentation.theme.PadawanColorsTatooineDesert
+import com.goldenraven.padawanwallet.presentation.ui.components.ColorThemePicker
 import com.goldenraven.padawanwallet.presentation.ui.components.PadawanAppBar
+import com.goldenraven.padawanwallet.presentation.ui.components.SectionDivider
+import com.goldenraven.padawanwallet.presentation.ui.components.SectionTitle
 import com.goldenraven.padawanwallet.presentation.ui.components.SupportedLanguagesPicker
 
 private const val TAG = "LanguagesScreen"
@@ -43,7 +45,7 @@ internal fun LanguagesScreen(
     ) { scaffoldPadding ->
         Column(
             Modifier
-                .background(PadawanColors.backgroundSecondary)
+                .background(PadawanColorsTatooineDesert.backgroundSecondary)
                 .padding(scaffoldPadding)
                 .padding(horizontal = 24.dp)
                 .fillMaxSize()
@@ -51,10 +53,15 @@ internal fun LanguagesScreen(
             Text(
                 text = stringResource(R.string.select_your_preferred_language),
                 style = PadawanTypography.bodyMedium,
-                color = PadawanColors.textFadedSecondary
+                color = PadawanColorsTatooineDesert.textFadedSecondary
             )
-            Spacer(modifier = Modifier.padding(vertical = 16.dp))
+            SectionTitle("Language", true)
+            SectionDivider()
             SupportedLanguagesPicker()
+
+            SectionTitle("Color Theme", false)
+            SectionDivider()
+            ColorThemePicker()
         }
     }
 }

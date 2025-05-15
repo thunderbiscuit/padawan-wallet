@@ -11,6 +11,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -43,8 +44,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.goldenraven.padawanwallet.R
 import com.goldenraven.padawanwallet.presentation.theme.ShareTechMono
-import com.goldenraven.padawanwallet.presentation.theme.PadawanColors
-import com.goldenraven.padawanwallet.presentation.theme.gradientBackground
+import com.goldenraven.padawanwallet.presentation.theme.PadawanColorsTatooineDesert
 import com.goldenraven.padawanwallet.presentation.theme.standardShadow
 import com.goldenraven.padawanwallet.presentation.ui.components.LoadingAnimation
 import com.goldenraven.padawanwallet.presentation.ui.components.PadawanAppBar
@@ -57,9 +57,11 @@ import com.goldenraven.padawanwallet.presentation.viewmodels.mvi.ReceiveScreenAc
 import com.goldenraven.padawanwallet.presentation.viewmodels.mvi.ReceiveScreenState
 import androidx.compose.ui.Alignment.Companion.BottomCenter
 import androidx.compose.ui.Alignment.Companion.Center
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import com.composables.icons.lucide.ClipboardCopy
 import com.composables.icons.lucide.Lucide
+import com.goldenraven.padawanwallet.presentation.theme.LocalPadawanColors
 import com.goldenraven.padawanwallet.utils.QrUiState
 import com.goldenraven.padawanwallet.utils.logRecomposition
 import kotlinx.coroutines.Dispatchers
@@ -74,6 +76,7 @@ internal fun ReceiveScreen(
     navController: NavHostController,
 ) {
     logRecomposition(TAG)
+    val colors = LocalPadawanColors.current
     val snackbarHostState = remember { SnackbarHostState() }
     var qr by remember { mutableStateOf<ImageBitmap?>(null) }
 
@@ -105,7 +108,7 @@ internal fun ReceiveScreen(
         Box(
             modifier = Modifier
                 .fillMaxSize()
-                .gradientBackground()
+                .background(colors.background)
                 .padding(scaffoldPadding)
         ) {
             Column(
@@ -116,7 +119,7 @@ internal fun ReceiveScreen(
                     .padding(bottom = 120.dp)
             ) {
                 if (state.qrState == QrUiState.Loading) {
-                    LoadingAnimation(circleColor = PadawanColors.background, circleSize = 38.dp)
+                    LoadingAnimation(circleColor = colors.accent2, circleSize = 38.dp)
                 } else if (state.qrState == QrUiState.QR && state.bip21Uri != null && state.address != null) {
                     qr?.let {
                         Image(
@@ -124,6 +127,7 @@ internal fun ReceiveScreen(
                             contentDescription = stringResource(R.string.qr_code),
                             Modifier
                                 .size(qrCodeSize)
+                                .clip(RoundedCornerShape(16.dp))
                                 .clickable {
                                     copyToClipboard(
                                         state.address,
@@ -133,14 +137,18 @@ internal fun ReceiveScreen(
                                         null
                                     )
                                 }
-                                .padding(12.dp),
                         )
+                        Spacer(Modifier.height(16.dp))
                         Box(
-                            modifier = Modifier.padding(horizontal = 8.dp)
+                            modifier = Modifier.padding(horizontal = 16.dp)
                         ) {
                             SelectionContainer {
                                 Text(
                                     modifier = Modifier
+                                        .background(
+                                            color = colors.background,
+                                            shape = RoundedCornerShape(16.dp)
+                                        )
                                         .clickable {
                                             copyToClipboard(
                                                 state.address,
@@ -150,13 +158,8 @@ internal fun ReceiveScreen(
                                                 null,
                                             )
                                         }
-                                        .background(
-                                            color = PadawanColors.background,
-                                            shape = RoundedCornerShape(16.dp)
-                                        )
                                         .padding(12.dp),
-                                    text = state.address,
-                                        // .chunked(4).joinToString(" "),
+                                    text = state.address.chunked(4).joinToString(" "),
                                     fontFamily = ShareTechMono,
                                     fontSize = 18.sp
                                 )
@@ -177,7 +180,7 @@ internal fun ReceiveScreen(
 
             Button(
                 onClick = { onAction(ReceiveScreenAction.UpdateAddress) },
-                colors = ButtonDefaults.buttonColors(containerColor = PadawanColors.buttonPrimary),
+                colors = ButtonDefaults.buttonColors(containerColor = PadawanColorsTatooineDesert.accent2),
                 shape = RoundedCornerShape(20.dp),
                 border = standardBorder,
                 modifier = Modifier
