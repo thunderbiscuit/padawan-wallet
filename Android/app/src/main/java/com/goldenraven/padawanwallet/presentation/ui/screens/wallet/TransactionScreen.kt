@@ -38,6 +38,7 @@ import com.goldenraven.padawanwallet.R
 import com.goldenraven.padawanwallet.domain.bitcoin.ChainPosition
 import com.goldenraven.padawanwallet.domain.bitcoin.TransactionDetails
 import com.goldenraven.padawanwallet.domain.bitcoin.TxType
+import com.goldenraven.padawanwallet.presentation.theme.LocalPadawanColors
 import com.goldenraven.padawanwallet.presentation.theme.PadawanTypography
 import com.goldenraven.padawanwallet.presentation.theme.gradientBackground
 import com.goldenraven.padawanwallet.presentation.theme.innerScreenPadding
@@ -54,6 +55,7 @@ internal fun TransactionScreen(
     txDetails: TransactionDetails,
     navController: NavHostController,
 ) {
+    val colors = LocalPadawanColors.current
     val padding = when (getScreenSizeWidth(LocalConfiguration.current.screenWidthDp)) {
         ScreenSizeWidth.Small -> PaddingValues(12.dp)
         ScreenSizeWidth.Phone -> PaddingValues(32.dp)
@@ -71,7 +73,6 @@ internal fun TransactionScreen(
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Center,
                 modifier = Modifier
-                    .gradientBackground()
                     .padding(scaffoldPadding)
                     .innerScreenPadding(padding)
             ) {
@@ -107,7 +108,7 @@ internal fun TransactionScreen(
                             modifier = Modifier
                                 .align(Alignment.CenterEnd)
                                 .background(
-                                    color = if (txDetails.txType == TxType.OUTBOUND) PadawanColorsTatooineDesert.sendPrimary else PadawanColorsTatooineDesert.receivePrimary,
+                                    color = if (txDetails.txType == TxType.OUTBOUND) colors.accent2 else colors.accent1,
                                     shape = RoundedCornerShape(size = 5.dp)
                                 )
                         ) {
@@ -116,16 +117,7 @@ internal fun TransactionScreen(
                                 style = PadawanTypography.bodySmall,
                                 modifier = Modifier
                                     .align(Alignment.CenterVertically)
-                                    .padding(start = 8.dp, top = 4.dp, bottom = 4.dp)
-                            )
-                            Icon(
-                                imageVector = if (txDetails.txType == TxType.OUTBOUND) Lucide.ArrowUpFromLine else Lucide.ArrowDownToLine,
-                                tint = PadawanColorsTatooineDesert.padawanFaded,
-                                contentDescription = if (txDetails.txType == TxType.OUTBOUND) stringResource(R.string.send_icon) else stringResource(R.string.receive_icon),
-                                modifier = Modifier
-                                    .align(Alignment.CenterVertically)
-                                    .scale(scale = 0.75f)
-                                    .padding(end = 8.dp),
+                                    .padding(horizontal = 12.dp, vertical = 4.dp)
                             )
                         }
                     }
