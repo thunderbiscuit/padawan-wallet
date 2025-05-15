@@ -30,6 +30,7 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SliderColors
 import androidx.compose.material3.SnackbarDuration
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
@@ -73,14 +74,12 @@ import com.composables.core.SheetDetent.Companion.Hidden
 import com.composables.core.rememberModalBottomSheetState
 import com.goldenraven.padawanwallet.R
 import com.goldenraven.padawanwallet.presentation.navigation.QRScanScreen
+import com.goldenraven.padawanwallet.presentation.theme.LocalPadawanColors
 import com.goldenraven.padawanwallet.presentation.theme.PadawanTypography
-import com.goldenraven.padawanwallet.presentation.theme.PadawanColorsTatooineDesert
-import com.goldenraven.padawanwallet.presentation.theme.gradientBackground
 import com.goldenraven.padawanwallet.presentation.theme.innerScreenPadding
 import com.goldenraven.padawanwallet.presentation.theme.standardShadow
 import com.goldenraven.padawanwallet.presentation.theme.wideTextField
 import com.goldenraven.padawanwallet.presentation.ui.components.PadawanAppBar
-import com.goldenraven.padawanwallet.presentation.ui.components.VerticalTextFieldDivider
 import com.goldenraven.padawanwallet.presentation.ui.components.standardBorder
 import com.goldenraven.padawanwallet.utils.ScreenSizeWidth
 import com.goldenraven.padawanwallet.utils.getScreenSizeWidth
@@ -97,9 +96,10 @@ private const val TAG = "SendScreen"
 internal fun SendScreen(
     state: WalletState,
     onAction: (WalletAction) -> Unit,
-    paddingValues: PaddingValues,
+    // paddingValues: PaddingValues,
     navController: NavHostController,
 ) {
+    val colors = LocalPadawanColors.current
     val recipientAddress: MutableState<String> = rememberSaveable { mutableStateOf("") }
     if (state.sendAddress != null) {
         recipientAddress.value = state.sendAddress
@@ -139,7 +139,6 @@ internal fun SendScreen(
             Column(
                 Modifier
                     .fillMaxSize()
-                    .gradientBackground()
                     // .consumeWindowInsets(paddingValues)
                     .padding(scaffoldPadding)
                     .verticalScroll(scrollState)
@@ -175,12 +174,17 @@ internal fun SendScreen(
                         amount.value = value.filter { it.isDigit() }
                     },
                     singleLine = true,
-                    placeholder = { Text(stringResource(R.string.enter_amount_sats)) },
+                    placeholder = {
+                        Text(
+                            stringResource(R.string.enter_amount_sats),
+                            color = colors.textLight
+                        )
+                    },
                     colors = TextFieldDefaults.colors(
-                        focusedContainerColor = PadawanColorsTatooineDesert.backgroundSecondary,
-                        unfocusedContainerColor = PadawanColorsTatooineDesert.backgroundSecondary,
-                        disabledContainerColor = PadawanColorsTatooineDesert.backgroundSecondary,
-                        cursorColor = PadawanColorsTatooineDesert.onPrimary,
+                        focusedContainerColor = colors.background2,
+                        unfocusedContainerColor = colors.background2,
+                        disabledContainerColor = colors.background2,
+                        cursorColor = colors.text,
                         focusedIndicatorColor = Color.Transparent,
                         unfocusedIndicatorColor = Color.Transparent,
                         disabledIndicatorColor = Color.Transparent,
@@ -207,12 +211,17 @@ internal fun SendScreen(
                     value = recipientAddress.value,
                     onValueChange = { recipientAddress.value = it },
                     singleLine = true,
-                    placeholder = { Text(text = stringResource(R.string.enter_a_bitcoin_signet_address)) },
+                    placeholder = {
+                        Text(
+                            text = stringResource(R.string.enter_a_bitcoin_signet_address),
+                            color = colors.textLight
+                        )
+                    },
                     colors = TextFieldDefaults.colors(
-                        focusedContainerColor = PadawanColorsTatooineDesert.backgroundSecondary,
-                        unfocusedContainerColor = PadawanColorsTatooineDesert.backgroundSecondary,
-                        disabledContainerColor = PadawanColorsTatooineDesert.backgroundSecondary,
-                        cursorColor = PadawanColorsTatooineDesert.onPrimary,
+                        focusedContainerColor = colors.background2,
+                        unfocusedContainerColor = colors.background2,
+                        disabledContainerColor = colors.background2,
+                        cursorColor = colors.text,
                         focusedIndicatorColor = Color.Transparent,
                         unfocusedIndicatorColor = Color.Transparent,
                         disabledIndicatorColor = Color.Transparent,
@@ -223,7 +232,6 @@ internal fun SendScreen(
                     ),
                     trailingIcon = {
                         Row {
-                            VerticalTextFieldDivider()
                             IconButton(
                                 onClick = {
                                     navController.navigate(QRScanScreen) {
@@ -259,6 +267,18 @@ internal fun SendScreen(
                     onValueChangeFinished = {
                         feeRate.value = sliderPosition.toString().take(1).toLong()
                     },
+                    colors = SliderColors(
+                        thumbColor = colors.accent1,
+                        activeTrackColor = colors.accent2,
+                        inactiveTrackColor = colors.textFaded,
+                        disabledActiveTrackColor = colors.textFaded,
+                        disabledInactiveTrackColor = colors.textFaded,
+                        disabledThumbColor = colors.textFaded,
+                        activeTickColor = colors.textFaded,
+                        inactiveTickColor = colors.textFaded,
+                        disabledActiveTickColor = colors.textFaded,
+                        disabledInactiveTickColor = colors.textFaded,
+                    ),
                     steps = 10
                 )
                 Text(text = sliderPosition.toString().take(3))
@@ -309,7 +329,7 @@ internal fun SendScreen(
                             }
                         }
                     },
-                    colors = ButtonDefaults.buttonColors(containerColor = PadawanColorsTatooineDesert.accent2),
+                    colors = ButtonDefaults.buttonColors(containerColor = colors.accent2),
                     shape = RoundedCornerShape(20.dp),
                     border = standardBorder,
                     modifier = Modifier
@@ -350,8 +370,7 @@ internal fun SendScreen(
                 .padding(top = 12.dp)
                 .shadow(4.dp, RoundedCornerShape(topStart = 28.dp, topEnd = 28.dp))
                 .clip(RoundedCornerShape(topStart = 28.dp, topEnd = 28.dp))
-                .background(Color.White)
-                .background(PadawanColorsTatooineDesert.buttonSecondaryFaded)
+                .background(colors.background2)
                 .widthIn(max = 640.dp)
                 .fillMaxWidth()
                 .imePadding(),
@@ -397,6 +416,8 @@ fun TransactionConfirmation(
     navController: NavHostController,
     closeBottomSheet: () -> Unit,
 ) {
+    val colors = LocalPadawanColors.current
+
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -488,7 +509,7 @@ fun TransactionConfirmation(
                     navController.popBackStack()
                 }
             },
-            colors = ButtonDefaults.buttonColors(containerColor = PadawanColorsTatooineDesert.accent2),
+            colors = ButtonDefaults.buttonColors(containerColor = colors.accent2),
             shape = RoundedCornerShape(20.dp),
             border = standardBorder,
             modifier = Modifier

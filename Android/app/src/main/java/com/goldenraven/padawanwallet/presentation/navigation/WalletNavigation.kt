@@ -141,7 +141,7 @@ fun WalletNavigation(
                 state = walletViewModel.walletState,
                 onAction = walletViewModel::onAction,
                 navController = navHostController,
-                paddingValues = paddingValues,
+                // paddingValues = paddingValues,
             )
         }
 
