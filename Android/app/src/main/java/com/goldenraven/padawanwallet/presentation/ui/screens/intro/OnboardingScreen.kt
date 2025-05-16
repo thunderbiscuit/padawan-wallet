@@ -195,7 +195,7 @@ internal fun PhoneOnboarding(
             Text(
                 stringResource(R.string.welcome_statement),
                 style = PadawanTypography.bodyMedium,
-                fontSize = 16.sp,
+                fontSize = 18.sp,
                 color = colors.textLight,
                 modifier = Modifier
                     .padding(start = 24.dp, end = 24.dp, bottom = 12.dp)

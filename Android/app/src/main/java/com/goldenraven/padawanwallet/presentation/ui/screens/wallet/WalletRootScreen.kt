@@ -567,6 +567,7 @@ private fun FaucetDialog(
     val colors = LocalPadawanColors.current
 
     AlertDialog(
+        containerColor = colors.background2,
         onDismissRequest = {},
         title = {
             Text(
@@ -587,7 +588,7 @@ private fun FaucetDialog(
         dismissButton = {
             Button(
                 onClick = { setOpenDialog(false) },
-                colors = ButtonDefaults.buttonColors(containerColor = Color(0xfffc4f4f)),
+                colors = ButtonDefaults.buttonColors(containerColor = colors.errorRed),
                 shape = RoundedCornerShape(20.dp),
                 border = standardBorder,
                 modifier = Modifier
@@ -615,7 +616,7 @@ private fun FaucetDialog(
                     setOpenDialog(false)
                     onAction(WalletAction.RequestCoins)
                 },
-                colors = ButtonDefaults.buttonColors(containerColor = PadawanColorsTatooineDesert.background),
+                colors = ButtonDefaults.buttonColors(containerColor = colors.goGreen),
                 shape = RoundedCornerShape(20.dp),
                 contentPadding = PaddingValues(0.dp),
                 border = standardBorder,

@@ -24,8 +24,10 @@ data class PadawanColors(
     val accent1Light : Color,
     val text: Color,
     val textLight: Color,
-    val navigationBarUnselected: Color,
     val textFaded: Color,
+    val goGreen: Color,
+    val errorRed: Color,
+    val navigationBarUnselected: Color,
     val darkBackground: Color,
 
     val backgroundSecondary: Color,
@@ -51,6 +53,8 @@ val PadawanColorsTatooineDesert = PadawanColors(
     text = Color(0xFF1a1a1a),
     textLight = Color(0xFF5a5a5a),
     textFaded = Color(0x403A3A3C),
+    goGreen = Color(0xFF7BAF7B),
+    errorRed = Color(0xFFC8644D),
     navigationBarUnselected = Color(0xFF3A3A3C),
     darkBackground = Color(0xFF2E1B0A),
 
@@ -76,8 +80,11 @@ val PadawanColorsVaderDark = PadawanColors(
     accent1Light = Color(0xffF9AA77),                // Warm tangerine unit toggle
     text = Color(0xFF3A3A3C),                      // Slightly cool charcoal
     textLight = Color(0xFF5a5a5a),
+    textFaded = Color(0x403A3A3C),
+    goGreen = Color(0xFF7BAF7B),
+    // errorRed = Color(0xFFC8644D),
+    errorRed = Color(0xFFDEA297),
     navigationBarUnselected = Color(0xFF3A3A3C),
-    textFaded = Color(0x403A3A3C),                 // Faded text
     darkBackground = Color(0xFF2E1B0A),
 
     backgroundSecondary = Color(0xFFf3f4ff),       // New!
