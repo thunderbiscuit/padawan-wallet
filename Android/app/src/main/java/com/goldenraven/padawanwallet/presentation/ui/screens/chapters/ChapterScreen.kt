@@ -88,7 +88,7 @@ fun ChapterScreen(
                 .fillMaxWidth()
                 .drawBehind {
                     drawLine(
-                        color = PadawanColorsTatooineDesert.onPrimary,
+                        color = Color.Black,
                         strokeWidth = 4.dp.toPx(),
                         start = Offset(x = 0f, y = size.height),
                         end = Offset(x = size.width, y = size.height)

@@ -6,8 +6,8 @@
 package com.goldenraven.padawanwallet.presentation.ui.components
 
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.unit.dp
-import com.goldenraven.padawanwallet.presentation.theme.PadawanColorsTatooineDesert
 
-val standardBorder = BorderStroke(2.dp, SolidColor(PadawanColorsTatooineDesert.onPrimary))
+val standardBorder = BorderStroke(2.dp, SolidColor(Color.Black))

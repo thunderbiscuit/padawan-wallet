@@ -388,6 +388,8 @@ fun TransactionListBox(
     onAction: (WalletAction) -> Unit,
     navController: NavHostController,
 ) {
+    val colors = LocalPadawanColors.current
+
     Row(modifier = Modifier.padding(top = 24.dp, bottom = 8.dp)) {
         Text(
             text = stringResource(id = R.string.transactions),
@@ -512,7 +514,7 @@ fun TransactionListBox(
                                     )
                                     Icon(
                                         imageVector = if (tx.txType == TxType.OUTBOUND) Lucide.ArrowUpFromLine else Lucide.ArrowDownToLine,
-                                        tint = PadawanColorsTatooineDesert.padawanFaded,
+                                        tint = colors.textFaded,
                                         contentDescription = if (tx.txType == TxType.OUTBOUND) stringResource(id = R.string.send_icon) else stringResource(id = R.string.receive_icon),
                                         modifier = Modifier
                                             .align(Alignment.CenterVertically)

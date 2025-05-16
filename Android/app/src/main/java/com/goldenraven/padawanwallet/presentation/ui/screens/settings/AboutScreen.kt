@@ -29,6 +29,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.goldenraven.padawanwallet.R
+import com.goldenraven.padawanwallet.presentation.theme.LocalPadawanColors
 import com.goldenraven.padawanwallet.presentation.theme.PadawanTheme
 import com.goldenraven.padawanwallet.presentation.theme.PadawanTypography
 import com.goldenraven.padawanwallet.presentation.theme.PadawanColorsTatooineDesert
@@ -42,6 +43,7 @@ internal fun AboutScreen(
     val mUriHandler = LocalUriHandler.current
     val privacyLink = stringResource(id = R.string.privacyLink)
     val openPrivacyLink = remember { { mUriHandler.openUri(privacyLink) } }
+    val colors = LocalPadawanColors.current
 
     Scaffold(
         topBar = {
@@ -63,13 +65,13 @@ internal fun AboutScreen(
             Text(
                 text = stringResource(R.string.about_text),
                 style = PadawanTypography.bodyMedium,
-                color = PadawanColorsTatooineDesert.textFadedSecondary,
+                color = colors.textLight
             )
             Spacer(Modifier.height(24.dp))
             Text(
                 text = stringResource(R.string.privacyText),
                 style = PadawanTypography.bodyMedium,
-                color = PadawanColorsTatooineDesert.textFadedSecondary,
+                color = colors.textLight,
             )
             Spacer(Modifier.height(24.dp))
             Text(

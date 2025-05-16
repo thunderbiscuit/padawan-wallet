@@ -29,18 +29,6 @@ data class PadawanColors(
     val errorRed: Color,
     val navigationBarUnselected: Color,
     val darkBackground: Color,
-
-    val backgroundSecondary: Color,
-    val primary: Color,
-    val onPrimary: Color,
-    val tutorialBackground: Color,
-    val textFadedSecondary: Color,
-    val receivePrimary: Color,
-    val sendPrimary: Color,
-    val textHeadline: Color,
-    val buttonSecondaryFaded: Color,
-    val padawanFaded: Color,
-    val error: Color,
 )
 
 val PadawanColorsTatooineDesert = PadawanColors(
@@ -57,45 +45,20 @@ val PadawanColorsTatooineDesert = PadawanColors(
     errorRed = Color(0xFFC8644D),
     navigationBarUnselected = Color(0xFF3A3A3C),
     darkBackground = Color(0xFF2E1B0A),
-
-    backgroundSecondary = Color(0xFFf3f4ff),
-    primary = Color(0xFF76dab3),
-    onPrimary = Color(0xFF000000),
-    tutorialBackground = Color(0xfff6cf47),
-    textFadedSecondary = Color(0xff787878),
-    receivePrimary = Color(0x668480e5),
-    sendPrimary = Color(0x6676dab3),
-    textHeadline = Color(0xff1f0208),
-    buttonSecondaryFaded = Color(0xc0ffd1bf),
-    padawanFaded = Color(0xA6000000),
-    error = Color(0xffcc241d),
 )
 
 val PadawanColorsVaderDark = PadawanColors(
-    background = Color(0xFF000000),                // Soft peach background
+    background = Color(0xFF000000),
     background2 = Color(0xFFEAD1B4),
-    accent1 = Color(0xFFEF6C57),                   // Coral card
-    accent2 = Color(0xffFFAA00),                   // Sunset gold button
-    accent3 = Color(0xFFB34700),                   // Burnt orange selection
-    accent1Light = Color(0xffF9AA77),                // Warm tangerine unit toggle
-    text = Color(0xFF3A3A3C),                      // Slightly cool charcoal
+    accent1 = Color(0xFFEF6C57),
+    accent2 = Color(0xffFFAA00),
+    accent3 = Color(0xFFB34700),
+    accent1Light = Color(0xffF9AA77),
+    text = Color(0xFF3A3A3C),
     textLight = Color(0xFF5a5a5a),
     textFaded = Color(0x403A3A3C),
     goGreen = Color(0xFF7BAF7B),
-    // errorRed = Color(0xFFC8644D),
-    errorRed = Color(0xFFDEA297),
+    errorRed = Color(0xFFC8644D),
     navigationBarUnselected = Color(0xFF3A3A3C),
     darkBackground = Color(0xFF2E1B0A),
-
-    backgroundSecondary = Color(0xFFf3f4ff),       // New!
-    primary = Color(0xFF76dab3),
-    onPrimary = Color(0xFF000000),
-    tutorialBackground = Color(0xfff6cf47),
-    textFadedSecondary = Color(0xff787878),
-    receivePrimary = Color(0x668480e5),
-    sendPrimary = Color(0x6676dab3),
-    textHeadline = Color(0xff1f0208), // default dark text (not quite black)
-    buttonSecondaryFaded = Color(0xc0ffd1bf),
-    padawanFaded = Color(0xA6000000),
-    error = Color(0xffcc241d),
 )
