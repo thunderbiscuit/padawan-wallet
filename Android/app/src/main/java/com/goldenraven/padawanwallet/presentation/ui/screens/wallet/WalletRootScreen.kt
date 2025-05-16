@@ -191,6 +191,8 @@ fun BalanceBox(
     currentlySyncing: Boolean,
     onAction: (WalletAction) -> Unit,
 ) {
+    val colors = LocalPadawanColors.current
+
     Card(
         border = standardBorder,
         shape = RoundedCornerShape(20.dp),
@@ -239,7 +241,6 @@ fun BalanceBox(
                         currencyToggleState = currencyToggleState,
                         text = BitcoinUnit.BTC
                     )
-                    // FadedVerticalDivider()
                     CurrencyToggleText(
                         currencyToggleState = currencyToggleState,
                         text = BitcoinUnit.SATS
@@ -288,7 +289,6 @@ fun BalanceBox(
                         end.linkTo(parent.end)
                     }
             ) {
-                // val isRefreshing by viewModel.isRefreshing.collectAsState()
                 CompositionLocalProvider(
                     LocalMinimumInteractiveComponentEnforcement provides false,
                 ) {
@@ -308,7 +308,7 @@ fun BalanceBox(
                             horizontalArrangement = Arrangement.Center
                         ) {
                             if (currentlySyncing) {
-                                LoadingAnimation()
+                                LoadingAnimation(circleColor = colors.accent2)
                             } else {
                                 Text(
                                     text = stringResource(id = R.string.sync),

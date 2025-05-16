@@ -28,7 +28,7 @@ import kotlinx.coroutines.delay
 
 @Composable
 fun LoadingAnimation(
-    circleColor: Color = Color(0xfff6cf47),
+    circleColor: Color,
     circleSize: Dp = 12.dp,
     animationDelay: Int = 800,
     initialAlpha: Float = 0.3f

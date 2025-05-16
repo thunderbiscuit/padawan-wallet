@@ -42,6 +42,7 @@ import com.composables.icons.lucide.CircleCheck
 import com.composables.icons.lucide.ClipboardCopy
 import com.composables.icons.lucide.Lucide
 import com.goldenraven.padawanwallet.R
+import com.goldenraven.padawanwallet.presentation.theme.LocalPadawanColors
 import com.goldenraven.padawanwallet.presentation.theme.PadawanTheme
 import com.goldenraven.padawanwallet.presentation.theme.PadawanTypography
 import com.goldenraven.padawanwallet.presentation.theme.PadawanColorsTatooineDesert
@@ -57,6 +58,7 @@ internal fun SendCoinsBackScreen(
     val context = LocalContext.current
     val scope = rememberCoroutineScope()
     val snackbarHostState = remember { SnackbarHostState() }
+    val colors = LocalPadawanColors.current
 
     val (copyClicked, setCopyClicked) = remember { mutableStateOf(false) }
 
@@ -96,7 +98,7 @@ internal fun SendCoinsBackScreen(
             Modifier
                 .fillMaxSize()
                 .verticalScroll(state = scrollState)
-                .background(PadawanColorsTatooineDesert.backgroundSecondary)
+                // .background()
                 .padding(scaffoldPadding)
         ) {
             val returnAddress: String = stringResource(R.string.send_coins_back_address)
@@ -107,7 +109,6 @@ internal fun SendCoinsBackScreen(
             )
             Row(
                 Modifier
-                    // .align(Alignment.CenterHorizontally)
                     .clickable(onClick = {
                         setCopyClicked(true)
                         copyToClipboard(
@@ -129,50 +130,12 @@ internal fun SendCoinsBackScreen(
                     imageVector = Lucide.ClipboardCopy,
                     contentDescription = stringResource(R.string.copy_to_clipboard_image),
                 )
-                // Text(
-                //     text = copyAddressString,
-                //     inlineContent = inlineContentMap,
-                //     modifier = Modifier.align(Alignment.End)
-                // )
             }
-            // Column(
-            //     Modifier
-            //         .align(Alignment.CenterHorizontally)
-            //         .clickable(onClick = {
-            //             setCopyClicked(true)
-            //             copyToClipboard(
-            //                 returnAddress,
-            //                 context,
-            //                 scope,
-            //                 snackbarHostState,
-            //                 setCopyClicked
-            //             )
-            //         })
-            //         .padding(start = 24.dp, end = 24.dp, bottom = 20.dp)
-            // ) {
-            //     Text(
-            //         text = stringResource(R.string.send_coins_back_address),
-            //         fontSize = 14.sp
-            //     )
-            //     HorizontalDivider(
-            //         color = padawan_theme_text_faded_secondary,
-            //         thickness = 1.dp,
-            //         modifier = Modifier.padding(all = 3.dp)
-            //     )
-            //     Image(
-            //         imageVector = Lucide.ClipboardCopy,
-            //         contentDescription = stringResource(R.string.copy_to_clipboard_image),
-            //     )
-            //     // Text(
-            //     //     text = copyAddressString,
-            //     //     inlineContent = inlineContentMap,
-            //     //     modifier = Modifier.align(Alignment.End)
-            //     // )
-            // }
+
             Text(
                 text = stringResource(id = R.string.send_coins_back),
                 style = PadawanTypography.bodyMedium,
-                color = PadawanColorsTatooineDesert.textFadedSecondary,
+                color = colors.textLight,
                 modifier = Modifier.padding(start = 24.dp, end = 24.dp)
             )
         }

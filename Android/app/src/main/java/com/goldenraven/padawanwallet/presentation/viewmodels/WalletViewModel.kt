@@ -25,6 +25,7 @@ import kotlinx.coroutines.launch
 import org.bitcoindevkit.Amount
 import org.bitcoindevkit.FeeRate
 import org.bitcoindevkit.Transaction
+import kotlin.system.measureTimeMillis
 
 private const val TAG = "WalletViewModel"
 
@@ -72,8 +73,15 @@ class WalletViewModel(application: Application) : AndroidViewModel(application) 
             walletState = walletState.copy(currentlySyncing = true)
 
             viewModelScope.launch(Dispatchers.IO) {
-                updateBalance()
-                syncTransactionHistory()
+                val minDurationMillis = 3000L
+
+                val elapsed = measureTimeMillis {
+                    updateBalance()
+                    syncTransactionHistory()
+                }
+                val remaining = minDurationMillis - elapsed
+                if (remaining > 0) delay(remaining)
+
                 walletState = walletState.copy(currentlySyncing = false)
             }
         }
