@@ -6,7 +6,6 @@
 package com.goldenraven.padawanwallet.presentation.ui.screens.intro
 
 import android.util.Log
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -49,9 +48,8 @@ import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.constraintlayout.compose.ConstraintLayout
-import androidx.constraintlayout.compose.Dimension
 import com.goldenraven.padawanwallet.R
+import com.goldenraven.padawanwallet.presentation.theme.LocalPadawanColors
 import com.goldenraven.padawanwallet.presentation.theme.PadawanTheme
 import com.goldenraven.padawanwallet.presentation.theme.PadawanTypography
 import com.goldenraven.padawanwallet.presentation.theme.PadawanColorsTatooineDesert
@@ -68,7 +66,9 @@ private const val TAG = "WalletRecoveryScreen"
 internal fun WalletRecoveryScreen(
     onBuildWalletButtonClicked: (WalletCreateType) -> Unit
 ) {
+    val scrollState = rememberScrollState()
     val snackbarHostState = remember { SnackbarHostState() }
+    val colors = LocalPadawanColors.current
 
     Scaffold(
         snackbarHost = {
@@ -77,27 +77,23 @@ internal fun WalletRecoveryScreen(
                 Snackbar(
                     modifier = Modifier
                         .padding(12.dp)
-                        .background(PadawanColorsTatooineDesert.background)
                         .semantics { testTag = "Intro WalletRecoveryScreen Snackbar" },
-                    containerColor = PadawanColorsTatooineDesert.background,
+                    containerColor = colors.background2,
 
                 ) {
                     Text(
                         text = data.visuals.message,
+                        color = colors.text
                     )
                 }
             }
         },
     ) { innerPadding ->
-        // the screen is broken into 3 parts
-        // the app name, the body, and the button
-        ConstraintLayout(
+        Column(
             modifier = Modifier
-                .fillMaxHeight(1f)
-                .background(Color(0xffffffff))
+                .fillMaxHeight()
+                .verticalScroll(scrollState)
         ) {
-
-            val (appName, body) = createRefs()
 
             val emptyRecoveryPhrase: Map<Int, String> = mapOf(
                 1 to "", 2 to "", 3 to "", 4 to "", 5 to "", 6 to "",
@@ -105,18 +101,11 @@ internal fun WalletRecoveryScreen(
             )
             val (recoveryPhraseWordMap, setRecoveryPhraseWordMap) = remember { mutableStateOf(emptyRecoveryPhrase) }
 
-
-            // the app name
             Column(
                 horizontalAlignment = Alignment.Start,
                 modifier = Modifier
-                    .fillMaxWidth(1f)
                     .padding(innerPadding)
                     .padding(top = 48.dp)
-                    .background(Color(0xffffffff))
-                    .constrainAs(appName) {
-                        top.linkTo(parent.top)
-                    }
             ) {
                 Text(
                     text = stringResource(R.string.recover_a_wallet),
@@ -134,20 +123,12 @@ internal fun WalletRecoveryScreen(
                 )
             }
 
-
-            // the body
             MyList(
                 recoveryPhraseWordMap,
                 setRecoveryPhraseWordMap,
                 onBuildWalletButtonClicked,
                 snackbarHostState,
                 modifier = Modifier
-                    .constrainAs(body) {
-                        top.linkTo(appName.bottom)
-                        bottom.linkTo(parent.bottom)
-                        height = Dimension.fillToConstraints
-
-                    },
             )
         }
     }
@@ -161,12 +142,10 @@ fun MyList(
     snackbarHostState: SnackbarHostState,
     modifier: Modifier,
 ) {
-    val scrollState = rememberScrollState()
+    val colors = LocalPadawanColors.current
     Column(
         modifier
-            .fillMaxWidth(1f)
-            .background(Color(0xffffffff))
-            .verticalScroll(state = scrollState),
+            .fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         val scope = rememberCoroutineScope()
@@ -193,14 +172,14 @@ fun MyList(
                     }
                 }
             },
-            colors = ButtonDefaults.buttonColors(Color(0xfff6cf47)),
+            colors = ButtonDefaults.buttonColors(colors.accent2),
             shape = RoundedCornerShape(20.dp),
             border = standardBorder,
             modifier = Modifier
                 .padding(top = 12.dp, start = 4.dp, end = 4.dp, bottom = 12.dp)
                 .standardShadow(20.dp)
                 .height(70.dp)
-                .width(240.dp)
+                .width(300.dp)
                 .semantics { testTag = "Intro EnterRecoveryPhrase Button" }
         ) {
             Text(

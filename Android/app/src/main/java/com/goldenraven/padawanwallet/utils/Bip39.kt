@@ -14,12 +14,12 @@ private const val TAG = "Utils"
 fun checkWords(recoveryPhraseWordMap: Map<Int, String>): WordCheckResult {
     recoveryPhraseWordMap.forEach {
         if (it.value.isBlank()) {
-            Log.i(TAG, "Word ${it.key} was empty")
-            return WordCheckResult.FAILURE(errorMessage = "Word ${it.key} is empty")
+            Log.i(TAG, "Word ${it.key} was empty!")
+            return WordCheckResult.FAILURE(errorMessage = "Word ${it.key} is empty!")
         }
         if (it.value.trim().lowercase() !in validWords) {
-            Log.i(TAG, "Word ${it.key} is not valid")
-            return WordCheckResult.FAILURE(errorMessage = "Word ${it.key} is not valid")
+            Log.i(TAG, "Word ${it.key} is not valid!")
+            return WordCheckResult.FAILURE(errorMessage = "Word ${it.key} is not valid!")
         }
     }
 
