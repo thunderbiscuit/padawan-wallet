@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.selection.selectable
 import androidx.compose.material3.RadioButton
+import androidx.compose.material3.RadioButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
@@ -17,7 +18,7 @@ import com.goldenraven.padawanwallet.presentation.theme.LocalPadawanColors
 
 @Composable
 fun ColorThemePicker() {
-    val PadawanColors = LocalPadawanColors.current
+    val colors = LocalPadawanColors.current
     val currentTheme = SettingsRepository.getTheme()
     val radioOptions = listOf(PadawanColorTheme.TATOOINE_DESERT, PadawanColorTheme.VADER_DARK)
 
@@ -44,11 +45,12 @@ fun ColorThemePicker() {
                     onClick = {
                         onOptionSelected(theme)
                         SettingsRepository.setTheme(theme)
-                    }
+                    },
+                    colors = RadioButtonDefaults.colors(selectedColor = colors.accent1)
                 )
                 Text(
                     text = theme.nickname,
-                    color = if (theme == PadawanColorTheme.TATOOINE_DESERT) PadawanColors.text else PadawanColors.textFaded
+                    color = if (theme == PadawanColorTheme.TATOOINE_DESERT) colors.text else colors.textFaded
                 )
             }
         }

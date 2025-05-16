@@ -5,7 +5,6 @@
 
 package com.goldenraven.padawanwallet.presentation.ui.screens.settings
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -20,21 +19,23 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.goldenraven.padawanwallet.R
+import com.goldenraven.padawanwallet.presentation.theme.LocalPadawanColors
 import com.goldenraven.padawanwallet.presentation.theme.PadawanTheme
 import com.goldenraven.padawanwallet.presentation.theme.PadawanTypography
-import com.goldenraven.padawanwallet.presentation.theme.PadawanColorsTatooineDesert
 import com.goldenraven.padawanwallet.presentation.ui.components.ColorThemePicker
 import com.goldenraven.padawanwallet.presentation.ui.components.PadawanAppBar
 import com.goldenraven.padawanwallet.presentation.ui.components.SectionDivider
 import com.goldenraven.padawanwallet.presentation.ui.components.SectionTitle
 import com.goldenraven.padawanwallet.presentation.ui.components.SupportedLanguagesPicker
 
-private const val TAG = "LanguagesScreen"
+private const val TAG = "SettingsScreen"
 
 @Composable
 internal fun LanguagesScreen(
     navController: NavHostController
 ) {
+    val colors = LocalPadawanColors.current
+
     Scaffold(
         topBar = {
             PadawanAppBar(
@@ -45,7 +46,7 @@ internal fun LanguagesScreen(
     ) { scaffoldPadding ->
         Column(
             Modifier
-                .background(PadawanColorsTatooineDesert.backgroundSecondary)
+                // .background(PadawanColorsTatooineDesert.backgroundSecondary)
                 .padding(scaffoldPadding)
                 .padding(horizontal = 24.dp)
                 .fillMaxSize()
@@ -53,9 +54,9 @@ internal fun LanguagesScreen(
             Text(
                 text = stringResource(R.string.select_your_preferred_language),
                 style = PadawanTypography.bodyMedium,
-                color = PadawanColorsTatooineDesert.textFadedSecondary
+                color = colors.textLight
             )
-            SectionTitle("Language", true)
+            SectionTitle("Language", false)
             SectionDivider()
             SupportedLanguagesPicker()
 

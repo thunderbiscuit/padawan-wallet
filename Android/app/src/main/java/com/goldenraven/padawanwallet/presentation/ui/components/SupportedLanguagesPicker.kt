@@ -12,6 +12,8 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.selection.selectable
 import androidx.compose.material3.RadioButton
+import androidx.compose.material3.RadioButtonColors
+import androidx.compose.material3.RadioButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
@@ -22,6 +24,7 @@ import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.core.os.LocaleListCompat
 import com.goldenraven.padawanwallet.domain.PadawanColorTheme
+import com.goldenraven.padawanwallet.presentation.theme.LocalPadawanColors
 import com.goldenraven.padawanwallet.presentation.theme.PadawanTheme
 import com.goldenraven.padawanwallet.utils.SupportedLanguage
 import com.goldenraven.padawanwallet.utils.getSupportedLanguageCode
@@ -30,6 +33,7 @@ private const val TAG = "SupportedLanguagesPicker"
 
 @Composable
 fun SupportedLanguagesPicker() {
+    val colors = LocalPadawanColors.current
     val radioOptions = listOf(SupportedLanguage.ENGLISH, SupportedLanguage.SPANISH, SupportedLanguage.PORTUGUESE)
     val localeListCompat: LocaleListCompat = AppCompatDelegate.getApplicationLocales()
     Log.i(TAG, "Current locale list compat is: $localeListCompat")
@@ -65,7 +69,8 @@ fun SupportedLanguagesPicker() {
                         val languageCode: String = getSupportedLanguageCode(language)
                         val appLocale: LocaleListCompat = LocaleListCompat.forLanguageTags(languageCode)
                         AppCompatDelegate.setApplicationLocales(appLocale)
-                    }
+                    },
+                    colors = RadioButtonDefaults.colors(selectedColor = colors.accent1)
                 )
                 Text(
                     text = language.name.lowercase().replaceFirstChar { it.uppercase() },
