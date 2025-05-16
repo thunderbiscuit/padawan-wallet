@@ -102,7 +102,7 @@ internal fun WalletRootScreen(
     paddingValues: PaddingValues,
     navController: NavHostController,
 ) {
-    val PadawanColors = LocalPadawanColors.current
+    val colors = LocalPadawanColors.current
     val (openDialog, setOpenDialog) = remember { mutableStateOf(false) }
     if (openDialog) FaucetDialog(onAction, setOpenDialog)
 
@@ -122,8 +122,6 @@ internal fun WalletRootScreen(
 
     Column(
         modifier = Modifier
-            // .gradientBackground()
-            .background(PadawanColors.background)
             .fillMaxHeight()
             .padding(paddingValues)
             .innerScreenPadding(padding)
@@ -132,18 +130,6 @@ internal fun WalletRootScreen(
         BalanceBox(balance = state.balance, currentlySyncing = state.currentlySyncing, onAction = onAction)
         Spacer(modifier = Modifier.height(height = 12.dp))
         SendReceive(navController, state.isOnline)
-        // Text(
-        //     text = stringResource(id = R.string.transactions),
-        //     style = PadawanTypography.headlineSmall,
-        //     color = PadawanColors.text,
-        //     textAlign = TextAlign.Start,
-        // )
-        // HorizontalDivider(
-        //     modifier = Modifier
-        //         .fillMaxWidth().padding(top = 21.dp),
-        //     color = PadawanColors.text,
-        //     thickness = 2.dp
-        // )
         TransactionListBox(
             setOpenDialog = setOpenDialog,
             transactionList = state.transactions,
@@ -156,6 +142,7 @@ internal fun WalletRootScreen(
 
 @Composable
 fun NoNetworkBanner(onAction: (WalletAction) -> Unit) {
+    val colors = LocalPadawanColors.current
     val screenSizeWidth = getScreenSizeWidth(LocalConfiguration.current.screenWidthDp)
     val fontSize = when (screenSizeWidth) {
         ScreenSizeWidth.Small -> 12.sp
@@ -169,7 +156,7 @@ fun NoNetworkBanner(onAction: (WalletAction) -> Unit) {
             .height(40.dp)
             .clickable { onAction(WalletAction.CheckNetworkStatus) },
         border = standardBorder,
-        colors = CardDefaults.cardColors(Color(0xfff6cf47)),
+        colors = CardDefaults.cardColors(colors.accent2),
     ) {
         Row(
             modifier = Modifier.fillMaxSize(),
@@ -196,7 +183,7 @@ fun BalanceBox(
     Card(
         border = standardBorder,
         shape = RoundedCornerShape(20.dp),
-        colors = CardDefaults.cardColors(PadawanColorsTatooineDesert.accent1),
+        colors = CardDefaults.cardColors(colors.accent1),
         modifier = Modifier
             .standardShadow(20.dp)
             .fillMaxWidth()
@@ -225,7 +212,7 @@ fun BalanceBox(
                     // .border(width = 2.dp, color = PadawanColors.text)
                     .background(
                         shape = RoundedCornerShape(size = 10.dp),
-                        color = PadawanColorsTatooineDesert.tealAccent,
+                        color = colors.accent1Light,
                     )
                     .constrainAs(currencyToggle) {
                         top.linkTo(parent.top)
@@ -314,7 +301,8 @@ fun BalanceBox(
                                     text = stringResource(id = R.string.sync),
                                     style = PadawanTypography.labelLarge,
                                     fontWeight = FontWeight.Normal,
-                                    color = Color(0xffdbdeff),
+                                    color = colors.background,
+                                    // color = Color.White,
                                     modifier = Modifier.padding(horizontal = 2.dp)
                                 )
                             }
@@ -548,17 +536,18 @@ fun TransactionListBox(
 
 @Composable
 fun CurrencyToggleText(currencyToggleState: Boolean, text: BitcoinUnit) {
+    val colors = LocalPadawanColors.current
     val currencyState = (!currencyToggleState && text == BitcoinUnit.BTC) || (currencyToggleState && text == BitcoinUnit.SATS)
 
     val colorTransition = updateTransition(
-        targetState = if (currencyState) PadawanColorsTatooineDesert.textFaded else PadawanColorsTatooineDesert.text,
+        targetState = if (currencyState) colors.textFaded else colors.text,
         label = stringResource(R.string.currency_toggle_text)
     )
     val color by colorTransition.animateColor(
         transitionSpec = { tween(durationMillis = 500) },
         label = stringResource(R.string.changing_color_animation),
     ) {
-        if (it == PadawanColorsTatooineDesert.textFaded) PadawanColorsTatooineDesert.text else PadawanColorsTatooineDesert.textFaded
+        if (it == colors.textFaded) colors.text else colors.textFaded
     }
 
     Text(
@@ -575,13 +564,15 @@ private fun FaucetDialog(
     onAction: (WalletAction) -> Unit,
     setOpenDialog: (Boolean) -> Unit,
 ) {
+    val colors = LocalPadawanColors.current
+
     AlertDialog(
         onDismissRequest = {},
         title = {
             Text(
                 text = stringResource(R.string.hello_there),
                 style = PadawanTypography.headlineMedium,
-                color = PadawanColorsTatooineDesert.textHeadline
+                color = colors.text
             )
         },
         text = {
@@ -589,7 +580,7 @@ private fun FaucetDialog(
                 text = stringResource(R.string.would_you_like_to_receive_some_signet_bitcoin),
                 fontSize = 18.sp,
                 lineHeight = 24.sp,
-                color = PadawanColorsTatooineDesert.textFadedSecondary
+                color = colors.textLight
             )
         },
 

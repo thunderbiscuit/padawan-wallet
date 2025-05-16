@@ -20,12 +20,12 @@ data class PadawanColors(
     val background2: Color,
     val accent1: Color,
     val accent2 : Color,
-    val tealAccent : Color,
+    val accent3: Color,
+    val accent1Light : Color,
     val text: Color,
     val textLight: Color,
     val navigationBarUnselected: Color,
     val textFaded: Color,
-    val accent3: Color,
     val darkBackground: Color,
 
     val backgroundSecondary: Color,
@@ -47,7 +47,7 @@ val PadawanColorsTatooineDesert = PadawanColors(
     accent1 = Color(0xFFEF6C57),
     accent2 = Color(0xffFFAA00),
     accent3 = Color(0xFFB34700),
-    tealAccent = Color(0xffF9AA77),
+    accent1Light = Color(0xffF9AA77),
     text = Color(0xFF1a1a1a),
     textLight = Color(0xFF5a5a5a),
     textFaded = Color(0x403A3A3C),
@@ -73,7 +73,7 @@ val PadawanColorsVaderDark = PadawanColors(
     accent1 = Color(0xFFEF6C57),                   // Coral card
     accent2 = Color(0xffFFAA00),                   // Sunset gold button
     accent3 = Color(0xFFB34700),                   // Burnt orange selection
-    tealAccent = Color(0xffF9AA77),                // Warm tangerine unit toggle
+    accent1Light = Color(0xffF9AA77),                // Warm tangerine unit toggle
     text = Color(0xFF3A3A3C),                      // Slightly cool charcoal
     textLight = Color(0xFF5a5a5a),
     navigationBarUnselected = Color(0xFF3A3A3C),

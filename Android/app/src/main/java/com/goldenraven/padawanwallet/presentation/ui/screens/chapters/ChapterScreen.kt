@@ -255,31 +255,35 @@ fun ChapterProgressBar(
 
 @Composable
 internal fun ChapterPage(page: Page) {
+    val colors = LocalPadawanColors.current
+
     for (element in page) {
         when (element.elementType) {
             ElementType.TITLE -> {
                 Text(
                     text = stringResource(id = element.resourceId),
                     style = PadawanTypography.headlineSmall,
+                    color = colors.text
                 )
             }
             ElementType.SUBTITLE -> {
                 Text(
                     text = stringResource(id = element.resourceId),
                     style = PadawanTypography.labelLarge,
-                    fontSize = 18.sp
+                    fontSize = 18.sp,
+                    color = colors.text
                 )
             }
             ElementType.BODY -> {
                 Text(
                     text = stringResource(id = element.resourceId),
                     style = PadawanTypography.bodyMedium,
-                    color = PadawanColorsTatooineDesert.text
+                    color = colors.text
                 )
             }
             ElementType.RESOURCE -> {
                 Card(
-                    colors = CardDefaults.cardColors(PadawanColorsTatooineDesert.tealAccent),
+                    colors = CardDefaults.cardColors(PadawanColorsTatooineDesert.accent1Light),
                     border = standardBorder,
                     modifier = Modifier
                         .height(height = 150.dp)
