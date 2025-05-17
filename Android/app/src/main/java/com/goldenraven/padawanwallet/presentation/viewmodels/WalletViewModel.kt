@@ -22,6 +22,7 @@ import com.goldenraven.padawanwallet.presentation.viewmodels.mvi.WalletState
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import org.bitcoindevkit.Amount
 import org.bitcoindevkit.FeeRate
 import org.bitcoindevkit.Transaction
@@ -120,20 +121,23 @@ class WalletViewModel(application: Application) : AndroidViewModel(application) 
         val faucetUsername: String = BuildConfig.FAUCET_USERNAME
         val faucetPassword: String = BuildConfig.FAUCET_PASSWORD
         Log.i(TAG, "############################################")
-        Log.i(TAG, "Calling server with url: $faucetUrl")
-        Log.i(TAG, "Calling server with username: $faucetUsername")
-        Log.i(TAG, "Calling server with password: $faucetPassword")
+        // Log.i(TAG, "Calling server with url: $faucetUrl")
+        // Log.i(TAG, "Calling server with username: $faucetUsername")
+        // Log.i(TAG, "Calling server with password: $faucetPassword")
         Log.i(TAG, "############################################")
         // val faucetPassword: String = "password" // Use for testing failed requests
 
         val faucetService = FaucetService()
         viewModelScope.launch {
-            val response = faucetService.callTatooineFaucet(
-                address.toString(),
-                faucetUrl,
-                faucetUsername,
-                faucetPassword
-            )
+            val response = withContext(Dispatchers.IO) {
+                faucetService.callTatooineFaucet(
+                    address.toString(),
+                    faucetUrl,
+                    faucetUsername,
+                    faucetPassword
+                )
+            }
+
             when (response) {
                 is FaucetCall.Success -> {
                     WalletRepository.faucetCallDone()
@@ -147,7 +151,7 @@ class WalletViewModel(application: Application) : AndroidViewModel(application) 
                     Log.i(TAG, "Faucet call threw an exception: ${response.exception}")
                 }
             }
-            delay(4000)
+            delay(2000)
             sync()
         }
     }
@@ -164,6 +168,7 @@ class WalletViewModel(application: Application) : AndroidViewModel(application) 
     private fun broadcastTransaction(tx: Transaction) {
         try {
             Wallet.broadcast(tx)
+            sync()
         } catch (e: Throwable) {
             Log.i(TAG, "Broadcast error: ${e.message}")
             "Error: ${e.message}"

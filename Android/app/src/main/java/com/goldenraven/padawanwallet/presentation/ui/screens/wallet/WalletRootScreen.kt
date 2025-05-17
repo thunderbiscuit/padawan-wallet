@@ -537,7 +537,7 @@ fun TransactionListBox(
 }
 
 @Composable
-fun CurrencyToggleText(currencyToggleState: Boolean, text: BitcoinUnit) {
+private fun CurrencyToggleText(currencyToggleState: Boolean, text: BitcoinUnit) {
     val colors = LocalPadawanColors.current
     val currencyState = (!currencyToggleState && text == BitcoinUnit.BTC) || (currencyToggleState && text == BitcoinUnit.SATS)
 
