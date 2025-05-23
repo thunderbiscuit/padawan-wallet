@@ -5,7 +5,6 @@
 
 package com.goldenraven.padawanwallet.presentation.ui.screens.wallet
 
-import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -22,7 +21,6 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Slider
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
@@ -30,6 +28,7 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Slider
 import androidx.compose.material3.SliderColors
 import androidx.compose.material3.SnackbarDuration
 import androidx.compose.material3.SnackbarHost
@@ -80,11 +79,12 @@ import com.goldenraven.padawanwallet.presentation.theme.innerScreenPadding
 import com.goldenraven.padawanwallet.presentation.theme.standardShadow
 import com.goldenraven.padawanwallet.presentation.theme.wideTextField
 import com.goldenraven.padawanwallet.presentation.ui.components.PadawanAppBar
+import com.goldenraven.padawanwallet.presentation.ui.components.TransactionBroadcastAnimation
 import com.goldenraven.padawanwallet.presentation.ui.components.standardBorder
-import com.goldenraven.padawanwallet.utils.ScreenSizeWidth
-import com.goldenraven.padawanwallet.utils.getScreenSizeWidth
 import com.goldenraven.padawanwallet.presentation.viewmodels.mvi.WalletAction
 import com.goldenraven.padawanwallet.presentation.viewmodels.mvi.WalletState
+import com.goldenraven.padawanwallet.utils.ScreenSizeWidth
+import com.goldenraven.padawanwallet.utils.getScreenSizeWidth
 import kotlinx.coroutines.launch
 import org.bitcoindevkit.Amount
 import org.bitcoindevkit.FeeRate
@@ -96,7 +96,6 @@ private const val TAG = "SendScreen"
 internal fun SendScreen(
     state: WalletState,
     onAction: (WalletAction) -> Unit,
-    // paddingValues: PaddingValues,
     navController: NavHostController,
 ) {
     val colors = LocalPadawanColors.current
@@ -106,6 +105,7 @@ internal fun SendScreen(
     }
     val amount: MutableState<String> = rememberSaveable { mutableStateOf("") }
     val feeRate: MutableState<Long> = rememberSaveable { mutableLongStateOf(1L) }
+    var showBroadcastAnimation by remember { mutableStateOf(false) }
 
     val Peek = SheetDetent(identifier = "peek") { containerHeight, sheetHeight ->
         containerHeight * 0.6f
@@ -123,6 +123,10 @@ internal fun SendScreen(
     val snackbarHostState = remember { SnackbarHostState() }
     val scope = rememberCoroutineScope()
 
+    if (showBroadcastAnimation) {
+        TransactionBroadcastAnimation(onAnimationEnd = { navController.popBackStack() })
+    } else {
+
     Scaffold(
         topBar = {
             PadawanAppBar(
@@ -135,11 +139,9 @@ internal fun SendScreen(
 
             val scrollState = rememberScrollState()
 
-            // TODO: Look into difference between consumeWindowInsets and simple padding
             Column(
                 Modifier
                     .fillMaxSize()
-                    // .consumeWindowInsets(paddingValues)
                     .padding(scaffoldPadding)
                     .verticalScroll(scrollState)
                     .innerScreenPadding(padding)
@@ -213,7 +215,7 @@ internal fun SendScreen(
                     singleLine = true,
                     placeholder = {
                         Text(
-                            text = stringResource(R.string.enter_a_bitcoin_signet_address),
+                            text = stringResource(R.string.enter_signet_address),
                             color = colors.textLight
                         )
                     },
@@ -298,6 +300,7 @@ internal fun SendScreen(
 
                 Button(
                     onClick = {
+                        // showCheckmark = true
                         var inputsAreValid = true
                         if (amount.value.isBlank()) {
                             showSnackbar(amountErrorMessage)
@@ -323,7 +326,6 @@ internal fun SendScreen(
                                 scope.launch { sheetState.currentDetent = Peek }
                             }
                         } catch (exception: Exception) {
-                            Log.i(TAG, "Exception: $exception")
                             scope.launch {
                                 showSnackbar("Error: ${exception.message}")
                             }
@@ -396,12 +398,13 @@ internal fun SendScreen(
                         recipientAddress,
                         amount.value.toULong(),
                         showSnackbar,
-                        navController,
-                        { scope.launch { sheetState.currentDetent = Peek } }
+                        closeBottomSheet = { scope.launch { sheetState.currentDetent = Peek } },
+                        onShowAnimation = { showBroadcastAnimation = true }
                     )
                 }
             }
         }
+    }
     }
 }
 
@@ -413,8 +416,8 @@ fun TransactionConfirmation(
     recipientAddress: MutableState<String>,
     amount: ULong,
     showSnackbar: (String) -> Unit,
-    navController: NavHostController,
     closeBottomSheet: () -> Unit,
+    onShowAnimation: () -> Unit,
 ) {
     val colors = LocalPadawanColors.current
 
@@ -497,16 +500,16 @@ fun TransactionConfirmation(
             )
         }
 
-        val notOnlineMessage = stringResource(R.string.your_device_is_not_connected_to_the_internet)
+        val notOnlineMessage = stringResource(R.string.no_network)
 
         Button(
             onClick = {
                 if (!state.isOnline) {
                     showSnackbar(notOnlineMessage)
                 } else {
-                    onAction(WalletAction.Broadcast(txAndFee.first))
                     closeBottomSheet()
-                    navController.popBackStack()
+                    onAction(WalletAction.Broadcast(txAndFee.first))
+                    onShowAnimation()
                 }
             },
             colors = ButtonDefaults.buttonColors(containerColor = colors.accent2),
