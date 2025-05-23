@@ -10,8 +10,8 @@
     <application
         android:name=".PadawanWalletApplication"
         android:label="@string/app_name"
-        android:icon="@mipmap/ic_padawan_white"
-        android:roundIcon="@mipmap/ic_padawan_white"
+        android:icon="@drawable/padawan_icon_light"
+        android:roundIcon="@drawable/padawan_icon_light"
         android:allowBackup="true"
         android:supportsRtl="true">
 

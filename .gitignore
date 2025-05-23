@@ -33,3 +33,6 @@ PadawanBdkWrapper.def
 
 # Localization
 android-strings/
+
+# Logos
+logos.fig

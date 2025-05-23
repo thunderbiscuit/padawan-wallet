@@ -25,7 +25,6 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Slider
@@ -52,7 +51,6 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalConfiguration
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
@@ -71,6 +69,8 @@ import com.composables.core.SheetDetent
 import com.composables.core.SheetDetent.Companion.FullyExpanded
 import com.composables.core.SheetDetent.Companion.Hidden
 import com.composables.core.rememberModalBottomSheetState
+import com.composables.icons.lucide.Camera
+import com.composables.icons.lucide.Lucide
 import com.goldenraven.padawanwallet.R
 import com.goldenraven.padawanwallet.presentation.navigation.QRScanScreen
 import com.goldenraven.padawanwallet.presentation.theme.LocalPadawanColors
@@ -241,9 +241,10 @@ internal fun SendScreen(
                                     }
                                 }, modifier = Modifier.align(Alignment.CenterVertically)
                             ) {
-                                Icon(
-                                    painter = painterResource(id = R.drawable.ic_camera),
+                                com.composables.core.Icon(
+                                    imageVector = Lucide.Camera,
                                     contentDescription = stringResource(R.string.scan_qr_icon),
+                                    tint = colors.text
                                 )
                             }
                         }
