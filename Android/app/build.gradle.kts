@@ -29,7 +29,7 @@ android {
     }
 
     defaultConfig {
-        applicationId = "com.goldenraven.padawanwallet"
+        applicationId = "com.coyotebitcoin.padawanwallet"
         minSdk = 26
         targetSdk = 35
         // This version code must be updated for each release but the version on the master branch
@@ -107,7 +107,7 @@ android {
         resources.pickFirsts.add("win32-x86/attach_hotspot_windows.dll")
     }
 
-    namespace = "com.goldenraven.padawanwallet"
+    namespace = "com.coyotebitcoin.padawanwallet"
 }
 
 dependencies {
