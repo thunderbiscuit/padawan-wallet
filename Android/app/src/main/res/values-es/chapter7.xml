@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="C7_title">¿Que son las palabras de recuperación?</string>
-    <string name="C7_tagline">Aprende a mantener tu cartera y tus fondos a salvo.</string>
 
     <string name="C7_p1">Piensa que tu cartera es como un árbol, y las direcciones que genera como sus hojas (recuerda utilizar una nueva dirección cada vez que recibas bitcoin). El número de direcciones que se pueden generar a partir de este árbol son casi infinitas, pero lo único que hay que respaldar o guardar de este \“ árbol de direcciones\” es su raíz. Cada nueva raíz generará un nuevo árbol completo, pero cualquier cartera podrá recrear el árbol completo simplemente utilizando la raíz.</string>
     <string name="C7_p2">Las carteras modernas de bitcoin utilizan un proceso llamado generación de claves determinista. Cada nueva dirección que produce tu cartera no se genera de forma aleatoria. Esto permite que sea muy flexible a la hora de generar nuevas direcciones, sin tener que recordarlas todas individualmente (no tienes que hacer respaldos individuales de todas las direcciones en las que hayas recibido bitcoin).</string>

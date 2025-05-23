@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="C7_title">O que é uma frase de recuperação?</string>
-    <string name="C7_tagline">Aprenda como manter sua carteira e seus fundos seguros.</string>
 
     <string name="C7_p1">A sua carteira é como uma árvore e os endereços gerados são como suas folhas (lembre-se de que você usa um novo endereço toda vez que recebe bitcoin). O número de endereços que podem ser gerados a partir da árvore é quase infinito, mas a única parte necessária para fazer backup dessa “árvore de endereços” é lembrar a sua raiz. Cada nova raiz gerará uma árvore completamente nova, mas qualquer carteira pode recriar a árvore inteira simplesmente começando pela raiz.</string>
     <string name="C7_p2">As carteiras bitcoin atuais usam um processo chamado geração determinística de chaves. Cada novo endereço que sua carteira produz é gerado de forma não aleatória. Isso permite que a carteira gere novos endereços, sem que você precise se lembrar de todos individualmente (você não precisa fazer backups individuais dos endereços nos quais recebeu bitcoin).</string>

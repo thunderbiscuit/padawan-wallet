@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="C8_title">Recovering your wallet</string>
-    <string name="C8_tagline">Find out how you can use a recovery phrase to load a pre-existing wallet on your device.</string>
 
     <string name="C8_p1">Recovering a wallet from a recovery phrase is usually fairly easy. Recovery phrases (sometimes also called mnemonics) use a standard called BIP39, which provides a common way to recover coins between different wallets. The usual pattern for backing up and recovering a wallet is the following:</string>
     <string name="C8_p2">1. We create a wallet and the software provides us with either 12 or 24 words to write down and keep. The order of the words is important, so make sure you write them in the right order. In Padawan, you can see those 12 words at any time by going into the \"Recovery phrase\" screen in the menu.</string>

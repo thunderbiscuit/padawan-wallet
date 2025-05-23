@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="C9_title">Os diferentes tipos de carteira</string>
-    <string name="C9_tagline">Carteiras quentes, carteiras frias, carteiras de hardware, carteiras móveis… o que você precisa saber!</string>
 
     <string name="t9_h1">Por que existe mais de um tipo de carteira?</string>
     <string name="t9_p1">Uma carteira bitcoin protege um conjunto de chaves criptográficas (números muito grandes e importantes). É crucial proteger essas chaves e garantir que elas não sejam acessadas por ninguém além do dono da carteira.</string>

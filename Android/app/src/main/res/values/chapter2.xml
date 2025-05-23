@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="C2_title">Receiving bitcoin</string>
-    <string name="C2_tagline">How do you receive bitcoin?</string>
 
     <string name="t2_p1">To receive bitcoin, you ask your wallet software (like Padawan) to generate a receive address. Each time your receive bitcoin, a new address will be used by your wallet.</string>
     <string name="t2_p2">To make it easier to share, we display this address in two common ways:</string>

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="C4_title">¿Qué es la mempool?</string>
-    <string name="C4_tagline">Cuando emito una transacción… ¿a dónde va?</string>
 
     <string name="t4_p1">Cuando completas y emites una transacción de bitcoin, esta transacción es anotada por todos los ordenadores conectados a la red de bitcoin normalmente entre los 2 y 5 siguientes segundos. Con el tiempo la transacción se añadirá a la cadena de bloques, pero cuando un nodo la recibe por primera vez, simplemente la añade a un grupo de transacciones que conoce pero que todavía no han sido incluidas en un bloque. Este grupo de transacciones es lo que se conoce como mempool (o memoria de reserva - \“memory pool\” en inglés), y cada ordenador conectado a la red de bitcoin guarda su propia mempool. Una transacción que está \“en la mempool\” (lo que indica que la mayoría de nodos la han visto y la han añadido a su \“mempool\”) significa que ha sido reconocida por la red, aunque no se ha hecho oficial en la cadena de bloques.</string>
     <string name="t4_p2">Para hacerla oficial, los mineros de bitcoin necesitan minar un bloque con la transacción incluida.</string>

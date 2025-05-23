@@ -8,8 +8,6 @@
 <resources>
     <string name="C1_title">What is the Bitcoin Signet?</string>
 
-    <string name="t1_h1">What is the Bitcoin Signet?</string>
-
     <string name="t1_p1">Bitcoin networks are made up of thousands of computers across the world. These computers speak a common language and communicate directly with each other over the internet.</string>
     <string name="t1_p2">You might not know, but there are many bitcoin networks! They break into two families: the main network (there is only one of those) and the test networks (there are many of those!).</string>
 

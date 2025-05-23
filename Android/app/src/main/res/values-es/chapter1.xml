@@ -8,8 +8,6 @@
 <resources>
     <string name="C1_title">¿Qué es el Bitcoin Signet?</string>
 
-    <string name="t1_h1">¿Qué es el Bitcoin Signet?</string>
-
     <string name="t1_p1">Las redes de Bitcoin están compuestas por miles de computadoras en todo el mundo. Estas computadoras hablan un lenguaje común y se comunican directamente entre sí a través de internet.</string>
     <string name="t1_p2">Tal vez no lo sepas, pero ¡existen muchas redes de bitcoin! Se dividen en dos familias: la red principal (solo hay una de esas) y las redes de prueba (¡hay muchas de esas!).</string>
 

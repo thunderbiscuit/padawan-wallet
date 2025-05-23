@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="C7_title">What is a recovery phrase?</string>
-    <string name="C7_tagline">Learn how to keep your wallet and your funds safe.</string>
 
     <string name="C7_p1">You can think of your wallet as a tree, and the addresses it generates as its leaves (remember that you use a new address every time you receive bitcoin). The number of addresses that can be generated from this tree is near-infinite, but the only necessary part of backing up such a \"tree of addresses\" is to remember the root of the tree. Each new root will generate a completely new tree, but any wallet can recreate the whole tree simply by starting with the root.</string>
     <string name="C7_p2">Modern bitcoin wallets use a process called deterministic key generation. Every new address your wallet produces is generated non-randomly. This gives them the property of being very flexible in terms of generating new addresses, while not having to remember them all individually (you do not have to make individual backups for all the addresses to which you received bitcoin).</string>

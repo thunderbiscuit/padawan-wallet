@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="C2_title">Recibir bitcoin</string>
-    <string name="C2_tagline">¿Cómo se recibe bitcoin?</string>
 
     <string name="t2_p1">Para recibir bitcoin, debes solicitar a tu cartera (una como Padawan) que genere una nueva dirección de recepción. Cada vez que recibas bitcoin, tu cartera utilizará una nueva dirección.</string>
     <string name="t2_p2">Para que sea más fácil de compartir, te mostramos la dirección de dos formas habituales:</string>

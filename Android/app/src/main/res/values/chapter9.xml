@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="C9_title">The different types of wallets</string>
-    <string name="C9_tagline">Hot wallets, cold wallets, hardware wallets, mobile wallets… what you need to know!</string>
 
     <string name="t9_h1">Why is there more than one type of wallet?</string>
     <string name="t9_p1">A bitcoin wallet secures a set of cryptographic keys (very big and important numbers). It is important to protect these keys, and ensure they are not accessed by anyone other than the wallet owner.</string>

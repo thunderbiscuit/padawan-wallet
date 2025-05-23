@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="C9_title">Los diferentes tipos de carteras</string>
-    <string name="C9_tagline">Carteras calientes, carteras frías, carteras físicas, carteras móviles… ¡lo que necesitas saber!</string>
 
     <string name="t9_h1">¿Por qué hay más de un tipo de cartera?</string>
     <string name="t9_p1">Una cartera de bitcoin protege un juego de claves criptográficas (números muy grandes e importantes). Es importante proteger estas claves, y asegurarse de que nadie accede a ellas salvo el propietario de la cartera.</string>

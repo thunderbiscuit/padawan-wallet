@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="C6_title">Unidades de bitcoin</string>
-    <string name="C6_tagline">Satoshis, bitcoins e muito mais.</string>
 
     <string name="t6_p1">A palavra bitcoin tem alguns significados. Ao se referir ao bitcoin, as pessoas às vezes querem dizer A) a rede, o protocolo, o projeto de código aberto ou B) uma das unidades de valor ao realizar transações na rede bitcoin.</string>
 

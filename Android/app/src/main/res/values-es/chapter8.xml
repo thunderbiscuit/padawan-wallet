@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="C8_title">Recuperar tu cartera</string>
-    <string name="C8_tagline">Descubre cómo puedes utilizar las palabras de recuperación para importar una cartera preexistente en tu dispositivo.</string>
 
     <string name="C8_p1">Reestablecer una cartera a partir de las palabras de recuperación es normalmente bastante fácil. Las palabras de recuperación (también conocido como frase mnemónica) utiliza un estándar llamado BIP39, el cual proporciona una forma común para recuperar tus monedas en diferentes carteras. El patrón habitual para respaldar y recuperar una cartera es el siguiente:</string>
     <string name="C8_p2">1. Creamos una cartera y el programa o la aplicación nos proporcionará 12 o 24 palabras para que las anotemos y las guardemos. El orden de estas palabras es importante, asique asegúrate de anotarlas en el orden correcto. En Padawan, podrás ver las 12 palabras cuando quieras entrando en la pantalla de \“Palabras de recuperación\” en el menú.</string>

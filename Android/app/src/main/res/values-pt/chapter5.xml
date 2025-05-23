@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="C5_title">O que são taxas de transação?</string>
-    <string name="C5_tagline">Transações têm taxas? Quais? Como? Para quem?</string>
 
     <string name="t5_p1">Agora você já conhece um pouco mais sobre transações. Existem muitas delas sendo enviadas, validadas, confirmadas e armazenadas na rede do Bitcoin 24 horas por dia. Isso é bastante custoso.</string>
     <string name="t5_p2">A rede Bitcoin só consegue validar uma determinada demanda recebida. Para garantir que a carga na rede permaneça leve e enxuta, há uma capacidade limitada de bytes que podem ser inseridos em um bloco.</string>

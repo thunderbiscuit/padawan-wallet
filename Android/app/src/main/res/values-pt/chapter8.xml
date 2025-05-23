@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="C8_title">Recuperando sua carteira.</string>
-    <string name="C8_tagline">Descubra como usar uma frase de recuperação para restaurar uma carteira já existente.</string>
 
     <string name="C8_p1">Restaurar uma carteira a partir de uma frase de recuperação é fácil. As frases de recuperação (Seed) usam o padrão chamado BIP39, que fornece uma maneira comum de recuperar moedas entre diferentes aplicativos de carteiras bitcoin. O procedimento usual para fazer backup e recuperar uma carteira é o seguinte:</string>
     <string name="C8_p2"> 1. Quando uma carteira é criada, o software informa 12 ou 24 palavras para você anotar e guardar. A ordem das palavras é importante, então certifique-se de escrevê-las na ordem correta. Na Padawan, você pode ver suas 12 palavras a qualquer momento acessando a tela “Frase de recuperação” no menu.</string>
