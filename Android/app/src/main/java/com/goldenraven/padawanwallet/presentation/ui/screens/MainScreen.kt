@@ -5,7 +5,6 @@
 
 package com.goldenraven.padawanwallet.presentation.ui.screens
 
-import android.util.Log
 import androidx.compose.foundation.clickable
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
@@ -39,16 +38,11 @@ private const val TAG = "RootScreen"
 @Composable
 internal fun MainScreen() {
     val navControllerWalletNavigation: NavHostController = rememberNavController()
-    // the splash screen hides the system bars
-    // we need to bring them back on before continuing
-    // SystemBars()
 
     Scaffold(
         bottomBar = { BottomNavigationBar(navControllerWalletNavigation) },
     ) { scaffoldPadding ->
-        Log.i(TAG, "The padding values are: $scaffoldPadding")
-        // We used to apply the padding values here on the box, but now we pass the insets for the
-        // system bars down to the composables that need them.
+        // We pass the insets for the system bars down to the composables that need them.
         WalletNavigation(
             paddingValues = scaffoldPadding,
             navHostController = navControllerWalletNavigation,
@@ -76,15 +70,6 @@ internal fun BottomNavigationBar(
         NavigationBar(
             tonalElevation = 0.dp,
             containerColor = PadawanColorsTatooineDesert.background2,
-            // containerColor = PadawanColors.background,
-            // modifier = Modifier.drawBehind {
-            //     drawLine(
-            //         Color(0xFFDFC8AF) ,
-            //         Offset(0f, 0f),
-            //         Offset(size.width, 0f),
-            //         3.dp.toPx()
-            //     )
-            // },
         ) {
             // This odd code is necessary to ensure the ripple effect is not shown on any part of the
             // navigation bar item. See commit a1fceda for more information.

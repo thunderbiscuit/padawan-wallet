@@ -166,12 +166,16 @@ class WalletViewModel(application: Application) : AndroidViewModel(application) 
     }
 
     private fun broadcastTransaction(tx: Transaction) {
-        try {
-            Wallet.broadcast(tx)
+        viewModelScope.launch {
+            withContext(Dispatchers.IO) {
+                try {
+                    Wallet.broadcast(tx)
+                } catch (e: Throwable) {
+                    Log.i(TAG, "Broadcast error: ${e.message}")
+                    "Error: ${e.message}"
+                }
+            }
             sync()
-        } catch (e: Throwable) {
-            Log.i(TAG, "Broadcast error: ${e.message}")
-            "Error: ${e.message}"
         }
     }
 

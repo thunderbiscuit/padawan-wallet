@@ -45,7 +45,6 @@ import com.goldenraven.padawanwallet.R
 import com.goldenraven.padawanwallet.presentation.theme.LocalPadawanColors
 import com.goldenraven.padawanwallet.presentation.theme.PadawanTheme
 import com.goldenraven.padawanwallet.presentation.theme.PadawanTypography
-import com.goldenraven.padawanwallet.presentation.theme.PadawanColorsTatooineDesert
 import com.goldenraven.padawanwallet.presentation.ui.components.PadawanAppBar
 import com.goldenraven.padawanwallet.presentation.ui.components.VerticalTextFieldDivider
 import com.goldenraven.padawanwallet.utils.copyToClipboard
@@ -63,8 +62,7 @@ internal fun SendCoinsBackScreen(
     val (copyClicked, setCopyClicked) = remember { mutableStateOf(false) }
 
     val copyAddressString = buildAnnotatedString {
-        // appendInlineContent(id = "copyAddressImageId")
-        if (!copyClicked) append(stringResource(id = R.string.copy_address_string)) else append(stringResource(R.string.textCopied))
+        if (!copyClicked) append(stringResource(id = R.string.copy_address_string)) else append(stringResource(R.string.text_copied))
     }
 
     val inlineContentMap = mapOf(
@@ -88,7 +86,7 @@ internal fun SendCoinsBackScreen(
     Scaffold(
         topBar = {
             PadawanAppBar(
-                title = stringResource(R.string.send_your_coins_back_to_us),
+                title = stringResource(R.string.send_signet_coins_back),
                 onClick = { navController.popBackStack() }
             )
         },
@@ -104,7 +102,7 @@ internal fun SendCoinsBackScreen(
             val returnAddress: String = stringResource(R.string.send_coins_back_address)
             Image(
                 painterResource(R.drawable.return_sats_faucet_address),
-                contentDescription = stringResource(R.string.return_sats_faucet_address_image),
+                contentDescription = stringResource(R.string.return_address_image),
                 modifier = Modifier.padding(start = 50.dp, end = 50.dp, bottom = 20.dp)
             )
             Row(

@@ -1,97 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- meta -->
-    <!-- <string name="app_name">Padawan Wallet</string> -->
-    <string name="padawan">Padawan</string>
-    <string name="elevator_pitch">a wallet de bitcoin para treino</string>
-
-    <!-- intro -->
-    <string name="welcome_statement">Bem-vindo à Padawan!\n\nEsse aplicativo é um lugar para aprender os recursos comuns das carteiras bitcoin.\n\nEla usa o <i><b>signet</b></i> do bitcoin, uma rede alternativa do bitcoin usada e construída exclusivamente para testes. As moedas nesta rede não têm nenhum valor, mas por outro lado parecem e se comportam como bitcoins normais!\n\nEssa carteira foi criada para usuários de todas as idades experimentarem e aprenderem sobre bitcoin em um ambiente livre de riscos.</string>
-    <string name="entry_button">Vamos lá!</string>
+    <string name="welcome_statement">Bem-vindo à Padawan!\n\nEsse aplicativo é um lugar para aprender os recursos comuns das carteiras bitcoin.\n\nEla usa o &lt;i&gt;&lt;b&gt;signet&lt;/b&gt;&lt;/i&gt; do bitcoin, uma rede alternativa do bitcoin usada e construída exclusivamente para testes. As moedas nesta rede não têm nenhum valor, mas por outro lado parecem e se comportam como bitcoins normais!\n\nEssa carteira foi criada para usuários de todas as idades experimentarem e aprenderem sobre bitcoin em um ambiente livre de riscos.</string>
     <string name="already_have_a_wallet">Eu já tenho uma\nCarteira Padawan\n(12-palavras de backup)</string>
-    <string name="create_new_wallet">Eu quero criar\numa nova carteira</string>
-    <string name="intro_dialog_message">É importante que você saiba que a Padawan é uma carteira de bitcoins signet (para testes) e não pode receber bitcoins normais.\n\nEsse aplicativo foi desenvolvido para ajudá-lo a aprender e experimentar o bitcoin por meio de uma série de tutoriais e usa moedas de signet, um tipo de bitcoin que não tem nenhum valor.\n\nLEMBRE-SE: A carteira só pode lidar com moedas de signet, que não são compatíveis com bitcoins normais!</string>
-    <string name="intro_dialog_title">Tenha cuidado!</string>
-    <string name="intro_dialog_positive">Eu entendi</string>
-    <string name="intro_dialog_negative">Cancelar</string>
     <string name="recover_wallet">Recuperar carteira</string>
-
-    <!-- wallet -->
-    <string name="tab_wallet">Carteira</string>
-    <string name="tab_chapters">Capítulos</string>
-    <string name="wallet_balance_section">Saldo (bitcoins de signet)</string>
-    <string name="transaction_history_section">Histórico de transações</string>
     <string name="sync">atualizar</string>
     <string name="send">Enviar</string>
     <string name="receive">Receber</string>
-    <string name="receive_screen_title">Receber bitcoin (signet)</string>
-    <string name="generate_new_address">Gerar novo endereço</string>
-    <string name="back_to_wallet">Voltar à carteira</string>
-    <string name="send_screen_title">Construir transação (signet)</string>
-    <string name="send_to_address">Enviar para</string>
-    <string name="fee_rate">Taxa:</string>
     <string name="amount">Quantidade</string>
-    <string name="amount_2">quantidade</string>
     <string name="verify_transaction">Conferir transação</string>
-    <string name="network_fee">Taxa de rede</string>
-    <string name="amount_transacted">Quantidade transacionada (satoshis):</string>
-    <string name="broadcast_screen_title">Enviar transação (signet)</string>
-    <string name="to_address">Para o endereço:</string>
-    <string name="total">Total:</string>
-    <string name="broadcast_transaction_button">Enviar transação</string>
-    <string name="back_to_transaction_build">Voltar para construir transação</string>
-    <string name="bitcoin_sign">Ƀ</string>
-    <string name="copy_address">copiar endereço</string>
-    <string name="satoshi_vbyte">satoshi/vbyte</string>
-    <string name="in_satoshis">(em satoshis)</string>
-    <string name="scan">Ler QR code</string>
     <string name="address">Endereço</string>
-
-    <!-- chapters -->
-    <string name="essentials_section_name">Essenciais</string>
-    <string name="concept">Conceito</string>
-    <string name="skill">Habilidades</string>
-
-
-    <string name="tutorial_done">Marcar tutorial\ncomo concluído</string>
-    <string name="back_to_list">Voltar à lista de tutoriais</string>
-    <string name="basic">Básico</string>
-    <string name="advanced">Avançado</string>
-
-    <!-- drawer -->
-    <string name="about_title">Sobre</string>
-    <string name="recovery_phrase_title">Frase de recuperação</string>
-    <string name="settings_title">Configurações</string>
-    <string name="send_coins_back_title">Devolver bitcoins(signet) não usados</string>
     <string name="about_text">Padawan é uma carteira somente com bitcoin signet e com tutoriais para aprender sobre como usar carteiras bitcoin. Construimos o aplicativo que você vai querer recomendar aos seus amigos que sempre fazem perguntas sobre bitcoin!\n\nA Padawan é para pessoas de todas as idades e se propõe ser uma ferramenta de estudo e prática, sendo o instrumento para que usuários se habituem com o fluxo de transações e jargão básico do ecossistema bitcoin, sendo em um ambiente livre de riscos, perfeito para experimentação e aprendizagem (bitcoin de signet). O bitcoin signet é utilizado bastante em desenvolvimento de software, mas acreditamos que pode ser aproveitado por pessoas curiosas sobre bitcoin em todos os lugares.\n\n A Padawan é um projeto colaborativo gratuito de código aberto (licenciado pelo Apache 2.0). Se você tiver comentários para nós, deixe-o na Play Store ou no nosso repositório no GitHub!</string>
     <string name="send_coins_back">Bitcoins de signet podem ser difíceis de adquirir e, embora não tenham valor de mercado, não são infinitos, então evite desperdiçá-las ou perdê-las!\n\nDepois de terminar o uso da Padawan  e seu treino, por favor considere devolver os bitcoins de signet que sobraram para o projeto Padawan, assim podemos continuar enviando moedas para novos usuários. Use o endereço acima para nos enviar suas moedas de volta.</string>
-    <string name="open">Open drawer</string>
-    <string name="close">Close drawer</string>
-    <string name="reset_tutorials">Resetar tutoriais concluídos</string>
-    <string name="request_signet_coins">Solicite bitcoins de signet!</string>
-    <string name="privacyLink">https://github.com/thunderbiscuit/padawan-wallet/blob/master/PRIVACY</string>
-    <string name="privacyText">A Padawan Wallet não coleta nenhuma informação sobre seus usuários e não usa Firebase Crashlytics. Isto, no entanto, significa que é muito mais difícil para nós ouvir sobre os bugs dos nossos usuários. Se você tiver comentários, sinta-se à vontade para enviar uma mensagem para a conta da Padawan no Twitter/X (@padawanwallet) ou nos escrever um e-mail. Você pode ler nossa política de privacidade completa aqui:</string>
+    <string name="privacy_link">https://github.com/thunderbiscuit/padawan-wallet/blob/master/PRIVACY</string>
+    <string name="privacy_text">A Padawan Wallet não coleta nenhuma informação sobre seus usuários e não usa Firebase Crashlytics. Isto, no entanto, significa que é muito mais difícil para nós ouvir sobre os bugs dos nossos usuários. Se você tiver comentários, sinta-se à vontade para enviar uma mensagem para a conta da Padawan no Twitter/X (@padawanwallet) ou nos escrever um e-mail. Você pode ler nossa política de privacidade completa aqui:</string>
     <string name="send_coins_back_address">tb1pjeu9rw9cwpmya0p85x9l27vp8hqd2hx2lwggta2fgm7u0gvua6asf8zrqw</string>
     <string name="copy_address_string">Copiar</string>
-    <string name="error_faucet">Erro: bitcoins de treino (signet) não disponíveis</string>
-    <string name="one_time_faucet">Erro: você\já recebeu bitcoins de signet!</string>
-    <string name="textCopied">Copiado</string>
+    <string name="text_copied">Copiado</string>
     <string name="cancel">Cancelar</string>
     <string name="generate_a_new_address">Gerar um novo endereço</string>
     <string name="fees_sats_vbytes">Taxas (sats/vbytes)</string>
     <string name="enter_amount_sats">Inserir quantidade (sats)</string>
-    <string name="enter_a_bitcoin_signet_address">Insira um endereço bitcoin de signet</string>
+    <string name="enter_signet_address">Insira um endereço bitcoin de signet</string>
     <string name="padawan_journey">Jornada Padawan</string>
     <string name="continue_on_your_journey">Continue em sua jornada de aprendizado sobre bitcoin.</string>
     <string name="getting_started">Começar</string>
     <string name="transactions">Transações</string>
-    <string name="wallets">Carteiras</string>
-    <string name="chapter">Capítulo %1$s</string>
-    <string name="start_chapter">Iniciar capítulo</string>
     <string name="next">Próximo</string>
-    <string name="previous">Anterior</string>
     <string name="finish">Concluir</string>
     <string name="back_to_lessons">Voltar para as lições</string>
-    <string name="section">Selecionar %1$s: %2$s</string>
     <string name="transaction_details">Detalhes da transação</string>
     <string name="total_transaction_amount">Quantidade total da transação:</string>
     <string name="transaction_type">Tipo de transação:</string>
@@ -101,12 +37,9 @@
     <string name="fees_paid">Taxas pagas:</string>
     <string name="back_icon">Ícone anterior</string>
     <string name="image">imagem</string>
-    <string name="next_icon">Próximo ícone</string>
-    <string name="of_3_done">de 3 concluído</string>
     <string name="padawan_logo">Logotipo da Padawan</string>
     <string name="padawan_wallet">Carteira Padawan</string>
     <string name="create_a_wallet">Criar uma nova carteira</string>
-    <string name="recover_it_here">Recuperar aqui</string>
     <string name="recover_a_wallet">Recupere a carteira</string>
     <string name="enter_your_12_words">Insira abaixo suas 12 palavras da frase de recuperação</string>
     <string name="about_padawan">Sobre a Padawan</string>
@@ -114,14 +47,13 @@
     <string name="your_recovery_phrase">Sua frase de recuperação</string>
     <string name="checkmark_image">Imagem de marcação de concluído</string>
     <string name="copy_to_clipboard_image">Imagem de copiar para área de transferência</string>
-    <string name="send_your_coins_back_to_us">Envie seus bitcoins signet devolta para nós!</string>
-    <string name="return_sats_faucet_address_image">Imagem de retornar o endereço do faucet dos sats</string>
+    <string name="send_your_coins_back">Envie seus bitcoins signet devolta para nós!</string>
+    <string name="return_address_image">Imagem de retornar o endereço do faucet dos sats</string>
     <string name="settings">Configurações</string>
     <string name="everything_else">Aqui estão as configurações que você precisa no aplicativo</string>
     <string name="recovery_phrase">Frase de recuperação</string>
-    <string name="scan_icon">Ícone de ler (escanear)</string>
     <string name="send_signet_coins_back">Envie seus bitcoins signet devolta para nós</string>
-    <string name="chapters_reset_successful">Capítulos resetados com sucesso</string>
+    <string name="lessons_reset_successful">Capítulos resetados com sucesso</string>
     <string name="reset_completed_chapters">Resetar capítulos concluídos</string>
     <string name="receive_bitcoin">Receber bitcoin signet</string>
     <string name="qr_code">QR Code</string>
@@ -129,30 +61,24 @@
     <string name="balance">Saldo:</string>
     <string name="scan_qr_icon">ìcone de escanear QR code</string>
     <string name="confirm_transaction">Confirmar Transação</string>
-    <string name="your_device_is_not_connected_to_the_internet">Seu dispositivo não está conectado à internet!</string>
+    <string name="no_network">Seu dispositivo não está conectado à internet!</string>
     <string name="confirm_and_broadcast">Confirmar e transmitir</string>
     <string name="amount_error_message">Insira a quantidade!</string>
     <string name="address_error_message">Insira o endereço!</string>
     <string name="fee_rate_error_message">Insira a taxa!</string>
-    <string name="back_online">Conectado novamente!</string>
-    <string name="no_internet_connection">Sem conexão com a Internet!</string>
-    <string name="connectivity_icon">Ícone de conectividade</string>
     <string name="send_icon">Ícone de enviar</string>
     <string name="receive_icon">Ícone de receber</string>
     <string name="block">Bloco:</string>
-    <string name="currently_unable_to_access_network">Não é possível acessar a rede no momento</string>
+    <string name="unable_to_access_network">Não é possível acessar a rede no momento</string>
     <string name="bitcoin_signet">bitcoin signet</string>
-    <string name="looks_like_your_transaction_list_is_empty">Opa! Parece que sua lista de transações está vazia e você não tem nenhum saldo. Clique abaixo em "Receber bitcoins signet, carregue seu saldo para poder treinar.</string>
-    <string name="get_coins_icon">Ícone de receber bitcoins</string>
+    <string name="transaction_list_empty">Opa! Parece que sua lista de transações está vazia e você não tem nenhum saldo. Clique abaixo em Receber bitcoins signet, carregue seu saldo para poder treinar.</string>
     <string name="currency_toggle_text">Texto de alteração de moeda</string>
     <string name="changing_color_animation">Alterando animação de cores</string>
     <string name="hello_there">Olá</string>
-    <string name="would_you_like_to_receive_some_signet_bitcoin">Para ajudá-lo a começar a aprender sobre bitcoin, a Padawan Wallet pode enviar alguns bitcoins signet para que você possa acompanhar os capítulos e enviá-los aos amigos!\n\nGostaria de receber algum bitcoin signet?</string>
+    <string name="faucet_dialog">Para ajudá-lo a começar a aprender sobre bitcoin, a Padawan Wallet pode enviar alguns bitcoins signet para que você possa acompanhar os capítulos e enviá-los aos amigos!\n\nGostaria de receber algum bitcoin signet?</string>
     <string name="no_thank_you_icon">Ícone de não, obrigado</string>
     <string name="proceed_icon">ícone de prosseguir</string>
-    <string name="no_internet_access">Sem acesso à internet!</string>
-    <string name="select_your_preferred_language">Selecione seu idioma preferido e tema de cores para usar a Carteira Padawan.</string>
-    <string name="transaction_was_broadcast_successfully">Transação enviada com sucesso!</string>
+    <string name="select_language">Selecione seu idioma preferido e tema de cores para usar a Carteira Padawan.</string>
     <string name="get_coins">Receber bitcoins signet</string>
     <string name="bottom_nav_wallet">Carteira</string>
     <string name="bottom_nav_chapters">Aprenda</string>

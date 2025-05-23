@@ -164,7 +164,7 @@ fun NoNetworkBanner(onAction: (WalletAction) -> Unit) {
             verticalAlignment = Alignment.CenterVertically,
         ) {
             Text(
-                text = stringResource(R.string.currently_unable_to_access_network),
+                text = stringResource(R.string.unable_to_access_network),
                 fontSize = fontSize
             )
         }
@@ -423,7 +423,7 @@ fun TransactionListBox(
                     modifier = Modifier.verticalScroll(state = scrollState).background(PadawanColorsTatooineDesert.background)
                 ) {
                     Text(
-                        text = stringResource(R.string.looks_like_your_transaction_list_is_empty),
+                        text = stringResource(R.string.transaction_list_empty),
                         style = PadawanTypography.bodyMedium,
                         modifier = Modifier.padding(all = 8.dp)
                     )
@@ -580,7 +580,7 @@ private fun FaucetDialog(
         },
         text = {
             Text(
-                text = stringResource(R.string.would_you_like_to_receive_some_signet_bitcoin),
+                text = stringResource(R.string.faucet_dialog),
                 fontSize = 18.sp,
                 lineHeight = 24.sp,
                 color = colors.textLight

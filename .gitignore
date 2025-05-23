@@ -30,3 +30,6 @@ PadawanBdkWrapper.xcframework/
 DerivedData-device/
 DerivedData-simulator/
 PadawanBdkWrapper.def
+
+# Localization
+android-strings/

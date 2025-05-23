@@ -142,7 +142,7 @@ internal fun SettingsRootScreen(
                 thickness = 1.dp
             )
 
-            val chaptersResetMessage = stringResource(R.string.chapters_reset_successful)
+            val chaptersResetMessage = stringResource(R.string.lessons_reset_successful)
             Button(
                 onClick = {
                     onAction(ChaptersScreensAction.ResetAllChapters)

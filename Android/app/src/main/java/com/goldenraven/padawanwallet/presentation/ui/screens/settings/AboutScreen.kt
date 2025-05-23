@@ -41,7 +41,7 @@ internal fun AboutScreen(
 ) {
     val scrollState = rememberScrollState()
     val mUriHandler = LocalUriHandler.current
-    val privacyLink = stringResource(id = R.string.privacyLink)
+    val privacyLink = stringResource(id = R.string.privacy_link)
     val openPrivacyLink = remember { { mUriHandler.openUri(privacyLink) } }
     val colors = LocalPadawanColors.current
 
@@ -69,7 +69,7 @@ internal fun AboutScreen(
             )
             Spacer(Modifier.height(24.dp))
             Text(
-                text = stringResource(R.string.privacyText),
+                text = stringResource(R.string.privacy_text),
                 style = PadawanTypography.bodyMedium,
                 color = colors.textLight,
             )

@@ -52,7 +52,7 @@ internal fun LanguagesScreen(
                 .fillMaxSize()
         ) {
             Text(
-                text = stringResource(R.string.select_your_preferred_language),
+                text = stringResource(R.string.select_language),
                 style = PadawanTypography.bodyMedium,
                 color = colors.textLight
             )
