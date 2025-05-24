@@ -6,7 +6,7 @@
 package com.coyotebitcoin.padawanwallet.presentation.viewmodels.mvi
 
 import androidx.compose.runtime.Stable
-import com.coyotebitcoin.padawanwallet.utils.QrUiState
+import com.coyotebitcoin.padawanwallet.domain.utils.QrUiState
 
 @Stable
 data class ReceiveScreenState(

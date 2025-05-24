@@ -18,11 +18,10 @@ import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import com.coyotebitcoin.padawanwallet.R
 import com.coyotebitcoin.padawanwallet.presentation.theme.PadawanTheme
-import com.coyotebitcoin.padawanwallet.presentation.theme.PadawanColorsTatooineDesert
 import com.composables.core.Icon
 import com.composables.icons.lucide.ArrowLeft
 import com.composables.icons.lucide.Lucide
-import com.coyotebitcoin.padawanwallet.domain.PadawanColorTheme
+import com.coyotebitcoin.padawanwallet.domain.settings.PadawanColorTheme
 
 private const val TAG = "PadawanAppBar"
 

@@ -32,15 +32,14 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.navigation.NavController
 import com.coyotebitcoin.padawanwallet.R
 import com.coyotebitcoin.padawanwallet.presentation.navigation.WalletRecoveryScreen
 import com.coyotebitcoin.padawanwallet.presentation.theme.PadawanTypography
 import com.coyotebitcoin.padawanwallet.presentation.theme.standardShadow
 import com.coyotebitcoin.padawanwallet.presentation.ui.components.standardBorder
-import com.coyotebitcoin.padawanwallet.utils.ScreenSizeHeight
-import com.coyotebitcoin.padawanwallet.utils.getScreenSizeHeight
+import com.coyotebitcoin.padawanwallet.presentation.utils.ScreenSizeHeight
+import com.coyotebitcoin.padawanwallet.presentation.utils.getScreenSizeHeight
 import androidx.compose.material3.Text
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Devices
@@ -48,7 +47,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.rememberNavController
 import com.coyotebitcoin.padawanwallet.presentation.theme.LocalPadawanColors
 import com.coyotebitcoin.padawanwallet.presentation.theme.PadawanTheme
-import com.coyotebitcoin.padawanwallet.utils.WalletCreateType
+import com.coyotebitcoin.padawanwallet.domain.utils.WalletCreateType
 
 private const val TAG = "OnboardingScreen"
 

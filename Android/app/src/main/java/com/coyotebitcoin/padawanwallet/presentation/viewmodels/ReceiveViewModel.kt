@@ -14,7 +14,7 @@ import androidx.lifecycle.viewModelScope
 import com.coyotebitcoin.padawanwallet.domain.bitcoin.Wallet
 import com.coyotebitcoin.padawanwallet.presentation.viewmodels.mvi.ReceiveScreenAction
 import com.coyotebitcoin.padawanwallet.presentation.viewmodels.mvi.ReceiveScreenState
-import com.coyotebitcoin.padawanwallet.utils.QrUiState
+import com.coyotebitcoin.padawanwallet.domain.utils.QrUiState
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.bitcointools.bip21.Bip21URI

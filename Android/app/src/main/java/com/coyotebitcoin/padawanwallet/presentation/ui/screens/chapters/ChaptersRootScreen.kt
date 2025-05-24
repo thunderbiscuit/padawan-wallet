@@ -25,7 +25,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.coyotebitcoin.padawanwallet.R
-import com.coyotebitcoin.padawanwallet.domain.PadawanColorTheme
+import com.coyotebitcoin.padawanwallet.domain.settings.PadawanColorTheme
 import com.coyotebitcoin.padawanwallet.presentation.navigation.ChapterScreen
 import com.coyotebitcoin.padawanwallet.presentation.theme.PadawanTheme
 import com.coyotebitcoin.padawanwallet.presentation.theme.PadawanTypography
@@ -33,8 +33,8 @@ import com.coyotebitcoin.padawanwallet.presentation.theme.PadawanColorsTatooineD
 import com.coyotebitcoin.padawanwallet.presentation.ui.components.SectionDivider
 import com.coyotebitcoin.padawanwallet.presentation.ui.components.SectionTitle
 import com.coyotebitcoin.padawanwallet.presentation.ui.components.TutorialCard
-import com.coyotebitcoin.padawanwallet.utils.ScreenSizeWidth
-import com.coyotebitcoin.padawanwallet.utils.getScreenSizeWidth
+import com.coyotebitcoin.padawanwallet.presentation.utils.ScreenSizeWidth
+import com.coyotebitcoin.padawanwallet.presentation.utils.getScreenSizeWidth
 import com.coyotebitcoin.padawanwallet.presentation.viewmodels.mvi.ChaptersRootState
 import com.coyotebitcoin.padawanwallet.presentation.viewmodels.mvi.ChaptersScreensAction
 

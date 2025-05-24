@@ -10,7 +10,7 @@ import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.staticCompositionLocalOf
-import com.coyotebitcoin.padawanwallet.domain.PadawanColorTheme
+import com.coyotebitcoin.padawanwallet.domain.settings.PadawanColorTheme
 
 val LocalPadawanColors = staticCompositionLocalOf<PadawanColors> { PadawanColorsTatooineDesert }
 

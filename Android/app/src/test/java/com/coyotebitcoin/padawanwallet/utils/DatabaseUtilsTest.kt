@@ -5,6 +5,7 @@
 
 package com.coyotebitcoin.padawanwallet.utils
 
+import com.coyotebitcoin.padawanwallet.domain.utils.netSendWithoutFees
 import org.junit.Assert.assertEquals
 import org.junit.Test
 

@@ -31,7 +31,7 @@ import androidx.compose.ui.unit.sp
 import com.composables.icons.lucide.Circle
 import com.composables.icons.lucide.Lucide
 import com.coyotebitcoin.padawanwallet.R
-import com.coyotebitcoin.padawanwallet.domain.PadawanColorTheme
+import com.coyotebitcoin.padawanwallet.domain.settings.PadawanColorTheme
 import com.coyotebitcoin.padawanwallet.presentation.theme.Outfit
 import com.coyotebitcoin.padawanwallet.presentation.theme.PadawanTheme
 import com.coyotebitcoin.padawanwallet.presentation.theme.PadawanColorsTatooineDesert

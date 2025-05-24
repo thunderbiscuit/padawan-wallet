@@ -82,16 +82,16 @@ import com.coyotebitcoin.padawanwallet.presentation.theme.innerScreenPadding
 import com.coyotebitcoin.padawanwallet.presentation.theme.noRippleClickable
 import com.coyotebitcoin.padawanwallet.presentation.theme.PadawanColorsTatooineDesert
 import com.coyotebitcoin.padawanwallet.presentation.theme.standardShadow
-import com.coyotebitcoin.padawanwallet.utils.ClickHelper
-import com.coyotebitcoin.padawanwallet.utils.ScreenSizeWidth
-import com.coyotebitcoin.padawanwallet.utils.formatCurrency
-import com.coyotebitcoin.padawanwallet.utils.formatInBtc
-import com.coyotebitcoin.padawanwallet.utils.getScreenSizeWidth
+import com.coyotebitcoin.padawanwallet.presentation.utils.ClickHelper
+import com.coyotebitcoin.padawanwallet.presentation.utils.ScreenSizeWidth
+import com.coyotebitcoin.padawanwallet.domain.utils.formatCurrency
+import com.coyotebitcoin.padawanwallet.domain.utils.formatInBtc
+import com.coyotebitcoin.padawanwallet.presentation.utils.getScreenSizeWidth
 import com.coyotebitcoin.padawanwallet.presentation.viewmodels.mvi.WalletAction
 import com.coyotebitcoin.padawanwallet.presentation.viewmodels.mvi.WalletState
 import com.coyotebitcoin.padawanwallet.domain.bitcoin.TxType
 import com.coyotebitcoin.padawanwallet.presentation.theme.LocalPadawanColors
-import com.coyotebitcoin.padawanwallet.utils.timestampToString
+import com.coyotebitcoin.padawanwallet.domain.utils.timestampToString
 
 private const val TAG = "WalletRootScreen"
 

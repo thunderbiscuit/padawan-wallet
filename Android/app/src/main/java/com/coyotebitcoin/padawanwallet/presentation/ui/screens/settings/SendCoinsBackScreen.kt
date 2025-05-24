@@ -46,7 +46,7 @@ import com.coyotebitcoin.padawanwallet.presentation.theme.PadawanTheme
 import com.coyotebitcoin.padawanwallet.presentation.theme.PadawanTypography
 import com.coyotebitcoin.padawanwallet.presentation.ui.components.PadawanAppBar
 import com.coyotebitcoin.padawanwallet.presentation.ui.components.VerticalTextFieldDivider
-import com.coyotebitcoin.padawanwallet.utils.copyToClipboard
+import com.coyotebitcoin.padawanwallet.presentation.utils.copyToClipboard
 
 @Composable
 internal fun SendCoinsBackScreen(

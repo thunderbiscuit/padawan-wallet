@@ -17,8 +17,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import com.coyotebitcoin.padawanwallet.domain.PadawanColorTheme
-import com.coyotebitcoin.padawanwallet.domain.SettingsRepository
+import com.coyotebitcoin.padawanwallet.domain.settings.PadawanColorTheme
+import com.coyotebitcoin.padawanwallet.domain.settings.SettingsRepository
 import com.coyotebitcoin.padawanwallet.presentation.theme.LocalPadawanColors
 
 @Composable

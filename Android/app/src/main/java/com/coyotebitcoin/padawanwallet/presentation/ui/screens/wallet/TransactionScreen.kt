@@ -38,9 +38,9 @@ import com.coyotebitcoin.padawanwallet.presentation.theme.PadawanTypography
 import com.coyotebitcoin.padawanwallet.presentation.theme.innerScreenPadding
 import com.coyotebitcoin.padawanwallet.presentation.theme.PadawanColorsTatooineDesert
 import com.coyotebitcoin.padawanwallet.presentation.ui.components.PadawanAppBar
-import com.coyotebitcoin.padawanwallet.utils.ScreenSizeWidth
-import com.coyotebitcoin.padawanwallet.utils.getScreenSizeWidth
-import com.coyotebitcoin.padawanwallet.utils.timestampToString
+import com.coyotebitcoin.padawanwallet.presentation.utils.ScreenSizeWidth
+import com.coyotebitcoin.padawanwallet.presentation.utils.getScreenSizeWidth
+import com.coyotebitcoin.padawanwallet.domain.utils.timestampToString
 
 private const val TAG = "TransactionScreen"
 

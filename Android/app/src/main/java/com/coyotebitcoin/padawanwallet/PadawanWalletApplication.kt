@@ -7,7 +7,7 @@ package com.coyotebitcoin.padawanwallet
 
 import android.app.Application
 import android.content.Context
-import com.coyotebitcoin.padawanwallet.domain.SettingsRepository
+import com.coyotebitcoin.padawanwallet.domain.settings.SettingsRepository
 import com.coyotebitcoin.padawanwallet.domain.tutorials.TutorialRepository
 import com.coyotebitcoin.padawanwallet.domain.bitcoin.WalletRepository
 import com.coyotebitcoin.padawanwallet.domain.bitcoin.Wallet

@@ -7,7 +7,7 @@ package com.coyotebitcoin.padawanwallet.domain.bitcoin
 
 import android.content.SharedPreferences
 import android.util.Log
-import com.coyotebitcoin.padawanwallet.utils.RequiredInitialWalletData
+import com.coyotebitcoin.padawanwallet.domain.utils.RequiredInitialWalletData
 
 private const val TAG = "WalletRepository"
 

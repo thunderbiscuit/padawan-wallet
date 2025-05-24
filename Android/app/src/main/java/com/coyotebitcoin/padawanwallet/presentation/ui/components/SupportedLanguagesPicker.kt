@@ -12,7 +12,6 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.selection.selectable
 import androidx.compose.material3.RadioButton
-import androidx.compose.material3.RadioButtonColors
 import androidx.compose.material3.RadioButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -23,11 +22,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.core.os.LocaleListCompat
-import com.coyotebitcoin.padawanwallet.domain.PadawanColorTheme
+import com.coyotebitcoin.padawanwallet.domain.settings.PadawanColorTheme
 import com.coyotebitcoin.padawanwallet.presentation.theme.LocalPadawanColors
 import com.coyotebitcoin.padawanwallet.presentation.theme.PadawanTheme
-import com.coyotebitcoin.padawanwallet.utils.SupportedLanguage
-import com.coyotebitcoin.padawanwallet.utils.getSupportedLanguageCode
+import com.coyotebitcoin.padawanwallet.domain.utils.SupportedLanguage
+import com.coyotebitcoin.padawanwallet.domain.utils.getSupportedLanguageCode
 
 private const val TAG = "SupportedLanguagesPicker"
 

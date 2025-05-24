@@ -28,7 +28,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import com.coyotebitcoin.padawanwallet.R
 import com.coyotebitcoin.padawanwallet.presentation.theme.PadawanTypography
 import com.coyotebitcoin.padawanwallet.presentation.theme.PadawanColorsTatooineDesert
-import com.coyotebitcoin.padawanwallet.utils.NavigationItem
+import com.coyotebitcoin.padawanwallet.presentation.utils.NavigationItem
 import com.coyotebitcoin.padawanwallet.presentation.navigation.WalletNavigation
 import androidx.navigation.compose.rememberNavController
 

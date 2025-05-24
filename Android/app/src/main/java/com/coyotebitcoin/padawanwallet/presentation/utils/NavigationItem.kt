@@ -3,15 +3,13 @@
  * Use of this source code is governed by the Apache 2.0 license that can be found in the ./LICENSE file.
  */
 
-package com.coyotebitcoin.padawanwallet.utils
+package com.coyotebitcoin.padawanwallet.presentation.utils
 
 import androidx.compose.ui.graphics.vector.ImageVector
 import com.composables.icons.lucide.GraduationCap
 import com.composables.icons.lucide.Lucide
 import com.composables.icons.lucide.Settings2
-import com.composables.icons.lucide.Wallet
 import com.composables.icons.lucide.WalletMinimal
-import com.coyotebitcoin.padawanwallet.R
 import com.coyotebitcoin.padawanwallet.presentation.navigation.AboutScreen
 import com.coyotebitcoin.padawanwallet.presentation.navigation.ChapterScreen
 import com.coyotebitcoin.padawanwallet.presentation.navigation.ChaptersRootScreen

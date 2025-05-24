@@ -49,10 +49,10 @@ import com.coyotebitcoin.padawanwallet.presentation.theme.standardShadow
 import com.coyotebitcoin.padawanwallet.presentation.ui.components.LoadingAnimation
 import com.coyotebitcoin.padawanwallet.presentation.ui.components.PadawanAppBar
 import com.coyotebitcoin.padawanwallet.presentation.ui.components.standardBorder
-import com.coyotebitcoin.padawanwallet.utils.ScreenSizeWidth
-import com.coyotebitcoin.padawanwallet.utils.addressToQR
-import com.coyotebitcoin.padawanwallet.utils.copyToClipboard
-import com.coyotebitcoin.padawanwallet.utils.getScreenSizeWidth
+import com.coyotebitcoin.padawanwallet.presentation.utils.ScreenSizeWidth
+import com.coyotebitcoin.padawanwallet.domain.utils.addressToQR
+import com.coyotebitcoin.padawanwallet.presentation.utils.copyToClipboard
+import com.coyotebitcoin.padawanwallet.presentation.utils.getScreenSizeWidth
 import com.coyotebitcoin.padawanwallet.presentation.viewmodels.mvi.ReceiveScreenAction
 import com.coyotebitcoin.padawanwallet.presentation.viewmodels.mvi.ReceiveScreenState
 import androidx.compose.ui.Alignment.Companion.BottomCenter
@@ -62,8 +62,8 @@ import androidx.compose.ui.graphics.Color
 import com.composables.icons.lucide.ClipboardCopy
 import com.composables.icons.lucide.Lucide
 import com.coyotebitcoin.padawanwallet.presentation.theme.LocalPadawanColors
-import com.coyotebitcoin.padawanwallet.utils.QrUiState
-import com.coyotebitcoin.padawanwallet.utils.logRecomposition
+import com.coyotebitcoin.padawanwallet.domain.utils.QrUiState
+import com.coyotebitcoin.padawanwallet.presentation.utils.logRecomposition
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 

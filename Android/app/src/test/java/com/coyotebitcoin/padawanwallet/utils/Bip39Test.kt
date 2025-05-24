@@ -5,6 +5,8 @@
 
 package com.coyotebitcoin.padawanwallet.utils
 
+import com.coyotebitcoin.padawanwallet.domain.utils.WordCheckResult
+import com.coyotebitcoin.padawanwallet.domain.utils.checkWords
 import org.junit.Test
 import org.junit.Assert.*
 

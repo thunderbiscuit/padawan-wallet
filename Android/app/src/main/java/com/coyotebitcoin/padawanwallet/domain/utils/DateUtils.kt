@@ -3,12 +3,17 @@
  * Use of this source code is governed by the Apache 2.0 license that can be found in the ./LICENSE file.
  */
 
-package com.coyotebitcoin.padawanwallet.utils
+package com.coyotebitcoin.padawanwallet.domain.utils
 
 import android.text.format.DateFormat
-import java.time.*
+import java.time.Duration
+import java.time.Instant
+import java.time.LocalDate
+import java.time.Period
+import java.time.ZoneId
 import java.time.format.DateTimeFormatter
-import java.util.*
+import java.util.Calendar
+import java.util.Locale
 
 fun getDateDifference(date: String): String {
     val dateTimeFormatter = DateTimeFormatter.ofPattern("MMMM d yyyy HH:mm")

@@ -50,7 +50,7 @@ import com.coyotebitcoin.padawanwallet.R
 import com.coyotebitcoin.padawanwallet.presentation.theme.standardShadow
 import com.coyotebitcoin.padawanwallet.presentation.ui.components.standardBorder
 import com.coyotebitcoin.padawanwallet.presentation.viewmodels.mvi.WalletAction
-import com.coyotebitcoin.padawanwallet.utils.QRCodeAnalyzer
+import com.coyotebitcoin.padawanwallet.domain.utils.QRCodeAnalyzer
 import org.bitcointools.bip21.Bip21URI
 
 private const val TAG = "QRScanScreen"

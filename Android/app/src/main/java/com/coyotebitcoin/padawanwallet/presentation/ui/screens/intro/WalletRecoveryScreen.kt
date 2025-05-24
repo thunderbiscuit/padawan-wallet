@@ -55,9 +55,9 @@ import com.coyotebitcoin.padawanwallet.presentation.theme.PadawanTypography
 import com.coyotebitcoin.padawanwallet.presentation.theme.PadawanColorsTatooineDesert
 import com.coyotebitcoin.padawanwallet.presentation.theme.standardShadow
 import com.coyotebitcoin.padawanwallet.presentation.ui.components.standardBorder
-import com.coyotebitcoin.padawanwallet.utils.WalletCreateType
-import com.coyotebitcoin.padawanwallet.utils.WordCheckResult
-import com.coyotebitcoin.padawanwallet.utils.checkWords
+import com.coyotebitcoin.padawanwallet.domain.utils.WalletCreateType
+import com.coyotebitcoin.padawanwallet.domain.utils.WordCheckResult
+import com.coyotebitcoin.padawanwallet.domain.utils.checkWords
 import kotlinx.coroutines.launch
 
 private const val TAG = "WalletRecoveryScreen"

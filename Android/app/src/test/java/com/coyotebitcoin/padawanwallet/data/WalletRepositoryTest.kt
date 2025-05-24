@@ -2,7 +2,7 @@ package com.coyotebitcoin.padawanwallet.data
 
 import android.content.SharedPreferences
 import com.coyotebitcoin.padawanwallet.domain.bitcoin.WalletRepository
-import com.coyotebitcoin.padawanwallet.utils.RequiredInitialWalletData
+import com.coyotebitcoin.padawanwallet.domain.utils.RequiredInitialWalletData
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test

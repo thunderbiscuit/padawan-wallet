@@ -6,8 +6,8 @@
 package com.coyotebitcoin.padawanwallet.domain.bitcoin
 
 import android.util.Log
-import com.coyotebitcoin.padawanwallet.utils.RequiredInitialWalletData
-import com.coyotebitcoin.padawanwallet.utils.netSendWithoutFees
+import com.coyotebitcoin.padawanwallet.domain.utils.RequiredInitialWalletData
+import com.coyotebitcoin.padawanwallet.domain.utils.netSendWithoutFees
 import org.bitcoindevkit.Address
 import org.bitcoindevkit.AddressInfo
 import org.bitcoindevkit.Connection

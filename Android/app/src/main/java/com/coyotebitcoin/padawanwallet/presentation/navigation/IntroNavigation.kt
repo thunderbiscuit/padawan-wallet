@@ -14,7 +14,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.NavHostController
 import com.coyotebitcoin.padawanwallet.presentation.ui.screens.intro.OnboardingScreen
 import com.coyotebitcoin.padawanwallet.presentation.ui.screens.intro.WalletRecoveryScreen
-import com.coyotebitcoin.padawanwallet.utils.WalletCreateType
+import com.coyotebitcoin.padawanwallet.domain.utils.WalletCreateType
 
 @Composable
 fun IntroNavigation(onBuildWalletButtonClicked: (WalletCreateType) -> Unit) {

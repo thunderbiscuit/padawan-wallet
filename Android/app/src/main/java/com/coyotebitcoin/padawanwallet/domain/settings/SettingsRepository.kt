@@ -3,7 +3,7 @@
  * Use of this source code is governed by the Apache 2.0 license that can be found in the ./LICENSE file.
  */
 
-package com.coyotebitcoin.padawanwallet.domain
+package com.coyotebitcoin.padawanwallet.domain.settings
 
 import android.content.SharedPreferences
 import androidx.core.content.edit
