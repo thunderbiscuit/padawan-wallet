@@ -5,7 +5,7 @@
 
 package com.coyotebitcoin.padawanwallet.presentation.viewmodels.mvi
 
-import com.coyotebitcoin.padawanwallet.domain.tutorials.ChapterElement
+import com.coyotebitcoin.padawanwallet.data.ChapterElement
 
 data class ChaptersRootState(
     val completedChapters: Map<Int, Boolean> = mapOf(

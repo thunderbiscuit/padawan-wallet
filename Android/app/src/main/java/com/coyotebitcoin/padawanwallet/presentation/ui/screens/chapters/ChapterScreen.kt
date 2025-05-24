@@ -49,8 +49,8 @@ import com.composables.core.Icon
 import com.composables.icons.lucide.ArrowLeft
 import com.composables.icons.lucide.Lucide
 import com.coyotebitcoin.padawanwallet.R
-import com.coyotebitcoin.padawanwallet.domain.tutorials.ElementType
-import com.coyotebitcoin.padawanwallet.domain.tutorials.Page
+import com.coyotebitcoin.padawanwallet.data.ElementType
+import com.coyotebitcoin.padawanwallet.data.Page
 import com.coyotebitcoin.padawanwallet.presentation.theme.LocalPadawanColors
 import com.coyotebitcoin.padawanwallet.presentation.theme.PadawanTypography
 import com.coyotebitcoin.padawanwallet.presentation.theme.PadawanColorsTatooineDesert
