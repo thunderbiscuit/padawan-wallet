@@ -34,8 +34,8 @@ android {
         targetSdk = 35
         // This version code must be updated for each release but the version on the master branch
         // stays at 1.
-        versionCode = 1
-        versionName = "v0.16.0-SNAPSHOT"
+        versionCode = 2
+        versionName = "v0.16.0"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
         resValue(
