@@ -24,30 +24,30 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Devices
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.coyotebitcoin.padawanwallet.R
+import com.coyotebitcoin.padawanwallet.domain.utils.WalletCreateType
 import com.coyotebitcoin.padawanwallet.presentation.navigation.WalletRecoveryScreen
+import com.coyotebitcoin.padawanwallet.presentation.theme.LocalPadawanColors
+import com.coyotebitcoin.padawanwallet.presentation.theme.PadawanTheme
 import com.coyotebitcoin.padawanwallet.presentation.theme.PadawanTypography
 import com.coyotebitcoin.padawanwallet.presentation.theme.standardShadow
 import com.coyotebitcoin.padawanwallet.presentation.ui.components.standardBorder
 import com.coyotebitcoin.padawanwallet.presentation.utils.ScreenSizeHeight
 import com.coyotebitcoin.padawanwallet.presentation.utils.getScreenSizeHeight
-import androidx.compose.material3.Text
-import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Devices
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.navigation.compose.rememberNavController
-import com.coyotebitcoin.padawanwallet.presentation.theme.LocalPadawanColors
-import com.coyotebitcoin.padawanwallet.presentation.theme.PadawanTheme
-import com.coyotebitcoin.padawanwallet.domain.utils.WalletCreateType
 
 private const val TAG = "OnboardingScreen"
 
@@ -62,13 +62,14 @@ internal fun OnboardingScreen(
     if (screenSizeHeight == ScreenSizeHeight.Small) {
         SmallOnboarding(
             pageScrollState = pageScrollState,
+            onBuildWalletButtonClicked = onBuildWalletButtonClicked,
             navController = navController,
-            onBuildWalletButtonClicked = onBuildWalletButtonClicked
         )
     } else {
         PhoneOnboarding(
+            pageScrollState = pageScrollState,
+            onBuildWalletButtonClicked = onBuildWalletButtonClicked,
             navController = navController,
-            onBuildWalletButtonClicked = onBuildWalletButtonClicked
         )
     }
 }
@@ -76,8 +77,8 @@ internal fun OnboardingScreen(
 @Composable
 internal fun SmallOnboarding(
     pageScrollState: ScrollState,
+    onBuildWalletButtonClicked: (WalletCreateType) -> Unit,
     navController: NavController,
-    onBuildWalletButtonClicked: (WalletCreateType) -> Unit
 ) {
     val colors = LocalPadawanColors.current
     Column(
@@ -155,8 +156,9 @@ internal fun SmallOnboarding(
 
 @Composable
 internal fun PhoneOnboarding(
+    pageScrollState: ScrollState,
+    onBuildWalletButtonClicked: (WalletCreateType) -> Unit,
     navController: NavController,
-    onBuildWalletButtonClicked: (WalletCreateType) -> Unit
 ) {
     val colors = LocalPadawanColors.current
 
@@ -164,6 +166,7 @@ internal fun PhoneOnboarding(
         modifier = Modifier
             .fillMaxSize()
             .background(colors.background)
+            .verticalScroll(pageScrollState)
     ) {
         Column(
             verticalArrangement = Arrangement.Center,
