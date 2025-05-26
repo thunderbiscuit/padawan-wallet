@@ -38,6 +38,12 @@ android {
         versionName = "v0.16.0-SNAPSHOT"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
+        // NOTE: This cannot be configured at the same time as the splits block when building App Bundles. Comment out
+        //       the this block and uncomment the splits block when building APKs.
+        ndk {
+            abiFilters += "arm64-v8a"
+        }
+
         resValue(
             type = "string",
             name = "app_name",
@@ -75,14 +81,16 @@ android {
         }
     }
 
-    splits {
-        abi {
-            isEnable = true
-            reset()
-            include("arm64-v8a")
-            isUniversalApk = false
-        }
-    }
+    // NOTE: This cannot be configured at the same time as the ndk block when building App Bundles. Comment out the ndk
+    //       block and uncomment this block when building APKs.
+    // splits {
+    //     abi {
+    //         isEnable = true
+    //         reset()
+    //         include("arm64-v8a")
+    //         isUniversalApk = false
+    //     }
+    // }
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
