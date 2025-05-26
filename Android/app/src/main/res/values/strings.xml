@@ -38,7 +38,7 @@
     <string name="finish">Finish</string>
     <string name="back_to_lessons">Back to lessons</string>
     <string name="transaction_details">Transaction details</string>
-    <string name="total_transaction_amount">Total transaction amount:</string>
+    <string name="balance_delta">Change on wallet balance:</string>
     <string name="transaction_type">Transaction type:</string>
     <string name="time">Time:</string>
     <string name="pending">Pending</string>

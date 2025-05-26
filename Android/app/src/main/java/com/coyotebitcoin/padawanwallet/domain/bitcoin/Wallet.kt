@@ -10,9 +10,8 @@ import com.coyotebitcoin.padawanwallet.domain.utils.RequiredInitialWalletData
 import com.coyotebitcoin.padawanwallet.domain.utils.netSendWithoutFees
 import org.bitcoindevkit.Address
 import org.bitcoindevkit.AddressInfo
-import org.bitcoindevkit.Connection
-import org.bitcoindevkit.ChainPosition as BdkChainPosition
 import org.bitcoindevkit.Amount
+import org.bitcoindevkit.Connection
 import org.bitcoindevkit.Descriptor
 import org.bitcoindevkit.DescriptorSecretKey
 import org.bitcoindevkit.ElectrumClient
@@ -25,6 +24,7 @@ import org.bitcoindevkit.Transaction
 import org.bitcoindevkit.TxBuilder
 import org.bitcoindevkit.Update
 import org.bitcoindevkit.WordCount
+import org.bitcoindevkit.ChainPosition as BdkChainPosition
 
 private const val TAG = "WalletObject"
 private const val SIGNET_ELECTRUM_URL: String = "ssl://mempool.space:60602"
@@ -175,6 +175,7 @@ object Wallet {
             } else {
                 0uL
             }
+            val balanceDelta: Long = received.toSat().toLong() - sent.toSat().toLong()
             val chainPosition: ChainPosition = when (val position = tx.chainPosition) {
                 is BdkChainPosition.Unconfirmed -> ChainPosition.Unconfirmed
                 is BdkChainPosition.Confirmed -> ChainPosition.Confirmed(
@@ -188,6 +189,7 @@ object Wallet {
                 sent = sent,
                 received = received,
                 paymentAmount = paymentAmount,
+                balanceDelta = balanceDelta,
                 fee = fee,
                 feeRate = feeRate,
                 txType = txType,

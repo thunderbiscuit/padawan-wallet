@@ -29,7 +29,7 @@
     <string name="finish">Concluir</string>
     <string name="back_to_lessons">Voltar para as lições</string>
     <string name="transaction_details">Detalhes da transação</string>
-    <string name="total_transaction_amount">Quantidade total da transação:</string>
+    <string name="balance_delta">Alteração no saldo\nda carteira:</string>
     <string name="transaction_type">Tipo de transação:</string>
     <string name="time">Tempo:</string>
     <string name="pending">Pendente</string>

@@ -29,18 +29,18 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
-import com.coyotebitcoin.padawanwallet.domain.bitcoin.TransactionDetails
-import com.coyotebitcoin.padawanwallet.R
 import com.coyotebitcoin.padawanwallet.domain.bitcoin.ChainPosition
+import com.coyotebitcoin.padawanwallet.domain.bitcoin.TransactionDetails
 import com.coyotebitcoin.padawanwallet.domain.bitcoin.TxType
+import com.coyotebitcoin.padawanwallet.domain.utils.timestampToString
 import com.coyotebitcoin.padawanwallet.presentation.theme.LocalPadawanColors
+import com.coyotebitcoin.padawanwallet.presentation.theme.PadawanColorsTatooineDesert
 import com.coyotebitcoin.padawanwallet.presentation.theme.PadawanTypography
 import com.coyotebitcoin.padawanwallet.presentation.theme.innerScreenPadding
-import com.coyotebitcoin.padawanwallet.presentation.theme.PadawanColorsTatooineDesert
 import com.coyotebitcoin.padawanwallet.presentation.ui.components.PadawanAppBar
 import com.coyotebitcoin.padawanwallet.presentation.utils.ScreenSizeWidth
 import com.coyotebitcoin.padawanwallet.presentation.utils.getScreenSizeWidth
-import com.coyotebitcoin.padawanwallet.domain.utils.timestampToString
+import com.coyotebitcoin.padawanwallet.R
 
 private const val TAG = "TransactionScreen"
 
@@ -70,6 +70,11 @@ internal fun TransactionScreen(
                     .padding(scaffoldPadding)
                     .innerScreenPadding(padding)
             ) {
+                val walletBalanceDelta: String = if (txDetails.balanceDelta > 0) {
+                    "+${txDetails.balanceDelta} sats"
+                } else {
+                    "${txDetails.balanceDelta} sats"
+                }
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -77,15 +82,10 @@ internal fun TransactionScreen(
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
                     Text(
-                        text = stringResource(R.string.total_transaction_amount),
+                        text = stringResource(R.string.balance_delta),
                         style = PadawanTypography.titleSmall
                     )
-                    val amount = if (txDetails.txType == TxType.OUTBOUND) {
-                        txDetails.sent.toSat()
-                    } else {
-                        txDetails.received.toSat()
-                    }
-                    Text("$amount sats")
+                    Text(walletBalanceDelta)
                 }
                 Row(
                     modifier = Modifier

@@ -13,6 +13,7 @@ data class TransactionDetails(
     val sent: Amount,
     val received: Amount,
     val paymentAmount: ULong,
+    val balanceDelta: Long,
     val fee: Amount,
     val feeRate: FeeRate,
     val txType: TxType,
