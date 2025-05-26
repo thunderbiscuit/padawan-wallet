@@ -68,30 +68,30 @@ import com.composables.icons.lucide.Lucide
 import com.composables.icons.lucide.ThumbsDown
 import com.composables.icons.lucide.ThumbsUp
 import com.coyotebitcoin.padawanwallet.R
-import com.coyotebitcoin.padawanwallet.presentation.navigation.SendScreen
-import com.coyotebitcoin.padawanwallet.presentation.navigation.ReceiveScreen
-import com.coyotebitcoin.padawanwallet.presentation.navigation.TransactionScreen
 import com.coyotebitcoin.padawanwallet.domain.bitcoin.BitcoinUnit
 import com.coyotebitcoin.padawanwallet.domain.bitcoin.ChainPosition
 import com.coyotebitcoin.padawanwallet.domain.bitcoin.TransactionDetails
-import com.coyotebitcoin.padawanwallet.presentation.ui.components.LoadingAnimation
-import com.coyotebitcoin.padawanwallet.presentation.ui.components.standardBorder
+import com.coyotebitcoin.padawanwallet.domain.bitcoin.TxType
+import com.coyotebitcoin.padawanwallet.domain.utils.formatCurrency
+import com.coyotebitcoin.padawanwallet.domain.utils.formatInBtc
+import com.coyotebitcoin.padawanwallet.domain.utils.timestampToString
+import com.coyotebitcoin.padawanwallet.presentation.navigation.ReceiveScreen
+import com.coyotebitcoin.padawanwallet.presentation.navigation.SendScreen
+import com.coyotebitcoin.padawanwallet.presentation.navigation.TransactionScreen
+import com.coyotebitcoin.padawanwallet.presentation.theme.LocalPadawanColors
+import com.coyotebitcoin.padawanwallet.presentation.theme.PadawanColorsTatooineDesert
 import com.coyotebitcoin.padawanwallet.presentation.theme.PadawanTheme
 import com.coyotebitcoin.padawanwallet.presentation.theme.PadawanTypography
 import com.coyotebitcoin.padawanwallet.presentation.theme.innerScreenPadding
 import com.coyotebitcoin.padawanwallet.presentation.theme.noRippleClickable
-import com.coyotebitcoin.padawanwallet.presentation.theme.PadawanColorsTatooineDesert
 import com.coyotebitcoin.padawanwallet.presentation.theme.standardShadow
+import com.coyotebitcoin.padawanwallet.presentation.ui.components.LoadingAnimation
+import com.coyotebitcoin.padawanwallet.presentation.ui.components.standardBorder
 import com.coyotebitcoin.padawanwallet.presentation.utils.ClickHelper
 import com.coyotebitcoin.padawanwallet.presentation.utils.ScreenSizeWidth
-import com.coyotebitcoin.padawanwallet.domain.utils.formatCurrency
-import com.coyotebitcoin.padawanwallet.domain.utils.formatInBtc
 import com.coyotebitcoin.padawanwallet.presentation.utils.getScreenSizeWidth
 import com.coyotebitcoin.padawanwallet.presentation.viewmodels.mvi.WalletAction
 import com.coyotebitcoin.padawanwallet.presentation.viewmodels.mvi.WalletState
-import com.coyotebitcoin.padawanwallet.domain.bitcoin.TxType
-import com.coyotebitcoin.padawanwallet.presentation.theme.LocalPadawanColors
-import com.coyotebitcoin.padawanwallet.domain.utils.timestampToString
 
 private const val TAG = "WalletRootScreen"
 
@@ -474,8 +474,13 @@ fun TransactionListBox(
                                     .align(Alignment.BottomStart)
                                     .padding(top = 8.dp)
                             )
+                            val walletBalanceDelta: String = if (tx.balanceDelta > 0) {
+                                "+${tx.balanceDelta} sats"
+                            } else {
+                                "${tx.balanceDelta} sats"
+                            }
                             Text(
-                                text = "${if (tx.txType == TxType.OUTBOUND) tx.paymentAmount.toString() else tx.received.toSat()} ${BitcoinUnit.SATS.toString().lowercase()}",
+                                text = walletBalanceDelta,
                                 style = PadawanTypography.bodyMedium,
                                 textAlign = TextAlign.End,
                                 modifier = Modifier.align(Alignment.BottomEnd)
