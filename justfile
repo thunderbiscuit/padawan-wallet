@@ -1,14 +1,19 @@
+[group("Root")]
+[doc("List all available commands.")]
+@default:
+  just --list --unsorted
+
+[group("Root")]
+[doc("Open repository on GitHub.")]
+repo:
+  open https://github.com/thunderbiscuit/padawan-wallet
+
+[group("Tests")]
+[doc("Run all unit tests.")]
 unittests:
   cd ./Android/ && ./gradlew test --console=plain
 
+[group("Tests")]
+[doc("Run all instrumentation tests.")]
 instrumentationtests:
   cd ./Android/ && ./gradlew connectedAndroidTest --console=plain
-
-buildlocalkmplib:
-  cd ./Android/ && ./gradlew :padawankmp:assemblePadawanKmpXCFramework
-  cp ./iOS/Package.swift ./Android/padawankmp/build/XCFrameworks/release/
-
-prepkmplibrelease:
-  cd ./Android/ && ./gradlew :padawankmp:assemblePadawanKmpXCFramework
-  zip -r ./Android/padawankmp/build/XCFrameworks/release/PadawanKmp.xcframework.zip ./Android/padawankmp/build/XCFrameworks/release/PadawanKmp.xcframework
-  swift package compute-checksum ./Android/padawankmp/build/XCFrameworks/release/PadawanKmp.xcframework.zip
