@@ -5,33 +5,31 @@
 
 package com.coyotebitcoin.padawanwallet.presentation.ui
 
-import android.R
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
+import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
-import com.coyotebitcoin.padawanwallet.domain.settings.SettingsRepository
-import com.coyotebitcoin.padawanwallet.domain.bitcoin.WalletRepository
 import com.coyotebitcoin.padawanwallet.domain.bitcoin.Wallet
+import com.coyotebitcoin.padawanwallet.domain.bitcoin.WalletRepository
+import com.coyotebitcoin.padawanwallet.domain.settings.SettingsRepository
+import com.coyotebitcoin.padawanwallet.domain.utils.WalletCreateType
+import com.coyotebitcoin.padawanwallet.domain.utils.setLanguage
+import com.coyotebitcoin.padawanwallet.presentation.navigation.HomeNavigation
 import com.coyotebitcoin.padawanwallet.presentation.navigation.IntroNavigation
 import com.coyotebitcoin.padawanwallet.presentation.theme.PadawanTheme
-import com.coyotebitcoin.padawanwallet.presentation.navigation.HomeNavigation
-import com.coyotebitcoin.padawanwallet.presentation.utils.SnackbarLevel
-import com.coyotebitcoin.padawanwallet.domain.utils.WalletCreateType
-import com.coyotebitcoin.padawanwallet.presentation.utils.fireSnackbar
-import com.coyotebitcoin.padawanwallet.domain.utils.setLanguage
 
 private const val TAG = "PadawanActivity"
 
-class PadawanActivity : AppCompatActivity() {
+class PadawanActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         installSplashScreen()
 
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+
         // ask the repository if a wallet already exists
         // if so, load it and launch into wallet activity, otherwise go to intro
         if (WalletRepository.doesWalletExist()) {
@@ -62,11 +60,11 @@ class PadawanActivity : AppCompatActivity() {
                     }
                 } catch (e: Throwable) {
                     Log.i(TAG, "Could not build wallet: $e")
-                    fireSnackbar(
-                        view = findViewById(R.id.content),
-                        level = SnackbarLevel.ERROR,
-                        message = "Error: $e"
-                    )
+                    // fireSnackbar(
+                    //     view = findViewById(R.id.content),
+                    //     level = SnackbarLevel.ERROR,
+                    //     message = "Error: $e"
+                    // )
                 }
             }
 
