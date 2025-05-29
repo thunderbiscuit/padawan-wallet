@@ -8,6 +8,7 @@ package com.coyotebitcoin.padawanwallet.presentation.ui
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -60,11 +61,7 @@ class PadawanActivity : ComponentActivity() {
                     }
                 } catch (e: Throwable) {
                     Log.i(TAG, "Could not build wallet: $e")
-                    // fireSnackbar(
-                    //     view = findViewById(R.id.content),
-                    //     level = SnackbarLevel.ERROR,
-                    //     message = "Error: $e"
-                    // )
+                    Toast.makeText(applicationContext, "Could not build wallet: $e", Toast.LENGTH_LONG).show()
                 }
             }
 
