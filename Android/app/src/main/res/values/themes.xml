@@ -1,6 +1,0 @@
-<resources>
-    <style
-        name="Theme.PadawanWallet"
-        parent="Theme.Material3.Light.NoActionBar">
-    </style>
-</resources>
