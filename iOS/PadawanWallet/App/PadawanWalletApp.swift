@@ -17,7 +17,7 @@ struct PadawanWalletApp: App {
             if isOnboarding {
                 OnboardingView()
             } else {
-                WalletView()
+                CoreView()
             }
         }
     }

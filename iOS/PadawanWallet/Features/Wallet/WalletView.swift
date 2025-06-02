@@ -5,18 +5,36 @@
 //  Created by thunderbiscuit on 2025-06-02.
 //
 
-import Foundation
 import SwiftUI
 
-struct WalletView: View {
+struct CoreView: View {
     var body: some View {
-        VStack(spacing: 20) {
-            Text("Wallet Screen")
-                .font(.largeTitle)
+        TabView {
+            WalletRootView()
+                .tabItem {
+                    Label("Red", systemImage: "flame.fill")
+                }
 
-            Text("You're done onboarding!")
-                .foregroundColor(.gray)
+            LessonsRootView()
+                .tabItem {
+                    Label("Green", systemImage: "leaf.fill")
+                }
+
+            MoreRootView()
+                .tabItem {
+                    Label("Blue", systemImage: "drop.fill")
+                }
         }
-        .padding()
+    }
+}
+
+struct WalletRootView: View {
+    var body: some View {
+        ZStack {
+            Color.red.ignoresSafeArea()
+            Text("Wallet")
+                .font(.largeTitle)
+                .foregroundColor(.white)
+        }
     }
 }
