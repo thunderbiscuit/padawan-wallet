@@ -46,7 +46,6 @@ internal fun LanguagesScreen(
     ) { scaffoldPadding ->
         Column(
             Modifier
-                // .background(PadawanColorsTatooineDesert.backgroundSecondary)
                 .padding(scaffoldPadding)
                 .padding(horizontal = 24.dp)
                 .fillMaxSize()
@@ -56,7 +55,7 @@ internal fun LanguagesScreen(
                 style = PadawanTypography.bodyMedium,
                 color = colors.textLight
             )
-            SectionTitle("Language", false)
+            SectionTitle("App-Level Language", false)
             SectionDivider()
             SupportedLanguagesPicker()
 

@@ -5,7 +5,6 @@
 
 package com.coyotebitcoin.padawanwallet.presentation.ui
 
-import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
@@ -17,7 +16,6 @@ import com.coyotebitcoin.padawanwallet.domain.bitcoin.Wallet
 import com.coyotebitcoin.padawanwallet.domain.bitcoin.WalletRepository
 import com.coyotebitcoin.padawanwallet.domain.settings.SettingsRepository
 import com.coyotebitcoin.padawanwallet.domain.utils.WalletCreateType
-import com.coyotebitcoin.padawanwallet.domain.utils.setLanguage
 import com.coyotebitcoin.padawanwallet.presentation.navigation.HomeNavigation
 import com.coyotebitcoin.padawanwallet.presentation.navigation.IntroNavigation
 import com.coyotebitcoin.padawanwallet.presentation.theme.PadawanTheme
@@ -71,17 +69,5 @@ class PadawanActivity : ComponentActivity() {
                 }
             }
         }
-    }
-
-    // TODO: This feels hacky but the AppCompatDelegate.getApplicationLocales() API returns an
-    //       an empty list if it hasn't been set manually. We cannot set it directly inside
-    //       the onCreate() method, and so we run it here.
-    // TODO: This can be cleaned up. The behaviour between API 33+ and > 33 are different, and not
-    //       handled optimally by this code.
-    // Languages: We check if the language has been manually set in the app
-    // and if it has not we use the system default language.
-    override fun attachBaseContext(newBase: Context?) {
-        super.attachBaseContext(newBase)
-        setLanguage()
     }
 }
