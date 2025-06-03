@@ -27,9 +27,9 @@ import androidx.navigation.compose.rememberNavController
 import com.coyotebitcoin.padawanwallet.R
 import com.coyotebitcoin.padawanwallet.domain.settings.PadawanColorTheme
 import com.coyotebitcoin.padawanwallet.presentation.navigation.ChapterScreen
+import com.coyotebitcoin.padawanwallet.presentation.theme.PadawanColorsTatooineDesert
 import com.coyotebitcoin.padawanwallet.presentation.theme.PadawanTheme
 import com.coyotebitcoin.padawanwallet.presentation.theme.PadawanTypography
-import com.coyotebitcoin.padawanwallet.presentation.theme.PadawanColorsTatooineDesert
 import com.coyotebitcoin.padawanwallet.presentation.ui.components.SectionDivider
 import com.coyotebitcoin.padawanwallet.presentation.ui.components.SectionTitle
 import com.coyotebitcoin.padawanwallet.presentation.ui.components.TutorialCard
@@ -77,7 +77,7 @@ internal fun ChaptersRootScreen(
             SectionTitle(stringResource(id = R.string.getting_started), true)
             SectionDivider()
             TutorialCard(
-                title = "1. ${stringResource(id = R.string.C1_title)}",
+                title = "1. ${stringResource(id = R.string.l1_title)}",
                 done = state.completedChapters[1] ?: false,
                 onClick = {
                     onAction(ChaptersScreensAction.OpenChapter(1))
@@ -85,7 +85,7 @@ internal fun ChaptersRootScreen(
                 }
             )
             TutorialCard(
-                title = "2. ${stringResource(id = R.string.C2_title)}",
+                title = "2. ${stringResource(id = R.string.l2_title)}",
                 done = state.completedChapters[2] ?: false,
                 onClick = {
                     onAction(ChaptersScreensAction.OpenChapter(2))
