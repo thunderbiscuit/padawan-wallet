@@ -93,7 +93,7 @@ internal fun ChaptersRootScreen(
                 }
             )
             TutorialCard(
-                title = "3. ${stringResource(id = R.string.C3_title)}",
+                title = "3. ${stringResource(id = R.string.l3_title)}",
                 done = state.completedChapters[3] ?: false,
                 onClick = {
                     onAction(ChaptersScreensAction.OpenChapter(3))
@@ -104,7 +104,7 @@ internal fun ChaptersRootScreen(
             SectionTitle("Transactions", false)
             SectionDivider()
             TutorialCard(
-                title = "4. ${stringResource(id = R.string.C4_title)}",
+                title = "4. ${stringResource(id = R.string.l4_title)}",
                 done = state.completedChapters[4] ?: false,
                 onClick = {
                     onAction(ChaptersScreensAction.OpenChapter(4))
@@ -112,7 +112,7 @@ internal fun ChaptersRootScreen(
                 }
             )
             TutorialCard(
-                title = "5. ${stringResource(id = R.string.C5_title)}",
+                title = "5. ${stringResource(id = R.string.l5_title)}",
                 done = state.completedChapters[5] ?: false,
                 onClick = {
                     onAction(ChaptersScreensAction.OpenChapter(5))
@@ -120,7 +120,7 @@ internal fun ChaptersRootScreen(
                 }
             )
             TutorialCard(
-                title = "6. ${stringResource(id = R.string.C6_title)}",
+                title = "6. ${stringResource(id = R.string.l6_title)}",
                 done = state.completedChapters[6] ?: false,
                 onClick = {
                     onAction(ChaptersScreensAction.OpenChapter(6))
@@ -131,7 +131,7 @@ internal fun ChaptersRootScreen(
             SectionTitle("Wallets", false)
             SectionDivider()
             TutorialCard(
-                title = "7. ${stringResource(id = R.string.C7_title)}",
+                title = "7. ${stringResource(id = R.string.l7_title)}",
                 done = state.completedChapters[7] ?: false,
                 onClick = {
                     onAction(ChaptersScreensAction.OpenChapter(7))
@@ -139,7 +139,7 @@ internal fun ChaptersRootScreen(
                 }
             )
             TutorialCard(
-                title = "8. ${stringResource(id = R.string.C8_title)}",
+                title = "8. ${stringResource(id = R.string.l8_title)}",
                 done = state.completedChapters[8] ?: false,
                 onClick = {
                     onAction(ChaptersScreensAction.OpenChapter(8))
@@ -147,7 +147,7 @@ internal fun ChaptersRootScreen(
                 }
             )
             TutorialCard(
-                title = "9. ${stringResource(id = R.string.C9_title)}",
+                title = "9. ${stringResource(id = R.string.l9_title)}",
                 done = state.completedChapters[9] ?: false,
                 onClick = {
                     onAction(ChaptersScreensAction.OpenChapter(9))

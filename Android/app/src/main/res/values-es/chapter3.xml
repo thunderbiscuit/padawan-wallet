@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string name="C3_title">Enviar bitcoin</string>
-
-    <string name="t3_p1">Para enviar bitcoin, debes solicitar una dirección de recepción. Si te ofrecen un código QR, escanéalo utilizando la cámara de tu teléfono. Si recibes una serie de letras y números, puedes copiar la dirección y pegarla en el campo de la dirección en la pantalla de la transacción en tu aplicación. ¡Recuerda comprobar dos veces la dirección cuando la hayas copiado!</string>
-    <string name="t3_p2">Cuando hayas introducido la dirección, especifica la cantidad de bitcoin a enviar (ya sean unidades de bitcoin o satoshis), y emite la transacción a la red. Tu transacción será recibida por los nodos de todo el mundo, y con el tiempo, ¡será minada en un bloque!</string>
-</resources>
