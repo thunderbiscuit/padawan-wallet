@@ -12,29 +12,36 @@ struct CoreView: View {
         TabView {
             WalletRootView()
                 .tabItem {
-                    Label("Red", systemImage: "flame.fill")
+                    Label("Wallet", systemImage: "flame.fill")
                 }
 
             LessonsRootView()
                 .tabItem {
-                    Label("Green", systemImage: "leaf.fill")
+                    Label("Learn", systemImage: "leaf.fill")
                 }
 
             MoreRootView()
                 .tabItem {
-                    Label("Blue", systemImage: "drop.fill")
+                    Label("More", systemImage: "drop.fill")
                 }
         }
     }
 }
 
+
+
 struct WalletRootView: View {
     var body: some View {
-        ZStack {
-            Color.red.ignoresSafeArea()
-            Text("Wallet")
-                .font(.largeTitle)
-                .foregroundColor(.white)
+        NavigationStack {
+            ScrollView {
+                VStack(spacing: 24) {
+                    BalanceCard()
+                    ActionButtons()
+                    TransactionsCard()
+                }
+                .padding()
+                .background(Color("Background"))
+            }
         }
     }
 }

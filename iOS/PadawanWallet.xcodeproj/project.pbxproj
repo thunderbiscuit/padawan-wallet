@@ -27,6 +27,7 @@
 		BF41F6DD2DB0469C0065E070 /* PadawanWallet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PadawanWallet.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF41F6ED2DB0469D0065E070 /* PadawanWalletTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PadawanWalletTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF41F6F72DB0469D0065E070 /* PadawanWalletUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PadawanWalletUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		BF435AD02DF0BC4200A44DC4 /* PadawanWallet.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = PadawanWallet.xcodeproj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -89,6 +90,11 @@
 				BF41F6ED2DB0469D0065E070 /* PadawanWalletTests.xctest */,
 				BF41F6F72DB0469D0065E070 /* PadawanWalletUITests.xctest */,
 			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		BF435AD12DF0BC4200A44DC4 /* Products */ = {
+			isa = PBXGroup;
 			name = Products;
 			sourceTree = "<group>";
 		};
@@ -198,6 +204,12 @@
 			preferredProjectObjectVersion = 77;
 			productRefGroup = BF41F6DE2DB0469C0065E070 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = BF435AD12DF0BC4200A44DC4 /* Products */;
+					ProjectRef = BF435AD02DF0BC4200A44DC4 /* PadawanWallet.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				BF41F6DC2DB0469C0065E070 /* PadawanWallet */,
