@@ -38,7 +38,7 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
-import androidx.compose.material3.LocalMinimumInteractiveComponentEnforcement
+import androidx.compose.material3.LocalMinimumInteractiveComponentSize
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
@@ -277,7 +277,7 @@ fun BalanceBox(
                     }
             ) {
                 CompositionLocalProvider(
-                    LocalMinimumInteractiveComponentEnforcement provides false,
+                    LocalMinimumInteractiveComponentSize provides 0.dp,
                 ) {
                     Button(
                         onClick = { onAction(WalletAction.Sync) },
@@ -302,7 +302,6 @@ fun BalanceBox(
                                     style = PadawanTypography.labelLarge,
                                     fontWeight = FontWeight.Normal,
                                     color = colors.background,
-                                    // color = Color.White,
                                     modifier = Modifier.padding(horizontal = 2.dp)
                                 )
                             }
