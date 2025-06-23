@@ -7,29 +7,6 @@
 
 import SwiftUI
 
-struct CoreView: View {
-    var body: some View {
-        TabView {
-            WalletRootView()
-                .tabItem {
-                    Label("Wallet", systemImage: "flame.fill")
-                }
-
-            LessonsRootView()
-                .tabItem {
-                    Label("Learn", systemImage: "leaf.fill")
-                }
-
-            MoreRootView()
-                .tabItem {
-                    Label("More", systemImage: "drop.fill")
-                }
-        }
-    }
-}
-
-
-
 struct WalletRootView: View {
     var body: some View {
         NavigationStack {
