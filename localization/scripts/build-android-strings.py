@@ -2,8 +2,8 @@ import os
 import yaml
 import xml.sax.saxutils as saxutils
 
-INPUT_DIR = "./"
-OUTPUT_DIR = "android-strings"
+INPUT_DIR = ".."
+OUTPUT_DIR = "../android"
 
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 

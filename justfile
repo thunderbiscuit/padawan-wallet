@@ -21,8 +21,15 @@ instrumentationtests:
 [group("Localizations")]
 [doc("Generate Android strings.")]
 android-locales:
-  cd ./localization/ \
-  && python build-android-strings.py \
-  && mv android-strings/values/strings.xml ../Android/app/src/main/res/values/ \
-  && mv android-strings/values-es/strings.xml ../Android/app/src/main/res/values-es/ \
-  && mv android-strings/values-pt/strings.xml ../Android/app/src/main/res/values-pt/
+  cd ./localization/scripts/                                                       \
+  && python build-android-strings.py                                               \
+  && mv ../android/values/strings.xml    ../../Android/app/src/main/res/values/    \
+  && mv ../android/values-es/strings.xml ../../Android/app/src/main/res/values-es/ \
+  && mv ../android/values-pt/strings.xml ../../Android/app/src/main/res/values-pt/
+
+[group("Localizations")]
+[doc("Generate iOS strings.")]
+ios-locales:
+  cd ./localization/scripts/   \
+  && python build-xcstrings.py \
+  && mv ../ios/Localizable.xcstrings ../../iOS/PadawanWallet/Resources/

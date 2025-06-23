@@ -32,7 +32,8 @@ DerivedData-simulator/
 PadawanBdkWrapper.def
 
 # Localization
-android-strings/
+localization/android/
+localization/ios/
 
 # Logos
 logos.fig

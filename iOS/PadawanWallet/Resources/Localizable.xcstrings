@@ -1,0 +1,4282 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "" : {
+
+    },
+    "0" : {
+
+    },
+    "A collection of everything else you need in the app." : {
+
+    },
+    "About Padawan" : {
+
+    },
+    "About Padawan Screen" : {
+
+    },
+    "about_padawan" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "About Padawan"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sobre Padawan"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sobre a Padawan"
+          }
+        }
+      }
+    },
+    "about_text" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Padawan is a signet-only bitcoin wallet packed with tutorials on how to use bitcoin wallets. We're building the app you will want to recommend to your friends that keep asking you questions about bitcoin!\n\nPadawan is for people of all ages and aims to be a self-study tool, getting its users acquainted with the usual workflow and basic jargon of mobile wallets in a risk-free environment perfect for experimentation and learning (signet). We think signet is an underused resource outside of software development circles, and believe it can be leveraged for bitcoin-curious people everywhere.\n\nPadawan is an open source (Apache 2.0 licenced), free collaborative project. If you have feedback for us, please leave us a review on the Play Store, or check out our GitHub repository!"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Padawan es una cartera que únicamente puede ser utilizada con monedas signet y que contiene tutoriales sobre como utilizar las carteras bitcoin. ¡Estamos desarrollando la aplicación que querrás recomendar a los amigos que no paran de hacerte preguntas sobre bitcoin!\n\nPadawan es para gente de todas las edades y su objetivo es ser una herramienta autodidacta, para que sus usuarios se familiaricen con el funcionamiento y la jerga básica de las carteras móviles en un entorno sin riesgos perfecto para la experimentación y el aprendizaje (red de pruebas o signet en inglés). Creemos que la red de pruebas de bitcoin es un recurso infrautilizado fuera de los círculos de desarrollo de software, y creemos que puede ser aprovechada por personas que sientan curiosidad por bitcoin en cualquier lugar.\n\nPadawan es un proyecto de código abierto (bajo licencia Apache 2.0). Si tienes cualquier comentario o sugerencia, ¡por favor déjanos una valoración en la Play Store, o echa un vistazo a nuestro repositorio en GitHub!"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Padawan é uma carteira somente com bitcoin signet e com tutoriais para aprender sobre como usar carteiras bitcoin. Construimos o aplicativo que você vai querer recomendar aos seus amigos que sempre fazem perguntas sobre bitcoin!\n\nA Padawan é para pessoas de todas as idades e se propõe ser uma ferramenta de estudo e prática, sendo o instrumento para que usuários se habituem com o fluxo de transações e jargão básico do ecossistema bitcoin, sendo em um ambiente livre de riscos, perfeito para experimentação e aprendizagem (bitcoin de signet). O bitcoin signet é utilizado bastante em desenvolvimento de software, mas acreditamos que pode ser aproveitado por pessoas curiosas sobre bitcoin em todos os lugares.\n\n A Padawan é um projeto colaborativo gratuito de código aberto (licenciado pelo Apache 2.0). Se você tiver comentários para nós, deixe-o na Play Store ou no nosso repositório no GitHub!"
+          }
+        }
+      }
+    },
+    "address" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Address"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "dirección"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Endereço"
+          }
+        }
+      }
+    },
+    "Address" : {
+
+    },
+    "address_error_message" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Address is missing!"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¡Falta introducir la dirección!"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Insira o endereço!"
+          }
+        }
+      }
+    },
+    "Advanced" : {
+
+    },
+    "already_have_a_wallet" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "I already have a\nPadawan wallet\n(12-words backup)"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ya tengo una\nPadawan wallet\n(Las 12 palabras de recuperación)"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Eu já tenho uma\nCarteira Padawan\n(12-palavras de backup)"
+          }
+        }
+      }
+    },
+    "amount" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Amount"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cantidad"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Quantidade"
+          }
+        }
+      }
+    },
+    "Amount" : {
+
+    },
+    "amount_error_message" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Amount is missing!"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¡Falta introducir la cantidad!"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Insira a quantidade!"
+          }
+        }
+      }
+    },
+    "App-Level Language" : {
+
+    },
+    "back_icon" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Back icon"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Icono volver"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ícone anterior"
+          }
+        }
+      }
+    },
+    "back_to_lessons" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Back to lessons"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Volver a tutoriales"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Voltar para as lições"
+          }
+        }
+      }
+    },
+    "balance" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Balance:"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Saldo:"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Saldo:"
+          }
+        }
+      }
+    },
+    "balance_delta" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Change on wallet balance:"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cambio en el saldo\nde la cartera:"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Alteração no saldo\nda carteira:"
+          }
+        }
+      }
+    },
+    "Balance: %lld sat" : {
+
+    },
+    "bitcoin signet" : {
+
+    },
+    "bitcoin_signet" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "bitcoin signet"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "bitcoin signet"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "bitcoin signet"
+          }
+        }
+      }
+    },
+    "block" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Block:"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bloque:"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bloco:"
+          }
+        }
+      }
+    },
+    "bottom_nav_chapters" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Learn"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aprende"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aprenda"
+          }
+        }
+      }
+    },
+    "bottom_nav_settings" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "More"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Menú"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Menu"
+          }
+        }
+      }
+    },
+    "bottom_nav_wallet" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wallet"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cartera"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Carteira"
+          }
+        }
+      }
+    },
+    "btc" : {
+
+    },
+    "cancel" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cancel"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cancelar"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cancelar"
+          }
+        }
+      }
+    },
+    "change_language" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Language + Color Theme"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Idiomas y tema de color"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Idiomas e tema de cores"
+          }
+        }
+      }
+    },
+    "changing_color_animation" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Changing color animation"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Animación cambio colores"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Alterando animação de cores"
+          }
+        }
+      }
+    },
+    "checkmark_image" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Checkmark image"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Imagen marca comprobación"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Imagem de marcação de concluído"
+          }
+        }
+      }
+    },
+    "Color Theme" : {
+
+    },
+    "confirm_and_broadcast" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Confirm and broadcast"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Confirmar y emitir"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Confirmar e transmitir"
+          }
+        }
+      }
+    },
+    "confirm_transaction" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Confirm Transaction"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Confirmar Transacción"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Confirmar Transação"
+          }
+        }
+      }
+    },
+    "Continue on your journey of learning bitcoin." : {
+
+    },
+    "Continue to Wallet" : {
+
+    },
+    "continue_on_your_journey" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Continue on your journey of learning bitcoin."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Continúa con tu camino de aprendizaje sobre bitcoin."
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Continue em sua jornada de aprendizado sobre bitcoin."
+          }
+        }
+      }
+    },
+    "copy_address_string" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Copy"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Copiar"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Copiar"
+          }
+        }
+      }
+    },
+    "copy_to_clipboard_image" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Copy to clipboard image"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Imagen copiado a portapapeles"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Imagem de copiar para área de transferência"
+          }
+        }
+      }
+    },
+    "create_a_wallet" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Create a wallet"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Crear una cartera"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Criar uma nova carteira"
+          }
+        }
+      }
+    },
+    "currency_toggle_text" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Currency Toggle Text"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Texto para cambiar divisa"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Texto de alteração de moeda"
+          }
+        }
+      }
+    },
+    "Enter a bitcoin signet address" : {
+
+    },
+    "Enter amount (sats)" : {
+
+    },
+    "enter_amount_sats" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enter amount (sats)"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Introduce la cantidad (sats)"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Inserir quantidade (sats)"
+          }
+        }
+      }
+    },
+    "enter_signet_address" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enter a bitcoin signet address"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Introduce una dirección de signet de bitcoin"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Insira um endereço bitcoin de signet"
+          }
+        }
+      }
+    },
+    "enter_your_12_words" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enter your 12-word recovery phrase below."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ntroduce tus 12 palabras de recuperación a continuación."
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Insira abaixo suas 12 palavras da frase de recuperação"
+          }
+        }
+      }
+    },
+    "everything_else" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "A collection of everything else you need in the app."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "El resto de cosas que necesitarás de la aplicación."
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aqui estão as configurações que você precisa no aplicativo"
+          }
+        }
+      }
+    },
+    "faucet_dialog" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "To help you get started learning about bitcoin, Padawan Wallet can send you some coins so you can follow along the chapters and send them around to friends!\n\nWould you like to receive some signet bitcoin?"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Para ayudarte a comenzar con el aprendizaje de bitcoin, Padawan Wallet puede enviarte unas monedas para que puedas seguir los capítulos y ¡enviárselas a tus amigos!\n\n¿Quieres recibir bitcoin de la red de pruebas (signet)?"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Para ajudá-lo a começar a aprender sobre bitcoin, a Padawan Wallet pode enviar alguns bitcoins signet para que você possa acompanhar os capítulos e enviá-los aos amigos!\n\nGostaria de receber algum bitcoin signet?"
+          }
+        }
+      }
+    },
+    "fee_rate_error_message" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fee Rate is missing!"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¡Falta introducir la comisión de red!"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Insira a taxa!"
+          }
+        }
+      }
+    },
+    "Fees (sats/vbytes)" : {
+
+    },
+    "fees_paid" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fees paid:"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Comisiones pagadas:"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Taxas pagas:"
+          }
+        }
+      }
+    },
+    "fees_sats_vbytes" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fees (sats/vbytes)"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Comisión (sats/vbytes)"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Taxas (sats/vbytes)"
+          }
+        }
+      }
+    },
+    "finish" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Finish"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Finalizar"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Concluir"
+          }
+        }
+      }
+    },
+    "Generate a new address" : {
+
+    },
+    "generate_a_new_address" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Generate a new address"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Generar una nueva dirección"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gerar um novo endereço"
+          }
+        }
+      }
+    },
+    "Get Signet coins" : {
+
+    },
+    "get_coins" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Get Signet coins"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Obtener Signet monedas"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Receber bitcoins signet"
+          }
+        }
+      }
+    },
+    "Getting started" : {
+
+    },
+    "getting_started" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Getting started"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "\nPrimeros pasos"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Começar"
+          }
+        }
+      }
+    },
+    "hello_there" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hello there!"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¡Hola!"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Olá"
+          }
+        }
+      }
+    },
+    "Hey! It looks like your transaction list is empty. Take a look around, and come back to get some coins so you can start playing with the wallet!" : {
+
+    },
+    "image" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "image"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "imagen"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "imagem"
+          }
+        }
+      }
+    },
+    "l1_h2" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mainnet"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mainnet"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mainnet"
+          }
+        }
+      }
+    },
+    "l1_h3" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Test Networks"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Redes de Prueba"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Redes de Teste"
+          }
+        }
+      }
+    },
+    "l1_h4" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Padawan &amp; Signet"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Padawan &amp; Signet"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Padawan &amp; Signet"
+          }
+        }
+      }
+    },
+    "l1_p1" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bitcoin networks are made up of thousands of computers across the world. These computers speak a common language and communicate directly with each other over the internet."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Las redes de Bitcoin están compuestas por miles de computadoras en todo el mundo. Estas computadoras hablan un lenguaje común y se comunican directamente entre sí a través de internet."
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "As redes Bitcoin são compostas por milhares de computadores em todo o mundo. Esses computadores falam uma linguagem comum e se comunicam diretamente uns com os outros através da internet."
+          }
+        }
+      }
+    },
+    "l1_p2" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You might not know, but there are many bitcoin networks! They break into two families: the main network (there is only one of those) and the test networks (there are many of those!)."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tal vez no lo sepas, pero ¡existen muchas redes de bitcoin! Se dividen en dos familias: la red principal (solo hay una de esas) y las redes de prueba (¡hay muchas de esas!)."
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Talvez você não saiba, mas existem muitas redes de bitcoin! Elas se dividem em duas famílias: a rede principal (há apenas uma dessa) e as redes de teste (há muitas dessas!)."
+          }
+        }
+      }
+    },
+    "l1_p3" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "When people talk about \"the bitcoin network\", they usually mean the mainnet bitcoin network (or simply \"mainnet\")."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cuando la gente habla de \"la red de bitcoin\", generalmente se refieren a la red de bitcoin mainnet (o simplemente \"mainnet\")."
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Quando as pessoas falam sobre \"a rede Bitcoin\", elas geralmente se referem à rede Bitcoin mainnet."
+          }
+        }
+      }
+    },
+    "l1_p4" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The bitcoins on mainnet have monetary value, are used as money for transactions between people, and can be traded on cryptocurrency exchanges."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Los bitcoins en la mainnet tienen valor monetario, se usan como dinero para transacciones entre personas y pueden ser comercializados en intercambios de criptomonedas."
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Os bitcoins na mainnet têm valor monetário, são usados como dinheiro para transações entre pessoas e podem ser negociados em exchanges de criptomoedas."
+          }
+        }
+      }
+    },
+    "l1_p5" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "There are a few test networks, each with their own purpose. They tend to not be as well known as the mainnet network, but are very important nonetheless! Padawan uses the Signet network for its transactions, but you might also hear of Testnet3, Testnet4, and Regtest. The bitcoins on these networks are called signet/testnet/regtest coins and look and behave just like mainnet bitcoins. But unlike mainnet bitcoins, those test coins have no monetary value."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hay algunas redes de prueba, cada una con su propio propósito. No suelen ser tan conocidas como la red mainnet, ¡pero son muy importantes! Padawan usa la red Signet para sus transacciones, pero también podrías escuchar sobre Testnet3, Testnet4 y Regtest. Los bitcoins en estas redes se llaman monedas signet/testnet/regtest y se comportan igual que los bitcoins de mainnet. Pero a diferencia de los bitcoins de mainnet, esas monedas de prueba no tienen valor monetario."
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Existem algumas redes de teste, cada uma com seu próprio propósito. Elas não são tão conhecidas quanto à rede mainnet, mas são muito importantes! Padawan usa a rede Signet para suas transações, mas você também pode ouvir falar de Testnet3, Testnet4 e Regtest. Os bitcoins nessas redes são chamados de moedas signet/testnet/regtest e se comportam como bitcoins de mainnet. Contudo, ao contrário dos bitcoins de mainnet, essas moedas de teste não têm valor monetário."
+          }
+        }
+      }
+    },
+    "l1_p6" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Test networks are used by software developers and organizations who create real-world applications that interact with bitcoin. These developers can use test networks to make sure their software is working properly before launching on mainnet. But you don't need to be a software developer to use them!"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Las redes de prueba son utilizadas por desarrolladores de software y organizaciones que crean aplicaciones del mundo real que interactúan con bitcoin. Estos desarrolladores pueden usar las redes de prueba para asegurarse de que su software funcione correctamente antes de lanzarlo en mainnet. ¡Pero no necesitas ser un desarrollador de software para usarlas!"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "As redes de teste são usadas por desenvolvedores de software e organizações que criam aplicações do mundo real que interagem com bitcoin. Esses desenvolvedores podem usar as redes de teste para garantir que seu software esteja funcionando corretamente antes de lançar na mainnet. Embora as redes de teste sejam utilizadas por desenvolvedores, você também pode usá-las!"
+          }
+        }
+      }
+    },
+    "l1_p7" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The signet and its coins are an invaluable resource for curious people to learn, play, and get confident with bitcoin networks before handling \"real\" mainnet bitcoins! Remember that test bitcoins DO NOT have monetary value."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "El signet y sus monedas son un recurso invaluable para que las personas curiosas aprendan, jueguen y se sientan seguras con las redes de bitcoin antes de manejar bitcoins \"reales\" de mainnet. Recuerda que los bitcoins de prueba NO tienen valor monetario."
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "A rede signet e suas moedas são um recurso importante para pessoas curiosas aprenderem, testarem e se tornarem confiantes com as redes de bitcoin antes de usarem bitcoins \"reais\" da mainnet. Lembre-se de que os bitcoins de teste NÃO têm valor monetário."
+          }
+        }
+      }
+    },
+    "l1_p8" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Padawan will teach you the foundations of bitcoin, including making transactions and backing up wallets, all using the signet network. You cannot receive or send mainnet bitcoins to or from your Padawan wallet. Any coins you have on Padawan or send to friends using the app are signet coins with NO monetary value."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Padawan te enseñará los fundamentos de bitcoin, incluyendo cómo realizar transacciones y respaldar carteras, todo usando la red signet. No puedes recibir ni enviar bitcoins de mainnet desde o hacia tu cartera de Padawan. Cualquier moneda que tengas en Padawan o envíes a amigos usando la aplicación son monedas signet SIN valor monetario."
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Padawan ensinará os fundamentos do bitcoin, incluindo como fazer transações e backup de carteiras, tudo usando a rede signet. Você não pode receber ou enviar bitcoins de mainnet para ou de sua carteira Padawan. Quaisquer moedas que você tenha no Padawan ou envie para amigos usando o aplicativo são moedas signet SEM valor monetário."
+          }
+        }
+      }
+    },
+    "l1_p9" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Use Padawan to learn, practice, and test the boundaries of your bitcoin knowledge!"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¡Usa Padawan para aprender, practicar y probar los límites de tu conocimiento sobre bitcoin!"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Use Padawan para aprender, praticar e testar os limites do seu conhecimento sobre bitcoin!"
+          }
+        }
+      }
+    },
+    "l1_title" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "What is the Bitcoin Signet?"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¿Qué es el Bitcoin Signet?"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "O que é o bitcoin Signet?"
+          }
+        }
+      }
+    },
+    "l2_h1" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Generating receive addresses"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Generar direcciones de recepción"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gerando endereço de recebimento"
+          }
+        }
+      }
+    },
+    "l2_h2" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Be careful!"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¡Ten cuidado!"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tenha cuidado!"
+          }
+        }
+      }
+    },
+    "l2_p1" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "To receive bitcoin, you ask your wallet software (like Padawan) to generate a receive address. Each time your receive bitcoin, a new address will be used by your wallet."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Para recibir bitcoin, debes solicitar a tu cartera (una como Padawan) que genere una nueva dirección de recepción. Cada vez que recibas bitcoin, tu cartera utilizará una nueva dirección."
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Para receber bitcoin, você pede para sua carteira (como o Padawan) gerar um endereço de recebimento. Cada vez que você pedir, um novo endereço será gerado pela sua carteira."
+          }
+        }
+      }
+    },
+    "l2_p2" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "To make it easier to share, we display this address in two common ways:"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Para que sea más fácil de compartir, te mostramos la dirección de dos formas habituales:"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "As duas maneiras de compartilhar o seu endereço de recebimento são:"
+          }
+        }
+      }
+    },
+    "l2_p3" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "1. A string of letters and numbers that might look like this:"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "1. Una serie de letras y números que puede que se parezcan a algo como esto:"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "1. Uma sequência de letras e números que pode ter esta aparência:"
+          }
+        }
+      }
+    },
+    "l2_p4" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Or"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "O"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ou"
+          }
+        }
+      }
+    },
+    "l2_p5" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "2. A QR code that might look like this:"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "2. Un código QR que puede que se parezca a algo como este:"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "2. Um QR code parecido com este:"
+          }
+        }
+      }
+    },
+    "l2_p6" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The two formats above refer to the same address, just in different ways."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Los dos formatos anteriormente mencionados se refieren a una misma dirección, aunque en diferentes formas."
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Os dois formatos acima referem-se ao mesmo endereço, apenas de maneiras diferentes."
+          }
+        }
+      }
+    },
+    "l2_p7" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "To receive bitcoin, you have two options:"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Para recibir bitcoin tienes dos opciones:"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Para receber bitcoin, você tem duas opções:"
+          }
+        }
+      }
+    },
+    "l2_p8" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "1. The sender scans a QR code: If the person who wants to send you coins is nearby, generate a new receive address and ask them to use their phone to scan the QR code displayed by your wallet."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "1. La persona que envía escanea un código QR: si la persona que quiere enviarte monedas está cerca, genera una nueva dirección y pídele que utilice su teléfono para escanear el código QR que aparecerá en tu cartera."
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "1. O remetente escaneia um QR code: Se a pessoa que deseja lhe enviar estiver por perto, gere um novo endereço de recebimento e peça para ela escanear o QR code exibido em sua carteira."
+          }
+        }
+      }
+    },
+    "l2_p9" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "2. Copy and paste the receive address to share it: Generate a new receive address, copy the string of letters and numbers (the address), and paste it in a message to the person who will send you the payment. If possible, you should try to send these messages on an encrypted platform so as to keep the address and the transaction private between you and the payer!"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "2. Copia y pega la dirección de recepción para compartirla: Genera una nueva dirección de recepción, copia la serie de letras y números (la dirección), y pégala en un mensaje a la persona que te realizará el pago. Si es posible, deberías intentar enviar estos mensajes a través de una plataforma de mensajes encriptados, ¡para que la dirección de la transacción sólo la conozcáis tú y la persona que te va a realizar el pago!"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "2. O remetente recebe uma sequência de letras e números: Gere um novo endereço de recebimento. Copie esse endereço, cole e envie uma mensagem para a pessoa que fará o pagamento. Se possível, utilize um aplicativo de envio de mensagens criptografadas para manter o endereço e a transação privados entre você e o pagador!"
+          }
+        }
+      }
+    },
+    "l2_p10" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "On Padawan, you can long press the address and the wallet will offer you to put the address directly into your clipboard for pasting somewhere else."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "En Padawan, puedes mantener pulsado sobre la dirección y la cartera te ofrecerá poner la dirección directamente en tu portapapeles para que lo pegues en otro sitio."
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Você pode pressionar o endereço e segurar para copiá-lo. Em seguida, você pode colá-lo na sua mensagem para quem fará o pagamento."
+          }
+        }
+      }
+    },
+    "l2_p11" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "It is very important to be careful when sending and receiving bitcoin. The person sending bitcoin must use the exact correct address."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Es muy importante que tengas cuidado cuando envíes o recibas bitcoin. La persona que envía bitcoin debe utilizar la dirección de forma correcta y exacta."
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "É muito importante ter cuidado ao enviar e receber bitcoin. A pessoa que faz o envio deve sempre conferir o endereço; caracter por caracter. "
+          }
+        }
+      }
+    },
+    "l2_p12" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Even though the QR code system and the copy/paste function of our phones are an acceptable way of remaining cautious, you should always double check the complete receive address. At the very least, when you copy and paste your receive address, make sure the first and last 5–10 characters of the address match."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aunque el sistema de códigos QR y la función de copiar y pegar de nuestros teléfonos son una forma aceptable de ser precavidos, siempre debes comprobar dos veces la dirección completa de recepción. Como mínimo, cuando copies y pegues la dirección, asegúrate de que los 5-10 primeros caracteres y los 5-10 últimos coinciden."
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Embora o sistema de QR code e a função de copiar/colar dos nossos telefones sejam uma boa maneira de transmitir informações, você deve sempre verificar com bastante atenção o endereço de recebimento por completo. No mínimo, ao copiar e colar seu endereço de recebimento, certifique-se de que os primeiros e últimos 5 a 10 caracteres do endereço correspondam."
+          }
+        }
+      }
+    },
+    "l2_p13" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Reminder: Padawan only uses signet bitcoins. Do not try to send it real bitcoins!"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Recordatorio: Padawan solo utiliza bitcoins de la red de pruebas. ¡No intentes enviar bitcoins reales!"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lembrete: Padawan usa apenas bitcoins de teste. Não tente enviar bitcoins reais!"
+          }
+        }
+      }
+    },
+    "l2_title" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Receiving bitcoin"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Recibir bitcoin"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Recebendo bitcoin"
+          }
+        }
+      }
+    },
+    "l3_p1" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "To send bitcoin, you must ask for a receive address. If offered a QR code, scan it using your phone's camera. If you receive a long string of letters and numbers, you can copy and paste the address into the address field of the transaction screen of the app. Remember to double check the address once you have pasted it!"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Para enviar bitcoin, debes solicitar una dirección de recepción. Si te ofrecen un código QR, escanéalo utilizando la cámara de tu teléfono. Si recibes una serie de letras y números, puedes copiar la dirección y pegarla en el campo de la dirección en la pantalla de la transacción en tu aplicación. ¡Recuerda comprobar dos veces la dirección cuando la hayas copiado!"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Para enviar bitcoin, você deve solicitar um endereço de recebimento. Se for oferecido a você um QR code, escaneie-o usando a câmera do seu telefone. Se você receber uma sequência de letras e números, copie e cole no local do endereço destinatário. Lembre-se de verificar o endereço depois de colar!"
+          }
+        }
+      }
+    },
+    "l3_p2" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Once you have inputted the address, specify the amount of bitcoin to send (either in bitcoin units or in satoshis), and broadcast the transaction to the network. Your transaction will be picked up by nodes all over the world, and will eventually be mined in a block!"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cuando hayas introducido la dirección, especifica la cantidad de bitcoin a enviar (ya sean unidades de bitcoin o satoshis), y emite la transacción a la red. Tu transacción será recibida por los nodos de todo el mundo, y con el tiempo, ¡será minada en un bloque!"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Depois de inserir o endereço, coloque a quantidade de bitcoin a enviar (bitcoin inteiro ou em satoshis) e transmita a transação para a rede. Sua transação será captada por nós em todo o mundo e registrada em um bloco!"
+          }
+        }
+      }
+    },
+    "l3_title" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sending bitcoin"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enviar bitcoin"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enviando bitcoin"
+          }
+        }
+      }
+    },
+    "l4_h1" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Imagine a bus"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Imagina un autobús"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Imagine um ônibus"
+          }
+        }
+      }
+    },
+    "l4_h2" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Some passengers"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Algunos pasajeros"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "A tarifa depende da pressa"
+          }
+        }
+      }
+    },
+    "l4_p1" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "When you complete and broadcast a bitcoin transaction, it is recorded across all computers connected to the bitcoin network usually within 2 to 5 seconds. Eventually the transaction is added to the blockchain, but when a node initially becomes aware of it, it simply adds it to a group of transactions it knows about but that have not yet been included in a block. This group of transactions is called the mempool (or \"memory pool\"), and each computer connected to the bitcoin network keeps its own memory pool. A transaction being \"in the mempool\" (meaning most nodes have seen and added the transaction to their memory pool) means it has been acknowledged by the network, but not yet made official on the blockchain."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cuando completas y emites una transacción de bitcoin, esta transacción es anotada por todos los ordenadores conectados a la red de bitcoin normalmente entre los 2 y 5 siguientes segundos. Con el tiempo la transacción se añadirá a la cadena de bloques, pero cuando un nodo la recibe por primera vez, simplemente la añade a un grupo de transacciones que conoce pero que todavía no han sido incluidas en un bloque. Este grupo de transacciones es lo que se conoce como mempool (o memoria de reserva - \"memory pool\" en inglés), y cada ordenador conectado a la red de bitcoin guarda su propia mempool. Una transacción que está \"en la mempool\" (lo que indica que la mayoría de nodos la han visto y la han añadido a su \"mempool\") significa que ha sido reconocida por la red, aunque no se ha hecho oficial en la cadena de bloques."
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Quando você envia uma transação, ela é registrada em todos os computadores (nó ou node) conectados à rede Bitcoin, geralmente dentro de 2 a 5 segundos. Um nó toma conhecimento da sua transação e a adiciona a um grupo com várias transações que ele conhece, mas que ainda não foram incluídas em um bloco, para, posteriormente, ser registrada na blockchain. Esse grupo de transações é chamado de mempool (ou “piscina de transações”), e cada computador conectado à rede Bitcoin mantém sua própria mempool. Uma transação “na mempool” (já vista por vários nós e adicionada à piscina de transações) significa que ela foi reconhecida pela rede, mas ainda não foi registrada na blockchain."
+          }
+        }
+      }
+    },
+    "l4_p2" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "To be made official, bitcoin miners need to mine a block that has the transaction included in it."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Para hacerla oficial, los mineros de bitcoin necesitan minar un bloque con la transacción incluida."
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Para se tornar oficial, os mineradores de bitcoin precisam minerar um bloco que inclua a sua transação nele."
+          }
+        }
+      }
+    },
+    "l4_p3" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Imagine a bus coming to pick up passengers every 10 or so minutes. The bus can only take a certain amount of weight. Since every passenger is a different weight, the amount of passengers that can fit on the bus changes every time."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Imagina un autobús que pasa aproximadamente cada 10 minutos para recoger pasajeros. El autobús solo puede llevar un cierto peso. Como cada pasajero tiene un peso diferente, la cantidad de pasajeros que caben en el autobús cambia cada vez que realiza un viaje."
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Imagine um ônibus que pega passageiros a cada 10 minutos em média. O ônibus só pode levar uma determinada carga. Como cada passageiro tem um peso diferente, a quantidade de pessoas que  cabem no ônibus muda toda vez."
+          }
+        }
+      }
+    },
+    "l4_p4" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The mempool acts as the bus stop. A lineup of transactions wait in the mempool to be processed into a block on the blockchain. The transactions wait for their turn to be mined, and every time the bus comes by it takes as many passengers as it can fit."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "La mempool es como si fuera la parada del autobús. Una cola de transacciones esperan en la mempool para ser procesadas en un bloque en la cadena de bloques. Las transacciones esperan su turno para ser minadas, y cada vez que viene un autobús, este recoge a todos los pasajeros que pueda."
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "A mempool atua como um ponto de ônibus. Várias transações esperam para serem registradas em um bloco na blockchain. As transações aguardam sua vez de serem mineradas e toda vez que o ônibus passa ele leva tantos passageiros quanto possa."
+          }
+        }
+      }
+    },
+    "l4_p5" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Some passengers might be in a hurry to get on the next bus. They can pay an extra fare to make sure they are near the front of the line. These transactions will be prioritized in the mining process."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Algunos pasajeros puede que tengan prisa para subirse al siguiente autobús. Pueden pagar una tarifa extra para asegurarse que serán de los primeros en subir. Estas transacciones son las que tendrán prioridad en el proceso de la minería."
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Alguns passageiros podem ter pressa em pegar o próximo ônibus. Assim, eles pagam uma tarifa mais cara para garantir que estejam perto do início da fila e consigam embarcar. Essas transações serão priorizadas no processo de mineração."
+          }
+        }
+      }
+    },
+    "l4_p6" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "On the other hand, some passengers might not be in a hurry at all! In that case, they might want to save their money by not paying a higher fare. Eventually, the line will clear and every transaction waiting in line does get through."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "En cambio, ¡otros pasajeros puede que no tengan ninguna prisa! En ese caso, puede que quieran ahorrarse un poco de dinero al no pagar una tarifa extra. Con el paso del tiempo la cola se acabará vaciando y todas las transacciones que estaban esperando acabarán subiendo al autobús."
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Por outro lado, outros passageiros podem não ter pressa alguma! Nesse caso, eles não pagam uma tarifa mais cara. Eventualmente, a fila para entrar no ônibus terá diminuído e as transações que estão esperando serão processadas."
+          }
+        }
+      }
+    },
+    "l4_title" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "What is the mempool?"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¿Qué es la mempool?"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "O que é a mempool?"
+          }
+        }
+      }
+    },
+    "l5_h1" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bidding using transaction fees"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "La puja en las comisiones de las transacciones"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Disputa por espaço no bloco"
+          }
+        }
+      }
+    },
+    "l5_h2" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Why does the network need a light load?"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¿Por qué la red necesita que la carga sea ligera?"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Por que é importante a rede Bitcoin ser enxuta e leve?"
+          }
+        }
+      }
+    },
+    "l5_p1" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Now you know a little bit more about transactions. There are many, many transactions being sent, validated, confirmed, and stored in the bitcoin network every minute of every day. This is a very costly affair."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ahora ya sabes un poco más sobre las transacciones. Muchas, muchas transacciones son enviadas, validadas, confirmadas y almacenadas en la red de bitcoin cada minuto de cada día. Lo que es algo muy costoso."
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Agora você já conhece um pouco mais sobre transações. Existem muitas delas sendo enviadas, validadas, confirmadas e armazenadas na rede do Bitcoin 24 horas por dia. Isso é bastante custoso."
+          }
+        }
+      }
+    },
+    "l5_p2" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The bitcoin network can only keep up with so much demand on the system. To make sure the load on the network stays light and lean, there is a limited capacity for the total amount of bytes that can be transacted over the network per amount of time."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "La red de bitcoin solo puede hacer frente a una demanda limitada del sistema. Para asegurarse de que la carga de la red se mantiene pequeña y ligera, hay una capacidad limitada en cuanto a la cantidad total de bytes que se pueden transaccionar a través de la red en una determinada cantidad de tiempo."
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "A rede Bitcoin só consegue validar uma determinada demanda recebida. Para garantir que a carga na rede permaneça leve e enxuta, há uma capacidade limitada de bytes que podem ser inseridos em um bloco."
+          }
+        }
+      }
+    },
+    "l5_p3" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Because the space is limited in terms of bytes per block and there is only 1 new block being mined every 10 minutes or so, bitcoin users compete for space on the blockchain by providing a fee for their transaction."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Como el espacio es limitado en términos de bytes por bloque y solo se mina un bloque aproximadamente cada 10 minutos, los usuarios de bitcoin compiten por el espacio en la cadena de bloques al proporcionar una comisión por sus transacciones."
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Como o espaço é limitado nos blocos e há apenas 1 novo bloco sendo extraído a cada 10 minutos em média, os usuários de bitcoin competem por espaço ao pagar a taxa para suas transações."
+          }
+        }
+      }
+    },
+    "l5_p4" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The transactions with the highest fees are prioritized by the miners when building blocks."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Las transacciones con las comisiones más altas son las que tienen prioridad a la hora de construir nuevos bloques."
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "As transações com as taxas mais altas são priorizadas pelos mineradores e inseridas prioritariamente naquele próximo bloco a ser minerado."
+          }
+        }
+      }
+    },
+    "l5_p5" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "One of the main advantages of the bitcoin network is its ability to stay synchronized and distributed across many computers linked to the network all over the world. The lighter and leaner the load on the network, the more resistant it is to attacks, and the more neutral and robust it stays so that all can benefit from its availability and robustness."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Una de las principales ventajas de la red de bitcoin es su habilidad para estar sincronizada y ser distribuida a través de muchos ordenadores conectados a la red por todo el mundo. Cuanto más pequeña y ligera sea la carga de la red, más resistente será frente a ataques, y cuanto más neutral y robusta se mantenga, más nos podremos beneficiar de su disponibilidad y robustez."
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Um dos pontos positivos da rede Bitcoin é permanecer sincronizada e distribuída entre muitos computadores ligados em todo o mundo. Quanto mais leve for a rede, mais resistente ela será a ataques, assim como mais neutra e robusta. Isso se deve ao fato de que pessoas comuns podem executar um Nó e ter uma cópia da rede Bitcoin e de todos os dados transacionados desde o início, pois com a rede leve ela cabe em computadores tradicionais."
+          }
+        }
+      }
+    },
+    "l5_title" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "What are transaction fees?"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¿Qué son las comisiones de transacción?"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "O que são taxas de transação?"
+          }
+        }
+      }
+    },
+    "l6_h1" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Breaking it down"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Descomponiéndolo"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Explicando:"
+          }
+        }
+      }
+    },
+    "l6_h2" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Symbols"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Símbolos"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Símbolos"
+          }
+        }
+      }
+    },
+    "l6_h3" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Which unit should I use?"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¿Qué unidad debo utilizar?"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Qual unidade devo usar?"
+          }
+        }
+      }
+    },
+    "l6_p1" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The word bitcoin has a few meanings. When referring to bitcoin, people sometime mean (a) the network, the protocol, the open source project, or (b) one of the units of value when transacting on the bitcoin network."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "La palabra bitcoin tiene varios significados. Cuando la gente se refiere a bitcoin suele significar (a) la red, el protocolo, el proyecto de código abierto, o (b) una unidad de valor cuando realizan una transacción en la red de bitcoin."
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "A palavra bitcoin tem alguns significados. Ao se referir ao bitcoin, as pessoas às vezes querem dizer A) a rede, o protocolo, o projeto de código aberto ou B) uma das unidades de valor ao realizar transações na rede bitcoin."
+          }
+        }
+      }
+    },
+    "l6_p3" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Just like the kilometer can be broken down into meters and centimeters and the foot can be broken down into inches, a bitcoin can be broken into smaller units."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "De la misma forma que el kilómetro se puede descomponer en metros y centímetros y un pie se puede descomponer en pulgadas, un bitcoin se puede descomponer en unidades más pequeñas."
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Assim como o quilômetro pode ser dividido em metros e centímetros, um pé pode ser dividido em polegadas, um bitcoin pode ser dividido em unidades menores."
+          }
+        }
+      }
+    },
+    "l6_p4" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The most important units to describe bitcoin are the bitcoin and the satoshi. Sometimes we shorten the bitcoin unit to \"btc\" and the satoshi unit to \"sat\". There are 100,000,000 satoshis in 1 bitcoin."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Las unidades de medida más importantes para describir bitcoin son el bitcoin y el satoshi. Algunas veces acortamos la unidad de bitcoin a \"btc\" y la unidad de satoshi a \"sat\". Hay 100.000.000 de satoshis en 1 bitcoin."
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "As unidades mais importantes para descrever o bitcoin são: bitcoin e satoshi. Às vezes abreviamos a unidade bitcoin para “btc” e a unidade satoshi para “sat”. Existem 100 milhões de satoshis em 1 bitcoin."
+          }
+        }
+      }
+    },
+    "l6_p5" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "There is not yet an \"official\" symbol for either unit (bitcoin or satoshi). You may see the following symbols on Padawan or in other cryptocurrency exchanges or applications."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Todavía no hay un símbolo \"oficial\" para cada unidad de medida (bitcoin o satoshi). Puede que te encuentres con los siguientes símbolos en Padawan o en otra aplicación o intercambio de criptomonedas."
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ainda não existe um símbolo “oficial” para nenhuma das unidades (bitcoin ou satoshi). Você pode ver os seguintes símbolos para bitcoin no Padawan ou em outras exchanges ou aplicativos."
+          }
+        }
+      }
+    },
+    "l6_p6" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Symbols sometimes used for bitcoin:"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Símbolos que normalmente son utilizados para bitcoin:"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Símbolos às vezes utilizados para representar o bitcoin:"
+          }
+        }
+      }
+    },
+    "l6_p7" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Symbols sometimes used for satoshis:"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Símbolos que normalmente son utilizados para los satoshis:"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Símbolos às vezes utilizados para representar o satoshi:"
+          }
+        }
+      }
+    },
+    "l6_p8" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "We often use the bitcoin (btc) or satoshi (sat) unit depending on the size of the transaction."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Normalmente utilizamos la unidad de medida de bitcoin (btc) o de satoshi (sat) dependiendo del tamaño de la transacción."
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Frequentemente usamos a unidade bitcoin (btc) ou satoshi (sat), dependendo do tamanho da transação."
+          }
+        }
+      }
+    },
+    "l6_p9" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "- A brand new car might be worth 1,700,000,000 sats, but it is more simple to say 1.7 bitcoin."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "- Un coche nuevo puede que tenga un valor de 1.700.000.000 sats, pero será más sencillo decir que tiene un valor de 1.7 bitcoin."
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "- Um carro zero Km. (no Brasil) pode valer 25.000.000 sats, só que é mais simples dizer 0,25 bitcoin."
+          }
+        }
+      }
+    },
+    "l6_p10" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "- You could buy a candy for 0.00000250 bitcoin, but it's much simpler to say 250 satoshis."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "- Puedes comprar un caramelo por 0.00000250 bitcoin, pero es mucho más simple decir 250 satoshis."
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "- Você pode comprar um doce por 0,00002700 bitcoin, só que é mais simples dizer 2700 satoshis."
+          }
+        }
+      }
+    },
+    "l6_p11" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Someone using bitcoin applications must develop the skill to understand both bitcoin and satoshi units. Many transactions are denominated in bitcoin, but their network fee (see chapter 4) is almost always using the satoshi unit."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Quien utilice aplicaciones de bitcoin debe desarrollar la habilidad para comprender tanto la unidad de medida de bitcoin como la del satoshi. Muchas transacciones son denominadas en bitcoin, pero la comisión de la red (ver capítulo 4) casi siempre utilizará la unidad de medida de satoshis."
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ao usar aplicativos/carteiras de bitcoin você deve compreender o que são as unidades bitcoin e satoshi. Muitas transações são representadas em bitcoin, mas a taxa de rede (ver capítulo 4) quase sempre usa a unidade satoshi."
+          }
+        }
+      }
+    },
+    "l6_p12" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "In Padawan, you can switch between the two units in the main wallet display page by touching the btc/sats symbol."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "En Padawan, puedes cambiar entre las dos unidades de medida en la pantalla principal de la cartera pulsando el símbolo btc/sats."
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Na Padawan, você pode alternar entre as duas unidades na página principal de exibição da carteira tocando no símbolo btc/sats."
+          }
+        }
+      }
+    },
+    "l6_title" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bitcoin units"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unidades de bitcoin"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unidades de bitcoin"
+          }
+        }
+      }
+    },
+    "l7_h1" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Padawan and backups"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Padawan y los respaldos"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Padawan e backups"
+          }
+        }
+      }
+    },
+    "l7_p1" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You can think of your wallet as a tree, and the addresses it generates as its leaves (remember that you use a new address every time you receive bitcoin). The number of addresses that can be generated from this tree is near-infinite, but the only necessary part of backing up such a \"tree of addresses\" is to remember the root of the tree. Each new root will generate a completely new tree, but any wallet can recreate the whole tree simply by starting with the root."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Piensa que tu cartera es como un árbol, y las direcciones que genera como sus hojas (recuerda utilizar una nueva dirección cada vez que recibas bitcoin). El número de direcciones que se pueden generar a partir de este árbol son casi infinitas, pero lo único que hay que respaldar o guardar de este \"árbol de direcciones\" es su raíz. Cada nueva raíz generará un nuevo árbol completo, pero cualquier cartera podrá recrear el árbol completo simplemente utilizando la raíz."
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "A sua carteira é como uma árvore e os endereços gerados são como suas folhas (lembre-se de que você usa um novo endereço toda vez que recebe bitcoin). O número de endereços que podem ser gerados a partir da árvore é quase infinito, mas a única parte necessária para fazer backup dessa “árvore de endereços” é lembrar a sua raiz. Cada nova raiz gerará uma árvore completamente nova, mas qualquer carteira pode recriar a árvore inteira simplesmente começando pela raiz."
+          }
+        }
+      }
+    },
+    "l7_p2" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Modern bitcoin wallets use a process called deterministic key generation. Every new address your wallet produces is generated non-randomly. This gives them the property of being very flexible in terms of generating new addresses, while not having to remember them all individually (you do not have to make individual backups for all the addresses to which you received bitcoin)."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Las carteras modernas de bitcoin utilizan un proceso llamado generación de claves determinista. Cada nueva dirección que produce tu cartera no se genera de forma aleatoria. Esto permite que sea muy flexible a la hora de generar nuevas direcciones, sin tener que recordarlas todas individualmente (no tienes que hacer respaldos individuales de todas las direcciones en las que hayas recibido bitcoin)."
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "As carteiras bitcoin atuais usam um processo chamado geração determinística de chaves. Cada novo endereço que sua carteira produz é gerado de forma não aleatória. Isso permite que a carteira gere novos endereços, sem que você precise se lembrar de todos individualmente (você não precisa fazer backups individuais dos endereços nos quais recebeu bitcoin)."
+          }
+        }
+      }
+    },
+    "l7_p3" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The \"root\" of your wallet is the wallet seed. This wallet seed is simply a really, really big number. But numbers are notoriously hard to remember, and humans are usually really bad at writing them down properly without making mistakes or typos."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "La \"raíz\" de tu cartera es la semilla de tu cartera. Esta semilla de tu cartera es simplemente un número muy, muy grande. Pero los números son muy difíciles de recordar, y los humanos normalmente son pésimos a la hora de escribirlos correctamente sin cometer errores o equivocaciones."
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "A “raiz” da sua carteira é a sua frase de recuperação (conhecida também como Seed). A frase de recuperação nada mais é que um número muito grande, mas números são difíceis de lembrar e geralmente há o risco de anotá-los errados."
+          }
+        }
+      }
+    },
+    "l7_p4" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Instead, a standard for encoding these really big numbers has emerged in the bitcoin ecosystem. This standard uses a series of 12 or 24 words in a specific order, which together can always be used to recreate the wallet seed."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "En su lugar, un nuevo estándar ha emergido en el ecosistema bitcoin para codificar estos números tan grandes. El estándar utiliza una serie de 12 o 24 palabras en un orden específico, que cuando se junten siempre podrán utilizarse para recrear la semilla de tu cartera."
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Para evitar erros ao anotar números, há um padrão no Bitcoin que codifica esses dados grandes. Ele utiliza, geralmente, uma série de 12 ou 24 palavras em uma ordem específica, que juntas são usadas para recriar a sua carteira. Sequência de palavras geralmente envolve menos riscos de anotar errado."
+          }
+        }
+      }
+    },
+    "l7_p5" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Padawan uses this standard to allow users to create backups for its wallets. You'll find the 12 words (often referred to as a recovery phrase) on a separate screen under the menu options."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Padawan utiliza este estándar para permitir a sus usuarios que creen respaldos de sus carteras. Encontrarás las 12 palabras (conocidas comúnmente como palabras de recuperación) en una pantalla aparte dentro de las opciones del menú."
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Padawan usa esse padrão para permitir que os usuários criem backups (cópias de segurança) de suas carteiras. Você encontrará as 12 palavras (frase de recuperação ou Seed) em uma tela separada nas opções do menu."
+          }
+        }
+      }
+    },
+    "l7_p6" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The words in your recovery phrase (or backup phrase) should be treated with the utmost care. They hold the key to all the bitcoin stored in a wallet, and they are indeed the only thing required to access all funds. We must be careful not to share this recovery phrase with potential attackers."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Las palabras que contengan tus palabras de recuperación o palabras de respaldo deben de ser tratadas con el máximo cuidado. Contienen la llave de todo el bitcoin almacenado en tu cartera, y son lo único que se necesita para acceder a todos los fondos. Debemos tener mucho cuidado de no compartir estas palabras de recuperación con atacantes potenciales."
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "As palavras da sua frase de recuperação (Seed) devem ser guardadas com o máximo de cuidado. Elas contêm o acesso a todos os seus bitcoins. Não compartilhe essa frase de recuperação."
+          }
+        }
+      }
+    },
+    "l7_p7" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "But the value of this recovery phrase is immense: it means you can delete the application or lose your phone, and you will not lose your funds. As long as you have kept your 12-word recovery phrase safe, you can recover your wallet and all the bitcoin it holds. It is generally a good practice to write down this recovery phrase on physical objects like paper or metal (not saved on a computer) and store it in a safe place. Where/how you do this depends on how much your wallet holds and the level of security required for your use case."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pero el valor de estas palabras de recuperación es inmenso: significa que puedes borrar la aplicación o perder tu teléfono y no perderás tus fondos. Mientras hayas guardado de forma segura las 12 palabras de recuperación, podrás recuperar tu cartera y todo el bitcoin que contiene. Generalmente es una buena práctica escribir estas palabras de recuperación en objetos físicos como el papel o el metal (no guardarlo o apuntarlo en ningún dispositivo electrónico como ordenadores, teléfonos móviles o fotos) y almacenarlos en un lugar seguro. Dónde y cómo lo hagas dependerá de la cantidad que tengas en tu cartera y el nivel de seguridad requerido para tu caso de uso."
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "A importância da frase de recuperação é imensa: significa que você pode excluir o aplicativo ou perder seu telefone e não perderá seus fundos, desde que você mantenha sua frase segura, com a qual você poderá recuperar sua carteira e o saldo que ela contém. É uma boa prática anotar a frase de recuperação em objetos físicos como papel ou metal e armazená-la em local seguro (não salve em um computador ou meios online). Onde/como você fará isso vai depender de quanto sua carteira contém e do nível de segurança que você precisa."
+          }
+        }
+      }
+    },
+    "l7_title" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "What is a recovery phrase?"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¿Que son las palabras de recuperación?"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "O que é uma frase de recuperação?"
+          }
+        }
+      }
+    },
+    "l8_h1" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The power of recovery phrases"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "El poder de las palabras de recuperación"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "O poder das frases de recuperação"
+          }
+        }
+      }
+    },
+    "l8_p1" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Recovering a wallet from a recovery phrase is usually fairly easy. Recovery phrases (sometimes also called mnemonics) use a standard called BIP39, which provides a common way to recover coins between different wallets. The usual pattern for backing up and recovering a wallet is the following:"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Reestablecer una cartera a partir de las palabras de recuperación es normalmente bastante fácil. Las palabras de recuperación (también conocido como frase mnemónica) utiliza un estándar llamado BIP39, el cual proporciona una forma común para recuperar tus monedas en diferentes carteras. El patrón habitual para respaldar y recuperar una cartera es el siguiente:"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Restaurar uma carteira a partir de uma frase de recuperação é fácil. As frases de recuperação (Seed) usam o padrão chamado BIP39, que fornece uma maneira comum de recuperar moedas entre diferentes aplicativos de carteiras bitcoin. O procedimento usual para fazer backup e recuperar uma carteira é o seguinte:"
+          }
+        }
+      }
+    },
+    "l8_p2" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "1. We create a wallet and the software provides us with either 12 or 24 words to write down and keep. The order of the words is important, so make sure you write them in the right order. In Padawan, you can see those 12 words at any time by going into the \"Recovery phrase\" screen in the menu."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "1. Creamos una cartera y el programa o la aplicación nos proporcionará 12 o 24 palabras para que las anotemos y las guardemos. El orden de estas palabras es importante, asique asegúrate de anotarlas en el orden correcto. En Padawan, podrás ver las 12 palabras cuando quieras entrando en la pantalla de \"Palabras de recuperación\" en el menú."
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : " 1. Quando uma carteira é criada, o software informa 12 ou 24 palavras para você anotar e guardar. A ordem das palavras é importante, então certifique-se de escrevê-las na ordem correta. Na Padawan, você pode ver suas 12 palavras a qualquer momento acessando a tela “Frase de recuperação” no menu."
+          }
+        }
+      }
+    },
+    "l8_p3" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "In most other wallets, you will only get a chance to see those words once, SO MAKE SURE YOU WRITE THEM DOWN AND TREAT THEM LIKE THE MONEY THEY REPRESENT."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "En la mayoría de carteras, solo tendrás una oportunidad para ver las palabras, ASIQUE ASEGÚRATE DE ESCRIBIRLAS Y TRATARLAS COMO EL DINERO QUE REPRESENTAN."
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Na maioria das outras carteiras, você terá acesso à frase de recuperação apenas uma vez, portanto, ANOTE-AS COM CUIDADO E CUIDE DELAS COM A IMPORTÂNCIA DO DINHEIRO QUE ELAS REPRESENTAM."
+          }
+        }
+      }
+    },
+    "l8_p4" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "2. Upon creating a new wallet, you can always try to send a tiny amount of bitcoin to the wallet, delete the wallet, and attempt a full recovery using the words provided by the wallet. Alternatively, if you own two devices you can use for this test, you can try to create the wallet on one, recover it on a different device, and see the small amount you sent is accessible on both devices. If all goes well and you backed up your wallet correctly, you will be able to re-enter the recovery phrase, the exact same wallet will be generated, and the coins will be there."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "2. Tras crear una cartera nueva, siempre puedes intentar enviar una cantidad muy pequeña de bitcoin, borrarla, e intentar hacer una recuperación completa utilizando las palabras proporcionadas por dicha cartera. También, si tienes dos dispositivos que puedas utilizar para realizar esta prueba, puedes intentar crear la cartera en uno de ellos, recuperar la cartera en el otro dispositivo, y comprobar que la cantidad que enviaste es accesible desde ambos dispositivos. Si todo va bien e hiciste el respaldo de tu cartera correctamente, podrás introducir de nuevo las palabras de recuperación y se generará exactamente la misma cartera y las monedas estarán allí."
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "2. Ao criar uma nova carteira, você pode enviar uma pequena quantidade de bitcoin para a carteira. Depois exclua ela e tente uma recuperação completa usando as palavras fornecidas. Se você tiver dois dispositivos que possa usar para este teste, você pode criar a carteira em um e recuperá-la em outro dispositivo diferente. Dessa forma você pode ver se a pequena quantia enviada está acessível em ambos os dispositivos. Se tudo estiver bem e você tiver feito o backup de sua carteira corretamente, basta inserir a frase de recuperação em qualquer aplicativo ou dispositivo de carteira e o seu saldo estará lá."
+          }
+        }
+      }
+    },
+    "l8_p5" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "3. In Padawan, you would click on \"I already have a Padawan wallet\" and enter your 12-word recovery phrase."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "3. En Padawan, debes pulsar en \"Ya tengo una Padawan wallet\" e introducir las 12 palabras de recuperación."
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "3. Se você for restaurar na Padawan (bitcoin de teste), clique em “Já tenho uma carteira Padawan” e digite sua frase de recuperação com 12 palavras."
+          }
+        }
+      }
+    },
+    "l8_p6" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This ability to recover a wallet using only your words is very powerful, because it means that you don't actually need the wallet to be installed on your phone to transport your bitcoin. You can simply keep the 12 words somewhere safe (learning them by heart is also often useful, although you should not rely on that uniquely!) and rebuild a wallet later on when needed. Recovery phrases are also standard across many bitcoin wallets, which means you can rebuild a wallet using a different app or desktop wallet and the coins will be accessible!"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "La habilidad para recuperar una cartera únicamente utilizando las palabras es muy potente, porque significa que no necesitas tener la aplicación instalada en tu teléfono para transportar tu bitcoin. Simplemente puedes guardar las 12 palabras en un lugar seguro (aprenderlas de memoria puede ser útil, ¡aunque no confíes unicamente en esa opción!) y reconstruir la cartera más adelante cuando la necesites. Las palabras de recuperación son también un estándar entre la mayoría de las carteras en bitcoin, lo que significa que, ¡podrás reconstruir tu cartera utilizando una aplicación diferente o una cartera para tu ordenador y las monedas serán accesibles!"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Essa capacidade de restaurar uma carteira usando apenas a sua sequência de palavras é muito poderosa, pois significa que você não precisa ter o aplicativo de carteira instalado para transportar seu bitcoin. Você pode simplesmente manter as 12 palavras em algum lugar seguro e reconstruí-la mais tarde quando necessário. As frases de recuperação também são padrão em muitas carteiras de bitcoin, o que significa que você pode reconstruir uma carteira usando um aplicativo diferente ou até mesmo em um desktop e as moedas estarão acessíveis!"
+          }
+        }
+      }
+    },
+    "l8_p7" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This aspect of bitcoin software is often misunderstood and is worth taking the time to appreciate; bitcoins are not \"held\" in any mobile, desktop, or hardware wallet. They are simply accessed through them."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Este aspecto del software de bitcoin es a menudo malinterpretado y merece la pena que te tomes tu tiempo para apreciarlo; los bitcoins no están \"guardados\" en ningún teléfono, ordenador o cartera física (en inglés hardware wallet). Simplemente accedes a ellos."
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Esse aspecto do software Bitcoin é muitas vezes mal compreendido e vale a pena dedicar algum tempo para entendê-lo. Os bitcoins não são “mantidos” em nenhum aplicativo de carteira ou carteira de hardware. Eles são simplesmente acessados através da frase de recuperação."
+          }
+        }
+      }
+    },
+    "l8_p8" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The signet coins you have on Padawan can be recovered and used on a range of other mobile, desktop, and hardware wallets that support BIP39 bitcoin wallets. If your recovery phrase is properly backed up, deleting the app on your phone is not an issue at all!"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Las monedas de signet que tienes en Padawan pueden recuperarse y ser utilizadas en otras carteras para móviles, carteras para ordenadores y carteras físicas (o hardware wallets) que soporten el estándar del BIP39. Si tus palabras de recuperación están correctamente respaldadas, borrar la aplicación de tu teléfono ¡no será un problema!"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "As moedas de signet que você possui na Padawan podem ser recuperadas e usadas em uma variedade de outras carteiras móveis, de desktop e de hardware que suportem carteiras bitcoin BIP39 e que sejam de signet. Se o backup da sua frase de recuperação tiver sido feito corretamente, excluir o aplicativo do seu telefone não será um problema!"
+          }
+        }
+      }
+    },
+    "l8_title" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Recovering your wallet"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Recuperar tu cartera"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Recuperando sua carteira."
+          }
+        }
+      }
+    },
+    "l9_h1" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Why is there more than one type of wallet?"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¿Por qué hay más de un tipo de cartera?"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Por que existe mais de um tipo de carteira?"
+          }
+        }
+      }
+    },
+    "l9_h2" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hot vs cold wallets"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Carteras calientes vs carteras frías"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Carteira quente(hot wallet) vs Carteira fria(cold wallet)"
+          }
+        }
+      }
+    },
+    "l9_h3" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hardware, software, mobile, lightning, and custodial wallets"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Carteras físicas, electrónicas, móviles, lightning y custodio"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Carteiras de hardware, software, dispositivos móveis, Lightning e de custódia"
+          }
+        }
+      }
+    },
+    "l9_p1" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "A bitcoin wallet secures a set of cryptographic keys (very big and important numbers). It is important to protect these keys, and ensure they are not accessed by anyone other than the wallet owner."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Una cartera de bitcoin protege un juego de claves criptográficas (números muy grandes e importantes). Es importante proteger estas claves, y asegurarse de que nadie accede a ellas salvo el propietario de la cartera."
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Uma carteira bitcoin protege um conjunto de chaves criptográficas (números muito grandes e importantes). É crucial proteger essas chaves e garantir que elas não sejam acessadas por ninguém além do dono da carteira."
+          }
+        }
+      }
+    },
+    "l9_p2" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "There are many solutions for this requirement. Each type of wallet will have tradeoffs between its security level and its ease-of-use. Choosing the right wallet for a specific use can be overwhelming, but it is important! This chapter will help you understand why and when to use different types of bitcoin wallets."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hay muchas soluciones para esta necesidad. Cada tipo de cartera tiene inconvenientes entre su nivel de seguridad y su facilidad de uso. Elegir la cartera correcta puede ser sobrecogedor, ¡pero es importante! En este capítulo te ayudaremos a comprender porqué y cuándo se utilizan diferentes tipos de carteras."
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cada tipo de carteira terá os seus prós e contra entre seu nível de segurança e sua facilidade de uso. Escolher a carteira certa para um uso específico pode ser desafiador, mas é importante! Esse capítulo vai ajudá-lo a entender porque e quando usar diferentes tipos de carteiras bitcoin."
+          }
+        }
+      }
+    },
+    "l9_p3" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The first distinction between wallets is whether they have any access to the internet at all. \"Hot wallets\" are connected to the internet. Padawan is connected to the internet, and therefore is classified as a hot wallet. Hot wallet are more vulnerable to security attacks, and there are more ways they can fail, but it is much easier to send and receive transactions using them."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "La primera distinción entre carteras es si tienen acceso a internet o no. Las \"carteras calientes\" (o hot wallets en inglés) están conectadas a internet. Padawan está conectada a internet, y por lo tanto es clasificada como una hot wallet. Las hot wallets son más vulnerables a ataques de seguridad, y hay más formas en las que pueden fallar, pero a la hora de utilizarlas son mucho más fáciles que otras a la hora de enviar y recibir transacciones."
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "A primeira distinção entre carteiras é se elas têm algum acesso à Internet, como as Carteiras quentes, que é o caso da Padawan wallet. As carteiras quentes são mais vulneráveis a ataques de segurança e há mais maneiras de falharem, só que é muito mais fácil enviar e receber transações com elas."
+          }
+        }
+      }
+    },
+    "l9_p4" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Think of a physical wallet you hold in your pocket with some cash in it. If it gets lost or stolen, you don't risk losing your savings, because those are held somewhere else safer (for example, in a bank account). A hot wallet is perfectly suited for holding small amounts of bitcoin for daily use (for example, the amount you would spend at a grocery store). It is easy to use, but you should not hold all your savings in it, since it is more vulnerable to attack and failure. On the other hand they're very handy! Knowing how much to keep on a hot wallet vs cold wallet is a good skill to develop, and often depends on your spending needs and habits."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Piensa en una cartera o monedero que guardas en tu bolsillo en la que tienes algo de efectivo. Si la pierdes o te la roban, no estás arriesgando tus ahorros, porque estos están guardados en otro lugar más seguro (por ejemplo, en una cuenta bancaria). Una hot wallet es perfecta para almacenar pequeñas cantidades de bitcoin para el uso diario (por ejemplo, la cantidad que te gastarías en un supermercado). Es fácil de utilizar, pero no debes guardar todos tus ahorros en ella, ya que es más vulnerable a ataques o fallos. ¡Por otro lado son muy prácticas! Saber cuanto almacenar en una hot wallet y cuanto almacenar en una cold wallet es una buena habilidad que hay que desarrollar, y normalmente dependerá de tus hábitos y necesidades de gasto."
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Imagine uma carteira física que você tem no bolso com algum dinheiro. Se for perdida ou roubada, você não perde suas economias, porque elas ficam guardadas em outro lugar com acesso mais difícil (ex: uma conta bancária). Uma carteira quente é adequada para guardar pequenas quantidades de bitcoin para uso diário (ex: a quantia que você gastaria em um supermercado). É fácil de usar e bem útil, mas você não deve guardar nela todas as suas economias, pois é vulnerável a ataques e a falhas. Saber quanto manter em uma carteira quente e em uma carteira fria é uma habilidade a ser desenvolvida e está ligada às suas necessidades e aos seus hábitos de gastos."
+          }
+        }
+      }
+    },
+    "l9_p5" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "\"Cold wallets\" are wallets that do not ever have access to the internet or the blockchain. They don't even know the internet exists! They are often specialized pieces of hardware that can perform a very small range of tasks, namely to sign bitcoin transactions with cryptographic keys they control. This makes them much more secure against attacks. It also means they are a bit more work when using them to spend or receive coins. Cold wallets are often used for storing larger amount of coins you don't need access to everyday, similar to how you might go to the bank to get money for the week."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Las \"carteras frías\" (o cold wallets en inglés) son carteras que nunca tienen acceso a internet o a la cadena de bloques. ¡Ni tan siquiera saben que internet existe! Normalmente son equipos o dispositivos especializados que pueden realizar un número muy limitado de tareas, concretamente, firmar transacciones de bitcoin con las claves criptográficas que poseen. Esto los hace mucho más seguros frente a ataques de seguridad. También significa que conlleva un poco más de trabajo utilizarlas para enviar o recibir monedas. Las cold wallets normalmente se utilizan para almacenar cantidades más grandes de monedas a las que no necesitas acceder a diario, similar a cuando vas al banco a sacar el dinero que necesitas para esa semana."
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Carteiras frias são do tipo que nunca deixam a chave privada com acesso à internet. Ela nem sabem que a internet existe! Carteiras frias, na maioria das vezes, são peças de hardware especializadas que executam poucas tarefas específicas, como assinar transações de bitcoin com as chaves privadas. Isso as torna muito mais seguras contra ataques, mas também significa que exigem um pouco mais de trabalho ao usá-las para gastar ou receber moedas. Carteiras frias são frequentemente usadas para armazenar grandes quantidades de bitcoin os quais você não precisa acessar todos os dias, da mesma forma que você vai ao banco para transferir quantias grandes de dinheiro."
+          }
+        }
+      }
+    },
+    "l9_p6" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You might hear other names for wallets when searching for what best suits your needs. The following are commonly used by people to interact with bitcoin. Remember that a wallet can fit more than one of those categories."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Puede que escuches otros nombres para referirse a los tipos de carteras cuando estés buscando la que mejor se adapte a tus necesidades. Las siguientes son las que comúnmente utiliza la gente cuando interactúa con bitcoin. Recuerda que una cartera puede entrar en más de una de estas categorías."
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Você pode ouvir outros nomes diferentes para carteiras quando pesquisar o que melhor atende às suas necessidades. Os itens a seguir são mais usados pelas pessoas para interagir com bitcoin. Lembre-se de que uma carteira pode caber em mais de uma dessas categorias."
+          }
+        }
+      }
+    },
+    "l9_p7" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "1. Hardware wallets: these are often small, specialized bitcoin devices that can be plugged in a computer or phone, but cannot use the internet. They would be considered in the family of \"cold wallets\"."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "1. Carteras físicas (o hardware wallets en inglés): normalmente son dispositivos pequeños y especializados para interactuar con bitcoin que pueden conectarse a un ordenador o a un teléfono móvil, pero no pueden utilizar internet. Se las incluiría dentro de la familia de las \"cold wallets\"."
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "1. Carteiras de hardware: geralmente são pequenos dispositivos bitcoin especializados que podem ser conectados a um computador ou telefone, mas não usam a Internet. Elas estão na família das “carteiras frias”."
+          }
+        }
+      }
+    },
+    "l9_p8" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "2. Software wallets: these often refer to applications you can use on your phone or desktop computer. Therefore, these are often hot wallets. It is not a very good name, because all bitcoin wallets use software! But you'll encounter the term often enough that you should know what it means."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "2. Carteras electrónicas (o software wallets en inglés): normalmente se refieren a las aplicaciones que puedes utilizar en tu teléfono o en tu ordenador. Por tanto, son consideradas hot wallets. No es el nombre más apropiado, ¡porque todas las carteras de bitcoin utilizan software! Pero puede que te encuentres este término lo suficientemente a menudo como para saber lo que significa."
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "2. Carteiras de software: geralmente são aplicativos para instalar em seu telefone ou computador. Portanto, muitas vezes são carteiras quentes. Não é um nome muito bom, porque todas as carteiras bitcoin utilizam software! Mas você encontrará o termo com frequência suficiente para saber o que significa."
+          }
+        }
+      }
+    },
+    "l9_p9" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "3. Mobile wallets: these applications run on your phone, and are almost always hot wallets. They tend to give you the most easy-to-use experience, but are less safe for bigger amounts of bitcoin. Padawan wallet is an example of a mobile wallet."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "3. Carteras para teléfonos móviles: estas son aplicaciones que funcionan en tu teléfono, y casi siempre son hot wallets. Suelen ser las que proporcionan una facilidad de uso mayor, pero son menos seguras para grandes cantidades de bitcoin. Padawan wallet es un ejemplo de carteras para teléfonos móviles."
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "3. Carteiras móveis: esses aplicativos são executados no seu telefone e quase sempre são carteiras quentes. Eles tendem a oferecer a experiência mais fácil de usar, mas são menos seguros para grandes quantidades de bitcoin. A carteira Padawan é um exemplo de carteira móvel."
+          }
+        }
+      }
+    },
+    "l9_p10" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "4. Lightning wallets: the lightning network is a whole other topic not covered by Padawan. In summary, the Lightning Network is an extension of what we can do with bitcoin, and is perfectly suited for smaller, faster transactions. Using a lightning wallet is a great way to manage day-to-day spending. We highly encourage looking into lightning wallets and payments as you make your way forward on your bitcoin journey!"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "4. Carteras lightning: la red lightning un tema completamente diferente y del que no se trata en Padawan. En resumen, la Red Lightning (o Lightning network en inglés) es una extensión de lo que puedes hacer con bitcoin, y es perfecta para transacciones rápidas y pequeñas. Utilizar una cartera lightning es una forma estupenda de manejar los gastos del día a día. ¡Te recomendamos encarecidamente que busques información sobre carteras lightning y sus pagos a medida que avances en tu viaje por bitcoin!"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "4. Carteiras Lightning: a rede lightning é outro tópico não abordado pelo Padawan. Em resumo, a Lightning Network é uma extensão do como podemos utilizar o bitcoin e é adequada para transações menores e mais rápidas. Usar uma carteira lightning é uma ótima maneira de gerenciar os gastos do dia a dia. É altamente recomendável que você analise esse tipo de carteira à medida em que avança em sua jornada no bitcoin!"
+          }
+        }
+      }
+    },
+    "l9_p11" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "5. Custodial wallets: these are wallets where the cryptographic keys do not reside on the device you use to receive or spend, but are rather held elsewhere under someone else's control. Your wallet then remotely asks the custodian to make payments on your behalf. This opens up other attack vectors (for example, the custodian can decide to not abide by your requests for a transaction, or potentially steal all your coins), but also makes the wallets easier to use and recover. In general, as your bitcoin experience grows and you get more comfortable with different types of wallets and use cases, you should prefer wallets that do not give up control of your keys, and the option of a custodial wallet should be considered a last resort."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "5. Carteras custodio (o custodial wallets en inglés): estas son carteras en las que las claves criptográficas no están guardadas en el dispositivo que utilizas para recibir o gastar, si no que están guardadas bajo el control de un tercero. Lo que hace tu cartera es preguntar al custodio para que realice el pago en tu nombre. Esto abre otros vectores de ataque (por ejemplo, un custodio puede decidir no atender tu solicitud de pago o recepción de una transacción o potencialmente robarte todos tus fondos), pero también hace que estas carteras sean más faciles de utilizar y de recuperar. En general, a medida que tu experiencia con bitcoin crezca y te sientas más cómodo con diferentes tipos de carteras y sus usos, acabarás prefiriendo carteras que no cedan el control de tus claves, y la opción de una cartera custodiada se considerará como una de último recurso."
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "5. Carteiras custodiais: são aquelas que a frase de recuperação não está no dispositivo que você usa para receber ou gastar, mas pode ser mantida em outro lugar sob o controle de outra pessoa/empresa. Sua carteira solicita remotamente ao custodiante que faça pagamentos em seu nome. Isso abre outros vetores de ataque (ex: o custodiante decidir não atender aos seus pedidos de transação ou potencialmente roubar todas as suas moedas), mas também torna as carteiras mais fáceis de usar e recuperar. Em geral, à medida que sua experiência com bitcoin cresce e você fica mais confortável com diferentes tipos de carteiras e casos de uso, você deve preferir carteiras que entreguem a frase de recuperação (Seed) para você e a opção de uma carteira custodial deve ser considerada como último recurso."
+          }
+        }
+      }
+    },
+    "l9_title" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The different types of wallets"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Los diferentes tipos de carteras"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Os diferentes tipos de carteira"
+          }
+        }
+      }
+    },
+    "Language + Color Theme" : {
+
+    },
+    "Lesson content coming soon!" : {
+
+    },
+    "lessons_reset_successful" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Chapters reset successful"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Reinicio de capítulos satisfactorio"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Capítulos resetados com sucesso"
+          }
+        }
+      }
+    },
+    "More" : {
+
+    },
+    "next" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Next"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Siguiente"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Próximo"
+          }
+        }
+      }
+    },
+    "no_network" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your device is not connected to the internet!"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¡Tu dispositivo no está conectado a internet!"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Seu dispositivo não está conectado à internet!"
+          }
+        }
+      }
+    },
+    "no_thank_you_icon" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No thank you icon"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Icono no gracias"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ícone de não, obrigado"
+          }
+        }
+      }
+    },
+    "Onboarding Screen" : {
+
+    },
+    "Padawan journey" : {
+
+    },
+    "Padawan Wallet v0.16.0" : {
+
+    },
+    "padawan_journey" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Padawan journey"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "El camino del Padawan"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Jornada Padawan"
+          }
+        }
+      }
+    },
+    "padawan_logo" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Padawan Logo"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Padawan Logo"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Logotipo da Padawan"
+          }
+        }
+      }
+    },
+    "padawan_wallet" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Padawan Wallet"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Padawan Wallet"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Carteira Padawan"
+          }
+        }
+      }
+    },
+    "pending" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pending"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pendiente"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pendente"
+          }
+        }
+      }
+    },
+    "privacy_link" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "https://github.com/thunderbiscuit/padawan-wallet/blob/master/PRIVACY.txt"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "https://github.com/thunderbiscuit/padawan-wallet/blob/master/PRIVACY.txt"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "https://github.com/thunderbiscuit/padawan-wallet/blob/master/PRIVACY"
+          }
+        }
+      }
+    },
+    "privacy_text" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Padawan Wallet does not collect any information on its users, and does not use Firebase Crashlytics. This, however, means it's much harder for us to hear about the bugs from our users. If you have feedback, feel free to send a message to the Padawan Twitter/X account (@padawanwallet) or to write us an email. You can read our full privacy policy here:"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Padawan Wallet no recopila ningún tipo de información de sus usuarios ni utiliza Firebase Crashlytics. Esto significa que es mucho más difícil para nosotros enterarnos sobre los errores de la aplicación por parte de nuestros usuarios. En caso de tener cualquier comentario, no dudes en enviar un mensaje a la cuenta de Twitter/X (@padawanwallet) o envíanos un email. Puedes leer nuestra política de privacidad aquí:"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "A Padawan Wallet não coleta nenhuma informação sobre seus usuários e não usa Firebase Crashlytics. Isto, no entanto, significa que é muito mais difícil para nós ouvir sobre os bugs dos nossos usuários. Se você tiver comentários, sinta-se à vontade para enviar uma mensagem para a conta da Padawan no Twitter/X (@padawanwallet) ou nos escrever um e-mail. Você pode ler nossa política de privacidade completa aqui:"
+          }
+        }
+      }
+    },
+    "proceed_icon" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Proceed icon"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Icono proceder"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ícone de prosseguir"
+          }
+        }
+      }
+    },
+    "qr_code" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "QR Code"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Código QR"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "QR Code"
+          }
+        }
+      }
+    },
+    "receive" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Receive"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Recibir"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Receber"
+          }
+        }
+      }
+    },
+    "Receive bitcoin" : {
+
+    },
+    "receive_bitcoin" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Receive bitcoin"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Recibir bitcoin"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Receber bitcoin signet"
+          }
+        }
+      }
+    },
+    "receive_icon" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Receive icon"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Icono recibir"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ícone de receber"
+          }
+        }
+      }
+    },
+    "recover_a_wallet" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Recover a wallet"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Recuperar una cartera"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Recupere a carteira"
+          }
+        }
+      }
+    },
+    "recover_wallet" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Recover Wallet"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Recuperar cartera"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Recuperar carteira"
+          }
+        }
+      }
+    },
+    "Recovery phrase" : {
+
+    },
+    "Recovery Phrase Screen" : {
+
+    },
+    "recovery_phrase" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Recovery phrase"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Palabras de recuperación"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Frase de recuperação"
+          }
+        }
+      }
+    },
+    "Reset completed chapters" : {
+
+    },
+    "reset_completed_chapters" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Reset completed chapters"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Reiniciar capítulos completados"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Resetar capítulos concluídos"
+          }
+        }
+      }
+    },
+    "return_address_image" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Return sats faucet address image"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Imagen dirección para devolver sats"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Imagem de retornar o endereço do faucet dos sats"
+          }
+        }
+      }
+    },
+    "sats" : {
+
+    },
+    "scan_qr_icon" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Scan QR Icon"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Icono escanear código QR"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ìcone de escanear QR code"
+          }
+        }
+      }
+    },
+    "Select your preferred language and color theme for Padawan Wallet." : {
+
+    },
+    "select_language" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Select your preferred language and color theme for Padawan Wallet."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Selecciona tu idioma preferido y tema de color para Padawan Wallet."
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Selecione seu idioma preferido e tema de cores para usar a Carteira Padawan."
+          }
+        }
+      }
+    },
+    "send" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Send"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enviar"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enviar"
+          }
+        }
+      }
+    },
+    "Send bitcoin" : {
+
+    },
+    "Send signet coins back" : {
+
+    },
+    "Send Signet Coins Back Screen" : {
+
+    },
+    "send_bitcoin" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Send bitcoin"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enviar bitcoin"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enviar bitcoin signet"
+          }
+        }
+      }
+    },
+    "send_coins_back" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Signet coins can be hard to acquire, and even though they have no market value, they are not infinite, and we should be careful not to waste them or let them get lost!\n\nOnce you are done with your signet coins, please consider sending them back to the Padawan project so that we can continue sending coins to new users. Use the address above to send your coins back to us."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Las monedas de signet pueden ser difíciles de adquirir, incluso aunque no tengan valor comercial no son infinitas, por lo que, ¡debemos tener cuidado de no malgastarlas o perderlas!\n\nCuando hayas acabado de utilizar las monedas de signet, por favor envíanoslas de vuelta al proyecto de Padawan para que podamos seguir enviando monedas a nuevos usuarios. Utiliza la dirección que aparece arriba para enviárnoslas de vuelta."
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bitcoins de signet podem ser difíceis de adquirir e, embora não tenham valor de mercado, não são infinitos, então evite desperdiçá-las ou perdê-las!\n\nDepois de terminar o uso da Padawan  e seu treino, por favor considere devolver os bitcoins de signet que sobraram para o projeto Padawan, assim podemos continuar enviando moedas para novos usuários. Use o endereço acima para nos enviar suas moedas de volta."
+          }
+        }
+      }
+    },
+    "send_coins_back_address" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "tb1pjeu9rw9cwpmya0p85x9l27vp8hqd2hx2lwggta2fgm7u0gvua6asf8zrqw"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "tb1pjeu9rw9cwpmya0p85x9l27vp8hqd2hx2lwggta2fgm7u0gvua6asf8zrqw"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "tb1pjeu9rw9cwpmya0p85x9l27vp8hqd2hx2lwggta2fgm7u0gvua6asf8zrqw"
+          }
+        }
+      }
+    },
+    "send_icon" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Send icon"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Icono enviar"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ícone de enviar"
+          }
+        }
+      }
+    },
+    "send_signet_coins_back" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Send signet coins back"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enviar monedas signet de vuelta"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Envie seus bitcoins signet devolta para nós"
+          }
+        }
+      }
+    },
+    "send_your_coins_back" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Send your coins back to us!"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¡Envianos tus monedas\nde vuelta!"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Envie seus bitcoins signet devolta para nós!"
+          }
+        }
+      }
+    },
+    "settings" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "More"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ajustes"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Configurações"
+          }
+        }
+      }
+    },
+    "sync" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "sync"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "sincronizar"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "atualizar"
+          }
+        }
+      }
+    },
+    "text_copied" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Copied"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Copiado"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Copiado"
+          }
+        }
+      }
+    },
+    "time" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Time:"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fecha:"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tempo:"
+          }
+        }
+      }
+    },
+    "transaction_details" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Transaction details"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Detalles de la transacción"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Detalhes da transação"
+          }
+        }
+      }
+    },
+    "transaction_list_empty" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hey! It looks like your transaction list is empty. Take a look around, and come back to get some coins so you can start playing with the wallet!"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¡Oye! Parece que tu lista de transacciones está vacía. Echa un vistazo y vuelve para conseguir algunas monedas, ¡para que puedas comenzar a jugar con la cartera!"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Opa! Parece que sua lista de transações está vazia e você não tem nenhum saldo. Clique abaixo em Receber bitcoins signet, carregue seu saldo para poder treinar."
+          }
+        }
+      }
+    },
+    "transaction_type" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Transaction type:"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tipo de transacción:"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tipo de transação:"
+          }
+        }
+      }
+    },
+    "transactions" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Transactions"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "\nTransacciones"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Transações"
+          }
+        }
+      }
+    },
+    "Transactions" : {
+
+    },
+    "txid" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Txid:"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Txid\n(identificador de\nla transacción):"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Id da transação:"
+          }
+        }
+      }
+    },
+    "unable_to_access_network" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Currently unable to access network"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Actualmente no se puede acceder a la red"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Não é possível acessar a rede no momento"
+          }
+        }
+      }
+    },
+    "Verify transaction" : {
+
+    },
+    "verify_transaction" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Verify transaction"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Verificar la transacción"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Conferir transação"
+          }
+        }
+      }
+    },
+    "welcome_statement" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Welcome to Padawan!\n\nThis application is a place to learn the common features of mobile bitcoin wallets.\n\nIt uses bitcoin's signet, an alternative bitcoin network used globally and built exclusively for testing. The coins on this network do not have any value, but they otherwise look and behave just like normal bitcoins!\n\nThis wallet is built for users of all ages to experiment and learn about bitcoin in a risk-free environment."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¡Bienvenido a Padawan!\n\nEsta aplicación es un lugar para aprender las características más comunes de las carteras (wallet en inglés) para teléfonos móviles de bitcoin.\n\nUtiliza bitcoin en su <i><b>red de pruebas</b></i>(signet en inglés), una red de bitcoin alternativa que es utilizada y construida exclusivamente para pruebas. Las monedas en esta red no tienen ningún valor pero, ¡se comportan y tienen la misma apariencia que los bitcoins normales!\n\nEsta cartera está diseñada para que usuarios de todas las edades experimenten y aprendan sobre bitcoin en un entorno libre de riesgos."
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bem-vindo à Padawan!\n\nEsse aplicativo é um lugar para aprender os recursos comuns das carteiras bitcoin.\n\nEla usa o <i><b>signet</b></i> do bitcoin, uma rede alternativa do bitcoin usada e construída exclusivamente para testes. As moedas nesta rede não têm nenhum valor, mas por outro lado parecem e se comportam como bitcoins normais!\n\nEssa carteira foi criada para usuários de todas as idades experimentarem e aprenderem sobre bitcoin em um ambiente livre de riscos."
+          }
+        }
+      }
+    },
+    "your_recovery_phrase" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your recovery phrase"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tus palabras de recuperación"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sua frase de recuperação"
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}
