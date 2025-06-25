@@ -54,10 +54,11 @@ class WalletViewModel(application: Application) : AndroidViewModel(application) 
 
     init {
         isOnline = updateNetworkStatus(application)
-        firstAutoSync()
-        Log.i(TAG, "First sync")
-        val txList: List<TransactionDetails> = Wallet.listTransactions()
-        walletState = walletState.copy(transactions = txList, isOnline = isOnline)
+        // firstAutoSync()
+        // Log.i(TAG, "First sync")
+        // val txList: List<TransactionDetails> = Wallet.listTransactions()
+        // walletState = walletState.copy(transactions = txList, isOnline = isOnline)
+        walletState = walletState.copy(isOnline = isOnline)
     }
 
 

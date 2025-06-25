@@ -35,8 +35,6 @@ import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavHostController
-import androidx.navigation.compose.rememberNavController
 import com.composables.icons.lucide.CircleCheck
 import com.composables.icons.lucide.ClipboardCopy
 import com.composables.icons.lucide.Lucide
@@ -50,7 +48,7 @@ import com.coyotebitcoin.padawanwallet.presentation.utils.copyToClipboard
 
 @Composable
 internal fun SendCoinsBackScreen(
-    navController: NavHostController
+    onBack: () -> Unit,
 ) {
     val scrollState = rememberScrollState()
     val context = LocalContext.current
@@ -86,7 +84,7 @@ internal fun SendCoinsBackScreen(
         topBar = {
             PadawanAppBar(
                 title = stringResource(R.string.send_signet_coins_back),
-                onClick = { navController.popBackStack() }
+                onClick = { onBack() }
             )
         },
         snackbarHost = { SnackbarHost(snackbarHostState) }
@@ -143,6 +141,8 @@ internal fun SendCoinsBackScreen(
 @Composable
 internal fun PreviewSendCoinsBackScreen() {
     PadawanTheme {
-        SendCoinsBackScreen(navController = rememberNavController())
+        SendCoinsBackScreen(
+            onBack = {}
+        )
     }
 }

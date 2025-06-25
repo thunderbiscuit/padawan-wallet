@@ -65,7 +65,8 @@ private const val TAG = "WalletRecoveryScreen"
 
 @Composable
 internal fun WalletRecoveryScreen(
-    onBuildWalletButtonClicked: (WalletCreateType) -> Unit
+    onBuildWallet: (WalletCreateType) -> Unit,
+    onRecoverNav: () -> Unit
 ) {
     val scrollState = rememberScrollState()
     val snackbarHostState = remember { SnackbarHostState() }
@@ -127,7 +128,8 @@ internal fun WalletRecoveryScreen(
             MyList(
                 recoveryPhraseWordMap,
                 setRecoveryPhraseWordMap,
-                onBuildWalletButtonClicked,
+                onBuildWallet = onBuildWallet,
+                onRecoverNav = onRecoverNav,
                 snackbarHostState,
                 modifier = Modifier
             )
@@ -139,7 +141,8 @@ internal fun WalletRecoveryScreen(
 fun MyList(
     recoveryPhraseWordMap: Map<Int, String>,
     setRecoveryPhraseWordMap: (Map<Int, String>) -> Unit,
-    onBuildWalletButtonClicked: (WalletCreateType) -> Unit,
+    onBuildWallet: (WalletCreateType) -> Unit,
+    onRecoverNav: () -> Unit,
     snackbarHostState: SnackbarHostState,
     modifier: Modifier,
 ) {
@@ -181,7 +184,8 @@ fun MyList(
                     is WordCheckResult.SUCCESS -> {
                         Log.i(TAG, "All words passed the first check")
                         Log.i(TAG, "Recovery phrase is \"${wordCheck.recoveryPhrase}\"")
-                        onBuildWalletButtonClicked(WalletCreateType.RECOVER(wordCheck.recoveryPhrase))
+                        onBuildWallet(WalletCreateType.RECOVER(wordCheck.recoveryPhrase))
+                        onRecoverNav()
                     }
                     is WordCheckResult.FAILURE -> {
                         Log.i(TAG, "Not all words are valid")
@@ -263,7 +267,8 @@ fun WordField(
 internal fun PreviewWalletRecoveryScreen() {
     PadawanTheme {
         WalletRecoveryScreen(
-            onBuildWalletButtonClicked = { }
+            onBuildWallet = { },
+            onRecoverNav = { }
         )
     }
 }
