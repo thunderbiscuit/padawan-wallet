@@ -107,11 +107,70 @@ struct RecoveryPhraseScreen: View {
 }
 
 struct SendCoinsBackScreen: View {
+    @State private var showCopiedMessage = false
+    
     var body: some View {
-        Text("Send Signet Coins Back Screen")
-            .font(.largeTitle)
-            .navigationTitle("Send signet coins back")
-            .navigationBarTitleDisplayMode(.inline)
+        ScrollView {
+            VStack(spacing: 20) {
+                // QR Code placeholder (since we don't have the vector asset)
+                VStack {
+                    Image(systemName: "qrcode")
+                        .font(.system(size: 200))
+                        .foregroundColor(.black)
+                        .background(Color.white)
+                        .cornerRadius(12)
+                        .padding()
+                }
+                .background(Color.gray.opacity(0.1))
+                .cornerRadius(12)
+                
+                // Bitcoin address with copy functionality
+                VStack(alignment: .leading, spacing: 8) {
+                    Button(action: {
+                        let address = String(localized: "send_coins_back_address")
+                        UIPasteboard.general.string = address
+                        showCopiedMessage = true
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                            showCopiedMessage = false
+                        }
+                    }) {
+                        HStack {
+                            Text(String(localized: "send_coins_back_address"))
+                                .font(.system(size: 14))
+                                .foregroundColor(.black)
+                                .multilineTextAlignment(.leading)
+                            
+                            Spacer()
+                            
+                            Image(systemName: showCopiedMessage ? "checkmark.circle.fill" : "doc.on.clipboard")
+                                .foregroundColor(showCopiedMessage ? .green : .gray)
+                        }
+                        .padding()
+                        .background(Color.gray.opacity(0.1))
+                        .cornerRadius(8)
+                    }
+                    
+                    if showCopiedMessage {
+                        Text("Address copied to clipboard!")
+                            .font(.caption)
+                            .foregroundColor(.green)
+                            .padding(.horizontal)
+                    }
+                }
+                
+                // Explanatory text
+                Text(String(localized: "send_coins_back"))
+                    .font(.body)
+                    .foregroundColor(.secondary)
+                    .multilineTextAlignment(.leading)
+                    .padding(.horizontal)
+                
+                Spacer()
+            }
+            .padding()
+        }
+        .navigationTitle(String(localized: "send_signet_coins_back"))
+        .navigationBarTitleDisplayMode(.inline)
     }
 }
 
