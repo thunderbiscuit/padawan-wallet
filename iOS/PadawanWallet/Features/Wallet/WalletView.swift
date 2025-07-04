@@ -6,6 +6,8 @@
 import SwiftUI
 
 struct WalletRootView: View {
+    @Environment(\.padawanColors) private var colors
+    
     var body: some View {
         NavigationStack {
             ScrollView {
@@ -15,8 +17,9 @@ struct WalletRootView: View {
                     TransactionsCard()
                 }
                 .padding()
-                .background(Color("Background"))
+                .background(colors.background)
             }
+            .background(colors.background)
         }
     }
 }

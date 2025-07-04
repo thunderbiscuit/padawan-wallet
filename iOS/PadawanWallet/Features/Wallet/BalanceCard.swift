@@ -6,46 +6,50 @@
 import SwiftUI
 
 struct BalanceCard: View {
+    @Environment(\.padawanColors) private var colors
+    
     var body: some View {
         ZStack(alignment: .topLeading) {
             RoundedRectangle(cornerRadius: 20)
-                .fill(Color("BalanceCardBackground"))
-                .shadow(color: .black.opacity(0.2), radius: 5, x: 5, y: 5)
+                .fill(colors.background2)
+                .shadow(color: colors.darkBackground.opacity(0.2), radius: 5, x: 5, y: 5)
 
             VStack(alignment: .leading, spacing: 16) {
                 HStack {
                     Text("bitcoin signet")
-                        .foregroundColor(.orange)
+                        .foregroundColor(colors.accent2)
                         .font(.subheadline)
 
                     Spacer()
 
                     HStack {
                         Text("btc")
-                            .foregroundColor(.black.opacity(0.4))
+                            .foregroundColor(colors.textLight)
                         Text("sats")
                             .bold()
+                            .foregroundColor(colors.text)
                     }
                     .padding(.horizontal, 12)
                     .padding(.vertical, 6)
-                    .background(Color("ToggleBackground"))
+                    .background(colors.background)
                     .cornerRadius(12)
                 }
 
                 HStack {
                     Text("0")
                         .font(.system(size: 48, weight: .bold))
+                        .foregroundColor(colors.text)
                     Text("sats")
                         .font(.title3)
-                        .foregroundColor(.black)
+                        .foregroundColor(colors.text)
                 }
 
                 Button("sync") {}
                     .font(.headline)
-                    .foregroundColor(.white)
+                    .foregroundColor(colors.background)
                     .padding(.vertical, 8)
                     .padding(.horizontal, 40)
-                    .background(Color.black)
+                    .background(colors.accent1)
                     .clipShape(Capsule())
             }
             .padding()

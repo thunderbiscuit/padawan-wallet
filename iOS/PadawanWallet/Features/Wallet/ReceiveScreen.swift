@@ -8,6 +8,7 @@ import CoreImage.CIFilterBuiltins
 
 struct ReceiveScreen: View {
     @State private var address: String = "tb1q rm8g 8wzk v5cs qc56 fxsm 0jhw jupn 7s5k nng7 86"
+    @Environment(\.padawanColors) private var colors
     private let context = CIContext()
     private let filter = CIFilter.qrCodeGenerator()
 
@@ -17,6 +18,7 @@ struct ReceiveScreen: View {
             Text("Receive bitcoin")
                 .font(.title2)
                 .bold()
+                .foregroundColor(colors.text)
                 .frame(maxWidth: .infinity, alignment: .center)
 
             // QR code
@@ -27,7 +29,7 @@ struct ReceiveScreen: View {
                     .scaledToFit()
                     .frame(width: 240, height: 240)
                     .padding()
-                    .background(Color(.systemGray6))
+                    .background(colors.background2)
                     .cornerRadius(20)
             }
 
@@ -35,6 +37,7 @@ struct ReceiveScreen: View {
             HStack {
                 Text(address)
                     .font(.system(.body, design: .monospaced))
+                    .foregroundColor(colors.text)
                     .lineLimit(2)
                     .minimumScaleFactor(0.5)
                     .multilineTextAlignment(.center)
@@ -42,7 +45,7 @@ struct ReceiveScreen: View {
                     UIPasteboard.general.string = address.replacingOccurrences(of: " ", with: "")
                 }) {
                     Image(systemName: "doc.on.doc")
-                        .foregroundColor(.black)
+                        .foregroundColor(colors.accent1)
                 }
             }
             .padding(.horizontal)
@@ -55,16 +58,17 @@ struct ReceiveScreen: View {
                 address = generateMockAddress()
             }) {
                 Text("Generate a new address")
-                    .foregroundColor(.black)
+                    .foregroundColor(colors.text)
                     .frame(maxWidth: .infinity)
                     .padding()
-                    .background(Color.orange)
+                    .background(colors.accent2)
                     .cornerRadius(12)
-                    .shadow(color: .black.opacity(0.25), radius: 2, x: 4, y: 4)
+                    .shadow(color: colors.darkBackground.opacity(0.25), radius: 2, x: 4, y: 4)
             }
 
         }
         .padding()
+        .background(colors.background)
         .navigationTitle("")
         .navigationBarTitleDisplayMode(.inline)
     }

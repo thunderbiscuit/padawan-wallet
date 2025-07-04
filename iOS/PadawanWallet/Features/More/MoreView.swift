@@ -5,18 +5,9 @@
 
 import SwiftUI
 
-//struct MoreRootView: View {
-//    var body: some View {
-//        ZStack {
-//            Color.blue.ignoresSafeArea()
-//            Text("More")
-//                .font(.largeTitle)
-//                .foregroundColor(.white)
-//        }
-//    }
-//}
-
 struct MoreRootView: View {
+    @Environment(\.padawanColors) private var colors
+    
     var body: some View {
         NavigationStack {
             VStack(alignment: .leading, spacing: 24) {
@@ -25,8 +16,9 @@ struct MoreRootView: View {
                     Text("More")
                         .font(.title)
                         .bold()
+                        .foregroundColor(colors.text)
                     Text("A collection of everything else you need in the app.")
-                        .foregroundColor(.gray)
+                        .foregroundColor(colors.textLight)
                 }
 
                 // Navigation items
@@ -48,10 +40,12 @@ struct MoreRootView: View {
                 // App version
                 VStack(spacing: 4) {
                     Divider()
+                        .background(colors.textFaded)
                     Text("Padawan Wallet v0.16.0")
                         .font(.footnote)
-                        .foregroundColor(.gray)
+                        .foregroundColor(colors.textLight)
                     Divider()
+                        .background(colors.textFaded)
                 }
                 .padding(.top, 16)
 
@@ -62,15 +56,16 @@ struct MoreRootView: View {
                     Text("Reset completed chapters")
                         .frame(maxWidth: .infinity)
                         .padding()
-                        .foregroundColor(.black)
-                        .background(Color.red.opacity(0.8))
+                        .foregroundColor(colors.text)
+                        .background(colors.errorRed)
                         .cornerRadius(12)
-                        .shadow(color: .black.opacity(0.25), radius: 2, x: 4, y: 4)
+                        .shadow(color: colors.darkBackground.opacity(0.25), radius: 2, x: 4, y: 4)
                 }
 
                 Spacer()
             }
             .padding()
+            .background(colors.background)
             .navigationTitle("")
             .navigationBarHidden(true)
         }
@@ -79,28 +74,34 @@ struct MoreRootView: View {
 
 struct MoreItem: View {
     let title: String
+    @Environment(\.padawanColors) private var colors
 
     var body: some View {
         HStack {
             Text(title)
-                .foregroundColor(.black)
+                .foregroundColor(colors.text)
             Spacer()
             Image(systemName: "chevron.right")
-                .foregroundColor(.orange)
+                .foregroundColor(colors.accent2)
         }
         .padding()
-        .background(Color(.systemGray5))
+        .background(colors.background2)
         .cornerRadius(12)
-        .shadow(color: .black.opacity(0.25), radius: 1, x: 2, y: 2)
+        .shadow(color: colors.darkBackground.opacity(0.25), radius: 1, x: 2, y: 2)
     }
 }
 
 
 
 struct RecoveryPhraseScreen: View {
+    @Environment(\.padawanColors) private var colors
+    
     var body: some View {
         Text("Recovery Phrase Screen")
             .font(.largeTitle)
+            .foregroundColor(colors.text)
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .background(colors.background)
             .navigationTitle("Recovery phrase")
             .navigationBarTitleDisplayMode(.inline)
     }
@@ -108,6 +109,7 @@ struct RecoveryPhraseScreen: View {
 
 struct SendCoinsBackScreen: View {
     @State private var showCopiedMessage = false
+    @Environment(\.padawanColors) private var colors
     
     var body: some View {
         ScrollView {
@@ -116,12 +118,12 @@ struct SendCoinsBackScreen: View {
                 VStack {
                     Image(systemName: "qrcode")
                         .font(.system(size: 200))
-                        .foregroundColor(.black)
+                        .foregroundColor(colors.text)
                         .background(Color.white)
                         .cornerRadius(12)
                         .padding()
                 }
-                .background(Color.gray.opacity(0.1))
+                .background(colors.background2)
                 .cornerRadius(12)
                 
                 // Bitcoin address with copy functionality
@@ -137,23 +139,23 @@ struct SendCoinsBackScreen: View {
                         HStack {
                             Text(String(localized: "send_coins_back_address"))
                                 .font(.system(size: 14))
-                                .foregroundColor(.black)
+                                .foregroundColor(colors.text)
                                 .multilineTextAlignment(.leading)
                             
                             Spacer()
                             
                             Image(systemName: showCopiedMessage ? "checkmark.circle.fill" : "doc.on.clipboard")
-                                .foregroundColor(showCopiedMessage ? .green : .gray)
+                                .foregroundColor(showCopiedMessage ? colors.goGreen : colors.textLight)
                         }
                         .padding()
-                        .background(Color.gray.opacity(0.1))
+                        .background(colors.background2)
                         .cornerRadius(8)
                     }
                     
                     if showCopiedMessage {
                         Text("Address copied to clipboard!")
                             .font(.caption)
-                            .foregroundColor(.green)
+                            .foregroundColor(colors.goGreen)
                             .padding(.horizontal)
                     }
                 }
@@ -161,7 +163,7 @@ struct SendCoinsBackScreen: View {
                 // Explanatory text
                 Text(String(localized: "send_coins_back"))
                     .font(.body)
-                    .foregroundColor(.secondary)
+                    .foregroundColor(colors.textLight)
                     .multilineTextAlignment(.leading)
                     .padding(.horizontal)
                 
@@ -169,6 +171,7 @@ struct SendCoinsBackScreen: View {
             }
             .padding()
         }
+        .background(colors.background)
         .navigationTitle(String(localized: "send_signet_coins_back"))
         .navigationBarTitleDisplayMode(.inline)
     }
@@ -192,6 +195,7 @@ struct LanguageThemeScreen: View {
 
     @State private var selectedLanguage: Language = .english
     @State private var selectedTheme: ColorTheme = .tatooine
+    @Environment(\.padawanColors) private var colors
 
     var body: some View {
         ScrollView {
@@ -201,9 +205,10 @@ struct LanguageThemeScreen: View {
                     Text("Language + Color Theme")
                         .font(.title2)
                         .bold()
+                        .foregroundColor(colors.text)
 
                     Text("Select your preferred language and color theme for Padawan Wallet.")
-                        .foregroundColor(.gray)
+                        .foregroundColor(colors.textLight)
                         .font(.body)
                 }
 
@@ -212,15 +217,18 @@ struct LanguageThemeScreen: View {
                     Text("App-Level Language")
                         .bold()
                         .font(.headline)
+                        .foregroundColor(colors.text)
                         .padding(.bottom, 4)
 
                     Divider()
+                        .background(colors.textFaded)
 
                     ForEach(Language.allCases) { language in
                         HStack {
                             Image(systemName: selectedLanguage == language ? "circle.inset.filled" : "circle")
-                                .foregroundColor(selectedLanguage == language ? .red : .gray)
+                                .foregroundColor(selectedLanguage == language ? colors.accent1 : colors.textLight)
                             Text(language.rawValue)
+                                .foregroundColor(colors.text)
                             Spacer()
                         }
                         .contentShape(Rectangle())
@@ -235,16 +243,18 @@ struct LanguageThemeScreen: View {
                     Text("Color Theme")
                         .bold()
                         .font(.headline)
+                        .foregroundColor(colors.text)
                         .padding(.bottom, 4)
 
                     Divider()
+                        .background(colors.textFaded)
 
                     ForEach(ColorTheme.allCases) { theme in
                         HStack {
                             Image(systemName: selectedTheme == theme ? "circle.inset.filled" : "circle")
-                                .foregroundColor(theme == .vader ? .gray.opacity(0.3) : .red)
+                                .foregroundColor(theme == .vader ? colors.textFaded : colors.accent1)
                             Text(theme.rawValue)
-                                .foregroundColor(theme == .vader ? .gray.opacity(0.5) : .primary)
+                                .foregroundColor(theme == .vader ? colors.textFaded : colors.text)
                             Spacer()
                         }
                         .contentShape(Rectangle())
@@ -260,25 +270,28 @@ struct LanguageThemeScreen: View {
             }
             .padding()
         }
+        .background(colors.background)
         .navigationTitle("")
         .navigationBarTitleDisplayMode(.inline)
     }
 }
 
 struct AboutPadawanScreen: View {
+    @Environment(\.padawanColors) private var colors
+    
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 24) {
                 // About text
                 Text(String(localized: "about_text"))
                     .font(.body)
-                    .foregroundColor(.primary)
+                    .foregroundColor(colors.textLight)
                     .multilineTextAlignment(.leading)
                 
                 // Privacy text
                 Text(String(localized: "privacy_text"))
                     .font(.body)
-                    .foregroundColor(.primary)
+                    .foregroundColor(colors.textLight)
                     .multilineTextAlignment(.leading)
                 
                 // Privacy policy link
@@ -289,7 +302,7 @@ struct AboutPadawanScreen: View {
                 }) {
                     Text("Read our privacy policy here.")
                         .font(.body)
-                        .foregroundColor(.blue)
+                        .foregroundColor(colors.accent2)
                         .underline()
                 }
                 
@@ -297,6 +310,7 @@ struct AboutPadawanScreen: View {
             }
             .padding()
         }
+        .background(colors.background)
         .navigationTitle(String(localized: "about_padawan"))
         .navigationBarTitleDisplayMode(.inline)
     }

@@ -35,6 +35,8 @@ enum ElementType {
 }
 
 struct LessonsRootView: View {
+    @Environment(\.padawanColors) private var colors
+    
     let lesson1Content = LessonContent(
         elements: [
             LessonElement(type: .title, resourceKey: "l1_title"),
@@ -61,14 +63,16 @@ struct LessonsRootView: View {
                         Text("Padawan journey")
                             .font(.title)
                             .bold()
+                            .foregroundColor(colors.text)
                         Text("Continue on your journey of learning bitcoin.")
-                            .foregroundColor(.gray)
+                            .foregroundColor(colors.textLight)
                     }
 
                     VStack(alignment: .leading, spacing: 12) {
                         Text("Getting started")
                             .font(.headline)
                             .bold()
+                            .foregroundColor(colors.text)
                         
                         NavigationLink(destination: LessonDetailScreen(lesson: Lesson(title: "1. What is the Bitcoin Signet?", isHighlighted: false, content: lesson1Content))) {
                             LessonRow(lesson: Lesson(title: "1. What is the Bitcoin Signet?", isHighlighted: false, content: lesson1Content))
@@ -87,6 +91,7 @@ struct LessonsRootView: View {
                         Text("Transactions")
                             .font(.headline)
                             .bold()
+                            .foregroundColor(colors.text)
                         
                         NavigationLink(destination: LessonDetailScreen(lesson: Lesson(title: "4. What is the mempool?", isHighlighted: true, content: nil))) {
                             LessonRow(lesson: Lesson(title: "4. What is the mempool?", isHighlighted: true, content: nil))
@@ -105,6 +110,7 @@ struct LessonsRootView: View {
                         Text("Advanced")
                             .font(.headline)
                             .bold()
+                            .foregroundColor(colors.text)
                         
                         NavigationLink(destination: LessonDetailScreen(lesson: Lesson(title: "7. Seed phrases", isHighlighted: false, content: nil))) {
                             LessonRow(lesson: Lesson(title: "7. Seed phrases", isHighlighted: false, content: nil))
@@ -121,6 +127,7 @@ struct LessonsRootView: View {
                 }
                 .padding()
             }
+            .background(colors.background)
             .navigationTitle("")
             .navigationBarHidden(true)
         }
@@ -129,32 +136,34 @@ struct LessonsRootView: View {
 
 struct LessonRow: View {
     let lesson: Lesson
+    @Environment(\.padawanColors) private var colors
 
     var body: some View {
         HStack {
             Text(lesson.title)
-                .foregroundColor(.black)
+                .foregroundColor(colors.text)
                 .padding()
             Spacer()
             if lesson.isHighlighted {
                 Image(systemName: "star.fill")
-                    .foregroundColor(.yellow)
+                    .foregroundColor(colors.accent2)
                     .padding(.trailing, 12)
             } else {
                 Circle()
-                    .stroke(lineWidth: 2)
+                    .stroke(colors.textLight, lineWidth: 2)
                     .frame(width: 24, height: 24)
                     .padding(.trailing, 12)
             }
         }
-        .background(lesson.isHighlighted ? Color.red.opacity(0.8) : Color(.systemGray5))
+        .background(lesson.isHighlighted ? colors.accent1Light : colors.background2)
         .cornerRadius(12)
-        .shadow(color: .black.opacity(0.25), radius: 2, x: 4, y: 4)
+        .shadow(color: colors.darkBackground.opacity(0.25), radius: 2, x: 4, y: 4)
     }
 }
 
 struct LessonDetailScreen: View {
     let lesson: Lesson
+    @Environment(\.padawanColors) private var colors
 
     var body: some View {
         ScrollView {
@@ -164,12 +173,13 @@ struct LessonDetailScreen: View {
                 } else {
                     Text("Lesson content coming soon!")
                         .font(.title2)
-                        .foregroundColor(.gray)
+                        .foregroundColor(colors.textLight)
                         .padding()
                 }
             }
             .padding()
         }
+        .background(colors.background)
         .navigationTitle(lesson.title)
         .navigationBarTitleDisplayMode(.inline)
     }
@@ -185,6 +195,7 @@ struct LessonDetailScreen: View {
                     .fontWeight(element.type == .title || element.type == .subtitle ? .bold : .regular)
                     .lineSpacing(element.type == .paragraph ? 4 : 0)
                     .padding(.top, element.type == .subtitle ? 8 : 0)
+                    .foregroundColor(element.type == .title ? colors.text : (element.type == .subtitle ? colors.text : colors.textLight))
             }
         }
     }

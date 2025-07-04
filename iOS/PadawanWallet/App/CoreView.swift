@@ -6,6 +6,8 @@
 import SwiftUI
 
 struct CoreView: View {
+    @Environment(\.padawanColors) private var colors
+    
     var body: some View {
         TabView {
             WalletRootView()
@@ -23,5 +25,7 @@ struct CoreView: View {
                     Label(String(localized: "bottom_nav_settings"), systemImage: "plus.square.fill")
                 }
         }
+        .accentColor(colors.accent2)
+        .background(colors.background)
     }
 }

@@ -6,29 +6,33 @@
 import SwiftUI
 
 struct TransactionsCard: View {
+    @Environment(\.padawanColors) private var colors
+    
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
             Text("Transactions")
                 .font(.title3)
                 .bold()
+                .foregroundColor(colors.text)
 
             VStack(alignment: .leading, spacing: 12) {
                 Text("Hey! It looks like your transaction list is empty. Take a look around, and come back to get some coins so you can start playing with the wallet!")
+                    .foregroundColor(colors.textLight)
 
                 Button("Get Signet coins") {}
                     .font(.headline)
-                    .foregroundColor(.black)
+                    .foregroundColor(colors.text)
                     .padding()
-                    .background(Color.yellow)
+                    .background(colors.accent2)
                     .cornerRadius(12)
-                    .shadow(color: .black, radius: 0, x: 2, y: 2)
+                    .shadow(color: colors.darkBackground, radius: 0, x: 2, y: 2)
             }
             .padding()
-            .background(Color.white)
+            .background(colors.background2)
             .cornerRadius(16)
             .overlay(
                 RoundedRectangle(cornerRadius: 16)
-                    .stroke(Color.black, lineWidth: 1)
+                    .stroke(colors.accent3, lineWidth: 1)
             )
         }
     }

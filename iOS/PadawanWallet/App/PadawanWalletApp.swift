@@ -14,8 +14,10 @@ struct PadawanWalletApp: App {
         WindowGroup {
             if isOnboarding {
                 OnboardingView()
+                    .environment(\.padawanColors, .tatooineDesert)
             } else {
                 CoreView()
+                    .environment(\.padawanColors, .tatooineDesert)
             }
         }
     }
