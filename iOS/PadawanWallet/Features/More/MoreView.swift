@@ -208,9 +208,37 @@ struct LanguageThemeScreen: View {
 
 struct AboutPadawanScreen: View {
     var body: some View {
-        Text("About Padawan Screen")
-            .font(.largeTitle)
-            .navigationTitle("About Padawan")
-            .navigationBarTitleDisplayMode(.inline)
+        ScrollView {
+            VStack(alignment: .leading, spacing: 24) {
+                // About text
+                Text(String(localized: "about_text"))
+                    .font(.body)
+                    .foregroundColor(.primary)
+                    .multilineTextAlignment(.leading)
+                
+                // Privacy text
+                Text(String(localized: "privacy_text"))
+                    .font(.body)
+                    .foregroundColor(.primary)
+                    .multilineTextAlignment(.leading)
+                
+                // Privacy policy link
+                Button(action: {
+                    if let url = URL(string: String(localized: "privacy_link")) {
+                        UIApplication.shared.open(url)
+                    }
+                }) {
+                    Text("Read our privacy policy here.")
+                        .font(.body)
+                        .foregroundColor(.blue)
+                        .underline()
+                }
+                
+                Spacer()
+            }
+            .padding()
+        }
+        .navigationTitle(String(localized: "about_padawan"))
+        .navigationBarTitleDisplayMode(.inline)
     }
 }

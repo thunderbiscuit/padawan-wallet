@@ -10,14 +10,7 @@
     "A collection of everything else you need in the app." : {
 
     },
-    "About Padawan" : {
-
-    },
-    "About Padawan Screen" : {
-
-    },
     "about_padawan" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -40,7 +33,6 @@
       }
     },
     "about_text" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -86,6 +78,9 @@
       }
     },
     "Address" : {
+
+    },
+    "Address copied to clipboard!" : {
 
     },
     "address_error_message" : {
@@ -3464,7 +3459,6 @@
       }
     },
     "privacy_link" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -3487,7 +3481,6 @@
       }
     },
     "privacy_text" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -3554,6 +3547,9 @@
           }
         }
       }
+    },
+    "Read our privacy policy here." : {
+
     },
     "receive" : {
       "extractionState" : "stale",
@@ -3829,12 +3825,6 @@
     "Send bitcoin" : {
 
     },
-    "Send signet coins back" : {
-
-    },
-    "Send Signet Coins Back Screen" : {
-
-    },
     "send_bitcoin" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -3859,7 +3849,6 @@
       }
     },
     "send_coins_back" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -3882,7 +3871,6 @@
       }
     },
     "send_coins_back_address" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -3928,7 +3916,6 @@
       }
     },
     "send_signet_coins_back" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
