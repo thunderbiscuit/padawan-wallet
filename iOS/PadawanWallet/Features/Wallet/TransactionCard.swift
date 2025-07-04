@@ -23,9 +23,22 @@ struct TransactionsCard: View {
                     .font(.headline)
                     .foregroundColor(colors.text)
                     .padding()
-                    .background(colors.accent2)
-                    .cornerRadius(12)
-                    .shadow(color: colors.darkBackground, radius: 0, x: 2, y: 2)
+                    .background(
+                        ZStack {
+                            // Shadow background
+                            RoundedRectangle(cornerRadius: 12)
+                                .fill(.black)
+                                .offset(x: 4, y: 4)
+                            
+                            // Button background
+                            RoundedRectangle(cornerRadius: 12)
+                                .fill(colors.accent2)
+                        }
+                    )
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 12)
+                            .stroke(.black, lineWidth: 2)
+                    )
             }
             .padding()
             .background(colors.background2)

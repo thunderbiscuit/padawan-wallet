@@ -57,9 +57,22 @@ struct MoreRootView: View {
                         .frame(maxWidth: .infinity)
                         .padding()
                         .foregroundColor(colors.text)
-                        .background(colors.errorRed)
-                        .cornerRadius(12)
-                        .shadow(color: colors.darkBackground.opacity(0.25), radius: 2, x: 4, y: 4)
+                        .background(
+                            ZStack {
+                                // Shadow background
+                                RoundedRectangle(cornerRadius: 12)
+                                    .fill(.black)
+                                    .offset(x: 4, y: 4)
+                                
+                                // Button background
+                                RoundedRectangle(cornerRadius: 12)
+                                    .fill(colors.errorRed)
+                            }
+                        )
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 12)
+                                .stroke(.black, lineWidth: 2)
+                        )
                 }
 
                 Spacer()
@@ -85,9 +98,22 @@ struct MoreItem: View {
                 .foregroundColor(colors.accent2)
         }
         .padding()
-        .background(colors.background2)
-        .cornerRadius(12)
-        .shadow(color: colors.darkBackground.opacity(0.25), radius: 1, x: 2, y: 2)
+        .background(
+            ZStack {
+                // Shadow background
+                RoundedRectangle(cornerRadius: 12)
+                    .fill(.black)
+                    .offset(x: 4, y: 4)
+                
+                // Item background
+                RoundedRectangle(cornerRadius: 12)
+                    .fill(colors.background2)
+            }
+        )
+        .overlay(
+            RoundedRectangle(cornerRadius: 12)
+                .stroke(.black, lineWidth: 2)
+        )
     }
 }
 

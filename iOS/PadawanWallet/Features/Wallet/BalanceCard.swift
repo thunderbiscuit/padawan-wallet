@@ -10,9 +10,18 @@ struct BalanceCard: View {
     
     var body: some View {
         ZStack(alignment: .topLeading) {
+            // Shadow background
+            RoundedRectangle(cornerRadius: 20)
+                .fill(.black)
+                .offset(x: 4, y: 4)
+            
+            // Card content
             RoundedRectangle(cornerRadius: 20)
                 .fill(colors.background2)
-                .shadow(color: colors.darkBackground.opacity(0.2), radius: 5, x: 5, y: 5)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 20)
+                        .stroke(.black, lineWidth: 2)
+                )
 
             VStack(alignment: .leading, spacing: 16) {
                 HStack {
@@ -49,8 +58,22 @@ struct BalanceCard: View {
                     .foregroundColor(colors.background)
                     .padding(.vertical, 8)
                     .padding(.horizontal, 40)
-                    .background(colors.accent1)
-                    .clipShape(Capsule())
+                    .background(
+                        ZStack {
+                            // Shadow background
+                            Capsule()
+                                .fill(.black)
+                                .offset(x: 4, y: 4)
+                            
+                            // Button background
+                            Capsule()
+                                .fill(colors.accent1)
+                        }
+                    )
+                    .overlay(
+                        Capsule()
+                            .stroke(.black, lineWidth: 2)
+                    )
             }
             .padding()
         }

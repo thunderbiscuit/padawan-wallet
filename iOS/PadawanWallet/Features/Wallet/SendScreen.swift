@@ -90,13 +90,24 @@ struct SendScreen: View {
             Button(action: {
                 // Trigger verify transaction flow
             }) {
-                Text("Verify transaction")
-                    .foregroundColor(colors.text)
-                    .frame(maxWidth: .infinity)
-                    .padding()
-                    .background(colors.accent2)
-                    .cornerRadius(12)
-                    .shadow(color: colors.darkBackground.opacity(0.25), radius: 2, x: 4, y: 4)
+                ZStack {
+                    // Shadow background
+                    RoundedRectangle(cornerRadius: 12)
+                        .fill(.black)
+                        .offset(x: 4, y: 4)
+                    
+                    // Button content
+                    Text("Verify transaction")
+                        .foregroundColor(colors.text)
+                        .frame(maxWidth: .infinity)
+                        .padding()
+                        .background(colors.accent2)
+                        .cornerRadius(12)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 12)
+                                .stroke(.black, lineWidth: 2)
+                        )
+                }
             }
             .padding(.top)
 

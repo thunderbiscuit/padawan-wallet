@@ -139,25 +139,36 @@ struct LessonRow: View {
     @Environment(\.padawanColors) private var colors
 
     var body: some View {
-        HStack {
-            Text(lesson.title)
-                .foregroundColor(colors.text)
-                .padding()
-            Spacer()
-            if lesson.isHighlighted {
-                Image(systemName: "star.fill")
-                    .foregroundColor(colors.accent2)
-                    .padding(.trailing, 12)
-            } else {
-                Circle()
-                    .stroke(colors.textLight, lineWidth: 2)
-                    .frame(width: 24, height: 24)
-                    .padding(.trailing, 12)
+        ZStack {
+            // Shadow background
+            RoundedRectangle(cornerRadius: 12)
+                .fill(.black)
+                .offset(x: 4, y: 4)
+            
+            // Row content
+            HStack {
+                Text(lesson.title)
+                    .foregroundColor(colors.text)
+                    .padding()
+                Spacer()
+                if lesson.isHighlighted {
+                    Image(systemName: "star.fill")
+                        .foregroundColor(colors.accent2)
+                        .padding(.trailing, 12)
+                } else {
+                    Circle()
+                        .stroke(colors.textLight, lineWidth: 2)
+                        .frame(width: 24, height: 24)
+                        .padding(.trailing, 12)
+                }
             }
+            .background(lesson.isHighlighted ? colors.accent1Light : colors.background2)
+            .cornerRadius(12)
+            .overlay(
+                RoundedRectangle(cornerRadius: 12)
+                    .stroke(.black, lineWidth: 2)
+            )
         }
-        .background(lesson.isHighlighted ? colors.accent1Light : colors.background2)
-        .cornerRadius(12)
-        .shadow(color: colors.darkBackground.opacity(0.25), radius: 2, x: 4, y: 4)
     }
 }
 

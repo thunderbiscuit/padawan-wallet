@@ -22,19 +22,31 @@ struct ActionButtons: View {
 struct ActionButton: View {
     var title: String
     var icon: String
+    @Environment(\.padawanColors) private var colors
 
     var body: some View {
-        HStack {
-            Text(title)
-            Image(systemName: icon)
+        ZStack {
+            // Shadow background
+            RoundedRectangle(cornerRadius: 12)
+                .fill(.black)
+                .offset(x: 4, y: 4)
+            
+            // Button content
+            HStack {
+                Text(title)
+                Image(systemName: icon)
+            }
+            .font(.headline)
+            .foregroundColor(colors.text)
+            .padding()
+            .frame(maxWidth: .infinity)
+            .background(colors.accent2)
+            .cornerRadius(12)
+            .overlay(
+                RoundedRectangle(cornerRadius: 12)
+                    .stroke(.black, lineWidth: 2)
+            )
         }
-        .font(.headline)
-        .foregroundColor(.black)
-        .padding()
-        .frame(maxWidth: .infinity)
-        .background(Color.yellow)
-        .cornerRadius(12)
-        .shadow(color: .black, radius: 0, x: 2, y: 2)
         .contentShape(Rectangle())
     }
 }
