@@ -6,7 +6,10 @@ from glob import glob
 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 INPUT_DIR = os.path.join(SCRIPT_DIR, "..")
+OUTPUT_DIR = "../ios"
 OUTPUT_FILE = os.path.join(SCRIPT_DIR, "..", "ios", "Localizable.xcstrings")
+
+os.makedirs(OUTPUT_DIR, exist_ok=True)
 
 def load_all_languages(input_dir):
     strings = {}
