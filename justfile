@@ -29,6 +29,12 @@ android-locales:
 
 [doc("Generate iOS strings.")]
 ios-locales:
+  cd ./localization/scripts/   \
+  && python3 build-xcstrings.py \
+  && mv ../ios/Localizable.xcstrings ../../iOS/PadawanWallet/Resources/
+
+[doc("Generate iOS strings.")]
+ios-locales-strings:
   cd ./localization/scripts/ \
   && find ../../iOS/PadawanWallet/Resources/ -name '*.lproj' -type d -exec rm -rf {} + \
   && python build-ios-strings.py \
