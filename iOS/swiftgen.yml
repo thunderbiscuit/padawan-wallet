@@ -1,0 +1,8 @@
+strings:
+  inputs:
+    - PadawanWallet/Resources/en.lproj
+  outputs:
+    templateName: structured-swift5
+    output: PadawanWallet/Resources/Strings+Generated.swift
+    params:
+      enumName: Strings

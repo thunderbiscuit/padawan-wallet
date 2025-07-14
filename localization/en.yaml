@@ -85,6 +85,7 @@ changing_color_animation: "Changing color animation"
 hello_there:              "Hello there!"
 select_language:          "Select your preferred language and color theme for Padawan Wallet."
 get_coins:                "Get Signet coins"
+button_link_privacy:      "Read our privacy policy here."
 
 # Content Descriptons
 return_address_image:     "Return sats faucet address image"

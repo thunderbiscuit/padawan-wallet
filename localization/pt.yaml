@@ -88,6 +88,7 @@ get_coins:                "Receber bitcoins signet"
 bottom_nav_wallet:        "Carteira"
 bottom_nav_chapters:      "Aprenda"
 bottom_nav_settings:      "Menu"
+button_link_privacy:      "Leia nossos termos de uso e privacidade aqui"
 
 # Lesson 1
 l1_title:                 "O que é o bitcoin Signet?"

@@ -36,6 +36,7 @@ ios-locales:
 
 [doc("Generate iOS strings.")]
 ios-locales-strings:
-  cd ./localization/scripts/   \
+  cd ./localization/scripts/ \
+  && find ../../iOS/PadawanWallet/Resources/ -name '*.lproj' -type d -exec rm -rf {} + \
   && python3 build-ios-strings.py \
   && mv ../ios/* ../../iOS/PadawanWallet/Resources/

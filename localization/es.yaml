@@ -81,6 +81,7 @@ bottom_nav_wallet:        "Cartera"
 bottom_nav_chapters:      "Aprende"
 bottom_nav_settings:      "Menú"
 privacy_link:             "https://github.com/thunderbiscuit/padawan-wallet/blob/master/PRIVACY.txt"
+button_link_privacy:      "Lee nuestros términos de uso y privacidad aquí."
 
 # Lesson 1
 l1_title:                 "¿Qué es el Bitcoin Signet?"
