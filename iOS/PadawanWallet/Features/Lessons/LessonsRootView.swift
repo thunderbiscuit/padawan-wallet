@@ -61,10 +61,10 @@ struct LessonsRootView: View {
                 VStack(alignment: .leading, spacing: 24) {
                     VStack(alignment: .leading, spacing: 4) {
                         Text("Padawan journey")
-                            .font(.title)
-                            .bold()
+                            .font(Fonts.title)
                             .foregroundColor(colors.text)
                         Text("Continue on your journey of learning bitcoin.")
+                            .font(Fonts.subtitle)
                             .foregroundColor(colors.textLight)
                     }
 

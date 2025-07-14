@@ -6,3 +6,12 @@ strings:
     output: PadawanWallet/Resources/Strings+Generated.swift
     params:
       enumName: Strings
+
+fonts:
+  inputs:
+    - PadawanWallet/Resources/Fonts
+  outputs:
+    templateName: swift5
+    output: PadawanWallet/Resources/Fonts/Fonts+Generated.swift
+    params:
+      enumName: Fonts
