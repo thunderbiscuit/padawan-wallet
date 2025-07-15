@@ -27,16 +27,9 @@ android-locales:
   && mv ../android/values-es/strings.xml ../../Android/app/src/main/res/values-es/ \
   && mv ../android/values-pt/strings.xml ../../Android/app/src/main/res/values-pt/
 
-[group("Localizations")]
 [doc("Generate iOS strings.")]
 ios-locales:
-  cd ./localization/scripts/   \
-  && python3 build-xcstrings.py \
-  && mv ../ios/Localizable.xcstrings ../../iOS/PadawanWallet/Resources/
-
-[doc("Generate iOS strings.")]
-ios-locales-strings:
   cd ./localization/scripts/ \
   && find ../../iOS/PadawanWallet/Resources/ -name '*.lproj' -type d -exec rm -rf {} + \
-  && python3 build-ios-strings.py \
+  && python build-ios-strings.py \
   && mv ../ios/* ../../iOS/PadawanWallet/Resources/
