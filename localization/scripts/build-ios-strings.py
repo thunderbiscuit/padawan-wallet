@@ -24,10 +24,6 @@ def load_all_languages(input_dir):
     return strings, languages
 
 def escape_string(value):
-    """
-    - Substitui quebras de linha reais por \n
-    - Escapa aspas duplas, se houver.
-    """
     return value.replace("\n", "\\n").replace('"', '\\"')
 
 def write_strings_files(strings_per_language):

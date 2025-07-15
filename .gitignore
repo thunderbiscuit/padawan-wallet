@@ -34,6 +34,7 @@ PadawanBdkWrapper.def
 # Localization
 localization/android/
 localization/ios/
+**/*+Generated.swift
 
 # Logos
 logos.fig
