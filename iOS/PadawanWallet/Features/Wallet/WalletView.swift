@@ -13,7 +13,7 @@ struct WalletRootView: View {
             ScrollView {
                 VStack(spacing: 24) {
                     BalanceCard()
-                    ActionButtons()
+                    SendReceiveButtons()
                     TransactionsCard()
                 }
                 .padding()

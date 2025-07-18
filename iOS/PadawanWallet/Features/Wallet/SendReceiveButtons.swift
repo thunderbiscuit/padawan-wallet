@@ -5,7 +5,7 @@
 
 import SwiftUI
 
-struct ActionButtons: View {
+struct SendReceiveButtons: View {
     var body: some View {
         HStack(spacing: 16) {
             NavigationLink(destination: ReceiveScreen()) {
@@ -16,37 +16,5 @@ struct ActionButtons: View {
                 ActionButton(title: "Send", icon: "arrow.up")
             }
         }
-    }
-}
-
-struct ActionButton: View {
-    var title: String
-    var icon: String
-    @Environment(\.padawanColors) private var colors
-
-    var body: some View {
-        ZStack {
-            // Shadow background
-            RoundedRectangle(cornerRadius: 12)
-                .fill(.black)
-                .offset(x: 4, y: 4)
-            
-            // Button content
-            HStack {
-                Text(title)
-                Image(systemName: icon)
-            }
-            .font(.headline)
-            .foregroundColor(colors.text)
-            .padding()
-            .frame(maxWidth: .infinity)
-            .background(colors.accent2)
-            .cornerRadius(12)
-            .overlay(
-                RoundedRectangle(cornerRadius: 12)
-                    .stroke(.black, lineWidth: 2)
-            )
-        }
-        .contentShape(Rectangle())
     }
 }
