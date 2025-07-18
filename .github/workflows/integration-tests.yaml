@@ -24,4 +24,4 @@ jobs:
         with:
           api-level: ${{ matrix.api-level }}
           arch: x86_64
-          script: ./gradlew connectedCheck 
+          script: cd ./Android/ && ./gradlew connectedCheck 

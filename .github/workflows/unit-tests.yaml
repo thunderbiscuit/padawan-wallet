@@ -17,4 +17,6 @@ jobs:
           java-version: 17
 
       - name: "Run unit tests"
-        run: ./gradlew test
+        run: |
+          cd ./Android/
+          ./gradlew test
