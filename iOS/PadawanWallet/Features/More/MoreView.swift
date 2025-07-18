@@ -13,11 +13,11 @@ struct MoreRootView: View {
             VStack(alignment: .leading, spacing: 24) {
                 // Title + Subtitle
                 VStack(alignment: .leading, spacing: 8) {
-                    Text("More")
-                        .font(.title)
-                        .bold()
+                    Text(Strings.settings)
+                        .font(Fonts.title)
                         .foregroundColor(colors.text)
-                    Text("A collection of everything else you need in the app.")
+                    Text(Strings.everythingElse)
+                        .font(Fonts.subtitle)
                         .foregroundColor(colors.textLight)
                 }
 
