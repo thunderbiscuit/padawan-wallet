@@ -38,3 +38,36 @@ localization/ios/
 
 # Logos
 logos.fig
+
+# iOS
+*.xcworkspace
+xcuserdata/
+build/
+DerivedData/
+*.pbxuser
+!default.pbxuser
+*.mode1v3
+!default.mode1v3
+*.mode2v3
+!default.mode2v3
+*.perspectivev3
+!default.perspectivev3
+xcuserdata/
+
+*.hmap
+*.ipa
+*.dSYM.zip
+*.dSYM
+
+*.moved-aside
+*.xccheckout
+*.xcscmblueprint
+
+*.xcodeproj
+
+.build/
+*.xcworkspace
+Pods/
+Podfile.lock
+
+iOS/PadawanWallet/Resources/Info.plist

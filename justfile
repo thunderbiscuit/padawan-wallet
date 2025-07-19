@@ -33,3 +33,10 @@ ios-locales:
   && find ../../iOS/PadawanWallet/Resources/ -name '*.lproj' -type d -exec rm -rf {} + \
   && python build-ios-strings.py \
   && mv ../ios/* ../../iOS/PadawanWallet/Resources/
+
+[group("ProjectSetup")]
+[doc("Generate iOS files to start development")]
+start-ios-dev:
+  just ios-locales \
+  && cd ./iOS/ \
+  && xcodegen
