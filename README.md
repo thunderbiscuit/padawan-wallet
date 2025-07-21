@@ -53,5 +53,24 @@ To build and run the app from source, you'll need:
 - Android Studio
 - A phone with Android 8 (Android Oreo, API level 26) or above with USB debugging activated OR an emulator on your development machine.
 
+### Building and running Padawan iOS
+To build and run the iOS app, you’ll need:
+- `Xcode`
+- `XcodeGen` to generate PadawanWallet.xcodeproj, [see](https://github.com/yonaskolb/XcodeGen)
+- `SwiftGen` to generate Strings, Fonts and Assets, [see](https://github.com/SwiftGen/SwiftGen)
+- `Python` 
+- `Rust`
+
+#### Configuring the project
+- After installing XcodeGen and SwiftGen, run the following commands
+- In the root directory, run
+```
+just start-ios-dev
+```
+This command will generate the PadawanWallet.xcodeproj and the localized strings. After that, just open the project inside the iOS/ directory or,
+```
+open iOS/PadawanWallet.xcodeproj
+```
+
 ### How can I contribute?
 If you think this project is interesting and would like to contribute or simply provide feedback and bounce ideas, open an issue on this repository, or message the [@padawanwallet](https://twitter.com/padawanwallet) Twitter account!
