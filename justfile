@@ -39,4 +39,5 @@ ios-locales:
 start-ios-dev:
   just ios-locales \
   && cd ./iOS/ \
+  && swiftgen \
   && xcodegen

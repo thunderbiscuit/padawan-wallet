@@ -26,6 +26,28 @@ targets:
         UISupportedInterfaceOrientations: [UIInterfaceOrientationPortrait]
         UISupportedInterfaceOrientations~ipad: [UIInterfaceOrientationPortrait, UIInterfaceOrientationPortraitUpsideDown, UIInterfaceOrientationLandscapeLeft, UIInterfaceOrientationLandscapeRight]
         UILaunchStoryboardName: LaunchScreen
+        UIAppFonts:
+          - outfit_medium.ttf
+          - outfit_regular.ttf
+          - outfit_semibold.ttf
+          - share_tech_mono.ttf
+          
+    preBuildScripts:
+      - script: |
+                if [[ "$(uname -m)" == arm64 ]]
+                then
+                    export PATH="/opt/homebrew/bin:$PATH"
+                fi
+
+                if command -v swiftgen >/dev/null 2>&1
+                then
+                    echo "Running SwiftGen..."
+                    swiftgen
+                else
+                    echo "error: SwiftGen não está instalado. Use 'brew install swiftgen'."
+                    exit 1
+                fi
+        name: SwiftGen
 
   PadawanWalletTests:
     type: bundle.unit-test

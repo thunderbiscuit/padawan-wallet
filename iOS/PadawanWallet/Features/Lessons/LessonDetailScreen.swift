@@ -45,7 +45,7 @@ struct LessonDetailScreen: View {
         }
     }
     
-    private func fontForElementType(_ type: ElementType) -> Font {
+    private func fontForElementType(_ type: ElementType) -> SwiftUI.Font {
         switch type {
         case .title: return .largeTitle
         case .subtitle: return .title2
