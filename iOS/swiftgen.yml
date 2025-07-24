@@ -15,3 +15,13 @@ fonts:
     output: PadawanWallet/Resources/Fonts/Fonts+Generated.swift
     params:
       enumName: Fonts
+
+xcassets:
+  inputs:
+    - PadawanWallet/Resources/Images.xcassets
+    - PadawanWallet/Resources/Colors.xcassets
+  outputs:
+    templateName: swift5
+    output: PadawanWallet/Resources/Assets+Generated.swift
+    params:
+      forceProvidesNamespaces: false
