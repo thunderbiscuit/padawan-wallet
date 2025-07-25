@@ -32,6 +32,10 @@ extension Fonts {
         Fonts.font(.regular, 18)
     }
     
+    static var body: SwiftUI.Font {
+        Fonts.font(.regular, 18)
+    }
+    
     static var caption: SwiftUI.Font {
         Fonts.font(.medium, 18)
     }

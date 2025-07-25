@@ -14,6 +14,13 @@ struct OnboardingView: View {
             Text("Onboarding Screen")
                 .font(.largeTitle)
 
+            PadawanButton(
+                title: "Teste",
+                action: {
+                    print("teste")
+                }
+            )
+            
             Button("Continue to Wallet") {
                 isOnboarding = false
             }
