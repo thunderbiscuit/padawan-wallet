@@ -31,39 +31,24 @@ struct PadawanButton: View {
         Button {
             action?()
         } label: {
-            ZStack {
-                RoundedRectangle(cornerRadius: 12)
-                    .fill(.black)
-                    .offset(x: 4, y: 4)
-                
-                HStack {
-                    buildContent()
-                }
-                .foregroundColor(colors.text)
-                .padding()
-                .frame(maxWidth: .infinity, maxHeight: PadawanButton.maxHeight)
-                .background(colors.accent2)
-                .cornerRadius(12)
-                .overlay(
-                    RoundedRectangle(cornerRadius: 12)
-                        .stroke(.black, lineWidth: 2)
-                )
+            PadawanCardView(backgroundColor: colors.accent1) {
+                buildContent()
             }
-            .contentShape(Rectangle())
-            .frame(maxHeight: PadawanButton.maxHeight)
+            .foregroundColor(colors.text)
         }
     }
     
     @ViewBuilder
     private func buildContent() -> some View {
-        Text(title)
-            .font(Fonts.caption)
-        if let icon {
-            icon
+        HStack {
+            Text(title)
+                .font(Fonts.caption)
+            if let icon {
+                icon
+            }
         }
     }
 }
-
 
 #if DEBUG
 private struct PreviewSample: View {
@@ -72,11 +57,13 @@ private struct PreviewSample: View {
             PadawanButton(
                 title: "Title"
             )
+            .frame(height: 80)
             
             PadawanButton(
                 title: "With Icon",
                 icon: Image(systemName: "bitcoinsign")
             )
+            .frame(height: 80)
         }
         .padding()
     }
