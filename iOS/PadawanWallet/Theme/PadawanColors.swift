@@ -19,6 +19,7 @@ struct PadawanColors {
     let errorRed: Color
     let navigationBarUnselected: Color
     let darkBackground: Color
+    let cardShadowColor: Color
 }
 
 extension PadawanColors {
@@ -35,7 +36,8 @@ extension PadawanColors {
         goGreen: Asset.Colors.tatooineDesertGoGreen.toColor,
         errorRed: Asset.Colors.tatooineDesertErrorRed.toColor,
         navigationBarUnselected: Asset.Colors.tatooineDesertNavigationBarUnselected.toColor,
-        darkBackground: Asset.Colors.tatooineDesertDarkBackground.toColor
+        darkBackground: Asset.Colors.tatooineDesertDarkBackground.toColor,
+        cardShadowColor: Asset.Colors.tatooineDesertShadowColor.toColor
     )
     
     static let vaderDark = PadawanColors(
@@ -51,7 +53,8 @@ extension PadawanColors {
         goGreen: Asset.Colors.vaderDarkGoGreen.toColor,
         errorRed: Asset.Colors.vaderDarkErrorRed.toColor,
         navigationBarUnselected: Asset.Colors.vaderDarkNavigationBarUnselected.toColor,
-        darkBackground: Asset.Colors.vaderDarkDarkBackground.toColor
+        darkBackground: Asset.Colors.vaderDarkDarkBackground.toColor,
+        cardShadowColor: Asset.Colors.vaderDarkShadowColor.toColor
     )
 }
 
