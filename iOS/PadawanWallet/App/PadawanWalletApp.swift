@@ -4,6 +4,9 @@
  */
 
 import SwiftUI
+import UIKit
+
+let screenHeight = UIScreen.main.bounds.height
 
 @main
 struct PadawanWalletApp: App {
