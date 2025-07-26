@@ -24,6 +24,22 @@ extension Fonts {
         }
     }
     
+    static func uiKitFont(
+        _ weight: SwiftUI.Font.Weight = .regular,
+        _ size: CGFloat = 14.0
+    ) -> UIFont {
+        switch weight {
+        case .bold, .semibold:
+            return Fonts.Outfit.semiBold.font(size: size)
+
+        case .medium:
+            return Fonts.Outfit.medium.font(size: size)
+
+        default:
+            return Fonts.Outfit.regular.font(size: size)
+        }
+    }
+    
     static var title: SwiftUI.Font {
         Fonts.font(.bold, 32)
     }

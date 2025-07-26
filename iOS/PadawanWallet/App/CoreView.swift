@@ -8,24 +8,49 @@ import SwiftUI
 struct CoreView: View {
     @Environment(\.padawanColors) private var colors
     
+    init() {
+        UITabBarAppearance.setupTabBarAppearance(colors: colors)
+    }
+    
     var body: some View {
         TabView {
             WalletRootView()
                 .tabItem {
-                    Label(String(localized: "bottom_nav_wallet"), systemImage: "bitcoinsign.square.fill")
+                    Label {
+                        Text(Strings.bottomNavWallet)
+                    } icon: {
+                        Image(systemName: "bitcoinsign.square")
+                    }
                 }
 
             LessonsRootView()
                 .tabItem {
-                    Label(String(localized: "bottom_nav_chapters"), systemImage: "graduationcap.fill")
+                    Label {
+                        Text(Strings.bottomNavChapters)
+                    } icon: {
+                        Image(systemName: "graduationcap")
+                    }
                 }
 
             MoreRootView()
                 .tabItem {
-                    Label(String(localized: "bottom_nav_settings"), systemImage: "plus.square.fill")
+                    Label {
+                        Text(Strings.bottomNavSettings)
+                    } icon: {
+                        Image(systemName: "ellipsis")
+                    }
                 }
         }
-        .accentColor(colors.accent2)
-        .background(colors.background)
+        .accentColor(colors.accent3)
+    }
+}
+
+private extension UITabBarAppearance {
+    static func setupTabBarAppearance(colors: PadawanColors) {
+        let font = Fonts.uiKitFont(.medium, 16)
+        let attributes: [NSAttributedString.Key: Any] = [
+            .font: font
+        ]
+        UITabBarItem.appearance().setTitleTextAttributes(attributes, for: .normal)
     }
 }
