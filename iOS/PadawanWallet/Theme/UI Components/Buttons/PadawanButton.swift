@@ -10,6 +10,8 @@ import SwiftUI
 struct PadawanButton: View {
     @Environment(\.padawanColors) private var colors
     
+    static let maxHeight: CGFloat = 110
+    
     private let title: String
     private let icon: Image?
     
@@ -39,7 +41,7 @@ struct PadawanButton: View {
                 }
                 .foregroundColor(colors.text)
                 .padding()
-                .frame(maxWidth: .infinity, maxHeight: 80)
+                .frame(maxWidth: .infinity, maxHeight: PadawanButton.maxHeight)
                 .background(colors.accent2)
                 .cornerRadius(12)
                 .overlay(
@@ -48,7 +50,7 @@ struct PadawanButton: View {
                 )
             }
             .contentShape(Rectangle())
-            .frame(maxHeight: 80)
+            .frame(maxHeight: PadawanButton.maxHeight)
         }
     }
     
