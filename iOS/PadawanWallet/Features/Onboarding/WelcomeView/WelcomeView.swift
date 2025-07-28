@@ -6,8 +6,8 @@
 import Foundation
 import SwiftUI
 
-private extension OnboardingView {
-    struct OnboardingViewStrings {
+private extension WelcomeView {
+    struct WelcomeViewStrings {
         static var screenTitle: String = Strings.padawanWallet
         static var welcomeText: String = Strings.welcomeStatement
         
@@ -16,10 +16,18 @@ private extension OnboardingView {
     }
 }
 
-struct OnboardingView: View {
+struct WelcomeView: View {
     @Environment(\.padawanColors) private var colors
     @AppStorage("isOnboarding") private var isOnboarding: Bool = true
 
+    private let viewModel: WelcomeViewModel
+    
+    init(
+        viewModel: WelcomeViewModel = .init(path: .constant(.init()))
+    ) {
+        self.viewModel = viewModel
+    }
+    
     var body: some View {
         BackgroundView {
             ScrollView {
@@ -28,11 +36,11 @@ struct OnboardingView: View {
                         .resizable()
                         .frame(width: 90, height: 90)
                     
-                    Text(OnboardingViewStrings.screenTitle)
+                    Text(WelcomeViewStrings.screenTitle)
                         .font(Fonts.title)
                         .foregroundStyle(colors.text)
                     
-                    Text(OnboardingViewStrings.welcomeText)
+                    Text(WelcomeViewStrings.welcomeText)
                         .font(Fonts.body)
                         .foregroundStyle(colors.textFaded)
                     
@@ -45,22 +53,28 @@ struct OnboardingView: View {
                 .padding(.bottom, 30)
             }
         }
+        .navigationDestination(for: WelcomeNavigation.self) { item in
+            switch item {
+            case .createWallet:
+                Text("Create Wallet")
+                
+            case .importWallet:
+                ImportWalletView(viewModel: .init(path: viewModel.$path))
+            }
+        }
     }
     
     @ViewBuilder
     private func buildButtons() -> some View {
         VStack(spacing: 20) {
             Group {
-                PadawanButton(
-                    title: OnboardingViewStrings.createWalletButtonTitle) {
-                        isOnboarding = false
-                    }
-                    
+                PadawanButton(title: WelcomeViewStrings.createWalletButtonTitle) {
+                    viewModel.createWallet()
+                }
                 
-                PadawanButton(
-                    title: OnboardingViewStrings.importWalletButtonTitle) {
-                        isOnboarding = false
-                    }
+                PadawanButton(title: WelcomeViewStrings.importWalletButtonTitle) {
+                    viewModel.importWallet()
+                }
             }
             .frame(width: 300)
         }
@@ -69,12 +83,12 @@ struct OnboardingView: View {
 
 #if DEBUG
 #Preview("TatooineDesert") {
-    OnboardingView()
+    WelcomeView()
         .environment(\.padawanColors, .tatooineDesert)
 }
 
 #Preview("VaderDark") {
-    OnboardingView()
+    WelcomeView()
         .environment(\.padawanColors, .vaderDark)
 }
 #endif

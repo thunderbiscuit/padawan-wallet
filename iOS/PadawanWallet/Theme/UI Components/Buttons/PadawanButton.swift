@@ -28,9 +28,16 @@ struct PadawanButton: View {
     }
     
     var body: some View {
-        Button {
-            action?()
-        } label: {
+        if let action {
+            Button {
+                action()
+            } label: {
+                PadawanCardView(backgroundColor: colors.accent1) {
+                    buildContent()
+                }
+                .foregroundColor(colors.text)
+            }
+        } else {
             PadawanCardView(backgroundColor: colors.accent1) {
                 buildContent()
             }

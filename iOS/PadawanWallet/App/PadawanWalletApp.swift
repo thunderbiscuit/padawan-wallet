@@ -15,12 +15,14 @@ struct PadawanWalletApp: App {
 
     var body: some Scene {
         WindowGroup {
-            if isOnboarding {
-                OnboardingView()
-                    .environment(\.padawanColors, .tatooineDesert)
-            } else {
-                CoreView()
-                    .environment(\.padawanColors, .tatooineDesert)
+            NavigationStack(path: $navigationPath) {
+                if isOnboarding {
+                    WelcomeView(viewModel: .init(path: $navigationPath))
+                        .environment(\.padawanColors, .tatooineDesert)
+                } else {
+                    CoreView()
+                        .environment(\.padawanColors, .tatooineDesert)
+                }
             }
         }
     }
