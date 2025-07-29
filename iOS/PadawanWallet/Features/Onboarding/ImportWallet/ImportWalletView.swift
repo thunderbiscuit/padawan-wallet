@@ -25,7 +25,7 @@ struct ImportWalletView: View {
                 Text("Home")
             }
         }
-        .navigationDestination(for: ImportNavigation.self) { destination in
+        .navigationDestination(for: ImportWalletNavigation.self) { destination in
             switch destination {
             case .home:
                 Text("Home")

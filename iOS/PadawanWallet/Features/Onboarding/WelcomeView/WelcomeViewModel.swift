@@ -7,11 +7,6 @@
 
 import SwiftUI
 
-enum WelcomeNavigation: Hashable {
-    case createWallet
-    case importWallet
-}
-
 final class WelcomeViewModel: ObservableObject {
     
     @Binding var path: NavigationPath
@@ -23,10 +18,11 @@ final class WelcomeViewModel: ObservableObject {
     // MARK: - Navigation
     
     func createWallet() {
-        path.append(WelcomeNavigation.createWallet)
+        // TODO: - Call BDKService
+        Session.shared.setNeedOnboarding(false)
     }
     
     func importWallet() {
-        path.append(WelcomeNavigation.importWallet)
+        path.append(WelcomeScreenNavigation.importWallet)
     }
 }

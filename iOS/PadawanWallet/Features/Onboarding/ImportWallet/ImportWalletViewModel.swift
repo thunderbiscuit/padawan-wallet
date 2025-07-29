@@ -7,10 +7,6 @@
 
 import SwiftUI
 
-enum ImportNavigation: Hashable {
-    case home
-}
-
 final class ImporViewModel: ObservableObject {
     
     @Binding var path: NavigationPath
@@ -22,6 +18,6 @@ final class ImporViewModel: ObservableObject {
     // MARK: - Navigation
     
     func showHome() {
-        path.append(ImportNavigation.home)
+        path.append(ImportWalletNavigation.home)
     }
 }

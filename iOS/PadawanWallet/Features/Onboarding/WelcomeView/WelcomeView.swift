@@ -18,7 +18,6 @@ private extension WelcomeView {
 
 struct WelcomeView: View {
     @Environment(\.padawanColors) private var colors
-    @AppStorage("isOnboarding") private var isOnboarding: Bool = true
 
     private let viewModel: WelcomeViewModel
     
@@ -53,11 +52,8 @@ struct WelcomeView: View {
                 .padding(.bottom, 30)
             }
         }
-        .navigationDestination(for: WelcomeNavigation.self) { item in
+        .navigationDestination(for: WelcomeScreenNavigation.self) { item in
             switch item {
-            case .createWallet:
-                Text("Create Wallet")
-                
             case .importWallet:
                 ImportWalletView(viewModel: .init(path: viewModel.$path))
             }
