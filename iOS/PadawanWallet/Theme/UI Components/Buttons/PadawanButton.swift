@@ -14,24 +14,35 @@ struct PadawanButton: View {
     
     private let title: String
     private let icon: Image?
+    private let isDestructive: Bool
     
     private let action: (() -> Void)?
     
     init(
         title: String,
         icon: Image? = nil,
-        action: (() -> Void)? = nil
+        action: (() -> Void)? = nil,
+        isDestructive: Bool = false
     ) {
         self.title = title
         self.icon = icon
         self.action = action
+        self.isDestructive = isDestructive
     }
     
     var body: some View {
-        Button {
-            action?()
-        } label: {
-            PadawanCardView(backgroundColor: colors.accent1) {
+        let bgColor = isDestructive ? colors.accent3 : colors.accent1
+        if let action {
+            Button {
+                action()
+            } label: {
+                PadawanCardView(backgroundColor: bgColor) {
+                    buildContent()
+                }
+                .foregroundColor(colors.text)
+            }
+        } else {
+            PadawanCardView(backgroundColor: bgColor) {
                 buildContent()
             }
             .foregroundColor(colors.text)
@@ -62,6 +73,12 @@ private struct PreviewSample: View {
             PadawanButton(
                 title: "With Icon",
                 icon: Image(systemName: "bitcoinsign")
+            )
+            .frame(height: 80)
+            
+            PadawanButton(
+                title: "Title",
+                isDestructive: true
             )
             .frame(height: 80)
         }

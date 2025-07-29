@@ -10,14 +10,26 @@ import Foundation
 enum BDKServiceError: Error {
     case dbNotFound
     case walletNotFound
+    case invalidSeed
+    case generic
+    case errorWith(message: String)
     
-    var errorDescription: String? {
+    var localizedDescription: String {
         switch self {
         case .dbNotFound:
             return "Database not found"
         
         case .walletNotFound:
             return "Wallet not found"
+            
+        case .invalidSeed:
+            return "Invalid seed"
+            
+        case .generic:
+            return "Generic error"
+            
+        case .errorWith(let message):
+            return message
         }
     }
 }

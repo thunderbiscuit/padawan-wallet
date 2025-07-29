@@ -52,6 +52,8 @@ struct MoreRootView: View {
                 // Reset button
                 Button(action: {
                     // Reset action here
+                    let backupInfo = try? KeyClient.live.getBackupInfo()
+                    Session.shared.resetWallet()
                 }) {
                     Text("Reset completed chapters")
                         .frame(maxWidth: .infinity)

@@ -7,21 +7,64 @@ import SwiftUI
 import UIKit
 
 let screenHeight = UIScreen.main.bounds.height
+let isIpad = UIDevice.current.userInterfaceIdiom == .pad
 
 @main
 struct PadawanWalletApp: App {
-    @AppStorage("isOnboarding") var isOnboarding: Bool = true
     @State private var navigationPath = NavigationPath()
-
+    @ObservedObject var session = Session.shared
+    
+    init() {
+        UINavigationBarAppearance.setupNavigationBar(.tatooineDesert)
+    }
+    
     var body: some Scene {
         WindowGroup {
-            if isOnboarding {
-                OnboardingView()
-                    .environment(\.padawanColors, .tatooineDesert)
-            } else {
-                CoreView()
-                    .environment(\.padawanColors, .tatooineDesert)
+            NavigationStack(path: $navigationPath) {
+                Group {
+                    if session.isOnboarding && !session.walletExists() {
+                        WelcomeView(
+                            path: $navigationPath
+                        )
+                    } else {
+                        CoreView()
+                    }
+                }
+                .environment(\.padawanColors, .tatooineDesert)
             }
         }
+    }
+}
+
+extension UINavigationBarAppearance {
+    static func setupNavigationBar(_ color: PadawanColors) {
+        let font = Fonts.uiKitFont(.medium, 18)
+        let textColor = UIColor(color.textFaded)
+
+        let appearance = UINavigationBarAppearance()
+        appearance.configureWithTransparentBackground()
+        appearance.backgroundColor = .clear
+        appearance.titleTextAttributes = [
+            .foregroundColor: textColor,
+            .font: font
+        ]
+        appearance.largeTitleTextAttributes = [
+            .foregroundColor: textColor,
+            .font: font
+        ]
+        
+        let backButtonAppearance = UIBarButtonItemAppearance()
+        backButtonAppearance.normal.titleTextAttributes = [
+            .foregroundColor: textColor,
+            .font: font
+        ]
+        appearance.backButtonAppearance = backButtonAppearance
+        
+        UINavigationBar.appearance().tintColor = textColor
+        UIBarButtonItem.appearance().tintColor = textColor
+        
+        UINavigationBar.appearance().standardAppearance = appearance
+        UINavigationBar.appearance().scrollEdgeAppearance = appearance
+        UINavigationBar.appearance().compactAppearance = appearance
     }
 }

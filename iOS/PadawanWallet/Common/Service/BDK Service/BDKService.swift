@@ -18,7 +18,7 @@ private class BDKService {
     
     private var persister: Persister?
     private var wallet: Wallet?
-    private var needsFullScan: Bool = false
+    private(set) var needsFullScan: Bool = false
     private let keyClient: KeyClient
     
     init(keyClient: KeyClient = .live) {
