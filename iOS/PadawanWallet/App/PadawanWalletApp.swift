@@ -10,19 +10,21 @@ let screenHeight = UIScreen.main.bounds.height
 
 @main
 struct PadawanWalletApp: App {
-    @AppStorage("isOnboarding") var isOnboarding: Bool = true
     @State private var navigationPath = NavigationPath()
+    @State private var isOnboarding: Bool = Session.shared.isOnboarding
+    @ObservedObject var session = Session.shared
 
     var body: some Scene {
         WindowGroup {
             NavigationStack(path: $navigationPath) {
-                if isOnboarding {
-                    WelcomeView(viewModel: .init(path: $navigationPath))
-                        .environment(\.padawanColors, .tatooineDesert)
-                } else {
-                    CoreView()
-                        .environment(\.padawanColors, .tatooineDesert)
+                Group {
+                    if session.isOnboarding {
+                        WelcomeView(viewModel: .init(path: $navigationPath))
+                    } else {
+                        CoreView()
+                    }
                 }
+                .environment(\.padawanColors, .tatooineDesert)
             }
         }
     }
