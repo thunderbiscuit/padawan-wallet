@@ -11,7 +11,6 @@ let screenHeight = UIScreen.main.bounds.height
 @main
 struct PadawanWalletApp: App {
     @State private var navigationPath = NavigationPath()
-    @State private var isOnboarding: Bool = Session.shared.isOnboarding
     @ObservedObject var session = Session.shared
 
     var body: some Scene {
