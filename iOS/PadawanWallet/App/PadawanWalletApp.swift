@@ -12,13 +12,15 @@ let screenHeight = UIScreen.main.bounds.height
 struct PadawanWalletApp: App {
     @State private var navigationPath = NavigationPath()
     @ObservedObject var session = Session.shared
-
+    
     var body: some Scene {
         WindowGroup {
             NavigationStack(path: $navigationPath) {
                 Group {
-                    if session.isOnboarding {
-                        WelcomeView(viewModel: .init(path: $navigationPath))
+                    if session.isOnboarding && !session.walletExists() {
+                        WelcomeView(
+                            path: $navigationPath
+                        )
                     } else {
                         CoreView()
                     }

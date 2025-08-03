@@ -22,9 +22,10 @@ struct WelcomeView: View {
     private let viewModel: WelcomeViewModel
     
     init(
-        viewModel: WelcomeViewModel = .init(path: .constant(.init()))
+        path: Binding<NavigationPath>,
+        bdkClient: BDKClient = .live
     ) {
-        self.viewModel = viewModel
+        self.viewModel = .init(path: path, bdkClient: bdkClient)
     }
     
     var body: some View {
@@ -55,7 +56,7 @@ struct WelcomeView: View {
         .navigationDestination(for: WelcomeScreenNavigation.self) { item in
             switch item {
             case .importWallet:
-                ImportWalletView(viewModel: .init(path: viewModel.$path))
+                ImportWalletView(path: viewModel.$path)
             }
         }
     }
@@ -79,12 +80,12 @@ struct WelcomeView: View {
 
 #if DEBUG
 #Preview("TatooineDesert") {
-    WelcomeView()
+    WelcomeView(path: .constant(.init()))
         .environment(\.padawanColors, .tatooineDesert)
 }
 
 #Preview("VaderDark") {
-    WelcomeView()
+    WelcomeView(path: .constant(.init()))
         .environment(\.padawanColors, .vaderDark)
 }
 #endif

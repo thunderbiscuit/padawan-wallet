@@ -11,15 +11,25 @@ final class WelcomeViewModel: ObservableObject {
     
     @Binding var path: NavigationPath
     
-    init(path: Binding<NavigationPath>) {
+    private let bdkClient: BDKClient
+    
+    init(
+        path: Binding<NavigationPath>,
+        bdkClient: BDKClient
+    ) {
         _path = path
+        self.bdkClient = bdkClient
     }
     
     // MARK: - Navigation
     
     func createWallet() {
-        // TODO: - Call BDKService
-        Session.shared.setNeedOnboarding(false)
+        do {
+            try bdkClient.createNewWallet()
+            Session.shared.setNeedOnboarding(false)
+        } catch {
+            print(error)
+        }
     }
     
     func importWallet() {

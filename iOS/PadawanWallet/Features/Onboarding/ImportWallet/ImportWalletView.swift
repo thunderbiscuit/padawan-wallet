@@ -8,21 +8,23 @@
 import SwiftUI
 
 struct ImportWalletView: View {
+    @Environment(\.padawanColors) private var colors
     
     private let viewModel: ImporViewModel
     
     init(
-        viewModel: ImporViewModel = .init(path: .constant(.init()))
+        path: Binding<NavigationPath>,
+        bdkClient: BDKClient = .live
     ) {
-        self.viewModel = viewModel
+        self.viewModel = .init(path: path, bdkClient: bdkClient)
     }
     
     var body: some View {
         VStack {
             Button {
-                viewModel.showHome()
+                viewModel.importWallet()
             } label: {
-                Text("Home")
+                Text("Import Wallet")
             }
         }
         .navigationDestination(for: ImportWalletNavigation.self) { destination in
@@ -34,6 +36,9 @@ struct ImportWalletView: View {
     }
 }
 
+#if DEBUG
 #Preview {
-    ImportWalletView()
+    ImportWalletView(path: .constant(.init()))
+        .environment(\.padawanColors, .vaderDark)
 }
+#endif
