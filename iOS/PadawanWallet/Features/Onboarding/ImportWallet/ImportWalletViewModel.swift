@@ -11,6 +11,9 @@ final class ImporViewModel: ObservableObject {
     
     @Binding var path: NavigationPath
     private let bdkClient: BDKClient
+    @Published var showAlertError: Bool = false
+    
+    var words: [String] = .init(repeating: "", count: 12)
     
     init(
         path: Binding<NavigationPath>,
@@ -22,10 +25,12 @@ final class ImporViewModel: ObservableObject {
     
     func importWallet() {
         do {
-            let seed = "abstract keep priority feed interest pencil squeeze index choice wrestle palace hotel"
-            try bdkClient.importWallet(seed)
+            print(words)
             
-            showHome()
+//            let seed = "abstract keep priority feed interest pencil squeeze index choice wrestle palace hotel"
+//            try bdkClient.importWallet(seed)
+            
+//            showHome()
         } catch {
             print(error)
         }
