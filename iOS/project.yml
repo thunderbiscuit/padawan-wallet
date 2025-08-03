@@ -7,6 +7,9 @@ packages:
   BitcoinDevKit:
     url: https://github.com/bitcoindevkit/bdk-swift
     version: 2.0.0
+  KeychainAccess:
+    url: https://github.com/kishikawakatsumi/KeychainAccess.git
+    version: 4.2.2
 
 targets:
   PadawanWallet:
@@ -40,6 +43,7 @@ targets:
 
     dependencies:
       - package: BitcoinDevKit
+      - package: KeychainAccess
           
     preBuildScripts:
       - script: |
