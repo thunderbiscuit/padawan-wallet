@@ -2,6 +2,15 @@ name: PadawanWallet
 options:
   deploymentTarget:
     iOS: '16.1'
+
+packages:
+  BitcoinDevKit:
+    url: https://github.com/bitcoindevkit/bdk-swift
+    version: 2.0.0
+  KeychainAccess:
+    url: https://github.com/kishikawakatsumi/KeychainAccess.git
+    version: 4.2.2
+
 targets:
   PadawanWallet:
     type: application
@@ -31,6 +40,10 @@ targets:
           - outfit_regular.ttf
           - outfit_semibold.ttf
           - share_tech_mono.ttf
+
+    dependencies:
+      - package: BitcoinDevKit
+      - package: KeychainAccess
           
     preBuildScripts:
       - script: |
