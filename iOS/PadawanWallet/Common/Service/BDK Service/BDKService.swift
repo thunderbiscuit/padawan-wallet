@@ -150,10 +150,18 @@ extension BDKClient {
 }
 
 #if DEBUG
+extension BDKService {
+    static let mock: BDKService = .init(keyClient: .mock)
+}
+
 extension BDKClient {
     static let mock: BDKClient = .init(
-        createNewWallet: { },
-        importWallet: { _ in },
+        createNewWallet: {
+            try BDKService.mock.createWallet(nil)
+        },
+        importWallet: { seed in
+            try BDKService.mock.createWallet(seed)
+        },
         loadWallet: { },
         getBalance: { .mock }
     )

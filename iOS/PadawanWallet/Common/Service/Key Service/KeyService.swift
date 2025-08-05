@@ -71,3 +71,13 @@ extension KeyClient {
         }
     )
 }
+
+#if DEBUG
+extension KeyClient {
+    static let mock: KeyClient = .init(
+        deleteBackupInfo: { },
+        getBackupInfo: { .mock },
+        saveBackupInfo: { _ in }
+    )
+}
+#endif
