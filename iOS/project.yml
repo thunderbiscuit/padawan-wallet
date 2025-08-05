@@ -69,9 +69,11 @@ targets:
       - PadawanWalletTests
     dependencies:
       - target: PadawanWallet
+    info:
+      path: PadawanWalletTests/Info.plist
     settings:
-      INFO_PLIST_FILE: PadawanWalletTests/Info.plist
-      PRODUCT_BUNDLE_IDENTIFIER: com.coyotebitcoin.padawanwallet.tests
+      BUNDLE_LOADER: "$(TEST_HOST)"
+      TEST_HOST: "$(BUILT_PRODUCTS_DIR)/PadawanWallet.app/PadawanWallet"
 
   PadawanWalletUITests:
     type: bundle.ui-testing
@@ -80,6 +82,14 @@ targets:
       - PadawanWalletUITests
     dependencies:
       - target: PadawanWallet
-    settings:
-      INFO_PLIST_FILE: PadawanWalletUITests/Info.plist
-      PRODUCT_BUNDLE_IDENTIFIER: com.coyotebitcoin.padawanwallet.uitests
+    info:
+      path: PadawanWalletUITests/Info.plist
+
+schemes:
+  PadawanWallet-Tests:
+    build:
+      targets:
+        PadawanWalletTests: all
+    test:
+      targets:
+        - name: PadawanWalletTests

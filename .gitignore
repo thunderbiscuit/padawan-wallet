@@ -71,3 +71,5 @@ Pods/
 Podfile.lock
 
 iOS/PadawanWallet/Resources/Info.plist
+iOS/PadawanWalletTests/Info.plist
+iOS/PadawanWalletUITests/Info.plist
