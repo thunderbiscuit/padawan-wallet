@@ -7,6 +7,7 @@ package com.coyotebitcoin.padawanwallet.presentation.ui.screens.intro
 
 import android.util.Log
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -49,15 +50,15 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.coyotebitcoin.padawanwallet.R
-import com.coyotebitcoin.padawanwallet.presentation.theme.LocalPadawanColors
-import com.coyotebitcoin.padawanwallet.presentation.theme.PadawanTheme
-import com.coyotebitcoin.padawanwallet.presentation.theme.PadawanTypography
-import com.coyotebitcoin.padawanwallet.presentation.theme.PadawanColorsTatooineDesert
-import com.coyotebitcoin.padawanwallet.presentation.theme.standardShadow
-import com.coyotebitcoin.padawanwallet.presentation.ui.components.standardBorder
 import com.coyotebitcoin.padawanwallet.domain.utils.WalletCreateType
 import com.coyotebitcoin.padawanwallet.domain.utils.WordCheckResult
 import com.coyotebitcoin.padawanwallet.domain.utils.checkWords
+import com.coyotebitcoin.padawanwallet.presentation.theme.LocalPadawanColors
+import com.coyotebitcoin.padawanwallet.presentation.theme.PadawanColorsTatooineDesert
+import com.coyotebitcoin.padawanwallet.presentation.theme.PadawanTheme
+import com.coyotebitcoin.padawanwallet.presentation.theme.PadawanTypography
+import com.coyotebitcoin.padawanwallet.presentation.theme.standardShadow
+import com.coyotebitcoin.padawanwallet.presentation.ui.components.standardBorder
 import kotlinx.coroutines.launch
 
 private const val TAG = "WalletRecoveryScreen"
@@ -145,13 +146,34 @@ fun MyList(
     val colors = LocalPadawanColors.current
     Column(
         modifier
-            .fillMaxWidth(),
+            .fillMaxWidth()
+            .padding(horizontal = 16.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         val scope = rememberCoroutineScope()
         val focusManager = LocalFocusManager.current
-        for (i in 1..12) {
-            WordField(wordNumber = i, recoveryPhraseWordMap, setRecoveryPhraseWordMap, focusManager)
+        for (row in 0..5) {
+            Row(
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                val leftWordNumber = row * 2 + 1
+                val rightWordNumber = row * 2 + 2
+                
+                WordField(
+                    wordNumber = leftWordNumber,
+                    recoveryPhraseWordMap,
+                    setRecoveryPhraseWordMap,
+                    focusManager,
+                    modifier = Modifier.weight(1f)
+                )
+                WordField(
+                    wordNumber = rightWordNumber,
+                    recoveryPhraseWordMap,
+                    setRecoveryPhraseWordMap,
+                    focusManager,
+                    modifier = Modifier.weight(1f)
+                )
+            }
         }
         Button(
             onClick = {
@@ -196,7 +218,8 @@ fun WordField(
     wordNumber: Int,
     recoveryWordMap: Map<Int, String>,
     setRecoveryPhraseWordMap: (Map<Int, String>) -> Unit,
-    focusManager: FocusManager
+    focusManager: FocusManager,
+    modifier: Modifier = Modifier
 ) {
     OutlinedTextField(
         value = recoveryWordMap[wordNumber] ?: "elvis is here",
@@ -221,14 +244,14 @@ fun WordField(
             focusedBorderColor = Color(0xff2f2f2f),
             unfocusedBorderColor = Color(0xff8a8a8a),
         ),
-        modifier = Modifier
+        modifier = modifier
             .padding(8.dp),
         keyboardOptions = when (wordNumber) {
             12 -> KeyboardOptions(imeAction = ImeAction.Done)
             else -> KeyboardOptions(imeAction = ImeAction.Next)
         },
         keyboardActions = KeyboardActions(
-            onNext = { focusManager.moveFocus(FocusDirection.Down) },
+            onNext = { focusManager.moveFocus(FocusDirection.Next) },
             onDone = { focusManager.clearFocus() }
         ),
         singleLine = true,
