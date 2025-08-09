@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
@@ -147,6 +148,7 @@ fun MyList(
     Column(
         modifier
             .fillMaxWidth()
+            .imePadding()
             .padding(horizontal = 16.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
@@ -158,7 +160,7 @@ fun MyList(
             ) {
                 val leftWordNumber = row * 2 + 1
                 val rightWordNumber = row * 2 + 2
-                
+
                 WordField(
                     wordNumber = leftWordNumber,
                     recoveryPhraseWordMap,
