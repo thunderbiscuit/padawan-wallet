@@ -9,6 +9,7 @@ import SwiftUI
 
 private extension String {
     static let onboardingKey = "isOnboarding"
+    static let fullScanRequiredKey = "isfullScanRequiredKey"
 }
 
 final class Session: ObservableObject {
@@ -18,16 +19,27 @@ final class Session: ObservableObject {
     
     static let shared = Session()
     
+    private let defaults = UserDefaults.standard
+    
+    var isFullScanRequired: Bool {
+        get {
+            return defaults.bool(forKey: .fullScanRequiredKey)
+        }
+        set {
+            defaults.setValue(newValue, forKey: .fullScanRequiredKey)
+        }
+    }
+    
     init(keyClient: KeyClient = .live) {
-        isOnboarding = UserDefaults.standard.object(forKey: .onboardingKey) == nil ?
+        isOnboarding = defaults.object(forKey: .onboardingKey) == nil ?
             true :
-            UserDefaults.standard.bool(forKey: .onboardingKey)
+        defaults.bool(forKey: .onboardingKey)
         self.keyClient = keyClient
     }
     
     func setNeedOnboarding(_ value: Bool) {
         isOnboarding = value
-        UserDefaults.standard.setValue(isOnboarding, forKey: .onboardingKey)
+        defaults.setValue(isOnboarding, forKey: .onboardingKey)
     }
     
     func walletExists() -> Bool {
@@ -39,6 +51,7 @@ final class Session: ObservableObject {
     
     func resetWallet() {
         try? keyClient.deleteBackupInfo()
+        isFullScanRequired = true
         setNeedOnboarding(true)
     }
 }
