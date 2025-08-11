@@ -5,6 +5,7 @@
 
 package com.coyotebitcoin.padawanwallet.presentation.ui.screens.chapters
 
+// import com.coyotebitcoin.padawanwallet.presentation.navigation.ChapterScreen
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -22,11 +23,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
 import com.coyotebitcoin.padawanwallet.R
 import com.coyotebitcoin.padawanwallet.domain.settings.PadawanColorTheme
-import com.coyotebitcoin.padawanwallet.presentation.navigation.ChapterScreen
 import com.coyotebitcoin.padawanwallet.presentation.theme.PadawanColorsTatooineDesert
 import com.coyotebitcoin.padawanwallet.presentation.theme.PadawanTheme
 import com.coyotebitcoin.padawanwallet.presentation.theme.PadawanTypography
@@ -44,8 +42,8 @@ private const val TAG = "ChaptersRootScreen"
 internal fun ChaptersRootScreen(
     state: ChaptersRootState,
     onAction: (ChaptersScreensAction) -> Unit,
+    onChapterNav: (Int) -> Unit,
     paddingValues: PaddingValues,
-    navController: NavController,
 ) {
     val padding = when (getScreenSizeWidth(LocalConfiguration.current.screenWidthDp)) {
         ScreenSizeWidth.Small -> 12.dp
@@ -81,7 +79,7 @@ internal fun ChaptersRootScreen(
                 done = state.completedChapters[1] ?: false,
                 onClick = {
                     onAction(ChaptersScreensAction.OpenChapter(1))
-                    navController.navigate(ChapterScreen)
+                    onChapterNav(1)
                 }
             )
             TutorialCard(
@@ -89,7 +87,7 @@ internal fun ChaptersRootScreen(
                 done = state.completedChapters[2] ?: false,
                 onClick = {
                     onAction(ChaptersScreensAction.OpenChapter(2))
-                    navController.navigate(ChapterScreen)
+                    onChapterNav(2)
                 }
             )
             TutorialCard(
@@ -97,7 +95,7 @@ internal fun ChaptersRootScreen(
                 done = state.completedChapters[3] ?: false,
                 onClick = {
                     onAction(ChaptersScreensAction.OpenChapter(3))
-                    navController.navigate(ChapterScreen)
+                    onChapterNav(3)
                 }
             )
 
@@ -108,7 +106,7 @@ internal fun ChaptersRootScreen(
                 done = state.completedChapters[4] ?: false,
                 onClick = {
                     onAction(ChaptersScreensAction.OpenChapter(4))
-                    navController.navigate(ChapterScreen)
+                    onChapterNav(4)
                 }
             )
             TutorialCard(
@@ -116,7 +114,7 @@ internal fun ChaptersRootScreen(
                 done = state.completedChapters[5] ?: false,
                 onClick = {
                     onAction(ChaptersScreensAction.OpenChapter(5))
-                    navController.navigate(ChapterScreen)
+                    onChapterNav(5)
                 }
             )
             TutorialCard(
@@ -124,7 +122,7 @@ internal fun ChaptersRootScreen(
                 done = state.completedChapters[6] ?: false,
                 onClick = {
                     onAction(ChaptersScreensAction.OpenChapter(6))
-                    navController.navigate(ChapterScreen)
+                    onChapterNav(6)
                 }
             )
 
@@ -135,7 +133,7 @@ internal fun ChaptersRootScreen(
                 done = state.completedChapters[7] ?: false,
                 onClick = {
                     onAction(ChaptersScreensAction.OpenChapter(7))
-                    navController.navigate(ChapterScreen)
+                    onChapterNav(7)
                 }
             )
             TutorialCard(
@@ -143,7 +141,7 @@ internal fun ChaptersRootScreen(
                 done = state.completedChapters[8] ?: false,
                 onClick = {
                     onAction(ChaptersScreensAction.OpenChapter(8))
-                    navController.navigate(ChapterScreen)
+                    onChapterNav(8)
                 }
             )
             TutorialCard(
@@ -151,7 +149,7 @@ internal fun ChaptersRootScreen(
                 done = state.completedChapters[9] ?: false,
                 onClick = {
                     onAction(ChaptersScreensAction.OpenChapter(9))
-                    navController.navigate(ChapterScreen)
+                    onChapterNav(9)
                 }
             )
             Spacer(modifier = Modifier.padding(bottom = 16.dp))
@@ -166,8 +164,8 @@ internal fun PreviewChaptersRootScreen() {
         ChaptersRootScreen(
             state = ChaptersRootState(),
             onAction = {},
+            onChapterNav = {},
             paddingValues = PaddingValues(0.dp),
-            navController = rememberNavController()
         )
     }
 }

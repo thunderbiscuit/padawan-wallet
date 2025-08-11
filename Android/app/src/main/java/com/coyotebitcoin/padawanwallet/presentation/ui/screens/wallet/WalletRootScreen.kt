@@ -60,8 +60,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
-import androidx.navigation.NavHostController
-import androidx.navigation.compose.rememberNavController
 import com.composables.icons.lucide.ArrowDownToLine
 import com.composables.icons.lucide.ArrowUpFromLine
 import com.composables.icons.lucide.Lucide
@@ -75,9 +73,7 @@ import com.coyotebitcoin.padawanwallet.domain.bitcoin.TxType
 import com.coyotebitcoin.padawanwallet.domain.utils.formatCurrency
 import com.coyotebitcoin.padawanwallet.domain.utils.formatInBtc
 import com.coyotebitcoin.padawanwallet.domain.utils.timestampToString
-import com.coyotebitcoin.padawanwallet.presentation.navigation.ReceiveScreen
-import com.coyotebitcoin.padawanwallet.presentation.navigation.SendScreen
-import com.coyotebitcoin.padawanwallet.presentation.navigation.TransactionScreen
+import com.coyotebitcoin.padawanwallet.presentation.navigation.SecondaryDestinations
 import com.coyotebitcoin.padawanwallet.presentation.theme.LocalPadawanColors
 import com.coyotebitcoin.padawanwallet.presentation.theme.PadawanColorsTatooineDesert
 import com.coyotebitcoin.padawanwallet.presentation.theme.PadawanTheme
@@ -96,11 +92,11 @@ import com.coyotebitcoin.padawanwallet.presentation.viewmodels.mvi.WalletState
 private const val TAG = "WalletRootScreen"
 
 @Composable
-internal fun WalletRootScreen(
+internal fun WalletHomeScreen(
     state: WalletState,
     onAction: (WalletAction) -> Unit,
+    onNavigation: (SecondaryDestinations) -> Unit,
     paddingValues: PaddingValues,
-    navController: NavHostController,
 ) {
     val colors = LocalPadawanColors.current
     val (openDialog, setOpenDialog) = remember { mutableStateOf(false) }
@@ -129,13 +125,16 @@ internal fun WalletRootScreen(
         if (!state.isOnline) { NoNetworkBanner(onAction) }
         BalanceBox(balance = state.balance, currentlySyncing = state.currentlySyncing, onAction = onAction)
         Spacer(modifier = Modifier.height(height = 12.dp))
-        SendReceive(navController, state.isOnline)
+        SendReceive(
+            onNavigation = onNavigation,
+            isOnline = state.isOnline
+        )
         TransactionListBox(
             setOpenDialog = setOpenDialog,
             transactionList = state.transactions,
             isOnline = state.isOnline,
             onAction = onAction,
-            navController = navController,
+            onNavigation = onNavigation
         )
     }
 }
@@ -314,7 +313,10 @@ fun BalanceBox(
 }
 
 @Composable
-fun SendReceive(navController: NavHostController, isOnline: Boolean) {
+fun SendReceive(
+    onNavigation: (SecondaryDestinations) -> Unit,
+    isOnline: Boolean
+) {
     val screenSizeWidth: ScreenSizeWidth = getScreenSizeWidth(LocalConfiguration.current.screenWidthDp)
 
     Row(
@@ -323,7 +325,7 @@ fun SendReceive(navController: NavHostController, isOnline: Boolean) {
             .height(70.dp)
     ) {
         Button(
-            onClick = { ClickHelper.clickOnce { navController.navigate(ReceiveScreen) }},
+            onClick = { ClickHelper.clickOnce { onNavigation(SecondaryDestinations.ReceiveScreen) } },
             colors = ButtonDefaults.buttonColors(containerColor = PadawanColorsTatooineDesert.accent2),
             shape = RoundedCornerShape(20.dp),
             border = standardBorder,
@@ -348,7 +350,7 @@ fun SendReceive(navController: NavHostController, isOnline: Boolean) {
             }
         }
         Button(
-            onClick = { ClickHelper.clickOnce { navController.navigate(SendScreen) }},
+            onClick = { ClickHelper.clickOnce { onNavigation(SecondaryDestinations.SendScreen) }},
             colors = ButtonDefaults.buttonColors(
                 containerColor = PadawanColorsTatooineDesert.accent2,
                 disabledContainerColor = Color.White
@@ -385,7 +387,7 @@ fun TransactionListBox(
     transactionList: List<TransactionDetails>,
     isOnline: Boolean,
     onAction: (WalletAction) -> Unit,
-    navController: NavHostController,
+    onNavigation: (SecondaryDestinations) -> Unit
 ) {
     val colors = LocalPadawanColors.current
 
@@ -458,7 +460,7 @@ fun TransactionListBox(
                     Column(
                         modifier = Modifier.noRippleClickable {
                             onAction(WalletAction.SeeSingleTx(tx.txid))
-                            navController.navigate(TransactionScreen)
+                            onNavigation(SecondaryDestinations.TransactionScreen)
                         }
                     ) {
                         Box(modifier = Modifier
@@ -653,7 +655,7 @@ private fun FaucetDialog(
 internal fun PreviewSendReceiveRow() {
     PadawanTheme {
         SendReceive(
-            rememberNavController(),
+            onNavigation = {},
             isOnline = true
         )
     }

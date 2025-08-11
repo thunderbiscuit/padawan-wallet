@@ -17,7 +17,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavHostController
 import com.coyotebitcoin.padawanwallet.R
 import com.coyotebitcoin.padawanwallet.domain.bitcoin.WalletRepository
 import com.coyotebitcoin.padawanwallet.presentation.ui.components.PadawanAppBar
@@ -25,7 +24,7 @@ import com.coyotebitcoin.padawanwallet.presentation.ui.components.RecoveryWord
 
 @Composable
 internal fun RecoveryPhraseScreen(
-    navController: NavHostController
+    onBack: () -> Unit,
 ) {
     val seedPhrase: String = WalletRepository.getMnemonic()
     val wordList: List<String> = seedPhrase.split(" ")
@@ -34,7 +33,7 @@ internal fun RecoveryPhraseScreen(
         topBar = {
             PadawanAppBar(
                 title = stringResource(R.string.your_recovery_phrase),
-                onClick = { navController.popBackStack() }
+                onClick = { onBack() }
             )
         }
     ) { scaffoldPadding ->

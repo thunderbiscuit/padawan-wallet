@@ -17,7 +17,7 @@ import com.coyotebitcoin.padawanwallet.presentation.viewmodels.mvi.ReceiveScreen
 import com.coyotebitcoin.padawanwallet.domain.utils.QrUiState
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import org.bitcointools.bip21.Bip21URI
+import org.kotlinbitcointools.bip21.Bip21URI
 
 private const val TAG = "ReceiveViewModel"
 

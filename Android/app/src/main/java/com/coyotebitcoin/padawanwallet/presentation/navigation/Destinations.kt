@@ -5,44 +5,52 @@
 
 package com.coyotebitcoin.padawanwallet.presentation.navigation
 
+import androidx.navigation3.runtime.NavKey
 import kotlinx.serialization.Serializable
 
-interface Destination
+@Serializable
+sealed class CoreDestinations : NavKey {
+    @Serializable
+    data object WalletRootScreen : CoreDestinations()
+    @Serializable
+    data object ChaptersRootScreen : CoreDestinations()
+    @Serializable
+    data object SettingsRootScreen : CoreDestinations()
+}
 
-// Onboarding screens
 @Serializable
-object OnboardingScreen : Destination
-@Serializable
-object WalletRecoveryScreen : Destination
+sealed class SecondaryDestinations : NavKey {
+    // Onboarding screens
+    @Serializable
+    object OnboardingScreen : SecondaryDestinations()
+    @Serializable
+    object WalletRecoveryScreen : SecondaryDestinations()
 
-// Wallet screens
-@Serializable
-object MainScreen : Destination
-@Serializable
-object WalletRootScreen : Destination
-@Serializable
-object ReceiveScreen : Destination
-@Serializable
-object SendScreen : Destination
-@Serializable
-object TransactionScreen : Destination
-@Serializable
-object QRScanScreen : Destination
+    // Core screens (Wallet, Lessons, More)
+    @Serializable
+    object CoreScreens : SecondaryDestinations()
 
-// Chapters screens
-@Serializable
-object ChaptersRootScreen : Destination
-@Serializable
-object ChapterScreen : Destination
+    // Wallet screens
+    @Serializable
+    object ReceiveScreen : SecondaryDestinations()
+    @Serializable
+    object SendScreen : SecondaryDestinations()
+    @Serializable
+    object TransactionScreen : SecondaryDestinations()
+    @Serializable
+    object QrScanScreen : SecondaryDestinations()
 
-// Settings screens
-@Serializable
-object SettingsRootScreen : Destination
-@Serializable
-object RecoveryPhraseScreen : Destination
-@Serializable
-object SendCoinsBackScreen : Destination
-@Serializable
-object LanguagesScreen : Destination
-@Serializable
-object AboutScreen : Destination
+    // Chapters screens
+    @Serializable
+    data class ChapterScreen(val chapter: Int) : SecondaryDestinations()
+
+    // More screens
+    @Serializable
+    object RecoveryPhraseScreen : SecondaryDestinations()
+    @Serializable
+    object SendCoinsBackScreen : SecondaryDestinations()
+    @Serializable
+    object LanguagesScreen : SecondaryDestinations()
+    @Serializable
+    object AboutScreen : SecondaryDestinations()
+}

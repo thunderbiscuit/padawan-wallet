@@ -33,37 +33,36 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.Alignment.Companion.BottomCenter
+import androidx.compose.ui.Alignment.Companion.Center
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavHostController
+import com.composables.icons.lucide.ClipboardCopy
+import com.composables.icons.lucide.Lucide
 import com.coyotebitcoin.padawanwallet.R
-import com.coyotebitcoin.padawanwallet.presentation.theme.ShareTechMono
+import com.coyotebitcoin.padawanwallet.domain.utils.QrUiState
+import com.coyotebitcoin.padawanwallet.domain.utils.addressToQR
+import com.coyotebitcoin.padawanwallet.presentation.theme.LocalPadawanColors
 import com.coyotebitcoin.padawanwallet.presentation.theme.PadawanColorsTatooineDesert
+import com.coyotebitcoin.padawanwallet.presentation.theme.ShareTechMono
 import com.coyotebitcoin.padawanwallet.presentation.theme.standardShadow
 import com.coyotebitcoin.padawanwallet.presentation.ui.components.LoadingAnimation
 import com.coyotebitcoin.padawanwallet.presentation.ui.components.PadawanAppBar
 import com.coyotebitcoin.padawanwallet.presentation.ui.components.standardBorder
 import com.coyotebitcoin.padawanwallet.presentation.utils.ScreenSizeWidth
-import com.coyotebitcoin.padawanwallet.domain.utils.addressToQR
 import com.coyotebitcoin.padawanwallet.presentation.utils.copyToClipboard
 import com.coyotebitcoin.padawanwallet.presentation.utils.getScreenSizeWidth
+import com.coyotebitcoin.padawanwallet.presentation.utils.logRecomposition
 import com.coyotebitcoin.padawanwallet.presentation.viewmodels.mvi.ReceiveScreenAction
 import com.coyotebitcoin.padawanwallet.presentation.viewmodels.mvi.ReceiveScreenState
-import androidx.compose.ui.Alignment.Companion.BottomCenter
-import androidx.compose.ui.Alignment.Companion.Center
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
-import com.composables.icons.lucide.ClipboardCopy
-import com.composables.icons.lucide.Lucide
-import com.coyotebitcoin.padawanwallet.presentation.theme.LocalPadawanColors
-import com.coyotebitcoin.padawanwallet.domain.utils.QrUiState
-import com.coyotebitcoin.padawanwallet.presentation.utils.logRecomposition
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
@@ -73,7 +72,7 @@ private const val TAG = "ReceiveScreen"
 internal fun ReceiveScreen(
     state: ReceiveScreenState,
     onAction: (ReceiveScreenAction) -> Unit,
-    navController: NavHostController,
+    onBack: () -> Unit,
 ) {
     logRecomposition(TAG)
     val colors = LocalPadawanColors.current
@@ -100,7 +99,7 @@ internal fun ReceiveScreen(
         topBar = {
             PadawanAppBar(
                 title = stringResource(R.string.receive_bitcoin),
-                onClick = { navController.popBackStack() }
+                onClick = { onBack() }
             )
         },
         snackbarHost = { SnackbarHost(snackbarHostState) }
