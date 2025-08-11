@@ -13,7 +13,6 @@ private class BDKService {
     
     // MARK: - Configs
     private let network: Network = .signet
-    private let currentAddressType: AddressType = .bip84
     private static let batchSize = UInt64(10)
     private static let stopGap: UInt64 = 20 // using https://github.com/bitcoin/bips/blob/master/bip-0044.mediawiki#address-gap-limit
     
@@ -65,7 +64,6 @@ private class BDKService {
             password: nil
         )
         let descriptors = Descriptor.createDescriptors(
-            for: currentAddressType,
             secretKey: secretKey,
             network: network
         )
