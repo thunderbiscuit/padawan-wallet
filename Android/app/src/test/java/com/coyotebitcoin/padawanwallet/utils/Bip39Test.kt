@@ -1,5 +1,5 @@
 /*
- * Copyright 2020-2022 thunderbiscuit and contributors.
+ * Copyright 2020-2025 thunderbiscuit and contributors.
  * Use of this source code is governed by the Apache 2.0 license that can be found in the ./LICENSE file.
  */
 
@@ -7,8 +7,8 @@ package com.coyotebitcoin.padawanwallet.utils
 
 import com.coyotebitcoin.padawanwallet.domain.utils.WordCheckResult
 import com.coyotebitcoin.padawanwallet.domain.utils.checkWords
+import org.junit.Assert.assertEquals
 import org.junit.Test
-import org.junit.Assert.*
 
 class CheckWords {
     private val correctRecoveryPhraseMap = mapOf(
@@ -35,7 +35,7 @@ class CheckWords {
         )
         val words: WordCheckResult = checkWords(wrongRecoveryPhraseMap)
         words as WordCheckResult.FAILURE
-        assertEquals("Word 8 is empty", words.errorMessage)
+        assertEquals("Word 8 is empty!", words.errorMessage)
     }
 
     @Test
@@ -46,7 +46,7 @@ class CheckWords {
         )
         val words: WordCheckResult = checkWords(wrongRecoveryPhraseMap)
         words as WordCheckResult.FAILURE
-        assertEquals("Word 2 is not valid", words.errorMessage)
+        assertEquals("Word 2 is not valid!", words.errorMessage)
     }
 
     @Test
