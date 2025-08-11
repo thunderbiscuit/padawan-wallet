@@ -13,6 +13,8 @@ enum BDKServiceError: Error {
     case invalidSeed
     case generic
     case errorWith(message: String)
+    case needResync
+    case clientNotStarted
     
     var localizedDescription: String {
         switch self {
@@ -30,6 +32,12 @@ enum BDKServiceError: Error {
             
         case .errorWith(let message):
             return message
+            
+        case .needResync:
+            return "Need resync"
+            
+        case .clientNotStarted:
+            return "Client not started"
         }
     }
 }
