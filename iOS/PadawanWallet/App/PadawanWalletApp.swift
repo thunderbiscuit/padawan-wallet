@@ -27,7 +27,9 @@ struct PadawanWalletApp: App {
                             path: $navigationPath
                         )
                     } else {
-                        CoreView()
+                        CoreView(
+                            path: $navigationPath
+                        )
                     }
                 }
                 .environment(\.padawanColors, .tatooineDesert)

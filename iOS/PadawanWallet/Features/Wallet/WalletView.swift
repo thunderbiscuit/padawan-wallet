@@ -7,12 +7,20 @@ import SwiftUI
 
 struct WalletRootView: View {
     @Environment(\.padawanColors) private var colors
+    @StateObject private var viewModel: WalletViewModel
+    
+    init(
+        path: Binding<NavigationPath>,
+        bdkClient: BDKClient = .live
+    ) {
+        _viewModel = StateObject(wrappedValue: WalletViewModel(path: path, bdkClient: bdkClient))
+    }
     
     var body: some View {
         NavigationStack {
             ScrollView {
                 VStack(spacing: 24) {
-                    BalanceCard()
+                    BalanceCard(balance: $viewModel.balance)
                     SendReceiveButtons()
                     TransactionsCard()
                 }
@@ -20,6 +28,11 @@ struct WalletRootView: View {
                 .background(colors.background)
             }
             .background(colors.background)
+        }
+        .task {
+            viewModel.loadWallet()
+            await viewModel.syncWallet()
+            print($viewModel.balance.wrappedValue)
         }
     }
 }

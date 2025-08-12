@@ -8,20 +8,31 @@ import SwiftUI
 struct CoreView: View {
     @Environment(\.padawanColors) private var colors
     
-    init() {
+    @Binding private var path: NavigationPath
+    private let bdkClient: BDKClient
+    
+    init(
+        path: Binding<NavigationPath>,
+        bdkClient: BDKClient = .live
+    ) {
+        _path = path
+        self.bdkClient = bdkClient
         UITabBarAppearance.setupTabBarAppearance(colors: colors)
     }
     
     var body: some View {
         TabView {
-            WalletRootView()
-                .tabItem {
-                    Label {
-                        Text(Strings.bottomNavWallet)
-                    } icon: {
-                        Image(systemName: "bitcoinsign.square")
-                    }
+            WalletRootView(
+                path: $path,
+                bdkClient: bdkClient
+            )
+            .tabItem {
+                Label {
+                    Text(Strings.bottomNavWallet)
+                } icon: {
+                    Image(systemName: "bitcoinsign.square")
                 }
+            }
 
             LessonsRootView()
                 .tabItem {
