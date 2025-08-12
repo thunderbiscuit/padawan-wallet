@@ -117,10 +117,10 @@ private class BDKService {
             }
             let _ = try wallet.persist(persister: persister)
             
-        } catch let error as CannotConnectError {
+        } catch is CannotConnectError {
             throw BDKServiceError.needResync
             
-        } catch let error as PersistenceError {
+        } catch is PersistenceError {
             throw BDKServiceError.dbNotFound
             
         } catch {
@@ -147,15 +147,31 @@ private class BDKService {
             }
             let _ = try wallet.persist(persister: persister)
             
-        } catch let error as CannotConnectError {
+        } catch is CannotConnectError {
             throw BDKServiceError.needResync
             
-        } catch let error as PersistenceError {
+        } catch is PersistenceError {
             throw BDKServiceError.dbNotFound
             
         } catch {
             throw BDKServiceError.errorWith(message: error.localizedDescription)
         }
+    }
+    
+    func transactions() throws -> [TxDetails] {
+        guard let wallet = self.wallet else {
+            throw BDKServiceError.walletNotFound
+        }
+        let transactions = wallet.transactions()
+        let sortedTransactions = transactions.sorted { (tx1, tx2) in
+            return tx1.chainPosition.isBefore(tx2.chainPosition)
+        }
+        
+        let details: [TxDetails] = sortedTransactions.compactMap {
+            wallet.txDetails(txid: $0.transaction.computeTxid())
+        }
+        
+        return details
     }
     
     // MARK: - Private
@@ -208,6 +224,7 @@ struct BDKClient {
     let syncWithInspector: (SyncScriptInspector) async throws -> Void
     let fullScanWithInspector: (FullScanScriptInspector) async throws -> Void
     let needsFullScan: () -> Bool
+    let transactions: () throws -> [TxDetails]
 }
 
 extension BDKClient {
@@ -232,6 +249,9 @@ extension BDKClient {
         },
         needsFullScan: {
             BDKService.shared.needsFullScan
+        },
+        transactions: {
+            try BDKService.shared.transactions()
         }
     )
 }
@@ -271,7 +291,8 @@ extension BDKClient {
         fullScanWithInspector: { inspect in
             try await BDKService.mock.fullScanWithInspector(inspector: inspect)
         },
-        needsFullScan: { true }
+        needsFullScan: { true },
+        transactions: { [] }
     )
 }
 #endif

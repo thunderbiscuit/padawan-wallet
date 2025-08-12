@@ -8,38 +8,55 @@ import SwiftUI
 struct CoreView: View {
     @Environment(\.padawanColors) private var colors
     
-    init() {
+    @State private var walletPath: NavigationPath = .init()
+    @State private var lessonPath: NavigationPath = .init()
+    @State private var morePath: NavigationPath = .init()
+    private let bdkClient: BDKClient
+    
+    init(
+        bdkClient: BDKClient = .live
+    ) {
+        self.bdkClient = bdkClient
         UITabBarAppearance.setupTabBarAppearance(colors: colors)
     }
     
     var body: some View {
         TabView {
-            WalletRootView()
-                .tabItem {
-                    Label {
-                        Text(Strings.bottomNavWallet)
-                    } icon: {
-                        Image(systemName: "bitcoinsign.square")
-                    }
+            NavigationStack(path: $walletPath) {
+                WalletView(
+                    path: $walletPath,
+                    bdkClient: bdkClient
+                )
+            }
+            .tabItem {
+                Label {
+                    Text(Strings.bottomNavWallet)
+                } icon: {
+                    Image(systemName: "bitcoinsign.square")
                 }
+            }
 
-            LessonsRootView()
-                .tabItem {
-                    Label {
-                        Text(Strings.bottomNavChapters)
-                    } icon: {
-                        Image(systemName: "graduationcap")
-                    }
+            NavigationStack(path: $lessonPath) {
+                LessonsRootView()
+            }
+            .tabItem {
+                Label {
+                    Text(Strings.bottomNavChapters)
+                } icon: {
+                    Image(systemName: "graduationcap")
                 }
+            }
 
-            MoreRootView()
-                .tabItem {
-                    Label {
-                        Text(Strings.bottomNavSettings)
-                    } icon: {
-                        Image(systemName: "ellipsis")
-                    }
+            NavigationStack(path: $morePath) {
+                MoreRootView()
+            }
+            .tabItem {
+                Label {
+                    Text(Strings.bottomNavSettings)
+                } icon: {
+                    Image(systemName: "ellipsis")
                 }
+            }
         }
         .accentColor(colors.accent3)
     }

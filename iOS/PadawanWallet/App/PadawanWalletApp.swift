@@ -20,18 +20,18 @@ struct PadawanWalletApp: App {
     
     var body: some Scene {
         WindowGroup {
-            NavigationStack(path: $navigationPath) {
-                Group {
-                    if session.isOnboarding && !session.walletExists() {
+            Group {
+                if session.isOnboarding && !session.walletExists() {
+                    NavigationStack(path: $navigationPath) {
                         WelcomeView(
                             path: $navigationPath
                         )
-                    } else {
-                        CoreView()
                     }
+                } else {
+                    CoreView()
                 }
-                .environment(\.padawanColors, .tatooineDesert)
             }
+            .environment(\.padawanColors, .tatooineDesert)
         }
     }
 }

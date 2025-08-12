@@ -14,12 +14,12 @@ extension BottomSheetView {
         var image: Image?
         var title: String
         var subtitle: String?
-        var primaryButtonTitle: String?
+        var primaryButtonTitle: String? = "OK"
         var secondaryButtonTitle: String?
         var onPrimaryButtonTap: (() -> Void)?
         var onSecondaryButtonTap: (() -> Void)?
         
-        init(image: Image? = nil, title: String, subtitle: String? = nil, primaryButtonTitle: String? = nil, secondaryButtonTitle: String? = nil, onPrimaryButtonTap: (() -> Void)? = nil, onSecondaryButtonTap: (() -> Void)? = nil) {
+        init(image: Image? = nil, title: String, subtitle: String? = nil, primaryButtonTitle: String? = "OK", secondaryButtonTitle: String? = nil, onPrimaryButtonTap: (() -> Void)? = nil, onSecondaryButtonTap: (() -> Void)? = nil) {
             self.image = image
             self.title = title
             self.subtitle = subtitle
