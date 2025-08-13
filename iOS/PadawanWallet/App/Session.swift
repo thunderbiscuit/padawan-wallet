@@ -10,6 +10,7 @@ import SwiftUI
 private extension String {
     static let onboardingKey = "isOnboarding"
     static let fullScanRequiredKey = "isfullScanRequiredKey"
+    static let lastBalanceUpdateKey = "lastBalanceUpdate"
 }
 
 final class Session: ObservableObject {
@@ -27,6 +28,16 @@ final class Session: ObservableObject {
         }
         set {
             defaults.setValue(newValue, forKey: .fullScanRequiredKey)
+        }
+    }
+    
+    var lastBalanceUpdate: UInt64 {
+        get {
+            return (defaults.object(forKey: .lastBalanceUpdateKey) as? UInt64) ?? 0
+        }
+        
+        set {
+            defaults.setValue(newValue, forKey: .lastBalanceUpdateKey)
         }
     }
     
@@ -52,6 +63,7 @@ final class Session: ObservableObject {
     func resetWallet() {
         try? keyClient.deleteBackupInfo()
         isFullScanRequired = true
+        lastBalanceUpdate = .zero
         setNeedOnboarding(true)
     }
 }

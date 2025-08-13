@@ -20,7 +20,10 @@ struct WalletRootView: View {
         NavigationStack {
             ScrollView {
                 VStack(spacing: 24) {
-                    BalanceCard(balance: $viewModel.balance)
+                    BalanceCard(
+                        balance: $viewModel.balance,
+                        isSyncing: $viewModel.isSyncing
+                    )
                     SendReceiveButtons()
                     TransactionsCard()
                 }

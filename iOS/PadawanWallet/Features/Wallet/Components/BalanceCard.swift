@@ -5,10 +5,6 @@
 
 import SwiftUI
 
-enum BalanceFormat: String, CaseIterable {
-    case btc = "btc", sats = "sats"
-}
-
 private struct BalanceCardStrings {
     static var cardTitle: String = Strings.bitcoinSignet
     static var formaOptions: [String] = BalanceFormat.allCases.map { $0.rawValue }
@@ -19,12 +15,14 @@ struct BalanceCard: View {
     @Environment(\.padawanColors) private var colors
     @State private var balanceFormatOption: BalanceFormat = .sats
     @Binding var balance: UInt64
-    @State private var isSyncing: Bool = false
+    @Binding private var isSyncing: Bool
     
     init(
-        balance: Binding<UInt64> = .constant(.zero)
+        balance: Binding<UInt64> = .constant(.zero),
+        isSyncing: Binding<Bool> = .constant(false)
     ) {
         _balance = balance
+        _isSyncing = isSyncing
     }
     
     var body: some View {
@@ -58,15 +56,10 @@ struct BalanceCard: View {
 
     @ViewBuilder
     private func buildBalanceView() -> some View {
-        HStack {
-            Text("\($balance.wrappedValue)")
-                .font(Fonts.font(.bold, 40))
-                .foregroundStyle(colors.text)
-            Text(balanceFormatOption.rawValue)
-                .font(Fonts.subtitle)
-                .foregroundStyle(colors.text)
-        }
-        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomLeading)
+        BalanceView(
+            balance: $balance,
+            balanceFormatOption: $balanceFormatOption
+        )
     }
     
     @ViewBuilder
