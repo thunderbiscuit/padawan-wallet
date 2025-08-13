@@ -5,7 +5,15 @@
 
 import SwiftUI
 
-struct WalletRootView: View {
+private struct WalletViewAssets {
+    static var receiveButtonTitle = Strings.receive
+    static var sendButtonTitle = Strings.send
+    
+    static var receiveButtonIcon: Image = Image(systemName: "arrow.down")
+    static var sendButtonIcon: Image = Image(systemName: "arrow.up")
+}
+
+struct WalletView: View {
     @Environment(\.padawanColors) private var colors
     @StateObject private var viewModel: WalletViewModel
     
@@ -17,25 +25,66 @@ struct WalletRootView: View {
     }
     
     var body: some View {
-        NavigationStack {
+        BackgroundView {
             ScrollView {
                 VStack(spacing: 24) {
                     BalanceCard(
                         balance: $viewModel.balance,
                         isSyncing: $viewModel.isSyncing
                     )
-                    SendReceiveButtons()
+                    buildSendReceiveButtons()
                     TransactionsCard()
                 }
                 .padding()
-                .background(colors.background)
             }
-            .background(colors.background)
         }
         .task {
             viewModel.loadWallet()
             await viewModel.syncWallet()
-            print($viewModel.balance.wrappedValue)
         }
+        .navigationDestination(for: WalletScreenNavigation.self) { item in
+            switch item {
+            case WalletScreenNavigation.receive:
+                ReceiveScreen()
+                
+            case WalletScreenNavigation.send:
+                SendScreen()
+                
+            default:
+                EmptyView()
+            }
+        }
+        .fullScreenCover(item: $viewModel.fullScreenCover) { item in
+            switch item {
+            case .alertError(let data):
+                AlertModalView(data: data)
+                    .background(BackgroundClearView())
+                
+            default:
+                EmptyView()
+            }
+        }
+    }
+    
+    @ViewBuilder
+    private func buildSendReceiveButtons() -> some View {
+        HStack(spacing: 16) {
+            PadawanButton(
+                title: WalletViewAssets.receiveButtonTitle,
+                icon: WalletViewAssets.receiveButtonIcon,
+                action: {
+                    viewModel.showReceiveScreen()
+                }
+            )
+            
+            PadawanButton(
+                title: WalletViewAssets.sendButtonTitle,
+                icon: WalletViewAssets.sendButtonIcon,
+                action: {
+                    viewModel.showSendScreen()
+                }
+            )
+        }
+        .frame(minHeight: 50)
     }
 }

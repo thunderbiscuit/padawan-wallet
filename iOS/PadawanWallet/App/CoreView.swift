@@ -22,7 +22,7 @@ struct CoreView: View {
     
     var body: some View {
         TabView {
-            WalletRootView(
+            WalletView(
                 path: $path,
                 bdkClient: bdkClient
             )

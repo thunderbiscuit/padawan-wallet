@@ -19,22 +19,14 @@ final class WalletViewModel: ObservableObject {
     private let bdkClient: BDKClient
     
     private var updateProgress: @Sendable (UInt64, UInt64) -> Void {
-        { [weak self] inspected, total in
-            DispatchQueue.main.async {
-                print("\(total > 0 ? Float(inspected) / Float(total) : 0)")
-//                self?.totalScripts = total
-//                self?.inspectedScripts = inspected
-//                self?.progress = total > 0 ? Float(inspected) / Float(total) : 0
-            }
+        { inspected, total in
+            print("progress: \(total > 0 ? Float(inspected) / Float(total) : 0)")
         }
     }
 
     private var updateProgressFullScan: @Sendable (UInt64) -> Void {
-        { [weak self] inspected in
-            DispatchQueue.main.async {
-                print("\(inspected)")
-//                self?.inspectedScripts = inspected
-            }
+        { inspected in
+            print("inspected: \(inspected)")
         }
     }
     
@@ -49,17 +41,26 @@ final class WalletViewModel: ObservableObject {
     func loadWallet() {
         do {
             try bdkClient.loadWallet()
+            balance = Session.shared.lastBalanceUpdate
         } catch {
-            print(error)
+            fullScreenCover = .alertError(
+                data: .init(
+                    title: "Error",
+                    subtitle: error.localizedDescription
+                )
+            )
         }
     }
     
     @MainActor
     func syncWallet() async {
+        defer {
+            isSyncing = false
+        }
         guard Session.shared.walletExists() else {
             return
         }
-        
+        isSyncing = true
         if bdkClient.needsFullScan() {
             await fullSync()
         } else {
@@ -68,9 +69,20 @@ final class WalletViewModel: ObservableObject {
         
         do {
             balance = try self.bdkClient.getBalance().total.toSat()
+            Session.shared.lastBalanceUpdate = balance
         } catch {
-            print(error)
+            fullScreenCover = .alertError(
+                data: .init(title: "Error", subtitle: error.localizedDescription)
+            )
         }
+    }
+    
+    func showReceiveScreen() {
+        path.append(WalletScreenNavigation.receive)
+    }
+    
+    func showSendScreen() {
+        path.append(WalletScreenNavigation.send)
     }
     
     // MARK: - Private
@@ -80,9 +92,11 @@ final class WalletViewModel: ObservableObject {
             let inspector = WalletFullScanScriptInspector(updateProgress: updateProgressFullScan)
             try await bdkClient.fullScanWithInspector(inspector)
             Session.shared.isFullScanRequired = false
-            print("Synced")
+            
         } catch {
-            print(error)
+            fullScreenCover = .alertError(
+                data: .init(title: "Error", subtitle: error.localizedDescription)
+            )
         }
     }
     
@@ -90,14 +104,14 @@ final class WalletViewModel: ObservableObject {
         do {
             let inspector = WalletSyncScriptInspector(updateProgress: updateProgress)
             try await bdkClient.syncWithInspector(inspector)
-            print("Synced")
-        } catch BDKServiceError.needResync {
-            print(BDKServiceError.needResync)
-//            Session.shared.isFullScanRequired = true
-            await syncWallet()
-        } catch {
             
-            print(error)
+        } catch BDKServiceError.needResync {
+            await syncWallet()
+            
+        } catch {
+            fullScreenCover = .alertError(
+                data: .init(title: "Error", subtitle: error.localizedDescription)
+            )
         }
     }
 }
