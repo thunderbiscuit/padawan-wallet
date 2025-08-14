@@ -8,24 +8,26 @@ import SwiftUI
 struct CoreView: View {
     @Environment(\.padawanColors) private var colors
     
-    @Binding private var path: NavigationPath
+    @State private var walletPath: NavigationPath = .init()
+    @State private var lessonPath: NavigationPath = .init()
+    @State private var morePath: NavigationPath = .init()
     private let bdkClient: BDKClient
     
     init(
-        path: Binding<NavigationPath>,
         bdkClient: BDKClient = .live
     ) {
-        _path = path
         self.bdkClient = bdkClient
         UITabBarAppearance.setupTabBarAppearance(colors: colors)
     }
     
     var body: some View {
         TabView {
-            WalletView(
-                path: $path,
-                bdkClient: bdkClient
-            )
+            NavigationStack(path: $walletPath) {
+                WalletView(
+                    path: $walletPath,
+                    bdkClient: bdkClient
+                )
+            }
             .tabItem {
                 Label {
                     Text(Strings.bottomNavWallet)
@@ -34,23 +36,27 @@ struct CoreView: View {
                 }
             }
 
-            LessonsRootView()
-                .tabItem {
-                    Label {
-                        Text(Strings.bottomNavChapters)
-                    } icon: {
-                        Image(systemName: "graduationcap")
-                    }
+            NavigationStack(path: $lessonPath) {
+                LessonsRootView()
+            }
+            .tabItem {
+                Label {
+                    Text(Strings.bottomNavChapters)
+                } icon: {
+                    Image(systemName: "graduationcap")
                 }
+            }
 
-            MoreRootView()
-                .tabItem {
-                    Label {
-                        Text(Strings.bottomNavSettings)
-                    } icon: {
-                        Image(systemName: "ellipsis")
-                    }
+            NavigationStack(path: $morePath) {
+                MoreRootView()
+            }
+            .tabItem {
+                Label {
+                    Text(Strings.bottomNavSettings)
+                } icon: {
+                    Image(systemName: "ellipsis")
                 }
+            }
         }
         .accentColor(colors.accent3)
     }
