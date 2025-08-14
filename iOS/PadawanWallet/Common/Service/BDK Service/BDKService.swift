@@ -11,18 +11,33 @@ import SwiftUI
 // MARK: - BDKService
 private class BDKService {
     
+    // MARK: - Configs
     private let network: Network = .signet
-    private let currentAddressType: AddressType = .bip84
+    private static let batchSize = UInt64(10)
+    private static let stopGap: UInt64 = 20 // using https://github.com/bitcoin/bips/blob/master/bip-0044.mediawiki#address-gap-limit
     
+    // MARK: -
     static let shared = BDKService()
     
     private var persister: Persister?
     private var wallet: Wallet?
-    private(set) var needsFullScan: Bool = false
+    private(set) var needsFullScan: Bool {
+        get {
+            Session.shared.isFullScanRequired
+        }
+        set {
+            Session.shared.isFullScanRequired = newValue
+        }
+    }
     private let keyClient: KeyClient
+    private let electrumClient: ElectrumClient?
     
-    init(keyClient: KeyClient = .live) {
+    init(
+        keyClient: KeyClient = .live,
+        electrumClient: ElectrumClient? = .live
+    ) {
         self.keyClient = keyClient
+        self.electrumClient = electrumClient
     }
     
     // Create a new wallet or import
@@ -49,7 +64,6 @@ private class BDKService {
             password: nil
         )
         let descriptors = Descriptor.createDescriptors(
-            for: currentAddressType,
             secretKey: secretKey,
             network: network
         )
@@ -81,6 +95,83 @@ private class BDKService {
         guard let wallet = self.wallet else { throw BDKServiceError.walletNotFound }
         let balance = wallet.balance()
         return balance
+    }
+    
+    func fullScanWithInspector(inspector: FullScanScriptInspector) async throws {
+        do {
+            guard let wallet = self.wallet else { throw BDKServiceError.walletNotFound }
+            let fullScanRequest = try wallet.startFullScan()
+                .inspectSpksForAllKeychains(inspector: inspector)
+                .build()
+            guard let update = try electrumClient?.fullScan(
+                request: fullScanRequest,
+                stopGap: BDKService.stopGap,
+                batchSize: BDKService.batchSize,
+                fetchPrevTxouts: true
+            ) else {
+                throw BDKServiceError.clientNotStarted
+            }
+            let _ = try wallet.applyUpdate(update: update)
+            guard let persister = self.persister else {
+                throw BDKServiceError.dbNotFound
+            }
+            let _ = try wallet.persist(persister: persister)
+            
+        } catch is CannotConnectError {
+            throw BDKServiceError.needResync
+            
+        } catch is PersistenceError {
+            throw BDKServiceError.dbNotFound
+            
+        } catch {
+            throw BDKServiceError.errorWith(message: error.localizedDescription)
+        }
+    }
+    
+    func syncWithInspector(inspector: SyncScriptInspector) async throws {
+        do {
+            guard let wallet = self.wallet else { throw BDKServiceError.walletNotFound }
+            let syncRequest = try wallet.startSyncWithRevealedSpks()
+                .inspectSpks(inspector: inspector)
+                .build()
+            guard let update: Update = try electrumClient?.sync(
+                request: syncRequest,
+                batchSize: BDKService.batchSize,
+                fetchPrevTxouts: true
+            ) else {
+                throw BDKServiceError.clientNotStarted
+            }
+            let _ = try wallet.applyUpdate(update: update)
+            guard let persister = self.persister else {
+                throw BDKServiceError.dbNotFound
+            }
+            let _ = try wallet.persist(persister: persister)
+            
+        } catch is CannotConnectError {
+            throw BDKServiceError.needResync
+            
+        } catch is PersistenceError {
+            throw BDKServiceError.dbNotFound
+            
+        } catch {
+            throw BDKServiceError.errorWith(message: error.localizedDescription)
+        }
+    }
+    
+    func transactions() throws -> [TxDetails] {
+        guard let wallet = self.wallet else {
+            throw BDKServiceError.walletNotFound
+        }
+        let transactions = wallet.transactions()
+        let sortedTransactions = transactions.sorted { (tx1, tx2) in
+            return tx1.chainPosition.isBefore(tx2.chainPosition)
+        }
+        
+        let details: [TxDetails] = sortedTransactions.compactMap {
+            wallet.txDetails(txid: $0.transaction.computeTxid())
+        }
+        
+        return details
     }
     
     // MARK: - Private
@@ -130,6 +221,10 @@ struct BDKClient {
     let importWallet: ( _ seed: String) throws -> Void
     let loadWallet: () throws -> Void
     let getBalance: () throws -> Balance
+    let syncWithInspector: (SyncScriptInspector) async throws -> Void
+    let fullScanWithInspector: (FullScanScriptInspector) async throws -> Void
+    let needsFullScan: () -> Bool
+    let transactions: () throws -> [TxDetails]
 }
 
 extension BDKClient {
@@ -145,8 +240,32 @@ extension BDKClient {
         },
         getBalance: {
             try BDKService.shared.getBalance()
+        },
+        syncWithInspector: { inspector in
+            try await BDKService.shared.syncWithInspector(inspector: inspector)
+        },
+        fullScanWithInspector: { inspector in
+            try await BDKService.shared.fullScanWithInspector(inspector: inspector)
+        },
+        needsFullScan: {
+            BDKService.shared.needsFullScan
+        },
+        transactions: {
+            try BDKService.shared.transactions()
         }
     )
+}
+
+extension ElectrumClient {
+    private static let url = "ssl://mempool.space:60602"
+    
+    static var live: ElectrumClient? {
+        do {
+            return try ElectrumClient(url: ElectrumClient.url)
+        } catch {
+            return nil
+        }
+    }
 }
 
 #if DEBUG
@@ -162,8 +281,18 @@ extension BDKClient {
         importWallet: { seed in
             try BDKService.mock.createWallet(seed)
         },
-        loadWallet: { },
-        getBalance: { .mock }
+        loadWallet: {
+            try BDKService.mock.loadWalletFromBackup()
+        },
+        getBalance: { .mock },
+        syncWithInspector: { inspect in
+            try await BDKService.mock.syncWithInspector(inspector: inspect)
+        },
+        fullScanWithInspector: { inspect in
+            try await BDKService.mock.fullScanWithInspector(inspector: inspect)
+        },
+        needsFullScan: { true },
+        transactions: { [] }
     )
 }
 #endif

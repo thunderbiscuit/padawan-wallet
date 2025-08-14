@@ -30,7 +30,6 @@ struct PadawanCardView<Content: View>: View {
             VStack {
                 content()
             }
-            .padding()
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background(backgroundColor)
             .cornerRadius(12)
