@@ -34,9 +34,14 @@ struct WalletView: View {
                     )
                     
                     buildSendReceiveButtons()
-                    TransactionsCard(list: $viewModel.transactions)
-                        .frame(minHeight: 200)
-                        .frame(maxWidth: .infinity)
+                    TransactionsCard(
+                        list: $viewModel.transactions,
+                        actionGetCoins: {
+                            
+                        }
+                    )
+                    .frame(minHeight: 200)
+                    .frame(maxWidth: .infinity)
                 }
                 .padding()
             }

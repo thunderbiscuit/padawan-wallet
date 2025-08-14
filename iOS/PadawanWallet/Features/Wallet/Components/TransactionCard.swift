@@ -50,42 +50,59 @@ struct TransactionsCard: View {
     @Environment(\.padawanColors) private var colors
     @Binding private var list: [TransactionsCard.Data]
     
+    private let actionGetCoins: () -> Void
+    
     init(
-        list: Binding<[TransactionsCard.Data]> = .constant([])
+        list: Binding<[TransactionsCard.Data]> = .constant([]),
+        actionGetCoins: @escaping () -> Void
     ) {
         _list = list
+        self.actionGetCoins = actionGetCoins
     }
     
     var body: some View {
-        if list.isEmpty {
-            buildEmptyState()
-        } else {
-            buildList()
+        VStack(alignment: .leading, spacing: 12.0) {
+            Text(TransactionsCardAssets.title)
+                .font(Fonts.title)
+                .foregroundStyle(colors.text)
+            if list.isEmpty {
+                buildEmptyState()
+            } else {
+                buildList()
+            }
         }
     }
     
     @ViewBuilder
     private func buildEmptyState() -> some View {
-        Text("Empty get coins")
+        PadawanCardView(
+            backgroundColor: colors.background) {
+                VStack(alignment: .leading, spacing: 24) {
+                    Text(TransactionsCardAssets.emptyStateDescription)
+                        .font(Fonts.body)
+                        .foregroundStyle(colors.text)
+                    
+                    PadawanButton(title: TransactionsCardAssets.emptyStateButton) {
+                        actionGetCoins()
+                    }
+                    .frame(width: 180, height: 60)
+                        
+                }
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
+                .padding(24)
+            }
     }
     
     @ViewBuilder
     private func buildList() -> some View {
-        VStack(alignment: .leading, spacing: 12.0) {
-            Text(TransactionsCardAssets.title)
-                .font(Fonts.title)
-                .foregroundStyle(colors.text)
-            
-            PadawanCardView(
-                backgroundColor: colors.background2,
-                content: {
-                    ForEach(list) { item in
-                        buildListItem(item)
-                    }
+        PadawanCardView(
+            backgroundColor: colors.background2,
+            content: {
+                ForEach(list) { item in
+                    buildListItem(item)
                 }
-            )
-        }
-        .fixedSize(horizontal: false, vertical: true)
+            }
+        )
     }
     
     @ViewBuilder
@@ -142,11 +159,10 @@ struct TransactionsCard: View {
 }
 
 #if DEBUG
-//#Preview("Empty") {
-//    TransactionsCard(list: .constant([]))
-//        .frame(height: 300)
-//        .padding()
-//}
+#Preview("Empty") {
+    TransactionsCard(list: .constant([]), actionGetCoins: {})
+        .padding()
+}
 
 #Preview("With transactions") {
     var transactions: Binding<[TransactionsCard.Data]> = .init {
@@ -157,7 +173,7 @@ struct TransactionsCard: View {
         ]
     } set: { _ in }
 
-    TransactionsCard(list: transactions)
+    TransactionsCard(list: transactions, actionGetCoins: {})
         .padding()
 }
 #endif

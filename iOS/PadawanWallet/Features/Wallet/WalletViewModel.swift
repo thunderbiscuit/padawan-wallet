@@ -112,11 +112,6 @@ final class WalletViewModel: ObservableObject {
             )
         }
         transactions = detailsTransactions
-//        transactions = [
-//            .init(id: "123123123123123123123123123123123123123123123123123121", date: "August 9 2025 09:11", amount: "+150000 sats", status: .sent),
-//            .init(id: "123123123123123123123123123123123123123123123123123122", date: "August 10 2025 09:11", amount: "+150000 sats", status: .sent),
-//            .init(id: "123123123123123123123123123123123123123123123123123123", date: "August 11 2025 09:11", amount: "+150000 sats", status: .received),
-//        ]
     }
     
     // MARK: - Private
