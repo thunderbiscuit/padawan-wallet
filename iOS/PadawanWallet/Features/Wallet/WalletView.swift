@@ -32,8 +32,11 @@ struct WalletView: View {
                         balance: $viewModel.balance,
                         isSyncing: $viewModel.isSyncing
                     )
+                    
                     buildSendReceiveButtons()
-                    TransactionsCard()
+                    TransactionsCard(list: $viewModel.transactions)
+                        .frame(minHeight: 200)
+                        .frame(maxWidth: .infinity)
                 }
                 .padding()
             }

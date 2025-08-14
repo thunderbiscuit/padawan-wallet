@@ -15,6 +15,7 @@ final class WalletViewModel: ObservableObject {
     
     @Published var isSyncing: Bool = false
     @Published var balance: UInt64 = 0
+    @Published var transactions: [TransactionsCard.Data] = []
     
     private let bdkClient: BDKClient
     
@@ -42,6 +43,12 @@ final class WalletViewModel: ObservableObject {
         do {
             try bdkClient.loadWallet()
             balance = Session.shared.lastBalanceUpdate
+            
+            transactions = [
+                .init(id: "123123123123123123123123123123123123123123123123123123", date: "August 9 2025 09:11", amount: "+150000 sats", status: .received),
+                .init(id: "123123123123123123123123123123123123123123123123123123", date: "August 9 2025 09:11", amount: "+150000 sats", status: .sent),
+                .init(id: "123123123123123123123123123123123123123123123123123123", date: "August 9 2025 09:11", amount: "+150000 sats", status: .received),
+            ]
         } catch {
             fullScreenCover = .alertError(
                 data: .init(
