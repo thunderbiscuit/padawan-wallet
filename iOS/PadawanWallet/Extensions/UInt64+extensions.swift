@@ -5,6 +5,8 @@
 //  Created by Rubens Machion on 13/08/25.
 //
 
+import Foundation
+
 extension UInt64 {
     func formattedSats() -> String {
         formatted(.number)
@@ -31,5 +33,9 @@ extension UInt64 {
 
             return formattedBalance
         }
+    }
+    
+    func toDate() -> Date {
+        return Date(timeIntervalSince1970: TimeInterval(self))
     }
 }

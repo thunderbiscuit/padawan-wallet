@@ -16,7 +16,6 @@ extension TransactionsCard {
         enum Status: String {
             case received
             case sent
-            case pending
             
             var icon: Image {
                 switch self {
@@ -26,8 +25,16 @@ extension TransactionsCard {
                 case .sent:
                     return Image(systemName: "arrow.up")
                     
-                case .pending:
-                    return Image(systemName: "arrow.trianglehead.2.clockwise.rotate.90")
+                }
+            }
+            
+            var signal: String {
+                switch self {
+                case .received:
+                    return "+"
+                    
+                case .sent:
+                    return "-"
                 }
             }
         }
@@ -144,8 +151,8 @@ struct TransactionsCard: View {
 #Preview("With transactions") {
     var transactions: Binding<[TransactionsCard.Data]> = .init {
         [
-            .init(id: "123123123123123123123123123123123123123123123123123123", date: "August 9 2025 09:11", amount: "+150000 sats", status: .received),
-            .init(id: "123123123123123123123123123123123123123123123123123123", date: "August 9 2025 09:11", amount: "+150000 sats", status: .sent),
+            .init(id: "123123123123123123123123123123123123123123123123123121", date: "August 9 2025 09:11", amount: "+150000 sats", status: .received),
+            .init(id: "123123123123123123123123123123123123123123123123123122", date: "August 9 2025 09:11", amount: "+150000 sats", status: .sent),
             .init(id: "123123123123123123123123123123123123123123123123123123", date: "August 9 2025 09:11", amount: "+150000 sats", status: .received),
         ]
     } set: { _ in }

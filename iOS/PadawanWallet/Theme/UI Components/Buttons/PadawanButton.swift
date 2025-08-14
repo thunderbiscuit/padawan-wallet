@@ -31,22 +31,25 @@ struct PadawanButton: View {
     }
     
     var body: some View {
-        let bgColor = isDestructive ? colors.accent3 : colors.accent1
-        if let action {
-            Button {
-                action()
-            } label: {
+        Group {
+            let bgColor = isDestructive ? colors.accent3 : colors.accent1
+            if let action {
+                Button {
+                    action()
+                } label: {
+                    PadawanCardView(backgroundColor: bgColor) {
+                        buildContent()
+                    }
+                    .foregroundColor(colors.text)
+                }
+            } else {
                 PadawanCardView(backgroundColor: bgColor) {
                     buildContent()
                 }
                 .foregroundColor(colors.text)
             }
-        } else {
-            PadawanCardView(backgroundColor: bgColor) {
-                buildContent()
-            }
-            .foregroundColor(colors.text)
         }
+        .frame(minHeight: 70.0)
     }
     
     @ViewBuilder
@@ -58,6 +61,7 @@ struct PadawanButton: View {
                 icon
             }
         }
+        .padding(.vertical)
     }
 }
 

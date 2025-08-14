@@ -43,12 +43,8 @@ final class WalletViewModel: ObservableObject {
         do {
             try bdkClient.loadWallet()
             balance = Session.shared.lastBalanceUpdate
+            try getTransactions()
             
-            transactions = [
-                .init(id: "123123123123123123123123123123123123123123123123123123", date: "August 9 2025 09:11", amount: "+150000 sats", status: .received),
-                .init(id: "123123123123123123123123123123123123123123123123123123", date: "August 9 2025 09:11", amount: "+150000 sats", status: .sent),
-                .init(id: "123123123123123123123123123123123123123123123123123123", date: "August 9 2025 09:11", amount: "+150000 sats", status: .received),
-            ]
         } catch {
             fullScreenCover = .alertError(
                 data: .init(
@@ -90,6 +86,37 @@ final class WalletViewModel: ObservableObject {
     
     func showSendScreen() {
         path.append(WalletScreenNavigation.send)
+    }
+    
+    func getTransactions() throws {
+        let detailsTransactions: [TransactionsCard.Data] = try bdkClient.transactions().compactMap { item in
+            let status: TransactionsCard.Data.Status = item.balanceDelta > .zero ? .received : .sent
+            let amount = "\(UInt64(item.balanceDelta).formattedSats()) sats"
+            var date: Date = .init()
+            switch item.chainPosition {
+            case .confirmed(let confirmationBlockTime, _):
+                date = confirmationBlockTime
+                    .confirmationTime
+                    .toDate()
+                
+            case .unconfirmed(let timestamp):
+                date = timestamp?
+                    .toDate() ?? .init()
+            }
+            
+            return .init(
+                id: item.txid.description,
+                date: date.formatted(date: .abbreviated, time: .shortened),
+                amount: amount,
+                status: status
+            )
+        }
+        transactions = detailsTransactions
+//        transactions = [
+//            .init(id: "123123123123123123123123123123123123123123123123123121", date: "August 9 2025 09:11", amount: "+150000 sats", status: .sent),
+//            .init(id: "123123123123123123123123123123123123123123123123123122", date: "August 10 2025 09:11", amount: "+150000 sats", status: .sent),
+//            .init(id: "123123123123123123123123123123123123123123123123123123", date: "August 11 2025 09:11", amount: "+150000 sats", status: .received),
+//        ]
     }
     
     // MARK: - Private
