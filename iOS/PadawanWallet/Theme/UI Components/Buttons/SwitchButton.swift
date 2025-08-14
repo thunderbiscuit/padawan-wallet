@@ -32,6 +32,7 @@ struct SwitchButton: View {
                         currentOption = option
                     } label: {
                         Text(option)
+                            .font(Fonts.body)
                             .foregroundColor(
                                 currentOption != option ?
                                     colors.text.opacity(0.3) :
