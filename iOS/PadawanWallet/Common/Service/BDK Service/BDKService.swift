@@ -174,6 +174,18 @@ private class BDKService {
         return details
     }
     
+    func getAddress() throws -> String {
+        guard let wallet else {
+            throw BDKServiceError.walletNotFound
+        }
+        guard let persister else {
+            throw BDKServiceError.dbNotFound
+        }
+        let nextAddress = wallet.revealNextAddress(keychain: .external)
+        _ = try wallet.persist(persister: persister)
+        return nextAddress.address.description
+    }
+    
     // MARK: - Private
     
     private func loadWallet(
@@ -225,6 +237,7 @@ struct BDKClient {
     let fullScanWithInspector: (FullScanScriptInspector) async throws -> Void
     let needsFullScan: () -> Bool
     let transactions: () throws -> [TxDetails]
+    let getAddress: () throws -> String
 }
 
 extension BDKClient {
@@ -252,6 +265,9 @@ extension BDKClient {
         },
         transactions: {
             try BDKService.shared.transactions()
+        },
+        getAddress: {
+            try BDKService.shared.getAddress()
         }
     )
 }
@@ -292,7 +308,8 @@ extension BDKClient {
             try await BDKService.mock.fullScanWithInspector(inspector: inspect)
         },
         needsFullScan: { true },
-        transactions: { [] }
+        transactions: { [] },
+        getAddress: { "tb1pd8jmenqpe7rz2mavfdx7uc8pj7vskxv4rl6avxlqsw2u8u7d4gfs97durt" }
     )
 }
 #endif
