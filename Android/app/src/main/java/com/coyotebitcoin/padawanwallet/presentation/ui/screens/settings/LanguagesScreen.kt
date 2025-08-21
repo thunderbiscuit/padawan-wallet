@@ -16,8 +16,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavHostController
-import androidx.navigation.compose.rememberNavController
 import com.coyotebitcoin.padawanwallet.R
 import com.coyotebitcoin.padawanwallet.presentation.theme.LocalPadawanColors
 import com.coyotebitcoin.padawanwallet.presentation.theme.PadawanTheme
@@ -32,7 +30,7 @@ private const val TAG = "SettingsScreen"
 
 @Composable
 internal fun LanguagesScreen(
-    navController: NavHostController
+    onBack: () -> Unit
 ) {
     val colors = LocalPadawanColors.current
 
@@ -40,7 +38,7 @@ internal fun LanguagesScreen(
         topBar = {
             PadawanAppBar(
                 title = stringResource(R.string.change_language),
-                onClick = { navController.popBackStack() }
+                onClick = { onBack() }
             )
         }
     ) { scaffoldPadding ->
@@ -70,6 +68,8 @@ internal fun LanguagesScreen(
 @Composable
 internal fun PreviewLanguagesScreen() {
     PadawanTheme {
-        LanguagesScreen(navController = rememberNavController())
+        LanguagesScreen(
+            onBack = { }
+        )
     }
 }

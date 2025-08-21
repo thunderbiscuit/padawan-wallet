@@ -60,7 +60,6 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavHostController
 import com.composables.core.DragIndication
 import com.composables.core.ModalBottomSheet
 import com.composables.core.Scrim
@@ -72,7 +71,6 @@ import com.composables.core.rememberModalBottomSheetState
 import com.composables.icons.lucide.Camera
 import com.composables.icons.lucide.Lucide
 import com.coyotebitcoin.padawanwallet.R
-import com.coyotebitcoin.padawanwallet.presentation.navigation.QRScanScreen
 import com.coyotebitcoin.padawanwallet.presentation.theme.LocalPadawanColors
 import com.coyotebitcoin.padawanwallet.presentation.theme.PadawanTypography
 import com.coyotebitcoin.padawanwallet.presentation.theme.innerScreenPadding
@@ -81,10 +79,10 @@ import com.coyotebitcoin.padawanwallet.presentation.theme.wideTextField
 import com.coyotebitcoin.padawanwallet.presentation.ui.components.PadawanAppBar
 import com.coyotebitcoin.padawanwallet.presentation.ui.components.TransactionBroadcastAnimation
 import com.coyotebitcoin.padawanwallet.presentation.ui.components.standardBorder
-import com.coyotebitcoin.padawanwallet.presentation.viewmodels.mvi.WalletAction
-import com.coyotebitcoin.padawanwallet.presentation.viewmodels.mvi.WalletState
 import com.coyotebitcoin.padawanwallet.presentation.utils.ScreenSizeWidth
 import com.coyotebitcoin.padawanwallet.presentation.utils.getScreenSizeWidth
+import com.coyotebitcoin.padawanwallet.presentation.viewmodels.mvi.WalletAction
+import com.coyotebitcoin.padawanwallet.presentation.viewmodels.mvi.WalletState
 import kotlinx.coroutines.launch
 import org.bitcoindevkit.Amount
 import org.bitcoindevkit.FeeRate
@@ -96,7 +94,8 @@ private const val TAG = "SendScreen"
 internal fun SendScreen(
     state: WalletState,
     onAction: (WalletAction) -> Unit,
-    navController: NavHostController,
+    onQrScreenNavigate: () -> Unit,
+    onBack: () -> Unit,
 ) {
     val colors = LocalPadawanColors.current
     val recipientAddress: MutableState<String> = rememberSaveable { mutableStateOf("") }
@@ -124,14 +123,14 @@ internal fun SendScreen(
     val scope = rememberCoroutineScope()
 
     if (showBroadcastAnimation) {
-        TransactionBroadcastAnimation(onAnimationEnd = { navController.popBackStack() })
+        TransactionBroadcastAnimation(onAnimationEnd = { onBack() })
     } else {
 
     Scaffold(
         topBar = {
             PadawanAppBar(
                 title = stringResource(R.string.send_bitcoin),
-                onClick = { navController.popBackStack() }
+                onClick = { onBack() }
             )
         },
         snackbarHost = { SnackbarHost(snackbarHostState) },
@@ -235,11 +234,8 @@ internal fun SendScreen(
                     trailingIcon = {
                         Row {
                             IconButton(
-                                onClick = {
-                                    navController.navigate(QRScanScreen) {
-                                        launchSingleTop = true
-                                    }
-                                }, modifier = Modifier.align(Alignment.CenterVertically)
+                                onClick = { onQrScreenNavigate() },
+                                modifier = Modifier.align(Alignment.CenterVertically)
                             ) {
                                 com.composables.core.Icon(
                                     imageVector = Lucide.Camera,

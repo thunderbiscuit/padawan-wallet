@@ -26,18 +26,16 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavHostController
-import androidx.navigation.compose.rememberNavController
 import com.coyotebitcoin.padawanwallet.R
 import com.coyotebitcoin.padawanwallet.presentation.theme.LocalPadawanColors
+import com.coyotebitcoin.padawanwallet.presentation.theme.PadawanColorsTatooineDesert
 import com.coyotebitcoin.padawanwallet.presentation.theme.PadawanTheme
 import com.coyotebitcoin.padawanwallet.presentation.theme.PadawanTypography
-import com.coyotebitcoin.padawanwallet.presentation.theme.PadawanColorsTatooineDesert
 import com.coyotebitcoin.padawanwallet.presentation.ui.components.PadawanAppBar
 
 @Composable
 internal fun AboutScreen(
-    navController: NavHostController
+    onBack: () -> Unit
 ) {
     val scrollState = rememberScrollState()
     val mUriHandler = LocalUriHandler.current
@@ -49,7 +47,7 @@ internal fun AboutScreen(
         topBar = {
             PadawanAppBar(
                 title = stringResource(R.string.about_padawan),
-                onClick = { navController.popBackStack() }
+                onClick = { onBack() }
             )
         },
         modifier = Modifier.fillMaxHeight()
@@ -89,6 +87,6 @@ internal fun AboutScreen(
 @Composable
 internal fun PreviewAboutScreen() {
     PadawanTheme {
-        AboutScreen(navController = rememberNavController())
+        AboutScreen(onBack = { })
     }
 }

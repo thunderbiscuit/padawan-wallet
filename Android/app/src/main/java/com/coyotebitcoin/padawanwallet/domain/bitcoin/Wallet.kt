@@ -42,6 +42,7 @@ object Wallet {
     fun setPathAndConnectDb(path: String) {
         dbPath = "$path/padawanDB_$PERSISTENCE_VERSION.sqlite3"
         dbConnection = Connection(dbPath)
+        Log.i(TAG, "Connecting to database at: $dbPath")
     }
 
     fun createWallet() {

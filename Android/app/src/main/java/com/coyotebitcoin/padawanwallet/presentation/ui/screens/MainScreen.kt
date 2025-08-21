@@ -5,6 +5,7 @@
 
 package com.coyotebitcoin.padawanwallet.presentation.ui.screens
 
+import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.clickable
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
@@ -21,128 +22,209 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
-import androidx.navigation.NavGraph.Companion.findStartDestination
-import androidx.navigation.NavHostController
-import androidx.navigation.compose.currentBackStackEntryAsState
+import androidx.navigation3.runtime.NavBackStack
+import com.composables.icons.lucide.GraduationCap
+import com.composables.icons.lucide.Lucide
+import com.composables.icons.lucide.Settings2
+import com.composables.icons.lucide.WalletMinimal
 import com.coyotebitcoin.padawanwallet.R
-import com.coyotebitcoin.padawanwallet.presentation.theme.PadawanTypography
+import com.coyotebitcoin.padawanwallet.presentation.navigation.CoreDestinations
+import com.coyotebitcoin.padawanwallet.presentation.navigation.NavigationCoreScreens
 import com.coyotebitcoin.padawanwallet.presentation.theme.PadawanColorsTatooineDesert
-import com.coyotebitcoin.padawanwallet.presentation.utils.NavigationItem
-import com.coyotebitcoin.padawanwallet.presentation.navigation.WalletNavigation
-import androidx.navigation.compose.rememberNavController
+import com.coyotebitcoin.padawanwallet.presentation.theme.PadawanTypography
+import com.coyotebitcoin.padawanwallet.presentation.viewmodels.ChaptersViewModel
+import com.coyotebitcoin.padawanwallet.presentation.viewmodels.WalletViewModel
 
-private const val TAG = "RootScreen"
+private const val TAG = "PadawanTag/RootScreen"
 
-@OptIn(androidx.compose.animation.ExperimentalAnimationApi::class)
+/**
+ * This is the entry point for the "core" screens of the app, namely the wallet, chapters, and more screens.
+ * These 3 screens exist in a bottom navigation bar structure.
+ * When navigating between these 3 screens, there is no back stack maintained, i.e. the backstack is always 1 screen
+ * deep (the current screen). Using the onBack callback will do (hopefully) nothing.
+ */
+@OptIn(ExperimentalAnimationApi::class)
 @Composable
-internal fun MainScreen() {
-    val navControllerWalletNavigation: NavHostController = rememberNavController()
-
+internal fun CoreScreens(
+    backStack: NavBackStack,
+    bottomBarBackStack: NavBackStack,
+    walletViewModel: WalletViewModel,
+    chaptersViewModel: ChaptersViewModel,
+) {
     Scaffold(
-        bottomBar = { BottomNavigationBar(navControllerWalletNavigation) },
+        bottomBar = { BottomNavigationBar(
+            onWalletNavigation = {
+                bottomBarBackStack.clear()
+                bottomBarBackStack.add(CoreDestinations.WalletRootScreen)
+            },
+            onLessonsNavigation = {
+                bottomBarBackStack.clear()
+                bottomBarBackStack.add(CoreDestinations.ChaptersRootScreen)
+            },
+            onMoreNavigation = {
+                bottomBarBackStack.clear()
+                bottomBarBackStack.add(CoreDestinations.SettingsRootScreen)
+            },
+        ) },
     ) { scaffoldPadding ->
-        // We pass the insets for the system bars down to the composables that need them.
-        WalletNavigation(
-            paddingValues = scaffoldPadding,
-            navHostController = navControllerWalletNavigation,
+        NavigationCoreScreens(
+            // onBack = onBack,
+            bottomBarBackStack = bottomBarBackStack,
+            walletViewModel = walletViewModel,
+            chaptersViewModel = chaptersViewModel,
+            scaffoldPadding = scaffoldPadding,
+            backStack = backStack
         )
     }
 }
 
 @Composable
 internal fun BottomNavigationBar(
-    navControllerWalletNavigation: NavController,
+    onWalletNavigation: () -> Unit,
+    onLessonsNavigation: () -> Unit,
+    onMoreNavigation: () -> Unit,
 ) {
     var selectedItem by remember { mutableIntStateOf(0) }
-    val items = listOf(
-        NavigationItem.Home(title = stringResource(id = R.string.bottom_nav_wallet)),
-        NavigationItem.Chapters(title = stringResource(id = R.string.bottom_nav_chapters)),
-        NavigationItem.Settings(title = stringResource(id = R.string.bottom_nav_settings))
-    )
 
-    val navBackStackEntry by navControllerWalletNavigation.currentBackStackEntryAsState()
-    val currentRoute = navBackStackEntry?.destination?.route?.substringAfterLast(".") ?: ""
-    val screensWithBottomBar = listOf("WalletRootScreen", "ChaptersRootScreen", "SettingsRootScreen")
-    val showNavigationBar = currentRoute in screensWithBottomBar
-
-    if (showNavigationBar) {
-        NavigationBar(
-            tonalElevation = 0.dp,
-            containerColor = PadawanColorsTatooineDesert.background2,
-        ) {
-            // This odd code is necessary to ensure the ripple effect is not shown on any part of the
-            // navigation bar item. See commit a1fceda for more information.
-            items.forEachIndexed { index, item ->
-                NavigationBarItem(
-                    icon = {
-                        Icon(
-                            imageVector = item.icon,
-                            contentDescription = item.title,
-                            modifier = Modifier.clickable(
-                                interactionSource = null,
-                                indication = null,
-                                enabled = true,
-                                onClick = {
-                                    if (selectedItem != index) {
-                                        selectedItem = index
-                                        navControllerWalletNavigation.navigate(item.route) {
-                                            popUpTo(navControllerWalletNavigation.graph.findStartDestination().id) {
-                                                saveState = true
-                                            }
-                                            launchSingleTop = true
-                                            restoreState = true
-                                        }
-                                    }
-                                }
-                            )
-                        )
-                    },
-                    label = {
-                        Text(
-                            text = item.title,
-                            style = PadawanTypography.labelMedium,
-                            modifier = Modifier.clickable(
-                                interactionSource = null,
-                                indication = null,
-                                enabled = true,
-                                onClick = {
-                                    if (selectedItem != index) {
-                                        selectedItem = index
-                                        navControllerWalletNavigation.navigate(item.route) {
-                                            popUpTo(navControllerWalletNavigation.graph.findStartDestination().id) {
-                                                saveState = true
-                                            }
-                                            launchSingleTop = true
-                                            restoreState = true
-                                        }
-                                    }
-                                }
-                            )
-                        )
-                    },
-                    selected = selectedItem == index,
-                    onClick = {
-                        if (selectedItem != index) {
-                            selectedItem = index
-                            navControllerWalletNavigation.navigate(item.route) {
-                                popUpTo(navControllerWalletNavigation.graph.findStartDestination().id) {
-                                    saveState = true
-                                }
-                                launchSingleTop = true
-                                restoreState = true
-                            }
+    // This odd code where you define the onClick in 3 separate places is necessary to ensure the ripple effect is not
+    // shown on any part of the navigation bar item. See commit a1fceda for more information.
+    NavigationBar(
+        tonalElevation = 0.dp,
+        containerColor = PadawanColorsTatooineDesert.background2,
+    ) {
+        NavigationBarItem(
+            icon = {
+                Icon(
+                    imageVector = Lucide.WalletMinimal,
+                    contentDescription = stringResource(id = R.string.bottom_nav_wallet),
+                    modifier = Modifier.clickable(
+                        interactionSource = null,
+                        indication = null,
+                        enabled = true,
+                        onClick = {
+                            selectedItem = 0
+                            onWalletNavigation()
                         }
-                    },
-                    colors = NavigationBarItemDefaults.colors(
-                        selectedIconColor = PadawanColorsTatooineDesert.accent1,
-                        selectedTextColor = PadawanColorsTatooineDesert.accent1,
-                        unselectedIconColor = PadawanColorsTatooineDesert.navigationBarUnselected,
-                        unselectedTextColor = PadawanColorsTatooineDesert.navigationBarUnselected,
-                        indicatorColor = Color.Transparent,
-                    ),
+                    )
                 )
-            }
-        }
+            },
+            label = {
+                Text(
+                    text = stringResource(id = R.string.bottom_nav_wallet),
+                    style = PadawanTypography.labelMedium,
+                    modifier = Modifier.clickable(
+                        interactionSource = null,
+                        indication = null,
+                        enabled = true,
+                        onClick = {
+                            selectedItem = 0
+                            onWalletNavigation()
+                        }
+                    )
+                )
+            },
+            selected = selectedItem == 0,
+            onClick = {
+                selectedItem = 0
+                onWalletNavigation()
+            },
+            colors = NavigationBarItemDefaults.colors(
+                selectedIconColor = PadawanColorsTatooineDesert.accent1,
+                selectedTextColor = PadawanColorsTatooineDesert.accent1,
+                unselectedIconColor = PadawanColorsTatooineDesert.navigationBarUnselected,
+                unselectedTextColor = PadawanColorsTatooineDesert.navigationBarUnselected,
+                indicatorColor = Color.Transparent,
+            ),
+        )
+
+        NavigationBarItem(
+            icon = {
+                Icon(
+                    imageVector = Lucide.GraduationCap,
+                    contentDescription = stringResource(id = R.string.bottom_nav_chapters),
+                    modifier = Modifier.clickable(
+                        interactionSource = null,
+                        indication = null,
+                        enabled = true,
+                        onClick = {
+                            selectedItem = 1
+                            onLessonsNavigation()
+                        }
+                    )
+                )
+            },
+            label = {
+                Text(
+                    text = stringResource(id = R.string.bottom_nav_chapters),
+                    style = PadawanTypography.labelMedium,
+                    modifier = Modifier.clickable(
+                        interactionSource = null,
+                        indication = null,
+                        enabled = true,
+                        onClick = {
+                            selectedItem = 1
+                            onLessonsNavigation()
+                        }
+                    )
+                )
+            },
+            selected = selectedItem == 1,
+            onClick = {
+                selectedItem = 1
+                onLessonsNavigation()
+            },
+            colors = NavigationBarItemDefaults.colors(
+                selectedIconColor = PadawanColorsTatooineDesert.accent1,
+                selectedTextColor = PadawanColorsTatooineDesert.accent1,
+                unselectedIconColor = PadawanColorsTatooineDesert.navigationBarUnselected,
+                unselectedTextColor = PadawanColorsTatooineDesert.navigationBarUnselected,
+                indicatorColor = Color.Transparent,
+            ),
+        )
+
+        NavigationBarItem(
+            icon = {
+                Icon(
+                    imageVector = Lucide.Settings2,
+                    contentDescription = stringResource(id = R.string.bottom_nav_settings),
+                    modifier = Modifier.clickable(
+                        interactionSource = null,
+                        indication = null,
+                        enabled = true,
+                        onClick = {
+                            selectedItem = 2
+                            onMoreNavigation()
+                        }
+                    )
+                )
+            },
+            label = {
+                Text(
+                    text = stringResource(id = R.string.bottom_nav_settings),
+                    style = PadawanTypography.labelMedium,
+                    modifier = Modifier.clickable(
+                        interactionSource = null,
+                        indication = null,
+                        enabled = true,
+                        onClick = {
+                            selectedItem = 2
+                            onMoreNavigation()
+                        }
+                    )
+                )
+            },
+            selected = selectedItem == 2,
+            onClick = {
+                selectedItem = 2
+                onMoreNavigation()
+            },
+            colors = NavigationBarItemDefaults.colors(
+                selectedIconColor = PadawanColorsTatooineDesert.accent1,
+                selectedTextColor = PadawanColorsTatooineDesert.accent1,
+                unselectedIconColor = PadawanColorsTatooineDesert.navigationBarUnselected,
+                unselectedTextColor = PadawanColorsTatooineDesert.navigationBarUnselected,
+                indicatorColor = Color.Transparent,
+            ),
+        )
     }
 }

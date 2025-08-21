@@ -21,6 +21,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
@@ -44,7 +45,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavHostController
 import com.composables.core.Icon
 import com.composables.icons.lucide.ArrowLeft
 import com.composables.icons.lucide.Lucide
@@ -52,8 +52,8 @@ import com.coyotebitcoin.padawanwallet.R
 import com.coyotebitcoin.padawanwallet.data.ElementType
 import com.coyotebitcoin.padawanwallet.data.Page
 import com.coyotebitcoin.padawanwallet.presentation.theme.LocalPadawanColors
-import com.coyotebitcoin.padawanwallet.presentation.theme.PadawanTypography
 import com.coyotebitcoin.padawanwallet.presentation.theme.PadawanColorsTatooineDesert
+import com.coyotebitcoin.padawanwallet.presentation.theme.PadawanTypography
 import com.coyotebitcoin.padawanwallet.presentation.theme.standardShadow
 import com.coyotebitcoin.padawanwallet.presentation.ui.components.standardBorder
 import com.coyotebitcoin.padawanwallet.presentation.utils.ScreenSizeWidth
@@ -63,14 +63,14 @@ import com.coyotebitcoin.padawanwallet.presentation.viewmodels.mvi.PageState
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
-private const val TAG = "ChapterScreen"
+private const val TAG = "PadawanTag/ChapterScreen"
 
 @Composable
 fun ChapterScreen(
     state: PageState,
     onAction: (ChaptersScreensAction) -> Unit,
-    paddingValues: PaddingValues,
-    navController: NavHostController
+    onBack: () -> Unit,
+    onChapterDone: () -> Unit,
 ) {
     val pageScrollState = rememberScrollState()
     val coroutineScope = rememberCoroutineScope()
@@ -84,7 +84,6 @@ fun ChapterScreen(
         Box(
             modifier = Modifier
                 .background(color = colors.accent1)
-                .padding(top = paddingValues.calculateTopPadding())
                 .fillMaxWidth()
                 .drawBehind {
                     drawLine(
@@ -94,9 +93,12 @@ fun ChapterScreen(
                         end = Offset(x = size.width, y = size.height)
                     )
                 }
+                .statusBarsPadding()
         ) {
-            Column(modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp)) {
-                ChapterAppBar(navController = navController)
+            Column(modifier = Modifier
+                .padding(horizontal = 16.dp, vertical = 8.dp)
+            ) {
+                ChapterAppBar { onBack() }
                 ChapterProgressBar(
                     incompleteColor = colors.background,
                     completeColor = colors.text,
@@ -116,7 +118,6 @@ fun ChapterScreen(
             modifier = Modifier
                 .verticalScroll(pageScrollState)
                 .padding(padding)
-                .padding(bottom = paddingValues.calculateBottomPadding())
                 .weight(1f),
         ) {
             ChapterPage(state.page)
@@ -125,7 +126,7 @@ fun ChapterScreen(
                 onAction = onAction,
                 pageScrollState = pageScrollState,
                 coroutineScope = coroutineScope,
-                navController
+                onChapterDone = { onChapterDone() }
             )
         }
     }
@@ -137,7 +138,7 @@ fun ChapterButtons(
     onAction: (ChaptersScreensAction) -> Unit,
     pageScrollState: ScrollState,
     coroutineScope: CoroutineScope,
-    navController: NavHostController
+    onChapterDone: () -> Unit,
 ) {
     Row(
         modifier = Modifier
@@ -172,7 +173,7 @@ fun ChapterButtons(
             Button(
                 onClick = {
                     onAction(ChaptersScreensAction.SetCompleted)
-                    navController.popBackStack()
+                    onChapterDone()
                 },
                 colors = ButtonDefaults.buttonColors(containerColor = PadawanColorsTatooineDesert.accent2),
                 shape = RoundedCornerShape(20.dp),
@@ -203,12 +204,12 @@ fun scrollUp(pageScrollState: ScrollState, coroutineScope: CoroutineScope) {
 }
 
 @Composable
-internal fun ChapterAppBar(navController: NavHostController) {
+internal fun ChapterAppBar(onBack: () -> Unit) {
     val colors = LocalPadawanColors.current
 
     Row(modifier = Modifier.fillMaxWidth()) {
         IconButton(
-            onClick = { navController.popBackStack() },
+            onClick = { onBack() },
             modifier = Modifier.align(alignment = Alignment.CenterVertically)
         ) {
             Icon(

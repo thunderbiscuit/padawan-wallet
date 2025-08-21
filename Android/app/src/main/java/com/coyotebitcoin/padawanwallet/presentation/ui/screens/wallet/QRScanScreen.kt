@@ -45,22 +45,20 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.core.content.ContextCompat
-import androidx.navigation.NavHostController
 import com.coyotebitcoin.padawanwallet.R
+import com.coyotebitcoin.padawanwallet.domain.utils.QRCodeAnalyzer
 import com.coyotebitcoin.padawanwallet.presentation.theme.standardShadow
 import com.coyotebitcoin.padawanwallet.presentation.ui.components.standardBorder
 import com.coyotebitcoin.padawanwallet.presentation.viewmodels.mvi.WalletAction
-import com.coyotebitcoin.padawanwallet.domain.utils.QRCodeAnalyzer
-import org.bitcointools.bip21.Bip21URI
+import org.kotlinbitcointools.bip21.Bip21URI
 
 private const val TAG = "QRScanScreen"
 
 @Composable
-internal fun QRScanScreen(
+internal fun QrScanScreen(
     onAction: (WalletAction) -> Unit,
-    navController: NavHostController
+    onBack: () -> Unit,
 ) {
-
     val context = LocalContext.current
     val lifecycleOwner = LocalLifecycleOwner.current
     val snackbarHostState = remember { SnackbarHostState() }
@@ -132,11 +130,8 @@ internal fun QRScanScreen(
                                             }
 
                                             onAction(WalletAction.QRCodeScanned(address))
-                                            // navController.previousBackStackEntry
-                                            //     ?.savedStateHandle
-                                            //     ?.set("BTC_Address", address)
                                             imageAnalysis.clearAnalyzer()
-                                            navController.popBackStack()
+                                            onBack()
                                         }
                                     }
                                 )
@@ -162,7 +157,7 @@ internal fun QRScanScreen(
 
             Button(
                 onClick = {
-                    navController.popBackStack()
+                    onBack()
                 },
                 colors = ButtonDefaults.buttonColors(containerColor = Color(0xfff6cf47)),
                 shape = RoundedCornerShape(20.dp),

@@ -36,7 +36,8 @@ class WalletRecoveryScreenTest {
         composeTestRule.setContent {
             PadawanTheme {
                 WalletRecoveryScreen(
-                    onBuildWalletButtonClicked = onBuildWalletButtonClicked
+                    onBuildWallet = onBuildWalletButtonClicked,
+                    onRecoverNav = { Log.i(TAG, "Recover wallet and navigate to WalletRootScreen") },
                 )
             }
         }

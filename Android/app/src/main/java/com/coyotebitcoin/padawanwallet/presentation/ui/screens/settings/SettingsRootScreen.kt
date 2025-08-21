@@ -34,20 +34,15 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
 import com.coyotebitcoin.padawanwallet.BuildConfig
 import com.coyotebitcoin.padawanwallet.R
-import com.coyotebitcoin.padawanwallet.presentation.navigation.AboutScreen
-import com.coyotebitcoin.padawanwallet.presentation.navigation.LanguagesScreen
-import com.coyotebitcoin.padawanwallet.presentation.navigation.RecoveryPhraseScreen
-import com.coyotebitcoin.padawanwallet.presentation.navigation.SendCoinsBackScreen
+import com.coyotebitcoin.padawanwallet.presentation.navigation.SecondaryDestinations
+import com.coyotebitcoin.padawanwallet.presentation.theme.LocalPadawanColors
+import com.coyotebitcoin.padawanwallet.presentation.theme.PadawanColorsTatooineDesert
 import com.coyotebitcoin.padawanwallet.presentation.theme.PadawanTheme
 import com.coyotebitcoin.padawanwallet.presentation.theme.PadawanTypography
-import com.coyotebitcoin.padawanwallet.presentation.theme.PadawanColorsTatooineDesert
-import com.coyotebitcoin.padawanwallet.presentation.viewmodels.mvi.ChaptersScreensAction
-import com.coyotebitcoin.padawanwallet.presentation.theme.LocalPadawanColors
 import com.coyotebitcoin.padawanwallet.presentation.ui.components.ExtraButton
+import com.coyotebitcoin.padawanwallet.presentation.viewmodels.mvi.ChaptersScreensAction
 import kotlinx.coroutines.launch
 
 private const val TAG = "SettingsRootScreen"
@@ -55,7 +50,7 @@ private const val TAG = "SettingsRootScreen"
 @Composable
 internal fun SettingsRootScreen(
     onAction: (ChaptersScreensAction) -> Unit,
-    navController: NavController,
+    onNavigation: (SecondaryDestinations) -> Unit,
 ) {
     val scope = rememberCoroutineScope()
     val scrollState = rememberScrollState()
@@ -96,22 +91,22 @@ internal fun SettingsRootScreen(
 
             ExtraButton(
                 label = stringResource(R.string.recovery_phrase),
-                onClick = { navController.navigate(RecoveryPhraseScreen) }
+                onClick = { onNavigation(SecondaryDestinations.RecoveryPhraseScreen) }
             )
 
             ExtraButton(
                 label = stringResource(R.string.send_signet_coins_back),
-                onClick = { navController.navigate(SendCoinsBackScreen) }
+                onClick = { onNavigation(SecondaryDestinations.SendCoinsBackScreen) }
             )
 
             ExtraButton(
                 label = stringResource(R.string.change_language),
-                onClick = { navController.navigate(LanguagesScreen) }
+                onClick = { onNavigation(SecondaryDestinations.LanguagesScreen) }
             )
 
             ExtraButton(
                 label = stringResource(R.string.about_padawan),
-                onClick = { navController.navigate(AboutScreen) }
+                onClick = { onNavigation(SecondaryDestinations.AboutScreen) }
             )
 
             HorizontalDivider(
@@ -172,7 +167,7 @@ internal fun PreviewSettingsRootScreen() {
     PadawanTheme {
         SettingsRootScreen(
             onAction = { },
-            navController = rememberNavController()
+            onNavigation = { }
         )
     }
 }

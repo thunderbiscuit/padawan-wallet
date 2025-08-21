@@ -36,11 +36,9 @@ import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
 import com.coyotebitcoin.padawanwallet.R
 import com.coyotebitcoin.padawanwallet.domain.utils.WalletCreateType
-import com.coyotebitcoin.padawanwallet.presentation.navigation.WalletRecoveryScreen
+import com.coyotebitcoin.padawanwallet.presentation.navigation.SecondaryDestinations
 import com.coyotebitcoin.padawanwallet.presentation.theme.LocalPadawanColors
 import com.coyotebitcoin.padawanwallet.presentation.theme.PadawanTheme
 import com.coyotebitcoin.padawanwallet.presentation.theme.PadawanTypography
@@ -53,8 +51,9 @@ private const val TAG = "OnboardingScreen"
 
 @Composable
 internal fun OnboardingScreen(
-    onBuildWalletButtonClicked: (WalletCreateType) -> Unit,
-    navController: NavController
+    onBuildWallet: (WalletCreateType) -> Unit,
+    onCreateNav: (SecondaryDestinations) -> Unit,
+    onRecoverNav: () -> Unit,
 ) {
     val screenSizeHeight: ScreenSizeHeight = getScreenSizeHeight(LocalConfiguration.current.screenHeightDp)
     val pageScrollState: ScrollState = rememberScrollState()
@@ -62,14 +61,16 @@ internal fun OnboardingScreen(
     if (screenSizeHeight == ScreenSizeHeight.Small) {
         SmallOnboarding(
             pageScrollState = pageScrollState,
-            onBuildWalletButtonClicked = onBuildWalletButtonClicked,
-            navController = navController,
+            onBuildWallet = onBuildWallet,
+            onCreateNav = onCreateNav,
+            onRecoverNav = onRecoverNav
         )
     } else {
         PhoneOnboarding(
             pageScrollState = pageScrollState,
-            onBuildWalletButtonClicked = onBuildWalletButtonClicked,
-            navController = navController,
+            onBuildWallet = onBuildWallet,
+            onCreateNav = onCreateNav,
+            onRecoverNav = onRecoverNav
         )
     }
 }
@@ -77,8 +78,9 @@ internal fun OnboardingScreen(
 @Composable
 internal fun SmallOnboarding(
     pageScrollState: ScrollState,
-    onBuildWalletButtonClicked: (WalletCreateType) -> Unit,
-    navController: NavController,
+    onBuildWallet: (WalletCreateType) -> Unit,
+    onCreateNav: (SecondaryDestinations) -> Unit,
+    onRecoverNav: () -> Unit,
 ) {
     val colors = LocalPadawanColors.current
     Column(
@@ -113,7 +115,8 @@ internal fun SmallOnboarding(
         Button(
             onClick = {
                 Log.i(TAG, "Creating a wallet")
-                onBuildWalletButtonClicked(WalletCreateType.FROMSCRATCH)
+                onBuildWallet(WalletCreateType.FROMSCRATCH)
+                onCreateNav(SecondaryDestinations.CoreScreens)
             },
             colors = ButtonDefaults.buttonColors(
                 containerColor = colors.accent2,
@@ -133,7 +136,7 @@ internal fun SmallOnboarding(
         }
 
         Button(
-            onClick = { navController.navigate(WalletRecoveryScreen) },
+            onClick = { onRecoverNav() },
             colors = ButtonDefaults.buttonColors(containerColor = colors.accent2),
             shape = RoundedCornerShape(20.dp),
             border = standardBorder,
@@ -157,8 +160,9 @@ internal fun SmallOnboarding(
 @Composable
 internal fun PhoneOnboarding(
     pageScrollState: ScrollState,
-    onBuildWalletButtonClicked: (WalletCreateType) -> Unit,
-    navController: NavController,
+    onBuildWallet: (WalletCreateType) -> Unit,
+    onCreateNav: (SecondaryDestinations) -> Unit,
+    onRecoverNav: () -> Unit,
 ) {
     val colors = LocalPadawanColors.current
 
@@ -208,7 +212,8 @@ internal fun PhoneOnboarding(
             Button(
                 onClick = {
                     Log.i(TAG, "Creating a wallet")
-                    onBuildWalletButtonClicked(WalletCreateType.FROMSCRATCH)
+                    onBuildWallet(WalletCreateType.FROMSCRATCH)
+                    onCreateNav(SecondaryDestinations.CoreScreens)
                 },
                 colors = ButtonDefaults.buttonColors(containerColor = colors.accent2),
                 shape = RoundedCornerShape(20.dp),
@@ -232,7 +237,7 @@ internal fun PhoneOnboarding(
             }
 
             Button(
-                onClick = { navController.navigate(WalletRecoveryScreen) },
+                onClick = { onRecoverNav() },
                 colors = ButtonDefaults.buttonColors(containerColor = colors.accent2),
                 shape = RoundedCornerShape(20.dp),
                 border = standardBorder,
@@ -260,8 +265,9 @@ internal fun PhoneOnboarding(
 internal fun PreviewOnboardingScreen() {
     PadawanTheme {
         OnboardingScreen(
-            onBuildWalletButtonClicked = {},
-            rememberNavController()
+            onBuildWallet = {},
+            onCreateNav = {},
+            onRecoverNav = {}
         )
     }
 }

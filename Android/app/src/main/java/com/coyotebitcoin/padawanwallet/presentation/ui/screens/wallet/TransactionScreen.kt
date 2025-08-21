@@ -28,7 +28,7 @@ import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavHostController
+import com.coyotebitcoin.padawanwallet.R
 import com.coyotebitcoin.padawanwallet.domain.bitcoin.ChainPosition
 import com.coyotebitcoin.padawanwallet.domain.bitcoin.TransactionDetails
 import com.coyotebitcoin.padawanwallet.domain.bitcoin.TxType
@@ -40,14 +40,13 @@ import com.coyotebitcoin.padawanwallet.presentation.theme.innerScreenPadding
 import com.coyotebitcoin.padawanwallet.presentation.ui.components.PadawanAppBar
 import com.coyotebitcoin.padawanwallet.presentation.utils.ScreenSizeWidth
 import com.coyotebitcoin.padawanwallet.presentation.utils.getScreenSizeWidth
-import com.coyotebitcoin.padawanwallet.R
 
 private const val TAG = "TransactionScreen"
 
 @Composable
 internal fun TransactionScreen(
     txDetails: TransactionDetails,
-    navController: NavHostController,
+    onBack: () -> Unit,
 ) {
     val colors = LocalPadawanColors.current
     val padding = when (getScreenSizeWidth(LocalConfiguration.current.screenWidthDp)) {
@@ -59,7 +58,7 @@ internal fun TransactionScreen(
         topBar = {
             PadawanAppBar(
                 title = stringResource(R.string.transaction_details),
-                onClick = { navController.popBackStack() }
+                onClick = { onBack() }
             )
         },
         content = { scaffoldPadding ->
