@@ -72,5 +72,17 @@ This command will generate the PadawanWallet.xcodeproj and the localized strings
 open iOS/PadawanWallet.xcodeproj
 ```
 
+Once Xcode is open, navigate to the directory `PadawanWallet/Resources/Config` and create the file `FaucetConfig.xcconfig`. This file contains the configuration for Faucet coins. You will need to add the following settings to this file:
+
+```
+// Replace this information to Padawan Faucet API
+//FAUCET_HOST = <the host>
+//FAUCET_USER = <the user>
+//FAUCET_PASSWORD = <the password>
+
+FAUCET_SCHEME = http:/
+FAUCET_URL = $(FAUCET_SCHEME)/$(FAUCET_HOST)/sendcoins
+```
+
 ### How can I contribute?
 If you think this project is interesting and would like to contribute or simply provide feedback and bounce ideas, open an issue on this repository, or message the [@padawanwallet](https://twitter.com/padawanwallet) Twitter account!
