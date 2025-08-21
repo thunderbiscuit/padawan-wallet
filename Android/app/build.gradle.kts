@@ -1,4 +1,3 @@
-
 import org.gradle.api.tasks.testing.logging.TestExceptionFormat.FULL
 import org.gradle.api.tasks.testing.logging.TestLogEvent.FAILED
 import org.gradle.api.tasks.testing.logging.TestLogEvent.PASSED
@@ -136,8 +135,13 @@ dependencies {
     // Was implementation("androidx.activity:activity-compose:1.6.1")
     implementation("androidx.activity:activity-compose")
 
-    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.9.0")
-    implementation("androidx.navigation:navigation-compose:2.9.0")
+    // Navigation
+    implementation("androidx.navigation3:navigation3-runtime:1.0.0-alpha07")
+    implementation("androidx.navigation3:navigation3-ui:1.0.0-alpha07")
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-core:1.9.0")
+
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.9.2")
+    implementation("androidx.navigation:navigation-compose:2.9.3")
     implementation("androidx.constraintlayout:constraintlayout-compose:1.1.1")
 
     // composables.com
@@ -148,7 +152,7 @@ dependencies {
 
     // Bitcoin
     implementation("org.bitcoindevkit:bdk-android:1.2.0")
-    implementation("org.kotlinbitcointools:bip21:0.0.5-SNAPSHOT")
+    implementation("org.kotlinbitcointools:bip21:0.1.0")
 
     // Ktor
     implementation("io.ktor:ktor-client-cio:2.2.1")
