@@ -114,7 +114,55 @@ final class WalletViewModel: ObservableObject {
         transactions = detailsTransactions
     }
     
+    func getFaucetCoins() {
+        do {
+            let newAddress = try bdkClient.getAddress()
+            Task {
+                try await getCoins(address: newAddress)
+                await syncWallet()
+                print()
+            }
+        } catch {
+            fullScreenCover = .alertError(
+                data: .init(
+                    title: "Error",
+                    subtitle: error.localizedDescription
+                )
+            )
+        }
+    }
+    
     // MARK: - Private
+    
+    private func getCoins(address: String) async throws {
+        guard let apiURL = Bundle.main.object(forInfoDictionaryKey: "FAUCET_URL") as? String,
+              let user = Bundle.main.object(forInfoDictionaryKey: "FAUCET_USER") as? String,
+              let password = Bundle.main.object(forInfoDictionaryKey: "FAUCET_PASSWORD") as? String else {
+            throw URLError(.badURL)
+        }
+        
+        guard let url = URL(string: apiURL) else {
+            throw URLError(.badURL)
+        }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.httpBody = address.data(using: .utf8)
+        
+        let loginString = "\(user):\(password)"
+        guard let loginData = loginString.data(using: .utf8) else {
+            throw URLError(.badURL)
+        }
+        
+        let base64LoginString = loginData.base64EncodedString()
+        request.setValue("Basic \(base64LoginString)", forHTTPHeaderField: "Authorization")
+        
+        let (_, response) = try await URLSession.shared.data(for: request)
+        guard let httpResponse = response as? HTTPURLResponse,
+              (200..<300).contains(httpResponse.statusCode) else {
+            throw URLError(.badServerResponse)
+        }
+    }
     
     private func fullSync() async {
         do {

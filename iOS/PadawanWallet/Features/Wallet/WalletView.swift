@@ -37,7 +37,7 @@ struct WalletView: View {
                     TransactionsCard(
                         list: $viewModel.transactions,
                         actionGetCoins: {
-                            
+                            viewModel.getFaucetCoins()
                         }
                     )
                     .frame(minHeight: 200)
