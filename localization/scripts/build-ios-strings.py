@@ -8,6 +8,9 @@ OUTPUT_DIR = os.path.join(SCRIPT_DIR, "..", "ios")
 
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 
+print("\nPadawan Wallet iOS Localization Generation")
+print("=" * 90)
+
 def load_all_languages(input_dir):
     strings = {}
     languages = []

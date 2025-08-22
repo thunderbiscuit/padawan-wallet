@@ -13,6 +13,9 @@ os.makedirs(OUTPUT_DIR, exist_ok=True)
 all_keys_by_lang = {}
 all_keys = set()
 
+print("\nPadawan Wallet Android Localization Generation")
+print("=" * 90)
+
 # Load and collect keys
 for filename in os.listdir(INPUT_DIR):
     if filename.endswith(".yaml"):
@@ -69,4 +72,4 @@ for filename in os.listdir(INPUT_DIR):
         with open(os.path.join(output_path, "strings.xml"), "w", encoding="utf-8") as out_file:
             out_file.write(xml_content)
 
-        print(f"✔ Generated: {output_path}/strings.xml")
+        print(f"✅ Generated: {output_path}/strings.xml")
