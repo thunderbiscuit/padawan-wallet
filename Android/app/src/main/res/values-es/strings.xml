@@ -1,8 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="welcome_statement">¡Bienvenido a Padawan!\n\nEsta aplicación es un lugar para aprender las características más comunes de las carteras (wallet en inglés) para teléfonos móviles de bitcoin.\n\nUtiliza bitcoin en su &lt;i&gt;&lt;b&gt;red de pruebas&lt;/b&gt;&lt;/i&gt;(signet en inglés), una red de bitcoin alternativa que es utilizada y construida exclusivamente para pruebas. Las monedas en esta red no tienen ningún valor pero, ¡se comportan y tienen la misma apariencia que los bitcoins normales!\n\nEsta cartera está diseñada para que usuarios de todas las edades experimenten y aprendan sobre bitcoin en un entorno libre de riesgos.</string>
+    <string name="onboard_title_1">Bienvenido a Padawan</string>
+    <string name="onboard_title_2">Aprende Haciendo</string>
+    <string name="onboard_title_3">Sube de Nivel</string>
+    <string name="onboard_1">Descubre Bitcoin de forma segura, con monedas de prueba para practicar y aprender.</string>
+    <string name="onboard_2">Padawan es una billetera de Bitcoin completa. Envía, recibe y recupera monedas de prueba como en cualquier billetera, ¡pero sin arriesgar dinero real!</string>
+    <string name="onboard_3">9 lecciones cortas te enseñan los conceptos básicos para usar Bitcoin con confianza. ¡Vamos allá!</string>
     <string name="already_have_a_wallet">Ya tengo una\nPadawan wallet\n(Las 12 palabras de recuperación)</string>
     <string name="recover_wallet">Recuperar cartera</string>
+    <string name="enter_your_12_words">ntroduce tus 12 palabras de recuperación a continuación.</string>
     <string name="sync">sincronizar</string>
     <string name="send">Enviar</string>
     <string name="receive">Recibir</string>
@@ -40,7 +47,6 @@
     <string name="padawan_wallet">Padawan Wallet</string>
     <string name="create_a_wallet">Crear una cartera</string>
     <string name="recover_a_wallet">Recuperar una cartera</string>
-    <string name="enter_your_12_words">ntroduce tus 12 palabras de recuperación a continuación.</string>
     <string name="about_padawan">Sobre Padawan</string>
     <string name="change_language">Idiomas y tema de color</string>
     <string name="your_recovery_phrase">Tus palabras de recuperación</string>
@@ -83,6 +89,7 @@
     <string name="bottom_nav_chapters">Aprende</string>
     <string name="bottom_nav_settings">Menú</string>
     <string name="privacy_link">https://github.com/thunderbiscuit/padawan-wallet/blob/master/PRIVACY.txt</string>
+    <string name="button_link_privacy">Lee nuestros términos de uso y privacidad aquí.</string>
     <string name="l1_title">¿Qué es el Bitcoin Signet?</string>
     <string name="l1_p1">Las redes de Bitcoin están compuestas por miles de computadoras en todo el mundo. Estas computadoras hablan un lenguaje común y se comunican directamente entre sí a través de internet.</string>
     <string name="l1_p2">Tal vez no lo sepas, pero ¡existen muchas redes de bitcoin! Se dividen en dos familias: la red principal (solo hay una de esas) y las redes de prueba (¡hay muchas de esas!).</string>

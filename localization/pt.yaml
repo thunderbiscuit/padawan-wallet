@@ -2,10 +2,17 @@
 
 # Intro Screens
 welcome_statement:        "Bem-vindo à Padawan!\n\nEsse aplicativo é um lugar para aprender os recursos comuns das carteiras bitcoin.\n\nEla usa o <i><b>signet</b></i> do bitcoin, uma rede alternativa do bitcoin usada e construída exclusivamente para testes. As moedas nesta rede não têm nenhum valor, mas por outro lado parecem e se comportam como bitcoins normais!\n\nEssa carteira foi criada para usuários de todas as idades experimentarem e aprenderem sobre bitcoin em um ambiente livre de riscos."
+onboard_title_1:          "Bem-vindo ao Padawan"
+onboard_title_2:          "Aprenda na Prática"
+onboard_title_3:          "Suba de Nível"
+onboard_1:                "Entre no mundo do Bitcoin de forma segura, com moedas de teste para praticar e aprender."
+onboard_2:                "O Padawan é uma carteira de Bitcoin completa. Envie, receba e recupere moedas de teste como faria em qualquer carteira — mas sem arriscar dinheiro de verdade!"
+onboard_3:                "9 lições rápidas vão te mostrar os conceitos essenciais para usar Bitcoin com confiança. Vamos nessa!"
 already_have_a_wallet:    "Eu já tenho uma\nCarteira Padawan\n(12-palavras de backup)"
 recover_wallet:           "Recuperar carteira"
+enter_your_12_words:      "Insira abaixo suas 12 palavras da frase de recuperação"
 
-# Wallet
+# Wallet Screens
 sync:                     "atualizar"
 send:                     "Enviar"
 receive:                  "Receber"
@@ -46,7 +53,6 @@ padawan_logo:             "Logotipo da Padawan"
 padawan_wallet:           "Carteira Padawan"
 create_a_wallet:          "Criar uma nova carteira"
 recover_a_wallet:         "Recupere a carteira"
-enter_your_12_words:      "Insira abaixo suas 12 palavras da frase de recuperação"
 about_padawan:            "Sobre a Padawan"
 change_language:          "Idiomas e tema de cores"
 your_recovery_phrase:     "Sua frase de recuperação"

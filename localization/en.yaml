@@ -2,11 +2,17 @@
 
 # Intro Screens
 welcome_statement:        "Welcome to Padawan!\n\nThis application is a place to learn the common features of mobile bitcoin wallets.\n\nIt uses bitcoin's signet, an alternative bitcoin network used globally and built exclusively for testing. The coins on this network do not have any value, but they otherwise look and behave just like normal bitcoins!\n\nThis wallet is built for users of all ages to experiment and learn about bitcoin in a risk-free environment."
+onboard_title_1:          "Welcome to Padawan"
+onboard_title_2:          "Learn by Doing"
+onboard_title_3:          "Level Up"
+onboard_1:                "Jump into bitcoin the safe way, with test coins to practice and learn!"
+onboard_2:                "Padawan is a complete bitcoin wallet. Send, receive, and recover test coins just like you would any bitcoin wallet (but without risking real funds!)"
+onboard_3:                "9 bite-sized lessons guide you through the concepts required to use bitcoin with confidence. Let's go!"
 already_have_a_wallet:    "I already have a\nPadawan wallet\n(12-words backup)"
 recover_wallet:           "Recover Wallet"
 enter_your_12_words:      "Enter your 12-word recovery phrase below."
 
-# Wallet
+# Wallet Screens
 sync:                     "sync"
 send:                     "Send"
 receive:                  "Receive"

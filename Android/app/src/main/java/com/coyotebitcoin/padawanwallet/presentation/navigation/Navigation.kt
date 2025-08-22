@@ -18,7 +18,7 @@ import com.coyotebitcoin.padawanwallet.domain.utils.WalletCreateType
 import com.coyotebitcoin.padawanwallet.presentation.ui.screens.CoreScreens
 import com.coyotebitcoin.padawanwallet.presentation.ui.screens.chapters.ChapterScreen
 import com.coyotebitcoin.padawanwallet.presentation.ui.screens.chapters.ChaptersRootScreen
-import com.coyotebitcoin.padawanwallet.presentation.ui.screens.intro.OnboardingScreen
+import com.coyotebitcoin.padawanwallet.presentation.ui.screens.intro.OnboardingScreens
 import com.coyotebitcoin.padawanwallet.presentation.ui.screens.intro.WalletRecoveryScreen
 import com.coyotebitcoin.padawanwallet.presentation.ui.screens.settings.AboutScreen
 import com.coyotebitcoin.padawanwallet.presentation.ui.screens.settings.LanguagesScreen
@@ -45,7 +45,7 @@ private const val TAG = "PadawanTag/Navigation"
 fun NavigationRoot(
     onboardingDone: Boolean
 ) {
-    val startingScreen = if (onboardingDone) SecondaryDestinations.CoreScreens else SecondaryDestinations.OnboardingScreen
+    val startingScreen = if (onboardingDone) SecondaryDestinations.CoreScreens else SecondaryDestinations.OnboardingScreens
     val backStack: NavBackStack = rememberNavBackStack(startingScreen)
     val bottom: NavBackStack = rememberNavBackStack(CoreDestinations.WalletRootScreen)
     val walletViewModel: WalletViewModel = viewModel()
@@ -68,8 +68,8 @@ fun NavigationRoot(
             // ---------------------------------------------------------------------------------------------------------
             // Screens accessible from the onboarding flow
             // ---------------------------------------------------------------------------------------------------------
-            entry<SecondaryDestinations.OnboardingScreen> {
-                OnboardingScreen(
+            entry<SecondaryDestinations.OnboardingScreens> {
+                OnboardingScreens(
                     onBuildWallet = ::onBuildWallet,
                     onCreateNav = {
                         backStack.clear()

@@ -1,6 +1,18 @@
+# Language: Spanish (Spain)
+
+# Intro Screens
 welcome_statement:        "¡Bienvenido a Padawan!\n\nEsta aplicación es un lugar para aprender las características más comunes de las carteras (wallet en inglés) para teléfonos móviles de bitcoin.\n\nUtiliza bitcoin en su <i><b>red de pruebas</b></i>(signet en inglés), una red de bitcoin alternativa que es utilizada y construida exclusivamente para pruebas. Las monedas en esta red no tienen ningún valor pero, ¡se comportan y tienen la misma apariencia que los bitcoins normales!\n\nEsta cartera está diseñada para que usuarios de todas las edades experimenten y aprendan sobre bitcoin en un entorno libre de riesgos."
+onboard_title_1: "Bienvenido a Padawan"  
+onboard_title_2: "Aprende Haciendo"  
+onboard_title_3: "Sube de Nivel"  
+onboard_1: "Descubre Bitcoin de forma segura, con monedas de prueba para practicar y aprender."  
+onboard_2: "Padawan es una billetera de Bitcoin completa. Envía, recibe y recupera monedas de prueba como en cualquier billetera, ¡pero sin arriesgar dinero real!"  
+onboard_3: "9 lecciones cortas te enseñan los conceptos básicos para usar Bitcoin con confianza. ¡Vamos allá!"
 already_have_a_wallet:    "Ya tengo una\nPadawan wallet\n(Las 12 palabras de recuperación)"
 recover_wallet:           "Recuperar cartera"
+enter_your_12_words:      "ntroduce tus 12 palabras de recuperación a continuación."
+
+# Wallet Screens
 sync:                     "sincronizar"
 send:                     "Enviar"
 receive:                  "Recibir"
@@ -38,7 +50,6 @@ padawan_logo:             "Padawan Logo"
 padawan_wallet:           "Padawan Wallet"
 create_a_wallet:          "Crear una cartera"
 recover_a_wallet:         "Recuperar una cartera"
-enter_your_12_words:      "ntroduce tus 12 palabras de recuperación a continuación."
 about_padawan:            "Sobre Padawan"
 change_language:          "Idiomas y tema de color"
 your_recovery_phrase:     "Tus palabras de recuperación"

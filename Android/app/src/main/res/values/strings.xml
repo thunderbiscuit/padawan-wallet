@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="welcome_statement">Welcome to Padawan!\n\nThis application is a place to learn the common features of mobile bitcoin wallets.\n\nIt uses bitcoin\'s signet, an alternative bitcoin network used globally and built exclusively for testing. The coins on this network do not have any value, but they otherwise look and behave just like normal bitcoins!\n\nThis wallet is built for users of all ages to experiment and learn about bitcoin in a risk-free environment.</string>
+    <string name="onboard_title_1">Welcome to Padawan</string>
+    <string name="onboard_title_2">Learn by Doing</string>
+    <string name="onboard_title_3">Level Up</string>
+    <string name="onboard_1">Jump into bitcoin the safe way, with test coins to practice and learn!</string>
+    <string name="onboard_2">Padawan is a complete bitcoin wallet. Send, receive, and recover test coins just like you would any bitcoin wallet (but without risking real funds!)</string>
+    <string name="onboard_3">9 bite-sized lessons guide you through the concepts required to use bitcoin with confidence. Let\'s go!</string>
     <string name="already_have_a_wallet">I already have a\nPadawan wallet\n(12-words backup)</string>
     <string name="recover_wallet">Recover Wallet</string>
     <string name="enter_your_12_words">Enter your 12-word recovery phrase below.</string>
@@ -80,6 +86,7 @@
     <string name="hello_there">Hello there!</string>
     <string name="select_language">Select your preferred language and color theme for Padawan Wallet.</string>
     <string name="get_coins">Get Signet coins</string>
+    <string name="button_link_privacy">Read our privacy policy here.</string>
     <string name="return_address_image">Return sats faucet address image</string>
     <string name="no_thank_you_icon">No thank you icon</string>
     <string name="proceed_icon">Proceed icon</string>

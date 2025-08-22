@@ -22,7 +22,7 @@ sealed class CoreDestinations : NavKey {
 sealed class SecondaryDestinations : NavKey {
     // Onboarding screens
     @Serializable
-    object OnboardingScreen : SecondaryDestinations()
+    object OnboardingScreens : SecondaryDestinations()
     @Serializable
     object WalletRecoveryScreen : SecondaryDestinations()
 

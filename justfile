@@ -27,6 +27,7 @@ android-locales:
   && mv ../android/values-es/strings.xml ../../Android/app/src/main/res/values-es/ \
   && mv ../android/values-pt/strings.xml ../../Android/app/src/main/res/values-pt/
 
+[group("Localizations")]
 [doc("Generate iOS strings.")]
 ios-locales:
   cd ./localization/scripts/ \

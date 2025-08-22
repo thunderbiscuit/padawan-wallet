@@ -1,8 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="welcome_statement">Bem-vindo à Padawan!\n\nEsse aplicativo é um lugar para aprender os recursos comuns das carteiras bitcoin.\n\nEla usa o &lt;i&gt;&lt;b&gt;signet&lt;/b&gt;&lt;/i&gt; do bitcoin, uma rede alternativa do bitcoin usada e construída exclusivamente para testes. As moedas nesta rede não têm nenhum valor, mas por outro lado parecem e se comportam como bitcoins normais!\n\nEssa carteira foi criada para usuários de todas as idades experimentarem e aprenderem sobre bitcoin em um ambiente livre de riscos.</string>
+    <string name="onboard_title_1">Bem-vindo ao Padawan</string>
+    <string name="onboard_title_2">Aprenda na Prática</string>
+    <string name="onboard_title_3">Suba de Nível</string>
+    <string name="onboard_1">Entre no mundo do Bitcoin de forma segura, com moedas de teste para praticar e aprender.</string>
+    <string name="onboard_2">O Padawan é uma carteira de Bitcoin completa. Envie, receba e recupere moedas de teste como faria em qualquer carteira — mas sem arriscar dinheiro de verdade!</string>
+    <string name="onboard_3">9 lições rápidas vão te mostrar os conceitos essenciais para usar Bitcoin com confiança. Vamos nessa!</string>
     <string name="already_have_a_wallet">Eu já tenho uma\nCarteira Padawan\n(12-palavras de backup)</string>
     <string name="recover_wallet">Recuperar carteira</string>
+    <string name="enter_your_12_words">Insira abaixo suas 12 palavras da frase de recuperação</string>
     <string name="sync">atualizar</string>
     <string name="send">Enviar</string>
     <string name="receive">Receber</string>
@@ -41,7 +48,6 @@
     <string name="padawan_wallet">Carteira Padawan</string>
     <string name="create_a_wallet">Criar uma nova carteira</string>
     <string name="recover_a_wallet">Recupere a carteira</string>
-    <string name="enter_your_12_words">Insira abaixo suas 12 palavras da frase de recuperação</string>
     <string name="about_padawan">Sobre a Padawan</string>
     <string name="change_language">Idiomas e tema de cores</string>
     <string name="your_recovery_phrase">Sua frase de recuperação</string>
@@ -83,6 +89,7 @@
     <string name="bottom_nav_wallet">Carteira</string>
     <string name="bottom_nav_chapters">Aprenda</string>
     <string name="bottom_nav_settings">Menu</string>
+    <string name="button_link_privacy">Leia nossos termos de uso e privacidade aqui</string>
     <string name="l1_title">O que é o bitcoin Signet?</string>
     <string name="l1_p1">As redes Bitcoin são compostas por milhares de computadores em todo o mundo. Esses computadores falam uma linguagem comum e se comunicam diretamente uns com os outros através da internet.</string>
     <string name="l1_p2">Talvez você não saiba, mas existem muitas redes de bitcoin! Elas se dividem em duas famílias: a rede principal (há apenas uma dessa) e as redes de teste (há muitas dessas!).</string>
