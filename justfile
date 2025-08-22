@@ -20,8 +20,9 @@ instrumentationtests:
 
 [group("Localizations")]
 [doc("Generate Android strings.")]
-android-locales:
+@android-locales:
   cd ./localization/scripts/                                                       \
+  && python sync_localizations.py                                                  \
   && python build-android-strings.py                                               \
   && mv ../android/values/strings.xml    ../../Android/app/src/main/res/values/    \
   && mv ../android/values-es/strings.xml ../../Android/app/src/main/res/values-es/ \
@@ -29,16 +30,17 @@ android-locales:
 
 [group("Localizations")]
 [doc("Generate iOS strings.")]
-ios-locales:
-  cd ./localization/scripts/ \
+@ios-locales:
+  cd ./localization/scripts/                                                           \
+  && python sync_localizations.py                                                      \
   && find ../../iOS/PadawanWallet/Resources/ -name '*.lproj' -type d -exec rm -rf {} + \
-  && python build-ios-strings.py \
+  && python build-ios-strings.py                                                       \
   && mv ../ios/* ../../iOS/PadawanWallet/Resources/
 
 [group("ProjectSetup")]
 [doc("Generate iOS files to start development")]
 start-ios-dev:
   just ios-locales \
-  && cd ./iOS/ \
-  && swiftgen \
+  && cd ./iOS/     \
+  && swiftgen      \
   && xcodegen
