@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Foundation
 
 final class WalletViewModel: ObservableObject {
     
@@ -43,7 +44,6 @@ final class WalletViewModel: ObservableObject {
         do {
             try bdkClient.loadWallet()
             balance = Session.shared.lastBalanceUpdate
-            try getTransactions()
             
         } catch {
             fullScreenCover = .alertError(
@@ -73,6 +73,7 @@ final class WalletViewModel: ObservableObject {
         do {
             balance = try self.bdkClient.getBalance().total.toSat()
             Session.shared.lastBalanceUpdate = balance
+            try getTransactions()
         } catch {
             fullScreenCover = .alertError(
                 data: .init(title: "Error", subtitle: error.localizedDescription)
@@ -89,39 +90,44 @@ final class WalletViewModel: ObservableObject {
     }
     
     func getTransactions() throws {
-        let detailsTransactions: [TransactionsCard.Data] = try bdkClient.transactions().compactMap { item in
+        let bdkTransactions = try bdkClient.transactions()
+        
+        let detailsTransactions: [TransactionsCard.Data] = bdkTransactions.compactMap { item in
             let status: TransactionsCard.Data.Status = item.balanceDelta > .zero ? .received : .sent
             let amount = "\(UInt64(item.balanceDelta).formattedSats()) sats"
             var date: Date = .init()
+            var isConfirmed = false
             switch item.chainPosition {
             case .confirmed(let confirmationBlockTime, _):
                 date = confirmationBlockTime
                     .confirmationTime
                     .toDate()
+                isConfirmed = true
                 
             case .unconfirmed(let timestamp):
                 date = timestamp?
                     .toDate() ?? .init()
+                isConfirmed = false
             }
             
             return .init(
                 id: item.txid.description,
                 date: date.formatted(date: .abbreviated, time: .shortened),
                 amount: amount,
-                status: status
+                status: status,
+                confirmed: isConfirmed
             )
         }
         transactions = detailsTransactions
     }
     
-    func getFaucetCoins() {
+    func getFaucetCoins() async {
         do {
             let newAddress = try bdkClient.getAddress()
-            Task {
-                try await getCoins(address: newAddress)
-                await syncWallet()
-                print()
-            }
+            try await getCoins(address: newAddress)
+            // Wait 6 seconds for the transaction to appear on the blockchain before returning user feedback
+            try await Task.sleep(nanoseconds: 6_000_000_000)
+            await syncWallet()
         } catch {
             fullScreenCover = .alertError(
                 data: .init(

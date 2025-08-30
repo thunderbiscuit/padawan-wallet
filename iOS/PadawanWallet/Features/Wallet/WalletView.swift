@@ -30,14 +30,23 @@ struct WalletView: View {
                 VStack(spacing: 24) {
                     BalanceCard(
                         balance: $viewModel.balance,
-                        isSyncing: $viewModel.isSyncing
+                        isSyncing: $viewModel.isSyncing,
+                        actionSyncWallet: {
+                            Task {
+                                await viewModel.syncWallet()
+                            }
+                        }
                     )
                     
                     buildSendReceiveButtons()
                     TransactionsCard(
                         list: $viewModel.transactions,
-                        actionGetCoins: {
-                            viewModel.getFaucetCoins()
+                        isSyncing: $viewModel.isSyncing,
+                        actionGetCoins: { completion in
+                            Task {
+                                await viewModel.getFaucetCoins()
+                                completion()
+                            }
                         }
                     )
                     .frame(minHeight: 200)

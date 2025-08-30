@@ -43,34 +43,44 @@ extension TransactionsCard {
         let date: String
         let amount: String
         let status: Status
+        let confirmed: Bool
     }
 }
 
 struct TransactionsCard: View {
     @Environment(\.padawanColors) private var colors
     @Binding private var list: [TransactionsCard.Data]
+    @Binding private var isSyncing: Bool
     
-    private let actionGetCoins: () -> Void
+    private let actionGetCoins: (_ completion: @escaping () -> Void) -> Void
+    private var isFirsLoading = true
     
     init(
         list: Binding<[TransactionsCard.Data]> = .constant([]),
-        actionGetCoins: @escaping () -> Void
+        isSyncing: Binding<Bool> = .constant(false),
+        actionGetCoins: @escaping (_ completion: @escaping () -> Void) -> Void
     ) {
         _list = list
+        _isSyncing = isSyncing
         self.actionGetCoins = actionGetCoins
     }
     
     var body: some View {
         VStack(alignment: .leading, spacing: 12.0) {
-            Text(TransactionsCardAssets.title)
-                .font(Fonts.title)
-                .foregroundStyle(colors.text)
+            buildHeader()
             if list.isEmpty {
                 buildEmptyState()
             } else {
                 buildList()
             }
         }
+    }
+    
+    @ViewBuilder
+    private func buildHeader() -> some View {
+        Text(TransactionsCardAssets.title)
+            .font(Fonts.title)
+            .foregroundStyle(colors.text)
     }
     
     @ViewBuilder
@@ -82,8 +92,14 @@ struct TransactionsCard: View {
                         .font(Fonts.body)
                         .foregroundStyle(colors.text)
                     
-                    PadawanButton(title: TransactionsCardAssets.emptyStateButton) {
-                        actionGetCoins()
+                    PadawanButton(
+                        title: TransactionsCardAssets.emptyStateButton,
+                        isLoading: $isSyncing
+                    ) {
+                        isSyncing = true
+                        actionGetCoins {
+                            self.isSyncing = false
+                        }
                     }
                     .frame(width: 180, height: 60)
                         
@@ -132,6 +148,7 @@ struct TransactionsCard: View {
             Divider()
                 .padding(.top, 18)
         }
+        .opacity(item.confirmed ? 1.0 : 0.7)
         .padding([.horizontal, .top], 24)
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
     }
@@ -160,20 +177,24 @@ struct TransactionsCard: View {
 
 #if DEBUG
 #Preview("Empty") {
-    TransactionsCard(list: .constant([]), actionGetCoins: {})
+    TransactionsCard(list: .constant([]), actionGetCoins: { _ in })
         .padding()
 }
 
 #Preview("With transactions") {
     var transactions: Binding<[TransactionsCard.Data]> = .init {
         [
-            .init(id: "123123123123123123123123123123123123123123123123123121", date: "August 9 2025 09:11", amount: "+150000 sats", status: .received),
-            .init(id: "123123123123123123123123123123123123123123123123123122", date: "August 9 2025 09:11", amount: "+150000 sats", status: .sent),
-            .init(id: "123123123123123123123123123123123123123123123123123123", date: "August 9 2025 09:11", amount: "+150000 sats", status: .received),
+            .init(
+                id: "123123123123123123123123123123123123123123123123123121",
+                date: "August 9 2025 09:11",
+                amount: "+150000 sats",
+                status: .received,
+                confirmed: false
+            ),
         ]
     } set: { _ in }
-
-    TransactionsCard(list: transactions, actionGetCoins: {})
+    
+    TransactionsCard(list: transactions, actionGetCoins: { _ in })
         .padding()
 }
 #endif
