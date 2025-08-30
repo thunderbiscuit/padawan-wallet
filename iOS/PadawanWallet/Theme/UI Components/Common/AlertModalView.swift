@@ -45,7 +45,8 @@ struct AlertModalView: View {
                     .clipShape(RoundedRectangle(cornerRadius: 16))
                 buildContent()
             }
-            .fixedSize(horizontal: true, vertical: true)
+            .fixedSize(horizontal: false, vertical: true)
+            .padding()
         }
     }
     
@@ -90,7 +91,7 @@ struct AlertModalView: View {
         if data.primaryButtonTitle == nil && data.secondaryButtonTitle == nil {
             EmptyView()
         } else {
-            VStack(spacing: 16) {
+            VStack(spacing: 40) {
                 if let primaryButtonTitle = data.primaryButtonTitle {
                     PadawanButton(
                         title: primaryButtonTitle,
@@ -105,11 +106,11 @@ struct AlertModalView: View {
                 if let secondaryButtonTitle = data.secondaryButtonTitle {
                     PadawanButton(
                         title: secondaryButtonTitle,
+                        isDestructive: true,
                         action: {
                             close()
                             data.onSecondaryButtonTap?()
-                        },
-                        isDestructive: true
+                        }
                     )
                     .frame(height: 50)
                 }

@@ -16,13 +16,16 @@ struct BalanceCard: View {
     @State private var balanceFormatOption: BalanceFormat = .sats
     @Binding var balance: UInt64
     @Binding private var isSyncing: Bool
+    let actionSyncWallet: () -> Void
     
     init(
         balance: Binding<UInt64> = .constant(.zero),
-        isSyncing: Binding<Bool> = .constant(false)
+        isSyncing: Binding<Bool> = .constant(false),
+        actionSyncWallet: @escaping () -> Void
     ) {
         _balance = balance
         _isSyncing = isSyncing
+        self.actionSyncWallet = actionSyncWallet
     }
     
     var body: some View {
@@ -93,16 +96,14 @@ struct BalanceCard: View {
     
     private func syncWallet() {
         isSyncing = true
-        DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
-            self.isSyncing = false
-        }
+        actionSyncWallet()
     }
 }
 
 #if DEBUG
 #Preview {
     VStack {
-        BalanceCard(balance: .constant(450000))
+        BalanceCard(balance: .constant(450000), actionSyncWallet: { })
             .frame(height: 200)
             .environment(\.padawanColors, .tatooineDesert)
     }
