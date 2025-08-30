@@ -15,6 +15,7 @@ private class BDKService {
     private let network: Network = .signet
     private static let batchSize = UInt64(10)
     private static let stopGap: UInt64 = 20 // using https://github.com/bitcoin/bips/blob/master/bip-0044.mediawiki#address-gap-limit
+    private static let parallelRequests = UInt64(5)
     
     // MARK: -
     static let shared = BDKService()
@@ -30,14 +31,14 @@ private class BDKService {
         }
     }
     private let keyClient: KeyClient
-    private let electrumClient: ElectrumClient?
+    private let esploraClient: EsploraClient?
     
     init(
         keyClient: KeyClient = .live,
-        electrumClient: ElectrumClient? = .live
+        esploraClient: EsploraClient? = .live
     ) {
         self.keyClient = keyClient
-        self.electrumClient = electrumClient
+        self.esploraClient = esploraClient
     }
     
     // Create a new wallet or import
@@ -103,11 +104,11 @@ private class BDKService {
             let fullScanRequest = try wallet.startFullScan()
                 .inspectSpksForAllKeychains(inspector: inspector)
                 .build()
-            guard let update = try electrumClient?.fullScan(
+            
+            guard let update = try esploraClient?.fullScan(
                 request: fullScanRequest,
                 stopGap: BDKService.stopGap,
-                batchSize: BDKService.batchSize,
-                fetchPrevTxouts: true
+                parallelRequests: BDKService.parallelRequests
             ) else {
                 throw BDKServiceError.clientNotStarted
             }
@@ -134,10 +135,10 @@ private class BDKService {
             let syncRequest = try wallet.startSyncWithRevealedSpks()
                 .inspectSpks(inspector: inspector)
                 .build()
-            guard let update: Update = try electrumClient?.sync(
+            
+            guard let update: Update = try esploraClient?.sync(
                 request: syncRequest,
-                batchSize: BDKService.batchSize,
-                fetchPrevTxouts: true
+                parallelRequests: BDKService.parallelRequests
             ) else {
                 throw BDKServiceError.clientNotStarted
             }
@@ -272,15 +273,24 @@ extension BDKClient {
     )
 }
 
-extension ElectrumClient {
-    private static let url = "ssl://mempool.space:60602"
+//extension ElectrumClient {
+//    private static let url = "ssl://mempool.space:60602"
+//    
+//    static var live: ElectrumClient? {
+//        do {
+//            return try ElectrumClient(url: ElectrumClient.url)
+//        } catch {
+//            return nil
+//        }
+//    }
+//}
+
+extension EsploraClient {
+//    private static let url = "https://mempool.space/signet/api"
+    private static let url = "https://blockstream.info/signet/api"
     
-    static var live: ElectrumClient? {
-        do {
-            return try ElectrumClient(url: ElectrumClient.url)
-        } catch {
-            return nil
-        }
+    static var live: EsploraClient? {
+        return EsploraClient(url: url)
     }
 }
 
