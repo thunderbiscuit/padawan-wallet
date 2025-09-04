@@ -10,9 +10,12 @@ private extension WelcomeView {
     struct WelcomeViewStrings {
         static var screenTitle: String = Strings.padawanWallet
         static var welcomeText: String = Strings.welcomeStatement
-        
         static var createWalletButtonTitle: String = Strings.createAWallet
         static var importWalletButtonTitle: String = Strings.alreadyHaveAWallet
+        static var screenTitlePage2: String = Strings.onboardTitle2
+        static var screenTextPage2: String = Strings.onboard2
+        static var screenTitlePage3: String = Strings.onboardTitle3
+        static var screenTextPage3: String = Strings.onboard3
     }
 }
 
@@ -30,11 +33,11 @@ struct WelcomeView: View {
     
     var body: some View {
         BackgroundView {
-            ScrollView {
-                VStack(spacing: 20) {
+            TabView() {
+                VStack(spacing: 8) {
                     Asset.Images.padawanLogoLight.toImage
                         .resizable()
-                        .frame(width: 90, height: 90)
+                        .frame(width: 120, height: 120)
                     
                     Text(WelcomeViewStrings.screenTitle)
                         .font(Fonts.title)
@@ -43,15 +46,62 @@ struct WelcomeView: View {
                     Text(WelcomeViewStrings.welcomeText)
                         .font(Fonts.body)
                         .foregroundStyle(colors.textFaded)
+                        .padding()
+                }
+                .tag(0)
+                .padding(.top, -130)
+                
+                VStack(spacing: 5) {
                     
-                    Spacer().frame(minHeight: 90)
+                    Asset.Images.bitcoinIcon.toImage
+                        .resizable()
+                        .frame(width: 150, height: 150)
+                    
+                    Text(WelcomeViewStrings.screenTitlePage2)
+                        .font(Fonts.title)
+                        .foregroundStyle(colors.text)
+                    
+                    Text(WelcomeViewStrings.screenTextPage2)
+                        .font(Fonts.body)
+                        .foregroundStyle(colors.textFaded)
+                        .padding()
+                }
+                .tag(1)
+                .padding(.top, -130)
+                
+                VStack(spacing: 5) {
+                    
+                    Asset.Images.bitcoinIcon.toImage
+                        .resizable()
+                        .frame(width: 150, height: 150)
+                    
+                    Text(WelcomeViewStrings.screenTitlePage3)
+                        .font(Fonts.title)
+                        .foregroundStyle(colors.text)
+                    
+                    Text(WelcomeViewStrings.screenTextPage3)
+                        .font(Fonts.body)
+                        .foregroundStyle(colors.textFaded)
+                        .padding()
+                }
+                .tag(2)
+                .padding(.top, -130)
+                
+                VStack(spacing: 60) {
+                    
+                    Asset.Images.padawanLogoLight.toImage
+                        .resizable()
+                        .frame(width: 150, height: 150)
                     
                     buildButtons()
                 }
+                .tag(3)
+                
                 .frame(maxWidth: .maxWidthScreen)
                 .padding(.horizontal, 30)
                 .padding(.bottom, 30)
             }
+            .tabViewStyle(PageTabViewStyle(indexDisplayMode: .automatic))
         }
         .fullScreenCover(item: $viewModel.fullScreenCover) { item in
             switch item {
@@ -83,17 +133,18 @@ struct WelcomeView: View {
     
     @ViewBuilder
     private func buildButtons() -> some View {
-        VStack(spacing: 20) {
+        VStack(spacing: 30) {
             Group {
                 PadawanButton(title: WelcomeViewStrings.createWalletButtonTitle) {
                     viewModel.createWallet()
                 }
+                .frame(height: 105)
                 
                 PadawanButton(title: WelcomeViewStrings.importWalletButtonTitle) {
                     viewModel.importWallet()
                 }
+                .frame(height: 105)
             }
-            .frame(minWidth: 300, maxWidth: .maxWidthScreen)
         }
     }
 }
