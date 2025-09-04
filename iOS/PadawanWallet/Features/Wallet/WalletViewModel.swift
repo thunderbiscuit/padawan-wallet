@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Foundation
 
 final class WalletViewModel: ObservableObject {
     
@@ -43,7 +44,6 @@ final class WalletViewModel: ObservableObject {
         do {
             try bdkClient.loadWallet()
             balance = Session.shared.lastBalanceUpdate
-            try getTransactions()
             
         } catch {
             fullScreenCover = .alertError(
@@ -73,6 +73,7 @@ final class WalletViewModel: ObservableObject {
         do {
             balance = try self.bdkClient.getBalance().total.toSat()
             Session.shared.lastBalanceUpdate = balance
+            try getTransactions()
         } catch {
             fullScreenCover = .alertError(
                 data: .init(title: "Error", subtitle: error.localizedDescription)
@@ -89,32 +90,85 @@ final class WalletViewModel: ObservableObject {
     }
     
     func getTransactions() throws {
-        let detailsTransactions: [TransactionsCard.Data] = try bdkClient.transactions().compactMap { item in
+        let bdkTransactions = try bdkClient.transactions()
+        
+        let detailsTransactions: [TransactionsCard.Data] = bdkTransactions.compactMap { item in
             let status: TransactionsCard.Data.Status = item.balanceDelta > .zero ? .received : .sent
             let amount = "\(UInt64(item.balanceDelta).formattedSats()) sats"
             var date: Date = .init()
+            var isConfirmed = false
             switch item.chainPosition {
             case .confirmed(let confirmationBlockTime, _):
                 date = confirmationBlockTime
                     .confirmationTime
                     .toDate()
+                isConfirmed = true
                 
             case .unconfirmed(let timestamp):
                 date = timestamp?
                     .toDate() ?? .init()
+                isConfirmed = false
             }
             
             return .init(
                 id: item.txid.description,
                 date: date.formatted(date: .abbreviated, time: .shortened),
                 amount: amount,
-                status: status
+                status: status,
+                confirmed: isConfirmed
             )
         }
         transactions = detailsTransactions
     }
     
+    func getFaucetCoins() async {
+        do {
+            let newAddress = try bdkClient.getAddress()
+            try await getCoins(address: newAddress)
+            // Wait 6 seconds for the transaction to appear on the blockchain before returning user feedback
+            try await Task.sleep(nanoseconds: 6_000_000_000)
+            await syncWallet()
+        } catch {
+            fullScreenCover = .alertError(
+                data: .init(
+                    title: "Error",
+                    subtitle: error.localizedDescription
+                )
+            )
+        }
+    }
+    
     // MARK: - Private
+    
+    private func getCoins(address: String) async throws {
+        guard let apiURL = Bundle.main.object(forInfoDictionaryKey: "FAUCET_URL") as? String,
+              let user = Bundle.main.object(forInfoDictionaryKey: "FAUCET_USER") as? String,
+              let password = Bundle.main.object(forInfoDictionaryKey: "FAUCET_PASSWORD") as? String else {
+            throw URLError(.badURL)
+        }
+        
+        guard let url = URL(string: apiURL) else {
+            throw URLError(.badURL)
+        }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.httpBody = address.data(using: .utf8)
+        
+        let loginString = "\(user):\(password)"
+        guard let loginData = loginString.data(using: .utf8) else {
+            throw URLError(.badURL)
+        }
+        
+        let base64LoginString = loginData.base64EncodedString()
+        request.setValue("Basic \(base64LoginString)", forHTTPHeaderField: "Authorization")
+        
+        let (_, response) = try await URLSession.shared.data(for: request)
+        guard let httpResponse = response as? HTTPURLResponse,
+              (200..<300).contains(httpResponse.statusCode) else {
+            throw URLError(.badServerResponse)
+        }
+    }
     
     private func fullSync() async {
         do {
