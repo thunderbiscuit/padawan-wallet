@@ -6,6 +6,13 @@
 import Foundation
 import SwiftUI
 
+struct OnboardingPage: Identifiable {
+    let id = UUID()
+    let image: Image
+    let title: String
+    let text: String
+}
+
 private extension WelcomeView {
     struct WelcomeViewStrings {
         static var screenTitle: String = Strings.padawanWallet
@@ -21,8 +28,25 @@ private extension WelcomeView {
 
 struct WelcomeView: View {
     @Environment(\.padawanColors) private var colors
-
     @StateObject private var viewModel: WelcomeViewModel
+    
+    private let onboardingPages: [OnboardingPage] = [
+        OnboardingPage(
+            image: Asset.Images.padawanLogoLight.toImage,
+            title: WelcomeViewStrings.screenTitle,
+            text: WelcomeViewStrings.welcomeText
+        ),
+        OnboardingPage(
+            image: Asset.Images.bitcoinIcon.toImage,
+            title: WelcomeViewStrings.screenTitlePage2,
+            text: WelcomeViewStrings.screenTextPage2
+        ),
+        OnboardingPage(
+            image: Asset.Images.padawanLogoLight.toImage,
+            title: WelcomeViewStrings.screenTitlePage3,
+            text: WelcomeViewStrings.screenTextPage3
+        ),
+    ]
     
     init(
         path: Binding<NavigationPath>,
@@ -33,75 +57,23 @@ struct WelcomeView: View {
     
     var body: some View {
         BackgroundView {
-            TabView() {
-                VStack(spacing: 8) {
-                    Asset.Images.padawanLogoLight.toImage
-                        .resizable()
-                        .frame(width: 120, height: 120)
-                    
-                    Text(WelcomeViewStrings.screenTitle)
-                        .font(Fonts.title)
-                        .foregroundStyle(colors.text)
-                    
-                    Text(WelcomeViewStrings.welcomeText)
-                        .font(Fonts.body)
-                        .foregroundStyle(colors.textFaded)
-                        .padding()
+            TabView {
+                ForEach(onboardingPages) { page in
+                    buildTabViewItem(page: page)
                 }
-                .tag(0)
-                .padding(.top, -130)
-                
-                VStack(spacing: 5) {
-                    
-                    Asset.Images.bitcoinIcon.toImage
-                        .resizable()
-                        .frame(width: 150, height: 150)
-                    
-                    Text(WelcomeViewStrings.screenTitlePage2)
-                        .font(Fonts.title)
-                        .foregroundStyle(colors.text)
-                    
-                    Text(WelcomeViewStrings.screenTextPage2)
-                        .font(Fonts.body)
-                        .foregroundStyle(colors.textFaded)
-                        .padding()
-                }
-                .tag(1)
-                .padding(.top, -130)
-                
-                VStack(spacing: 5) {
-                    
-                    Asset.Images.bitcoinIcon.toImage
-                        .resizable()
-                        .frame(width: 150, height: 150)
-                    
-                    Text(WelcomeViewStrings.screenTitlePage3)
-                        .font(Fonts.title)
-                        .foregroundStyle(colors.text)
-                    
-                    Text(WelcomeViewStrings.screenTextPage3)
-                        .font(Fonts.body)
-                        .foregroundStyle(colors.textFaded)
-                        .padding()
-                }
-                .tag(2)
-                .padding(.top, -130)
                 
                 VStack(spacing: 60) {
-                    
-                    Asset.Images.padawanLogoLight.toImage
-                        .resizable()
-                        .frame(width: 150, height: 150)
+                    PadawanCardIconView(image: Asset.Images.padawanLogoLight.toImage, size: 150)
+
                     
                     buildButtons()
                 }
-                .tag(3)
-                
                 .frame(maxWidth: .maxWidthScreen)
                 .padding(.horizontal, 30)
                 .padding(.bottom, 30)
             }
             .tabViewStyle(PageTabViewStyle(indexDisplayMode: .automatic))
+
         }
         .fullScreenCover(item: $viewModel.fullScreenCover) { item in
             switch item {
@@ -130,6 +102,24 @@ struct WelcomeView: View {
             }
         }
     }
+    
+    @ViewBuilder
+    private func buildTabViewItem(page: OnboardingPage) -> some View {
+        VStack(spacing: 8) {
+            PadawanCardIconView(image: page.image, size: 120)
+            
+            Text(page.title)
+                .font(Fonts.title)
+                .foregroundStyle(colors.text)
+            
+            Text(page.text)
+                .font(Fonts.body)
+                .foregroundStyle(colors.textFaded)
+                .padding()
+        }
+        .padding(.top, -130)
+    }
+
     
     @ViewBuilder
     private func buildButtons() -> some View {
