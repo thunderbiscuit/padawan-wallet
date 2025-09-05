@@ -62,7 +62,10 @@ struct WalletView: View {
         .navigationDestination(for: WalletScreenNavigation.self) { item in
             switch item {
             case WalletScreenNavigation.receive:
-                ReceiveScreen()
+                ReceiveTransactionView(
+                    path: viewModel.$path,
+                    bdkClient: viewModel.bdkClient
+                )
                 
             case WalletScreenNavigation.send:
                 SendTransactionView(

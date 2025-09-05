@@ -13,6 +13,9 @@ packages:
   CodeScanner:
     url: https://github.com/twostraws/CodeScanner.git
     version: 2.0.0
+  BitcoinUI:
+    url: https://github.com/reez/BitcoinUI.git
+    version: 1.0.8
 
 configs:
   Debug: debug
@@ -61,6 +64,7 @@ targets:
       - package: BitcoinDevKit
       - package: KeychainAccess
       - package: CodeScanner
+      - package: BitcoinUI
           
     preBuildScripts:
       - script: |

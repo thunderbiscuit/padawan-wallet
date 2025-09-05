@@ -73,6 +73,7 @@ final class SendTransactionViewModel: ObservableObject {
                 return
             }
             let fee = UInt64(feeRate)
+            
             try bdkClient.send(address, amount, fee)
             fullScreenCover = .alert(
                 data: .init(
