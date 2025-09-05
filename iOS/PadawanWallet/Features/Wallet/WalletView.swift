@@ -65,7 +65,10 @@ struct WalletView: View {
                 ReceiveScreen()
                 
             case WalletScreenNavigation.send:
-                SendScreen()
+                SendTransactionView(
+                    path: viewModel.$path,
+                    bdkClient: viewModel.bdkClient
+                )
                 
             default:
                 EmptyView()
