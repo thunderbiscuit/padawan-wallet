@@ -60,7 +60,7 @@ struct SendTransactionView: View {
                 
                 Spacer()
             }
-            .frame(maxWidth: .infinity, alignment: .leading)
+            .frame(maxWidth: .maxWidthScreen, alignment: .leading)
             .padding()
         }
         .toolbar(.hidden, for: .tabBar)

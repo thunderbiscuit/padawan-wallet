@@ -57,6 +57,7 @@ struct ReceiveTransactionView: View {
                 }
                 .fixedSize(horizontal: false, vertical: true)
             }
+            .frame(maxWidth: .maxWidthScreen)
             .padding()
         }
         .toolbar(.hidden, for: .tabBar)

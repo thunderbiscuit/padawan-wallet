@@ -52,6 +52,7 @@ struct WalletView: View {
                     .frame(minHeight: 200)
                     .frame(maxWidth: .infinity)
                 }
+                .frame(maxWidth: .maxWidthScreen)
                 .padding()
             }
         }
