@@ -30,7 +30,7 @@ extension BottomSheetView {
         }
         
         init(error: BDKServiceError, dismissAction: (() -> Void)? = nil) {
-            self.title = "Error"
+            self.title = Strings.genericTitleError
             self.subtitle = error.localizedDescription
             self.primaryButtonTitle = "OK"
             self.onPrimaryButtonTap = dismissAction

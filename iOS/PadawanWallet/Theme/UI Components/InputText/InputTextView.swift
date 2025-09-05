@@ -16,29 +16,41 @@ struct InputTextView: View {
     private let label: String
     private var placeholder: String
     private var autocorrectionDisabled: Bool
+    private var standardAppearance: Bool
     private var autocapitalization: TextInputAutocapitalization
+    private var keyboardType: UIKeyboardType
     
     init(
         text: Binding<String>,
-        label: String,
+        label: String = "",
         placeholder: String,
         autocorrectionDisabled: Bool = false,
-        autocapitalization: TextInputAutocapitalization = .sentences
+        autocapitalization: TextInputAutocapitalization = .sentences,
+        standardAppearance: Bool = false,
+        keyboardType: UIKeyboardType = .default
     ) {
         _text = text
         self.label = label
         self.placeholder = placeholder
         self.autocorrectionDisabled = autocorrectionDisabled
         self.autocapitalization = autocapitalization
+        self.standardAppearance = standardAppearance
+        self.keyboardType = keyboardType
     }
     
     var body: some View {
         VStack(alignment: .leading, spacing: 4) {
-            Text(label)
-                .font(Fonts.font(.regular, 16))
+            if !standardAppearance {
+                Text(label)
+                    .font(Fonts.font(.regular, 16))
+            }
+            
             ZStack(alignment: .leading) {
                 RoundedRectangle(cornerRadius: 8.0)
-                    .stroke(colors.darkBackground, lineWidth: 1)
+                    .stroke(
+                        colors.darkBackground,
+                        lineWidth: standardAppearance ? 0 : 1
+                    )
                     .frame(height: heightRect)
                     .zIndex(0)
                 
@@ -50,6 +62,7 @@ struct InputTextView: View {
                 .padding(.horizontal, 12)
                 .autocorrectionDisabled(autocorrectionDisabled)
                 .textInputAutocapitalization(autocapitalization)
+                .keyboardType(keyboardType)
             }
             .frame(maxWidth: .infinity)
         }

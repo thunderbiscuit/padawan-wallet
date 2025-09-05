@@ -79,8 +79,8 @@ private class BDKService {
         
         let backupInfo = BackupInfo(
             mnemonic: mnemonic.description,
-            descriptor: descriptors.descriptor.description,
-            changeDescriptor: descriptors.changeDescriptor.description
+            descriptor: descriptors.descriptor.toStringWithSecret(),
+            changeDescriptor: descriptors.changeDescriptor.toStringWithSecret()
         )
         try keyClient.saveBackupInfo(backupInfo)
     }
@@ -187,13 +187,56 @@ private class BDKService {
         return nextAddress.address.description
     }
     
+    func buildTransaction(
+        address: String,
+        amount: UInt64,
+        feeRate: UInt64
+    ) throws -> Psbt {
+        guard let wallet = self.wallet else { throw BDKServiceError.walletNotFound }
+        let script = try Address(address: address, network: self.network)
+            .scriptPubkey()
+        let txBuilder = try TxBuilder()
+            .addRecipient(
+                script: script,
+                amount: Amount.fromSat(satoshi: amount)
+            )
+            .feeRate(feeRate: FeeRate.fromSatPerVb(satVb: feeRate))
+            .finish(wallet: wallet)
+        return txBuilder
+    }
+    
+    func send(
+        address: String,
+        amount: UInt64,
+        feeRate: UInt64
+    ) async throws {
+        let psbt = try buildTransaction(
+            address: address,
+            amount: amount,
+            feeRate: feeRate
+        )
+        try await signAndBroadcast(psbt: psbt)
+    }
+    
     // MARK: - Private
+    
+    private func signAndBroadcast(psbt: Psbt) async throws {
+        guard let wallet = self.wallet else { throw BDKServiceError.walletNotFound }
+        let isSigned = try wallet.sign(psbt: psbt)
+        if isSigned {
+            let transaction = try psbt.extractTx()
+            try esploraClient?.broadcast(transaction: transaction)
+        } else {
+            throw BDKServiceError.notSigned
+        }
+    }
     
     private func loadWallet(
         descriptor: Descriptor,
         changeDescriptor: Descriptor,
         network: Network
     ) throws {
+        if wallet != nil { return }
         guard FileManager.default.fileExists(atPath: URL.persistenceBackendPath) else {
             let persister = try Persister.createConnection()
             self.persister = persister
@@ -239,6 +282,8 @@ struct BDKClient {
     let needsFullScan: () -> Bool
     let transactions: () throws -> [TxDetails]
     let getAddress: () throws -> String
+    let createTransaction: (String, UInt64, UInt64) throws -> Psbt
+    let send: (String, UInt64, UInt64) throws -> Void
 }
 
 extension BDKClient {
@@ -269,6 +314,18 @@ extension BDKClient {
         },
         getAddress: {
             try BDKService.shared.getAddress()
+        },
+        createTransaction: { (address, amount, feeRate) in
+            try BDKService.shared.buildTransaction(
+                address: address,
+                amount: amount,
+                feeRate: feeRate
+            )
+        },
+        send: { (address, amount, feeRate) in
+            Task {
+                try await BDKService.shared.send(address: address, amount: amount, feeRate: feeRate)
+            }
         }
     )
 }
@@ -319,7 +376,14 @@ extension BDKClient {
         },
         needsFullScan: { true },
         transactions: { [] },
-        getAddress: { "tb1pd8jmenqpe7rz2mavfdx7uc8pj7vskxv4rl6avxlqsw2u8u7d4gfs97durt" }
+        getAddress: { "tb1pd8jmenqpe7rz2mavfdx7uc8pj7vskxv4rl6avxlqsw2u8u7d4gfs97durt" },
+        createTransaction: { _, _, _ in
+            let pb64 = """
+                cHNidP8BAIkBAAAAAeaWcxp4/+xSRJ2rhkpUJ+jQclqocoyuJ/ulSZEgEkaoAQAAAAD+////Ak/cDgAAAAAAIlEgqxShDO8ifAouGyRHTFxWnTjpY69Cssr3IoNQvMYOKG/OVgAAAAAAACJRIGnlvMwBz4Ylb6xLTe5g4ZeZCxmVH/XWG+CDlcPzzaoT8qoGAAABAStAQg8AAAAAACJRIFGGvSoLWt3hRAIwYa8KEyawiFTXoOCVWFxYtSofZuAsIRZ2b8YiEpzexWYGt8B5EqLM8BE4qxJY3pkiGw/8zOZGYxkAvh7sj1YAAIABAACAAAAAgAAAAAAEAAAAARcgdm/GIhKc3sVmBrfAeRKizPAROKsSWN6ZIhsP/MzmRmMAAQUge7cvJMsJmR56NzObGOGkm8vNqaAIJdnBXLZD2PvrinIhB3u3LyTLCZkeejczmxjhpJvLzamgCCXZwVy2Q9j764pyGQC+HuyPVgAAgAEAAIAAAACAAQAAAAYAAAAAAQUgtIFPrI2EW/+PJiAmYdmux88p0KgeAxDFLMoeQoS66hIhB7SBT6yNhFv/jyYgJmHZrsfPKdCoHgMQxSzKHkKEuuoSGQC+HuyPVgAAgAEAAIAAAACAAAAAAAIAAAAA
+                """
+            return try Psbt(psbtBase64: pb64)
+        },
+        send: { _, _, _ in }
     )
 }
 #endif

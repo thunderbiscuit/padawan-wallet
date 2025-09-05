@@ -15,6 +15,7 @@ enum BDKServiceError: Error {
     case errorWith(message: String)
     case needResync
     case clientNotStarted
+    case notSigned
     
     var localizedDescription: String {
         switch self {
@@ -38,6 +39,9 @@ enum BDKServiceError: Error {
             
         case .clientNotStarted:
             return "Client not started"
+            
+        case .notSigned:
+            return "Transaction not signed"
         }
     }
 }

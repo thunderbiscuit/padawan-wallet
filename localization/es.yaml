@@ -1,5 +1,8 @@
 # Language: Spanish (Spain)
 
+# Generic
+generic_title_error:      "Erro"
+
 # Intro Screens
 welcome_statement:        "¡Bienvenido a Padawan!\n\nEsta aplicación es un lugar para aprender las características más comunes de las carteras (wallet en inglés) para teléfonos móviles de bitcoin.\n\nUtiliza bitcoin en su <i><b>red de pruebas</b></i>(signet en inglés), una red de bitcoin alternativa que es utilizada y construida exclusivamente para pruebas. Las monedas en esta red no tienen ningún valor pero, ¡se comportan y tienen la misma apariencia que los bitcoins normales!\n\nEsta cartera está diseñada para que usuarios de todas las edades experimenten y aprendan sobre bitcoin en un entorno libre de riesgos."
 onboard_title_1: "Bienvenido a Padawan"  
@@ -27,6 +30,8 @@ amount_error_message:     "¡Falta introducir la cantidad!"
 address_error_message:    "¡Falta introducir la dirección!"
 fee_rate_error_message:   "¡Falta introducir la comisión de red!"
 faucet_dialog:            "Para ayudarte a comenzar con el aprendizaje de bitcoin, Padawan Wallet puede enviarte unas monedas para que puedas seguir los capítulos y ¡enviárselas a tus amigos!\n\n¿Quieres recibir bitcoin de la red de pruebas (signet)?"
+total_fee:                "Comisión total"
+transaction_broadcast:    "Transacción transmitida"
 
 # More Screens
 about_text:               "Padawan es una cartera que únicamente puede ser utilizada con monedas signet y que contiene tutoriales sobre como utilizar las carteras bitcoin. ¡Estamos desarrollando la aplicación que querrás recomendar a los amigos que no paran de hacerte preguntas sobre bitcoin!\n\nPadawan es para gente de todas las edades y su objetivo es ser una herramienta autodidacta, para que sus usuarios se familiaricen con el funcionamiento y la jerga básica de las carteras móviles en un entorno sin riesgos perfecto para la experimentación y el aprendizaje (red de pruebas o signet en inglés). Creemos que la red de pruebas de bitcoin es un recurso infrautilizado fuera de los círculos de desarrollo de software, y creemos que puede ser aprovechada por personas que sientan curiosidad por bitcoin en cualquier lugar.\n\nPadawan es un proyecto de código abierto (bajo licencia Apache 2.0). Si tienes cualquier comentario o sugerencia, ¡por favor déjanos una valoración en la Play Store, o echa un vistazo a nuestro repositorio en GitHub!"
