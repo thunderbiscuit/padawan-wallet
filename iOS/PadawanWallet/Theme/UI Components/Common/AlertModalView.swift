@@ -47,6 +47,7 @@ struct AlertModalView: View {
             }
             .fixedSize(horizontal: false, vertical: true)
             .padding()
+            .frame(maxWidth: .maxWidthScreen)
         }
     }
     
