@@ -26,7 +26,7 @@ import com.coyotebitcoin.padawanwallet.presentation.ui.components.SectionDivider
 import com.coyotebitcoin.padawanwallet.presentation.ui.components.SectionTitle
 import com.coyotebitcoin.padawanwallet.presentation.ui.components.SupportedLanguagesPicker
 
-private const val TAG = "SettingsScreen"
+private const val TAG = "PadawanTag/SettingsScreen"
 
 @Composable
 internal fun LanguagesScreen(

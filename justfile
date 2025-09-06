@@ -26,7 +26,8 @@ instrumentationtests:
   && python build-android-strings.py                                               \
   && mv ../android/values/strings.xml    ../../Android/app/src/main/res/values/    \
   && mv ../android/values-es/strings.xml ../../Android/app/src/main/res/values-es/ \
-  && mv ../android/values-pt/strings.xml ../../Android/app/src/main/res/values-pt/
+  && mv ../android/values-pt/strings.xml ../../Android/app/src/main/res/values-pt/ \
+  && mv ../android/values-fr/strings.xml ../../Android/app/src/main/res/values-fr/ \
 
 [group("Localizations")]
 [doc("Generate iOS strings.")]
