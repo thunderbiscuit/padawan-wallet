@@ -8,17 +8,18 @@
 import SwiftUI
 import Foundation
 
+@MainActor
 final class WalletViewModel: ObservableObject {
     
     @Binding var path: NavigationPath
-    @Published var sheetScreen: WelcomeScreenNavigation?
-    @Published var fullScreenCover: ImportWalletNavigation?
+
+    @Published var fullScreenCover: WalletScreenNavigation?
     
     @Published var isSyncing: Bool = false
     @Published var balance: UInt64 = 0
     @Published var transactions: [TransactionsCard.Data] = []
     
-    private let bdkClient: BDKClient
+    let bdkClient: BDKClient
     
     private var updateProgress: @Sendable (UInt64, UInt64) -> Void {
         { inspected, total in
@@ -48,7 +49,7 @@ final class WalletViewModel: ObservableObject {
         } catch {
             fullScreenCover = .alertError(
                 data: .init(
-                    title: "Error",
+                    title: Strings.genericTitleError,
                     subtitle: error.localizedDescription
                 )
             )
@@ -76,7 +77,7 @@ final class WalletViewModel: ObservableObject {
             try getTransactions()
         } catch {
             fullScreenCover = .alertError(
-                data: .init(title: "Error", subtitle: error.localizedDescription)
+                data: .init(title: Strings.genericTitleError, subtitle: error.localizedDescription)
             )
         }
     }
@@ -94,25 +95,25 @@ final class WalletViewModel: ObservableObject {
         
         let detailsTransactions: [TransactionsCard.Data] = bdkTransactions.compactMap { item in
             let status: TransactionsCard.Data.Status = item.balanceDelta > .zero ? .received : .sent
-            let amount = "\(UInt64(item.balanceDelta).formattedSats()) sats"
-            var date: Date = .init()
+            let amount = "\(UInt64(abs(item.balanceDelta)).formattedSats()) sats"
+            var formattedDate: String = ""
             var isConfirmed = false
             switch item.chainPosition {
             case .confirmed(let confirmationBlockTime, _):
-                date = confirmationBlockTime
+                formattedDate = confirmationBlockTime
                     .confirmationTime
                     .toDate()
+                    .formatted(date: .abbreviated, time: .shortened)
                 isConfirmed = true
                 
             case .unconfirmed(let timestamp):
-                date = timestamp?
-                    .toDate() ?? .init()
+                formattedDate = Strings.pending
                 isConfirmed = false
             }
             
             return .init(
                 id: item.txid.description,
-                date: date.formatted(date: .abbreviated, time: .shortened),
+                date: formattedDate,
                 amount: amount,
                 status: status,
                 confirmed: isConfirmed
@@ -131,7 +132,7 @@ final class WalletViewModel: ObservableObject {
         } catch {
             fullScreenCover = .alertError(
                 data: .init(
-                    title: "Error",
+                    title: Strings.genericTitleError,
                     subtitle: error.localizedDescription
                 )
             )
@@ -178,7 +179,7 @@ final class WalletViewModel: ObservableObject {
             
         } catch {
             fullScreenCover = .alertError(
-                data: .init(title: "Error", subtitle: error.localizedDescription)
+                data: .init(title: Strings.genericTitleError, subtitle: error.localizedDescription)
             )
         }
     }
@@ -193,7 +194,7 @@ final class WalletViewModel: ObservableObject {
             
         } catch {
             fullScreenCover = .alertError(
-                data: .init(title: "Error", subtitle: error.localizedDescription)
+                data: .init(title: Strings.genericTitleError, subtitle: error.localizedDescription)
             )
         }
     }

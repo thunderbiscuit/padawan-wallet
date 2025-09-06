@@ -1,5 +1,8 @@
 # Language: Portuguese (Brazilian)
 
+# Generic
+generic_title_error:      "Erro"
+
 # Intro Screens
 welcome_statement: "Bem-vindo à Padawan!\n\nEsse aplicativo é um lugar para aprender os recursos comuns das carteiras bitcoin.\n\nEla usa o <i><b>signet</b></i> do bitcoin, uma rede alternativa do bitcoin usada e construída exclusivamente para testes. As moedas nesta rede não têm nenhum valor, mas por outro lado parecem e se comportam como bitcoins normais!\n\nEssa carteira foi criada para usuários de todas as idades experimentarem e aprenderem sobre bitcoin em um ambiente livre de riscos."
 onboard_title_1: "Bem-vindo ao Padawan"
@@ -27,6 +30,8 @@ amount_error_message: "Insira a quantidade!"
 address_error_message: "Insira o endereço!"
 fee_rate_error_message: "Insira a taxa!"
 faucet_dialog: "Para ajudá-lo a começar a aprender sobre bitcoin, a Padawan Wallet pode enviar alguns bitcoins signet para que você possa acompanhar os capítulos e enviá-los aos amigos!\n\nGostaria de receber algum bitcoin signet?"
+total_fee: "Taxa"
+transaction_broadcast: "Transação transmitida"
 
 # More Screens
 about_text: "Padawan é uma carteira somente com bitcoin signet e com tutoriais para aprender sobre como usar carteiras bitcoin. Construimos o aplicativo que você vai querer recomendar aos seus amigos que sempre fazem perguntas sobre bitcoin!\n\nA Padawan é para pessoas de todas as idades e se propõe ser uma ferramenta de estudo e prática, sendo o instrumento para que usuários se habituem com o fluxo de transações e jargão básico do ecossistema bitcoin, sendo em um ambiente livre de riscos, perfeito para experimentação e aprendizagem (bitcoin de signet). O bitcoin signet é utilizado bastante em desenvolvimento de software, mas acreditamos que pode ser aproveitado por pessoas curiosas sobre bitcoin em todos os lugares.\n\n A Padawan é um projeto colaborativo gratuito de código aberto (licenciado pelo Apache 2.0). Se você tiver comentários para nós, deixe-o na Play Store ou no nosso repositório no GitHub!"

@@ -1,5 +1,8 @@
 # Language: English (American)
 
+# Generic
+generic_title_error:      "Error"
+
 # Intro Screens
 welcome_statement:        "Welcome to Padawan!\n\nThis application is a place to learn the common features of mobile bitcoin wallets.\n\nIt uses bitcoin's signet, an alternative bitcoin network used globally and built exclusively for testing. The coins on this network do not have any value, but they otherwise look and behave just like normal bitcoins!\n\nThis wallet is built for users of all ages to experiment and learn about bitcoin in a risk-free environment."
 onboard_title_1:          "Welcome to Padawan"
@@ -27,6 +30,8 @@ amount_error_message:     "Amount is missing!"
 address_error_message:    "Address is missing!"
 fee_rate_error_message:   "Fee Rate is missing!"
 faucet_dialog:            "To help you get started learning about bitcoin, Padawan Wallet can send you some coins so you can follow along the chapters and send them around to friends!\n\nWould you like to receive some signet bitcoin?"
+total_fee:                "Total fee"
+transaction_broadcast:    "Transaction broadcast!"
 
 # More Screens
 about_text:               "Padawan is a signet-only bitcoin wallet packed with tutorials on how to use bitcoin wallets. We're building the app you will want to recommend to your friends that keep asking you questions about bitcoin!\n\nPadawan is for people of all ages and aims to be a self-study tool, getting its users acquainted with the usual workflow and basic jargon of mobile wallets in a risk-free environment perfect for experimentation and learning (signet). We think signet is an underused resource outside of software development circles, and believe it can be leveraged for bitcoin-curious people everywhere.\n\nPadawan is an open source (Apache 2.0 licenced), free collaborative project. If you have feedback for us, please leave us a review on the Play Store, or check out our GitHub repository!"

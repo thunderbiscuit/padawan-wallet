@@ -52,6 +52,7 @@ struct WalletView: View {
                     .frame(minHeight: 200)
                     .frame(maxWidth: .infinity)
                 }
+                .frame(maxWidth: .maxWidthScreen)
                 .padding()
             }
         }
@@ -62,10 +63,16 @@ struct WalletView: View {
         .navigationDestination(for: WalletScreenNavigation.self) { item in
             switch item {
             case WalletScreenNavigation.receive:
-                ReceiveScreen()
+                ReceiveTransactionView(
+                    path: viewModel.$path,
+                    bdkClient: viewModel.bdkClient
+                )
                 
             case WalletScreenNavigation.send:
-                SendScreen()
+                SendTransactionView(
+                    path: viewModel.$path,
+                    bdkClient: viewModel.bdkClient
+                )
                 
             default:
                 EmptyView()

@@ -10,6 +10,12 @@ packages:
   KeychainAccess:
     url: https://github.com/kishikawakatsumi/KeychainAccess.git
     version: 4.2.2
+  CodeScanner:
+    url: https://github.com/twostraws/CodeScanner.git
+    version: 2.0.0
+  BitcoinUI:
+    url: https://github.com/reez/BitcoinUI.git
+    version: 1.0.8
 
 configs:
   Debug: debug
@@ -47,6 +53,7 @@ targets:
         UISupportedInterfaceOrientations: [UIInterfaceOrientationPortrait]
         UISupportedInterfaceOrientations~ipad: [UIInterfaceOrientationPortrait, UIInterfaceOrientationPortraitUpsideDown, UIInterfaceOrientationLandscapeLeft, UIInterfaceOrientationLandscapeRight]
         UILaunchStoryboardName: LaunchScreen
+        NSCameraUsageDescription: "To allow users to open camera and scan QR code"
         UIAppFonts:
           - outfit_medium.ttf
           - outfit_regular.ttf
@@ -56,6 +63,8 @@ targets:
     dependencies:
       - package: BitcoinDevKit
       - package: KeychainAccess
+      - package: CodeScanner
+      - package: BitcoinUI
           
     preBuildScripts:
       - script: |
