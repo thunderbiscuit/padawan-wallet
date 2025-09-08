@@ -1,0 +1,21 @@
+name: Validate Localizations
+
+on: [pull_request, workflow_dispatch]
+
+jobs: 
+  validate_localization:
+    name: "Validate localization files"
+    runs-on: ubuntu-24.04
+    steps:
+      - name: "Check out PR branch"
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: "Set up Python"
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: "Run localization validation"
+        run: python3 localization/scripts/sync_localizations.py
