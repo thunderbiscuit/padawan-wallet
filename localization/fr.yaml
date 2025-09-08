@@ -1,5 +1,8 @@
 # Language: French (France)
 
+# Generic
+generic_title_error:      "Erreur"
+
 # Intro Screens
 welcome_statement:        "Bienvenue sur Padawan !\n\nCette application est un endroit pour apprendre les caractéristiques courantes des portefeuilles Bitcoin mobiles.\n\nIl utilise le signet de Bitcoin, un réseau Bitcoin alternatif utilisé dans le monde entier et construit exclusivement pour les tests. Les pièces de ce réseau n'ont aucune valeur, mais elles ressemblent et se comportent comme des bitcoins normaux !\n\nCe portefeuille est conçu pour que les utilisateurs de tous âges puissent expérimenter et en apprendre davantage sur Bitcoin dans un environnement sans risque."
 onboard_title_1:          "Bienvenue sur Padawan"
@@ -27,6 +30,8 @@ amount_error_message:     "Le montant est manquant !"
 address_error_message:    "L'adresse est manquante !"
 fee_rate_error_message:   "Le taux des frais est manquant !"
 faucet_dialog:            "Pour vous aider à vous familiariser avec Bitcoin, Padawan Wallet peut vous envoyer quelques pièces afin que vous puissiez suivre les chapitres et les envoyer à vos amis !\n\nSouhaitez-vous recevoir des bitcoins signet ?"
+total_fee:                "Total fee"
+transaction_broadcast:    "Transaction broadcast!"
 
 # More Screens
 about_text:               "Padawan est un portefeuille Bitcoin réservé au signet, rempli de tutoriels sur l'utilisation des portefeuilles Bitcoin. Nous construisons l'application que vous voudrez recommander à vos amis qui n'arrêtent pas de vous poser des questions sur Bitcoin !\n\nPadawan s'adresse aux personnes de tous âges et vise à être un outil d'auto-apprentissage, familiarisant ses utilisateurs avec le processus habituel et le jargon de base des portefeuilles mobiles dans un environnement sans risque, parfait pour l'expérimentation et l'apprentissage (signet). Nous pensons que le signet est une ressource sous-utilisée en dehors des cercles de développement logiciel, et nous pensons qu'il peut être exploité pour les personnes curieuses du Bitcoin partout dans le monde.\n\nPadawan est un projet collaboratif libre et open source (licence Apache 2.0). Si vous avez des commentaires à nous faire, veuillez nous laisser un avis sur le Play Store, ou consulter notre dépôt GitHub !"
