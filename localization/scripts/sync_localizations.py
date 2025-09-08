@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """
-This script ensures all localization YAML files follow the same structure as en.yaml:
-1. All keys from en.yaml exist in other files
-2. No extra keys exist in other files that don't exist in en.yaml
-3. Keys are sorted in the exact same order as en.yaml
+This script validates that all localization YAML files have the same keys as en.yaml:
+1. All keys from en.yaml must exist in other files
+2. No extra keys should exist in other files that don't exist in en.yaml
+3. Throws errors if mismatches are found instead of auto-fixing them
 """
 
 import os
@@ -13,7 +13,7 @@ from pathlib import Path
 from typing import Dict, List, Tuple, Optional
 
 
-class LocalizationSync:
+class LocalizationValidator:
     def __init__(self, base_dir: str = "../"):
         self.base_dir = Path(base_dir)
         self.reference_file = self.base_dir / "en.yaml"
@@ -66,83 +66,33 @@ class LocalizationSync:
                 yaml_files.append(file_path)
         return sorted(yaml_files)
     
-    def sync_file(self, target_file: Path, reference_structure: List[Tuple[str, str, str]], 
-                  reference_keys: Dict[str, str]) -> bool:
+    def validate_file(self, target_file: Path, reference_structure: List[Tuple[str, str, str]], 
+                      reference_keys: Dict[str, str]) -> None:
         """
-        Sync a target file to match the reference structure.
-        Returns True if changes were made.
+        Validate a target file against the reference structure.
+        Raises an exception if keys are missing or extra.
         """
         target_structure, target_keys = self.parse_yaml_structure(target_file)
         
-        # Check if sync is needed
+        # Check for missing and extra keys
         missing_keys = set(reference_keys.keys()) - set(target_keys.keys())
         extra_keys = set(target_keys.keys()) - set(reference_keys.keys())
         
-        # Check if order matches (by comparing key sequence)
-        ref_key_order = [key for line_type, key, content in reference_structure if line_type == 'key_value']
-        target_key_order = [key for line_type, key, content in target_structure if line_type == 'key_value']
-        
-        order_matches = ref_key_order == target_key_order[:len(ref_key_order)]
-        keys_match = not missing_keys and not extra_keys
-        
-        if keys_match and order_matches:
-            print(f"✅ {target_file.name}: Already in sync")
-            return False
-            
-        print(f"🔄 {target_file.name}: Syncing...")
+        errors = []
         
         if missing_keys:
-            print(f"  - Adding missing keys: {', '.join(sorted(missing_keys))}")
+            errors.append(f"Missing keys: {', '.join(sorted(missing_keys))}")
+        
         if extra_keys:
-            print(f"  - Removing extra keys: {', '.join(sorted(extra_keys))}")
-        if not order_matches:
-            print(f"  - Reordering keys to match reference")
-            
-        # Build new content following reference structure
-        new_content = []
+            errors.append(f"Extra keys: {', '.join(sorted(extra_keys))}")
         
-        # Get language comment from original file if it exists
-        language_comment = None
-        for line_type, key, content in target_structure:
-            if line_type == 'comment' and 'Language:' in content:
-                language_comment = content
-                break
-                
-        # Process reference structure
-        for line_type, key, content in reference_structure:
-            if line_type == 'comment':
-                if 'Language:' in content and language_comment:
-                    # Use target's language comment instead of reference
-                    new_content.append(language_comment)
-                else:
-                    new_content.append(content)
-            elif line_type == 'empty':
-                new_content.append('')
-            elif line_type == 'key_value':
-                if key in target_keys:
-                    # Use existing translation
-                    # Reconstruct line with same format as reference but target value
-                    ref_match = re.match(r'^(\s*)([^:]+):\s*(.*)$', content)
-                    if ref_match:
-                        indent, _, _ = ref_match.groups()
-                        # Find the original line in target to preserve its value formatting
-                        target_value = target_keys[key]
-                        new_line = f"{indent}{key}:{' ' * (max(1, len(content.split(':')[0]) + 1 - len(key) - len(indent)))}{target_value}"
-                        new_content.append(new_line)
-                    else:
-                        new_content.append(content)  # Fallback
-                else:
-                    # Missing key - add placeholder with reference format
-                    new_content.append(f"{content}  # TODO: Translate")
-            else:
-                new_content.append(content)
+        if errors:
+            error_message = f"{target_file.name} has localization key mismatches:\n"
+            for error in errors:
+                error_message += f"  - {error}\n"
+            raise ValueError(error_message.rstrip())
         
-        # Write the synchronized file
-        with open(target_file, 'w', encoding='utf-8') as f:
-            for line in new_content:
-                f.write(line + '\n')
-                
-        return True
+        print(f"✅ {target_file.name}: Keys are in sync")
     
     def validate_reference_file(self) -> bool:
         """Validate that the reference file exists and is readable."""
@@ -162,13 +112,13 @@ class LocalizationSync:
             return False
     
     def run(self) -> bool:
-        """Run the synchronization process."""
-        print("\nPadawan Wallet Localization Sync")
+        """Run the validation process."""
+        print("\nPadawan Wallet Localization Validator")
         print("=" * 90)
         
         # Validate reference file
         if not self.validate_reference_file():
-            return False,
+            return False
             
         # Load reference structure
         reference_structure, reference_keys = self.parse_yaml_structure(self.reference_file)
@@ -176,23 +126,31 @@ class LocalizationSync:
         # Get target files
         target_files = self.get_yaml_files()
         if not target_files:
-            print("No localization files found to sync")
+            print("No localization files found to validate")
             return True
             
-        print(f"Found {len(target_files)} localization files to check")
+        print(f"Found {len(target_files)} localization files to validate")
         print()
         
-        # Sync each file
-        changes_made = False
+        # Validate each file
+        validation_errors = []
         for target_file in target_files:
-            if self.sync_file(target_file, reference_structure, reference_keys):
-                changes_made = True
+            try:
+                self.validate_file(target_file, reference_structure, reference_keys)
+            except ValueError as e:
+                validation_errors.append(str(e))
                 
         print()
-        if changes_made:
-            print("✅ Synchronization completed with changes")
+        if validation_errors:
+            print("❌ Validation failed with the following errors:")
+            print()
+            for error in validation_errors:
+                print(error)
+                print()
+            print("Please manually add/remove the missing/extra keys and run the validator again.")
+            return False
         else:
-            print("✅ All files already synchronized")
+            print("✅ All localization files are valid")
             
         return True
 
@@ -200,10 +158,10 @@ class LocalizationSync:
 def main():
     """Main entry point."""
     script_dir = Path(__file__).parent
-    sync_tool = LocalizationSync(script_dir.parent)
+    validator = LocalizationValidator(script_dir.parent)
     
     try:
-        success = sync_tool.run()
+        success = validator.run()
         sys.exit(0 if success else 1)
     except KeyboardInterrupt:
         print("\nInterrupted by user")
