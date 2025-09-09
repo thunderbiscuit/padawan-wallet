@@ -11,20 +11,28 @@ struct PadawanCardIconView: View {
     let image: Image
     let size: CGFloat
     let backgroundColor: Color
+    let hasBorder: Bool
     
-    init(image: Image, size: CGFloat = 120, backgroundColor: Color = Color(red: 0.87, green: 0.79, blue: 0.68),
-         cornerRadius: CGFloat = 20,
-         verticalPadding: CGFloat = 20
+    init(
+        image: Image,
+        size: CGFloat = 120,
+        backgroundColor: Color = Color(red: 0.87, green: 0.79, blue: 0.68),
+        cornerRadius: CGFloat = 20,
+        verticalPadding: CGFloat = 20,
+        hasBorder: Bool = true
     ) {
         self.image = image
         self.size = size
         self.backgroundColor = backgroundColor
+        self.hasBorder = hasBorder
     }
     
     var body: some View {
         ZStack {
-            RoundedRectangle(cornerRadius: 30)
-                .fill(backgroundColor)
+            if hasBorder {
+                RoundedRectangle(cornerRadius: 30)
+                    .fill(backgroundColor)
+            }
             
             image
                 .resizable()
@@ -32,6 +40,6 @@ struct PadawanCardIconView: View {
                 .frame(width: size, height: size)
                 .padding(16)
         }
-        .frame(width: size + 40, height: size + 40)
+        .frame(width: size + 80, height: size + 40)
     }
 }
