@@ -75,20 +75,26 @@ struct WelcomeView: View {
     
     @ViewBuilder
     private func buildTabViewItem(page: WelcomeViewModel.OnboardingPage) -> some View {
-        VStack(spacing: 8) {
-            PadawanCardIconView(image: page.image, size: 100)
+        VStack(spacing: 20) {
+            Spacer()
             
+            PadawanCardIconView(image: page.image, size: 100)
+
             Text(page.title)
                 .font(Fonts.title)
                 .foregroundStyle(colors.text)
                 .padding(.top, 20)
-            
+
             Text(page.text)
                 .font(Fonts.body)
                 .foregroundStyle(colors.textFaded)
-                .padding()
+                .multilineTextAlignment(.center)
+                .padding(.horizontal)
+
+            Spacer()
         }
-        .padding(.top, -130)
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+
     }
     
     @ViewBuilder
@@ -116,10 +122,10 @@ struct WelcomeView: View {
                     }
                 } label: {
                     Image(systemName: "chevron.left")
-                        .font(.system(size: 22, weight: .bold))
+                        .font(.system(size: 20, weight: .medium))
                         .foregroundStyle(.black)
                         .frame(width: 50, height: 50)
-                        .background(Circle().fill(Color(red: 0.95, green: 0.90, blue: 0.80)))
+                        
                 }
                 .buttonStyle(ScaleButtonStyle())
             } else {
@@ -149,10 +155,10 @@ struct WelcomeView: View {
                     }
                 } label: {
                     Image(systemName: currentPage == viewModel.onboardingPages.count - 1 ? "hand.thumbsup" : "chevron.right")
-                        .font(.system(size: 22, weight: .bold))
+                        .font(.system(size: 20, weight: .medium))
                         .foregroundStyle(.black)
                         .frame(width: 50, height: 50)
-                        .background(Circle().fill(Color(red: 0.95, green: 0.90, blue: 0.80)))
+                        
                 }
                 .buttonStyle(ScaleButtonStyle())
             } else {

@@ -18,7 +18,7 @@ final class WelcomeViewModel: ObservableObject {
     
     struct OnboardingStrings {
         static let screenTitle = Strings.onboardTitle1
-        static let welcomeText = Strings.welcomeStatement
+        static let welcomeText = Strings.onboard1
         static let createWalletButtonTitle = Strings.createAWallet
         static let importWalletButtonTitle = Strings.alreadyHaveAWallet
         static let screenTitlePage2 = Strings.onboardTitle2
