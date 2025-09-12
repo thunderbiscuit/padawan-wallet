@@ -9,6 +9,7 @@ import SwiftUI
 import Foundation
 import BitcoinDevKit
 
+@MainActor
 final class SendTransactionViewModel: ObservableObject {
     
     @Binding var path: NavigationPath
@@ -68,25 +69,27 @@ final class SendTransactionViewModel: ObservableObject {
     }
     
     func sendTransaction() {
-        do {
-            guard let amount = UInt64(amountValue) else {
-                return
-            }
-            let fee = UInt64(feeRate)
-            
-            try bdkClient.send(address, amount, fee)
-            fullScreenCover = .alert(
-                data: .init(
-                    title: Strings.transactionBroadcast,
-                    onPrimaryButtonTap: { [weak self] in
-                        self?.path.removeLast()
-                    }
+        Task {
+            do {
+                guard let amount = UInt64(amountValue) else {
+                    return
+                }
+                let fee = UInt64(feeRate)
+                
+                try await bdkClient.send(address, amount, fee)
+                fullScreenCover = .alert(
+                    data: .init(
+                        title: Strings.transactionBroadcast,
+                        onPrimaryButtonTap: { [weak self] in
+                            self?.path.removeLast()
+                        }
+                    )
                 )
-            )
-        } catch {
-            fullScreenCover = .alert(
-                data: .init(title: Strings.genericTitleError, subtitle: error.localizedDescription)
-            )
+            } catch {
+                self.fullScreenCover = .alert(
+                    data: .init(title: Strings.genericTitleError, subtitle: error.localizedDescription)
+                )
+            }
         }
     }
     

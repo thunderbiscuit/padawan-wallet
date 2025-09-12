@@ -36,7 +36,7 @@ struct FilledButton: View {
     
     var body: some View {
         Button {
-            
+            action?()
         } label: {
             HStack {
                 Text(title)

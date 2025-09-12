@@ -13,13 +13,13 @@ struct AboutPadawanScreen: View {
             VStack(alignment: .leading, spacing: 24) {
                 // About text
                 Text(String(localized: "about_text"))
-                    .font(.body)
+                    .font(Fonts.font(.regular, 16))
                     .foregroundColor(colors.textLight)
                     .multilineTextAlignment(.leading)
                 
                 // Privacy text
                 Text(String(localized: "privacy_text"))
-                    .font(.body)
+                    .font(Fonts.font(.regular, 16))
                     .foregroundColor(colors.textLight)
                     .multilineTextAlignment(.leading)
                 
@@ -30,7 +30,7 @@ struct AboutPadawanScreen: View {
                     }
                 }) {
                     Text("Read our privacy policy here.")
-                        .font(.body)
+                        .font(Fonts.font(.regular, 16))
                         .foregroundColor(colors.accent2)
                         .underline()
                 }

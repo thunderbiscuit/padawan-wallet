@@ -48,7 +48,10 @@ struct CoreView: View {
             }
 
             NavigationStack(path: $morePath) {
-                MoreRootView()
+                MoreRootView(
+                    path: $morePath,
+                    bdkClient: bdkClient
+                )
             }
             .tabItem {
                 Label {

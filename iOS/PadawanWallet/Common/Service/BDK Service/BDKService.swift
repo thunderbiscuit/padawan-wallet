@@ -218,6 +218,12 @@ private class BDKService {
         try await signAndBroadcast(psbt: psbt)
     }
     
+    func getRecoveryPhase() throws -> String {
+        let backupInfo = try keyClient.getBackupInfo()
+        
+        return backupInfo.mnemonic
+    }
+    
     // MARK: - Private
     
     private func signAndBroadcast(psbt: Psbt) async throws {
@@ -283,7 +289,8 @@ struct BDKClient {
     let transactions: () throws -> [TxDetails]
     let getAddress: () throws -> String
     let createTransaction: (String, UInt64, UInt64) throws -> Psbt
-    let send: (String, UInt64, UInt64) throws -> Void
+    let send: (String, UInt64, UInt64) async throws -> Void
+    let getRecoveryPhase: () throws -> String
 }
 
 extension BDKClient {
@@ -323,9 +330,10 @@ extension BDKClient {
             )
         },
         send: { (address, amount, feeRate) in
-            Task {
-                try await BDKService.shared.send(address: address, amount: amount, feeRate: feeRate)
-            }
+            try await BDKService.shared.send(address: address, amount: amount, feeRate: feeRate)
+        },
+        getRecoveryPhase: {
+            try BDKService.shared.getRecoveryPhase()
         }
     )
 }
@@ -383,7 +391,8 @@ extension BDKClient {
                 """
             return try Psbt(psbtBase64: pb64)
         },
-        send: { _, _, _ in }
+        send: { _, _, _ in },
+        getRecoveryPhase: { "" }
     )
 }
 #endif
