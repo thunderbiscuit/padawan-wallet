@@ -51,7 +51,7 @@ final class WelcomeViewModel: ObservableObject {
                 text: OnboardingStrings.welcomeText
             ),
             OnboardingPage(
-                image: Asset.Images.bitcoinIcon.toImage,
+                image: Asset.Images.bitcoinicon1.toImage,
                 title: OnboardingStrings.screenTitlePage2,
                 text: OnboardingStrings.screenTextPage2
             ),
