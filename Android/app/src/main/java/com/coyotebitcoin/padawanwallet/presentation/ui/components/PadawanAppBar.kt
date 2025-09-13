@@ -16,18 +16,22 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
-import com.coyotebitcoin.padawanwallet.R
-import com.coyotebitcoin.padawanwallet.presentation.theme.PadawanTheme
 import com.composables.core.Icon
 import com.composables.icons.lucide.ArrowLeft
 import com.composables.icons.lucide.Lucide
+import com.coyotebitcoin.padawanwallet.R
 import com.coyotebitcoin.padawanwallet.domain.settings.PadawanColorTheme
+import com.coyotebitcoin.padawanwallet.presentation.theme.PadawanTheme
 
 private const val TAG = "PadawanAppBar"
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun PadawanAppBar(title: String, onClick: () -> Unit) {
+fun PadawanAppBar(
+    title: String,
+    onClick: () -> Unit,
+    color: Color = Color.Transparent
+) {
     CenterAlignedTopAppBar(
         title = {
             Text(
@@ -45,7 +49,7 @@ fun PadawanAppBar(title: String, onClick: () -> Unit) {
             }
         },
         colors = TopAppBarDefaults.topAppBarColors(
-            containerColor = Color.Transparent
+            containerColor = color
         )
     )
 }
