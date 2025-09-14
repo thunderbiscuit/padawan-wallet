@@ -45,7 +45,7 @@ import com.coyotebitcoin.padawanwallet.presentation.ui.components.ExtraButton
 import com.coyotebitcoin.padawanwallet.presentation.viewmodels.mvi.ChaptersScreensAction
 import kotlinx.coroutines.launch
 
-private const val TAG = "SettingsRootScreen"
+private const val TAG = "PadawanTag/SettingsRootScreen"
 
 @Composable
 internal fun SettingsRootScreen(

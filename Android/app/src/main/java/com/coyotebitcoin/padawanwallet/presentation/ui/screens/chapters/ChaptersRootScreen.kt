@@ -5,7 +5,6 @@
 
 package com.coyotebitcoin.padawanwallet.presentation.ui.screens.chapters
 
-// import com.coyotebitcoin.padawanwallet.presentation.navigation.ChapterScreen
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -34,14 +33,12 @@ import com.coyotebitcoin.padawanwallet.presentation.ui.components.TutorialCard
 import com.coyotebitcoin.padawanwallet.presentation.utils.ScreenSizeWidth
 import com.coyotebitcoin.padawanwallet.presentation.utils.getScreenSizeWidth
 import com.coyotebitcoin.padawanwallet.presentation.viewmodels.mvi.ChaptersRootState
-import com.coyotebitcoin.padawanwallet.presentation.viewmodels.mvi.ChaptersScreensAction
 
-private const val TAG = "ChaptersRootScreen"
+private const val TAG = "PadawanTag/ChaptersRootScreen"
 
 @Composable
 internal fun ChaptersRootScreen(
     state: ChaptersRootState,
-    onAction: (ChaptersScreensAction) -> Unit,
     onChapterNav: (Int) -> Unit,
     paddingValues: PaddingValues,
 ) {
@@ -78,7 +75,6 @@ internal fun ChaptersRootScreen(
                 title = "1. ${stringResource(id = R.string.l1_title)}",
                 done = state.completedChapters[1] ?: false,
                 onClick = {
-                    onAction(ChaptersScreensAction.OpenChapter(1))
                     onChapterNav(1)
                 }
             )
@@ -86,7 +82,6 @@ internal fun ChaptersRootScreen(
                 title = "2. ${stringResource(id = R.string.l2_title)}",
                 done = state.completedChapters[2] ?: false,
                 onClick = {
-                    onAction(ChaptersScreensAction.OpenChapter(2))
                     onChapterNav(2)
                 }
             )
@@ -94,7 +89,6 @@ internal fun ChaptersRootScreen(
                 title = "3. ${stringResource(id = R.string.l3_title)}",
                 done = state.completedChapters[3] ?: false,
                 onClick = {
-                    onAction(ChaptersScreensAction.OpenChapter(3))
                     onChapterNav(3)
                 }
             )
@@ -105,7 +99,6 @@ internal fun ChaptersRootScreen(
                 title = "4. ${stringResource(id = R.string.l4_title)}",
                 done = state.completedChapters[4] ?: false,
                 onClick = {
-                    onAction(ChaptersScreensAction.OpenChapter(4))
                     onChapterNav(4)
                 }
             )
@@ -113,7 +106,6 @@ internal fun ChaptersRootScreen(
                 title = "5. ${stringResource(id = R.string.l5_title)}",
                 done = state.completedChapters[5] ?: false,
                 onClick = {
-                    onAction(ChaptersScreensAction.OpenChapter(5))
                     onChapterNav(5)
                 }
             )
@@ -121,7 +113,6 @@ internal fun ChaptersRootScreen(
                 title = "6. ${stringResource(id = R.string.l6_title)}",
                 done = state.completedChapters[6] ?: false,
                 onClick = {
-                    onAction(ChaptersScreensAction.OpenChapter(6))
                     onChapterNav(6)
                 }
             )
@@ -132,7 +123,6 @@ internal fun ChaptersRootScreen(
                 title = "7. ${stringResource(id = R.string.l7_title)}",
                 done = state.completedChapters[7] ?: false,
                 onClick = {
-                    onAction(ChaptersScreensAction.OpenChapter(7))
                     onChapterNav(7)
                 }
             )
@@ -140,7 +130,6 @@ internal fun ChaptersRootScreen(
                 title = "8. ${stringResource(id = R.string.l8_title)}",
                 done = state.completedChapters[8] ?: false,
                 onClick = {
-                    onAction(ChaptersScreensAction.OpenChapter(8))
                     onChapterNav(8)
                 }
             )
@@ -148,7 +137,6 @@ internal fun ChaptersRootScreen(
                 title = "9. ${stringResource(id = R.string.l9_title)}",
                 done = state.completedChapters[9] ?: false,
                 onClick = {
-                    onAction(ChaptersScreensAction.OpenChapter(9))
                     onChapterNav(9)
                 }
             )
@@ -163,7 +151,6 @@ internal fun PreviewChaptersRootScreen() {
     PadawanTheme(PadawanColorTheme.TATOOINE_DESERT) {
         ChaptersRootScreen(
             state = ChaptersRootState(),
-            onAction = {},
             onChapterNav = {},
             paddingValues = PaddingValues(0.dp),
         )

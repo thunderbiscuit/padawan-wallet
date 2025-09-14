@@ -30,10 +30,9 @@ object TutorialRepository {
         }.apply()
     }
 
-    fun unsetAllCompleted() {
+    fun resetCompletedLessons() {
         sharedPreferences.edit().apply {
             putString("completedTutorials", defaultCompletedTutorials)
         }.apply()
     }
 }
-

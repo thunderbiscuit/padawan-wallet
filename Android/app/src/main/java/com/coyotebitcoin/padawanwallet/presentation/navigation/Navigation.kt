@@ -13,11 +13,14 @@ import androidx.navigation3.runtime.entry
 import androidx.navigation3.runtime.entryProvider
 import androidx.navigation3.runtime.rememberNavBackStack
 import androidx.navigation3.ui.NavDisplay
+import com.coyotebitcoin.padawanwallet.data.LessonData
+import com.coyotebitcoin.padawanwallet.data.allAppBarTitlesResourceId
+import com.coyotebitcoin.padawanwallet.data.allChapters
 import com.coyotebitcoin.padawanwallet.domain.bitcoin.Wallet
 import com.coyotebitcoin.padawanwallet.domain.utils.WalletCreateType
 import com.coyotebitcoin.padawanwallet.presentation.ui.screens.CoreScreens
-import com.coyotebitcoin.padawanwallet.presentation.ui.screens.chapters.ChapterScreen
 import com.coyotebitcoin.padawanwallet.presentation.ui.screens.chapters.ChaptersRootScreen
+import com.coyotebitcoin.padawanwallet.presentation.ui.screens.chapters.LessonScreens
 import com.coyotebitcoin.padawanwallet.presentation.ui.screens.intro.OnboardingScreens
 import com.coyotebitcoin.padawanwallet.presentation.ui.screens.intro.WalletRecoveryScreen
 import com.coyotebitcoin.padawanwallet.presentation.ui.screens.settings.AboutScreen
@@ -144,12 +147,18 @@ fun NavigationRoot(
             // ---------------------------------------------------------------------------------------------------------
             // Screens accessible from the Learn tab
             // ---------------------------------------------------------------------------------------------------------
-            entry<SecondaryDestinations.ChapterScreen> {
-                ChapterScreen(
-                    state = chaptersViewModel.pageState,
-                    onAction = chaptersViewModel::onAction,
+            entry<SecondaryDestinations.ChapterScreen> { chapter ->
+                // The lessons are numbered from 1, but the list is 0-indexed
+                // When we call "navigate to chapter 1", we need to get the 0th element of the list and so on.
+                val lessonData = LessonData(
+                    chapterNum = chapter.chapter,
+                    appBarTitleResourceId = allAppBarTitlesResourceId.get(chapter.chapter - 1),
+                    pages = allChapters.get(chapter.chapter - 1)
+                )
+                LessonScreens(
+                    lessonData = lessonData,
                     onBack = { backStack.removeLastOrNull() },
-                    onChapterDone = { backStack.removeLastOrNull() }
+                    onChapterDone = chaptersViewModel::onAction,
                 )
             }
 
@@ -215,7 +224,6 @@ fun NavigationCoreScreens(
             entry<CoreDestinations.ChaptersRootScreen> {
                 ChaptersRootScreen(
                     state = chaptersViewModel.rootState,
-                    onAction = chaptersViewModel::onAction,
                     onChapterNav = { chapter: Int ->
                         backStack.add(SecondaryDestinations.ChapterScreen(chapter))
                     },
@@ -225,7 +233,7 @@ fun NavigationCoreScreens(
 
             entry<CoreDestinations.SettingsRootScreen> {
                 SettingsRootScreen(
-                    onAction = {  },
+                    onAction = chaptersViewModel::onAction,
                     onNavigation = { destination: SecondaryDestinations ->
                         when (destination) {
                             is SecondaryDestinations.RecoveryPhraseScreen -> backStack.add(destination)

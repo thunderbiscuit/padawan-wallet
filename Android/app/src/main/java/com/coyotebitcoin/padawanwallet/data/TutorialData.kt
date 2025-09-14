@@ -7,8 +7,8 @@ package com.coyotebitcoin.padawanwallet.data
 
 import com.coyotebitcoin.padawanwallet.R
 
+data class LessonData(val chapterNum: Int, val appBarTitleResourceId: Int, val pages: List<Page>)
 data class ChapterElement(val elementType: ElementType, val resourceId: Int)
-
 typealias Page = List<ChapterElement>
 
 enum class ElementType {
@@ -194,4 +194,28 @@ val chapter9: List<Page> = listOf(
         ChapterElement(ElementType.BODY, R.string.l9_p10),
         ChapterElement(ElementType.BODY, R.string.l9_p11),
     ),
+)
+
+val allChapters = listOf(
+    chapter1,
+    chapter2,
+    chapter3,
+    chapter4,
+    chapter5,
+    chapter6,
+    chapter7,
+    chapter8,
+    chapter9,
+)
+
+val allAppBarTitlesResourceId = listOf(
+    R.string.l1_app_bar,
+    R.string.l2_app_bar,
+    R.string.l3_app_bar,
+    R.string.l4_app_bar,
+    R.string.l5_app_bar,
+    R.string.l6_app_bar,
+    R.string.l7_app_bar,
+    R.string.l8_app_bar,
+    R.string.l9_app_bar,
 )
