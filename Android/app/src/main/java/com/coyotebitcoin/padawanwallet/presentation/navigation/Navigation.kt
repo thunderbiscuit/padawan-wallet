@@ -19,10 +19,10 @@ import com.coyotebitcoin.padawanwallet.data.allChapters
 import com.coyotebitcoin.padawanwallet.domain.bitcoin.Wallet
 import com.coyotebitcoin.padawanwallet.domain.utils.WalletCreateType
 import com.coyotebitcoin.padawanwallet.presentation.ui.screens.CoreScreens
-import com.coyotebitcoin.padawanwallet.presentation.ui.screens.chapters.ChaptersRootScreen
-import com.coyotebitcoin.padawanwallet.presentation.ui.screens.chapters.LessonScreens
 import com.coyotebitcoin.padawanwallet.presentation.ui.screens.intro.OnboardingScreens
 import com.coyotebitcoin.padawanwallet.presentation.ui.screens.intro.WalletRecoveryScreen
+import com.coyotebitcoin.padawanwallet.presentation.ui.screens.lessons.LessonScreens
+import com.coyotebitcoin.padawanwallet.presentation.ui.screens.lessons.LessonsRootScreen
 import com.coyotebitcoin.padawanwallet.presentation.ui.screens.settings.AboutScreen
 import com.coyotebitcoin.padawanwallet.presentation.ui.screens.settings.LanguagesScreen
 import com.coyotebitcoin.padawanwallet.presentation.ui.screens.settings.RecoveryPhraseScreen
@@ -33,7 +33,7 @@ import com.coyotebitcoin.padawanwallet.presentation.ui.screens.wallet.ReceiveScr
 import com.coyotebitcoin.padawanwallet.presentation.ui.screens.wallet.SendScreen
 import com.coyotebitcoin.padawanwallet.presentation.ui.screens.wallet.TransactionScreen
 import com.coyotebitcoin.padawanwallet.presentation.ui.screens.wallet.WalletHomeScreen
-import com.coyotebitcoin.padawanwallet.presentation.viewmodels.ChaptersViewModel
+import com.coyotebitcoin.padawanwallet.presentation.viewmodels.LessonsViewModel
 import com.coyotebitcoin.padawanwallet.presentation.viewmodels.ReceiveViewModel
 import com.coyotebitcoin.padawanwallet.presentation.viewmodels.WalletViewModel
 
@@ -53,7 +53,7 @@ fun NavigationRoot(
     val bottom: NavBackStack = rememberNavBackStack(CoreDestinations.WalletRootScreen)
     val walletViewModel: WalletViewModel = viewModel()
     val receiveViewModel: ReceiveViewModel = viewModel()
-    val chaptersViewModel: ChaptersViewModel = viewModel()
+    val chaptersViewModel: LessonsViewModel = viewModel()
 
     // TODO: Consider scoping the viewmodels to the NavEntries.
     //       https://developer.android.com/guide/navigation/navigation-3/save-state#scoping-viewmodels
@@ -189,7 +189,7 @@ fun NavigationCoreScreens(
     backStack: NavBackStack,
     bottomBarBackStack: NavBackStack,
     walletViewModel: WalletViewModel,
-    chaptersViewModel: ChaptersViewModel,
+    chaptersViewModel: LessonsViewModel,
     scaffoldPadding: PaddingValues
 ) {
     // TODO: Consider scoping the viewmodels to the NavEntries.
@@ -221,8 +221,8 @@ fun NavigationCoreScreens(
                 )
             }
 
-            entry<CoreDestinations.ChaptersRootScreen> {
-                ChaptersRootScreen(
+            entry<CoreDestinations.LessonsRootScreen> {
+                LessonsRootScreen(
                     state = chaptersViewModel.rootState,
                     onChapterNav = { chapter: Int ->
                         backStack.add(SecondaryDestinations.ChapterScreen(chapter))

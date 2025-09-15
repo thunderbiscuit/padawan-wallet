@@ -32,7 +32,7 @@ import com.coyotebitcoin.padawanwallet.presentation.navigation.CoreDestinations
 import com.coyotebitcoin.padawanwallet.presentation.navigation.NavigationCoreScreens
 import com.coyotebitcoin.padawanwallet.presentation.theme.PadawanColorsTatooineDesert
 import com.coyotebitcoin.padawanwallet.presentation.theme.PadawanTypography
-import com.coyotebitcoin.padawanwallet.presentation.viewmodels.ChaptersViewModel
+import com.coyotebitcoin.padawanwallet.presentation.viewmodels.LessonsViewModel
 import com.coyotebitcoin.padawanwallet.presentation.viewmodels.WalletViewModel
 
 private const val TAG = "PadawanTag/RootScreen"
@@ -49,7 +49,7 @@ internal fun CoreScreens(
     backStack: NavBackStack,
     bottomBarBackStack: NavBackStack,
     walletViewModel: WalletViewModel,
-    chaptersViewModel: ChaptersViewModel,
+    chaptersViewModel: LessonsViewModel,
 ) {
     Scaffold(
         bottomBar = { BottomNavigationBar(
@@ -59,7 +59,7 @@ internal fun CoreScreens(
             },
             onLessonsNavigation = {
                 bottomBarBackStack.clear()
-                bottomBarBackStack.add(CoreDestinations.ChaptersRootScreen)
+                bottomBarBackStack.add(CoreDestinations.LessonsRootScreen)
             },
             onMoreNavigation = {
                 bottomBarBackStack.clear()

@@ -8,8 +8,8 @@ package com.coyotebitcoin.padawanwallet
 import android.app.Application
 import com.coyotebitcoin.padawanwallet.domain.bitcoin.Wallet
 import com.coyotebitcoin.padawanwallet.domain.bitcoin.WalletRepository
+import com.coyotebitcoin.padawanwallet.domain.lessons.LessonsRepository
 import com.coyotebitcoin.padawanwallet.domain.settings.SettingsRepository
-import com.coyotebitcoin.padawanwallet.domain.tutorials.TutorialRepository
 
 class PadawanWalletApplication : Application() {
     override fun onCreate() {
@@ -19,7 +19,7 @@ class PadawanWalletApplication : Application() {
 
         // initialize repositories and set shared preferences
         WalletRepository.setSharedPreferences(applicationContext.getSharedPreferences("wallet", MODE_PRIVATE))
-        TutorialRepository.setSharedPreferences(applicationContext.getSharedPreferences("tutorials", MODE_PRIVATE))
+        LessonsRepository.setSharedPreferences(applicationContext.getSharedPreferences("lessons", MODE_PRIVATE))
         SettingsRepository.setSharedPreferences(applicationContext.getSharedPreferences("settings", MODE_PRIVATE))
 
         // initialize Wallet object with path variable

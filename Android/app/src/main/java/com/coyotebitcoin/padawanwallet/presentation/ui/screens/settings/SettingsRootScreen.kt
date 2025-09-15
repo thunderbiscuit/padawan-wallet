@@ -42,14 +42,14 @@ import com.coyotebitcoin.padawanwallet.presentation.theme.PadawanColorsTatooineD
 import com.coyotebitcoin.padawanwallet.presentation.theme.PadawanTheme
 import com.coyotebitcoin.padawanwallet.presentation.theme.PadawanTypography
 import com.coyotebitcoin.padawanwallet.presentation.ui.components.ExtraButton
-import com.coyotebitcoin.padawanwallet.presentation.viewmodels.mvi.ChaptersScreensAction
+import com.coyotebitcoin.padawanwallet.presentation.viewmodels.mvi.LessonAction
 import kotlinx.coroutines.launch
 
 private const val TAG = "PadawanTag/SettingsRootScreen"
 
 @Composable
 internal fun SettingsRootScreen(
-    onAction: (ChaptersScreensAction) -> Unit,
+    onAction: (LessonAction) -> Unit,
     onNavigation: (SecondaryDestinations) -> Unit,
 ) {
     val scope = rememberCoroutineScope()
@@ -140,7 +140,7 @@ internal fun SettingsRootScreen(
             val chaptersResetMessage = stringResource(R.string.lessons_reset_successful)
             Button(
                 onClick = {
-                    onAction(ChaptersScreensAction.ResetAllChapters)
+                    onAction(LessonAction.ResetAll)
                     scope.launch { snackbarHostState.showSnackbar(chaptersResetMessage) }
                 },
                 colors = ButtonDefaults.buttonColors(containerColor = colors.accent1),

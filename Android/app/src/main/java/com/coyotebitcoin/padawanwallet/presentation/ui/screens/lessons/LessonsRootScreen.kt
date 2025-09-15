@@ -3,7 +3,7 @@
  * Use of this source code is governed by the Apache 2.0 license that can be found in the ./LICENSE file.
  */
 
-package com.coyotebitcoin.padawanwallet.presentation.ui.screens.chapters
+package com.coyotebitcoin.padawanwallet.presentation.ui.screens.lessons
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
@@ -29,16 +29,16 @@ import com.coyotebitcoin.padawanwallet.presentation.theme.PadawanTheme
 import com.coyotebitcoin.padawanwallet.presentation.theme.PadawanTypography
 import com.coyotebitcoin.padawanwallet.presentation.ui.components.SectionDivider
 import com.coyotebitcoin.padawanwallet.presentation.ui.components.SectionTitle
-import com.coyotebitcoin.padawanwallet.presentation.ui.components.TutorialCard
+import com.coyotebitcoin.padawanwallet.presentation.ui.components.LessonCard
 import com.coyotebitcoin.padawanwallet.presentation.utils.ScreenSizeWidth
 import com.coyotebitcoin.padawanwallet.presentation.utils.getScreenSizeWidth
-import com.coyotebitcoin.padawanwallet.presentation.viewmodels.mvi.ChaptersRootState
+import com.coyotebitcoin.padawanwallet.presentation.viewmodels.mvi.LessonsRootScreenState
 
 private const val TAG = "PadawanTag/ChaptersRootScreen"
 
 @Composable
-internal fun ChaptersRootScreen(
-    state: ChaptersRootState,
+internal fun LessonsRootScreen(
+    state: LessonsRootScreenState,
     onChapterNav: (Int) -> Unit,
     paddingValues: PaddingValues,
 ) {
@@ -71,23 +71,23 @@ internal fun ChaptersRootScreen(
             )
             SectionTitle(stringResource(id = R.string.getting_started), true)
             SectionDivider()
-            TutorialCard(
+            LessonCard(
                 title = "1. ${stringResource(id = R.string.l1_title)}",
-                done = state.completedChapters[1] ?: false,
+                done = state.completedLessons[1] ?: false,
                 onClick = {
                     onChapterNav(1)
                 }
             )
-            TutorialCard(
+            LessonCard(
                 title = "2. ${stringResource(id = R.string.l2_title)}",
-                done = state.completedChapters[2] ?: false,
+                done = state.completedLessons[2] ?: false,
                 onClick = {
                     onChapterNav(2)
                 }
             )
-            TutorialCard(
+            LessonCard(
                 title = "3. ${stringResource(id = R.string.l3_title)}",
-                done = state.completedChapters[3] ?: false,
+                done = state.completedLessons[3] ?: false,
                 onClick = {
                     onChapterNav(3)
                 }
@@ -95,23 +95,23 @@ internal fun ChaptersRootScreen(
 
             SectionTitle("Transactions", false)
             SectionDivider()
-            TutorialCard(
+            LessonCard(
                 title = "4. ${stringResource(id = R.string.l4_title)}",
-                done = state.completedChapters[4] ?: false,
+                done = state.completedLessons[4] ?: false,
                 onClick = {
                     onChapterNav(4)
                 }
             )
-            TutorialCard(
+            LessonCard(
                 title = "5. ${stringResource(id = R.string.l5_title)}",
-                done = state.completedChapters[5] ?: false,
+                done = state.completedLessons[5] ?: false,
                 onClick = {
                     onChapterNav(5)
                 }
             )
-            TutorialCard(
+            LessonCard(
                 title = "6. ${stringResource(id = R.string.l6_title)}",
-                done = state.completedChapters[6] ?: false,
+                done = state.completedLessons[6] ?: false,
                 onClick = {
                     onChapterNav(6)
                 }
@@ -119,23 +119,23 @@ internal fun ChaptersRootScreen(
 
             SectionTitle("Wallets", false)
             SectionDivider()
-            TutorialCard(
+            LessonCard(
                 title = "7. ${stringResource(id = R.string.l7_title)}",
-                done = state.completedChapters[7] ?: false,
+                done = state.completedLessons[7] ?: false,
                 onClick = {
                     onChapterNav(7)
                 }
             )
-            TutorialCard(
+            LessonCard(
                 title = "8. ${stringResource(id = R.string.l8_title)}",
-                done = state.completedChapters[8] ?: false,
+                done = state.completedLessons[8] ?: false,
                 onClick = {
                     onChapterNav(8)
                 }
             )
-            TutorialCard(
+            LessonCard(
                 title = "9. ${stringResource(id = R.string.l9_title)}",
-                done = state.completedChapters[9] ?: false,
+                done = state.completedLessons[9] ?: false,
                 onClick = {
                     onChapterNav(9)
                 }
@@ -149,8 +149,8 @@ internal fun ChaptersRootScreen(
 @Composable
 internal fun PreviewChaptersRootScreen() {
     PadawanTheme(PadawanColorTheme.TATOOINE_DESERT) {
-        ChaptersRootScreen(
-            state = ChaptersRootState(),
+        LessonsRootScreen(
+            state = LessonsRootScreenState(),
             onChapterNav = {},
             paddingValues = PaddingValues(0.dp),
         )

@@ -13,7 +13,7 @@ sealed class CoreDestinations : NavKey {
     @Serializable
     data object WalletRootScreen : CoreDestinations()
     @Serializable
-    data object ChaptersRootScreen : CoreDestinations()
+    data object LessonsRootScreen : CoreDestinations()
     @Serializable
     data object SettingsRootScreen : CoreDestinations()
 }

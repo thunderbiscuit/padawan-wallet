@@ -1,12 +1,12 @@
 /*
- * Copyright 2021-2025 thunderbiscuit and contributors.
+ * Copyright 2020-2025 thunderbiscuit and contributors.
  * Use of this source code is governed by the Apache 2.0 license that can be found in the ./LICENSE file.
  */
 
 package com.coyotebitcoin.padawanwallet.presentation.viewmodels.mvi
 
-data class ChaptersRootState(
-    val completedChapters: Map<Int, Boolean> = mapOf(
+data class LessonsRootScreenState(
+    val completedLessons: Map<Int, Boolean> = mapOf(
         Pair(1, false),
         Pair(2, false),
         Pair(3, false),
@@ -19,7 +19,7 @@ data class ChaptersRootState(
     )
 )
 
-sealed interface ChaptersScreensAction {
-    data class  SetCompleted(val chapterNum: Int) : ChaptersScreensAction
-    data object ResetAllChapters : ChaptersScreensAction
+sealed interface LessonAction {
+    data class  SetCompleted(val lessonNum: Int) : LessonAction
+    data object ResetAll : LessonAction
 }

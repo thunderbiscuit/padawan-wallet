@@ -3,7 +3,7 @@
  * Use of this source code is governed by the Apache 2.0 license that can be found in the ./LICENSE.txt file.
  */
 
-package com.coyotebitcoin.padawanwallet.presentation.ui.screens.chapters
+package com.coyotebitcoin.padawanwallet.presentation.ui.screens.lessons
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -51,7 +51,7 @@ import com.coyotebitcoin.padawanwallet.presentation.theme.PadawanTypography
 import com.coyotebitcoin.padawanwallet.presentation.theme.standardShadow
 import com.coyotebitcoin.padawanwallet.presentation.ui.components.PadawanAppBar
 import com.coyotebitcoin.padawanwallet.presentation.ui.components.standardBorder
-import com.coyotebitcoin.padawanwallet.presentation.viewmodels.mvi.ChaptersScreensAction
+import com.coyotebitcoin.padawanwallet.presentation.viewmodels.mvi.LessonAction
 import kotlinx.coroutines.launch
 
 private const val TAG = "PadawanTag/ChapterScreens"
@@ -60,7 +60,7 @@ private const val TAG = "PadawanTag/ChapterScreens"
 fun LessonScreens(
     lessonData: LessonData,
     onBack: () -> Unit,
-    onChapterDone: (ChaptersScreensAction) -> Unit,
+    onChapterDone: (LessonAction) -> Unit,
 ) {
     val colors = LocalPadawanColors.current
     val (chapterNum, appBarTitleResourceId, pages) = lessonData
@@ -140,7 +140,7 @@ fun LessonScreens(
                                     pagerState.animateScrollToPage(pagerState.currentPage + 1)
                                 }
                             } else {
-                                onChapterDone(ChaptersScreensAction.SetCompleted(chapterNum))
+                                onChapterDone(LessonAction.SetCompleted(chapterNum))
                                 onBack()
                             }
                         },

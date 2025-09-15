@@ -33,12 +33,12 @@ import com.composables.icons.lucide.Lucide
 import com.coyotebitcoin.padawanwallet.R
 import com.coyotebitcoin.padawanwallet.domain.settings.PadawanColorTheme
 import com.coyotebitcoin.padawanwallet.presentation.theme.Outfit
-import com.coyotebitcoin.padawanwallet.presentation.theme.PadawanTheme
 import com.coyotebitcoin.padawanwallet.presentation.theme.PadawanColorsTatooineDesert
+import com.coyotebitcoin.padawanwallet.presentation.theme.PadawanTheme
 import com.coyotebitcoin.padawanwallet.presentation.theme.standardShadow
 
 @Composable
-fun TutorialCard(
+fun LessonCard(
     title: String,
     done: Boolean,
     onClick: () -> Unit,
@@ -91,10 +91,10 @@ fun TutorialCard(
 
 @Preview(device = Devices.PIXEL_7, showBackground = true)
 @Composable
-internal fun PreviewNotCompletedTutorialCard() {
+internal fun PreviewNotCompletedLessonCard() {
     PadawanTheme(PadawanColorTheme.TATOOINE_DESERT) {
-        TutorialCard(
-            title = "Tutorial Card",
+        LessonCard(
+            title = "Lesson Card",
             done = false,
             onClick = { }
         )
@@ -103,10 +103,10 @@ internal fun PreviewNotCompletedTutorialCard() {
 
 @Preview(device = Devices.PIXEL_7, showBackground = true)
 @Composable
-internal fun PreviewCompletedTutorialCard() {
+internal fun PreviewCompletedLessonCard() {
     PadawanTheme(PadawanColorTheme.TATOOINE_DESERT) {
-        TutorialCard(
-            title = "Tutorial Card",
+        LessonCard(
+            title = "Lesson Card",
             done = true,
             onClick = { }
         )
