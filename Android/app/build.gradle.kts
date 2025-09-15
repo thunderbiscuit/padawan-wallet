@@ -156,8 +156,8 @@ dependencies {
     implementation("org.kotlinbitcointools:bip21:0.1.0")
 
     // Ktor
-    implementation("io.ktor:ktor-client-cio:2.2.1")
-    implementation("io.ktor:ktor-client-auth:2.2.1")
+    implementation("io.ktor:ktor-client-cio:3.3.0")
+    implementation("io.ktor:ktor-client-auth:3.3.0")
 
     // QR codes
     implementation("com.google.zxing:core:3.5.3")
