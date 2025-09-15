@@ -157,8 +157,8 @@ fun NavigationRoot(
                 )
                 LessonScreens(
                     lessonData = lessonData,
+                    onLessonDone = chaptersViewModel::onAction,
                     onBack = { backStack.removeLastOrNull() },
-                    onChapterDone = chaptersViewModel::onAction,
                 )
             }
 

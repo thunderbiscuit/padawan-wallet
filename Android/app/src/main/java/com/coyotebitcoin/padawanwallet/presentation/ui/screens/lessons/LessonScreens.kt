@@ -7,7 +7,6 @@ package com.coyotebitcoin.padawanwallet.presentation.ui.screens.lessons
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -19,6 +18,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.pager.HorizontalPager
+import androidx.compose.foundation.pager.PagerState
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
@@ -38,6 +38,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.composables.icons.lucide.ChevronLeft
 import com.composables.icons.lucide.ChevronRight
+import com.composables.icons.lucide.CircleCheckBig
 import com.composables.icons.lucide.Lucide
 import com.coyotebitcoin.padawanwallet.R
 import com.coyotebitcoin.padawanwallet.data.ElementType
@@ -52,6 +53,7 @@ import com.coyotebitcoin.padawanwallet.presentation.theme.standardShadow
 import com.coyotebitcoin.padawanwallet.presentation.ui.components.PadawanAppBar
 import com.coyotebitcoin.padawanwallet.presentation.ui.components.standardBorder
 import com.coyotebitcoin.padawanwallet.presentation.viewmodels.mvi.LessonAction
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
 private const val TAG = "PadawanTag/ChapterScreens"
@@ -59,11 +61,11 @@ private const val TAG = "PadawanTag/ChapterScreens"
 @Composable
 fun LessonScreens(
     lessonData: LessonData,
+    onLessonDone: (LessonAction) -> Unit,
     onBack: () -> Unit,
-    onChapterDone: (LessonAction) -> Unit,
 ) {
     val colors = LocalPadawanColors.current
-    val (chapterNum, appBarTitleResourceId, pages) = lessonData
+    val (lessonNum, appBarTitleResourceId, pages) = lessonData
     val numPages = pages.size
     val pagerState = rememberPagerState(pageCount = { numPages })
     val coroutineScope = rememberCoroutineScope()
@@ -111,6 +113,10 @@ fun LessonScreens(
                 thickness = 3.dp,
                 color = colors.text
             )
+
+            // This is the main content area. It has 2 main parts:
+            // 1. The pager that shows the lesson pages
+            // 2. The navigation row with back/next buttons
             Column {
                 HorizontalPager(
                     state = pagerState,
@@ -120,33 +126,14 @@ fun LessonScreens(
                 ) { pageNumber ->
                     LessonPage(pages[pageNumber])
                 }
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceBetween
-                ) {
-                    NavigationButton(
-                        onClick = {
-                            coroutineScope.launch {
-                                pagerState.animateScrollToPage(pagerState.currentPage - 1)
-                            }
-                        },
-                        icon = Lucide.ChevronLeft,
-                    )
-                    NavigationButton(
-                        onClick = {
-                            if (pagerState.currentPage < pages.size - 1) {
-                                coroutineScope.launch {
-                                    pagerState.animateScrollToPage(pagerState.currentPage + 1)
-                                }
-                            } else {
-                                onChapterDone(LessonAction.SetCompleted(chapterNum))
-                                onBack()
-                            }
-                        },
-                        icon = Lucide.ChevronRight,
-                    )
-                }
+
+                NavigationRow(
+                    coroutineScope = coroutineScope,
+                    pagerState = pagerState,
+                    numPages = numPages,
+                    onLessonDone = { onLessonDone(LessonAction.SetCompleted(lessonNum)) },
+                    onBack = onBack
+                )
             }
         }
     }
@@ -214,20 +201,60 @@ fun LessonPage(page: Page) {
 }
 
 @Composable
+fun NavigationRow(
+    coroutineScope: CoroutineScope,
+    pagerState: PagerState,
+    numPages: Int,
+    onLessonDone: () -> Unit,
+    onBack: () -> Unit,
+) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(start = 16.dp, end = 16.dp, bottom = 4.dp),
+        horizontalArrangement = Arrangement.spacedBy(12.dp)
+    ) {
+        NavigationButton(
+            onClick = {
+                coroutineScope.launch {
+                    pagerState.animateScrollToPage(pagerState.currentPage - 1)
+                }
+            },
+            icon = Lucide.ChevronLeft,
+            modifier = Modifier.weight(1f)
+        )
+        Spacer(modifier = Modifier.width(16.dp))
+        NavigationButton(
+            onClick = {
+                if (pagerState.currentPage < numPages - 1) {
+                    coroutineScope.launch {
+                        pagerState.animateScrollToPage(pagerState.currentPage + 1)
+                    }
+                } else {
+                    onLessonDone()
+                    onBack()
+                }
+            },
+            icon = if (pagerState.currentPage < numPages - 1) Lucide.ChevronRight else Lucide.CircleCheckBig,
+            modifier = Modifier.weight(1f)
+        )
+    }
+}
+
+@Composable
 fun NavigationButton(
     onClick: () -> Unit,
     icon: ImageVector,
+    modifier: Modifier = Modifier,
 ) {
     Card(
+        onClick = onClick,
         border = standardBorder,
         shape = RoundedCornerShape(20.dp),
         colors = CardDefaults.cardColors(PadawanColorsTatooineDesert.accent2),
-        modifier = Modifier
-            .padding(vertical = 4.dp, horizontal = 8.dp)
+        modifier = modifier
             .standardShadow(20.dp)
-            .width(140.dp)
             .height(50.dp)
-            .clickable(onClick = onClick)
     ) {
         Box(
             modifier = Modifier
@@ -254,8 +281,8 @@ fun LessonScreensPreview() {
     PadawanTheme {
         LessonScreens(
             lessonData = lessonData,
+            onLessonDone = {},
             onBack = {},
-            onChapterDone = {},
         )
     }
 }
