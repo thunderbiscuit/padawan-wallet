@@ -125,7 +125,7 @@ dependencies {
     // Adding the Bill of Materials synchronizes dependencies in the androidx.compose namespace
     // https://developer.android.com/develop/ui/compose/bom/bom-mapping
     // Once declared, you remove the library versions in your dependency declarations
-    implementation(platform("androidx.compose:compose-bom:2025.05.01"))
+    implementation(platform("androidx.compose:compose-bom:2025.09.00"))
     implementation("androidx.compose.material3:material3")
     implementation("androidx.compose.ui:ui")
     implementation("androidx.compose.animation:animation")
