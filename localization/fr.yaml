@@ -98,13 +98,14 @@ select_language:          "Sélectionnez votre langue préférée et le thème d
 get_coins:                "Obtenir des pièces signet"
 button_link_privacy:      "Lisez notre politique de confidentialité ici."
 
-# Content Descriptons
+# Content Descriptions
 return_address_image:     "Image Renvoyer des sats à l'adresse du robinet(faucet)"
 no_thank_you_icon:        "Icône Non merci"
 proceed_icon:             "Icône Continuer"
 
 # Lesson 1
 l1_title:                  "Qu'est-ce que le Bitcoin Signet ?"
+l1_app_bar:                "Réseaux Bitcoin"
 l1_p1:                     "Les réseaux Bitcoin sont composés de milliers d'ordinateurs répartis dans le monde entier. Ces ordinateurs parlent un langage commun et communiquent directement entre eux via internet."
 l1_p2:                     "Vous ne le savez peut-être pas, mais il existe de nombreux réseaux Bitcoin ! Ils se divisent en deux familles : le réseau principal (il n'y en a qu'un) et les réseaux de test (il y en a beaucoup !)."
 l1_h2:                     "Mainnet, Réseau principal"
@@ -120,6 +121,7 @@ l1_p9:                     "Utilisez Padawan pour apprendre, pratiquer et tester
 
 # Lesson 2
 l2_title:                  "Recevoir du bitcoin"
+l2_app_bar:                "Receiving Bitcoin"
 l2_p1:                     "Pour recevoir des bitcoins, vous demandez à votre logiciel de portefeuille, souvent nommé wallet (comme Padawan) de générer une adresse de réception. Chaque fois que vous recevez des bitcoins, une nouvelle adresse sera utilisée par votre portefeuille."
 l2_p2:                     "Pour faciliter le partage, nous affichons cette adresse de deux manières courantes :"
 l2_p3:                     "1. Une chaîne de chiffres et de lettres qui pourrait ressembler à ceci :"
@@ -138,11 +140,13 @@ l2_p13:                    "Rappel : Padawan n'utilise que des bitcoins signet. 
 
 # Lesson 3
 l3_title:                  "Envoyer du bitcoin"
+l3_app_bar:                "Envoyer du bitcoin"
 l3_p1:                     "Pour envoyer du bitcoin, vous devez demander une adresse de réception. Si un code QR vous est proposé, scannez-le avec l'appareil photo de votre téléphone. Si vous recevez une longue chaîne de chiffres et de lettres, vous pouvez copier et coller l'adresse dans le champ d'adresse de l'écran de transaction de l'application. N'oubliez pas de vérifier l'adresse une fois que vous l'avez collée !"
 l3_p2:                     "Une fois l'adresse saisie, spécifiez le montant de bitcoins à envoyer (soit en unités de bitcoin, soit en satoshis), puis diffusez la transaction sur le réseau. Votre transaction sera récupérée par des nœuds du monde entier et sera finalement minée dans un bloc !"
 
 # Lesson 4
 l4_title:                  "Qu'est-ce que la mempool ?"
+l4_app_bar:                "La Mempool"
 l4_p1:                     "Lorsque vous effectuez et diffusez une transaction bitcoin, elle est enregistrée sur tous les ordinateurs connectés au réseau Bitcoin, généralement en 2 à 5 secondes. Finalement, la transaction est ajoutée à la blockchain, mais lorsqu'un nœud en prend initialement connaissance, il l'ajoute simplement à un groupe de transactions qu'il connaît mais qui n'ont pas encore été incluses dans un bloc. Cet ensemble de transactions est appelé la mempool (ou « memory pool » pour « bassin de mémoire » en anglais), et chaque ordinateur connecté au réseau Bitcoin conserve sa propre mempool. Une transaction étant « dans la mempool » (ce qui signifie que la plupart des nœuds ont vu et ajouté la transaction à leure mempool) signifie qu'elle a été validée par le réseau, mais pas encore confirmée sur la blockchain."
 l4_p2:                     "Pour être officialisée, la transaction doit être incluse dans un bloc miné par les mineurs de bitcoins."
 l4_h1:                     "Imaginez un bus"
@@ -154,6 +158,7 @@ l4_p6:                     "D'un autre côté, certains passagers pourraient ne 
 
 # Lesson 5
 l5_title:                  "Que sont les frais de transaction?"
+l5_app_bar:                "Frais de Transaction"
 l5_p1:                     "Vous en savez maintenant un peu plus sur les transactions. Il y a de très nombreuses transactions envoyées, validées, confirmées et stockées sur le réseau Bitcoin chaque minute de chaque jour. C'est une affaire très coûteuse."
 l5_p2:                     "Le réseau Bitcoin ne peut supporter qu'une certaine demande sur le système. Pour s'assurer que la charge sur le réseau reste légère et efficace, il y a une capacité limitée pour la quantité totale d'octets (bytes en anglais) qui peuvent être traités sur le réseau par unité de temps."
 l5_h1:                     "Enchérir en utilisant les frais de transaction"
@@ -164,6 +169,7 @@ l5_p5:                     "L'un des principaux avantages du réseau Bitcoin est
 
 # Lesson 6
 l6_title:                  "Unités de Bitcoin"
+l6_app_bar:                "Unités de Bitcoin"
 l6_p1:                     "Le mot « bitcoin » a plusieurs sens. Lorsqu'on parle de bitcoin, on peut parfois désigner (a) le réseau, le protocole, le projet open source, ou (b) l'une des unités de compte lors des transactions sur le réseau Bitcoin."
 l6_h1:                     "Pour décortiquer"
 l6_p3:                     "Tout comme le kilomètre peut être décomposé en mètres et centimètres et le pied en pouces, un bitcoin peut être divisé en unités plus petites."
@@ -181,6 +187,7 @@ l6_p12:                    "Dans Padawan, vous pouvez basculer entre les deux un
 
 # Lesson 7
 l7_title:                  "Qu'est-ce qu'une phrase de récupération ?"
+l7_app_bar:                "Phrases de Récupération"
 l7_p1:                     "Vous pouvez considérer votre portefeuille comme un arbre, et les adresses qu'il génère comme ses feuilles (rappelez-vous que vous utilisez une nouvelle adresse chaque fois que vous recevez du bitcoin). Le nombre d'adresses qui peuvent être générées à partir de cet arbre est quasi infini, mais la seule partie nécessaire pour sauvegarder un tel « arbre d'adresses » est de se souvenir de la racine de l'arbre. Chaque nouvelle racine générera un arbre complètement nouveau, mais n'importe quel portefeuille peut recréer l'arbre entier simplement en commençant par la racine."
 l7_p2:                     "Les portefeuilles Bitcoin modernes utilisent un processus appelé génération de clés déterministes. Chaque nouvelle adresse que votre portefeuille produit est générée de manière non aléatoire. Cela leur confère la propriété d'être très flexibles en termes de génération de nouvelles adresses, sans avoir à les mémoriser toutes individuellement (vous n'avez pas besoin de faire des sauvegardes individuelles pour toutes les adresses auxquelles vous avez reçu des bitcoins)."
 l7_p3:                     "La « racine » de votre portefeuille est la graine de portefeuille (seed en anglais). Cette graine de portefeuille est simplement un nombre très, très long. Mais les nombres sont notoirement difficiles à retenir, et les humains sont généralement très mauvais pour les écrire correctement sans faire d'erreurs ou de fautes de frappe."
@@ -192,6 +199,7 @@ l7_p7:                     "Mais la valeur de cette phrase de récupération est
 
 # Lesson 8
 l8_title:                  "Récupérer votre portefeuille"
+l8_app_bar:                "Récupération de Portefeuille"
 l8_p1:                     "Récupérer un portefeuille à partir d'une phrase de récupération est généralement assez facile. Les phrases de récupération (parfois aussi appelées mnémoniques) utilisent une norme appelée BIP39, qui offre un moyen commun et standard de récupérer des pièces entre différents portefeuilles. Le schéma habituel pour sauvegarder et récupérer un portefeuille est le suivant :"
 l8_p2:                     "1. Nous créons un portefeuille et le logiciel nous fournit 12 ou 24 mots à noter et à conserver. L'ordre des mots est crucial, alors assurez-vous de les écrire dans le bon ordre. Dans Padawan, vous pouvez voir ces 12 mots à tout moment en allant dans l'écran « Phrase de récupération » dans le menu."
 l8_p3:                     "Dans la plupart des autres portefeuilles, vous n'aurez qu'une seule occasion de voir ces mots, ALORS ASSUREZ-VOUS DE LES ÉCRIRE ET DE LES TRAITER COMME L'ARGENT QU'ILS REPRÉSENTENT."
@@ -204,6 +212,7 @@ l8_p8:                     "Les pièces signet que vous avez sur Padawan peuvent
 
 # Lesson 9
 l9_title:                  "Les différents types de portefeuilles"
+l9_app_bar:                "Types de Portefeuilles"
 l9_h1:                     "Pourquoi y a-t-il plus d'un type de portefeuille?"
 l9_p1:                     "Un portefeuille Bitcoin sécurise un ensemble de clés cryptographiques (des nombres très longs et importants). Il est crucial de protéger ces clés et de s'assurer qu'elles ne sont accessibles à personne d'autre que le propriétaire du portefeuille."
 l9_p2:                     "Il existe de nombreuses solutions pour répondre à cette exigence. Chaque type de portefeuille présentera des compromis entre son niveau de sécurité et sa facilité d'utilisation. Choisir le bon portefeuille pour un usage spécifique peut être accablant, mais c'est important ! Ce chapitre vous aidera à comprendre pourquoi et quand utiliser différents types de portefeuilles Bitcoin."

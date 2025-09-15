@@ -98,13 +98,14 @@ select_language:          "Selecione seu idioma preferido e tema de cores para u
 get_coins:                "Receber bitcoins signet"
 button_link_privacy:      "Leia nossos termos de uso e privacidade aqui"
 
-# Content Descriptons
+# Content Descriptions
 return_address_image:     "Imagem de retornar o endereço do faucet dos sats"
 no_thank_you_icon:        "Ícone de não, obrigado"
 proceed_icon:             "ícone de prosseguir"
 
 # Lesson 1
 l1_title:                 "O que é o bitcoin Signet?"
+l1_app_bar:               "Redes Bitcoin"
 l1_p1:                    "As redes Bitcoin são compostas por milhares de computadores em todo o mundo. Esses computadores falam uma linguagem comum e se comunicam diretamente uns com os outros através da internet."
 l1_p2:                    "Talvez você não saiba, mas existem muitas redes de bitcoin! Elas se dividem em duas famílias: a rede principal (há apenas uma dessa) e as redes de teste (há muitas dessas!)."
 l1_h2:                    "Mainnet"
@@ -120,6 +121,7 @@ l1_p9:                    "Use Padawan para aprender, praticar e testar os limit
 
 # Lesson 2
 l2_title:                 "Recebendo bitcoin"
+l2_app_bar:               "Recebendo Bitcoin"
 l2_p1:                    "Para receber bitcoin, você pede para sua carteira (como o Padawan) gerar um endereço de recebimento. Cada vez que você pedir, um novo endereço será gerado pela sua carteira."
 l2_p2:                    "As duas maneiras de compartilhar o seu endereço de recebimento são:"
 l2_p3:                    "1. Uma sequência de letras e números que pode ter esta aparência:"
@@ -138,11 +140,13 @@ l2_p13:                   "Lembrete: Padawan usa apenas bitcoins de teste. Não 
 
 # Lesson 3
 l3_title:                 "Enviando bitcoin"
+l3_app_bar:               "Enviando bitcoin"
 l3_p1:                    "Para enviar bitcoin, você deve solicitar um endereço de recebimento. Se for oferecido a você um QR code, escaneie-o usando a câmera do seu telefone. Se você receber uma sequência de letras e números, copie e cole no local do endereço destinatário. Lembre-se de verificar o endereço depois de colar!"
 l3_p2:                    "Depois de inserir o endereço, coloque a quantidade de bitcoin a enviar (bitcoin inteiro ou em satoshis) e transmita a transação para a rede. Sua transação será captada por nós em todo o mundo e registrada em um bloco!"
 
 # Lesson 4
 l4_title:                 "O que é a mempool?"
+l4_app_bar:               "O Mempool"
 l4_p1:                    "Quando você envia uma transação, ela é registrada em todos os computadores (nó ou node) conectados à rede Bitcoin, geralmente dentro de 2 a 5 segundos. Um nó toma conhecimento da sua transação e a adiciona a um grupo com várias transações que ele conhece, mas que ainda não foram incluídas em um bloco, para, posteriormente, ser registrada na blockchain. Esse grupo de transações é chamado de mempool (ou “piscina de transações”), e cada computador conectado à rede Bitcoin mantém sua própria mempool. Uma transação “na mempool” (já vista por vários nós e adicionada à piscina de transações) significa que ela foi reconhecida pela rede, mas ainda não foi registrada na blockchain."
 l4_p2:                    "Para se tornar oficial, os mineradores de bitcoin precisam minerar um bloco que inclua a sua transação nele."
 l4_h1:                    "Imagine um ônibus"
@@ -154,6 +158,7 @@ l4_p6:                    "Por outro lado, outros passageiros podem não ter pre
 
 # Lesson 5
 l5_title:                 "O que são taxas de transação?"
+l5_app_bar:               "Taxas de transação"
 l5_p1:                    "Agora você já conhece um pouco mais sobre transações. Existem muitas delas sendo enviadas, validadas, confirmadas e armazenadas na rede do Bitcoin 24 horas por dia. Isso é bastante custoso."
 l5_p2:                    "A rede Bitcoin só consegue validar uma determinada demanda recebida. Para garantir que a carga na rede permaneça leve e enxuta, há uma capacidade limitada de bytes que podem ser inseridos em um bloco."
 l5_h1:                    "Disputa por espaço no bloco"
@@ -164,6 +169,7 @@ l5_p5:                    "Um dos pontos positivos da rede Bitcoin é permanecer
 
 # Lesson 6
 l6_title:                 "Unidades de bitcoin"
+l6_app_bar:               "Unidades de Bitcoin"
 l6_p1:                    "A palavra bitcoin tem alguns significados. Ao se referir ao bitcoin, as pessoas às vezes querem dizer A) a rede, o protocolo, o projeto de código aberto ou B) uma das unidades de valor ao realizar transações na rede bitcoin."
 l6_h1:                    "Explicando:"
 l6_p3:                    "Assim como o quilômetro pode ser dividido em metros e centímetros, um pé pode ser dividido em polegadas, um bitcoin pode ser dividido em unidades menores."
@@ -181,6 +187,7 @@ l6_p12:                   "Na Padawan, você pode alternar entre as duas unidade
 
 # Lesson 7
 l7_title:                 "O que é uma frase de recuperação?"
+l7_app_bar:               "Frases de recuperação"
 l7_p1:                    "A sua carteira é como uma árvore e os endereços gerados são como suas folhas (lembre-se de que você usa um novo endereço toda vez que recebe bitcoin). O número de endereços que podem ser gerados a partir da árvore é quase infinito, mas a única parte necessária para fazer backup dessa “árvore de endereços” é lembrar a sua raiz. Cada nova raiz gerará uma árvore completamente nova, mas qualquer carteira pode recriar a árvore inteira simplesmente começando pela raiz."
 l7_p2:                    "As carteiras bitcoin atuais usam um processo chamado geração determinística de chaves. Cada novo endereço que sua carteira produz é gerado de forma não aleatória. Isso permite que a carteira gere novos endereços, sem que você precise se lembrar de todos individualmente (você não precisa fazer backups individuais dos endereços nos quais recebeu bitcoin)."
 l7_p3:                    "A “raiz” da sua carteira é a sua frase de recuperação (conhecida também como Seed). A frase de recuperação nada mais é que um número muito grande, mas números são difíceis de lembrar e geralmente há o risco de anotá-los errados."
@@ -192,6 +199,7 @@ l7_p7:                    "A importância da frase de recuperação é imensa: s
 
 # Lesson 8
 l8_title:                 "Recuperando sua carteira."
+l8_app_bar:               "Recuperação da carteira"
 l8_p1:                    "Restaurar uma carteira a partir de uma frase de recuperação é fácil. As frases de recuperação (Seed) usam o padrão chamado BIP39, que fornece uma maneira comum de recuperar moedas entre diferentes aplicativos de carteiras bitcoin. O procedimento usual para fazer backup e recuperar uma carteira é o seguinte:"
 l8_p2:                    "1. Quando uma carteira é criada, o software informa 12 ou 24 palavras para você anotar e guardar. A ordem das palavras é importante, então certifique-se de escrevê-las na ordem correta. Na Padawan, você pode ver suas 12 palavras a qualquer momento acessando a tela “Frase de recuperação” no menu."
 l8_p3:                    "Na maioria das outras carteiras, você terá acesso à frase de recuperação apenas uma vez, portanto, ANOTE-AS COM CUIDADO E CUIDE DELAS COM A IMPORTÂNCIA DO DINHEIRO QUE ELAS REPRESENTAM."
@@ -204,6 +212,7 @@ l8_p8:                    "As moedas de signet que você possui na Padawan podem
 
 # Lesson 9
 l9_title:                 "Os diferentes tipos de carteira"
+l9_app_bar:               "Carteiras diferentes"
 l9_h1:                    "Por que existe mais de um tipo de carteira?"
 l9_p1:                    "Uma carteira bitcoin protege um conjunto de chaves criptográficas (números muito grandes e importantes). É crucial proteger essas chaves e garantir que elas não sejam acessadas por ninguém além do dono da carteira."
 l9_p2:                    "Cada tipo de carteira terá os seus prós e contra entre seu nível de segurança e sua facilidade de uso. Escolher a carteira certa para um uso específico pode ser desafiador, mas é importante! Esse capítulo vai ajudá-lo a entender porque e quando usar diferentes tipos de carteiras bitcoin."

@@ -94,6 +94,7 @@
     <string name="no_thank_you_icon">Icono no gracias</string>
     <string name="proceed_icon">Icono proceder</string>
     <string name="l1_title">¿Qué es el Bitcoin Signet?</string>
+    <string name="l1_app_bar">Redes Bitcoin</string>
     <string name="l1_p1">Las redes de Bitcoin están compuestas por miles de computadoras en todo el mundo. Estas computadoras hablan un lenguaje común y se comunican directamente entre sí a través de internet.</string>
     <string name="l1_p2">Tal vez no lo sepas, pero ¡existen muchas redes de bitcoin! Se dividen en dos familias: la red principal (solo hay una de esas) y las redes de prueba (¡hay muchas de esas!).</string>
     <string name="l1_h2">Mainnet</string>
@@ -107,6 +108,7 @@
     <string name="l1_p8">Padawan te enseñará los fundamentos de bitcoin, incluyendo cómo realizar transacciones y respaldar carteras, todo usando la red signet. No puedes recibir ni enviar bitcoins de mainnet desde o hacia tu cartera de Padawan. Cualquier moneda que tengas en Padawan o envíes a amigos usando la aplicación son monedas signet SIN valor monetario.</string>
     <string name="l1_p9">¡Usa Padawan para aprender, practicar y probar los límites de tu conocimiento sobre bitcoin!</string>
     <string name="l2_title">Recibir bitcoin</string>
+    <string name="l2_app_bar">Recibiendo Bitcoin</string>
     <string name="l2_p1">Para recibir bitcoin, debes solicitar a tu cartera (una como Padawan) que genere una nueva dirección de recepción. Cada vez que recibas bitcoin, tu cartera utilizará una nueva dirección.</string>
     <string name="l2_p2">Para que sea más fácil de compartir, te mostramos la dirección de dos formas habituales:</string>
     <string name="l2_p3">1. Una serie de letras y números que puede que se parezcan a algo como esto:</string>
@@ -123,9 +125,11 @@
     <string name="l2_p12">Aunque el sistema de códigos QR y la función de copiar y pegar de nuestros teléfonos son una forma aceptable de ser precavidos, siempre debes comprobar dos veces la dirección completa de recepción. Como mínimo, cuando copies y pegues la dirección, asegúrate de que los 5-10 primeros caracteres y los 5-10 últimos coinciden.</string>
     <string name="l2_p13">Recordatorio: Padawan solo utiliza bitcoins de la red de pruebas. ¡No intentes enviar bitcoins reales!</string>
     <string name="l3_title">Enviar bitcoin</string>
+    <string name="l3_app_bar">Enviando bitcoin</string>
     <string name="l3_p1">Para enviar bitcoin, debes solicitar una dirección de recepción. Si te ofrecen un código QR, escanéalo utilizando la cámara de tu teléfono. Si recibes una serie de letras y números, puedes copiar la dirección y pegarla en el campo de la dirección en la pantalla de la transacción en tu aplicación. ¡Recuerda comprobar dos veces la dirección cuando la hayas copiado!</string>
     <string name="l3_p2">Cuando hayas introducido la dirección, especifica la cantidad de bitcoin a enviar (ya sean unidades de bitcoin o satoshis), y emite la transacción a la red. Tu transacción será recibida por los nodos de todo el mundo, y con el tiempo, ¡será minada en un bloque!</string>
     <string name="l4_title">¿Qué es la mempool?</string>
+    <string name="l4_app_bar">La Mempool</string>
     <string name="l4_p1">Cuando completas y emites una transacción de bitcoin, esta transacción es anotada por todos los ordenadores conectados a la red de bitcoin normalmente entre los 2 y 5 siguientes segundos. Con el tiempo la transacción se añadirá a la cadena de bloques, pero cuando un nodo la recibe por primera vez, simplemente la añade a un grupo de transacciones que conoce pero que todavía no han sido incluidas en un bloque. Este grupo de transacciones es lo que se conoce como mempool (o memoria de reserva - "memory pool" en inglés), y cada ordenador conectado a la red de bitcoin guarda su propia mempool. Una transacción que está "en la mempool" (lo que indica que la mayoría de nodos la han visto y la han añadido a su "mempool") significa que ha sido reconocida por la red, aunque no se ha hecho oficial en la cadena de bloques.</string>
     <string name="l4_p2">Para hacerla oficial, los mineros de bitcoin necesitan minar un bloque con la transacción incluida.</string>
     <string name="l4_h1">Imagina un autobús</string>
@@ -135,6 +139,7 @@
     <string name="l4_p5">Algunos pasajeros puede que tengan prisa para subirse al siguiente autobús. Pueden pagar una tarifa extra para asegurarse que serán de los primeros en subir. Estas transacciones son las que tendrán prioridad en el proceso de la minería.</string>
     <string name="l4_p6">En cambio, ¡otros pasajeros puede que no tengan ninguna prisa! En ese caso, puede que quieran ahorrarse un poco de dinero al no pagar una tarifa extra. Con el paso del tiempo la cola se acabará vaciando y todas las transacciones que estaban esperando acabarán subiendo al autobús.</string>
     <string name="l5_title">¿Qué son las comisiones de transacción?</string>
+    <string name="l5_app_bar">Comisiones de Transacción</string>
     <string name="l5_p1">Ahora ya sabes un poco más sobre las transacciones. Muchas, muchas transacciones son enviadas, validadas, confirmadas y almacenadas en la red de bitcoin cada minuto de cada día. Lo que es algo muy costoso.</string>
     <string name="l5_p2">La red de bitcoin solo puede hacer frente a una demanda limitada del sistema. Para asegurarse de que la carga de la red se mantiene pequeña y ligera, hay una capacidad limitada en cuanto a la cantidad total de bytes que se pueden transaccionar a través de la red en una determinada cantidad de tiempo.</string>
     <string name="l5_h1">La puja en las comisiones de las transacciones</string>
@@ -143,6 +148,7 @@
     <string name="l5_h2">¿Por qué la red necesita que la carga sea ligera?</string>
     <string name="l5_p5">Una de las principales ventajas de la red de bitcoin es su habilidad para estar sincronizada y ser distribuida a través de muchos ordenadores conectados a la red por todo el mundo. Cuanto más pequeña y ligera sea la carga de la red, más resistente será frente a ataques, y cuanto más neutral y robusta se mantenga, más nos podremos beneficiar de su disponibilidad y robustez.</string>
     <string name="l6_title">Unidades de bitcoin</string>
+    <string name="l6_app_bar">Unidades de Bitcoin</string>
     <string name="l6_p1">La palabra bitcoin tiene varios significados. Cuando la gente se refiere a bitcoin suele significar (a) la red, el protocolo, el proyecto de código abierto, o (b) una unidad de valor cuando realizan una transacción en la red de bitcoin.</string>
     <string name="l6_h1">Descomponiéndolo</string>
     <string name="l6_p3">De la misma forma que el kilómetro se puede descomponer en metros y centímetros y un pie se puede descomponer en pulgadas, un bitcoin se puede descomponer en unidades más pequeñas.</string>
@@ -158,6 +164,7 @@
     <string name="l6_p11">Quien utilice aplicaciones de bitcoin debe desarrollar la habilidad para comprender tanto la unidad de medida de bitcoin como la del satoshi. Muchas transacciones son denominadas en bitcoin, pero la comisión de la red (ver capítulo 4) casi siempre utilizará la unidad de medida de satoshis.</string>
     <string name="l6_p12">En Padawan, puedes cambiar entre las dos unidades de medida en la pantalla principal de la cartera pulsando el símbolo btc/sats.</string>
     <string name="l7_title">¿Que son las palabras de recuperación?</string>
+    <string name="l7_app_bar">Palabras de Recuperación</string>
     <string name="l7_p1">Piensa que tu cartera es como un árbol, y las direcciones que genera como sus hojas (recuerda utilizar una nueva dirección cada vez que recibas bitcoin). El número de direcciones que se pueden generar a partir de este árbol son casi infinitas, pero lo único que hay que respaldar o guardar de este "árbol de direcciones" es su raíz. Cada nueva raíz generará un nuevo árbol completo, pero cualquier cartera podrá recrear el árbol completo simplemente utilizando la raíz.</string>
     <string name="l7_p2">Las carteras modernas de bitcoin utilizan un proceso llamado generación de claves determinista. Cada nueva dirección que produce tu cartera no se genera de forma aleatoria. Esto permite que sea muy flexible a la hora de generar nuevas direcciones, sin tener que recordarlas todas individualmente (no tienes que hacer respaldos individuales de todas las direcciones en las que hayas recibido bitcoin).</string>
     <string name="l7_p3">La "raíz" de tu cartera es la semilla de tu cartera. Esta semilla de tu cartera es simplemente un número muy, muy grande. Pero los números son muy difíciles de recordar, y los humanos normalmente son pésimos a la hora de escribirlos correctamente sin cometer errores o equivocaciones.</string>
@@ -167,6 +174,7 @@
     <string name="l7_p6">Las palabras que contengan tus palabras de recuperación o palabras de respaldo deben de ser tratadas con el máximo cuidado. Contienen la llave de todo el bitcoin almacenado en tu cartera, y son lo único que se necesita para acceder a todos los fondos. Debemos tener mucho cuidado de no compartir estas palabras de recuperación con atacantes potenciales.</string>
     <string name="l7_p7">Pero el valor de estas palabras de recuperación es inmenso: significa que puedes borrar la aplicación o perder tu teléfono y no perderás tus fondos. Mientras hayas guardado de forma segura las 12 palabras de recuperación, podrás recuperar tu cartera y todo el bitcoin que contiene. Generalmente es una buena práctica escribir estas palabras de recuperación en objetos físicos como el papel o el metal (no guardarlo o apuntarlo en ningún dispositivo electrónico como ordenadores, teléfonos móviles o fotos) y almacenarlos en un lugar seguro. Dónde y cómo lo hagas dependerá de la cantidad que tengas en tu cartera y el nivel de seguridad requerido para tu caso de uso.</string>
     <string name="l8_title">Recuperar tu cartera</string>
+    <string name="l8_app_bar">Recuperación de la billetera</string>
     <string name="l8_p1">Reestablecer una cartera a partir de las palabras de recuperación es normalmente bastante fácil. Las palabras de recuperación (también conocido como frase mnemónica) utiliza un estándar llamado BIP39, el cual proporciona una forma común para recuperar tus monedas en diferentes carteras. El patrón habitual para respaldar y recuperar una cartera es el siguiente:</string>
     <string name="l8_p2">1. Creamos una cartera y el programa o la aplicación nos proporcionará 12 o 24 palabras para que las anotemos y las guardemos. El orden de estas palabras es importante, asique asegúrate de anotarlas en el orden correcto. En Padawan, podrás ver las 12 palabras cuando quieras entrando en la pantalla de "Palabras de recuperación" en el menú.</string>
     <string name="l8_p3">En la mayoría de carteras, solo tendrás una oportunidad para ver las palabras, ASIQUE ASEGÚRATE DE ESCRIBIRLAS Y TRATARLAS COMO EL DINERO QUE REPRESENTAN.</string>
@@ -177,6 +185,7 @@
     <string name="l8_p7">Este aspecto del software de bitcoin es a menudo malinterpretado y merece la pena que te tomes tu tiempo para apreciarlo; los bitcoins no están "guardados" en ningún teléfono, ordenador o cartera física (en inglés hardware wallet). Simplemente accedes a ellos.</string>
     <string name="l8_p8">Las monedas de signet que tienes en Padawan pueden recuperarse y ser utilizadas en otras carteras para móviles, carteras para ordenadores y carteras físicas (o hardware wallets) que soporten el estándar del BIP39. Si tus palabras de recuperación están correctamente respaldadas, borrar la aplicación de tu teléfono ¡no será un problema!</string>
     <string name="l9_title">Los diferentes tipos de carteras</string>
+    <string name="l9_app_bar">Carteras diferentes</string>
     <string name="l9_h1">¿Por qué hay más de un tipo de cartera?</string>
     <string name="l9_p1">Una cartera de bitcoin protege un juego de claves criptográficas (números muy grandes e importantes). Es importante proteger estas claves, y asegurarse de que nadie accede a ellas salvo el propietario de la cartera.</string>
     <string name="l9_p2">Hay muchas soluciones para esta necesidad. Cada tipo de cartera tiene inconvenientes entre su nivel de seguridad y su facilidad de uso. Elegir la cartera correcta puede ser sobrecogedor, ¡pero es importante! En este capítulo te ayudaremos a comprender porqué y cuándo se utilizan diferentes tipos de carteras.</string>

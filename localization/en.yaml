@@ -98,13 +98,14 @@ select_language:          "Select your preferred language and color theme for Pa
 get_coins:                "Get Signet coins"
 button_link_privacy:      "Read our privacy policy here."
 
-# Content Descriptons
+# Content Descriptions
 return_address_image:     "Return sats faucet address image"
 no_thank_you_icon:        "No thank you icon"
 proceed_icon:             "Proceed icon"
 
 # Lesson 1
 l1_title:                  "What is the Bitcoin Signet?"
+l1_app_bar:                "Bitcoin Networks"
 l1_p1:                     "Bitcoin networks are made up of thousands of computers across the world. These computers speak a common language and communicate directly with each other over the internet."
 l1_p2:                     "You might not know, but there are many bitcoin networks! They break into two families: the main network (there is only one of those) and the test networks (there are many of those!)."
 l1_h2:                     "Mainnet"
@@ -120,6 +121,7 @@ l1_p9:                     "Use Padawan to learn, practice, and test the boundar
 
 # Lesson 2
 l2_title:                  "Receiving bitcoin"
+l2_app_bar:                "Receiving Bitcoin"
 l2_p1:                     "To receive bitcoin, you ask your wallet software (like Padawan) to generate a receive address. Each time your receive bitcoin, a new address will be used by your wallet."
 l2_p2:                     "To make it easier to share, we display this address in two common ways:"
 l2_p3:                     "1. A string of letters and numbers that might look like this:"
@@ -138,11 +140,13 @@ l2_p13:                    "Reminder: Padawan only uses signet bitcoins. Do not 
 
 # Lesson 3
 l3_title:                  "Sending bitcoin"
+l3_app_bar:                "Sending bitcoin"
 l3_p1:                     "To send bitcoin, you must ask for a receive address. If offered a QR code, scan it using your phone's camera. If you receive a long string of letters and numbers, you can copy and paste the address into the address field of the transaction screen of the app. Remember to double check the address once you have pasted it!"
 l3_p2:                     "Once you have inputted the address, specify the amount of bitcoin to send (either in bitcoin units or in satoshis), and broadcast the transaction to the network. Your transaction will be picked up by nodes all over the world, and will eventually be mined in a block!"
 
 # Lesson 4
 l4_title:                  "What is the mempool?"
+l4_app_bar:                "The Mempool"
 l4_p1:                     "When you complete and broadcast a bitcoin transaction, it is recorded across all computers connected to the bitcoin network usually within 2 to 5 seconds. Eventually the transaction is added to the blockchain, but when a node initially becomes aware of it, it simply adds it to a group of transactions it knows about but that have not yet been included in a block. This group of transactions is called the mempool (or \"memory pool\"), and each computer connected to the bitcoin network keeps its own memory pool. A transaction being \"in the mempool\" (meaning most nodes have seen and added the transaction to their memory pool) means it has been acknowledged by the network, but not yet made official on the blockchain."
 l4_p2:                     "To be made official, bitcoin miners need to mine a block that has the transaction included in it."
 l4_h1:                     "Imagine a bus"
@@ -154,6 +158,7 @@ l4_p6:                     "On the other hand, some passengers might not be in a
 
 # Lesson 5
 l5_title:                  "What are transaction fees?"
+l5_app_bar:                "Transaction Fees"
 l5_p1:                     "Now you know a little bit more about transactions. There are many, many transactions being sent, validated, confirmed, and stored in the bitcoin network every minute of every day. This is a very costly affair."
 l5_p2:                     "The bitcoin network can only keep up with so much demand on the system. To make sure the load on the network stays light and lean, there is a limited capacity for the total amount of bytes that can be transacted over the network per amount of time."
 l5_h1:                     "Bidding using transaction fees"
@@ -164,6 +169,7 @@ l5_p5:                     "One of the main advantages of the bitcoin network is
 
 # Lesson 6
 l6_title:                  "Bitcoin units"
+l6_app_bar:                "Bitcoin Units"
 l6_p1:                     "The word bitcoin has a few meanings. When referring to bitcoin, people sometime mean (a) the network, the protocol, the open source project, or (b) one of the units of value when transacting on the bitcoin network."
 l6_h1:                     "Breaking it down"
 l6_p3:                     "Just like the kilometer can be broken down into meters and centimeters and the foot can be broken down into inches, a bitcoin can be broken into smaller units."
@@ -181,6 +187,7 @@ l6_p12:                    "In Padawan, you can switch between the two units in 
 
 # Lesson 7
 l7_title:                  "What is a recovery phrase?"
+l7_app_bar:                "Recovery Phrases"
 l7_p1:                     "You can think of your wallet as a tree, and the addresses it generates as its leaves (remember that you use a new address every time you receive bitcoin). The number of addresses that can be generated from this tree is near-infinite, but the only necessary part of backing up such a \"tree of addresses\" is to remember the root of the tree. Each new root will generate a completely new tree, but any wallet can recreate the whole tree simply by starting with the root."
 l7_p2:                     "Modern bitcoin wallets use a process called deterministic key generation. Every new address your wallet produces is generated non-randomly. This gives them the property of being very flexible in terms of generating new addresses, while not having to remember them all individually (you do not have to make individual backups for all the addresses to which you received bitcoin)."
 l7_p3:                     "The \"root\" of your wallet is the wallet seed. This wallet seed is simply a really, really large number. But numbers are notoriously hard to remember, and humans are usually really bad at writing them down properly without making mistakes or typos."
@@ -192,6 +199,7 @@ l7_p7:                     "But the value of this recovery phrase is immense: it
 
 # Lesson 8
 l8_title:                  "Recovering your wallet"
+l8_app_bar:                "Wallet Recovery"
 l8_p1:                     "Recovering a wallet from a recovery phrase is usually fairly easy. Recovery phrases (sometimes also called mnemonics) use a standard called BIP39, which provides a common way to recover coins between different wallets. The usual pattern for backing up and recovering a wallet is the following:"
 l8_p2:                     "1. We create a wallet and the software provides us with either 12 or 24 words to write down and keep. The order of the words is important, so make sure you write them in the right order. In Padawan, you can see those 12 words at any time by going into the \"Recovery phrase\" screen in the menu."
 l8_p3:                     "In most other wallets, you will only get a chance to see those words once, SO MAKE SURE YOU WRITE THEM DOWN AND TREAT THEM LIKE THE MONEY THEY REPRESENT."
@@ -204,6 +212,7 @@ l8_p8:                     "The signet coins you have on Padawan can be recovere
 
 # Lesson 9
 l9_title:                  "The different types of wallets"
+l9_app_bar:                "Different Wallets"
 l9_h1:                     "Why is there more than one type of wallet?"
 l9_p1:                     "A bitcoin wallet secures a set of cryptographic keys (very large and important numbers). It is important to protect these keys, and ensure they are not accessed by anyone other than the wallet owner."
 l9_p2:                     "There are many solutions for this requirement. Each type of wallet will have tradeoffs between its security level and its ease-of-use. Choosing the right wallet for a specific use can be overwhelming, but it is important! This chapter will help you understand why and when to use different types of bitcoin wallets."

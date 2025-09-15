@@ -94,6 +94,7 @@
     <string name="no_thank_you_icon">No thank you icon</string>
     <string name="proceed_icon">Proceed icon</string>
     <string name="l1_title">What is the Bitcoin Signet?</string>
+    <string name="l1_app_bar">Bitcoin Networks</string>
     <string name="l1_p1">Bitcoin networks are made up of thousands of computers across the world. These computers speak a common language and communicate directly with each other over the internet.</string>
     <string name="l1_p2">You might not know, but there are many bitcoin networks! They break into two families: the main network (there is only one of those) and the test networks (there are many of those!).</string>
     <string name="l1_h2">Mainnet</string>
@@ -107,6 +108,7 @@
     <string name="l1_p8">Padawan will teach you the foundations of bitcoin, including making transactions and backing up wallets, all using the signet network. You cannot receive or send mainnet bitcoins to or from your Padawan wallet. Any coins you have on Padawan or send to friends using the app are signet coins with NO monetary value.</string>
     <string name="l1_p9">Use Padawan to learn, practice, and test the boundaries of your bitcoin knowledge!</string>
     <string name="l2_title">Receiving bitcoin</string>
+    <string name="l2_app_bar">Receiving Bitcoin</string>
     <string name="l2_p1">To receive bitcoin, you ask your wallet software (like Padawan) to generate a receive address. Each time your receive bitcoin, a new address will be used by your wallet.</string>
     <string name="l2_p2">To make it easier to share, we display this address in two common ways:</string>
     <string name="l2_p3">1. A string of letters and numbers that might look like this:</string>
@@ -123,9 +125,11 @@
     <string name="l2_p12">Even though the QR code system and the copy/paste function of our phones are an acceptable way of remaining cautious, you should always double check the complete receive address. At the very least, when you copy and paste your receive address, make sure the first and last 5–10 characters of the address match.</string>
     <string name="l2_p13">Reminder: Padawan only uses signet bitcoins. Do not try to send it real bitcoins!</string>
     <string name="l3_title">Sending bitcoin</string>
+    <string name="l3_app_bar">Sending bitcoin</string>
     <string name="l3_p1">To send bitcoin, you must ask for a receive address. If offered a QR code, scan it using your phone\'s camera. If you receive a long string of letters and numbers, you can copy and paste the address into the address field of the transaction screen of the app. Remember to double check the address once you have pasted it!</string>
     <string name="l3_p2">Once you have inputted the address, specify the amount of bitcoin to send (either in bitcoin units or in satoshis), and broadcast the transaction to the network. Your transaction will be picked up by nodes all over the world, and will eventually be mined in a block!</string>
     <string name="l4_title">What is the mempool?</string>
+    <string name="l4_app_bar">The Mempool</string>
     <string name="l4_p1">When you complete and broadcast a bitcoin transaction, it is recorded across all computers connected to the bitcoin network usually within 2 to 5 seconds. Eventually the transaction is added to the blockchain, but when a node initially becomes aware of it, it simply adds it to a group of transactions it knows about but that have not yet been included in a block. This group of transactions is called the mempool (or "memory pool"), and each computer connected to the bitcoin network keeps its own memory pool. A transaction being "in the mempool" (meaning most nodes have seen and added the transaction to their memory pool) means it has been acknowledged by the network, but not yet made official on the blockchain.</string>
     <string name="l4_p2">To be made official, bitcoin miners need to mine a block that has the transaction included in it.</string>
     <string name="l4_h1">Imagine a bus</string>
@@ -135,6 +139,7 @@
     <string name="l4_p5">Some passengers might be in a hurry to get on the next bus. They can pay an extra fare to make sure they are near the front of the line. These transactions will be prioritized in the mining process.</string>
     <string name="l4_p6">On the other hand, some passengers might not be in a hurry at all! In that case, they might want to save their money by not paying a higher fare. Eventually, the line will clear and every transaction waiting in line does get through.</string>
     <string name="l5_title">What are transaction fees?</string>
+    <string name="l5_app_bar">Transaction Fees</string>
     <string name="l5_p1">Now you know a little bit more about transactions. There are many, many transactions being sent, validated, confirmed, and stored in the bitcoin network every minute of every day. This is a very costly affair.</string>
     <string name="l5_p2">The bitcoin network can only keep up with so much demand on the system. To make sure the load on the network stays light and lean, there is a limited capacity for the total amount of bytes that can be transacted over the network per amount of time.</string>
     <string name="l5_h1">Bidding using transaction fees</string>
@@ -143,6 +148,7 @@
     <string name="l5_h2">Why does the network need a light load?</string>
     <string name="l5_p5">One of the main advantages of the bitcoin network is its ability to stay synchronized and distributed across many computers linked to the network all over the world. The lighter and leaner the load on the network, the more resistant it is to attacks, and the more neutral and robust it stays so that all can benefit from its availability and robustness.</string>
     <string name="l6_title">Bitcoin units</string>
+    <string name="l6_app_bar">Bitcoin Units</string>
     <string name="l6_p1">The word bitcoin has a few meanings. When referring to bitcoin, people sometime mean (a) the network, the protocol, the open source project, or (b) one of the units of value when transacting on the bitcoin network.</string>
     <string name="l6_h1">Breaking it down</string>
     <string name="l6_p3">Just like the kilometer can be broken down into meters and centimeters and the foot can be broken down into inches, a bitcoin can be broken into smaller units.</string>
@@ -158,6 +164,7 @@
     <string name="l6_p11">Someone using bitcoin applications must develop the skill to understand both bitcoin and satoshi units. Many transactions are denominated in bitcoin, but their network fee (see chapter 4) is almost always using the satoshi unit.</string>
     <string name="l6_p12">In Padawan, you can switch between the two units in the main wallet display page by touching the btc/sats symbol.</string>
     <string name="l7_title">What is a recovery phrase?</string>
+    <string name="l7_app_bar">Recovery Phrases</string>
     <string name="l7_p1">You can think of your wallet as a tree, and the addresses it generates as its leaves (remember that you use a new address every time you receive bitcoin). The number of addresses that can be generated from this tree is near-infinite, but the only necessary part of backing up such a "tree of addresses" is to remember the root of the tree. Each new root will generate a completely new tree, but any wallet can recreate the whole tree simply by starting with the root.</string>
     <string name="l7_p2">Modern bitcoin wallets use a process called deterministic key generation. Every new address your wallet produces is generated non-randomly. This gives them the property of being very flexible in terms of generating new addresses, while not having to remember them all individually (you do not have to make individual backups for all the addresses to which you received bitcoin).</string>
     <string name="l7_p3">The "root" of your wallet is the wallet seed. This wallet seed is simply a really, really big number. But numbers are notoriously hard to remember, and humans are usually really bad at writing them down properly without making mistakes or typos.</string>
@@ -167,6 +174,7 @@
     <string name="l7_p6">The words in your recovery phrase (or backup phrase) should be treated with the utmost care. They hold the key to all the bitcoin stored in a wallet, and they are indeed the only thing required to access all funds. We must be careful not to share this recovery phrase with potential attackers.</string>
     <string name="l7_p7">But the value of this recovery phrase is immense: it means you can delete the application or lose your phone, and you will not lose your funds. As long as you have kept your 12-word recovery phrase safe, you can recover your wallet and all the bitcoin it holds. It is generally a good practice to write down this recovery phrase on physical objects like paper or metal (not saved on a computer) and store it in a safe place. Where/how you do this depends on how much your wallet holds and the level of security required for your use case.</string>
     <string name="l8_title">Recovering your wallet</string>
+    <string name="l8_app_bar">Wallet Recovery</string>
     <string name="l8_p1">Recovering a wallet from a recovery phrase is usually fairly easy. Recovery phrases (sometimes also called mnemonics) use a standard called BIP39, which provides a common way to recover coins between different wallets. The usual pattern for backing up and recovering a wallet is the following:</string>
     <string name="l8_p2">1. We create a wallet and the software provides us with either 12 or 24 words to write down and keep. The order of the words is important, so make sure you write them in the right order. In Padawan, you can see those 12 words at any time by going into the "Recovery phrase" screen in the menu.</string>
     <string name="l8_p3">In most other wallets, you will only get a chance to see those words once, SO MAKE SURE YOU WRITE THEM DOWN AND TREAT THEM LIKE THE MONEY THEY REPRESENT.</string>
@@ -177,6 +185,7 @@
     <string name="l8_p7">This aspect of bitcoin software is often misunderstood and is worth taking the time to appreciate; bitcoins are not "held" in any mobile, desktop, or hardware wallet. They are simply accessed through them.</string>
     <string name="l8_p8">The signet coins you have on Padawan can be recovered and used on a range of other mobile, desktop, and hardware wallets that support BIP39 bitcoin wallets. If your recovery phrase is properly backed up, deleting the app on your phone is not an issue at all!</string>
     <string name="l9_title">The different types of wallets</string>
+    <string name="l9_app_bar">Different Wallets</string>
     <string name="l9_h1">Why is there more than one type of wallet?</string>
     <string name="l9_p1">A bitcoin wallet secures a set of cryptographic keys (very big and important numbers). It is important to protect these keys, and ensure they are not accessed by anyone other than the wallet owner.</string>
     <string name="l9_p2">There are many solutions for this requirement. Each type of wallet will have tradeoffs between its security level and its ease-of-use. Choosing the right wallet for a specific use can be overwhelming, but it is important! This chapter will help you understand why and when to use different types of bitcoin wallets.</string>
