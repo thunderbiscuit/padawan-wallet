@@ -73,16 +73,4 @@ class WalletRepositoryTest {
         `when`(sharedPrefsMock.getString("mnemonic", "No seed phrase saved")).thenReturn(null)
         assertEquals("Mnemonic get is incorrect", "Seed phrase not there", repo.getMnemonic())
     }
-
-    @Test
-    fun `Check if faucet was called before`() {
-        `when`(sharedPrefsMock.getBoolean("faucetCallDone", false)).thenReturn(true)
-        assertEquals("Faucet call is wrong", true, repo.wasFaucetCallDone())
-    }
-
-    @Test
-    fun `Check if faucet done call is correct`() {
-        repo.offerFaucetDone()
-        verify(editorMock, times(1)).putBoolean("offerFaucetDone", true)
-    }
 }

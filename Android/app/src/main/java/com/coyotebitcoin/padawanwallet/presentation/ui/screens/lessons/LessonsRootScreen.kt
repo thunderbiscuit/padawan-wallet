@@ -27,9 +27,9 @@ import com.coyotebitcoin.padawanwallet.domain.settings.PadawanColorTheme
 import com.coyotebitcoin.padawanwallet.presentation.theme.PadawanColorsTatooineDesert
 import com.coyotebitcoin.padawanwallet.presentation.theme.PadawanTheme
 import com.coyotebitcoin.padawanwallet.presentation.theme.PadawanTypography
+import com.coyotebitcoin.padawanwallet.presentation.ui.components.LessonCard
 import com.coyotebitcoin.padawanwallet.presentation.ui.components.SectionDivider
 import com.coyotebitcoin.padawanwallet.presentation.ui.components.SectionTitle
-import com.coyotebitcoin.padawanwallet.presentation.ui.components.LessonCard
 import com.coyotebitcoin.padawanwallet.presentation.utils.ScreenSizeWidth
 import com.coyotebitcoin.padawanwallet.presentation.utils.getScreenSizeWidth
 import com.coyotebitcoin.padawanwallet.presentation.viewmodels.mvi.LessonsRootScreenState

@@ -46,7 +46,7 @@ private const val TAG = "PadawanTag/Navigation"
  */
 @Composable
 fun NavigationRoot(
-    onboardingDone: Boolean
+    onboardingDone: Boolean,
 ) {
     val startingScreen = if (onboardingDone) SecondaryDestinations.CoreScreens else SecondaryDestinations.OnboardingScreens
     val backStack: NavBackStack = rememberNavBackStack(startingScreen)

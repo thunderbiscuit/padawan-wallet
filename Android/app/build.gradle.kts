@@ -13,8 +13,7 @@ plugins {
 }
 
 val faucetUrl: String by project
-val faucetUsername: String by project
-val faucetPassword: String by project
+val faucetToken: String by project
 
 android {
     compileSdk = 36
@@ -48,8 +47,7 @@ android {
             value = "Padawan Wallet",
         )
         buildConfigField("String", "FAUCET_URL", faucetUrl)
-        buildConfigField("String", "FAUCET_USERNAME", faucetUsername)
-        buildConfigField("String", "FAUCET_PASSWORD", faucetPassword)
+        buildConfigField("String", "FAUCET_TOKEN", faucetToken)
     }
 
     androidResources {

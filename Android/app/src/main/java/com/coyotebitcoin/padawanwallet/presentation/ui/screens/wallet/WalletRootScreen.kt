@@ -101,6 +101,7 @@ internal fun WalletHomeScreen(
     val colors = LocalPadawanColors.current
     val (openDialog, setOpenDialog) = remember { mutableStateOf(false) }
     if (openDialog) FaucetDialog(onAction, setOpenDialog)
+    val userCanRequestFaucetCoins = state.userCanRequestFaucetCoins
 
     val padding = when (getScreenSizeWidth(LocalConfiguration.current.screenWidthDp)) {
         ScreenSizeWidth.Small -> PaddingValues(horizontal = 12.dp)
@@ -132,6 +133,7 @@ internal fun WalletHomeScreen(
         TransactionListBox(
             setOpenDialog = setOpenDialog,
             transactionList = state.transactions,
+            userCanRequestFaucetCoins = userCanRequestFaucetCoins,
             isOnline = state.isOnline,
             onAction = onAction,
             onNavigation = onNavigation
@@ -385,6 +387,7 @@ fun SendReceive(
 fun TransactionListBox(
     setOpenDialog: (Boolean) -> Unit,
     transactionList: List<TransactionDetails>,
+    userCanRequestFaucetCoins: Boolean,
     isOnline: Boolean,
     onAction: (WalletAction) -> Unit,
     onNavigation: (SecondaryDestinations) -> Unit
@@ -414,7 +417,7 @@ fun TransactionListBox(
             ScreenSizeWidth.Phone -> 24.dp
         }
 
-        if (transactionList.isEmpty()) {
+        if (transactionList.isEmpty() && userCanRequestFaucetCoins) {
             Row(
                 modifier = Modifier.padding(all = padding).background(PadawanColorsTatooineDesert.background2)
             ) {

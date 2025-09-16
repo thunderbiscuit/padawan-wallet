@@ -68,12 +68,11 @@ internal fun CoreScreens(
         ) },
     ) { scaffoldPadding ->
         NavigationCoreScreens(
-            // onBack = onBack,
+            backStack = backStack,
             bottomBarBackStack = bottomBarBackStack,
             walletViewModel = walletViewModel,
             chaptersViewModel = chaptersViewModel,
             scaffoldPadding = scaffoldPadding,
-            backStack = backStack
         )
     }
 }

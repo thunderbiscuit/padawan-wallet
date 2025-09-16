@@ -51,19 +51,13 @@ object WalletRepository {
         return sharedPreferences.getString("mnemonic", "No seed phrase saved") ?: "Seed phrase not there"
     }
 
-    fun wasFaucetCallDone(): Boolean {
-        return sharedPreferences.getBoolean("faucetCallDone", false)
+    fun hasUserClaimedFaucetCoins(): Boolean {
+        return sharedPreferences.getBoolean("hasClaimedFaucetCoins", false)
     }
 
-    fun faucetCallDone() {
+    fun userHasClaimedFaucetCoins() {
         val editor = sharedPreferences.edit()
-        editor.putBoolean("faucetCallDone", true)
-        editor.apply()
-    }
-
-    fun offerFaucetDone() {
-        val editor = sharedPreferences.edit()
-        editor.putBoolean("offerFaucetDone", true)
+        editor.putBoolean("hasClaimedFaucetCoins", true)
         editor.apply()
     }
 

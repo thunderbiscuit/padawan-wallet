@@ -1,34 +1,35 @@
+/*
+ * Copyright 2020-2025 thunderbiscuit and contributors.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the ./LICENSE file.
+ */
+
 package com.coyotebitcoin.padawanwallet.domain.bitcoin
 
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.cio.CIO
 import io.ktor.client.plugins.auth.Auth
-import io.ktor.client.plugins.auth.providers.BasicAuthCredentials
-import io.ktor.client.plugins.auth.providers.basic
+import io.ktor.client.plugins.auth.providers.BearerTokens
+import io.ktor.client.plugins.auth.providers.bearer
 import io.ktor.client.request.request
 import io.ktor.client.request.setBody
 import io.ktor.client.statement.HttpResponse
+import io.ktor.content.TextContent
 import io.ktor.http.ContentType
 import io.ktor.http.HttpMethod
 import io.ktor.utils.io.core.use
 import kotlinx.coroutines.runBlocking
-import io.ktor.content.TextContent
 
 class FaucetService {
     fun callTatooineFaucet(
         address: String,
         faucetUrl: String,
-        faucetUsername: String,
-        faucetPassword: String
+        faucetToken: String,
     ): FaucetCall {
         val ktorClient = HttpClient(CIO) {
             install(Auth) {
-                basic {
-                    credentials {
-                        BasicAuthCredentials(
-                            username = faucetUsername,
-                            password = faucetPassword
-                        )
+                bearer {
+                    loadTokens {
+                        BearerTokens(faucetToken, "")
                     }
                 }
             }

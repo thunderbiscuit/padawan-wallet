@@ -40,6 +40,7 @@ class WalletViewModel(application: Application) : AndroidViewModel(application) 
     private var isOnline: Boolean by mutableStateOf(false)
     private var sendAddress: String? by mutableStateOf(null)
     private var singleTxDetails: TransactionDetails? = null
+    private var userCanRequestFaucetCoins: Boolean by mutableStateOf(false)
 
     var walletState by mutableStateOf(
         WalletState(
@@ -54,24 +55,22 @@ class WalletViewModel(application: Application) : AndroidViewModel(application) 
 
     init {
         isOnline = updateNetworkStatus(application)
+        userCanRequestFaucetCoins = !WalletRepository.hasUserClaimedFaucetCoins()
+        walletState = walletState.copy(isOnline = isOnline, userCanRequestFaucetCoins = userCanRequestFaucetCoins)
         // firstAutoSync()
-        // Log.i(TAG, "First sync")
-        // val txList: List<TransactionDetails> = Wallet.listTransactions()
-        // walletState = walletState.copy(transactions = txList, isOnline = isOnline)
-        walletState = walletState.copy(isOnline = isOnline)
     }
 
 
     fun onAction(action: WalletAction) {
         when (action) {
-            is WalletAction.Sync -> sync()
-            is WalletAction.RequestCoins -> requestCoins()
+            is WalletAction.Sync               -> sync()
+            is WalletAction.RequestCoins       -> requestCoins()
             is WalletAction.CheckNetworkStatus -> updateNetworkStatus()
-            is WalletAction.QRCodeScanned -> updateSendAddress(action.address)
-            is WalletAction.Broadcast -> broadcastTransaction(action.tx)
+            is WalletAction.QRCodeScanned      -> updateSendAddress(action.address)
+            is WalletAction.Broadcast          -> broadcastTransaction(action.tx)
             is WalletAction.UiMessageDelivered -> uiMessageDelivered()
-            is WalletAction.SeeSingleTx -> { setSingleTxDetails(action.tx) }
-            is WalletAction.BuildAndSignPsbt -> { buildAndSignPsbt(action.address, action.amount, action.feeRate) }
+            is WalletAction.SeeSingleTx        -> { setSingleTxDetails(action.tx) }
+            is WalletAction.BuildAndSignPsbt   -> { buildAndSignPsbt(action.address, action.amount, action.feeRate) }
         }
     }
 
@@ -124,8 +123,7 @@ class WalletViewModel(application: Application) : AndroidViewModel(application) 
     private fun requestCoins() {
         val address = Wallet.getLastUnusedAddress().address
         val faucetUrl: String = BuildConfig.FAUCET_URL
-        val faucetUsername: String = BuildConfig.FAUCET_USERNAME
-        val faucetPassword: String = BuildConfig.FAUCET_PASSWORD
+        val faucetToken: String = BuildConfig.FAUCET_TOKEN
         Log.i(TAG, "############################################")
         // Log.i(TAG, "Calling server with url: $faucetUrl")
         // Log.i(TAG, "Calling server with username: $faucetUsername")
@@ -137,16 +135,15 @@ class WalletViewModel(application: Application) : AndroidViewModel(application) 
         viewModelScope.launch {
             val response = withContext(Dispatchers.IO) {
                 faucetService.callTatooineFaucet(
-                    address.toString(),
-                    faucetUrl,
-                    faucetUsername,
-                    faucetPassword
+                    address = address.toString(),
+                    faucetUrl = faucetUrl,
+                    faucetToken = faucetToken,
                 )
             }
 
             when (response) {
                 is FaucetCall.Success -> {
-                    WalletRepository.faucetCallDone()
+                    WalletRepository.userHasClaimedFaucetCoins()
                     Log.i(TAG, "Faucet call succeeded with status: ${response.status}, description: ${response.description}")
                 }
                 is FaucetCall.Error -> {
@@ -157,7 +154,8 @@ class WalletViewModel(application: Application) : AndroidViewModel(application) 
                     Log.i(TAG, "Faucet call threw an exception: ${response.exception}")
                 }
             }
-            delay(2000)
+            delay(1000)
+            walletState = walletState.copy(userCanRequestFaucetCoins = false)
             sync()
         }
     }
@@ -191,7 +189,7 @@ class WalletViewModel(application: Application) : AndroidViewModel(application) 
 
     private fun firstAutoSync() {
         viewModelScope.launch {
-            delay(4000)
+            delay(1000)
             sync()
         }
     }
