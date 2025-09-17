@@ -57,7 +57,7 @@ class WalletViewModel(application: Application) : AndroidViewModel(application) 
         isOnline = updateNetworkStatus(application)
         userCanRequestFaucetCoins = !WalletRepository.hasUserClaimedFaucetCoins()
         walletState = walletState.copy(isOnline = isOnline, userCanRequestFaucetCoins = userCanRequestFaucetCoins)
-        // firstAutoSync()
+        firstAutoSync()
     }
 
 
