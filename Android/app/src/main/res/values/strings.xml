@@ -31,7 +31,7 @@
     <string name="send_coins_back">Signet coins can be hard to acquire, and even though they have no market value, they are not infinite, and we should be careful not to waste them or let them get lost!\n\nOnce you are done with your signet coins, please consider sending them back to the Padawan project so that we can continue sending coins to new users. Use the address above to send your coins back to us.</string>
     <string name="privacy_text">Padawan Wallet does not collect any information on its users, and does not use Firebase Crashlytics. This, however, means it\'s much harder for us to hear about the bugs from our users. If you have feedback, feel free to send a message to the Padawan Twitter/X account (@padawanwallet) or to write us an email. You can read our full privacy policy here:</string>
     <string name="privacy_link">https://github.com/thunderbiscuit/padawan-wallet/blob/master/PRIVACY.txt</string>
-    <string name="send_coins_back_address">tb1pjeu9rw9cwpmya0p85x9l27vp8hqd2hx2lwggta2fgm7u0gvua6asf8zrqw</string>
+    <string name="send_coins_back_address">tb1pu5yrm5vmtnvtla4d83qexh4tjpwmccuc4pyfryrf45g7534ck9nqz7408v</string>
     <string name="copy_address_string">Copy</string>
     <string name="text_copied">Copied</string>
     <string name="cancel">Cancel</string>
@@ -167,8 +167,8 @@
     <string name="l7_app_bar">Recovery Phrases</string>
     <string name="l7_p1">You can think of your wallet as a tree, and the addresses it generates as its leaves (remember that you use a new address every time you receive bitcoin). The number of addresses that can be generated from this tree is near-infinite, but the only necessary part of backing up such a "tree of addresses" is to remember the root of the tree. Each new root will generate a completely new tree, but any wallet can recreate the whole tree simply by starting with the root.</string>
     <string name="l7_p2">Modern bitcoin wallets use a process called deterministic key generation. Every new address your wallet produces is generated non-randomly. This gives them the property of being very flexible in terms of generating new addresses, while not having to remember them all individually (you do not have to make individual backups for all the addresses to which you received bitcoin).</string>
-    <string name="l7_p3">The "root" of your wallet is the wallet seed. This wallet seed is simply a really, really big number. But numbers are notoriously hard to remember, and humans are usually really bad at writing them down properly without making mistakes or typos.</string>
-    <string name="l7_p4">Instead, a standard for encoding these really big numbers has emerged in the bitcoin ecosystem. This standard uses a series of 12 or 24 words in a specific order, which together can always be used to recreate the wallet seed.</string>
+    <string name="l7_p3">The "root" of your wallet is the wallet seed. This wallet seed is simply a really, really large number. But numbers are notoriously hard to remember, and humans are usually really bad at writing them down properly without making mistakes or typos.</string>
+    <string name="l7_p4">Instead, a standard for encoding these really large numbers has emerged in the bitcoin ecosystem. This standard uses a series of 12 or 24 words in a specific order, which together can always be used to recreate the wallet seed.</string>
     <string name="l7_h1">Padawan and backups</string>
     <string name="l7_p5">Padawan uses this standard to allow users to create backups for its wallets. You\'ll find the 12 words (often referred to as a recovery phrase) on a separate screen under the menu options.</string>
     <string name="l7_p6">The words in your recovery phrase (or backup phrase) should be treated with the utmost care. They hold the key to all the bitcoin stored in a wallet, and they are indeed the only thing required to access all funds. We must be careful not to share this recovery phrase with potential attackers.</string>
@@ -187,7 +187,7 @@
     <string name="l9_title">The different types of wallets</string>
     <string name="l9_app_bar">Different Wallets</string>
     <string name="l9_h1">Why is there more than one type of wallet?</string>
-    <string name="l9_p1">A bitcoin wallet secures a set of cryptographic keys (very big and important numbers). It is important to protect these keys, and ensure they are not accessed by anyone other than the wallet owner.</string>
+    <string name="l9_p1">A bitcoin wallet secures a set of cryptographic keys (very large and important numbers). It is important to protect these keys, and ensure they are not accessed by anyone other than the wallet owner.</string>
     <string name="l9_p2">There are many solutions for this requirement. Each type of wallet will have tradeoffs between its security level and its ease-of-use. Choosing the right wallet for a specific use can be overwhelming, but it is important! This chapter will help you understand why and when to use different types of bitcoin wallets.</string>
     <string name="l9_h2">Hot vs cold wallets</string>
     <string name="l9_p3">The first distinction between wallets is whether they have any access to the internet at all. "Hot wallets" are connected to the internet. Padawan is connected to the internet, and therefore is classified as a hot wallet. Hot wallet are more vulnerable to security attacks, and there are more ways they can fail, but it is much easier to send and receive transactions using them.</string>

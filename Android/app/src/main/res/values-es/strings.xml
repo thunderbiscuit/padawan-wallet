@@ -31,7 +31,7 @@
     <string name="send_coins_back">Las monedas de signet pueden ser difíciles de adquirir, incluso aunque no tengan valor comercial no son infinitas, por lo que, ¡debemos tener cuidado de no malgastarlas o perderlas!\n\nCuando hayas acabado de utilizar las monedas de signet, por favor envíanoslas de vuelta al proyecto de Padawan para que podamos seguir enviando monedas a nuevos usuarios. Utiliza la dirección que aparece arriba para enviárnoslas de vuelta.</string>
     <string name="privacy_text">Padawan Wallet no recopila ningún tipo de información de sus usuarios ni utiliza Firebase Crashlytics. Esto significa que es mucho más difícil para nosotros enterarnos sobre los errores de la aplicación por parte de nuestros usuarios. En caso de tener cualquier comentario, no dudes en enviar un mensaje a la cuenta de Twitter/X (@padawanwallet) o envíanos un email. Puedes leer nuestra política de privacidad aquí:</string>
     <string name="privacy_link">https://github.com/thunderbiscuit/padawan-wallet/blob/master/PRIVACY.txt</string>
-    <string name="send_coins_back_address">tb1pjeu9rw9cwpmya0p85x9l27vp8hqd2hx2lwggta2fgm7u0gvua6asf8zrqw</string>
+    <string name="send_coins_back_address">tb1pu5yrm5vmtnvtla4d83qexh4tjpwmccuc4pyfryrf45g7534ck9nqz7408v</string>
     <string name="copy_address_string">Copiar</string>
     <string name="text_copied">Copiado</string>
     <string name="cancel">Cancelar</string>

@@ -31,7 +31,7 @@
     <string name="send_coins_back">Les jetons signets peuvent être difficiles à acquérir, et même s\'ils n\'ont aucune valeur marchande, ils ne sont pas infinis, et nous devrions faire attention à ne pas les gaspiller ou les laisser se perdre !\n\nUne fois que vous avez terminé avec vos jetons signets, veuillez envisager de les renvoyer au projet Padawan afin que nous puissions continuer à envoyer des jetons aux nouveaux utilisateurs. Utilisez l\'adresse ci-dessus pour nous renvoyer vos jetons.</string>
     <string name="privacy_text">Padawan Wallet ne collecte aucune information sur ses utilisateurs et n\'utilise pas Firebase Crashlytics. Cela signifie cependant qu\'il nous est beaucoup plus difficile d\'être informés des bugs par nos utilisateurs. Si vous avez des commentaires, n\'hésitez pas à envoyer un message au compte Twitter/X de Padawan (@padawanwallet) ou à nous écrire un e-mail. Vous pouvez lire notre politique de confidentialité complète ici :</string>
     <string name="privacy_link">https://github.com/thunderbiscuit/padawan-wallet/blob/master/PRIVACY.txt</string>
-    <string name="send_coins_back_address">tb1pjeu9rw9cwpmya0p85x9l27vp8hqd2hx2lwggta2fgm7u0gvua6asf8zrqw</string>
+    <string name="send_coins_back_address">tb1pu5yrm5vmtnvtla4d83qexh4tjpwmccuc4pyfryrf45g7534ck9nqz7408v</string>
     <string name="copy_address_string">Copier</string>
     <string name="text_copied">Copié</string>
     <string name="cancel">Annuler</string>
