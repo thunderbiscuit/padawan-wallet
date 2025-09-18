@@ -1,0 +1,48 @@
+name: iOS CI Pipeline
+
+on:
+  push:
+    branches: [ master ]
+    paths:
+      - 'iOS/**'
+  pull_request:
+    branches: [ master ]
+    paths:
+      - 'iOS/**'
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Select Xcode
+        run: sudo xcode-select -s /Applications/Xcode.app
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          brew install xcodegen swiftgen python rustup just
+          pip install pyyaml
+
+      - name: Setup Rust
+        run: rustup install stable && rustup default stable
+
+      - name: Generate Xcode project and Strings
+        run: just start-ios-dev
+
+      - name: Build iOS app
+        run: |
+          xcodebuild \
+           -project iOS/PadawanWallet.xcodeproj \
+           -scheme PadawanWallet \
+           -sdk iphonesimulator \
+           -destination 'platform=iOS Simulator,name=iPhone 17,OS=latest' \
+           build
