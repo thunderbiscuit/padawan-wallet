@@ -13,6 +13,7 @@ import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.slideInVertically
 import androidx.compose.foundation.Canvas
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -36,10 +37,13 @@ import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Devices
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.coyotebitcoin.padawanwallet.presentation.theme.LocalPadawanColors
+import com.coyotebitcoin.padawanwallet.presentation.theme.PadawanTheme
 import kotlinx.coroutines.delay
 
 @Composable
@@ -68,7 +72,7 @@ fun TransactionBroadcastAnimation(
     }
 
     Column(
-        modifier = Modifier.fillMaxSize(),
+        modifier = Modifier.fillMaxSize().background(colors.background),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
@@ -126,5 +130,16 @@ fun TransactionBroadcastAnimation(
                 }
             }
         }
+    }
+}
+
+@Preview(name = "PIXEL 7", device = Devices.PIXEL_7, showBackground = true)
+@Preview(name = "PIXEL 2, 270 Wide", device = Devices.PIXEL_2, widthDp = 270)
+@Composable
+internal fun PreviewTransactionBroadcastAnimation() {
+    PadawanTheme {
+        TransactionBroadcastAnimation(
+            onAnimationEnd = {}
+        )
     }
 }
