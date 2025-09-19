@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.runtime.Composable
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation3.runtime.NavBackStack
+import androidx.navigation3.runtime.NavKey
 import androidx.navigation3.runtime.entry
 import androidx.navigation3.runtime.entryProvider
 import androidx.navigation3.runtime.rememberNavBackStack
@@ -49,8 +50,8 @@ fun NavigationRoot(
     onboardingDone: Boolean,
 ) {
     val startingScreen = if (onboardingDone) SecondaryDestinations.CoreScreens else SecondaryDestinations.OnboardingScreens
-    val backStack: NavBackStack = rememberNavBackStack(startingScreen)
-    val bottom: NavBackStack = rememberNavBackStack(CoreDestinations.WalletRootScreen)
+    val backStack: NavBackStack<NavKey> = rememberNavBackStack(startingScreen)
+    val bottom: NavBackStack<NavKey> = rememberNavBackStack(CoreDestinations.WalletRootScreen)
     val walletViewModel: WalletViewModel = viewModel()
     val receiveViewModel: ReceiveViewModel = viewModel()
     val chaptersViewModel: LessonsViewModel = viewModel()
@@ -186,8 +187,8 @@ fun NavigationRoot(
 
 @Composable
 fun NavigationCoreScreens(
-    backStack: NavBackStack,
-    bottomBarBackStack: NavBackStack,
+    backStack: NavBackStack<NavKey>,
+    bottomBarBackStack: NavBackStack<NavKey>,
     walletViewModel: WalletViewModel,
     chaptersViewModel: LessonsViewModel,
     scaffoldPadding: PaddingValues

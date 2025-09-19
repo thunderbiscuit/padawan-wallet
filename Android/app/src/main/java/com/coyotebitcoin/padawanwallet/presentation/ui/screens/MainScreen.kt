@@ -23,6 +23,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation3.runtime.NavBackStack
+import androidx.navigation3.runtime.NavKey
 import com.composables.icons.lucide.GraduationCap
 import com.composables.icons.lucide.Lucide
 import com.composables.icons.lucide.Settings2
@@ -46,8 +47,8 @@ private const val TAG = "PadawanTag/RootScreen"
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
 internal fun CoreScreens(
-    backStack: NavBackStack,
-    bottomBarBackStack: NavBackStack,
+    backStack: NavBackStack<NavKey>,
+    bottomBarBackStack: NavBackStack<NavKey>,
     walletViewModel: WalletViewModel,
     chaptersViewModel: LessonsViewModel,
 ) {

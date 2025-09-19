@@ -115,9 +115,9 @@ android {
 }
 
 dependencies {
-    implementation("androidx.core:core-ktx:1.16.0")
+    implementation("androidx.core:core-ktx:1.17.0")
     implementation("androidx.core:core-splashscreen:1.0.1")
-    implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.3.2")
+    implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.7.1")
 
     // Compose
     // Adding the Bill of Materials synchronizes dependencies in the androidx.compose namespace
@@ -134,19 +134,19 @@ dependencies {
     implementation("androidx.activity:activity-compose")
 
     // Navigation
-    implementation("androidx.navigation3:navigation3-runtime:1.0.0-alpha07")
-    implementation("androidx.navigation3:navigation3-ui:1.0.0-alpha07")
+    implementation("androidx.navigation3:navigation3-runtime:1.0.0-alpha09")
+    implementation("androidx.navigation3:navigation3-ui:1.0.0-alpha09")
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-core:1.9.0")
 
-    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.9.2")
-    implementation("androidx.navigation:navigation-compose:2.9.3")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.9.4")
+    implementation("androidx.navigation:navigation-compose:2.9.4")
     implementation("androidx.constraintlayout:constraintlayout-compose:1.1.1")
 
     // composables.com
-    implementation("com.composables:core:1.11.2")
+    implementation("com.composables:core:1.43.1")
 
     // Icons
-    implementation("com.composables:icons-lucide:1.0.0")
+    implementation("com.composables:icons-lucide:1.1.0")
     implementation("androidx.compose.material:material-icons-extended:1.7.8")
 
     // Bitcoin
@@ -160,18 +160,18 @@ dependencies {
     // QR codes
     implementation("com.google.zxing:core:3.5.3")
     implementation("com.google.mlkit:barcode-scanning:17.3.0")
-    implementation("androidx.camera:camera-camera2:1.4.2")
-    implementation("androidx.camera:camera-lifecycle:1.4.2")
-    implementation("androidx.camera:camera-view:1.4.2")
+    implementation("androidx.camera:camera-camera2:1.5.0")
+    implementation("androidx.camera:camera-lifecycle:1.5.0")
+    implementation("androidx.camera:camera-view:1.5.0")
 
     // Unit testing
     testImplementation("junit:junit:4.13.2")
-    testRuntimeOnly("org.junit.vintage:junit-vintage-engine:5.10.1")
-    testImplementation("org.mockito:mockito-core:4.4.0")
+    testRuntimeOnly("org.junit.vintage:junit-vintage-engine:5.13.4")
+    testImplementation("org.mockito:mockito-core:5.19.0")
 
     // Instrumentation testing
-    androidTestImplementation("androidx.compose.ui:ui-test-junit4:1.6.8")
-    debugImplementation("androidx.compose.ui:ui-test-manifest:1.6.8")
+    androidTestImplementation("androidx.compose.ui:ui-test-junit4:1.9.1")
+    debugImplementation("androidx.compose.ui:ui-test-manifest:1.9.1")
 }
 
 tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach {
