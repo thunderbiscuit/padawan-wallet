@@ -143,8 +143,7 @@ final class WalletViewModel: ObservableObject {
     
     private func getCoins(address: String) async throws {
         guard let apiURL = Bundle.main.object(forInfoDictionaryKey: "FAUCET_URL") as? String,
-              let user = Bundle.main.object(forInfoDictionaryKey: "FAUCET_USER") as? String,
-              let password = Bundle.main.object(forInfoDictionaryKey: "FAUCET_PASSWORD") as? String else {
+              let token = Bundle.main.object(forInfoDictionaryKey: "FAUCET_TOKEN") as? String else {
             throw URLError(.badURL)
         }
         
@@ -156,13 +155,7 @@ final class WalletViewModel: ObservableObject {
         request.httpMethod = "POST"
         request.httpBody = address.data(using: .utf8)
         
-        let loginString = "\(user):\(password)"
-        guard let loginData = loginString.data(using: .utf8) else {
-            throw URLError(.badURL)
-        }
-        
-        let base64LoginString = loginData.base64EncodedString()
-        request.setValue("Basic \(base64LoginString)", forHTTPHeaderField: "Authorization")
+        request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
         
         let (_, response) = try await URLSession.shared.data(for: request)
         guard let httpResponse = response as? HTTPURLResponse,

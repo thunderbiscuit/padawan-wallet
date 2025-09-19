@@ -41,8 +41,7 @@ targets:
       path: PadawanWallet/Resources/Info.plist
       properties:
         FAUCET_URL: $(FAUCET_URL)
-        FAUCET_USER: $(FAUCET_USER)
-        FAUCET_PASSWORD: $(FAUCET_PASSWORD)
+        FAUCET_TOKEN: $(FAUCET_TOKEN)
         NSAppTransportSecurity:
           NSAllowsArbitraryLoads: true
         CFBundleShortVersionString: $(MARKETING_VERSION)

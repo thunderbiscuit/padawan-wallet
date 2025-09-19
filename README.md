@@ -77,8 +77,7 @@ Once Xcode is open, navigate to the directory `PadawanWallet/Resources/Config` a
 ```
 // Replace this information to Padawan Faucet API
 //FAUCET_HOST = <the host>
-//FAUCET_USER = <the user>
-//FAUCET_PASSWORD = <the password>
+//FAUCET_TOKEN = <the user>
 
 FAUCET_SCHEME = http:/
 FAUCET_URL = $(FAUCET_SCHEME)/$(FAUCET_HOST)/sendcoins
