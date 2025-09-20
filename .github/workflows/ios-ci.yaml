@@ -2,11 +2,9 @@ name: iOS CI Pipeline
 
 on:
   push:
-    branches: [ master ]
     paths:
       - 'iOS/**'
   pull_request:
-    branches: [ master ]
     paths:
       - 'iOS/**'
   workflow_dispatch:
@@ -16,33 +14,58 @@ jobs:
     runs-on: macos-latest
 
     steps:
-      - name: Checkout repository
+      - name: "Checkout repository"
         uses: actions/checkout@v4
 
-      - name: Select Xcode
-        run: sudo xcode-select -s /Applications/Xcode.app
+      - name: "Create faucetconfig example for CI"
+        run: |
+          mkdir -p iOS/PadawanWallet/Resources/Config
+          printf '%s\n' \
+            'FAUCET_HOST = 127.0.0.1:8872' \
+            'FAUCET_USER = dummy_user' \
+            'FAUCET_PASSWORD = dummy_password' \
+            'FAUCET_SCHEME = http:/' \
+            'FAUCET_URL = \$(FAUCET_SCHEME)/\$(FAUCET_HOST)/sendcoins' \
+            > iOS/PadawanWallet/Resources/Config/FaucetConfig.xcconfig
 
-      - name: Set up Python
+      - name: "Cache Homebrew"
+        uses: actions/cache@v4
+        with:
+          path: /usr/local/Homebrew/Cellar
+          key: ${{ runner.os }}-homebrew-
+          restore-keys: |
+            ${{ runner.os }}-homebrew-
+
+      - name: "Cache Xcode derivedData"
+        uses: actions/cache@v4
+        with:
+          path: ~/Library/Developer/Xcode/DerivedData
+          key: ${{ runner.os }}-xcode-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-xcode-
+
+      - name: "Set up python"
         uses: actions/setup-python@v5
         with:
           python-version: "3.11"
 
-      - name: Install dependencies
+      - name: "Install dependencies"
         run: |
           brew install xcodegen swiftgen python rustup just
-          pip install pyyaml
+          pip install --upgrade pip pyyaml
 
-      - name: Setup Rust
+      - name: "Setup Rust"
         run: rustup install stable && rustup default stable
 
-      - name: Generate Xcode project and Strings
+      - name: "Generate strings and project"
         run: just start-ios-dev
 
-      - name: Build iOS app
+      - name: "Build app"
         run: |
           xcodebuild \
-           -project iOS/PadawanWallet.xcodeproj \
-           -scheme PadawanWallet \
-           -sdk iphonesimulator \
-           -destination 'platform=iOS Simulator,name=iPhone 17,OS=latest' \
-           build
+            -project iOS/PadawanWallet.xcodeproj \
+            -scheme PadawanWallet \
+            -sdk iphonesimulator \
+            -destination 'platform=iOS Simulator,name=iPhone 16 Pro,OS=latest' \
+            build
+
