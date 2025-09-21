@@ -2,6 +2,10 @@
 
 # Generic
 generic_title_error:      "Erro"
+english:                  "Inglês"
+spanish:                  "Espanhol"
+portuguese:               "Português"
+french:                   "Francês"
 
 # Intro Screens
 welcome_statement:        "Bem-vindo à Padawan!\n\nEsse aplicativo é um lugar para aprender os recursos comuns das carteiras bitcoin.\n\nEla usa o <i><b>signet</b></i> do bitcoin, uma rede alternativa do bitcoin usada e construída exclusivamente para testes. As moedas nesta rede não têm nenhum valor, mas por outro lado parecem e se comportam como bitcoins normais!\n\nEssa carteira foi criada para usuários de todas as idades experimentarem e aprenderem sobre bitcoin em um ambiente livre de riscos."
@@ -75,7 +79,7 @@ send_your_coins_back:     "Envie seus bitcoins signet devolta para nós!"
 settings:                 "Configurações"
 everything_else:          "Aqui estão as configurações que você precisa no aplicativo"
 recovery_phrase:          "Frase de recuperação"
-send_signet_coins_back:   "Envie seus bitcoins signet devolta para nós"
+send_signet_coins_back:   "Envie seus bitcoins signet devolta"
 lessons_reset_successful: "Capítulos resetados com sucesso"
 reset_completed_chapters: "Resetar capítulos concluídos"
 receive_bitcoin:          "Receber bitcoin signet"
@@ -97,6 +101,8 @@ hello_there:              "Olá"
 select_language:          "Selecione seu idioma preferido e tema de cores para usar a Carteira Padawan."
 get_coins:                "Receber bitcoins signet"
 button_link_privacy:      "Leia nossos termos de uso e privacidade aqui"
+app_level_language:       "Linguagem do Aplicativo"
+color_theme:              "Tema"
 
 # Content Descriptions
 return_address_image:     "Imagem de retornar o endereço do faucet dos sats"
