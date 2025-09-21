@@ -6,6 +6,9 @@ english:                  "Anglais"
 spanish:                  "Espagnol"
 portuguese:               "Portugais"
 french:                   "Français"
+attention:                "Attention"
+button_yes:               "Oui"
+button_no:                "Non"
 
 # Intro Screens
 welcome_statement:        "Bienvenue sur Padawan !\n\nCette application est un endroit pour apprendre les caractéristiques courantes des portefeuilles Bitcoin mobiles.\n\nIl utilise le signet de Bitcoin, un réseau Bitcoin alternatif utilisé dans le monde entier et construit exclusivement pour les tests. Les pièces de ce réseau n'ont aucune valeur, mais elles ressemblent et se comportent comme des bitcoins normaux !\n\nCe portefeuille est conçu pour que les utilisateurs de tous âges puissent expérimenter et en apprendre davantage sur Bitcoin dans un environnement sans risque."
@@ -103,6 +106,7 @@ get_coins:                "Obtenir des pièces signet"
 button_link_privacy:      "Lisez notre politique de confidentialité ici."
 app_level_language:       "Langage de l’application"
 color_theme:              "Thème de couleur"
+alert_change_language:    "Ce paramètre prendra effet après le redémarrage de l’application. Voulez-vous redémarrer l’application maintenant?"
 
 # Content Descriptions
 return_address_image:     "Image Renvoyer des sats à l'adresse du robinet(faucet)"

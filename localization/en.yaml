@@ -6,6 +6,9 @@ english:                  "English"
 spanish:                  "Spanish"
 portuguese:               "Portuguese"
 french:                   "French"
+attention:                "Attention"
+button_yes:               "Yes"
+button_no:                "No"
 
 # Intro Screens
 welcome_statement:        "Welcome to Padawan!\n\nThis application is a place to learn the common features of mobile bitcoin wallets.\n\nIt uses bitcoin's signet, an alternative bitcoin network used globally and built exclusively for testing. The coins on this network do not have any value, but they otherwise look and behave just like normal bitcoins!\n\nThis wallet is built for users of all ages to experiment and learn about bitcoin in a risk-free environment."
@@ -103,6 +106,7 @@ get_coins:                "Get Signet coins"
 button_link_privacy:      "Read our privacy policy here."
 app_level_language:       "App-Level Language"
 color_theme:              "Color Theme"
+alert_change_language:    "This setting will take effect after restarting the app. Do you want to restart the app now?"
 
 # Content Descriptions
 return_address_image:     "Return sats faucet address image"

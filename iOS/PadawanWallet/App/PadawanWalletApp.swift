@@ -31,7 +31,7 @@ struct PadawanWalletApp: App {
                     CoreView()
                 }
             }
-            .environment(\.padawanColors, .tatooineDesert)
+            .environment(\.padawanColors, session.themeChoice.colors)
         }
     }
 }

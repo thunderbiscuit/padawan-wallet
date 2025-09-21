@@ -112,6 +112,9 @@ struct MoreRootView: View {
                     
                 case .about:
                     AboutPadawanScreen()
+                
+                case .alert(let data):
+                    AlertModalView(data: data)
                 }
             }
             .toolbar(.hidden, for: .tabBar)

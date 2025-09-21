@@ -49,6 +49,7 @@ struct AlertModalView: View {
             .padding()
             .frame(maxWidth: .maxWidthScreen)
         }
+        .background(BackgroundClearView())
     }
     
     @ViewBuilder

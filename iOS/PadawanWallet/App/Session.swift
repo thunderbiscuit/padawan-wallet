@@ -51,6 +51,7 @@ final class Session: ObservableObject {
             return .init(rawValue: language) ?? .english
         }
         set {
+            defaults.set([newValue.code], forKey: "AppleLanguages")
             defaults.set(newValue.rawValue, forKey: .languageChoiceKey)
         }
     }

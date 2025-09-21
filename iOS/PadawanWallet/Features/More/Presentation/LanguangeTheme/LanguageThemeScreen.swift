@@ -44,6 +44,15 @@ struct LanguageThemeScreen: View {
                 .padding()
             }
         }
+        .fullScreenCover(item: $viewModel.fullScreenCover, content: { item in
+            switch item {
+            case MoreScreenNavigation.alert(let data):
+                AlertModalView(data: data)
+                
+            default:
+                EmptyView()
+            }
+        })
         .navigationTitle(Strings.changeLanguage)
         .navigationBarTitleDisplayMode(.inline)
     }

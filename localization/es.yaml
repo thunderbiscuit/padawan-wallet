@@ -6,6 +6,9 @@ english:                  "Inglés"
 spanish:                  "Español"
 portuguese:               "Portugués"
 french:                   "Francés"
+attention:                "Atención"
+button_yes:               "Sí"
+button_no:                "No"
 
 # Intro Screens
 welcome_statement:        "¡Bienvenido a Padawan!\n\nEsta aplicación es un lugar para aprender las características más comunes de las carteras (wallet en inglés) para teléfonos móviles de bitcoin.\n\nUtiliza bitcoin en su <i><b>red de pruebas</b></i>(signet en inglés), una red de bitcoin alternativa que es utilizada y construida exclusivamente para pruebas. Las monedas en esta red no tienen ningún valor pero, ¡se comportan y tienen la misma apariencia que los bitcoins normales!\n\nEsta cartera está diseñada para que usuarios de todas las edades experimenten y aprendan sobre bitcoin en un entorno libre de riesgos."
@@ -103,6 +106,7 @@ get_coins:                "Obtener Signet monedas"
 button_link_privacy:      "Lee nuestros términos de uso y privacidad aquí."
 app_level_language:       "Lenguaje de la aplicación"
 color_theme:              "Tema de color"
+alert_change_language:    "Esta configuración tendrá efecto después de reiniciar la aplicación. ¿Desea reiniciar la aplicación ahora?"
 
 # Content Descriptions
 return_address_image:     "Imagen dirección para devolver sats"

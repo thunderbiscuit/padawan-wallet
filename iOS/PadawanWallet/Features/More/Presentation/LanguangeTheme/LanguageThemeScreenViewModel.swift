@@ -11,15 +11,12 @@ import Foundation
 @MainActor
 final class LanguageThemeScreenViewModel: ObservableObject {
     
+    @Published var fullScreenCover: MoreScreenNavigation?
     @Published var selectedLanguage: PadawanLanguage = Session.shared.languageChoice
     @Published var selectedTheme: PadawanColorTheme = Session.shared.themeChoice
     
     var disabledLanguages: [PadawanLanguage] = []
     var disabledThemes: [PadawanColorTheme] = [.vader]
-    
-    init() {
-        
-    }
     
     func selectItem<T: LanguageThemeItemProtocol>(_ item: T) {
         
@@ -38,6 +35,24 @@ final class LanguageThemeScreenViewModel: ObservableObject {
             
         default:
             break
+        }
+        
+        fullScreenCover = .alert(
+            data: .init(
+                title: Strings.attention,
+                subtitle: Strings.alertChangeLanguage,
+                primaryButtonTitle: Strings.buttonYes,
+                secondaryButtonTitle: Strings.buttonNo,
+                onPrimaryButtonTap: {
+                    self.closeApp()
+                },
+            )
+        )
+    }
+    
+    func closeApp() {
+        DispatchQueue.main.async {
+            exit(0)
         }
     }
 }

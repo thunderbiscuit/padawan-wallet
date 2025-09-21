@@ -12,4 +12,5 @@ enum MoreScreenNavigation: Hashable, Identifiable {
     case sendCoinsBack
     case language
     case about
+    case alert(data: BottomSheetView.Data)
 }
