@@ -11,6 +11,8 @@ private extension String {
     static let onboardingKey = "isOnboarding"
     static let fullScanRequiredKey = "isfullScanRequiredKey"
     static let lastBalanceUpdateKey = "lastBalanceUpdate"
+    static let languageChoiceKey = "languageChoice"
+    static let themeChoiceKey = "themeChoice"
 }
 
 final class Session: ObservableObject {
@@ -41,6 +43,30 @@ final class Session: ObservableObject {
         }
     }
     
+    var languageChoice: PadawanLanguage {
+        get {
+            guard let language = defaults.string(forKey: .languageChoiceKey) else {
+                return .english
+            }
+            return .init(rawValue: language) ?? .english
+        }
+        set {
+            defaults.set(newValue.rawValue, forKey: .languageChoiceKey)
+        }
+    }
+    
+    var themeChoice: PadawanColorTheme {
+        get {
+            guard let theme = defaults.string(forKey: .themeChoiceKey) else {
+                return .tatooine
+            }
+            return .init(rawValue: theme) ?? .tatooine
+        }
+        set {
+            defaults.set(newValue.rawValue, forKey: .languageChoiceKey)
+        }
+    }
+    
     init(keyClient: KeyClient = .live) {
         isOnboarding = defaults.object(forKey: .onboardingKey) == nil ?
             true :
@@ -64,6 +90,8 @@ final class Session: ObservableObject {
         try? keyClient.deleteBackupInfo()
         isFullScanRequired = true
         lastBalanceUpdate = .zero
+        languageChoice = .english
+        themeChoice = .tatooine
         setNeedOnboarding(true)
     }
 }
