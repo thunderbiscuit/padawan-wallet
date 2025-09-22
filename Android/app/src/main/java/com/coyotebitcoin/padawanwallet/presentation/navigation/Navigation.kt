@@ -7,12 +7,12 @@ import androidx.compose.animation.fadeOut
 import androidx.compose.animation.togetherWith
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.lifecycle.viewmodel.compose.viewModel
-import androidx.navigation3.runtime.NavBackStack
-import androidx.navigation3.runtime.NavKey
 import androidx.navigation3.runtime.entry
 import androidx.navigation3.runtime.entryProvider
-import androidx.navigation3.runtime.rememberNavBackStack
 import androidx.navigation3.ui.NavDisplay
 import com.coyotebitcoin.padawanwallet.data.LessonData
 import com.coyotebitcoin.padawanwallet.data.allAppBarTitlesResourceId
@@ -37,6 +37,7 @@ import com.coyotebitcoin.padawanwallet.presentation.ui.screens.wallet.WalletHome
 import com.coyotebitcoin.padawanwallet.presentation.viewmodels.LessonsViewModel
 import com.coyotebitcoin.padawanwallet.presentation.viewmodels.ReceiveViewModel
 import com.coyotebitcoin.padawanwallet.presentation.viewmodels.WalletViewModel
+import com.coyotebitcoin.padawanwallet.presentation.viewmodels.mvi.WalletAction
 
 private const val TAG = "PadawanTag/Navigation"
 
@@ -50,8 +51,8 @@ fun NavigationRoot(
     onboardingDone: Boolean,
 ) {
     val startingScreen = if (onboardingDone) SecondaryDestinations.CoreScreens else SecondaryDestinations.OnboardingScreens
-    val backStack: NavBackStack<NavKey> = rememberNavBackStack(startingScreen)
-    val bottom: NavBackStack<NavKey> = rememberNavBackStack(CoreDestinations.WalletRootScreen)
+    val backStack = remember { mutableStateListOf<SecondaryDestinations>(startingScreen) }
+    val bottom = remember { mutableStateListOf<CoreDestinations>(CoreDestinations.WalletRootScreen) }
     val walletViewModel: WalletViewModel = viewModel()
     val receiveViewModel: ReceiveViewModel = viewModel()
     val chaptersViewModel: LessonsViewModel = viewModel()
@@ -89,6 +90,7 @@ fun NavigationRoot(
                     onRecoverNav = {
                         backStack.clear()
                         backStack.add(SecondaryDestinations.CoreScreens)
+                        walletViewModel.onAction(WalletAction.Sync)
                     },
                 )
             }
@@ -167,19 +169,19 @@ fun NavigationRoot(
             // Screens accessible from the More tab
             // ---------------------------------------------------------------------------------------------------------
             entry<SecondaryDestinations.RecoveryPhraseScreen> {
-                RecoveryPhraseScreen(onBack = { backStack.removeLastOrNull() })
+                RecoveryPhraseScreen(onBackArrow = { backStack.removeLastOrNull() })
             }
 
             entry<SecondaryDestinations.SendCoinsBackScreen> {
-                SendCoinsBackScreen(onBack = { backStack.removeLastOrNull() })
+                SendCoinsBackScreen(onBackArrow = { backStack.removeLastOrNull() })
             }
 
             entry<SecondaryDestinations.LanguagesScreen> {
-                LanguagesScreen(onBack = { backStack.removeLastOrNull() })
+                LanguagesScreen(onBackArrow = { backStack.removeLastOrNull() })
             }
 
             entry<SecondaryDestinations.AboutScreen> {
-                AboutScreen(onBack = { backStack.removeLastOrNull() })
+                AboutScreen(onBackArrow = { backStack.removeLastOrNull() })
             }
         }
     )
@@ -187,8 +189,8 @@ fun NavigationRoot(
 
 @Composable
 fun NavigationCoreScreens(
-    backStack: NavBackStack<NavKey>,
-    bottomBarBackStack: NavBackStack<NavKey>,
+    backStack: SnapshotStateList<SecondaryDestinations>,
+    bottomBarBackStack: SnapshotStateList<CoreDestinations>,
     walletViewModel: WalletViewModel,
     chaptersViewModel: LessonsViewModel,
     scaffoldPadding: PaddingValues

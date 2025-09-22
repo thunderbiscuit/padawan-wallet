@@ -48,7 +48,7 @@ import com.coyotebitcoin.padawanwallet.presentation.utils.copyToClipboard
 
 @Composable
 internal fun SendCoinsBackScreen(
-    onBack: () -> Unit,
+    onBackArrow: () -> Unit,
 ) {
     val scrollState = rememberScrollState()
     val context = LocalContext.current
@@ -84,7 +84,7 @@ internal fun SendCoinsBackScreen(
         topBar = {
             PadawanAppBar(
                 title = stringResource(R.string.send_signet_coins_back),
-                onClick = { onBack() }
+                onClick = { onBackArrow() }
             )
         },
         snackbarHost = { SnackbarHost(snackbarHostState) }
@@ -142,7 +142,7 @@ internal fun SendCoinsBackScreen(
 internal fun PreviewSendCoinsBackScreen() {
     PadawanTheme {
         SendCoinsBackScreen(
-            onBack = {}
+            onBackArrow = {}
         )
     }
 }

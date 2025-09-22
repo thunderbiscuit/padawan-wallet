@@ -18,12 +18,11 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import androidx.navigation3.runtime.NavBackStack
-import androidx.navigation3.runtime.NavKey
 import com.composables.icons.lucide.GraduationCap
 import com.composables.icons.lucide.Lucide
 import com.composables.icons.lucide.Settings2
@@ -31,12 +30,13 @@ import com.composables.icons.lucide.WalletMinimal
 import com.coyotebitcoin.padawanwallet.R
 import com.coyotebitcoin.padawanwallet.presentation.navigation.CoreDestinations
 import com.coyotebitcoin.padawanwallet.presentation.navigation.NavigationCoreScreens
+import com.coyotebitcoin.padawanwallet.presentation.navigation.SecondaryDestinations
 import com.coyotebitcoin.padawanwallet.presentation.theme.PadawanColorsTatooineDesert
 import com.coyotebitcoin.padawanwallet.presentation.theme.PadawanTypography
 import com.coyotebitcoin.padawanwallet.presentation.viewmodels.LessonsViewModel
 import com.coyotebitcoin.padawanwallet.presentation.viewmodels.WalletViewModel
 
-private const val TAG = "PadawanTag/RootScreen"
+private const val TAG = "PTag/RootScreen"
 
 /**
  * This is the entry point for the "core" screens of the app, namely the wallet, chapters, and more screens.
@@ -47,24 +47,39 @@ private const val TAG = "PadawanTag/RootScreen"
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
 internal fun CoreScreens(
-    backStack: NavBackStack<NavKey>,
-    bottomBarBackStack: NavBackStack<NavKey>,
+    backStack: SnapshotStateList<SecondaryDestinations>,
+    bottomBarBackStack: SnapshotStateList<CoreDestinations>,
     walletViewModel: WalletViewModel,
     chaptersViewModel: LessonsViewModel,
 ) {
     Scaffold(
         bottomBar = { BottomNavigationBar(
             onWalletNavigation = {
-                bottomBarBackStack.clear()
-                bottomBarBackStack.add(CoreDestinations.WalletRootScreen)
+                // TODO: figure out why this clearing and adding twice is necessary to make the backstack work correctly
+                //       Basically the system onBack (when you swipe back) tries to remove an item in both the backstack
+                //       and the bottomBarBackStack. If you only have 1 item in the bottomBarBackStack, it will crash
+                //       when calling the onBack.
+                bottomBarBackStack.apply {
+                    clear()
+                    add(CoreDestinations.WalletRootScreen)
+                    add(CoreDestinations.WalletRootScreen)
+                }
             },
             onLessonsNavigation = {
-                bottomBarBackStack.clear()
-                bottomBarBackStack.add(CoreDestinations.LessonsRootScreen)
+                // TODO: figure out why this clearing and adding twice is necessary to make the backstack work correctly
+                bottomBarBackStack.apply {
+                    clear()
+                    add(CoreDestinations.LessonsRootScreen)
+                    add(CoreDestinations.LessonsRootScreen)
+                }
             },
             onMoreNavigation = {
-                bottomBarBackStack.clear()
-                bottomBarBackStack.add(CoreDestinations.SettingsRootScreen)
+                // TODO: figure out why this clearing and adding twice is necessary to make the backstack work correctly
+                bottomBarBackStack.apply {
+                    clear()
+                    add(CoreDestinations.SettingsRootScreen)
+                    add(CoreDestinations.SettingsRootScreen)
+                }
             },
         ) },
     ) { scaffoldPadding ->

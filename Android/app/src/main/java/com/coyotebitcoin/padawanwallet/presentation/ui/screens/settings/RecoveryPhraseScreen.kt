@@ -5,6 +5,8 @@
 
 package com.coyotebitcoin.padawanwallet.presentation.ui.screens.settings
 
+import android.util.Log
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
@@ -22,9 +24,11 @@ import com.coyotebitcoin.padawanwallet.domain.bitcoin.WalletRepository
 import com.coyotebitcoin.padawanwallet.presentation.ui.components.PadawanAppBar
 import com.coyotebitcoin.padawanwallet.presentation.ui.components.RecoveryWord
 
+private const val TAG = "PTag/RecoveryPhraseScreen"
+
 @Composable
 internal fun RecoveryPhraseScreen(
-    onBack: () -> Unit,
+    onBackArrow: () -> Unit,
 ) {
     val seedPhrase: String = WalletRepository.getMnemonic()
     val wordList: List<String> = seedPhrase.split(" ")
@@ -33,7 +37,7 @@ internal fun RecoveryPhraseScreen(
         topBar = {
             PadawanAppBar(
                 title = stringResource(R.string.your_recovery_phrase),
-                onClick = { onBack() }
+                onClick = { onBackArrow() }
             )
         }
     ) { scaffoldPadding ->

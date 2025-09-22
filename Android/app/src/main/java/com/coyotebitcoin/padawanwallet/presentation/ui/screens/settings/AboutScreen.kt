@@ -35,7 +35,7 @@ import com.coyotebitcoin.padawanwallet.presentation.ui.components.PadawanAppBar
 
 @Composable
 internal fun AboutScreen(
-    onBack: () -> Unit
+    onBackArrow: () -> Unit
 ) {
     val scrollState = rememberScrollState()
     val mUriHandler = LocalUriHandler.current
@@ -47,7 +47,7 @@ internal fun AboutScreen(
         topBar = {
             PadawanAppBar(
                 title = stringResource(R.string.about_padawan),
-                onClick = { onBack() }
+                onClick = { onBackArrow() }
             )
         },
         modifier = Modifier.fillMaxHeight()
@@ -87,6 +87,6 @@ internal fun AboutScreen(
 @Composable
 internal fun PreviewAboutScreen() {
     PadawanTheme {
-        AboutScreen(onBack = { })
+        AboutScreen(onBackArrow = { })
     }
 }

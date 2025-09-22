@@ -30,7 +30,7 @@ private const val TAG = "PadawanTag/SettingsScreen"
 
 @Composable
 internal fun LanguagesScreen(
-    onBack: () -> Unit
+    onBackArrow: () -> Unit
 ) {
     val colors = LocalPadawanColors.current
 
@@ -38,7 +38,7 @@ internal fun LanguagesScreen(
         topBar = {
             PadawanAppBar(
                 title = stringResource(R.string.change_language),
-                onClick = { onBack() }
+                onClick = { onBackArrow() }
             )
         }
     ) { scaffoldPadding ->
@@ -69,7 +69,7 @@ internal fun LanguagesScreen(
 internal fun PreviewLanguagesScreen() {
     PadawanTheme {
         LanguagesScreen(
-            onBack = { }
+            onBackArrow = { }
         )
     }
 }
