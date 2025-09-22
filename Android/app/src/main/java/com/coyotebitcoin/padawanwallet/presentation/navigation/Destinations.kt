@@ -22,23 +22,23 @@ sealed class CoreDestinations : NavKey {
 sealed class SecondaryDestinations : NavKey {
     // Onboarding screens
     @Serializable
-    object OnboardingScreens : SecondaryDestinations()
+    data object OnboardingScreens : SecondaryDestinations()
     @Serializable
-    object WalletRecoveryScreen : SecondaryDestinations()
+    data object WalletRecoveryScreen : SecondaryDestinations()
 
     // Core screens (Wallet, Lessons, More)
     @Serializable
-    object CoreScreens : SecondaryDestinations()
+    data object CoreScreens : SecondaryDestinations()
 
     // Wallet screens
     @Serializable
-    object ReceiveScreen : SecondaryDestinations()
+    data object ReceiveScreen : SecondaryDestinations()
     @Serializable
-    object SendScreen : SecondaryDestinations()
+    data object SendScreen : SecondaryDestinations()
     @Serializable
-    object TransactionScreen : SecondaryDestinations()
+    data object TransactionScreen : SecondaryDestinations()
     @Serializable
-    object QrScanScreen : SecondaryDestinations()
+    data object QrScanScreen : SecondaryDestinations()
 
     // Chapters screens
     @Serializable
@@ -46,11 +46,11 @@ sealed class SecondaryDestinations : NavKey {
 
     // More screens
     @Serializable
-    object RecoveryPhraseScreen : SecondaryDestinations()
+    data object RecoveryPhraseScreen : SecondaryDestinations()
     @Serializable
-    object SendCoinsBackScreen : SecondaryDestinations()
+    data object SendCoinsBackScreen : SecondaryDestinations()
     @Serializable
-    object LanguagesScreen : SecondaryDestinations()
+    data object LanguagesScreen : SecondaryDestinations()
     @Serializable
-    object AboutScreen : SecondaryDestinations()
+    data object AboutScreen : SecondaryDestinations()
 }
