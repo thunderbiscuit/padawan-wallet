@@ -54,6 +54,7 @@ internal fun CoreScreens(
 ) {
     Scaffold(
         bottomBar = { BottomNavigationBar(
+            selectedScreen = bottomBarBackStack.lastOrNull() ?: CoreDestinations.WalletRootScreen,
             onWalletNavigation = {
                 // TODO: figure out why this clearing and adding twice is necessary to make the backstack work correctly
                 //       Basically the system onBack (when you swipe back) tries to remove an item in both the backstack
@@ -95,11 +96,17 @@ internal fun CoreScreens(
 
 @Composable
 internal fun BottomNavigationBar(
+    selectedScreen: CoreDestinations,
     onWalletNavigation: () -> Unit,
     onLessonsNavigation: () -> Unit,
     onMoreNavigation: () -> Unit,
 ) {
-    var selectedItem by remember { mutableIntStateOf(0) }
+    val selectedIndex = when (selectedScreen) {
+        CoreDestinations.WalletRootScreen -> 0
+        CoreDestinations.LessonsRootScreen -> 1
+        CoreDestinations.SettingsRootScreen -> 2
+    }
+    var selectedItem by remember { mutableIntStateOf(selectedIndex) }
 
     // This odd code where you define the onClick in 3 separate places is necessary to ensure the ripple effect is not
     // shown on any part of the navigation bar item. See commit a1fceda for more information.
