@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="generic_title_error">Erreur</string>
+    <string name="english">Anglais</string>
+    <string name="spanish">Espagnol</string>
+    <string name="portuguese">Portugais</string>
+    <string name="french">Français</string>
+    <string name="attention">Attention</string>
+    <string name="button_yes">Oui</string>
+    <string name="button_no">Non</string>
     <string name="welcome_statement">Bienvenue sur Padawan !\n\nCette application est un endroit pour apprendre les caractéristiques courantes des portefeuilles Bitcoin mobiles.\n\nIl utilise le signet de Bitcoin, un réseau Bitcoin alternatif utilisé dans le monde entier et construit exclusivement pour les tests. Les pièces de ce réseau n\'ont aucune valeur, mais elles ressemblent et se comportent comme des bitcoins normaux !\n\nCe portefeuille est conçu pour que les utilisateurs de tous âges puissent expérimenter et en apprendre davantage sur Bitcoin dans un environnement sans risque.</string>
     <string name="onboard_title_1">Bienvenue sur Padawan</string>
     <string name="onboard_title_2">Apprendre par la pratique</string>
@@ -90,6 +97,9 @@
     <string name="select_language">Sélectionnez votre langue préférée et le thème de couleur pour le portefeuille Padawan.</string>
     <string name="get_coins">Obtenir des pièces signet</string>
     <string name="button_link_privacy">Lisez notre politique de confidentialité ici.</string>
+    <string name="app_level_language">Langage de l’application</string>
+    <string name="color_theme">Thème de couleur</string>
+    <string name="alert_change_language">Ce paramètre prendra effet après le redémarrage de l’application. Voulez-vous redémarrer l’application maintenant?</string>
     <string name="return_address_image">Image Renvoyer des sats à l\'adresse du robinet(faucet)</string>
     <string name="no_thank_you_icon">Icône Non merci</string>
     <string name="proceed_icon">Icône Continuer</string>

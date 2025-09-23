@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="generic_title_error">Erro</string>
+    <string name="english">Inglés</string>
+    <string name="spanish">Español</string>
+    <string name="portuguese">Portugués</string>
+    <string name="french">Francés</string>
+    <string name="attention">Atención</string>
+    <string name="button_yes">Sí</string>
+    <string name="button_no">No</string>
     <string name="welcome_statement">¡Bienvenido a Padawan!\n\nEsta aplicación es un lugar para aprender las características más comunes de las carteras (wallet en inglés) para teléfonos móviles de bitcoin.\n\nUtiliza bitcoin en su &lt;i&gt;&lt;b&gt;red de pruebas&lt;/b&gt;&lt;/i&gt;(signet en inglés), una red de bitcoin alternativa que es utilizada y construida exclusivamente para pruebas. Las monedas en esta red no tienen ningún valor pero, ¡se comportan y tienen la misma apariencia que los bitcoins normales!\n\nEsta cartera está diseñada para que usuarios de todas las edades experimenten y aprendan sobre bitcoin en un entorno libre de riesgos.</string>
     <string name="onboard_title_1">Bienvenido a Padawan</string>
     <string name="onboard_title_2">Aprende Haciendo</string>
@@ -90,6 +97,9 @@
     <string name="select_language">Selecciona tu idioma preferido y tema de color para Padawan Wallet.</string>
     <string name="get_coins">Obtener Signet monedas</string>
     <string name="button_link_privacy">Lee nuestros términos de uso y privacidad aquí.</string>
+    <string name="app_level_language">Lenguaje de la aplicación</string>
+    <string name="color_theme">Tema de color</string>
+    <string name="alert_change_language">Esta configuración tendrá efecto después de reiniciar la aplicación. ¿Desea reiniciar la aplicación ahora?</string>
     <string name="return_address_image">Imagen dirección para devolver sats</string>
     <string name="no_thank_you_icon">Icono no gracias</string>
     <string name="proceed_icon">Icono proceder</string>

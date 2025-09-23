@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="generic_title_error">Error</string>
+    <string name="english">English</string>
+    <string name="spanish">Spanish</string>
+    <string name="portuguese">Portuguese</string>
+    <string name="french">French</string>
+    <string name="attention">Attention</string>
+    <string name="button_yes">Yes</string>
+    <string name="button_no">No</string>
     <string name="welcome_statement">Welcome to Padawan!\n\nThis application is a place to learn the common features of mobile bitcoin wallets.\n\nIt uses bitcoin\'s signet, an alternative bitcoin network used globally and built exclusively for testing. The coins on this network do not have any value, but they otherwise look and behave just like normal bitcoins!\n\nThis wallet is built for users of all ages to experiment and learn about bitcoin in a risk-free environment.</string>
     <string name="onboard_title_1">Welcome to Padawan</string>
     <string name="onboard_title_2">Learn by Doing</string>
@@ -90,6 +97,9 @@
     <string name="select_language">Select your preferred language and color theme for Padawan Wallet.</string>
     <string name="get_coins">Get Signet coins</string>
     <string name="button_link_privacy">Read our privacy policy here.</string>
+    <string name="app_level_language">App-Level Language</string>
+    <string name="color_theme">Color Theme</string>
+    <string name="alert_change_language">This setting will take effect after restarting the app. Do you want to restart the app now?</string>
     <string name="return_address_image">Return sats faucet address image</string>
     <string name="no_thank_you_icon">No thank you icon</string>
     <string name="proceed_icon">Proceed icon</string>

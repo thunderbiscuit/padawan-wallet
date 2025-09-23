@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="generic_title_error">Erro</string>
+    <string name="english">Inglês</string>
+    <string name="spanish">Espanhol</string>
+    <string name="portuguese">Português</string>
+    <string name="french">Francês</string>
+    <string name="attention">Atenção</string>
+    <string name="button_yes">Sim</string>
+    <string name="button_no">Não</string>
     <string name="welcome_statement">Bem-vindo à Padawan!\n\nEsse aplicativo é um lugar para aprender os recursos comuns das carteiras bitcoin.\n\nEla usa o &lt;i&gt;&lt;b&gt;signet&lt;/b&gt;&lt;/i&gt; do bitcoin, uma rede alternativa do bitcoin usada e construída exclusivamente para testes. As moedas nesta rede não têm nenhum valor, mas por outro lado parecem e se comportam como bitcoins normais!\n\nEssa carteira foi criada para usuários de todas as idades experimentarem e aprenderem sobre bitcoin em um ambiente livre de riscos.</string>
     <string name="onboard_title_1">Bem-vindo ao Padawan</string>
     <string name="onboard_title_2">Aprenda na Prática</string>
@@ -68,7 +75,7 @@
     <string name="settings">Configurações</string>
     <string name="everything_else">Aqui estão as configurações que você precisa no aplicativo</string>
     <string name="recovery_phrase">Frase de recuperação</string>
-    <string name="send_signet_coins_back">Envie seus bitcoins signet devolta para nós</string>
+    <string name="send_signet_coins_back">Envie seus bitcoins signet devolta</string>
     <string name="lessons_reset_successful">Capítulos resetados com sucesso</string>
     <string name="reset_completed_chapters">Resetar capítulos concluídos</string>
     <string name="receive_bitcoin">Receber bitcoin signet</string>
@@ -90,6 +97,9 @@
     <string name="select_language">Selecione seu idioma preferido e tema de cores para usar a Carteira Padawan.</string>
     <string name="get_coins">Receber bitcoins signet</string>
     <string name="button_link_privacy">Leia nossos termos de uso e privacidade aqui</string>
+    <string name="app_level_language">Linguagem do Aplicativo</string>
+    <string name="color_theme">Tema</string>
+    <string name="alert_change_language">Esta configuração terá efeito depois que reiniciar o app. Deseja reiniciar o app agora?</string>
     <string name="return_address_image">Imagem de retornar o endereço do faucet dos sats</string>
     <string name="no_thank_you_icon">Ícone de não, obrigado</string>
     <string name="proceed_icon">ícone de prosseguir</string>
