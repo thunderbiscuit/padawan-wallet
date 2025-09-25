@@ -4,13 +4,26 @@ This changelog is not a typical source code changelog. It is used primarily to k
 
 ## Unreleased
 
+<br>
+
+## 0.17.0: Nimble Naboo
+
 ### Android
+
+- New onboarding screens carousel
+- New French version of the app
+- Cleaner lessons screens with carousel
 - Fix vertical scroll on onboarding screen
-- Small fixes to translations
+- Small fixes to translations everywhere
 - Use 2-column layout on wallet recover screen
+- Bottom bar highlighted navigation link is now correct when navigating back to one of the core screens
+- New localization yaml files available for contributors who want to help with translating the app
 
 ### iOS
+
 - We're building the iOS version!
+
+<br>
 
 ## Prior Versions
 
