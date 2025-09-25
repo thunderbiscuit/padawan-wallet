@@ -35,8 +35,9 @@ android {
         versionName = "v0.17.0-SNAPSHOT"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
-        // NOTE: This cannot be configured at the same time as the splits block when building App Bundles. Comment out
-        //       the this block and uncomment the splits block when building APKs.
+        // NOTE: This cannot be configured at the same time as the ndk block when building App Bundles.
+        //       When building the App Bundle: comment out the splits block and uncomment the ndk block.
+        //       When building the APK:        comment out the ndk block and uncomment the splits block.
         ndk {
             abiFilters += "arm64-v8a"
         }
@@ -77,8 +78,9 @@ android {
         }
     }
 
-    // NOTE: This cannot be configured at the same time as the ndk block when building App Bundles. Comment out the ndk
-    //       block and uncomment this block when building APKs.
+    // NOTE: This cannot be configured at the same time as the ndk block when building App Bundles.
+    //       When building the App Bundle: comment out the splits block and uncomment the ndk block.
+    //       When building the APK:        comment out the ndk block and uncomment the splits block.
     // splits {
     //     abi {
     //         isEnable = true
