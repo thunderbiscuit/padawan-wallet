@@ -31,8 +31,8 @@ android {
         targetSdk = 36
         // This version code must be updated for each release but the version on the master branch
         // stays at 1.
-        versionCode = 1
-        versionName = "v0.17.0-SNAPSHOT"
+        versionCode = 4
+        versionName = "v0.17.0"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
         // NOTE: This cannot be configured at the same time as the ndk block when building App Bundles.
