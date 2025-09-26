@@ -18,14 +18,32 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.composed
 import androidx.compose.ui.draw.drawBehind
+import androidx.compose.ui.draw.dropShadow
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Paint
+import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.graphics.drawscope.drawIntoCanvas
+import androidx.compose.ui.graphics.shadow.Shadow
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.DpOffset
 import androidx.compose.ui.unit.dp
+
+// The Neubrutalism shadow we use everywhere in Padawan. It uses a RoundedCornerShape(20.dp) that's hardcoded in the
+// modifier, and therefore must be applied on components that also use RoundedCornerShape(20.dp).
+fun Modifier.neuBrutalismShadow(): Modifier {
+    val blackBrush: Brush = SolidColor(Color.Black)
+    val shadow = Shadow(
+        radius = 0.dp,
+        brush = blackBrush,
+        spread = 0.dp,
+        offset = DpOffset(4.dp, 4.dp),
+        alpha = 1f,
+    )
+    return this.dropShadow(shape = RoundedCornerShape(20.dp), shadow = shadow)
+}
 
 fun Modifier.advancedShadow(
     color: Color = Color.Black,
