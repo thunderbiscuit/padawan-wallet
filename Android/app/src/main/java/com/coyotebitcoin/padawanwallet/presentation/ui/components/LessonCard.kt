@@ -35,7 +35,7 @@ import com.coyotebitcoin.padawanwallet.domain.settings.PadawanColorTheme
 import com.coyotebitcoin.padawanwallet.presentation.theme.Outfit
 import com.coyotebitcoin.padawanwallet.presentation.theme.PadawanColorsTatooineDesert
 import com.coyotebitcoin.padawanwallet.presentation.theme.PadawanTheme
-import com.coyotebitcoin.padawanwallet.presentation.theme.standardShadow
+import com.coyotebitcoin.padawanwallet.presentation.theme.neuBrutalismShadow
 
 @Composable
 fun LessonCard(
@@ -49,9 +49,9 @@ fun LessonCard(
         colors = if (done) CardDefaults.cardColors(PadawanColorsTatooineDesert.accent1) else CardDefaults.cardColors(PadawanColorsTatooineDesert.background2),
         modifier = Modifier
             .padding(vertical = 4.dp)
-            .standardShadow(20.dp)
             .height(70.dp)
             .fillMaxWidth()
+            .neuBrutalismShadow()
             .clickable { onClick() }
     ) {
         Row(
@@ -86,18 +86,6 @@ fun LessonCard(
                 )
             }
         }
-    }
-}
-
-@Preview(device = Devices.PIXEL_7, showBackground = true)
-@Composable
-internal fun PreviewNotCompletedLessonCard() {
-    PadawanTheme(PadawanColorTheme.TATOOINE_DESERT) {
-        LessonCard(
-            title = "Lesson Card",
-            done = false,
-            onClick = { }
-        )
     }
 }
 

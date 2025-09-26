@@ -54,7 +54,7 @@ import com.coyotebitcoin.padawanwallet.R
 import com.coyotebitcoin.padawanwallet.domain.utils.WalletCreateType
 import com.coyotebitcoin.padawanwallet.presentation.navigation.SecondaryDestinations
 import com.coyotebitcoin.padawanwallet.presentation.theme.LocalPadawanColors
-import com.coyotebitcoin.padawanwallet.presentation.theme.standardShadow
+import com.coyotebitcoin.padawanwallet.presentation.theme.neuBrutalismShadow
 import com.coyotebitcoin.padawanwallet.presentation.ui.components.standardBorder
 import kotlinx.coroutines.launch
 
@@ -283,7 +283,7 @@ fun CreateWalletPage(
             border = standardBorder,
             modifier = Modifier
                 .padding(top = 4.dp, start = 4.dp, end = 4.dp, bottom = 4.dp)
-                .standardShadow(20.dp)
+                .neuBrutalismShadow()
                 .height(120.dp)
                 .fillMaxWidth(0.9f)
                 .align(Alignment.CenterHorizontally)
@@ -302,7 +302,7 @@ fun CreateWalletPage(
             border = standardBorder,
             modifier = Modifier
                 .padding(top = 4.dp, start = 4.dp, end = 4.dp, bottom = 4.dp)
-                .standardShadow(20.dp)
+                .neuBrutalismShadow()
                 .height(120.dp)
                 .fillMaxWidth(0.9f)
                 .align(Alignment.CenterHorizontally)

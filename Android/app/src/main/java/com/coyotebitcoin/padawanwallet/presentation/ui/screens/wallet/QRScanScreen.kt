@@ -47,7 +47,7 @@ import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.core.content.ContextCompat
 import com.coyotebitcoin.padawanwallet.R
 import com.coyotebitcoin.padawanwallet.domain.utils.QRCodeAnalyzer
-import com.coyotebitcoin.padawanwallet.presentation.theme.standardShadow
+import com.coyotebitcoin.padawanwallet.presentation.theme.neuBrutalismShadow
 import com.coyotebitcoin.padawanwallet.presentation.ui.components.standardBorder
 import com.coyotebitcoin.padawanwallet.presentation.viewmodels.mvi.WalletAction
 import org.kotlinbitcointools.bip21.Bip21URI
@@ -168,7 +168,7 @@ internal fun QrScanScreen(
                         bottom.linkTo(parent.bottom, margin = 16.dp)
                     }
                     .padding(top = 4.dp, start = 4.dp, end = 4.dp, bottom = 4.dp)
-                    .standardShadow(20.dp)
+                    .neuBrutalismShadow()
                     .height(70.dp)
                     .width(200.dp)
             ) {

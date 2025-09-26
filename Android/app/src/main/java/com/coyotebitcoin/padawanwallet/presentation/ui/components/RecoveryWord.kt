@@ -23,7 +23,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.coyotebitcoin.padawanwallet.presentation.theme.Outfit
 import com.coyotebitcoin.padawanwallet.presentation.theme.PadawanColorsTatooineDesert
-import com.coyotebitcoin.padawanwallet.presentation.theme.standardShadow
+import com.coyotebitcoin.padawanwallet.presentation.theme.neuBrutalismShadow
 
 @Composable
 fun RecoveryWord(
@@ -36,7 +36,7 @@ fun RecoveryWord(
         colors = CardDefaults.cardColors(PadawanColorsTatooineDesert.accent2),
         modifier = Modifier
             .padding(vertical = 4.dp, horizontal = 12.dp)
-            .standardShadow(20.dp)
+            .neuBrutalismShadow()
             .width(100.dp)
             .height(50.dp)
     ) {

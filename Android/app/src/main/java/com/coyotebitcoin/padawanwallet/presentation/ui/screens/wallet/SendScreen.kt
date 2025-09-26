@@ -74,7 +74,7 @@ import com.coyotebitcoin.padawanwallet.R
 import com.coyotebitcoin.padawanwallet.presentation.theme.LocalPadawanColors
 import com.coyotebitcoin.padawanwallet.presentation.theme.PadawanTypography
 import com.coyotebitcoin.padawanwallet.presentation.theme.innerScreenPadding
-import com.coyotebitcoin.padawanwallet.presentation.theme.standardShadow
+import com.coyotebitcoin.padawanwallet.presentation.theme.neuBrutalismShadow
 import com.coyotebitcoin.padawanwallet.presentation.theme.wideTextField
 import com.coyotebitcoin.padawanwallet.presentation.ui.components.PadawanAppBar
 import com.coyotebitcoin.padawanwallet.presentation.ui.components.TransactionBroadcastAnimation
@@ -335,7 +335,7 @@ internal fun SendScreen(
                         .padding(
                             top = 32.dp, start = 4.dp, end = 4.dp, bottom = 24.dp
                         )
-                        .standardShadow(20.dp)
+                        .neuBrutalismShadow()
                         .height(70.dp)
                         .width(240.dp)
                         .align(Alignment.CenterHorizontally)
@@ -514,7 +514,7 @@ fun TransactionConfirmation(
             border = standardBorder,
             modifier = Modifier
                 .padding(top = 32.dp, start = 4.dp, end = 4.dp, bottom = 24.dp)
-                .standardShadow(20.dp)
+                .neuBrutalismShadow()
                 .height(70.dp)
                 .width(240.dp)
                 .align(Alignment.CenterHorizontally)

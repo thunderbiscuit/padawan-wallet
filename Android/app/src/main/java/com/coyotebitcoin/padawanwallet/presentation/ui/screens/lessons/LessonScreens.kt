@@ -51,7 +51,7 @@ import com.coyotebitcoin.padawanwallet.presentation.theme.LocalPadawanColors
 import com.coyotebitcoin.padawanwallet.presentation.theme.PadawanColorsTatooineDesert
 import com.coyotebitcoin.padawanwallet.presentation.theme.PadawanTheme
 import com.coyotebitcoin.padawanwallet.presentation.theme.PadawanTypography
-import com.coyotebitcoin.padawanwallet.presentation.theme.standardShadow
+import com.coyotebitcoin.padawanwallet.presentation.theme.neuBrutalismShadow
 import com.coyotebitcoin.padawanwallet.presentation.ui.components.PadawanAppBar
 import com.coyotebitcoin.padawanwallet.presentation.ui.components.standardBorder
 import com.coyotebitcoin.padawanwallet.presentation.viewmodels.mvi.LessonAction
@@ -184,7 +184,7 @@ fun LessonPage(page: Page) {
                         modifier = Modifier
                             .height(height = 150.dp)
                             .fillMaxWidth()
-                            .standardShadow(20.dp)
+                            .neuBrutalismShadow()
                     ) {
                         Row(
                             modifier = Modifier.fillMaxSize(),
@@ -257,7 +257,7 @@ fun NavigationButton(
         shape = RoundedCornerShape(20.dp),
         colors = CardDefaults.cardColors(PadawanColorsTatooineDesert.accent2),
         modifier = modifier
-            .standardShadow(20.dp)
+            .neuBrutalismShadow()
             .height(50.dp)
     ) {
         Box(

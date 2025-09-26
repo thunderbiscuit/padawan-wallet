@@ -57,7 +57,7 @@ import com.coyotebitcoin.padawanwallet.presentation.theme.LocalPadawanColors
 import com.coyotebitcoin.padawanwallet.presentation.theme.PadawanColorsTatooineDesert
 import com.coyotebitcoin.padawanwallet.presentation.theme.PadawanTheme
 import com.coyotebitcoin.padawanwallet.presentation.theme.PadawanTypography
-import com.coyotebitcoin.padawanwallet.presentation.theme.standardShadow
+import com.coyotebitcoin.padawanwallet.presentation.theme.neuBrutalismShadow
 import com.coyotebitcoin.padawanwallet.presentation.ui.components.standardBorder
 import kotlinx.coroutines.launch
 
@@ -203,7 +203,7 @@ fun MyList(
             border = standardBorder,
             modifier = Modifier
                 .padding(top = 12.dp, start = 4.dp, end = 4.dp, bottom = 12.dp)
-                .standardShadow(20.dp)
+                .neuBrutalismShadow()
                 .height(70.dp)
                 .width(300.dp)
                 .semantics { testTag = "Intro EnterRecoveryPhrase Button" }

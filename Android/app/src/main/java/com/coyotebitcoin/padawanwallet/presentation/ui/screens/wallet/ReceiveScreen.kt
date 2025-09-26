@@ -53,7 +53,7 @@ import com.coyotebitcoin.padawanwallet.domain.utils.addressToQR
 import com.coyotebitcoin.padawanwallet.presentation.theme.LocalPadawanColors
 import com.coyotebitcoin.padawanwallet.presentation.theme.PadawanColorsTatooineDesert
 import com.coyotebitcoin.padawanwallet.presentation.theme.ShareTechMono
-import com.coyotebitcoin.padawanwallet.presentation.theme.standardShadow
+import com.coyotebitcoin.padawanwallet.presentation.theme.neuBrutalismShadow
 import com.coyotebitcoin.padawanwallet.presentation.ui.components.LoadingAnimation
 import com.coyotebitcoin.padawanwallet.presentation.ui.components.PadawanAppBar
 import com.coyotebitcoin.padawanwallet.presentation.ui.components.standardBorder
@@ -186,7 +186,7 @@ internal fun ReceiveScreen(
                     .height(100.dp)
                     .fillMaxWidth(0.9f)
                     .padding(vertical = 8.dp, horizontal = 8.dp)
-                    .standardShadow(20.dp)
+                    .neuBrutalismShadow()
                     .align(BottomCenter)
             ) {
                 Text(

@@ -42,7 +42,7 @@ import com.coyotebitcoin.padawanwallet.presentation.navigation.SecondaryDestinat
 import com.coyotebitcoin.padawanwallet.presentation.theme.LocalPadawanColors
 import com.coyotebitcoin.padawanwallet.presentation.theme.PadawanTheme
 import com.coyotebitcoin.padawanwallet.presentation.theme.PadawanTypography
-import com.coyotebitcoin.padawanwallet.presentation.theme.standardShadow
+import com.coyotebitcoin.padawanwallet.presentation.theme.neuBrutalismShadow
 import com.coyotebitcoin.padawanwallet.presentation.ui.components.standardBorder
 import com.coyotebitcoin.padawanwallet.presentation.utils.ScreenSizeHeight
 import com.coyotebitcoin.padawanwallet.presentation.utils.getScreenSizeHeight
@@ -125,7 +125,7 @@ internal fun SmallOnboarding(
             border = standardBorder,
             modifier = Modifier
                 .padding(top = 4.dp, start = 4.dp, end = 4.dp, bottom = 4.dp)
-                .standardShadow(20.dp)
+                .neuBrutalismShadow()
                 .height(90.dp)
                 .width(240.dp)
                 .align(Alignment.CenterHorizontally)
@@ -142,7 +142,7 @@ internal fun SmallOnboarding(
             border = standardBorder,
             modifier = Modifier
                 .padding(top = 4.dp, start = 4.dp, end = 4.dp, bottom = 4.dp)
-                .standardShadow(20.dp)
+                .neuBrutalismShadow()
                 .height(90.dp)
                 .width(240.dp)
                 .align(Alignment.CenterHorizontally)
@@ -220,7 +220,7 @@ internal fun PhoneOnboarding(
                 border = standardBorder,
                 modifier = Modifier
                     .padding(top = 4.dp, start = 4.dp, end = 4.dp, bottom = 4.dp)
-                    .standardShadow(20.dp)
+                    .neuBrutalismShadow()
                     .height(90.dp)
                     .width(300.dp)
                     .align(Alignment.CenterHorizontally)
@@ -243,7 +243,7 @@ internal fun PhoneOnboarding(
                 border = standardBorder,
                 modifier = Modifier
                     .padding(top = 4.dp, start = 4.dp, end = 4.dp, bottom = 32.dp)
-                    .standardShadow(20.dp)
+                    .neuBrutalismShadow()
                     .height(90.dp)
                     .width(300.dp)
                     .align(Alignment.CenterHorizontally)

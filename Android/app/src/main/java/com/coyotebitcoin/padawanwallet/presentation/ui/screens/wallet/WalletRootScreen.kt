@@ -79,8 +79,8 @@ import com.coyotebitcoin.padawanwallet.presentation.theme.PadawanColorsTatooineD
 import com.coyotebitcoin.padawanwallet.presentation.theme.PadawanTheme
 import com.coyotebitcoin.padawanwallet.presentation.theme.PadawanTypography
 import com.coyotebitcoin.padawanwallet.presentation.theme.innerScreenPadding
+import com.coyotebitcoin.padawanwallet.presentation.theme.neuBrutalismShadow
 import com.coyotebitcoin.padawanwallet.presentation.theme.noRippleClickable
-import com.coyotebitcoin.padawanwallet.presentation.theme.standardShadow
 import com.coyotebitcoin.padawanwallet.presentation.ui.components.LoadingAnimation
 import com.coyotebitcoin.padawanwallet.presentation.ui.components.standardBorder
 import com.coyotebitcoin.padawanwallet.presentation.utils.ClickHelper
@@ -186,7 +186,7 @@ fun BalanceBox(
         shape = RoundedCornerShape(20.dp),
         colors = CardDefaults.cardColors(colors.accent1),
         modifier = Modifier
-            .standardShadow(20.dp)
+            .neuBrutalismShadow()
             .fillMaxWidth()
     ) {
         ConstraintLayout(
@@ -333,7 +333,7 @@ fun SendReceive(
             border = standardBorder,
             modifier = Modifier
                 .padding(all = 4.dp)
-                .standardShadow(20.dp)
+                .neuBrutalismShadow()
                 .weight(weight = 0.5f)
                 .fillMaxHeight()
         ) {
@@ -362,7 +362,7 @@ fun SendReceive(
             enabled = isOnline,
             modifier = Modifier
                 .padding(all = 4.dp)
-                .standardShadow(20.dp)
+                .neuBrutalismShadow()
                 .weight(weight = 0.5f)
                 .fillMaxHeight(),
         ) {
@@ -407,7 +407,7 @@ fun TransactionListBox(
     }
 
     Card(
-        modifier = Modifier.fillMaxWidth().standardShadow(20.dp),
+        modifier = Modifier.fillMaxWidth().neuBrutalismShadow(),
         border = standardBorder,
         shape = RoundedCornerShape(20.dp),
         colors = CardDefaults.cardColors(PadawanColorsTatooineDesert.background),
@@ -436,7 +436,7 @@ fun TransactionListBox(
                         enabled = isOnline,
                         modifier = Modifier
                             .padding(all = 8.dp)
-                            .standardShadow(20.dp),
+                            .neuBrutalismShadow(),
                         colors = ButtonDefaults.buttonColors(
                             containerColor = PadawanColorsTatooineDesert.accent2,
                             disabledContainerColor = Color.White
@@ -604,7 +604,7 @@ private fun FaucetDialog(
                 border = standardBorder,
                 modifier = Modifier
                     .padding(top = 4.dp, start = 4.dp, end = 4.dp, bottom = 4.dp)
-                    .standardShadow(20.dp)
+                    .neuBrutalismShadow()
                     .height(70.dp)
                     .width(110.dp)
             ) {
@@ -633,7 +633,7 @@ private fun FaucetDialog(
                 border = standardBorder,
                 modifier = Modifier
                     .padding(top = 4.dp, start = 4.dp, end = 4.dp, bottom = 4.dp)
-                    .standardShadow(20.dp)
+                    .neuBrutalismShadow()
                     .height(70.dp)
                     .width(110.dp)
             ) {
