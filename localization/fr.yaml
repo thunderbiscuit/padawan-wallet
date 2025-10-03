@@ -9,6 +9,7 @@ french:                   "Français"
 attention:                "Attention"
 button_yes:               "Oui"
 button_no:                "Non"
+wallets:                  "Portefeuilles"
 
 # Intro Screens
 welcome_statement:        "Bienvenue sur Padawan !\n\nCette application est un endroit pour apprendre les caractéristiques courantes des portefeuilles Bitcoin mobiles.\n\nIl utilise le signet de Bitcoin, un réseau Bitcoin alternatif utilisé dans le monde entier et construit exclusivement pour les tests. Les pièces de ce réseau n'ont aucune valeur, mais elles ressemblent et se comportent comme des bitcoins normaux !\n\nCe portefeuille est conçu pour que les utilisateurs de tous âges puissent expérimenter et en apprendre davantage sur Bitcoin dans un environnement sans risque."

@@ -65,7 +65,7 @@ struct LanguageThemeScreen: View {
         disableItems: [T]
     ) -> some View {
         VStack(alignment: .leading) {
-            buildSectionTitle(title)
+            SectionTitleView(title)
             Spacer().frame(height: 10)
             
             buildItems(
@@ -73,20 +73,6 @@ struct LanguageThemeScreen: View {
                 itemSelected: itemSelected,
                 disableItems: disableItems
             )
-        }
-        .frame(maxWidth: .infinity, alignment: .leading)
-    }
-    
-    @ViewBuilder
-    private func buildSectionTitle(_ title: String) -> some View {
-        VStack(alignment: .leading, spacing: 2) {
-            Text(Strings.appLevelLanguage)
-                .font(Fonts.font(.semibold, 20))
-                .foregroundStyle(colors.text)
-            
-            Rectangle()
-                .frame(height: 1)
-                .background(colors.text)
         }
         .frame(maxWidth: .infinity, alignment: .leading)
     }

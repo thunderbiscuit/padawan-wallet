@@ -30,7 +30,7 @@ struct PadawanToggleButton: View {
             action?()
         } label: {
             PadawanCardView(
-                backgroundColor: isOn ? colors.accent3 : colors.background2
+                backgroundColor: isOn ? colors.errorRed : colors.background2
             ) {
                 HStack {
                     Text(title)
@@ -45,6 +45,7 @@ struct PadawanToggleButton: View {
                             .frame(width: 24, height: 24)
                     }
                 }
+                .padding()
                 .frame(maxWidth: .infinity, alignment: .leading)
             }
         }

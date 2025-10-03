@@ -14,14 +14,14 @@ struct PadawanButton: View {
     
     static let maxHeight: CGFloat = 110
     
-    private let title: String
+    private let title: String?
     private let icon: Image?
     private let isDestructive: Bool
     
     private let action: (() -> Void)?
     
     init(
-        title: String,
+        title: String? = nil,
         icon: Image? = nil,
         isLoading: Binding<Bool> = .constant(false),
         isDestructive: Bool = false,
@@ -53,7 +53,7 @@ struct PadawanButton: View {
                 .foregroundColor(colors.text)
             }
         }
-        .frame(minHeight: 70.0)
+        .frame(minHeight: 30.0)
     }
     
     @ViewBuilder
@@ -62,8 +62,10 @@ struct PadawanButton: View {
             if isLoading {
                 ProgressView()
             } else {
-                Text(title)
-                    .font(Fonts.caption)
+                if let title  {
+                    Text(title)
+                        .font(Fonts.caption)
+                }
             }
             if let icon {
                 icon

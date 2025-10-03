@@ -37,7 +37,9 @@ struct CoreView: View {
             }
 
             NavigationStack(path: $lessonPath) {
-                LessonsRootView()
+                LessonsListView(
+                    path: $lessonPath
+                )
             }
             .tabItem {
                 Label {

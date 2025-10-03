@@ -9,6 +9,7 @@ french:                   "Francês"
 attention:                "Atenção"
 button_yes:               "Sim"
 button_no:                "Não"
+wallets:                  "Carteiras"
 
 # Intro Screens
 welcome_statement:        "Bem-vindo à Padawan!\n\nEsse aplicativo é um lugar para aprender os recursos comuns das carteiras bitcoin.\n\nEla usa o <i><b>signet</b></i> do bitcoin, uma rede alternativa do bitcoin usada e construída exclusivamente para testes. As moedas nesta rede não têm nenhum valor, mas por outro lado parecem e se comportam como bitcoins normais!\n\nEssa carteira foi criada para usuários de todas as idades experimentarem e aprenderem sobre bitcoin em um ambiente livre de riscos."
