@@ -14,6 +14,7 @@ private struct MoreRootViewAssets {
     static var buttonSelectLanguage = Strings.changeLanguage
     static var buttonAboutPadawan = Strings.aboutPadawan
     static var buttonReset = Strings.resetCompletedChapters
+    static var buttonResetWallet = Strings.resetWallet
     
     static func separatorWithVersion(_ version: String) -> String {
         "\(Strings.padawanWallet) \(version)"
@@ -53,6 +54,15 @@ struct MoreRootView: View {
                         title: MoreRootViewAssets.buttonReset,
                         titleColor: colors.text,
                         backgroundColor: colors.errorRed
+                    ) {
+                        viewModel.resetLessons()
+                    }
+                    .padding(.top, 12)
+                    
+                    FilledButton(
+                        title: MoreRootViewAssets.buttonResetWallet,
+                        titleColor: colors.text,
+                        backgroundColor: colors.accent3
                     ) {
                         viewModel.resetWallet()
                     }

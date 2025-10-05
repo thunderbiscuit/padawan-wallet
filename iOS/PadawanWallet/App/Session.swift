@@ -97,7 +97,7 @@ final class Session: ObservableObject {
         resetLessons()
     }
     
-    private func resetLessons() {
+    func resetLessons() {
         for i in 1...100 {
             let key = "l\(i)_title"
             UserDefaultsStorage.shared.remove(key)

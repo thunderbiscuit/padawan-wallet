@@ -48,6 +48,10 @@ final class MoreViewModel: ObservableObject {
         Session.shared.resetWallet()
     }
     
+    func resetLessons() {
+        Session.shared.resetLessons()
+    }
+    
     // MARK: - Private
     
     private func getRecoveryPhase() throws -> String {
