@@ -94,5 +94,13 @@ final class Session: ObservableObject {
         languageChoice = .english
         themeChoice = .tatooine
         setNeedOnboarding(true)
+        resetLessons()
+    }
+    
+    private func resetLessons() {
+        for i in 1...100 {
+            let key = "l\(i)_title"
+            UserDefaultsStorage.shared.remove(key)
+        }
     }
 }
