@@ -16,15 +16,32 @@ extension BottomSheetView {
         var subtitle: String?
         var primaryButtonTitle: String? = "OK"
         var secondaryButtonTitle: String?
+        var primaryButtonIcon: Image?
+        var secondaryButtonIcon: Image?
         var onPrimaryButtonTap: (() -> Void)?
         var onSecondaryButtonTap: (() -> Void)?
+        var verticalAlignmentForButtons: Bool
         
-        init(image: Image? = nil, title: String, subtitle: String? = nil, primaryButtonTitle: String? = "OK", secondaryButtonTitle: String? = nil, onPrimaryButtonTap: (() -> Void)? = nil, onSecondaryButtonTap: (() -> Void)? = nil) {
+        init(
+            image: Image? = nil,
+            title: String,
+            subtitle: String? = nil,
+            verticalAlignmentForButtons: Bool = true,
+            primaryButtonTitle: String? = "OK",
+            secondaryButtonTitle: String? = nil,
+            primaryButtonIcon: Image? = nil,
+            secondaryButtonIcon: Image? = nil,
+            onPrimaryButtonTap: (() -> Void)? = nil,
+            onSecondaryButtonTap: (() -> Void)? = nil
+        ) {
             self.image = image
             self.title = title
             self.subtitle = subtitle
+            self.verticalAlignmentForButtons = verticalAlignmentForButtons
             self.primaryButtonTitle = primaryButtonTitle
             self.secondaryButtonTitle = secondaryButtonTitle
+            self.primaryButtonIcon = primaryButtonIcon
+            self.secondaryButtonIcon = secondaryButtonIcon
             self.onPrimaryButtonTap = onPrimaryButtonTap
             self.onSecondaryButtonTap = onSecondaryButtonTap
         }
@@ -34,6 +51,7 @@ extension BottomSheetView {
             self.subtitle = error.localizedDescription
             self.primaryButtonTitle = "OK"
             self.onPrimaryButtonTap = dismissAction
+            self.verticalAlignmentForButtons = true
         }
         
         static func == (lhs: Data, rhs: Data) -> Bool {

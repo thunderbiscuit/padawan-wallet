@@ -80,7 +80,7 @@ struct AlertModalView: View {
                 Text(subtitle)
                     .font(Fonts.font(.regular, 20))
                     .multilineTextAlignment(.center)
-                    .lineLimit(5)
+                    .lineLimit(15)
             }
         }
         .frame(maxWidth: .maxWidthScreen, alignment: .center)
@@ -90,32 +90,41 @@ struct AlertModalView: View {
 
     @ViewBuilder
     private func buildDock() -> some View {
-        if data.primaryButtonTitle == nil && data.secondaryButtonTitle == nil {
-            EmptyView()
+        buttonsOrientation {
+            PadawanButton(
+                title: data.secondaryButtonTitle,
+                icon: data.secondaryButtonIcon,
+                isDestructive: true,
+                action: {
+                    close()
+                    data.onSecondaryButtonTap?()
+                }
+            )
+            .frame(height: 50)
+            
+            PadawanButton(
+                title: data.primaryButtonTitle,
+                icon: data.primaryButtonIcon,
+                action: {
+                    close()
+                    data.onPrimaryButtonTap?()
+                }
+            )
+            .frame(height: 50)
+        }
+    }
+    
+    @ViewBuilder
+    private func buttonsOrientation(
+        @ViewBuilder content: () -> some View
+    ) -> some View {
+        if data.verticalAlignmentForButtons {
+            VStack(spacing: 16) {
+                content()
+            }
         } else {
-            VStack(spacing: 40) {
-                if let primaryButtonTitle = data.primaryButtonTitle {
-                    PadawanButton(
-                        title: primaryButtonTitle,
-                        action: {
-                            close()
-                            data.onPrimaryButtonTap?()
-                        }
-                    )
-                    .frame(height: 50)
-                }
-
-                if let secondaryButtonTitle = data.secondaryButtonTitle {
-                    PadawanButton(
-                        title: secondaryButtonTitle,
-                        isDestructive: true,
-                        action: {
-                            close()
-                            data.onSecondaryButtonTap?()
-                        }
-                    )
-                    .frame(height: 50)
-                }
+            HStack(spacing: 16) {
+                content()
             }
         }
     }

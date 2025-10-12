@@ -69,6 +69,9 @@ struct PadawanButton: View {
             }
             if let icon {
                 icon
+                    .resizable()
+                    .frame(width: 24, height: 24)
+                    .aspectRatio(contentMode: .fit)
             }
         }
         .padding(.vertical)
@@ -91,7 +94,7 @@ private struct PreviewSample: View {
             .frame(height: 80)
             
             PadawanButton(
-                title: "With Icon",
+                title: nil,
                 icon: Image(systemName: "bitcoinsign")
             )
             .frame(height: 80)

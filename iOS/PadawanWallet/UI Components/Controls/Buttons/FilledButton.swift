@@ -10,7 +10,7 @@ import SwiftUI
 struct FilledButton: View {
     @Environment(\.padawanColors) private var colors
     
-    private let title: String
+    private let title: String?
     private let icon: Image?
     private let titleColor: Color?
     private let iconTintColor: Color?
@@ -19,7 +19,7 @@ struct FilledButton: View {
     private let action: (() -> Void)?
     
     init(
-        title: String,
+        title: String?,
         icon: Image? = nil,
         titleColor: Color? = nil,
         iconTintColor: Color? = nil,
@@ -39,13 +39,18 @@ struct FilledButton: View {
             action?()
         } label: {
             HStack {
-                Text(title)
-                    .font(Fonts.body)
-                    .foregroundStyle(titleColor ?? colors.text)
+                if let title {
+                    Text(title)
+                        .font(Fonts.body)
+                        .foregroundStyle(titleColor ?? colors.text)
+                }
                 if let icon {
                     Spacer()
                     icon
                         .foregroundStyle(iconTintColor ?? colors.accent1)
+                }
+                if title == nil && icon == nil {
+                    EmptyView()
                 }
             }
             .padding()
