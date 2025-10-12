@@ -47,7 +47,7 @@ final class WalletViewModel: ObservableObject {
             balance = Session.shared.lastBalanceUpdate
             
         } catch {
-            fullScreenCover = .alertError(
+            fullScreenCover = .alert(
                 data: .init(
                     title: Strings.genericTitleError,
                     subtitle: error.localizedDescription
@@ -76,7 +76,7 @@ final class WalletViewModel: ObservableObject {
             Session.shared.lastBalanceUpdate = balance
             try getTransactions()
         } catch {
-            fullScreenCover = .alertError(
+            fullScreenCover = .alert(
                 data: .init(title: Strings.genericTitleError, subtitle: error.localizedDescription)
             )
         }
@@ -122,15 +122,39 @@ final class WalletViewModel: ObservableObject {
         transactions = detailsTransactions
     }
     
-    func getFaucetCoins() async {
+    func getFaucetCoinsConfirmation(completion: @escaping () -> Void) {
+        fullScreenCover = .alert(
+            data: .init(
+                title: Strings.helloThere,
+                subtitle: Strings.faucetDialog,
+                verticalAlignmentForButtons: false,
+                primaryButtonTitle: nil,
+                secondaryButtonTitle: nil,
+                primaryButtonIcon: Image(systemName: "hand.thumbsup"),
+                secondaryButtonIcon: Image(systemName: "hand.thumbsdown"),
+                onPrimaryButtonTap: {
+                    Task {
+                        await self.getFaucetCoins()
+                        completion()
+                    }
+                }
+            )
+        )
+    }
+    
+    // MARK: - Private
+    
+    private func getFaucetCoins() async {
         do {
+            isSyncing = true
             let newAddress = try bdkClient.getAddress()
             try await getCoins(address: newAddress)
             // Wait 6 seconds for the transaction to appear on the blockchain before returning user feedback
             try await Task.sleep(nanoseconds: 6_000_000_000)
             await syncWallet()
         } catch {
-            fullScreenCover = .alertError(
+            isSyncing = false
+            fullScreenCover = .alert(
                 data: .init(
                     title: Strings.genericTitleError,
                     subtitle: error.localizedDescription
@@ -138,8 +162,6 @@ final class WalletViewModel: ObservableObject {
             )
         }
     }
-    
-    // MARK: - Private
     
     private func getCoins(address: String) async throws {
         guard let apiURL = Bundle.main.object(forInfoDictionaryKey: "FAUCET_URL") as? String,
@@ -171,7 +193,7 @@ final class WalletViewModel: ObservableObject {
             Session.shared.isFullScanRequired = false
             
         } catch {
-            fullScreenCover = .alertError(
+            fullScreenCover = .alert(
                 data: .init(title: Strings.genericTitleError, subtitle: error.localizedDescription)
             )
         }
@@ -186,7 +208,7 @@ final class WalletViewModel: ObservableObject {
             await syncWallet()
             
         } catch {
-            fullScreenCover = .alertError(
+            fullScreenCover = .alert(
                 data: .init(title: Strings.genericTitleError, subtitle: error.localizedDescription)
             )
         }

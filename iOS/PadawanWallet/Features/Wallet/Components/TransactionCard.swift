@@ -96,7 +96,6 @@ struct TransactionsCard: View {
                         title: TransactionsCardAssets.emptyStateButton,
                         isLoading: $isSyncing
                     ) {
-                        isSyncing = true
                         actionGetCoins {
                             self.isSyncing = false
                         }

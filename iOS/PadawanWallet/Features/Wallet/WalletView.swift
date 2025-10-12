@@ -43,8 +43,7 @@ struct WalletView: View {
                         list: $viewModel.transactions,
                         isSyncing: $viewModel.isSyncing,
                         actionGetCoins: { completion in
-                            Task {
-                                await viewModel.getFaucetCoins()
+                            viewModel.getFaucetCoinsConfirmation {
                                 completion()
                             }
                         }
@@ -80,7 +79,7 @@ struct WalletView: View {
         }
         .fullScreenCover(item: $viewModel.fullScreenCover) { item in
             switch item {
-            case .alertError(let data):
+            case .alert(let data):
                 AlertModalView(data: data)
                     .background(BackgroundClearView())
                 
