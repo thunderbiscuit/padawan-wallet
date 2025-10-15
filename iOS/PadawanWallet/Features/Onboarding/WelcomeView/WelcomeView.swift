@@ -15,6 +15,7 @@ struct ScaleButtonStyle: ButtonStyle {
 
 struct WelcomeView: View {
     @Environment(\.padawanColors) private var colors
+    @EnvironmentObject private var languageManager: LanguageManager
     @StateObject private var viewModel: WelcomeViewModel
     @State private var currentPage = 0
     
@@ -80,12 +81,12 @@ struct WelcomeView: View {
             
             PadawanCardIconView(image: page.image, size: 100)
 
-            Text(page.title)
+            Text(languageManager.localizedString(forKey: page.titleKey))
                 .font(Fonts.title)
                 .foregroundStyle(colors.text)
                 .padding(.top, 20)
 
-            Text(page.text)
+            Text(languageManager.localizedString(forKey: page.textKey))
                 .font(Fonts.body)
                 .foregroundStyle(colors.textFaded)
                 .multilineTextAlignment(.center)
@@ -100,14 +101,14 @@ struct WelcomeView: View {
     @ViewBuilder
     private func buildButtons() -> some View {
         VStack(spacing: 30) {
-            PadawanButton(title: viewModel.createWalletButtonTitle) {
-                viewModel.createWallet()
-            }
+            PadawanButton(title: languageManager.localizedString(forKey: viewModel.createWalletButtonTitleKey)) {
+                            viewModel.createWallet()
+                        }
             .frame(height: 105)
             
-            PadawanButton(title: viewModel.importWalletButtonTitle) {
-                viewModel.importWallet()
-            }
+            PadawanButton(title: languageManager.localizedString(forKey: viewModel.importWalletButtonTitleKey)) {
+                            viewModel.importWallet()
+                        }
             .frame(height: 105)
         }
     }

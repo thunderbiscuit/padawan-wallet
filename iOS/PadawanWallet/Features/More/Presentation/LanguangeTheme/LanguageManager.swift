@@ -49,4 +49,11 @@ class LanguageManager: ObservableObject {
         }
         self.bundle = newBundle
     }
+    static func translate(key: String, to language: PadawanLanguage) -> String {
+        guard let path = Bundle.main.path(forResource: language.code, ofType: "lproj"),
+              let bundle = Bundle(path: path) else {
+            return key
+        }
+        return bundle.localizedString(forKey: key, value: nil, table: nil)
+    }
 }

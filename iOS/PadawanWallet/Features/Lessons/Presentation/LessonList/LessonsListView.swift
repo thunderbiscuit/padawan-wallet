@@ -8,6 +8,7 @@ import SwiftUI
 
 struct LessonsListView: View {
     @Environment(\.padawanColors) private var colors
+    @EnvironmentObject private var languageManager: LanguageManager
     @StateObject private var viewModel: LessonsListViewModel
     
     init(
@@ -21,9 +22,9 @@ struct LessonsListView: View {
             ScrollView {
                 VStack(alignment: .leading, spacing: 12.0) {
                     Group {
-                        Text(Strings.padawanJourney)
+                        Text(languageManager.localizedString(forKey: "padawan_journey"))
                             .font(Fonts.title)
-                        Text(Strings.continueOnYourJourney)
+                        Text(languageManager.localizedString(forKey: "continue_on_your_journey"))
                             .font(Fonts.subtitle)
                     }
                     .foregroundStyle(colors.text)
@@ -42,17 +43,9 @@ struct LessonsListView: View {
                 await viewModel.updateList()
             }
         }
-        .navigationDestination(for: LessonScreenNavigation.self) { item in
-            Group {
-                switch item {
-                case .lessonDetails(let lesson):
-                    LessonsDetailView(path: viewModel.$path, lesson: lesson)
-                    
-                case .alert(let data):
-                    AlertModalView(data: data)
-                }
-            }
-            .toolbar(.hidden, for: .tabBar)
+        .navigationDestination(for: LessonItemList.self) { lesson in
+             LessonsDetailView(path: viewModel.$path, lesson: lesson)
+                .toolbar(.hidden, for: .tabBar)
         }
     }
     
@@ -60,7 +53,7 @@ struct LessonsListView: View {
     private func buildList() -> some View {
         ForEach(viewModel.list) { item in
             Section {
-                SectionTitleView(item.title)
+                SectionTitleView(languageManager.localizedString(forKey: item.titleKey))
                 
                 ForEach(item.items) { lesson in
                     buildListItem(
@@ -74,17 +67,22 @@ struct LessonsListView: View {
     
     @ViewBuilder
     private func buildListItem(lesson: LessonItemList) -> some View {
+        let lessonTitle = languageManager.localizedString(forKey: lesson.titleKey)
+        
         PadawanToggleButton(
-            title: "\(lesson.sort). \(lesson.title)",
+            title: "\(lesson.sort). \(lessonTitle)",
             isOn: lesson.isDone) {
-                viewModel.showLesson(for: lesson)
+                viewModel.path.append(lesson)
             }
     }
 }
 
 #if DEBUG
 #Preview {
-    LessonsListView(path: .constant(.init()))
-        .environment(\.padawanColors, .tatooineDesert)
+    NavigationStack {
+        LessonsListView(path: .constant(.init()))
+            .environment(\.padawanColors, .tatooineDesert)
+            .environmentObject(LanguageManager.shared)
+    }
 }
 #endif

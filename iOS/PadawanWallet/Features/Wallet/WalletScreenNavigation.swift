@@ -10,5 +10,5 @@ enum WalletScreenNavigation: Hashable, Identifiable {
     
     case receive
     case send
-    case alert(data: BottomSheetView.Data)
+    case alertError(data: BottomSheetView.Data)
 }

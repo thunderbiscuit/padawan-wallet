@@ -9,14 +9,15 @@ import BitcoinUI
 import SwiftUI
 
 private struct ViewAssets {
-    static var navigationTitle = Strings.receiveBitcoin
-    static var button = Strings.generateANewAddress
+    static func navigationTitle(_ lm: LanguageManager) -> String { lm.localizedString(forKey: "receive_bitcoin") }
+    static func button(_ lm: LanguageManager) -> String { lm.localizedString(forKey: "generate_a_new_address") }
     
     static var copyIcon = Image(systemName: "document.on.document")
 }
 
 struct ReceiveTransactionView: View {
     @Environment(\.padawanColors) private var colors
+    @EnvironmentObject private var languageManager: LanguageManager
     @StateObject private var viewModel: ReceiveTransactionViewModel
     
     init(
@@ -52,8 +53,8 @@ struct ReceiveTransactionView: View {
                 }
                 
                 Spacer()
-                PadawanButton(title: ViewAssets.button) {
-                    viewModel.generateAddress()
+                PadawanButton(title: ViewAssets.button(languageManager)) {
+                                    viewModel.generateAddress()
                 }
                 .fixedSize(horizontal: false, vertical: true)
             }
@@ -61,7 +62,7 @@ struct ReceiveTransactionView: View {
             .padding()
         }
         .toolbar(.hidden, for: .tabBar)
-        .navigationTitle(ViewAssets.navigationTitle)
+        .navigationTitle(ViewAssets.navigationTitle(languageManager))
     }
     
     @ViewBuilder

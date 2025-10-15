@@ -6,11 +6,12 @@
 import SwiftUI
 
 private struct RecoveryPhraseScreenAssets {
-    static var title = Strings.yourRecoveryPhrase
+    static func title(_ lm: LanguageManager) -> String { lm.localizedString(forKey: "your_recovery_phrase") }
 }
 
 struct RecoveryPhraseScreen: View {
     @Environment(\.padawanColors) private var colors
+    @EnvironmentObject private var languageManager: LanguageManager
     
     private let words: String
     
@@ -43,14 +44,18 @@ struct RecoveryPhraseScreen: View {
                 .padding()
             }
         }
-        .navigationTitle(RecoveryPhraseScreenAssets.title)
+        .navigationTitle(RecoveryPhraseScreenAssets.title(languageManager))
     }
 }
 
 #if DEBUG
 #Preview {
-    RecoveryPhraseScreen(
-        words: "omit arm chunk harbor path unfair coil radar stairs unfair raise memory"
-    )
+    NavigationStack {
+        RecoveryPhraseScreen(
+            words: "omit arm chunk harbor path unfair coil radar stairs unfair raise memory"
+        )
+        .environment(\.padawanColors, PadawanColorTheme.tatooine.colors)
+        .environmentObject(LanguageManager.shared)
+    }
 }
 #endif

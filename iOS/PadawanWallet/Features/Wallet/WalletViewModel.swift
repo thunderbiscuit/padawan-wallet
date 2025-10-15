@@ -45,11 +45,10 @@ final class WalletViewModel: ObservableObject {
         do {
             try bdkClient.loadWallet()
             balance = Session.shared.lastBalanceUpdate
-            
         } catch {
-            fullScreenCover = .alert(
+            fullScreenCover = .alertError(
                 data: .init(
-                    title: Strings.genericTitleError,
+                    titleKey: "generic_title_error",
                     subtitle: error.localizedDescription
                 )
             )
@@ -76,8 +75,8 @@ final class WalletViewModel: ObservableObject {
             Session.shared.lastBalanceUpdate = balance
             try getTransactions()
         } catch {
-            fullScreenCover = .alert(
-                data: .init(title: Strings.genericTitleError, subtitle: error.localizedDescription)
+            fullScreenCover = .alertError(
+                data: .init(titleKey: "generic_title_error", subtitle: error.localizedDescription)
             )
         }
     }
@@ -106,8 +105,8 @@ final class WalletViewModel: ObservableObject {
                     .formatted(date: .abbreviated, time: .shortened)
                 isConfirmed = true
                 
-            case .unconfirmed(let timestamp):
-                formattedDate = Strings.pending
+            case .unconfirmed(_):
+                formattedDate = LanguageManager.shared.localizedString(forKey: "pending")
                 isConfirmed = false
             }
             
@@ -123,13 +122,13 @@ final class WalletViewModel: ObservableObject {
     }
     
     func getFaucetCoinsConfirmation(completion: @escaping () -> Void) {
-        fullScreenCover = .alert(
+        fullScreenCover = .alertError(
             data: .init(
-                title: Strings.helloThere,
-                subtitle: Strings.faucetDialog,
+                titleKey: "hello_there",
+                subtitleKey: "faucet_dialog",
                 verticalAlignmentForButtons: false,
-                primaryButtonTitle: nil,
-                secondaryButtonTitle: nil,
+                primaryButtonTitleKey: nil,
+                secondaryButtonTitleKey: nil,
                 primaryButtonIcon: Image(systemName: "hand.thumbsup"),
                 secondaryButtonIcon: Image(systemName: "hand.thumbsdown"),
                 onPrimaryButtonTap: {
@@ -149,14 +148,13 @@ final class WalletViewModel: ObservableObject {
             isSyncing = true
             let newAddress = try bdkClient.getAddress()
             try await getCoins(address: newAddress)
-            // Wait 6 seconds for the transaction to appear on the blockchain before returning user feedback
             try await Task.sleep(nanoseconds: 6_000_000_000)
             await syncWallet()
         } catch {
             isSyncing = false
-            fullScreenCover = .alert(
+            fullScreenCover = .alertError(
                 data: .init(
-                    title: Strings.genericTitleError,
+                    titleKey: "generic_title_error",
                     subtitle: error.localizedDescription
                 )
             )
@@ -193,8 +191,8 @@ final class WalletViewModel: ObservableObject {
             Session.shared.isFullScanRequired = false
             
         } catch {
-            fullScreenCover = .alert(
-                data: .init(title: Strings.genericTitleError, subtitle: error.localizedDescription)
+            fullScreenCover = .alertError(
+                data: .init(titleKey: "generic_title_error", subtitle: error.localizedDescription)
             )
         }
     }
@@ -208,8 +206,8 @@ final class WalletViewModel: ObservableObject {
             await syncWallet()
             
         } catch {
-            fullScreenCover = .alert(
-                data: .init(title: Strings.genericTitleError, subtitle: error.localizedDescription)
+            fullScreenCover = .alertError(
+                data: .init(titleKey: "generic_title_error", subtitle: error.localizedDescription)
             )
         }
     }

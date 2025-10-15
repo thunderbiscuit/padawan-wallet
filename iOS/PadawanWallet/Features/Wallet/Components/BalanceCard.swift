@@ -6,13 +6,18 @@
 import SwiftUI
 
 private struct BalanceCardStrings {
-    static var cardTitle: String = Strings.bitcoinSignet
-    static var formaOptions: [String] = BalanceFormat.allCases.map { $0.rawValue }
-    static var buttonSync: String = Strings.sync
+    static func cardTitle(_ lm: LanguageManager) -> String { lm.localizedString(forKey: "bitcoin_signet") }
+    static func buttonSync(_ lm: LanguageManager) -> String { lm.localizedString(forKey: "sync") }
+    static func formaOptions(_ lm: LanguageManager) -> [String] {
+        BalanceFormat.allCases.map { option in
+            lm.localizedString(forKey: option.rawValue.lowercased())
+        }
+    }
 }
 
 struct BalanceCard: View {
     @Environment(\.padawanColors) private var colors
+    @EnvironmentObject private var languageManager: LanguageManager
     @State private var balanceFormatOption: BalanceFormat = .sats
     @Binding var balance: UInt64
     @Binding private var isSyncing: Bool
@@ -33,12 +38,12 @@ struct BalanceCard: View {
             backgroundColor: colors.errorRed) {
                 VStack(spacing: 8.0) {
                     HStack {
-                        Text(BalanceCardStrings.cardTitle)
+                        Text(BalanceCardStrings.cardTitle(languageManager))
                             .font(Fonts.body)
                             .foregroundStyle(colors.textFaded)
                         Spacer()
                         SwitchButton(
-                            options: BalanceCardStrings.formaOptions,
+                            options: BalanceCardStrings.formaOptions(languageManager),
                             currentOption: .init(get: {
                                 balanceFormatOption.rawValue
                             }, set: { newValue in
@@ -75,7 +80,7 @@ struct BalanceCard: View {
                     ProgressView()
                         .tint(colors.accent1)
                 } else {
-                    Text(BalanceCardStrings.buttonSync)
+                    Text(BalanceCardStrings.buttonSync(languageManager))
                         .font(Fonts.caption)
                         .foregroundStyle(.white)
                 }
@@ -105,9 +110,9 @@ struct BalanceCard: View {
     VStack {
         BalanceCard(balance: .constant(450000), actionSyncWallet: { })
             .frame(height: 200)
-            .environment(\.padawanColors, .tatooineDesert)
+            .environment(\.padawanColors, PadawanColorTheme.tatooine.colors)
+            .environmentObject(LanguageManager.shared)
     }
     .padding()
-    
 }
 #endif
