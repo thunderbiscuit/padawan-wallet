@@ -9,6 +9,7 @@ import SwiftUI
 
 struct LanguageThemeScreen: View {
     @Environment(\.padawanColors) private var colors
+    @EnvironmentObject private var languageManager: LanguageManager
     @StateObject private var viewModel: LanguageThemeScreenViewModel
     
     init() {
@@ -19,11 +20,11 @@ struct LanguageThemeScreen: View {
         BackgroundView {
             ScrollView {
                 VStack(alignment: .leading, spacing: 12.0) {
-                    Text(Strings.selectLanguage)
+                    Text(languageManager.localizedString(forKey: "select_language"))
                         .font(Fonts.subtitle)
                     
                     buildSection(
-                        title: Strings.appLevelLanguage,
+                        title: languageManager.localizedString(forKey: "app_level_language"),
                         type: PadawanLanguage.self,
                         itemSelected: viewModel.selectedLanguage,
                         disableItems: viewModel.disabledLanguages
@@ -32,7 +33,7 @@ struct LanguageThemeScreen: View {
                     Spacer().frame(height: 18)
                     
                     buildSection(
-                        title: Strings.colorTheme,
+                        title: languageManager.localizedString(forKey: "color_theme"),
                         type: PadawanColorTheme.self,
                         itemSelected: viewModel.selectedTheme,
                         disableItems: viewModel.disabledThemes
@@ -53,7 +54,7 @@ struct LanguageThemeScreen: View {
                 EmptyView()
             }
         })
-        .navigationTitle(Strings.changeLanguage)
+        .navigationTitle(languageManager.localizedString(forKey: "change_language"))
         .navigationBarTitleDisplayMode(.inline)
     }
     

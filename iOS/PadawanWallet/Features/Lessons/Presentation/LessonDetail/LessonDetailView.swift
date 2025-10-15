@@ -7,9 +7,11 @@
 
 import Foundation
 import SwiftUI
+import BitcoinUI
 
 struct LessonsDetailView: View {
     @Environment(\.padawanColors) private var colors
+    @EnvironmentObject private var languageManager: LanguageManager
     @StateObject private var viewModel: LessonsDetailViewModel
     
     init(
@@ -39,7 +41,7 @@ struct LessonsDetailView: View {
                 .frame(maxWidth: .maxWidthScreen, maxHeight: .infinity, alignment: .leading)
                 .padding()
             }
-            .navigationTitle(viewModel.lesson.navigationTitle)
+            .navigationTitle(languageManager.localizedString(forKey: viewModel.lesson.navigationTitleKey))
             .navigationBarTitleDisplayMode(.inline)
         }
     }
@@ -47,7 +49,7 @@ struct LessonsDetailView: View {
     @ViewBuilder
     private func buildHeader() -> some View {
         ZStack {
-            colors.errorRed
+            colors.background2
                 .ignoresSafeArea()
             
             VStack {
@@ -59,13 +61,12 @@ struct LessonsDetailView: View {
                 Spacer()
                 
                 Rectangle()
-                    .frame(height: 2)
+                    .frame(height: 1)
                     .frame(maxWidth: .infinity)
                     .foregroundStyle(colors.text)
             }
-            
         }
-        .frame(height: 50)
+        .frame(height: 40)
         .frame(maxWidth: .infinity)
     }
     
@@ -85,16 +86,56 @@ struct LessonsDetailView: View {
         ScrollView {
             VStack(alignment: .leading, spacing: 16) {
                 Group {
-                    Text(content.header)
+                    Text(languageManager.localizedString(forKey: content.headerKey))
                         .font(Fonts.font(.bold, 24))
                     
-                    ForEach(content.texts, id: \.self) { text in
-                        text.view
+                    ForEach(content.items) { item in
+                        switch item {
+                        case .text(let key):
+                            let translatedText = languageManager.localizedString(forKey: key)
+                            Text.lessonText(translatedText)
+
+                        case .qrCode(let address):
+                            PadawanCardView(
+                                backgroundColor: colors.background2,
+                                content: { QRCodeView(qrCodeType: .bitcoin(address)) }
+                            )
+                            .padding(.horizontal, 8)
+                            .frame(height: 120)
+
+                        case .addressCard(let address):
+                            PadawanCardView(
+                                backgroundColor: colors.background2,
+                                content: {
+                                    Text(address)
+                                        .font(Fonts.font(.regular, 13))
+                                        .lineLimit(2)
+                                        .minimumScaleFactor(0.5)
+                                        .padding(.horizontal, 16)
+                                }
+                            )
+                            .padding(.horizontal, 8)
+                            .frame(height: 120)
+
+                        case .image(let name):
+                            if let uiImage = UIImage(named: name) {
+                                Image(uiImage: uiImage)
+                                     .resizable()
+                                     .aspectRatio(contentMode: .fit)
+                                     .padding()
+                                     .frame(height: 120)
+                            } else {
+                                Image(systemName: "photo.on.rectangle.angled")
+                                     .resizable()
+                                     .aspectRatio(contentMode: .fit)
+                                     .padding()
+                                     .frame(height: 120)
+                            }
+                        }
                     }
                     Spacer()
                 }
                 .foregroundStyle(colors.text)
-                
             }
             .frame(maxWidth: .infinity, alignment: .leading)
         }
@@ -125,34 +166,35 @@ struct LessonsDetailView: View {
 
 #if DEBUG
 #Preview {
-    NavigationStack(path: .constant(.init())) {
+    NavigationStack {
         LessonsDetailView(
             path: .constant(.init()),
             lesson: .init(
-                id: "l1",
-                title: "What is the bitcoin Signet?",
-                navigationTitle: "Bitcoin Networks",
+                id: "preview_l1",
+                titleKey: "l1_title",
+                navigationTitleKey: "l1_app_bar",
                 content: [
                     .init(
-                        header: "Header 1",
-                        texts: [
-                            AnyHashableView(Text("Text 1"))
-                        ]),
+                        headerKey: "l1_title",
+                        items: [
+                            .text(key: "l1_p1"),
+                            .text(key: "l1_p2")
+                        ]
+                    ),
                     .init(
-                        header: "Header 2",
-                        texts: [
-                            AnyHashableView(Text("Text 1"))
-                        ]),
-                    .init(
-                        header: "Header 3",
-                        texts: [
-                            AnyHashableView(Text("Text 1"))
-                        ])
+                        headerKey: "l2_title",
+                        items: [
+                            .text(key: "l2_p1"),
+                            .addressCard(address: "tb1pd8jmenqpe7rz2mavfdx7uc8pj7vskxv4rl6avxlqsw2u8u7d4gfs97durt"),
+                            .qrCode(address: "tb1pd8jmenqpe7rz2mavfdx7uc8pj7vskxv4rl6avxlqsw2u8u7d4gfs97durt")
+                        ]
+                    )
                 ],
                 sort: 1
             )
         )
-        .environment(\.padawanColors, .tatooineDesert)
+        .environment(\.padawanColors, PadawanColorTheme.tatooine.colors)
+        .environmentObject(LanguageManager.shared)
     }
 }
 #endif
