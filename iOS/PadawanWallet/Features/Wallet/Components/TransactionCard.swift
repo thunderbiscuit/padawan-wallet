@@ -6,9 +6,9 @@
 import SwiftUI
 
 private struct TransactionsCardAssets {
-    static let title = Strings.transactions
-    static let emptyStateDescription = Strings.transactionListEmpty
-    static let emptyStateButton = Strings.getCoins
+    static func title(_ lm: LanguageManager) -> String { lm.localizedString(forKey: "transactions") }
+    static func emptyStateDescription(_ lm: LanguageManager) -> String { lm.localizedString(forKey: "transaction_list_empty") }
+    static func emptyStateButton(_ lm: LanguageManager) -> String { lm.localizedString(forKey: "get_coins") }
 }
 
 extension TransactionsCard {
@@ -49,6 +49,7 @@ extension TransactionsCard {
 
 struct TransactionsCard: View {
     @Environment(\.padawanColors) private var colors
+    @EnvironmentObject private var languageManager: LanguageManager
     @Binding private var list: [TransactionsCard.Data]
     @Binding private var isSyncing: Bool
     
@@ -78,7 +79,7 @@ struct TransactionsCard: View {
     
     @ViewBuilder
     private func buildHeader() -> some View {
-        Text(TransactionsCardAssets.title)
+        Text(TransactionsCardAssets.title(languageManager))
             .font(Fonts.title)
             .foregroundStyle(colors.text)
     }
@@ -88,12 +89,12 @@ struct TransactionsCard: View {
         PadawanCardView(
             backgroundColor: colors.background) {
                 VStack(alignment: .leading, spacing: 24) {
-                    Text(TransactionsCardAssets.emptyStateDescription)
+                    Text(TransactionsCardAssets.emptyStateDescription(languageManager))
                         .font(Fonts.body)
                         .foregroundStyle(colors.text)
                     
                     PadawanButton(
-                        title: TransactionsCardAssets.emptyStateButton,
+                        title: TransactionsCardAssets.emptyStateButton(languageManager),
                         isLoading: $isSyncing
                     ) {
                         actionGetCoins {
@@ -178,6 +179,8 @@ struct TransactionsCard: View {
 #Preview("Empty") {
     TransactionsCard(list: .constant([]), actionGetCoins: { _ in })
         .padding()
+        .environment(\.padawanColors, PadawanColorTheme.tatooine.colors)
+        .environmentObject(LanguageManager.shared)
 }
 
 #Preview("With transactions") {
@@ -195,5 +198,7 @@ struct TransactionsCard: View {
     
     TransactionsCard(list: transactions, actionGetCoins: { _ in })
         .padding()
+        .environment(\.padawanColors, PadawanColorTheme.tatooine.colors)
+        .environmentObject(LanguageManager.shared)
 }
 #endif

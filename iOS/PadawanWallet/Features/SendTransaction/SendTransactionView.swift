@@ -8,20 +8,21 @@
 import SwiftUI
 
 private struct ViewAssets {
-    static var navigationTitle = Strings.sendBitcoin
-    static var labelInputAmount = Strings.amount
-    static var placeHolderInputAmount = Strings.enterAmountSats
-    static var labelInputAddress = Strings.address
-    static var placeHolderInputAddress = Strings.enterSignetAddress
-    static var labelBalance = Strings.balance
-    static var labelTax = Strings.feesSatsVbytes
-    static var buttonVerifyTransaction = Strings.verifyTransaction
+    static func navigationTitle(_ lm: LanguageManager) -> String { lm.localizedString(forKey: "send_bitcoin") }
+    static func labelInputAmount(_ lm: LanguageManager) -> String { lm.localizedString(forKey: "amount") }
+    static func placeHolderInputAmount(_ lm: LanguageManager) -> String { lm.localizedString(forKey: "enter_amount_sats") }
+    static func labelInputAddress(_ lm: LanguageManager) -> String { lm.localizedString(forKey: "address") }
+    static func placeHolderInputAddress(_ lm: LanguageManager) -> String { lm.localizedString(forKey: "enter_signet_address") }
+    static func labelBalance(_ lm: LanguageManager) -> String { lm.localizedString(forKey: "balance") }
+    static func labelTax(_ lm: LanguageManager) -> String { lm.localizedString(forKey: "fees_sats_vbytes") }
+    static func buttonVerifyTransaction(_ lm: LanguageManager) -> String { lm.localizedString(forKey: "verify_transaction") }
     
     static var cameraIcon: Image = Image(systemName: "camera")
 }
 
 struct SendTransactionView: View {
     @Environment(\.padawanColors) private var colors
+    @EnvironmentObject private var languageManager: LanguageManager
     @StateObject private var viewModel: SendTransactionViewModel
     
     init(
@@ -36,7 +37,7 @@ struct SendTransactionView: View {
             VStack(spacing: 20) {
                 HStack {
                     Spacer()
-                    Text("\(ViewAssets.labelBalance) \(viewModel.getBalance()) sats")
+                    Text("\(ViewAssets.labelBalance(languageManager)) \(viewModel.getBalance()) sats")
                         .font(Fonts.subtitle)
                         .multilineTextAlignment(.trailing)
                         .foregroundStyle(colors.textFaded)
@@ -49,12 +50,13 @@ struct SendTransactionView: View {
                 Spacer().frame(minHeight: 50)
                 
                 PadawanButton(
-                    title: ViewAssets.buttonVerifyTransaction,
+                title: ViewAssets.buttonVerifyTransaction(languageManager),
                     action: {
                         dismissKeyBoard()
                         viewModel.verifyTransaction()
                     }
                 )
+
                 .fixedSize(horizontal: false, vertical: true)
                 .padding(.horizontal)
                 
@@ -64,7 +66,7 @@ struct SendTransactionView: View {
             .padding()
         }
         .toolbar(.hidden, for: .tabBar)
-        .navigationTitle(ViewAssets.navigationTitle)
+        .navigationTitle(ViewAssets.navigationTitle(languageManager))
         .onTapGesture {
             dismissKeyBoard()
         }
@@ -102,33 +104,33 @@ struct SendTransactionView: View {
     }
     
     @ViewBuilder
-    private func buildInputTexts() -> some View {
-        VStack(spacing: 20) {
-            buildInputText(
-                label: ViewAssets.labelInputAmount,
-                placeholder: ViewAssets.placeHolderInputAmount,
-                text: $viewModel.amountValue,
-                trailingIcon: nil,
-                keyboardType: .numberPad
-            )
-            
-            buildInputText(
-                label: ViewAssets.labelInputAddress,
-                placeholder: ViewAssets.placeHolderInputAddress,
-                text: $viewModel.address,
-                trailingIcon: ViewAssets.cameraIcon,
-                trailingAction: {
-                    dismissKeyBoard()
-                    viewModel.openCamera()
-                }
-            )
+        private func buildInputTexts() -> some View {
+            VStack(spacing: 20) {
+                buildInputText(
+                    label: ViewAssets.labelInputAmount(languageManager),
+                    placeholder: ViewAssets.placeHolderInputAmount(languageManager),
+                    text: $viewModel.amountValue,
+                    trailingIcon: nil,
+                    keyboardType: .numberPad
+                )
+                
+                buildInputText(
+                    label: ViewAssets.labelInputAddress(languageManager),
+                    placeholder: ViewAssets.placeHolderInputAddress(languageManager),
+                    text: $viewModel.address,
+                    trailingIcon: ViewAssets.cameraIcon,
+                    trailingAction: {
+                        dismissKeyBoard()
+                        viewModel.openCamera()
+                    }
+                )
+            }
         }
-    }
     
     @ViewBuilder
     private func buildTax() -> some View {
         VStack(alignment: .leading, spacing: .zero) {
-            buildHeader(title: ViewAssets.labelTax)
+            buildHeader(title: ViewAssets.labelTax(languageManager))
             Spacer().frame(height: 8.0)
             Slider(
                 value: $viewModel.feeRate,
@@ -195,9 +197,13 @@ struct SendTransactionView: View {
 
 #if DEBUG
 #Preview {
-    SendTransactionView(
-        path: .constant(.init()),
-        bdkClient: .mock
-    )
+    NavigationStack {
+        SendTransactionView(
+            path: .constant(.init()),
+            bdkClient: .mock
+        )
+        .environment(\.padawanColors, PadawanColorTheme.tatooine.colors)
+        .environmentObject(LanguageManager.shared)
+    }
 }
 #endif

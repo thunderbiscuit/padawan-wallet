@@ -76,6 +76,7 @@ struct AlertModalView: View {
             Text(data.title)
                 .font(Fonts.font(.bold, 22))
                 .multilineTextAlignment(.center)
+            
             if let subtitle = data.subtitle {
                 Text(subtitle)
                     .font(Fonts.font(.regular, 20))
@@ -142,13 +143,15 @@ struct AlertModalView: View {
     AlertModalView(
         data: .init(
             image: Image(systemName: "person"),
-            title: "Title of sheetError",
-            subtitle: "Subtractive text that explains the error",
-            primaryButtonTitle: "OK",
-            secondaryButtonTitle: "Secondary",
+            titleKey: "attention",
+            subtitleKey: "alert_change_language",
+            primaryButtonTitleKey: "button_yes",
+            secondaryButtonTitleKey: "button_no",
             onPrimaryButtonTap: { print("Primary button tapped") },
             onSecondaryButtonTap: { print("Secondary button tapped") }
         )
     )
+    .environment(\.padawanColors, PadawanColorTheme.tatooine.colors)
+    .environmentObject(LanguageManager.shared)
 }
 #endif

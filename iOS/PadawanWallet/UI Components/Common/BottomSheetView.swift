@@ -10,62 +10,68 @@ import SwiftUI
 extension BottomSheetView {
     struct Data: Equatable, Hashable, Identifiable {
         var id: String { title }
-        
         var image: Image?
         var title: String
         var subtitle: String?
-        var primaryButtonTitle: String? = "OK"
+        var primaryButtonTitle: String?
         var secondaryButtonTitle: String?
         var primaryButtonIcon: Image?
         var secondaryButtonIcon: Image?
+        var verticalAlignmentForButtons: Bool
         var onPrimaryButtonTap: (() -> Void)?
         var onSecondaryButtonTap: (() -> Void)?
-        var verticalAlignmentForButtons: Bool
-        
+
         init(
             image: Image? = nil,
-            title: String,
+            titleKey: String,
             subtitle: String? = nil,
+            subtitleKey: String? = nil,
             verticalAlignmentForButtons: Bool = true,
-            primaryButtonTitle: String? = "OK",
-            secondaryButtonTitle: String? = nil,
+            primaryButtonTitleKey: String? = "OK",
+            secondaryButtonTitleKey: String? = nil,
             primaryButtonIcon: Image? = nil,
             secondaryButtonIcon: Image? = nil,
+            overrideLanguage: PadawanLanguage? = nil,
             onPrimaryButtonTap: (() -> Void)? = nil,
             onSecondaryButtonTap: (() -> Void)? = nil
         ) {
             self.image = image
-            self.title = title
-            self.subtitle = subtitle
-            self.verticalAlignmentForButtons = verticalAlignmentForButtons
-            self.primaryButtonTitle = primaryButtonTitle
-            self.secondaryButtonTitle = secondaryButtonTitle
-            self.primaryButtonIcon = primaryButtonIcon
-            self.secondaryButtonIcon = secondaryButtonIcon
             self.onPrimaryButtonTap = onPrimaryButtonTap
             self.onSecondaryButtonTap = onSecondaryButtonTap
+            self.subtitle = subtitle
+            self.verticalAlignmentForButtons = verticalAlignmentForButtons
+            self.primaryButtonIcon = primaryButtonIcon
+            self.secondaryButtonIcon = secondaryButtonIcon
+
+            if let lang = overrideLanguage {
+                self.title = LanguageManager.translate(key: titleKey, to: lang)
+                self.subtitle = subtitleKey != nil ? LanguageManager.translate(key: subtitleKey!, to: lang) : self.subtitle
+                self.primaryButtonTitle = primaryButtonTitleKey != nil ? LanguageManager.translate(key: primaryButtonTitleKey!, to: lang) : nil
+                self.secondaryButtonTitle = secondaryButtonTitleKey != nil ? LanguageManager.translate(key: secondaryButtonTitleKey!, to: lang) : nil
+            } else {
+                self.title = LanguageManager.shared.localizedString(forKey: titleKey)
+                self.subtitle = subtitleKey != nil ? LanguageManager.shared.localizedString(forKey: subtitleKey!) : self.subtitle
+                self.primaryButtonTitle = primaryButtonTitleKey != nil ? LanguageManager.shared.localizedString(forKey: primaryButtonTitleKey!) : nil
+                self.secondaryButtonTitle = secondaryButtonTitleKey != nil ? LanguageManager.shared.localizedString(forKey: secondaryButtonTitleKey!) : nil
+            }
         }
         
         init(error: BDKServiceError, dismissAction: (() -> Void)? = nil) {
-            self.title = Strings.genericTitleError
-            self.subtitle = error.localizedDescription
-            self.primaryButtonTitle = "OK"
-            self.onPrimaryButtonTap = dismissAction
-            self.verticalAlignmentForButtons = true
+            self.init(
+                titleKey: "generic_title_error",
+                subtitle: error.localizedDescription,
+                primaryButtonTitleKey: "OK",
+                onPrimaryButtonTap: dismissAction
+            )
         }
         
         static func == (lhs: Data, rhs: Data) -> Bool {
-            return lhs.title == rhs.title &&
-            lhs.subtitle == rhs.subtitle &&
-            lhs.primaryButtonTitle == rhs.primaryButtonTitle &&
-            lhs.secondaryButtonTitle == rhs.secondaryButtonTitle
+            return lhs.title == rhs.title && lhs.subtitle == rhs.subtitle
         }
         
         func hash(into hasher: inout Hasher) {
             hasher.combine(title)
             hasher.combine(subtitle)
-            hasher.combine(primaryButtonTitle)
-            hasher.combine(secondaryButtonTitle)
         }
     }
 }
@@ -156,13 +162,15 @@ struct BottomSheetView: View {
     BottomSheetView(
         data: .init(
             image: Image(systemName: "person"),
-            title: "Title of sheetError",
-            subtitle: "Subtractive text that explains the error",
-            primaryButtonTitle: "OK",
-            secondaryButtonTitle: "Secondary",
+            titleKey: "attention",
+            subtitleKey: "alert_change_language",
+            primaryButtonTitleKey: "button_yes",
+            secondaryButtonTitleKey: "button_no",
             onPrimaryButtonTap: { print("Primary button tapped") },
             onSecondaryButtonTap: { print("Secondary button tapped") }
         )
     )
+    .environment(\.padawanColors, PadawanColorTheme.tatooine.colors)
+    .environmentObject(LanguageManager.shared)
 }
 #endif

@@ -7,7 +7,7 @@ import SwiftUI
 
 struct CoreView: View {
     @Environment(\.padawanColors) private var colors
-    
+    @EnvironmentObject private var languageManager: LanguageManager
     @State private var walletPath: NavigationPath = .init()
     @State private var lessonPath: NavigationPath = .init()
     @State private var morePath: NavigationPath = .init()
@@ -30,7 +30,7 @@ struct CoreView: View {
             }
             .tabItem {
                 Label {
-                    Text(Strings.bottomNavWallet)
+                    Text(languageManager.localizedString(forKey: "bottom_nav_wallet"))
                 } icon: {
                     Image(systemName: "bitcoinsign.square")
                 }
@@ -43,7 +43,7 @@ struct CoreView: View {
             }
             .tabItem {
                 Label {
-                    Text(Strings.bottomNavChapters)
+                    Text(languageManager.localizedString(forKey: "bottom_nav_chapters"))
                 } icon: {
                     Image(systemName: "graduationcap")
                 }
@@ -57,7 +57,7 @@ struct CoreView: View {
             }
             .tabItem {
                 Label {
-                    Text(Strings.bottomNavSettings)
+                    Text(languageManager.localizedString(forKey: "bottom_nav_settings"))
                 } icon: {
                     Image(systemName: "ellipsis")
                 }

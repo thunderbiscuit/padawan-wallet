@@ -11,6 +11,7 @@ import SwiftUI
 
 struct CameraScannView: View {
     @Environment(\.dismiss) private var dismiss
+    @EnvironmentObject private var languageManager: LanguageManager
     @State private var fullScreenMode: SendTransactionScreenNavigation?
     private let codeTypes: [AVMetadataObject.ObjectType] = [
         .qr
@@ -31,7 +32,7 @@ struct CameraScannView: View {
         
             VStack {
                 Spacer()
-                PadawanButton(title: Strings.cancel) {
+                PadawanButton(title: languageManager.localizedString(forKey: "cancel")) {
                     dismiss()
                 }
                 .frame(width: 150)
@@ -65,8 +66,8 @@ struct CameraScannView: View {
             dismiss()
         case .failure(let failure):
             fullScreenMode = .alert(
-                data: .init(
-                    title: Strings.genericTitleError,
+                    data: .init(
+                    titleKey: "generic_title_error",
                     subtitle: failure.localizedDescription
                 )
             )

@@ -9,16 +9,24 @@ import BitcoinUI
 import Foundation
 import SwiftUI
 
+enum LessonContentItem: Hashable, Identifiable {
+    var id: UUID { UUID() }
+    case text(key: String)
+    case qrCode(address: String)
+    case addressCard(address: String)
+    case image(name: String)
+}
+
 struct LessonSectionList: Hashable, Equatable, Identifiable {
     let id: UUID = UUID()
-    let title: String
+    let titleKey: String
     var items: [LessonItemList]
 }
 
 struct LessonItemList: Hashable, Equatable, Identifiable {
     let id: String
-    let title: String
-    let navigationTitle: String
+    let titleKey: String
+    let navigationTitleKey: String
     let content: [LessonContent]
     var isDone: Bool = false
     let sort: Int
@@ -26,26 +34,8 @@ struct LessonItemList: Hashable, Equatable, Identifiable {
 
 struct LessonContent: Hashable, Equatable, Identifiable {
     let id: UUID = UUID()
-    let header: String
-    let texts: [AnyHashableView]
-}
-
-struct AnyHashableView: Hashable, Equatable, Identifiable {
-    let id: UUID
-    let view: AnyView
-
-    init<V: View>(_ view: V, id: UUID = UUID()) {
-        self.id = id
-        self.view = AnyView(view)
-    }
-
-    static func == (lhs: AnyHashableView, rhs: AnyHashableView) -> Bool {
-        lhs.id == rhs.id
-    }
-
-    func hash(into hasher: inout Hasher) {
-        hasher.combine(id)
-    }
+    let headerKey: String
+    let items: [LessonContentItem]
 }
 
 extension Text {
@@ -58,371 +48,258 @@ extension Text {
 // MARK: - Build all items
 extension LessonSectionList {
     static var all: [LessonSectionList] = [
-        .init(
-            title: Strings.gettingStarted,
-            items: LessonItemList.itemsL1
-        ),
-        .init(
-            title: Strings.transactions,
-            items: LessonItemList.itemsL2
-        ),
-        .init(
-            title: Strings.wallets,
-            items: LessonItemList.itemsL3
-        ),
+        .init(titleKey: "getting_started", items: LessonItemList.itemsL1),
+        .init(titleKey: "transactions", items: LessonItemList.itemsL2),
+        .init(titleKey: "wallets", items: LessonItemList.itemsL3),
     ]
 }
 
 extension LessonItemList {
     static var itemsL1: [LessonItemList] = [
-        .init(
-            id: "l1_title",
-            title: Strings.l1Title,
-            navigationTitle: Strings.l1AppBar,
-            content: LessonContent.contentL1,
-            sort: 1
-        ),
-        .init(
-            id: "l2_title",
-            title: Strings.l2Title,
-            navigationTitle: Strings.l2AppBar,
-            content: LessonContent.contentL2,
-            sort: 2
-        ),
-        .init(
-            id: "l3_title",
-            title: Strings.l3Title,
-            navigationTitle: Strings.l3AppBar,
-            content: LessonContent.contentL3,
-            sort: 3
-        ),
+        .init(id: "l1_title", titleKey: "l1_title", navigationTitleKey: "l1_app_bar", content: LessonContent.contentL1, sort: 1),
+        .init(id: "l2_title", titleKey: "l2_title", navigationTitleKey: "l2_app_bar", content: LessonContent.contentL2, sort: 2),
+        .init(id: "l3_title", titleKey: "l3_title", navigationTitleKey: "l3_app_bar", content: LessonContent.contentL3, sort: 3),
     ]
     
     static var itemsL2: [LessonItemList] = [
-        .init(
-            id: "l4_title",
-            title: Strings.l4Title,
-            navigationTitle: Strings.l4AppBar,
-            content: LessonContent.contentL4,
-            sort: 4
-        ),
-        .init(
-            id: "l5_title",
-            title: Strings.l5Title,
-            navigationTitle: Strings.l5AppBar,
-            content: LessonContent.contentL5,
-            sort: 5
-        ),
-        .init(
-            id: "l6_title",
-            title: Strings.l6Title,
-            navigationTitle: Strings.l6AppBar,
-            content: LessonContent.contentL6,
-            sort: 6
-        ),
+        .init(id: "l4_title", titleKey: "l4_title", navigationTitleKey: "l4_app_bar", content: LessonContent.contentL4, sort: 4),
+        .init(id: "l5_title", titleKey: "l5_title", navigationTitleKey: "l5_app_bar", content: LessonContent.contentL5, sort: 5),
+        .init(id: "l6_title", titleKey: "l6_title", navigationTitleKey: "l6_app_bar", content: LessonContent.contentL6, sort: 6),
     ]
     
     static var itemsL3: [LessonItemList] = [
-        .init(
-            id: "l7_title",
-            title: Strings.l7Title,
-            navigationTitle: Strings.l7AppBar,
-            content: LessonContent.contentL7,
-            sort: 7
-        ),
-        .init(
-            id: "l8_title",
-            title: Strings.l8Title,
-            navigationTitle: Strings.l8AppBar,
-            content: LessonContent.contentL8,
-            sort: 8
-        ),
-        .init(
-            id: "l9_title",
-            title: Strings.l9Title,
-            navigationTitle: Strings.l9AppBar,
-            content: LessonContent.contentL9,
-            sort: 9
-        ),
+        .init(id: "l7_title", titleKey: "l7_title", navigationTitleKey: "l7_app_bar", content: LessonContent.contentL7, sort: 7),
+        .init(id: "l8_title", titleKey: "l8_title", navigationTitleKey: "l8_app_bar", content: LessonContent.contentL8, sort: 8),
+        .init(id: "l9_title", titleKey: "l9_title", navigationTitleKey: "l9_app_bar", content: LessonContent.contentL9, sort: 9),
     ]
 }
 
+// MARK: - Lesson Content Data
 extension LessonContent {
     static var contentL1: [LessonContent] = [
         .init(
-            header: Strings.l1Title,
-            texts: [
-                AnyHashableView(Text.lessonText(Strings.l1P1)),
-                AnyHashableView(Text.lessonText(Strings.l1P2))
+            headerKey: "l1_title",
+            items: [
+                .text(key: "l1_p1"),
+                .text(key: "l1_p2")
             ]
         ),
         .init(
-            header: Strings.l1H2,
-            texts: [
-                AnyHashableView(Text.lessonText(Strings.l1P3)),
-                AnyHashableView(Text.lessonText(Strings.l1P4)),
+            headerKey: "l1_h2",
+            items: [
+                .text(key: "l1_p3"),
+                .text(key: "l1_p4")
             ]
         ),
         .init(
-            header: Strings.l1H3,
-            texts: [
-                AnyHashableView(Text.lessonText(Strings.l1P5)),
-                AnyHashableView(Text.lessonText(Strings.l1P6)),
+            headerKey: "l1_h3",
+            items: [
+                .text(key: "l1_p5"),
+                .text(key: "l1_p6")
             ]
         ),
         .init(
-            header: Strings.l1H4,
-            texts: [
-                AnyHashableView(Text.lessonText(Strings.l1P7)),
-                AnyHashableView(Text.lessonText(Strings.l1P8)),
-                AnyHashableView(Text.lessonText(Strings.l1P9)),
+            headerKey: "l1_h4",
+            items: [
+                .text(key: "l1_p7"),
+                .text(key: "l1_p8"),
+                .text(key: "l1_p9")
             ]
-        )
+        ),
     ]
     
     static var contentL2: [LessonContent] = [
         .init(
-            header: Strings.l2Title,
-            texts: [
-                AnyHashableView(Text.lessonText(Strings.l2P1)),
-                AnyHashableView(Text.lessonText(Strings.l2P2)),
-                AnyHashableView(Text.lessonText(Strings.l2P3)),
-                AnyHashableView(
-                    PadawanCardView(
-                        backgroundColor: PadawanColorTheme.tatooine.colors.background2,
-                        content: {
-                            Text("tb1pd8jmenqpe7rz2mavfdx7uc8pj7vskxv4rl6avxlqsw2u8u7d4gfs97durt")
-                                .font(Fonts.font(.regular, 13))
-                                .padding(.horizontal, 16)
-                        }
-                    )
-                    .padding(.horizontal, 8)
-                    .frame(height: 120)
-                ),
-                AnyHashableView(Text.lessonText(Strings.l2P4)),
-                AnyHashableView(
-                    PadawanCardView(
-                        backgroundColor: PadawanColorTheme.tatooine.colors.background2,
-                        content: {
-                            QRCodeView(qrCodeType: .bitcoin("tb1pd8jmenqpe7rz2mavfdx7uc8pj7vskxv4rl6avxlqsw2u8u7d4gfs97durt"))
-                        }
-                    )
-                    .padding(.horizontal, 8)
-                    .frame(height: 120)
-                ),
-                AnyHashableView(Text.lessonText(Strings.l2P5)),
-                AnyHashableView(Text.lessonText(Strings.l2P6)),
+            headerKey: "l2_title",
+            items: [
+                .text(key: "l2_p1"),
+                .text(key: "l2_p2"),
+                .text(key: "l2_p3"),
+                .addressCard(address: "tb1pd8jmenqpe7rz2mavfdx7uc8pj7vskxv4rl6avxlqsw2u8u7d4gfs97durt"),
+                .text(key: "l2_p4"),
+                .qrCode(address: "tb1pd8jmenqpe7rz2mavfdx7uc8pj7vskxv4rl6avxlqsw2u8u7d4gfs97durt"),
+                .text(key: "l2_p5"),
+                .text(key: "l2_p6"),
             ]
         ),
         .init(
-            header: Strings.l2H1,
-            texts: [
-                AnyHashableView(Text.lessonText(Strings.l2P7)),
-                AnyHashableView(Text.lessonText(Strings.l2P8)),
-                AnyHashableView(Text.lessonText(Strings.l2P9)),
-                AnyHashableView(Text.lessonText(Strings.l2P10)),
+            headerKey: "l2_h1",
+            items: [
+                .text(key: "l2_p7"),
+                .text(key: "l2_p8"),
+                .text(key: "l2_p9"),
+                .text(key: "l2_p10")
             ]
         ),
         .init(
-            header: Strings.l2H2,
-            texts: [
-                AnyHashableView(Text.lessonText(Strings.l2P11)),
-                AnyHashableView(Text.lessonText(Strings.l2P12)),
-                AnyHashableView(Text.lessonText(Strings.l2P13)),
+            headerKey: "l2_h2",
+            items: [
+                .text(key: "l2_p11"),
+                .text(key: "l2_p12"),
+                .text(key: "l2_p13")
             ]
-        )
+        ),
     ]
     
     static var contentL3: [LessonContent] = [
         .init(
-            header: Strings.l3Title,
-            texts: [
-                AnyHashableView(Text.lessonText(Strings.l3P1)),
-                AnyHashableView(Text.lessonText(Strings.l3P2)),
+            headerKey: "l3_title",
+            items: [
+                .text(key: "l3_p1"),
+                .text(key: "l3_p2")
             ]
         )
     ]
     
     static var contentL4: [LessonContent] = [
         .init(
-            header: Strings.l4Title,
-            texts: [
-                AnyHashableView(Text.lessonText(Strings.l4P1)),
-                AnyHashableView(Text.lessonText(Strings.l4P2)),
+            headerKey: "l4_title",
+            items: [
+                .text(key: "l4_p1"),
+                .text(key: "l4_p2")
             ]
         ),
         .init(
-            header: Strings.l4H1,
-            texts: [
-                AnyHashableView(Text.lessonText(Strings.l4P3)),
-                AnyHashableView(Text.lessonText(Strings.l4P4)),
+            headerKey: "l4_h1",
+            items: [
+                .text(key: "l4_p3"),
+                .text(key: "l4_p4")
             ]
         ),
         .init(
-            header: Strings.l4H2,
-            texts: [
-                AnyHashableView(Text.lessonText(Strings.l4P5)),
-                AnyHashableView(Text.lessonText(Strings.l4P6)),
+            headerKey: "l4_h2",
+            items: [
+                .text(key: "l4_p5"),
+                .text(key: "l4_p6")
             ]
-        )
+        ),
     ]
     
     static var contentL5: [LessonContent] = [
         .init(
-            header: Strings.l5Title,
-            texts: [
-                AnyHashableView(Text.lessonText(Strings.l5P1)),
-                AnyHashableView(Text.lessonText(Strings.l5P2)),
+            headerKey: "l5_title",
+            items: [
+                .text(key: "l5_p1"),
+                .text(key: "l5_p2")
             ]
         ),
         .init(
-            header: Strings.l5H1,
-            texts: [
-                AnyHashableView(Text.lessonText(Strings.l5P3)),
-                AnyHashableView(Text.lessonText(Strings.l5P4)),
+            headerKey: "l5_h1",
+            items: [
+                .text(key: "l5_p3"),
+                .text(key: "l5_p4")
             ]
         ),
         .init(
-            header: Strings.l5H2,
-            texts: [
-                AnyHashableView(Text.lessonText(Strings.l5P5)),
+            headerKey: "l5_h2",
+            items: [
+                .text(key: "l5_p5")
             ]
-        )
+        ),
     ]
     
     static var contentL6: [LessonContent] = [
         .init(
-            header: Strings.l6Title,
-            texts: [
-                AnyHashableView(Text.lessonText(Strings.l6P1)),
+            headerKey: "l6_title",
+            items: [
+                .text(key: "l6_p1")
             ]
         ),
         .init(
-            header: Strings.l6H1,
-            texts: [
-                AnyHashableView(Text.lessonText(Strings.l6P3)),
-                AnyHashableView(Text.lessonText(Strings.l6P4)),
-                AnyHashableView(
-                    PadawanCardView(
-                        backgroundColor: PadawanColorTheme.tatooine.colors.background2,
-                        content: {
-                            Asset.Images.unitSymbols.toImage
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                        }
-                    )
-                    .padding(.horizontal, 8)
-                    .frame(height: 120)
-                )
+            headerKey: "l6_h1",
+            items: [
+                .text(key: "l6_p3"),
+                .text(key: "l6_p4"),
+                .image(name: "unit_symbols")
             ]
         ),
         .init(
-            header: Strings.l6H2,
-            texts: [
-                AnyHashableView(Text.lessonText(Strings.l6P5)),
-                AnyHashableView(Text.lessonText(Strings.l6P6)),
-                AnyHashableView(
-                    PadawanCardView(
-                        backgroundColor: PadawanColorTheme.tatooine.colors.background2,
-                        content: {
-                            Asset.Images.bitcoinSymbols.toImage
-                                .resizable()
-                        }
-                    )
-                    .padding(.horizontal, 8)
-                    .frame(height: 120)
-                ),
-                AnyHashableView(Text.lessonText(Strings.l6P7)),
-                AnyHashableView(
-                    PadawanCardView(
-                        backgroundColor: PadawanColorTheme.tatooine.colors.background2,
-                        content: {
-                            Asset.Images.satSymbols.toImage
-                                .resizable()
-                        }
-                    )
-                    .padding(.horizontal, 8)
-                    .frame(height: 120)
-                )
+            headerKey: "l6_h2",
+            items: [
+                .text(key: "l6_p5"),
+                .text(key: "l6_p6"),
+                .image(name: "bitcoin_symbols"),
+                .text(key: "l6_p7"),
+                .image(name: "sat_symbols"),
             ]
         ),
         .init(
-            header: Strings.l6H3,
-            texts: [
-                AnyHashableView(Text.lessonText(Strings.l6P8)),
-                AnyHashableView(Text.lessonText(Strings.l6P9)),
-                AnyHashableView(Text.lessonText(Strings.l6P10)),
-                AnyHashableView(Text.lessonText(Strings.l6P11)),
+            headerKey: "l6_h3",
+            items: [
+                .text(key: "l6_p8"),
+                .text(key: "l6_p9"),
+                .text(key: "l6_p10"),
+                .text(key: "l6_p11")
             ]
-        )
+        ),
     ]
     
     static var contentL7: [LessonContent] = [
         .init(
-            header: Strings.l7Title,
-            texts: [
-                AnyHashableView(Text.lessonText(Strings.l7P1)),
-                AnyHashableView(Text.lessonText(Strings.l7P2)),
-                AnyHashableView(Text.lessonText(Strings.l7P3)),
-                AnyHashableView(Text.lessonText(Strings.l7P4)),
+            headerKey: "l7_title",
+            items: [
+                .text(key: "l7_p1"),
+                .text(key: "l7_p2"),
+                .text(key: "l7_p3"),
+                .text(key: "l7_p4")
             ]
         ),
         .init(
-            header: Strings.l7H1,
-            texts: [
-                AnyHashableView(Text.lessonText(Strings.l7P5)),
-                AnyHashableView(Text.lessonText(Strings.l7P6)),
-                AnyHashableView(Text.lessonText(Strings.l7P7)),
+            headerKey: "l7_h1",
+            items: [
+                .text(key: "l7_p5"),
+                .text(key: "l7_p6"),
+                .text(key: "l7_p7")
             ]
-        )
+        ),
     ]
     
     static var contentL8: [LessonContent] = [
         .init(
-            header: Strings.l8Title,
-            texts: [
-                AnyHashableView(Text.lessonText(Strings.l8P1)),
-                AnyHashableView(Text.lessonText(Strings.l8P2)),
-                AnyHashableView(Text.lessonText(Strings.l8P3)),
-                AnyHashableView(Text.lessonText(Strings.l8P4)),
-                AnyHashableView(Text.lessonText(Strings.l8P5)),
+            headerKey: "l8_title",
+            items: [
+                .text(key: "l8_p1"),
+                .text(key: "l8_p2"),
+                .text(key: "l8_p3"),
+                .text(key: "l8_p4"),
+                .text(key: "l8_p5")
             ]
         ),
         .init(
-            header: Strings.l8H1,
-            texts: [
-                AnyHashableView(Text.lessonText(Strings.l8P6)),
-                AnyHashableView(Text.lessonText(Strings.l8P7)),
-                AnyHashableView(Text.lessonText(Strings.l8P8)),
+            headerKey: "l8_h1",
+            items: [
+                .text(key: "l8_p6"),
+                .text(key: "l8_p7"),
+                .text(key: "l8_p8")
             ]
         ),
     ]
     
     static var contentL9: [LessonContent] = [
         .init(
-            header: Strings.l9H1,
-            texts: [
-                AnyHashableView(Text.lessonText(Strings.l9P1)),
-                AnyHashableView(Text.lessonText(Strings.l9P2)),
+            headerKey: "l9_h1",
+            items: [
+                .text(key: "l9_p1"),
+                .text(key: "l9_p2")
             ]
         ),
         .init(
-            header: Strings.l9H2,
-            texts: [
-                AnyHashableView(Text.lessonText(Strings.l9P3)),
-                AnyHashableView(Text.lessonText(Strings.l9P4)),
-                AnyHashableView(Text.lessonText(Strings.l9P5)),
+            headerKey: "l9_h2",
+            items: [
+                .text(key: "l9_p3"),
+                .text(key: "l9_p4"),
+                .text(key: "l9_p5")
             ]
         ),
         .init(
-            header: Strings.l9H3,
-            texts: [
-                AnyHashableView(Text.lessonText(Strings.l9P6)),
-                AnyHashableView(Text.lessonText(Strings.l9P7)),
-                AnyHashableView(Text.lessonText(Strings.l9P8)),
-                AnyHashableView(Text.lessonText(Strings.l9P9)),
-                AnyHashableView(Text.lessonText(Strings.l9P10)),
-                AnyHashableView(Text.lessonText(Strings.l9P11)),
+            headerKey: "l9_h3",
+            items: [
+                .text(key: "l9_p6"),
+                .text(key: "l9_p7"),
+                .text(key: "l9_p8"),
+                .text(key: "l9_p9"),
+                .text(key: "l9_p10"),
+                .text(key: "l9_p11")
             ]
         ),
     ]

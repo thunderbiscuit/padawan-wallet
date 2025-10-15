@@ -6,8 +6,8 @@
 import SwiftUI
 
 private struct WalletViewAssets {
-    static var receiveButtonTitle = Strings.receive
-    static var sendButtonTitle = Strings.send
+    static func receiveButtonTitle(_ lm: LanguageManager) -> String { lm.localizedString(forKey: "receive") }
+    static func sendButtonTitle(_ lm: LanguageManager) -> String { lm.localizedString(forKey: "send") }
     
     static var receiveButtonIcon: Image = Image(systemName: "arrow.down")
     static var sendButtonIcon: Image = Image(systemName: "arrow.up")
@@ -15,6 +15,7 @@ private struct WalletViewAssets {
 
 struct WalletView: View {
     @Environment(\.padawanColors) private var colors
+    @EnvironmentObject private var languageManager: LanguageManager
     @StateObject private var viewModel: WalletViewModel
     
     init(
@@ -79,7 +80,7 @@ struct WalletView: View {
         }
         .fullScreenCover(item: $viewModel.fullScreenCover) { item in
             switch item {
-            case .alert(let data):
+            case .alertError(let data):
                 AlertModalView(data: data)
                     .background(BackgroundClearView())
                 
@@ -93,15 +94,15 @@ struct WalletView: View {
     private func buildSendReceiveButtons() -> some View {
         HStack(spacing: 16) {
             PadawanButton(
-                title: WalletViewAssets.receiveButtonTitle,
+                title: WalletViewAssets.receiveButtonTitle(languageManager),
                 icon: WalletViewAssets.receiveButtonIcon,
                 action: {
                     viewModel.showReceiveScreen()
                 }
             )
             
-            PadawanButton(
-                title: WalletViewAssets.sendButtonTitle,
+                PadawanButton(
+                title: WalletViewAssets.sendButtonTitle(languageManager),
                 icon: WalletViewAssets.sendButtonIcon,
                 action: {
                     viewModel.showSendScreen()
