@@ -91,16 +91,18 @@ struct AlertModalView: View {
     @ViewBuilder
     private func buildDock() -> some View {
         buttonsOrientation {
-            PadawanButton(
-                title: data.secondaryButtonTitle,
-                icon: data.secondaryButtonIcon,
-                isDestructive: true,
-                action: {
-                    close()
-                    data.onSecondaryButtonTap?()
-                }
-            )
-            .frame(height: 50)
+            if let onSecondaryButtonTap = data.onSecondaryButtonTap {
+                PadawanButton(
+                    title: data.secondaryButtonTitle,
+                    icon: data.secondaryButtonIcon,
+                    isDestructive: true,
+                    action: {
+                        close()
+                        onSecondaryButtonTap()
+                    }
+                )
+                .frame(height: 50)
+            }
             
             PadawanButton(
                 title: data.primaryButtonTitle,
