@@ -31,14 +31,14 @@ private class BDKService {
         }
     }
     private let keyClient: KeyClient
-    private let esploraClient: EsploraClient?
+    private let electrumClient: ElectrumClient?
     
     init(
         keyClient: KeyClient = .live,
-        esploraClient: EsploraClient? = .live
+        electrumClient: ElectrumClient? = .live
     ) {
         self.keyClient = keyClient
-        self.esploraClient = esploraClient
+        self.electrumClient = electrumClient
     }
     
     // Create a new wallet or import
@@ -105,13 +105,15 @@ private class BDKService {
                 .inspectSpksForAllKeychains(inspector: inspector)
                 .build()
             
-            guard let update = try esploraClient?.fullScan(
+            guard let update = try electrumClient?.fullScan(
                 request: fullScanRequest,
                 stopGap: BDKService.stopGap,
-                parallelRequests: BDKService.parallelRequests
+                batchSize: BDKService.parallelRequests,
+                fetchPrevTxouts: true
             ) else {
                 throw BDKServiceError.clientNotStarted
             }
+            
             let _ = try wallet.applyUpdate(update: update)
             guard let persister = self.persister else {
                 throw BDKServiceError.dbNotFound
@@ -136,12 +138,14 @@ private class BDKService {
                 .inspectSpks(inspector: inspector)
                 .build()
             
-            guard let update: Update = try esploraClient?.sync(
+            guard let update = try electrumClient?.sync(
                 request: syncRequest,
-                parallelRequests: BDKService.parallelRequests
+                batchSize: BDKService.batchSize,
+                fetchPrevTxouts: true
             ) else {
                 throw BDKServiceError.clientNotStarted
             }
+            
             let _ = try wallet.applyUpdate(update: update)
             guard let persister = self.persister else {
                 throw BDKServiceError.dbNotFound
@@ -231,7 +235,7 @@ private class BDKService {
         let isSigned = try wallet.sign(psbt: psbt)
         if isSigned {
             let transaction = try psbt.extractTx()
-            try esploraClient?.broadcast(transaction: transaction)
+            _ = try electrumClient?.transactionBroadcast(tx: transaction)
         } else {
             throw BDKServiceError.notSigned
         }
@@ -338,24 +342,15 @@ extension BDKClient {
     )
 }
 
-//extension ElectrumClient {
-//    private static let url = "ssl://mempool.space:60602"
-//    
-//    static var live: ElectrumClient? {
-//        do {
-//            return try ElectrumClient(url: ElectrumClient.url)
-//        } catch {
-//            return nil
-//        }
-//    }
-//}
-
-extension EsploraClient {
-//    private static let url = "https://mempool.space/signet/api"
-    private static let url = "https://blockstream.info/signet/api"
+extension ElectrumClient {
+    private static let url = "ssl://mempool.space:60602"
     
-    static var live: EsploraClient? {
-        return EsploraClient(url: url)
+    static var live: ElectrumClient? {
+        do {
+            return try ElectrumClient(url: ElectrumClient.url)
+        } catch {
+            return nil
+        }
     }
 }
 
