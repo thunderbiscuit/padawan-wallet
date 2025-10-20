@@ -6,11 +6,11 @@
 import SwiftUI
 
 private struct BalanceCardStrings {
-    static func cardTitle(_ lm: LanguageManager) -> String { lm.localizedString(forKey: "bitcoin_signet") }
-    static func buttonSync(_ lm: LanguageManager) -> String { lm.localizedString(forKey: "sync") }
-    static func formaOptions(_ lm: LanguageManager) -> [String] {
+    static var cardTitle: String { LanguageManager.shared.localizedString(forKey: "bitcoin_signet") }
+    static var buttonSync: String { LanguageManager.shared.localizedString(forKey: "sync") }
+    static var formaOptions: [String] {
         BalanceFormat.allCases.map { option in
-            lm.localizedString(forKey: option.rawValue.lowercased())
+            LanguageManager.shared.localizedString(forKey: option.rawValue.lowercased())
         }
     }
 }
@@ -38,12 +38,12 @@ struct BalanceCard: View {
             backgroundColor: colors.errorRed) {
                 VStack(spacing: 8.0) {
                     HStack {
-                        Text(BalanceCardStrings.cardTitle(languageManager))
+                        Text(BalanceCardStrings.cardTitle)
                             .font(Fonts.body)
                             .foregroundStyle(colors.textFaded)
                         Spacer()
                         SwitchButton(
-                            options: BalanceCardStrings.formaOptions(languageManager),
+                            options: BalanceCardStrings.formaOptions,
                             currentOption: .init(get: {
                                 balanceFormatOption.rawValue
                             }, set: { newValue in
@@ -80,7 +80,7 @@ struct BalanceCard: View {
                     ProgressView()
                         .tint(colors.accent1)
                 } else {
-                    Text(BalanceCardStrings.buttonSync(languageManager))
+                    Text(BalanceCardStrings.buttonSync)
                         .font(Fonts.caption)
                         .foregroundStyle(.white)
                 }

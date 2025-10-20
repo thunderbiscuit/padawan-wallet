@@ -6,8 +6,8 @@
 import SwiftUI
 
 private struct WalletViewAssets {
-    static func receiveButtonTitle(_ lm: LanguageManager) -> String { lm.localizedString(forKey: "receive") }
-    static func sendButtonTitle(_ lm: LanguageManager) -> String { lm.localizedString(forKey: "send") }
+    static var receiveButtonTitle: String { LanguageManager.shared.localizedString(forKey: "receive") }
+    static var sendButtonTitle: String { LanguageManager.shared.localizedString(forKey: "send") }
     
     static var receiveButtonIcon: Image = Image(systemName: "arrow.down")
     static var sendButtonIcon: Image = Image(systemName: "arrow.up")
@@ -94,7 +94,7 @@ struct WalletView: View {
     private func buildSendReceiveButtons() -> some View {
         HStack(spacing: 16) {
             PadawanButton(
-                title: WalletViewAssets.receiveButtonTitle(languageManager),
+                title: WalletViewAssets.receiveButtonTitle,
                 icon: WalletViewAssets.receiveButtonIcon,
                 action: {
                     viewModel.showReceiveScreen()
@@ -102,7 +102,7 @@ struct WalletView: View {
             )
             
                 PadawanButton(
-                title: WalletViewAssets.sendButtonTitle(languageManager),
+                title: WalletViewAssets.sendButtonTitle,
                 icon: WalletViewAssets.sendButtonIcon,
                 action: {
                     viewModel.showSendScreen()

@@ -22,9 +22,9 @@ struct LessonsListView: View {
             ScrollView {
                 VStack(alignment: .leading, spacing: 12.0) {
                     Group {
-                        Text(languageManager.localizedString(forKey: "padawan_journey"))
+                        Text(LanguageManager.shared.localizedString(forKey: "padawan_journey"))
                             .font(Fonts.title)
-                        Text(languageManager.localizedString(forKey: "continue_on_your_journey"))
+                        Text(LanguageManager.shared.localizedString(forKey: "continue_on_your_journey"))
                             .font(Fonts.subtitle)
                     }
                     .foregroundStyle(colors.text)
@@ -53,7 +53,7 @@ struct LessonsListView: View {
     private func buildList() -> some View {
         ForEach(viewModel.list) { item in
             Section {
-                SectionTitleView(languageManager.localizedString(forKey: item.titleKey))
+                SectionTitleView(LanguageManager.shared.localizedString(forKey: item.titleKey))
                 
                 ForEach(item.items) { lesson in
                     buildListItem(
@@ -67,7 +67,7 @@ struct LessonsListView: View {
     
     @ViewBuilder
     private func buildListItem(lesson: LessonItemList) -> some View {
-        let lessonTitle = languageManager.localizedString(forKey: lesson.titleKey)
+        let lessonTitle = LanguageManager.shared.localizedString(forKey: lesson.titleKey)
         
         PadawanToggleButton(
             title: "\(lesson.sort). \(lessonTitle)",

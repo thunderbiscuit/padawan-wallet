@@ -32,7 +32,7 @@ struct CameraScannView: View {
         
             VStack {
                 Spacer()
-                PadawanButton(title: languageManager.localizedString(forKey: "cancel")) {
+                PadawanButton(title: LanguageManager.shared.localizedString(forKey: "cancel")) {
                     dismiss()
                 }
                 .frame(width: 150)

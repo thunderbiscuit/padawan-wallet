@@ -20,11 +20,11 @@ struct LanguageThemeScreen: View {
         BackgroundView {
             ScrollView {
                 VStack(alignment: .leading, spacing: 12.0) {
-                    Text(languageManager.localizedString(forKey: "select_language"))
+                    Text(LanguageManager.shared.localizedString(forKey: "select_language"))
                         .font(Fonts.subtitle)
                     
                     buildSection(
-                        title: languageManager.localizedString(forKey: "app_level_language"),
+                        title: LanguageManager.shared.localizedString(forKey: "app_level_language"),
                         type: PadawanLanguage.self,
                         itemSelected: viewModel.selectedLanguage,
                         disableItems: viewModel.disabledLanguages
@@ -33,7 +33,7 @@ struct LanguageThemeScreen: View {
                     Spacer().frame(height: 18)
                     
                     buildSection(
-                        title: languageManager.localizedString(forKey: "color_theme"),
+                        title: LanguageManager.shared.localizedString(forKey: "color_theme"),
                         type: PadawanColorTheme.self,
                         itemSelected: viewModel.selectedTheme,
                         disableItems: viewModel.disabledThemes
@@ -54,7 +54,7 @@ struct LanguageThemeScreen: View {
                 EmptyView()
             }
         })
-        .navigationTitle(languageManager.localizedString(forKey: "change_language"))
+        .navigationTitle(LanguageManager.shared.localizedString(forKey: "change_language"))
         .navigationBarTitleDisplayMode(.inline)
     }
     

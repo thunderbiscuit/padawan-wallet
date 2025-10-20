@@ -6,7 +6,7 @@
 import SwiftUI
 
 private struct RecoveryPhraseScreenAssets {
-    static func title(_ lm: LanguageManager) -> String { lm.localizedString(forKey: "your_recovery_phrase") }
+    static var title: String { LanguageManager.shared.localizedString(forKey: "your_recovery_phrase") }
 }
 
 struct RecoveryPhraseScreen: View {
@@ -44,7 +44,7 @@ struct RecoveryPhraseScreen: View {
                 .padding()
             }
         }
-        .navigationTitle(RecoveryPhraseScreenAssets.title(languageManager))
+        .navigationTitle(RecoveryPhraseScreenAssets.title)
     }
 }
 

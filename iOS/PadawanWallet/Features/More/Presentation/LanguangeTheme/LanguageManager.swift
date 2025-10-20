@@ -14,22 +14,24 @@ class LanguageManager: ObservableObject {
     
     @Published var currentLanguage: PadawanLanguage {
         didSet {
-            UserDefaults.standard.setValue(currentLanguage.code, forKey: "selectedLanguage")
+            storage.set(currentLanguage.code, key: "selectedLanguage")
             updateBundle()
         }
     }
     
     private var bundle: Bundle?
+    private let storage: StorageProtocol
 
-    private init() {
-        if let savedLangCode = UserDefaults.standard.string(forKey: "selectedLanguage"),
+    private init(storage: StorageProtocol = UserDefaultsStorage.shared) {
+        self.storage = storage
+
+        if let savedLangCode: String = storage.get("selectedLanguage"),
            let savedLang = PadawanLanguage.allCases.first(where: { $0.code == savedLangCode }) {
             self.currentLanguage = savedLang
         } else {
             let deviceLanguage = Bundle.main.preferredLocalizations.first ?? "en"
             self.currentLanguage = PadawanLanguage.allCases.first(where: { $0.code == deviceLanguage }) ?? .english
         }
-        
         updateBundle()
     }
     

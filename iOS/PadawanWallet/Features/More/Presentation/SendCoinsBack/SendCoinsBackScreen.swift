@@ -7,9 +7,9 @@ import SwiftUI
 import BitcoinUI
 
 private struct SendCoinsBackScreenAssets {
-    static func title(_ lm: LanguageManager) -> String { lm.localizedString(forKey: "send_signet_coins_back") }
-    static func sendCoinsBackAddress(_ lm: LanguageManager) -> String { lm.localizedString(forKey: "send_coins_back_address") }
-    static func text(_ lm: LanguageManager) -> String { lm.localizedString(forKey: "send_coins_back") }
+    static var title: String { LanguageManager.shared.localizedString(forKey: "send_signet_coins_back") }
+    static var sendCoinsBackAddress: String { LanguageManager.shared.localizedString(forKey: "send_coins_back_address") }
+    static var text: String { LanguageManager.shared.localizedString(forKey: "send_coins_back") }
     static var copyIcon = Image(systemName: "document.on.document")
     static var copiedIcon = Image(systemName: "checkmark.circle.fill")
 }
@@ -27,7 +27,7 @@ struct SendCoinsBackScreen: View {
                     
                     buildCopyButton()
                     
-                    Text(SendCoinsBackScreenAssets.text(languageManager))
+                    Text(SendCoinsBackScreenAssets.text)
                         .font(Fonts.font(.regular, 16))
                         .foregroundStyle(colors.text)
                         .padding(.horizontal)
@@ -35,7 +35,7 @@ struct SendCoinsBackScreen: View {
                 .padding()
             }
         }
-        .navigationTitle(SendCoinsBackScreenAssets.title(languageManager))
+        .navigationTitle(SendCoinsBackScreenAssets.title)
     }
     
     @ViewBuilder
@@ -45,7 +45,7 @@ struct SendCoinsBackScreen: View {
         } label: {
             HStack(spacing: 12.0) {
                 AddressFormattedView(
-                    address: SendCoinsBackScreenAssets.sendCoinsBackAddress(languageManager),
+                    address: SendCoinsBackScreenAssets.sendCoinsBackAddress,
                     columns: 4,
                     spacing: 2.0,
                     gridItemSize: 60
@@ -70,7 +70,7 @@ struct SendCoinsBackScreen: View {
             Button {
                 copyAddress()
             } label: {
-                QRCodeView(qrCodeType: .bitcoin(SendCoinsBackScreenAssets.sendCoinsBackAddress(languageManager)))
+                QRCodeView(qrCodeType: .bitcoin(SendCoinsBackScreenAssets.sendCoinsBackAddress))
                     .padding()
             }
         }
@@ -78,7 +78,7 @@ struct SendCoinsBackScreen: View {
     }
     
     private func copyAddress() {
-        UIPasteboard.general.string = SendCoinsBackScreenAssets.sendCoinsBackAddress(languageManager)
+        UIPasteboard.general.string = SendCoinsBackScreenAssets.sendCoinsBackAddress
         copiedAddress = true
         DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
             copiedAddress = false

@@ -14,12 +14,11 @@ import Foundation
 final class LanguageThemeScreenViewModel: ObservableObject {
     
     @Published var fullScreenCover: MoreScreenNavigation?
+    @Published var selectedLanguage: PadawanLanguage
+    init() {
+        self.selectedLanguage = LanguageManager.shared.currentLanguage
+    }
     
-    // MUDANÇA 1: @EnvironmentObject REMOVIDO
-    // Este wrapper só funciona dentro de uma View, não em um ViewModel.
-    // Não precisamos dele aqui de qualquer forma.
-    
-    @Published var selectedLanguage: PadawanLanguage = Session.shared.languageChoice
     @Published var selectedTheme: PadawanColorTheme = Session.shared.themeChoice
     
     var disabledLanguages: [PadawanLanguage] = []
@@ -44,7 +43,7 @@ final class LanguageThemeScreenViewModel: ObservableObject {
                     subtitleKey: "alert_change_language",
                     primaryButtonTitleKey: "button_yes",
                     secondaryButtonTitleKey: "button_no",
-                    overrideLanguage: newLanguage, // <- A MÁGICA ACONTECE AQUI
+                    overrideLanguage: newLanguage,
                     onPrimaryButtonTap: {
                         Session.shared.languageChoice = newLanguage
                         LanguageManager.shared.setLanguage(newLanguage)

@@ -30,7 +30,7 @@ struct CoreView: View {
             }
             .tabItem {
                 Label {
-                    Text(languageManager.localizedString(forKey: "bottom_nav_wallet"))
+                    Text(LanguageManager.shared.localizedString(forKey: "bottom_nav_wallet"))
                 } icon: {
                     Image(systemName: "bitcoinsign.square")
                 }
@@ -43,7 +43,7 @@ struct CoreView: View {
             }
             .tabItem {
                 Label {
-                    Text(languageManager.localizedString(forKey: "bottom_nav_chapters"))
+                    Text(LanguageManager.shared.localizedString(forKey: "bottom_nav_chapters"))
                 } icon: {
                     Image(systemName: "graduationcap")
                 }
@@ -57,7 +57,7 @@ struct CoreView: View {
             }
             .tabItem {
                 Label {
-                    Text(languageManager.localizedString(forKey: "bottom_nav_settings"))
+                    Text(LanguageManager.shared.localizedString(forKey: "bottom_nav_settings"))
                 } icon: {
                     Image(systemName: "ellipsis")
                 }

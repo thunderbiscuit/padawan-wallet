@@ -8,11 +8,11 @@
 import SwiftUI
 
 private struct ViewAssets {
-    static var screenTitle = Strings.confirmTransaction
-    static var amountLabel = Strings.amount
-    static var addressLabel = Strings.address
-    static var taxLabel = Strings.totalFee
-    static var confirmaButton = Strings.confirmAndBroadcast
+    static var screenTitle: String { LanguageManager.shared.localizedString(forKey: "confirm_transaction") }
+    static var amountLabel: String { LanguageManager.shared.localizedString(forKey: "amount") }
+    static var addressLabel: String { LanguageManager.shared.localizedString(forKey: "address") }
+    static var taxLabel: String { LanguageManager.shared.localizedString(forKey: "total_fee") }
+    static var confirmaButton: String { LanguageManager.shared.localizedString(forKey: "confirm_and_broadcast") }
 }
 
 struct VerifyTransactionView: View {

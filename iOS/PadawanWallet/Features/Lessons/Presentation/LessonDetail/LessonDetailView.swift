@@ -41,7 +41,7 @@ struct LessonsDetailView: View {
                 .frame(maxWidth: .maxWidthScreen, maxHeight: .infinity, alignment: .leading)
                 .padding()
             }
-            .navigationTitle(languageManager.localizedString(forKey: viewModel.lesson.navigationTitleKey))
+            .navigationTitle(LanguageManager.shared.localizedString(forKey: viewModel.lesson.navigationTitleKey))
             .navigationBarTitleDisplayMode(.inline)
         }
     }
@@ -86,13 +86,13 @@ struct LessonsDetailView: View {
         ScrollView {
             VStack(alignment: .leading, spacing: 16) {
                 Group {
-                    Text(languageManager.localizedString(forKey: content.headerKey))
+                    Text(LanguageManager.shared.localizedString(forKey: content.headerKey))
                         .font(Fonts.font(.bold, 24))
                     
                     ForEach(content.items) { item in
                         switch item {
                         case .text(let key):
-                            let translatedText = languageManager.localizedString(forKey: key)
+                            let translatedText = LanguageManager.shared.localizedString(forKey: key)
                             Text.lessonText(translatedText)
 
                         case .qrCode(let address):

@@ -22,7 +22,7 @@ struct SectionTitleView: View {
             Text(title)
                 .font(Fonts.font(.semibold, 20))
                 .foregroundStyle(colors.text)
-            
+        
             Rectangle()
                 .frame(height: 1)
                 .background(colors.text)

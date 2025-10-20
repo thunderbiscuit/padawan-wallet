@@ -6,18 +6,17 @@
 import SwiftUI
 
 private struct MoreRootViewAssets {
-    static func title(_ lm: LanguageManager) -> String { lm.localizedString(forKey: "settings") }
-    static func subtitle(_ lm: LanguageManager) -> String { lm.localizedString(forKey: "everything_else") }
+    static var title: String { LanguageManager.shared.localizedString(forKey: "settings") }
+    static var subtitle: String { LanguageManager.shared.localizedString(forKey: "everything_else") }
+    static var buttonRecoverPhrase: String { LanguageManager.shared.localizedString(forKey: "recovery_phrase") }
+    static var buttonSendCoinBack: String { LanguageManager.shared.localizedString(forKey: "send_signet_coins_back") }
+    static var buttonSelectLanguage: String { LanguageManager.shared.localizedString(forKey: "change_language") }
+    static var buttonAboutPadawan: String { LanguageManager.shared.localizedString(forKey: "about_padawan") }
+    static var buttonReset: String { LanguageManager.shared.localizedString(forKey: "reset_completed_chapters") }
+    static var buttonResetWallet: String { LanguageManager.shared.localizedString(forKey: "reset_wallet") }
     
-    static func buttonRecoverPhase(_ lm: LanguageManager) -> String { lm.localizedString(forKey: "recovery_phrase") }
-    static func buttonSendCoinBack(_ lm: LanguageManager) -> String { lm.localizedString(forKey: "send_signet_coins_back") }
-    static func buttonSelectLanguage(_ lm: LanguageManager) -> String { lm.localizedString(forKey: "change_language") }
-    static func buttonAboutPadawan(_ lm: LanguageManager) -> String { lm.localizedString(forKey: "about_padawan") }
-    static func buttonReset(_ lm: LanguageManager) -> String { lm.localizedString(forKey: "reset_completed_chapters") }
-    static func buttonResetWallet(_ lm: LanguageManager) -> String { lm.localizedString(forKey: "reset_wallet") }
-    
-    static func separatorWithVersion(_ lm: LanguageManager, _ version: String) -> String {
-        "\(lm.localizedString(forKey: "padawan_wallet")) \(version)"
+    static func separatorWithVersion(_ version: String) -> String {
+        "\(LanguageManager.shared.localizedString(forKey: "padawan_wallet")) \(version)"
     }
     
     static var chevronRight = Image(systemName: "chevron.right.2")
@@ -42,9 +41,9 @@ struct MoreRootView: View {
             ScrollView {
                 VStack(alignment: .leading, spacing: 12.0) {
                     Group {
-                        Text(MoreRootViewAssets.title(languageManager))
+                        Text(MoreRootViewAssets.title)
                             .font(Fonts.title)
-                        Text(MoreRootViewAssets.subtitle(languageManager))
+                        Text(MoreRootViewAssets.subtitle)
                             .font(Fonts.subtitle)
                     }
                     .foregroundStyle(colors.text)
@@ -54,7 +53,7 @@ struct MoreRootView: View {
                     buildSeparator()
                     
                     FilledButton(
-                        title: MoreRootViewAssets.buttonReset(languageManager),
+                        title: MoreRootViewAssets.buttonReset,
                         titleColor: colors.text,
                         backgroundColor: colors.errorRed
                     ) {
@@ -63,7 +62,7 @@ struct MoreRootView: View {
                     .padding(.top, 12)
                     
                     FilledButton(
-                        title: MoreRootViewAssets.buttonResetWallet(languageManager),
+                        title: MoreRootViewAssets.buttonResetWallet,
                         titleColor: colors.text,
                         backgroundColor: colors.accent3
                     ) {
@@ -83,28 +82,28 @@ struct MoreRootView: View {
     private func buildButtons() -> some View {
         VStack(spacing: 20) {
             FilledButton(
-                title: MoreRootViewAssets.buttonRecoverPhase(languageManager),
+                title: MoreRootViewAssets.buttonRecoverPhrase,
                 icon: MoreRootViewAssets.chevronRight
             ) {
                 viewModel.showRecoveryPhrase()
             }
             
             FilledButton(
-                title: MoreRootViewAssets.buttonSendCoinBack(languageManager),
+                title: MoreRootViewAssets.buttonSendCoinBack,
                 icon: MoreRootViewAssets.chevronRight
             ) {
                 viewModel.showSendCoinsBack()
             }
             
             FilledButton(
-                title: MoreRootViewAssets.buttonSelectLanguage(languageManager),
+                title: MoreRootViewAssets.buttonSelectLanguage,
                 icon: MoreRootViewAssets.chevronRight
             ) {
                 viewModel.showLanguage()
             }
             
             FilledButton(
-                title: MoreRootViewAssets.buttonAboutPadawan(languageManager),
+                title: MoreRootViewAssets.buttonAboutPadawan,
                 icon: MoreRootViewAssets.chevronRight
             ) {
                 viewModel.showAbout()
@@ -139,7 +138,7 @@ struct MoreRootView: View {
         VStack(spacing: 4) {
             Divider()
                 .background(colors.textFaded)
-            Text(MoreRootViewAssets.separatorWithVersion(languageManager, viewModel.version))
+            Text(MoreRootViewAssets.separatorWithVersion(viewModel.version))
                 .font(.footnote)
                 .foregroundColor(colors.textLight)
             Divider()

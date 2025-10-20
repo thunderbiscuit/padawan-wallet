@@ -13,22 +13,22 @@ struct AboutPadawanScreen: View {
         ScrollView {
             VStack(alignment: .leading, spacing: 24) {
                 
-                Text(languageManager.localizedString(forKey: "about_text"))
+                Text(LanguageManager.shared.localizedString(forKey: "about_text"))
                     .font(Fonts.font(.regular, 16))
                     .foregroundColor(colors.textLight)
                     .multilineTextAlignment(.leading)
                 
-                Text(languageManager.localizedString(forKey: "privacy_text"))
+                Text(LanguageManager.shared.localizedString(forKey: "privacy_text"))
                     .font(Fonts.font(.regular, 16))
                     .foregroundColor(colors.textLight)
                     .multilineTextAlignment(.leading)
                 
                 Button(action: {
-                    if let url = URL(string: languageManager.localizedString(forKey: "privacy_link")) {
+                    if let url = URL(string: LanguageManager.shared.localizedString(forKey: "privacy_link")) {
                         UIApplication.shared.open(url)
                     }
                 }) {
-                    Text(languageManager.localizedString(forKey: "button_link_privacy"))
+                    Text(LanguageManager.shared.localizedString(forKey: "button_link_privacy"))
                         .font(Fonts.font(.regular, 16))
                         .foregroundColor(colors.accent2)
                         .underline()
@@ -39,7 +39,7 @@ struct AboutPadawanScreen: View {
             .padding()
         }
         .background(colors.background)
-        .navigationTitle(languageManager.localizedString(forKey: "about_padawan"))
+        .navigationTitle(LanguageManager.shared.localizedString(forKey: "about_padawan"))
         .navigationBarTitleDisplayMode(.inline)
     }
 }

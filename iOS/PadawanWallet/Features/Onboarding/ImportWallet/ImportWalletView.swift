@@ -9,10 +9,10 @@ import SwiftUI
 
 private extension ImportWalletView {
     struct ImportWalletViewStrings {
-        static var screenTitle: String = Strings.recoverAWallet
-        static var subtitle: String = Strings.enterYour12Words
+        static var screenTitle: String { LanguageManager.shared.localizedString(forKey: "recover_a_wallet") }
+            static var subtitle: String { LanguageManager.shared.localizedString(forKey: "enter_your_12_words") }
         
-        static var buttonTitle: String = Strings.recoverWallet
+            static var buttonTitle: String { LanguageManager.shared.localizedString(forKey: "recover_wallet") }
         
         static func wordNumber(_ number: Int) -> String {
             "Word \(number)"
@@ -22,7 +22,7 @@ private extension ImportWalletView {
 
 struct ImportWalletView: View {
     @Environment(\.padawanColors) private var colors
-    
+    @EnvironmentObject private var languageManager: LanguageManager
     @StateObject private var viewModel: ImporViewModel
     
     init(
@@ -110,5 +110,6 @@ struct ImportWalletView: View {
         bdkClient: .mock
     )
     .environment(\.padawanColors, .tatooineDesert)
+    .environmentObject(LanguageManager.shared)
 }
 #endif

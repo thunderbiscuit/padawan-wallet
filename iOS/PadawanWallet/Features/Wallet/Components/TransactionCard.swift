@@ -6,9 +6,9 @@
 import SwiftUI
 
 private struct TransactionsCardAssets {
-    static func title(_ lm: LanguageManager) -> String { lm.localizedString(forKey: "transactions") }
-    static func emptyStateDescription(_ lm: LanguageManager) -> String { lm.localizedString(forKey: "transaction_list_empty") }
-    static func emptyStateButton(_ lm: LanguageManager) -> String { lm.localizedString(forKey: "get_coins") }
+    static var title: String { LanguageManager.shared.localizedString(forKey: "transactions") }
+    static var emptyStateDescription: String { LanguageManager.shared.localizedString(forKey: "transaction_list_empty") }
+    static var emptyStateButton: String { LanguageManager.shared.localizedString(forKey: "get_coins") }
 }
 
 extension TransactionsCard {
@@ -79,7 +79,7 @@ struct TransactionsCard: View {
     
     @ViewBuilder
     private func buildHeader() -> some View {
-        Text(TransactionsCardAssets.title(languageManager))
+        Text(TransactionsCardAssets.title)
             .font(Fonts.title)
             .foregroundStyle(colors.text)
     }
@@ -89,12 +89,12 @@ struct TransactionsCard: View {
         PadawanCardView(
             backgroundColor: colors.background) {
                 VStack(alignment: .leading, spacing: 24) {
-                    Text(TransactionsCardAssets.emptyStateDescription(languageManager))
+                    Text(TransactionsCardAssets.emptyStateDescription)
                         .font(Fonts.body)
                         .foregroundStyle(colors.text)
                     
                     PadawanButton(
-                        title: TransactionsCardAssets.emptyStateButton(languageManager),
+                        title: TransactionsCardAssets.emptyStateButton,
                         isLoading: $isSyncing
                     ) {
                         actionGetCoins {
