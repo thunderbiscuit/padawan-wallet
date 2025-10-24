@@ -81,8 +81,8 @@ import com.coyotebitcoin.padawanwallet.presentation.ui.components.TransactionBro
 import com.coyotebitcoin.padawanwallet.presentation.ui.components.standardBorder
 import com.coyotebitcoin.padawanwallet.presentation.utils.ScreenSizeWidth
 import com.coyotebitcoin.padawanwallet.presentation.utils.getScreenSizeWidth
-import com.coyotebitcoin.padawanwallet.presentation.viewmodels.mvi.WalletAction
-import com.coyotebitcoin.padawanwallet.presentation.viewmodels.mvi.WalletState
+import com.coyotebitcoin.padawanwallet.presentation.viewmodels.WalletAction
+import com.coyotebitcoin.padawanwallet.presentation.viewmodels.WalletState
 import kotlinx.coroutines.launch
 import org.bitcoindevkit.Amount
 import org.bitcoindevkit.FeeRate

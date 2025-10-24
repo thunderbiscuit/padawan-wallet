@@ -21,11 +21,12 @@ import com.coyotebitcoin.padawanwallet.domain.bitcoin.FaucetService
 import com.coyotebitcoin.padawanwallet.domain.bitcoin.TransactionDetails
 import com.coyotebitcoin.padawanwallet.domain.bitcoin.Wallet
 import com.coyotebitcoin.padawanwallet.domain.bitcoin.WalletRepository
-import com.coyotebitcoin.padawanwallet.presentation.viewmodels.mvi.MessageType
-import com.coyotebitcoin.padawanwallet.presentation.viewmodels.mvi.WalletAction
-import com.coyotebitcoin.padawanwallet.presentation.viewmodels.mvi.WalletState
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.bitcoindevkit.Amount
@@ -35,6 +36,33 @@ import kotlin.system.measureTimeMillis
 
 private const val TAG = "WalletViewModel"
 
+data class WalletState(
+    val balance: ULong,
+    val transactions: List<TransactionDetails>,
+    val txAndFee: Pair<Transaction, Amount>? = null,
+    val isOnline: Boolean,
+    val currentlySyncing: Boolean,
+    val messageForUi: Pair<MessageType, String>? = null,
+    val sendAddress: String? = null,
+    val userCanRequestFaucetCoins: Boolean = false,
+)
+
+enum class MessageType {
+    Error,
+    Success,
+}
+
+sealed interface WalletAction {
+    data object Sync : WalletAction
+    data object RequestCoins : WalletAction
+    data object CheckNetworkStatus : WalletAction
+    data class  QRCodeScanned(val address: String) : WalletAction
+    data class  Broadcast(val tx: Transaction) : WalletAction
+    data object UiMessageDelivered : WalletAction
+    data class  SeeSingleTx(val tx: String) : WalletAction
+    data class  BuildAndSignPsbt(val address: String, val amount: Amount, val feeRate: FeeRate) : WalletAction
+}
+
 class WalletViewModel(application: Application) : AndroidViewModel(application) {
     private var txList: List<TransactionDetails> by mutableStateOf(emptyList())
     private var isOnline: Boolean by mutableStateOf(false)
@@ -42,7 +70,7 @@ class WalletViewModel(application: Application) : AndroidViewModel(application) 
     private var singleTxDetails: TransactionDetails? = null
     private var userCanRequestFaucetCoins: Boolean by mutableStateOf(false)
 
-    var walletState by mutableStateOf(
+    private val _walletState: MutableStateFlow<WalletState> = MutableStateFlow(
         WalletState(
             balance = 0u,
             transactions = txList,
@@ -51,32 +79,31 @@ class WalletViewModel(application: Application) : AndroidViewModel(application) 
             currentlySyncing = false
         )
     )
-        private set
+    val walletState: StateFlow<WalletState> = _walletState.asStateFlow()
 
     init {
         isOnline = updateNetworkStatus(application)
         userCanRequestFaucetCoins = !WalletRepository.hasUserClaimedFaucetCoins()
-        walletState = walletState.copy(isOnline = isOnline, userCanRequestFaucetCoins = userCanRequestFaucetCoins)
+        _walletState.update { it.copy(isOnline = isOnline, userCanRequestFaucetCoins = userCanRequestFaucetCoins) }
         // firstAutoSync()
     }
 
-
     fun onAction(action: WalletAction) {
         when (action) {
-            is WalletAction.Sync               -> sync()
-            is WalletAction.RequestCoins       -> requestCoins()
+            is WalletAction.Sync -> sync()
+            is WalletAction.RequestCoins -> requestCoins()
             is WalletAction.CheckNetworkStatus -> updateNetworkStatus()
-            is WalletAction.QRCodeScanned      -> updateSendAddress(action.address)
-            is WalletAction.Broadcast          -> broadcastTransaction(action.tx)
+            is WalletAction.QRCodeScanned -> updateSendAddress(action.address)
+            is WalletAction.Broadcast -> broadcastTransaction(action.tx)
             is WalletAction.UiMessageDelivered -> uiMessageDelivered()
-            is WalletAction.SeeSingleTx        -> { setSingleTxDetails(action.tx) }
-            is WalletAction.BuildAndSignPsbt   -> { buildAndSignPsbt(action.address, action.amount, action.feeRate) }
+            is WalletAction.SeeSingleTx -> setSingleTxDetails(action.tx)
+            is WalletAction.BuildAndSignPsbt -> buildAndSignPsbt(action.address, action.amount, action.feeRate)
         }
     }
 
     private fun sync() {
         if (isOnline) {
-            walletState = walletState.copy(currentlySyncing = true)
+            _walletState.update { it.copy(currentlySyncing = true) }
 
             viewModelScope.launch(Dispatchers.IO) {
                 val minDurationMillis = 3000L
@@ -88,7 +115,7 @@ class WalletViewModel(application: Application) : AndroidViewModel(application) 
                 val remaining = minDurationMillis - elapsed
                 if (remaining > 0) delay(remaining)
 
-                walletState = walletState.copy(currentlySyncing = false)
+                _walletState.update { it.copy(currentlySyncing = false) }
             }
         }
     }
@@ -100,7 +127,7 @@ class WalletViewModel(application: Application) : AndroidViewModel(application) 
 
         val isOnlineNow: Boolean = if (capabilities != null) {
             when {
-                capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI)     -> true
+                capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) -> true
                 capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> true
                 capabilities.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET) -> true
                 else -> false
@@ -117,7 +144,7 @@ class WalletViewModel(application: Application) : AndroidViewModel(application) 
         Wallet.sync()
         val balance = Wallet.getBalance()
         Log.i(TAG, "Balance updated to: $balance")
-        walletState = walletState.copy(balance = balance)
+        _walletState.update { it.copy(balance = balance) }
     }
 
     private fun requestCoins() {
@@ -144,29 +171,34 @@ class WalletViewModel(application: Application) : AndroidViewModel(application) 
             when (response) {
                 is FaucetCall.Success -> {
                     WalletRepository.userHasClaimedFaucetCoins()
-                    Log.i(TAG, "Faucet call succeeded with status: ${response.status}, description: ${response.description}")
+                    Log.i(
+                        TAG,
+                        "Faucet call succeeded with status: ${response.status}, description: ${response.description}"
+                    )
                 }
+
                 is FaucetCall.Error -> {
                     sendMessageToUi(MessageType.Error, "Status ${response.status}, ${response.description}")
                     Log.i(TAG, "Faucet call failed with status:${response.status}, description:${response.description}")
                 }
+
                 is FaucetCall.ExceptionThrown -> {
                     Log.i(TAG, "Faucet call threw an exception: ${response.exception}")
                 }
             }
             delay(1000)
-            walletState = walletState.copy(userCanRequestFaucetCoins = false)
+            _walletState.update { it.copy(userCanRequestFaucetCoins = false) }
             sync()
         }
     }
 
     private fun sendMessageToUi(type: MessageType, message: String) {
-        walletState = walletState.copy(messageForUi = Pair(type, message))
+        _walletState.update { it.copy(messageForUi = Pair(type, message)) }
     }
 
     private fun updateSendAddress(address: String) {
         Log.i(TAG, "Updating send address to $address")
-        walletState = walletState.copy(sendAddress = address)
+        _walletState.update { it.copy(sendAddress = address) }
     }
 
     private fun broadcastTransaction(tx: Transaction) {
@@ -184,7 +216,7 @@ class WalletViewModel(application: Application) : AndroidViewModel(application) 
     }
 
     private fun uiMessageDelivered() {
-        walletState = walletState.copy(messageForUi = null)
+        _walletState.update { it.copy(messageForUi = null) }
     }
 
     private fun firstAutoSync() {
@@ -197,7 +229,7 @@ class WalletViewModel(application: Application) : AndroidViewModel(application) 
     private fun syncTransactionHistory() {
         val txHistory = Wallet.listTransactions()
         Log.i(TAG, "Transaction history synced, number of transactions: ${txHistory.size}")
-        walletState = walletState.copy(transactions = txHistory)
+        _walletState.update { it.copy(transactions = txHistory) }
     }
 
     private fun setSingleTxDetails(tx: String) {
@@ -215,6 +247,6 @@ class WalletViewModel(application: Application) : AndroidViewModel(application) 
         Wallet.sign(psbt)
         val fee = psbt.fee()
         val tx: Transaction = psbt.extractTx()
-        walletState = walletState.copy(txAndFee = Pair(tx, Amount.fromSat(fee)))
+        _walletState.update { it.copy(txAndFee = Pair(tx, Amount.fromSat(fee))) }
     }
 }

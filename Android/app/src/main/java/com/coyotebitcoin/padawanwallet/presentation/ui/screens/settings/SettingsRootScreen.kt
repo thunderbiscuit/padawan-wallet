@@ -42,7 +42,7 @@ import com.coyotebitcoin.padawanwallet.presentation.theme.PadawanColorsTatooineD
 import com.coyotebitcoin.padawanwallet.presentation.theme.PadawanTheme
 import com.coyotebitcoin.padawanwallet.presentation.theme.PadawanTypography
 import com.coyotebitcoin.padawanwallet.presentation.ui.components.ExtraButton
-import com.coyotebitcoin.padawanwallet.presentation.viewmodels.mvi.LessonAction
+import com.coyotebitcoin.padawanwallet.presentation.viewmodels.LessonAction
 import kotlinx.coroutines.launch
 
 private const val TAG = "PadawanTag/SettingsRootScreen"

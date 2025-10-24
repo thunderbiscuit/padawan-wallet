@@ -61,8 +61,8 @@ import com.coyotebitcoin.padawanwallet.presentation.utils.ScreenSizeWidth
 import com.coyotebitcoin.padawanwallet.presentation.utils.copyToClipboard
 import com.coyotebitcoin.padawanwallet.presentation.utils.getScreenSizeWidth
 import com.coyotebitcoin.padawanwallet.presentation.utils.logRecomposition
-import com.coyotebitcoin.padawanwallet.presentation.viewmodels.mvi.ReceiveScreenAction
-import com.coyotebitcoin.padawanwallet.presentation.viewmodels.mvi.ReceiveScreenState
+import com.coyotebitcoin.padawanwallet.presentation.viewmodels.ReceiveScreenAction
+import com.coyotebitcoin.padawanwallet.presentation.viewmodels.ReceiveScreenState
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 

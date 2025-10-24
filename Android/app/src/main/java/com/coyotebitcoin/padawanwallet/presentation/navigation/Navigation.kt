@@ -7,6 +7,8 @@ import androidx.compose.animation.fadeOut
 import androidx.compose.animation.togetherWith
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.snapshots.SnapshotStateList
@@ -34,10 +36,13 @@ import com.coyotebitcoin.padawanwallet.presentation.ui.screens.wallet.ReceiveScr
 import com.coyotebitcoin.padawanwallet.presentation.ui.screens.wallet.SendScreen
 import com.coyotebitcoin.padawanwallet.presentation.ui.screens.wallet.TransactionScreen
 import com.coyotebitcoin.padawanwallet.presentation.ui.screens.wallet.WalletHomeScreen
+import com.coyotebitcoin.padawanwallet.presentation.viewmodels.LessonsRootScreenState
 import com.coyotebitcoin.padawanwallet.presentation.viewmodels.LessonsViewModel
+import com.coyotebitcoin.padawanwallet.presentation.viewmodels.ReceiveScreenState
 import com.coyotebitcoin.padawanwallet.presentation.viewmodels.ReceiveViewModel
+import com.coyotebitcoin.padawanwallet.presentation.viewmodels.WalletAction
+import com.coyotebitcoin.padawanwallet.presentation.viewmodels.WalletState
 import com.coyotebitcoin.padawanwallet.presentation.viewmodels.WalletViewModel
-import com.coyotebitcoin.padawanwallet.presentation.viewmodels.mvi.WalletAction
 
 private const val TAG = "PadawanTag/Navigation"
 
@@ -124,16 +129,19 @@ fun NavigationRoot(
             }
 
             entry<SecondaryDestinations.ReceiveScreen> {
+                val state: ReceiveScreenState by receiveViewModel.state.collectAsState()
+
                 ReceiveScreen(
-                    state = receiveViewModel.state,
+                    state = state,
                     onAction = receiveViewModel::onAction,
                     onBack = { backStack.removeLastOrNull() },
                 )
             }
 
             entry<SecondaryDestinations.SendScreen> {
+                val state by walletViewModel.walletState.collectAsState()
                 SendScreen(
-                    state = walletViewModel.walletState,
+                    state = state,
                     onAction = walletViewModel::onAction,
                     onBack = { backStack.removeLastOrNull() },
                     onQrScreenNavigate = { backStack.add(SecondaryDestinations.QrScanScreen) }
@@ -209,8 +217,10 @@ fun NavigationCoreScreens(
         },
         entryProvider = entryProvider {
             entry<CoreDestinations.WalletRootScreen> {
+                val walletState: WalletState by walletViewModel.walletState.collectAsState()
+
                 WalletHomeScreen(
-                    walletViewModel.walletState,
+                    state = walletState,
                     onAction = walletViewModel::onAction,
                     onNavigation = { destination: SecondaryDestinations ->
                         when (destination) {
@@ -225,8 +235,10 @@ fun NavigationCoreScreens(
             }
 
             entry<CoreDestinations.LessonsRootScreen> {
+                val state: LessonsRootScreenState by chaptersViewModel.rootState.collectAsState()
+
                 LessonsRootScreen(
-                    state = chaptersViewModel.rootState,
+                    state = state,
                     onChapterNav = { chapter: Int ->
                         backStack.add(SecondaryDestinations.ChapterScreen(chapter))
                     },

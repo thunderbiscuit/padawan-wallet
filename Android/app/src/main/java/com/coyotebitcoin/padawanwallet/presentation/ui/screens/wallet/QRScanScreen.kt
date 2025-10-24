@@ -49,7 +49,7 @@ import com.coyotebitcoin.padawanwallet.R
 import com.coyotebitcoin.padawanwallet.domain.utils.QRCodeAnalyzer
 import com.coyotebitcoin.padawanwallet.presentation.theme.neuBrutalismShadow
 import com.coyotebitcoin.padawanwallet.presentation.ui.components.standardBorder
-import com.coyotebitcoin.padawanwallet.presentation.viewmodels.mvi.WalletAction
+import com.coyotebitcoin.padawanwallet.presentation.viewmodels.WalletAction
 import org.kotlinbitcointools.bip21.Bip21URI
 
 private const val TAG = "QRScanScreen"

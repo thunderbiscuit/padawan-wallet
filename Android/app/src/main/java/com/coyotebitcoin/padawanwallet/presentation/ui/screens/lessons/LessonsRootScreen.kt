@@ -32,7 +32,7 @@ import com.coyotebitcoin.padawanwallet.presentation.ui.components.SectionDivider
 import com.coyotebitcoin.padawanwallet.presentation.ui.components.SectionTitle
 import com.coyotebitcoin.padawanwallet.presentation.utils.ScreenSizeWidth
 import com.coyotebitcoin.padawanwallet.presentation.utils.getScreenSizeWidth
-import com.coyotebitcoin.padawanwallet.presentation.viewmodels.mvi.LessonsRootScreenState
+import com.coyotebitcoin.padawanwallet.presentation.viewmodels.LessonsRootScreenState
 
 private const val TAG = "PadawanTag/ChaptersRootScreen"
 

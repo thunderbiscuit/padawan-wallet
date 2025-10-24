@@ -86,8 +86,8 @@ import com.coyotebitcoin.padawanwallet.presentation.ui.components.standardBorder
 import com.coyotebitcoin.padawanwallet.presentation.utils.ClickHelper
 import com.coyotebitcoin.padawanwallet.presentation.utils.ScreenSizeWidth
 import com.coyotebitcoin.padawanwallet.presentation.utils.getScreenSizeWidth
-import com.coyotebitcoin.padawanwallet.presentation.viewmodels.mvi.WalletAction
-import com.coyotebitcoin.padawanwallet.presentation.viewmodels.mvi.WalletState
+import com.coyotebitcoin.padawanwallet.presentation.viewmodels.WalletAction
+import com.coyotebitcoin.padawanwallet.presentation.viewmodels.WalletState
 
 private const val TAG = "WalletRootScreen"
 

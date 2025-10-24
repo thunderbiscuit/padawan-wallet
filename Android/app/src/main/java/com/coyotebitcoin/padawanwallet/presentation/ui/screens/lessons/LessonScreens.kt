@@ -54,7 +54,7 @@ import com.coyotebitcoin.padawanwallet.presentation.theme.PadawanTypography
 import com.coyotebitcoin.padawanwallet.presentation.theme.neuBrutalismShadow
 import com.coyotebitcoin.padawanwallet.presentation.ui.components.PadawanAppBar
 import com.coyotebitcoin.padawanwallet.presentation.ui.components.standardBorder
-import com.coyotebitcoin.padawanwallet.presentation.viewmodels.mvi.LessonAction
+import com.coyotebitcoin.padawanwallet.presentation.viewmodels.LessonAction
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
