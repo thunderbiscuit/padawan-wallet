@@ -46,7 +46,9 @@ final class SendTransactionViewModel: ObservableObject {
     func verifyTransaction() {
         if isValidTransaction() {
             do {
-                guard let amount = UInt64(amountValue) else { return }
+                guard let amount = UInt64(amountValue) else {
+                    return
+                }
                 let fee = UInt64(feeRate)
                 
                 let transaction = try bdkClient.createTransaction(address, amount, fee)

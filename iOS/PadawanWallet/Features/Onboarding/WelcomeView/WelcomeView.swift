@@ -81,12 +81,12 @@ struct WelcomeView: View {
             
             PadawanCardIconView(image: page.image, size: 100)
 
-            Text(LanguageManager.shared.localizedString(forKey: page.titleKey))
+            Text(languageManager.localizedString(forKey: page.titleKey))
                 .font(Fonts.title)
                 .foregroundStyle(colors.text)
                 .padding(.top, 20)
 
-            Text(LanguageManager.shared.localizedString(forKey: page.textKey))
+            Text(languageManager.localizedString(forKey: page.textKey))
                 .font(Fonts.body)
                 .foregroundStyle(colors.textFaded)
                 .multilineTextAlignment(.center)
@@ -101,12 +101,12 @@ struct WelcomeView: View {
     @ViewBuilder
     private func buildButtons() -> some View {
         VStack(spacing: 30) {
-            PadawanButton(title: LanguageManager.shared.localizedString(forKey: viewModel.createWalletButtonTitleKey)) {
+            PadawanButton(title: languageManager.localizedString(forKey: viewModel.createWalletButtonTitleKey)) {
                             viewModel.createWallet()
                         }
             .frame(height: 105)
             
-            PadawanButton(title: LanguageManager.shared.localizedString(forKey: viewModel.importWalletButtonTitleKey)) {
+            PadawanButton(title: languageManager.localizedString(forKey: viewModel.importWalletButtonTitleKey)) {
                             viewModel.importWallet()
                         }
             .frame(height: 105)

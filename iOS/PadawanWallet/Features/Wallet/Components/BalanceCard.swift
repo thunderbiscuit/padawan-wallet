@@ -111,7 +111,6 @@ struct BalanceCard: View {
         BalanceCard(balance: .constant(450000), actionSyncWallet: { })
             .frame(height: 200)
             .environment(\.padawanColors, PadawanColorTheme.tatooine.colors)
-            .environmentObject(LanguageManager.shared)
     }
     .padding()
 }
