@@ -47,6 +47,9 @@ struct WalletView: View {
                             viewModel.getFaucetCoinsConfirmation {
                                 completion()
                             }
+                        },
+                        onTransactionTapped: { txid in
+                            viewModel.showTransactionDetails(txid: txid)
                         }
                     )
                     .frame(minHeight: 200)
@@ -73,6 +76,15 @@ struct WalletView: View {
                     path: viewModel.$path,
                     bdkClient: viewModel.bdkClient
                 )
+                
+            case .transactionDetails(let txid):
+                
+                if let transaction = viewModel.getTransaction(by: txid) {
+                    let detailsViewModel = TransactionDetailsViewModel(transaction: transaction)
+                    TransactionDetailsView(transaction: transaction)
+                } else {
+                    EmptyView()
+                }
                 
             default:
                 EmptyView()

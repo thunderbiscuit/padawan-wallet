@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Foundation
+import BitcoinDevKit
 
 @MainActor
 final class WalletViewModel: ObservableObject {
@@ -119,6 +120,24 @@ final class WalletViewModel: ObservableObject {
             )
         }
         transactions = detailsTransactions
+    }
+    
+    func showTransactionDetails(txid: String) {
+        path.append(WalletScreenNavigation.transactionDetails(txid: txid))
+    }
+    
+    func getTransaction(by txid: String) -> BitcoinDevKit.TxDetails? {
+        do {
+            let allTransactions = try bdkClient.transactions()
+            
+            return allTransactions.first(where: { $0.txid.description == txid })
+            
+        } catch {
+            fullScreenCover = .alertError(
+                data: .init(titleKey: "generic_title_error", subtitle: error.localizedDescription)
+            )
+            return nil
+        }
     }
     
     func getFaucetCoinsConfirmation(completion: @escaping () -> Void) {

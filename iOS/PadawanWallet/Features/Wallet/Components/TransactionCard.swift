@@ -55,15 +55,18 @@ struct TransactionsCard: View {
     
     private let actionGetCoins: (_ completion: @escaping () -> Void) -> Void
     private var isFirsLoading = true
+    private let onTransactionTapped: ((String) -> Void)?
     
     init(
         list: Binding<[TransactionsCard.Data]> = .constant([]),
         isSyncing: Binding<Bool> = .constant(false),
-        actionGetCoins: @escaping (_ completion: @escaping () -> Void) -> Void
+        actionGetCoins: @escaping (_ completion: @escaping () -> Void) -> Void,
+            onTransactionTapped: ((String) -> Void)? = nil
     ) {
         _list = list
         _isSyncing = isSyncing
         self.actionGetCoins = actionGetCoins
+                self.onTransactionTapped = onTransactionTapped
     }
     
     var body: some View {
@@ -116,6 +119,9 @@ struct TransactionsCard: View {
             content: {
                 ForEach(list) { item in
                     buildListItem(item)
+                        .onTapGesture {
+                    onTransactionTapped?(item.id)
+                    }
                 }
             }
         )
@@ -177,7 +183,8 @@ struct TransactionsCard: View {
 
 #if DEBUG
 #Preview("Empty") {
-    TransactionsCard(list: .constant([]), actionGetCoins: { _ in })
+    TransactionsCard(list: .constant([]),actionGetCoins: { _ in},
+                     onTransactionTapped: { txid in print("Preview tap: \(txid)") })
         .padding()
         .environment(\.padawanColors, PadawanColorTheme.tatooine.colors)
         .environmentObject(LanguageManager.shared)
@@ -196,7 +203,8 @@ struct TransactionsCard: View {
         ]
     } set: { _ in }
     
-    TransactionsCard(list: transactions, actionGetCoins: { _ in })
+    TransactionsCard(list: transactions,actionGetCoins: { _ in },
+                     onTransactionTapped: { txid in print("Preview tap: \(txid)") })
         .padding()
         .environment(\.padawanColors, PadawanColorTheme.tatooine.colors)
         .environmentObject(LanguageManager.shared)
