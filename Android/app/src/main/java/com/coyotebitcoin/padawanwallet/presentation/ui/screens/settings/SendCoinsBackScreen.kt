@@ -11,7 +11,9 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.InlineTextContent
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Scaffold
@@ -22,11 +24,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.Placeholder
 import androidx.compose.ui.text.PlaceholderVerticalAlign
@@ -39,6 +42,7 @@ import com.composables.icons.lucide.CircleCheck
 import com.composables.icons.lucide.ClipboardCopy
 import com.composables.icons.lucide.Lucide
 import com.coyotebitcoin.padawanwallet.R
+import com.coyotebitcoin.padawanwallet.domain.utils.addressToQR
 import com.coyotebitcoin.padawanwallet.presentation.theme.LocalPadawanColors
 import com.coyotebitcoin.padawanwallet.presentation.theme.PadawanTheme
 import com.coyotebitcoin.padawanwallet.presentation.theme.PadawanTypography
@@ -90,18 +94,34 @@ internal fun SendCoinsBackScreen(
         snackbarHost = { SnackbarHost(snackbarHostState) }
     ) { scaffoldPadding ->
         Column(
-            Modifier
+            horizontalAlignment = Alignment.CenterHorizontally,
+            modifier = Modifier
                 .fillMaxSize()
                 .verticalScroll(state = scrollState)
-                // .background()
                 .padding(scaffoldPadding)
         ) {
             val returnAddress: String = stringResource(R.string.send_coins_back_address)
-            Image(
-                painterResource(R.drawable.return_sats_faucet_address),
-                contentDescription = stringResource(R.string.return_address_image),
-                modifier = Modifier.padding(start = 50.dp, end = 50.dp, bottom = 20.dp)
-            )
+            val returnQr = addressToQR(returnAddress)
+
+            returnQr?.let {
+                Image(
+                    bitmap = it,
+                    contentDescription = stringResource(R.string.qr_code),
+                    Modifier
+                        .padding(vertical = 16.dp)
+                        .size(340.dp)
+                        .clip(RoundedCornerShape(16.dp))
+                        .clickable {
+                            copyToClipboard(
+                                returnAddress,
+                                context,
+                                scope,
+                                snackbarHostState,
+                                null
+                            )
+                        }
+                )
+            }
             Row(
                 Modifier
                     .clickable(onClick = {

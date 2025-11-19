@@ -8,6 +8,8 @@
     <string name="attention">Attention</string>
     <string name="button_yes">Oui</string>
     <string name="button_no">Non</string>
+    <string name="wallets">Portefeuilles</string>
+    <string name="reset_wallet">Réinitialiser le portefeuille</string>
     <string name="welcome_statement">Bienvenue sur Padawan !\n\nCette application est un endroit pour apprendre les caractéristiques courantes des portefeuilles Bitcoin mobiles.\n\nIl utilise le signet de Bitcoin, un réseau Bitcoin alternatif utilisé dans le monde entier et construit exclusivement pour les tests. Les pièces de ce réseau n\'ont aucune valeur, mais elles ressemblent et se comportent comme des bitcoins normaux !\n\nCe portefeuille est conçu pour que les utilisateurs de tous âges puissent expérimenter et en apprendre davantage sur Bitcoin dans un environnement sans risque.</string>
     <string name="onboard_title_1">Bienvenue sur Padawan</string>
     <string name="onboard_title_2">Apprendre par la pratique</string>
@@ -38,7 +40,7 @@
     <string name="send_coins_back">Les jetons signets peuvent être difficiles à acquérir, et même s\'ils n\'ont aucune valeur marchande, ils ne sont pas infinis, et nous devrions faire attention à ne pas les gaspiller ou les laisser se perdre !\n\nUne fois que vous avez terminé avec vos jetons signets, veuillez envisager de les renvoyer au projet Padawan afin que nous puissions continuer à envoyer des jetons aux nouveaux utilisateurs. Utilisez l\'adresse ci-dessus pour nous renvoyer vos jetons.</string>
     <string name="privacy_text">Padawan Wallet ne collecte aucune information sur ses utilisateurs et n\'utilise pas Firebase Crashlytics. Cela signifie cependant qu\'il nous est beaucoup plus difficile d\'être informés des bugs par nos utilisateurs. Si vous avez des commentaires, n\'hésitez pas à envoyer un message au compte Twitter/X de Padawan (@padawanwallet) ou à nous écrire un e-mail. Vous pouvez lire notre politique de confidentialité complète ici :</string>
     <string name="privacy_link">https://github.com/thunderbiscuit/padawan-wallet/blob/master/PRIVACY.txt</string>
-    <string name="send_coins_back_address">tb1pu5yrm5vmtnvtla4d83qexh4tjpwmccuc4pyfryrf45g7534ck9nqz7408v</string>
+    <string name="send_coins_back_address">tb1pdjafg7w0p60c7n06my4lt8ql42tk7tdd7ureds5m5wdfkc9suhhsgsd0xe</string>
     <string name="copy_address_string">Copier</string>
     <string name="text_copied">Copié</string>
     <string name="cancel">Annuler</string>

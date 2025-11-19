@@ -47,7 +47,7 @@ about_text:               "Padawan est un portefeuille Bitcoin réservé au sign
 send_coins_back:          "Les jetons signets peuvent être difficiles à acquérir, et même s'ils n'ont aucune valeur marchande, ils ne sont pas infinis, et nous devrions faire attention à ne pas les gaspiller ou les laisser se perdre !\n\nUne fois que vous avez terminé avec vos jetons signets, veuillez envisager de les renvoyer au projet Padawan afin que nous puissions continuer à envoyer des jetons aux nouveaux utilisateurs. Utilisez l'adresse ci-dessus pour nous renvoyer vos jetons."
 privacy_text:             "Padawan Wallet ne collecte aucune information sur ses utilisateurs et n'utilise pas Firebase Crashlytics. Cela signifie cependant qu'il nous est beaucoup plus difficile d'être informés des bugs par nos utilisateurs. Si vous avez des commentaires, n'hésitez pas à envoyer un message au compte Twitter/X de Padawan (@padawanwallet) ou à nous écrire un e-mail. Vous pouvez lire notre politique de confidentialité complète ici :"
 privacy_link:             "https://github.com/thunderbiscuit/padawan-wallet/blob/master/PRIVACY.txt"
-send_coins_back_address:  "tb1pu5yrm5vmtnvtla4d83qexh4tjpwmccuc4pyfryrf45g7534ck9nqz7408v"
+send_coins_back_address:  "tb1pdjafg7w0p60c7n06my4lt8ql42tk7tdd7ureds5m5wdfkc9suhhsgsd0xe"
 copy_address_string:      "Copier"
 text_copied:              "Copié"
 cancel:                   "Annuler"

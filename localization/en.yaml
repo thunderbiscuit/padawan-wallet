@@ -47,7 +47,7 @@ about_text:               "Padawan is a signet-only bitcoin wallet packed with t
 send_coins_back:          "Signet coins can be hard to acquire, and even though they have no market value, they are not infinite, and we should be careful not to waste them or let them get lost!\n\nOnce you are done with your signet coins, please consider sending them back to the Padawan project so that we can continue sending coins to new users. Use the address above to send your coins back to us."
 privacy_text:             "Padawan Wallet does not collect any information on its users, and does not use Firebase Crashlytics. This, however, means it's much harder for us to hear about the bugs from our users. If you have feedback, feel free to send a message to the Padawan Twitter/X account (@padawanwallet) or to write us an email. You can read our full privacy policy here:"
 privacy_link:             "https://github.com/thunderbiscuit/padawan-wallet/blob/master/PRIVACY.txt"
-send_coins_back_address:  "tb1pu5yrm5vmtnvtla4d83qexh4tjpwmccuc4pyfryrf45g7534ck9nqz7408v"
+send_coins_back_address:  "tb1pdjafg7w0p60c7n06my4lt8ql42tk7tdd7ureds5m5wdfkc9suhhsgsd0xe"
 copy_address_string:      "Copy"
 text_copied:              "Copied"
 cancel:                   "Cancel"
