@@ -239,3 +239,14 @@ l9_p8:                     "2. Software wallets: these often refer to applicatio
 l9_p9:                     "3. Mobile wallets: these applications run on your phone, and are almost always hot wallets. They tend to give you the most easy-to-use experience, but are less safe for bigger amounts of bitcoin. Padawan wallet is an example of a mobile wallet."
 l9_p10:                    "4. Lightning wallets: the lightning network is a whole other topic not covered by Padawan. In summary, the Lightning Network is an extension of what we can do with bitcoin, and is perfectly suited for smaller, faster transactions. Using a lightning wallet is a great way to manage day-to-day spending. We highly encourage looking into lightning wallets and payments as you make your way forward on your bitcoin journey!"
 l9_p11:                    "5. Custodial wallets: these are wallets where the cryptographic keys do not reside on the device you use to receive or spend, but are rather held elsewhere under someone else's control. Your wallet then remotely asks the custodian to make payments on your behalf. This opens up other attack vectors (for example, the custodian can decide to not abide by your requests for a transaction, or potentially steal all your coins), but also makes the wallets easier to use and recover. In general, as your bitcoin experience grows and you get more comfortable with different types of wallets and use cases, you should prefer wallets that do not give up control of your keys, and the option of a custodial wallet should be considered a last resort."
+
+# Accessibility Wallet Screen
+accessibility_transactions_empty_label: "This is your list of transactions made in the Padawan Wallet. Currently, it has no transactions."
+accessibility_transactions_empty_hint: "Tap on get signet coins right below to receive test funds and start your first transaction."
+accessibility_unit_selector: "Currency Unit."
+accessibility_unit_selector_hint: "Tap to switch unit."
+accessibility_total_balance: "Total Balance"
+accessibility_sync_button: "Updates your balance and transactions."
+accessibility_header_balance: "This card is where present your total balance"
+accessibility_receive_hint: "Navigates to the address generation screen"
+accessibility_send_hint: "Navigates to the screen to paste an address and send signet coins"

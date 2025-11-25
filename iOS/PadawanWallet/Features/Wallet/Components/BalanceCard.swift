@@ -8,6 +8,11 @@ import SwiftUI
 private struct BalanceCardStrings {
     static var cardTitle: String { LanguageManager.shared.localizedString(forKey: "bitcoin_signet") }
     static var buttonSync: String { LanguageManager.shared.localizedString(forKey: "sync") }
+    static var accessibilityUnitSelector: String { LanguageManager.shared.localizedString(forKey: "accessibility_unit_selector") }
+    static var accessibilityUnitSelectorHint: String { LanguageManager.shared.localizedString(forKey: "accessibility_unit_selector_hint") }
+    static var accessibilityTotalBalance: String { LanguageManager.shared.localizedString(forKey: "accessibility_total_balance") }
+    static var accessibilitySyncButton: String { LanguageManager.shared.localizedString(forKey: "accessibility_sync_button") }
+    static var accessibilityHeaderBalance: String { LanguageManager.shared.localizedString(forKey: "accessibility_header_balance") }
     static var formaOptions: [String] {
         BalanceFormat.allCases.map { option in
             LanguageManager.shared.localizedString(forKey: option.rawValue.lowercased())
@@ -41,6 +46,8 @@ struct BalanceCard: View {
                         Text(BalanceCardStrings.cardTitle)
                             .font(Fonts.body)
                             .foregroundStyle(colors.textFaded)
+                            .accessibilityLabel(Text(BalanceCardStrings.accessibilityHeaderBalance))
+                        
                         Spacer()
                         SwitchButton(
                             options: BalanceCardStrings.formaOptions,
@@ -50,10 +57,18 @@ struct BalanceCard: View {
                                 balanceFormatOption = .init(rawValue: newValue) ?? .sats
                             })
                         )
+                        .accessibilityElement(children: .combine)
+                        .accessibilityLabel(Text(BalanceCardStrings.accessibilityUnitSelector))
+                        .accessibilityValue(Text(balanceFormatOption.rawValue))
+                        .accessibilityAddTraits(.isButton)
+                        .accessibilityHint(Text(BalanceCardStrings.accessibilityUnitSelectorHint))
                     }
                     .frame(maxWidth: .infinity, alignment: .topLeading)
                     
                     buildBalanceView()
+                    .accessibilityElement(children: .combine)
+                    .accessibilityLabel(Text(BalanceCardStrings.accessibilityTotalBalance))
+                    .accessibilityValue(Text("\(balance) \(balanceFormatOption.rawValue)"))
                     
                     buildSyncButton()
                 }
@@ -95,6 +110,9 @@ struct BalanceCard: View {
                 )
                 .padding(.bottom, -12)
             }
+            .accessibilityLabel(Text(BalanceCardStrings.buttonSync))
+            .accessibilityLabel(Text(BalanceCardStrings.accessibilitySyncButton))
+            .accessibilityAddTraits(.isButton)
         }
         .frame(maxWidth: .infinity, alignment: .center)
     }

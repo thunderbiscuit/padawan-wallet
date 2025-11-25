@@ -239,3 +239,14 @@ l9_p8:                    "2. Carteiras de software: geralmente são aplicativos
 l9_p9:                    "3. Carteiras móveis: esses aplicativos são executados no seu telefone e quase sempre são carteiras quentes. Eles tendem a oferecer a experiência mais fácil de usar, mas são menos seguros para grandes quantidades de bitcoin. A carteira Padawan é um exemplo de carteira móvel."
 l9_p10:                   "4. Carteiras Lightning: a rede lightning é outro tópico não abordado pelo Padawan. Em resumo, a Lightning Network é uma extensão do como podemos utilizar o bitcoin e é adequada para transações menores e mais rápidas. Usar uma carteira lightning é uma ótima maneira de gerenciar os gastos do dia a dia. É altamente recomendável que você analise esse tipo de carteira à medida em que avança em sua jornada no bitcoin!"
 l9_p11:                   "5. Carteiras custodiais: são aquelas que a frase de recuperação não está no dispositivo que você usa para receber ou gastar, mas pode ser mantida em outro lugar sob o controle de outra pessoa/empresa. Sua carteira solicita remotamente ao custodiante que faça pagamentos em seu nome. Isso abre outros vetores de ataque (ex: o custodiante decidir não atender aos seus pedidos de transação ou potencialmente roubar todas as suas moedas), mas também torna as carteiras mais fáceis de usar e recuperar. Em geral, à medida que sua experiência com bitcoin cresce e você fica mais confortável com diferentes tipos de carteiras e casos de uso, você deve preferir carteiras que entreguem a frase de recuperação (Seed) para você e a opção de uma carteira custodial deve ser considerada como último recurso."
+
+# Accessibility Wallet Screen
+accessibility_transactions_empty_label: "Esta é a sua lista de transações realizadas na Padawan Wallet; atualmente, não contém nenhuma transação."
+accessibility_transactions_empty_hint: "Clique em Receber Signetcoins logo a baixo para receber fundos de teste e fazer sua primeira transação."
+accessibility_unit_selector: "Unidade Monetária."
+accessibility_unit_selector_hint: "Toque para mudar a unidade."
+accessibility_total_balance: "Saldo total"
+accessibility_sync_button: "Atualiza seu saldo e transações."
+accessibility_header_balance: "Nesse card é apresentado seu saldo total"
+accessibility_receive_hint: "Navega para a tela de geração de endereço"
+accessibility_send_hint: "Navega para a tela de colar endereço e enviar moedas signet"

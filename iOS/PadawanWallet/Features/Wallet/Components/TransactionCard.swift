@@ -9,6 +9,8 @@ private struct TransactionsCardAssets {
     static var title: String { LanguageManager.shared.localizedString(forKey: "transactions") }
     static var emptyStateDescription: String { LanguageManager.shared.localizedString(forKey: "transaction_list_empty") }
     static var emptyStateButton: String { LanguageManager.shared.localizedString(forKey: "get_coins") }
+    static var accessibilityEmptyStateDescriptionLabel: String { LanguageManager.shared.localizedString(forKey: "accessibility_transactions_empty_label") }
+    static var accessibilityEmptyStateDescriptionHint: String { LanguageManager.shared.localizedString(forKey: "accessibility_transactions_empty_hint") }
 }
 
 extension TransactionsCard {
@@ -85,6 +87,7 @@ struct TransactionsCard: View {
         Text(TransactionsCardAssets.title)
             .font(Fonts.title)
             .foregroundStyle(colors.text)
+            .accessibilityAddTraits(.isHeader)
     }
     
     @ViewBuilder
@@ -110,6 +113,9 @@ struct TransactionsCard: View {
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
                 .padding(24)
             }
+            .accessibilityElement(children: .ignore)
+            .accessibilityLabel(Text(TransactionsCardAssets.accessibilityEmptyStateDescriptionLabel))
+            .accessibilityHint(Text(TransactionsCardAssets.accessibilityEmptyStateDescriptionHint))
     }
     
     @ViewBuilder
@@ -157,6 +163,12 @@ struct TransactionsCard: View {
         .opacity(item.confirmed ? 1.0 : 0.7)
         .padding([.horizontal, .top], 24)
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel(
+            Text("\(item.status.rawValue), \(item.amount), \(item.date)")
+        )
+        .accessibilityAddTraits(.isButton)
+        .accessibilityHint(Text(languageManager.localizedString(forKey: "transaction_details")))
     }
     
     @ViewBuilder

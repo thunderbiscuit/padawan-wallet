@@ -8,6 +8,8 @@ import SwiftUI
 private struct WalletViewAssets {
     static var receiveButtonTitle: String { LanguageManager.shared.localizedString(forKey: "receive") }
     static var sendButtonTitle: String { LanguageManager.shared.localizedString(forKey: "send") }
+    static var accessibilitySendButton: String { LanguageManager.shared.localizedString(forKey: "accessibility_send_hint") }
+    static var accessibilityReceiveButton: String { LanguageManager.shared.localizedString(forKey: "accessibility_receive_hint") }
     
     static var receiveButtonIcon: Image = Image(systemName: "arrow.down")
     static var sendButtonIcon: Image = Image(systemName: "arrow.up")
@@ -112,6 +114,8 @@ struct WalletView: View {
                     viewModel.showReceiveScreen()
                 }
             )
+            .accessibilityLabel(Text(WalletViewAssets.receiveButtonTitle))
+            .accessibilityHint(Text(WalletViewAssets.accessibilityReceiveButton))
             
                 PadawanButton(
                 title: WalletViewAssets.sendButtonTitle,
@@ -120,6 +124,8 @@ struct WalletView: View {
                     viewModel.showSendScreen()
                 }
             )
+            .accessibilityLabel(Text(WalletViewAssets.sendButtonTitle))
+            .accessibilityHint(Text(WalletViewAssets.accessibilitySendButton))
         }
         .frame(minHeight: 50)
     }

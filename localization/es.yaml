@@ -239,3 +239,14 @@ l9_p8:                    "2. Carteras electrónicas (o software wallets en ingl
 l9_p9:                    "3. Carteras para teléfonos móviles: estas son aplicaciones que funcionan en tu teléfono, y casi siempre son hot wallets. Suelen ser las que proporcionan una facilidad de uso mayor, pero son menos seguras para grandes cantidades de bitcoin. Padawan wallet es un ejemplo de carteras para teléfonos móviles."
 l9_p10:                   "4. Carteras lightning: la red lightning un tema completamente diferente y del que no se trata en Padawan. En resumen, la Red Lightning (o Lightning network en inglés) es una extensión de lo que puedes hacer con bitcoin, y es perfecta para transacciones rápidas y pequeñas. Utilizar una cartera lightning es una forma estupenda de manejar los gastos del día a día. ¡Te recomendamos encarecidamente que busques información sobre carteras lightning y sus pagos a medida que avances en tu viaje por bitcoin!"
 l9_p11:                   "5. Carteras custodio (o custodial wallets en inglés): estas son carteras en las que las claves criptográficas no están guardadas en el dispositivo que utilizas para recibir o gastar, si no que están guardadas bajo el control de un tercero. Lo que hace tu cartera es preguntar al custodio para que realice el pago en tu nombre. Esto abre otros vectores de ataque (por ejemplo, un custodio puede decidir no atender tu solicitud de pago o recepción de una transacción o potencialmente robarte todos tus fondos), pero también hace que estas carteras sean más faciles de utilizar y de recuperar. En general, a medida que tu experiencia con bitcoin crezca y te sientas más cómodo con diferentes tipos de carteras y sus usos, acabarás prefiriendo carteras que no cedan el control de tus claves, y la opción de una cartera custodiada se considerará como una de último recurso."
+
+# Accessibility Wallet Screen
+accessibility_transactions_empty_label: "Aquí está la lista de transacciones realizadas en la Padawan Wallet. actualmente, no contiene ninguna transacción."
+accessibility_transactions_empty_hint: "Pulsa en Recibir signet coins justo debajo para recibir fondos de prueba e iniciar tu primera transacción."
+accessibility_unit_selector: "Unidad Monetaria."
+accessibility_unit_selector_hint: "Toca para cambiar de unidad."
+accessibility_total_balance: "Saldo Total"
+accessibility_sync_button: "Actualiza tu saldo y transacciones."
+accessibility_header_balance: "En esta tarjeta es donde presentas tu saldo total"
+accessibility_receive_hint: "Navegue a la pantalla de generación de direcciones"
+accessibility_send_hint: "Navegue hasta la pantalla de pegar dirección y envíe monedas signet"

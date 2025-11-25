@@ -239,3 +239,14 @@ l9_p8:                     "2. Portefeuilles logiciels : il s'agit souvent d'app
 l9_p9:                     "3. Portefeuilles mobiles : ces applications fonctionnent sur votre téléphone et sont presque toujours des portefeuilles chauds. Elles ont tendance à offrir l'expérience la plus facile à utiliser, mais sont moins sûres pour de plus grandes quantités de bitcoins. Padawan wallet est un exemple de portefeuille mobile."
 l9_p10:                    "4. Portefeuilles Lightning : le réseau Lightning (Lightning Network) est un tout autre sujet non couvert par Padawan. En résumé, le réseau Lightning est une extension de ce que nous pouvons faire avec Bitcoin, et il est parfaitement adapté aux transactions plus petites et plus rapides. Utiliser un portefeuille Lightning est un excellent moyen de gérer les dépenses quotidiennes. Nous vous encourageons vivement à vous intéresser aux portefeuilles et aux paiements Lightning à mesure que vous avancez dans votre parcours Bitcoin !"
 l9_p11:                    "5. Portefeuilles dépositaires (custodial) : ce sont des portefeuilles où les clés cryptographiques ne résident pas sur l'appareil que vous utilisez pour recevoir ou dépenser, mais sont plutôt détenues ailleurs sous le contrôle de quelqu'un d'autre. Votre portefeuille demande alors à distance au dépositaire d'effectuer des paiements en votre nom. Cela ouvre d'autres vecteurs d'attaque (par exemple, le dépositaire peut décider de ne pas respecter vos demandes de transaction, ou potentiellement voler toutes vos pièces), mais rend également les portefeuilles plus faciles à utiliser et à récupérer. En général, à mesure que votre expérience en Bitcoin grandit et que vous vous familiarisez avec différents types de portefeuilles et de cas d'utilisation, vous devriez préférer les portefeuilles qui ne cèdent pas le contrôle de vos clés, et l'option d'un portefeuille de garde devrait être considérée comme un dernier recours."
+
+# Accessibility Wallet Screen
+accessibility_transactions_empty_label: "Voici la liste des transactions effectuées dans le Padawan Wallet. Actuellement, il ne contient aucune transaction."
+accessibility_transactions_empty_hint: "Cliquez sur Recevoir des signet coins juste en dessous pour recevoir des fonds d'essai et effectuer votre première transaction."
+accessibility_unit_selector: "Unité monétaire."
+accessibility_unit_selector_hint: "Appuyez pour changer d'unité."
+accessibility_total_balance: "Solde total"
+accessibility_sync_button: "Mettre à jour votre solde et vos transactions."
+accessibility_header_balance: "C'est sur cette carte que vous indiquez votre solde total."
+accessibility_receive_hint: "Accédez à l'écran de génération d'adresse"
+accessibility_send_hint: "Accédez à l'écran de saisie d'adresse et envoyez des signet pièces"
