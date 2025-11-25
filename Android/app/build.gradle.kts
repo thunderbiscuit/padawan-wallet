@@ -27,7 +27,7 @@ android {
 
     defaultConfig {
         applicationId = "com.coyotebitcoin.padawanwallet"
-        minSdk = 29
+        minSdk = 30
         targetSdk = 36
         // This version code must be updated for each release but the version on the master branch
         // stays at 1.

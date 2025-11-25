@@ -4,6 +4,12 @@ This changelog is not a typical source code changelog. It is used primarily to k
 
 ## Unreleased
 
+### Android
+
+- Drop support for Android API 29
+
+### iOS
+
 <br>
 
 ## 0.17.0: Nimble Naboo
