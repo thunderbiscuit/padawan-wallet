@@ -250,3 +250,7 @@ accessibility_sync_button: "Updates your balance and transactions."
 accessibility_header_balance: "This card is where present your total balance"
 accessibility_receive_hint: "Navigates to the address generation screen"
 accessibility_send_hint: "Navigates to the screen to paste an address and send signet coins"
+
+# Acessibility Transaction Details Screen
+accessibility_txid_format: "Transaction identifier. Starts with %@ and ends with %@"
+accessibility_txid_link_format: "ID starting with %@, tap to open mempool space in browser"

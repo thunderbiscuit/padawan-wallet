@@ -250,3 +250,7 @@ accessibility_sync_button: "Mettre à jour votre solde et vos transactions."
 accessibility_header_balance: "C'est sur cette carte que vous indiquez votre solde total."
 accessibility_receive_hint: "Accédez à l'écran de génération d'adresse"
 accessibility_send_hint: "Accédez à l'écran de saisie d'adresse et envoyez des signet pièces"
+
+# Acessibility Transaction Details Screen
+accessibility_txid_format: "Identifiant de la transaction. Il commence par %@ et se termine par %@"
+accessibility_txid_link_format: "ID commençant par %@, appuyez pour ouvrir l'espace mémoire dans le navigateur"

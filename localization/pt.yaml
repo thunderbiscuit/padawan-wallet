@@ -250,3 +250,7 @@ accessibility_sync_button: "Atualiza seu saldo e transações."
 accessibility_header_balance: "Nesse card é apresentado seu saldo total"
 accessibility_receive_hint: "Navega para a tela de geração de endereço"
 accessibility_send_hint: "Navega para a tela de colar endereço e enviar moedas signet"
+
+# Acessibility Transaction Details Screen
+accessibility_txid_format: "Identificador da transação. Começa com %@ e termina com %@"
+accessibility_txid_link_format: "ID iniciando com %@, toque para abrir o mempool space no navegador"

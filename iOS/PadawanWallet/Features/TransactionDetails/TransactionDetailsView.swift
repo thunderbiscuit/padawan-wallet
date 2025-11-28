@@ -17,6 +17,29 @@ struct TransactionDetailsView: View {
         _viewModel = StateObject(wrappedValue: TransactionDetailsViewModel(transaction: transaction))
     }
     
+    private func accessibilityLabelForItem(
+        _ item: TransactionDetailsViewModel.TransactionDetailItem
+    ) -> String {
+        let keyText = languageManager.localizedString(forKey: item.key)
+
+        switch item.displayType {
+        case .link:
+            let prefix = String(item.value.prefix(6))
+            let format = languageManager.localizedString(forKey: "accessibility_txid_link_format")
+            return String(format: format, prefix)
+
+        case .badge, .standard:
+            if item.key == "txid" {
+                let prefix = String(item.value.prefix(6))
+                let suffix = String(item.value.suffix(6))
+                let format = languageManager.localizedString(forKey: "accessibility_txid_format")
+                return String(format: format, prefix, suffix)
+            }
+            let valueText = languageManager.localizedString(forKey: item.value)
+            return "\(keyText): \(valueText)"
+        }
+    }
+    
     var body: some View {
         BackgroundView {
             VStack(spacing: 25) {
@@ -80,7 +103,12 @@ struct TransactionDetailsView: View {
                 Divider()
                     .padding(.horizontal)
                     .padding(.top, 10)
+                    .accessibilityHidden(true)
             }
         }
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel(accessibilityLabelForItem(item))
+        .accessibilityAddTraits(item.displayType == .link ? .isButton : [])
+        .accessibilityRemoveTraits(item.displayType != .link ? .isButton : [])
     }
 }
