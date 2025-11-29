@@ -262,3 +262,12 @@ accessibility_address_label: "adresse de Bitcoin signet"
 accessibility_address_copied: "Adresse copiée dans le presse-papiers"
 accessibility_starts_with: "commence par"
 accessibility_ends_with: "Terminer par"
+
+# Accessibility Send Transaction Screen
+accessibility_scan_qr_code: "balayage QR Code"
+accessibility_slide_taxs: "sats par vByte"
+accessibility_verify_transaction: "Vérification des transactions ouvertes"
+accessibility_camera_viewfinder: "viseur de caméra"
+accessibility_camera_hint: "Montrez un code QR"
+accessibility_cancel_scan_hint: "Fermez la caméra et revenez"
+accessibility_broadcast_hint: "Envoyez la transaction au réseau Bitcoin"

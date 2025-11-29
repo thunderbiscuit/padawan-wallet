@@ -13,6 +13,7 @@ private struct ViewAssets {
     static var addressLabel: String { LanguageManager.shared.localizedString(forKey: "address") }
     static var taxLabel: String { LanguageManager.shared.localizedString(forKey: "total_fee") }
     static var confirmaButton: String { LanguageManager.shared.localizedString(forKey: "confirm_and_broadcast") }
+    static var accBroadcastHint: String { LanguageManager.shared.localizedString(forKey: "accessibility_broadcast_hint") }
 }
 
 struct VerifyTransactionView: View {
@@ -38,6 +39,7 @@ struct VerifyTransactionView: View {
                     .font(Fonts.font(.medium, 24))
                     .foregroundStyle(colors.text)
                     .padding(.top, 24)
+                    .accessibilityAddTraits(.isHeader)
                 
                 VStack(alignment: .leading, spacing: 16) {
                     buildTitle(
@@ -64,6 +66,7 @@ struct VerifyTransactionView: View {
                     primaryAction()
                 }
                 .fixedSize(horizontal: false, vertical: true)
+                .accessibilityHint(ViewAssets.accBroadcastHint)
             }
             .padding()
         }
@@ -81,6 +84,8 @@ struct VerifyTransactionView: View {
         }
         .frame(maxWidth: .infinity, alignment: .leading)
         .foregroundStyle(colors.text)
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel("\(title), \(subtitle)")
     }
 }
 

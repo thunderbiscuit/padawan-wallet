@@ -17,6 +17,10 @@ private struct ViewAssets {
     static var labelTax: String { LanguageManager.shared.localizedString(forKey: "fees_sats_vbytes") }
     static var buttonVerifyTransaction: String { LanguageManager.shared.localizedString(forKey: "verify_transaction") }
     
+    static var accScanQRCode: String { LanguageManager.shared.localizedString(forKey: "accessibility_scan_qr_code") }
+    static var accSlideTaxs: String { LanguageManager.shared.localizedString(forKey: "accessibility_slide_taxs") }
+    static var accVerifyTransaction: String { LanguageManager.shared.localizedString(forKey: "accessibility_verify_transaction") }
+    
     static var cameraIcon: Image = Image(systemName: "camera")
 }
 
@@ -41,6 +45,8 @@ struct SendTransactionView: View {
                         .font(Fonts.subtitle)
                         .multilineTextAlignment(.trailing)
                         .foregroundStyle(colors.textFaded)
+                        .accessibilityLabel("\(ViewAssets.labelBalance), \(viewModel.getBalance()) sats")
+                        .accessibilityAddTraits(.isStaticText)
                 }
                 
                 buildInputTexts()
@@ -59,6 +65,7 @@ struct SendTransactionView: View {
 
                 .fixedSize(horizontal: false, vertical: true)
                 .padding(.horizontal)
+                .accessibilityHint(Text(ViewAssets.accVerifyTransaction))
                 
                 Spacer()
             }
@@ -122,7 +129,8 @@ struct SendTransactionView: View {
                     trailingAction: {
                         dismissKeyBoard()
                         viewModel.openCamera()
-                    }
+                    },
+                    trailingAccessibilityLabel: ViewAssets.accScanQRCode
                 )
             }
         }
@@ -131,6 +139,7 @@ struct SendTransactionView: View {
     private func buildTax() -> some View {
         VStack(alignment: .leading, spacing: .zero) {
             buildHeader(title: ViewAssets.labelTax)
+                .accessibilityHidden(true)
             Spacer().frame(height: 8.0)
             Slider(
                 value: $viewModel.feeRate,
@@ -138,12 +147,16 @@ struct SendTransactionView: View {
                 step: viewModel.feeRateStep
             )
             .accentColor(colors.accent1)
+            .accessibilityLabel(ViewAssets.labelTax)
+            .accessibilityValue("\(Int(viewModel.feeRate)) \(ViewAssets.accSlideTaxs)")
             
             Text(String(format: "%.0f", viewModel.feeRate))
                 .font(Fonts.body)
                 .foregroundColor(colors.textLight)
+                .accessibilityHidden(true)
         }
         .frame(maxWidth: .infinity, alignment: .leading)
+        .accessibilityElement(children: .contain)
     }
     
     @ViewBuilder
@@ -153,10 +166,12 @@ struct SendTransactionView: View {
         text: Binding<String>,
         trailingIcon: Image? = nil,
         trailingAction: (() -> Void)? = nil,
+        trailingAccessibilityLabel: String? = nil,
         keyboardType: UIKeyboardType = .default
     ) -> some View {
         VStack(spacing: 6) {
             buildHeader(title: label)
+            .accessibilityAddTraits(.isStaticText)
             PadawanCardView(
                 backgroundColor: colors.background2) {
                     HStack {
@@ -168,6 +183,7 @@ struct SendTransactionView: View {
                             standardAppearance: true,
                             keyboardType: keyboardType
                         )
+                        .accessibilityLabel(label)
                         
                         if let trailingIcon {
                             Button {
@@ -176,6 +192,8 @@ struct SendTransactionView: View {
                                 trailingIcon
                                     .padding(.horizontal)
                             }
+                            .accessibilityLabel(trailingAccessibilityLabel ?? "")
+                            .accessibilityRemoveTraits(.isImage)
                             
                         } else {
                             EmptyView()
