@@ -254,3 +254,11 @@ accessibility_send_hint: "Accédez à l'écran de saisie d'adresse et envoyez de
 # Acessibility Transaction Details Screen
 accessibility_txid_format: "Identifiant de la transaction. Il commence par %@ et se termine par %@"
 accessibility_txid_link_format: "ID commençant par %@, appuyez pour ouvrir l'espace mémoire dans le navigateur"
+
+# Accessibility Receive Transaction Screen
+accessibility_qr_code_label: "Adresse du code QR"
+accessibility_qr_code_hint: "Appuyez pour copier"
+accessibility_address_label: "adresse de Bitcoin signet"
+accessibility_address_copied: "Adresse copiée dans le presse-papiers"
+accessibility_starts_with: "commence par"
+accessibility_ends_with: "Terminer par"

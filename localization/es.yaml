@@ -254,3 +254,11 @@ accessibility_send_hint: "Navegue hasta la pantalla de pegar dirección y envíe
 # Acessibility Transaction Details Screen
 accessibility_txid_format: "Identificador de transacción. Empieza con %@ y termina con %@"
 accessibility_txid_link_format: "ID que comienza con %@, toque para abrir el espacio de memoria en el navegador"
+
+# Accessibility Receive Transaction Screen
+accessibility_qr_code_label: "dirección código QR"
+accessibility_qr_code_hint: "Toca para copiar"
+accessibility_address_label: "dirección de bitcoin signet"
+accessibility_address_copied: "Dirección copiada al portapapeles"
+accessibility_starts_with: "comienza con"
+accessibility_ends_with: "Termina con"

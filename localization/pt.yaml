@@ -254,3 +254,11 @@ accessibility_send_hint: "Navega para a tela de colar endereço e enviar moedas 
 # Acessibility Transaction Details Screen
 accessibility_txid_format: "Identificador da transação. Começa com %@ e termina com %@"
 accessibility_txid_link_format: "ID iniciando com %@, toque para abrir o mempool space no navegador"
+
+# Accessibility Receive Transaction Screen
+accessibility_qr_code_label: "QR Code do Endereço"
+accessibility_qr_code_hint: "Toque para copiar"
+accessibility_address_label: "Endereço de Bitcoin signet"
+accessibility_address_copied: "Endereço copiado para a área de transferência"
+accessibility_starts_with: "Começa com"
+accessibility_ends_with: "Termina com"
