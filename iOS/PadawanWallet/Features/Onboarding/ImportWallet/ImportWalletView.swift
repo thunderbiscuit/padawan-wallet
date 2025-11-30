@@ -13,9 +13,13 @@ private extension ImportWalletView {
             static var subtitle: String { LanguageManager.shared.localizedString(forKey: "enter_your_12_words") }
         
             static var buttonTitle: String { LanguageManager.shared.localizedString(forKey: "recover_wallet") }
+            static var accButtonHint: String { LanguageManager.shared.localizedString(forKey: "accessibility_recover_wallet_hint") }
         
         static func wordNumber(_ number: Int) -> String {
             "Word \(number)"
+        }
+        static func accWordLabel(_ number: Int) -> String {
+            return "\(ImportWalletViewStrings.wordNumber(number))"
         }
     }
 }
@@ -40,6 +44,7 @@ struct ImportWalletView: View {
                         .font(Fonts.title)
                         .foregroundStyle(colors.textFaded)
                         .multilineTextAlignment(.leading)
+                        .accessibilityAddTraits(.isHeader)
                     
                     Text(ImportWalletViewStrings.subtitle)
                         .font(Fonts.subtitle)
@@ -54,6 +59,7 @@ struct ImportWalletView: View {
                         dismissKeyBoard()
                         viewModel.importWallet()
                     }
+                    .accessibilityHint(ImportWalletViewStrings.accButtonHint)
                 }
                 .frame(maxWidth: .maxWidthScreen, alignment: .leading)
                 .padding(.horizontal, 30)
@@ -76,6 +82,7 @@ struct ImportWalletView: View {
     private func buildForm() -> some View {
         ForEach(0..<12) { i in
             buildTextField(
+                index: i + 1,
                 label: ImportWalletViewStrings.wordNumber(i+1),
                 placeholder: ImportWalletViewStrings.wordNumber(i+1),
                 text: .init(get: {
@@ -89,6 +96,7 @@ struct ImportWalletView: View {
     
     @ViewBuilder
     private func buildTextField(
+        index: Int,
         label: String,
         placeholder: String,
         text: Binding<String>
@@ -100,6 +108,8 @@ struct ImportWalletView: View {
             autocorrectionDisabled: true,
             autocapitalization: .never
         )
+        .accessibilityLabel(ImportWalletViewStrings.accWordLabel(index))
+        .keyboardType(.asciiCapable)
     }
 }
 

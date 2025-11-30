@@ -13,6 +13,7 @@ struct CameraScannView: View {
     @Environment(\.dismiss) private var dismiss
     @EnvironmentObject private var languageManager: LanguageManager
     @State private var fullScreenMode: SendTransactionScreenNavigation?
+    private let accVibrationFeedback = UINotificationFeedbackGenerator()
     private let codeTypes: [AVMetadataObject.ObjectType] = [
         .qr
     ]
@@ -29,6 +30,9 @@ struct CameraScannView: View {
                 completion: codeScannerHandler
             )
             .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .accessibilityLabel(languageManager.localizedString(forKey: "accessibility_camera_viewfinder"))
+            .accessibilityHint(languageManager.localizedString(forKey: "accessibility_camera_hint"))
+            .accessibilityAddTraits(.isImage)
         
             VStack {
                 Spacer()
@@ -37,6 +41,7 @@ struct CameraScannView: View {
                 }
                 .frame(width: 150)
                 .fixedSize(horizontal: false, vertical: true)
+                .accessibilityHint(languageManager.localizedString(forKey: "accessibility_cancel_scan_hint"))
             }
             .padding(.bottom, 90)
         }
@@ -51,6 +56,9 @@ struct CameraScannView: View {
                 EmptyView()
             }
         }
+        .onAppear {
+            accVibrationFeedback.prepare()
+        }
     }
     
     // MARK: - Private
@@ -58,6 +66,7 @@ struct CameraScannView: View {
     private func codeScannerHandler(_ result: Result<ScanResult, ScanError>) {
         switch result {
         case .success(let response):
+            accVibrationFeedback.notificationOccurred(.success)
             let scannedAddress = response.string.lowercased().replacingOccurrences(
                 of: "bitcoin:",
                 with: ""
@@ -65,6 +74,7 @@ struct CameraScannView: View {
             actionRecognized(scannedAddress)
             dismiss()
         case .failure(let failure):
+            accVibrationFeedback.notificationOccurred(.error)
             fullScreenMode = .alert(
                     data: .init(
                     titleKey: "generic_title_error",
