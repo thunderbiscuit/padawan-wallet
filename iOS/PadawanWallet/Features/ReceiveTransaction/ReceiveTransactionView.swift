@@ -13,6 +13,13 @@ private struct ViewAssets {
     static var button: String { LanguageManager.shared.localizedString(forKey: "generate_a_new_address") }
     
     static var copyIcon = Image(systemName: "document.on.document")
+    
+    static var accQrCodeLabel: String { LanguageManager.shared.localizedString(forKey: "accessibility_qr_code_label") }
+    static var accQrCodeHint: String { LanguageManager.shared.localizedString(forKey: "accessibility_qr_code_hint") }
+    static var accAddressLabel: String { LanguageManager.shared.localizedString(forKey: "accessibility_address_label") }
+    static var accAddressCopied: String { LanguageManager.shared.localizedString(forKey: "accessibility_address_copied") }
+    static var accStartsWith: String { LanguageManager.shared.localizedString(forKey: "accessibility_starts_with") }
+    static var accEndsWith: String { LanguageManager.shared.localizedString(forKey: "accessibility_ends_with") }
 }
 
 struct ReceiveTransactionView: View {
@@ -35,7 +42,7 @@ struct ReceiveTransactionView: View {
                 
                 if let address = viewModel.address, !address.isEmpty {
                     Button {
-                        viewModel.copyAddress()
+                        copyToClipboard(address)
                     } label: {
                         HStack(spacing: 12.0) {
                             
@@ -50,6 +57,10 @@ struct ReceiveTransactionView: View {
                             ViewAssets.copyIcon
                         }
                     }
+                    .accessibilityLabel(ViewAssets.accAddressLabel)
+                    .accessibilityValue(getAccessibleAddressSummary(address))
+                    .accessibilityHint(ViewAssets.accQrCodeHint)
+                    .accessibilityAddTraits(.isButton)
                 }
                 
                 Spacer()
@@ -72,15 +83,35 @@ struct ReceiveTransactionView: View {
                 RoundedRectangle(cornerRadius: 12)
                     .fill(colors.background2)
                 Button {
-                    viewModel.copyAddress()
+                    copyToClipboard(address)
                 } label: {
                     QRCodeView(qrCodeType: .bitcoin(address))
                         .padding()
                 }
+                .accessibilityElement(children: .combine)
+                .accessibilityLabel(ViewAssets.accQrCodeLabel)
+                .accessibilityHint(ViewAssets.accQrCodeHint)
+                .accessibilityAddTraits(.isImage)
+                .accessibilityAddTraits(.isButton)
             }
             .frame(width: 320, height: 320)
         } else {
             EmptyView()
         }
+    }
+    private func copyToClipboard(_ address: String) {
+        viewModel.copyAddress()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            UIAccessibility.post(notification: .announcement, argument: ViewAssets.accAddressCopied)
+        }
+    }
+    
+    private func getAccessibleAddressSummary(_ address: String) -> String {
+        guard address.count > 12 else { return address }
+        let prefix = address.prefix(6)
+        let suffix = address.suffix(6)
+        let startText = ViewAssets.accStartsWith
+        let endText = ViewAssets.accEndsWith
+        return "\(startText) \(prefix), \(endText) \(suffix)"
     }
 }
