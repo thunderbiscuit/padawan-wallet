@@ -271,3 +271,11 @@ accessibility_camera_viewfinder: "camera viewfinder"
 accessibility_camera_hint: "Point to a QR code"
 accessibility_cancel_scan_hint: "close the camera and come back"
 accessibility_broadcast_hint: "Send the transaction to the bitcoin network"
+
+# Accessibility Onboarding
+accessibility_prev_page: "Previous page"
+accessibility_next_page: "Next page"
+accessibility_finish_onboarding: "Finish introduction"
+accessibility_create_wallet_hint: "Create a new wallet"
+accessibility_restore_wallet_hint: "Recover an existing wallet using recovery phrase"
+accessibility_recover_wallet_hint: "Restore your wallet using the 12 words typed above"

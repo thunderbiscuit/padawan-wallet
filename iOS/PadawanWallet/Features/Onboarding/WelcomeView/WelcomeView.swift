@@ -19,6 +19,10 @@ struct WelcomeView: View {
     @StateObject private var viewModel: WelcomeViewModel
     @State private var currentPage = 0
     
+    private var accPreviousPage: String { languageManager.localizedString(forKey: "accessibility_prev_page") }
+    private var accNextPage: String { languageManager.localizedString(forKey: "accessibility_next_page") }
+    private var accFinishOnboarding: String { languageManager.localizedString(forKey: "accessibility_finish_onboarding") }
+    
     init(path: Binding<NavigationPath>, bdkClient: BDKClient = .live) {
         _viewModel = StateObject(wrappedValue: WelcomeViewModel(path: path, bdkClient: bdkClient))
     }
@@ -34,6 +38,7 @@ struct WelcomeView: View {
                     
                     VStack(spacing: 60) {
                         PadawanCardIconView(image: Asset.Images.padawantransparent.toImage, size: 150, hasBorder: false)
+                            .accessibilityHidden(true)
                         buildButtons()
                     }
                     .frame(maxWidth: .maxWidthScreen)
@@ -80,6 +85,7 @@ struct WelcomeView: View {
             Spacer()
             
             PadawanCardIconView(image: page.image, size: 100)
+                .accessibilityHidden(true)
 
             Text(languageManager.localizedString(forKey: page.titleKey))
                 .font(Fonts.title)
@@ -95,6 +101,7 @@ struct WelcomeView: View {
             Spacer()
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .accessibilityElement(children: .combine)
 
     }
     
@@ -105,11 +112,13 @@ struct WelcomeView: View {
                             viewModel.createWallet()
                         }
             .frame(height: 105)
+            .accessibilityHint(languageManager.localizedString(forKey: "accessibility_create_wallet_hint"))
             
             PadawanButton(title: languageManager.localizedString(forKey: viewModel.importWalletButtonTitleKey)) {
                             viewModel.importWallet()
                         }
             .frame(height: 105)
+            .accessibilityHint(languageManager.localizedString(forKey: "accessibility_restore_wallet_hint"))
         }
     }
     
@@ -129,6 +138,8 @@ struct WelcomeView: View {
                         
                 }
                 .buttonStyle(ScaleButtonStyle())
+                .accessibilityLabel(accPreviousPage)
+                .accessibilityRemoveTraits(.isImage)
             } else {
                 Spacer().frame(width: 50, height: 50)
             }
@@ -142,6 +153,7 @@ struct WelcomeView: View {
                         .frame(width: 10, height: 10)
                 }
             }
+            .accessibilityHidden(true)
 
             Spacer()
 
@@ -162,6 +174,11 @@ struct WelcomeView: View {
                         
                 }
                 .buttonStyle(ScaleButtonStyle())
+                .accessibilityLabel(
+                    currentPage == viewModel.onboardingPages.count - 1
+                    ? accFinishOnboarding
+                    : accNextPage
+                )
             } else {
                 Spacer().frame(width: 50, height: 50)
             }

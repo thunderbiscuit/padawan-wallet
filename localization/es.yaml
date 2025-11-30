@@ -271,3 +271,11 @@ accessibility_camera_viewfinder: "visor de la cámara"
 accessibility_camera_hint: "Señale un código QR"
 accessibility_cancel_scan_hint: "cierra la cámara y vuelve"
 accessibility_broadcast_hint: "Envía la transacción a la red bitcoin"
+
+# Accessibility Onboarding
+accessibility_prev_page: "pagina anterior"
+accessibility_next_page: "página siguiente"
+accessibility_finish_onboarding: "Terminar la introducción"
+accessibility_create_wallet_hint: "Crear una nueva billetera"
+accessibility_restore_wallet_hint: "Recuperar una billetera existente usando una frase de recuperación"
+accessibility_recover_wallet_hint: "Restaura tu billetera usando las 12 palabras escritas arriba"
