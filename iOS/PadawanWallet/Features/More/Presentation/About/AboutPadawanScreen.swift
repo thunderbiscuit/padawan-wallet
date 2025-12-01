@@ -17,11 +17,13 @@ struct AboutPadawanScreen: View {
                     .font(Fonts.font(.regular, 16))
                     .foregroundColor(colors.textLight)
                     .multilineTextAlignment(.leading)
+                    .accessibilityAddTraits(.isStaticText)
                 
                 Text(languageManager.localizedString(forKey: "privacy_text"))
                     .font(Fonts.font(.regular, 16))
                     .foregroundColor(colors.textLight)
                     .multilineTextAlignment(.leading)
+                    .accessibilityAddTraits(.isStaticText)
                 
                 Button(action: {
                     if let url = URL(string: languageManager.localizedString(forKey: "privacy_link")) {
@@ -33,6 +35,9 @@ struct AboutPadawanScreen: View {
                         .foregroundColor(colors.accent2)
                         .underline()
                 }
+                .accessibilityRemoveTraits(.isButton)
+                .accessibilityAddTraits(.isLink)
+                .accessibilityHint(languageManager.localizedString(forKey: "accessibility_privacy_link_hint"))
                 
                 Spacer()
             }

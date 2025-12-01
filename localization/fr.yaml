@@ -250,3 +250,51 @@ accessibility_sync_button: "Mettre à jour votre solde et vos transactions."
 accessibility_header_balance: "C'est sur cette carte que vous indiquez votre solde total."
 accessibility_receive_hint: "Accédez à l'écran de génération d'adresse"
 accessibility_send_hint: "Accédez à l'écran de saisie d'adresse et envoyez des signet pièces"
+
+# Acessibility Transaction Details Screen
+accessibility_txid_format: "Identifiant de la transaction. Il commence par %@ et se termine par %@"
+accessibility_txid_link_format: "ID commençant par %@, appuyez pour ouvrir l'espace mémoire dans le navigateur"
+
+# Accessibility Receive Transaction Screen
+accessibility_qr_code_label: "Adresse du code QR"
+accessibility_qr_code_hint: "Appuyez pour copier"
+accessibility_address_label: "adresse de Bitcoin signet"
+accessibility_address_copied: "Adresse copiée dans le presse-papiers"
+accessibility_starts_with: "commence par"
+accessibility_ends_with: "Terminer par"
+
+# Accessibility Send Transaction Screen
+accessibility_scan_qr_code: "balayage QR Code"
+accessibility_slide_taxs: "sats par vByte"
+accessibility_verify_transaction: "Vérification des transactions ouvertes"
+accessibility_camera_viewfinder: "viseur de caméra"
+accessibility_camera_hint: "Montrez un code QR"
+accessibility_cancel_scan_hint: "Fermez la caméra et revenez"
+accessibility_broadcast_hint: "Envoyez la transaction au réseau Bitcoin"
+
+# Accessibility Onboarding
+accessibility_prev_page: "page précédente"
+accessibility_next_page: "page suivante"
+accessibility_finish_onboarding: "Terminez l'introduction"
+accessibility_create_wallet_hint: "Créer un nouveau portefeuille"
+accessibility_restore_wallet_hint: "Récupérer un portefeuille existant à l'aide d'une phrase de récupération"
+accessibility_recover_wallet_hint: "Récupérez votre portefeuille en utilisant les 12 mots écrits ci-dessus"
+
+# Accessibility More screens
+accessibility_privacy_link_hint: "Ouvrez la page relative aux conditions de confidentialité dans un navigateur externe"
+accessibility_reset_lessons_hint: "Il rétablit tous les progrès réalisés dans les leçons éducatives"
+accessibility_opens_screen_hint: "Accédez à l'écran sélectionné"
+accessibility_app_version: "version de l'application"
+accessibility_word_number: "mot"
+accessibility_qr_code_return_label: "Code QR de l'adresse de retour"
+accessibility_copy_address_hint: "Appuyez pour copier l'adresse dans le presse-papiers"
+accessibility_return_address_copied: "Adresse copiée"
+accessibility_return_address: "Adresse de retour"
+
+# Accessibility Lessons
+accessibility_lesson_completed: "Terminée"
+accessibility_lesson_pending: "Non terminée"
+accessibility_open_lesson_hint: "Ouvre les détails de la leçon"
+accessibility_page: "Page"
+accessibility_of: "sur"
+accessibility_finish_lesson: "Terminer la leçon"

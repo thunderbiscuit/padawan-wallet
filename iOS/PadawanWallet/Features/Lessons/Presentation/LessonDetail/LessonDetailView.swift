@@ -9,6 +9,16 @@ import Foundation
 import SwiftUI
 import BitcoinUI
 
+private struct LessonsDetailAssets {
+    static var accPrevPage: String { LanguageManager.shared.localizedString(forKey: "accessibility_prev_page") }
+    static var accNextPage: String { LanguageManager.shared.localizedString(forKey: "accessibility_next_page") }
+    static var accFinishLesson: String { LanguageManager.shared.localizedString(forKey: "accessibility_finish_lesson") }
+    
+    static func accPageProgress(current: Int, total: Int) -> String {
+        return "\(LanguageManager.shared.localizedString(forKey: "accessibility_page")) \(current + 1) \(LanguageManager.shared.localizedString(forKey: "accessibility_of")) \(total)"
+    }
+}
+
 struct LessonsDetailView: View {
     @Environment(\.padawanColors) private var colors
     @EnvironmentObject private var languageManager: LanguageManager
@@ -58,6 +68,8 @@ struct LessonsDetailView: View {
                     currentIndex: viewModel.selectedIndex,
                     total: viewModel.totalPages
                 )
+                .accessibilityLabel(LessonsDetailAssets.accPageProgress(current: viewModel.selectedIndex, total: viewModel.totalPages))
+                .accessibilityAddTraits(.updatesFrequently)
                 Spacer()
                 
                 Rectangle()
@@ -68,6 +80,7 @@ struct LessonsDetailView: View {
         }
         .frame(height: 40)
         .frame(maxWidth: .infinity)
+        .accessibilityElement(children: .contain)
     }
     
     @ViewBuilder
@@ -110,6 +123,8 @@ struct LessonsDetailView: View {
                 }
             )
             .frame(height: 30)
+            .accessibilityLabel(LessonsDetailAssets.accPrevPage)
+            .accessibilityRemoveTraits(.isImage)
             
             PadawanButton(
                 icon: viewModel.nextPageImage,
@@ -118,6 +133,12 @@ struct LessonsDetailView: View {
                 }
             )
             .frame(height: 30)
+            .accessibilityLabel(
+                viewModel.selectedIndex == viewModel.totalPages - 1
+                ? LessonsDetailAssets.accFinishLesson
+                : LessonsDetailAssets.accNextPage
+            )
+            .accessibilityRemoveTraits(.isImage)
         }
         .padding()
     }
