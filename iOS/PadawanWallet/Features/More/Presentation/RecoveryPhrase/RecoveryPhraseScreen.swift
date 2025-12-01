@@ -7,6 +7,11 @@ import SwiftUI
 
 private struct RecoveryPhraseScreenAssets {
     static var title: String { LanguageManager.shared.localizedString(forKey: "your_recovery_phrase") }
+    
+    static func accWordLabel(index: Int, word: String) -> String {
+        let label = LanguageManager.shared.localizedString(forKey: "accessibility_word_number")
+        return "\(label) \(index), \(word)"
+    }
 }
 
 struct RecoveryPhraseScreen: View {
@@ -38,6 +43,8 @@ struct RecoveryPhraseScreen: View {
                                     .foregroundColor(colors.text)
                             }
                             .frame(height: 50)
+                            .accessibilityElement(children: .ignore)
+                            .accessibilityLabel(RecoveryPhraseScreenAssets.accWordLabel(index: index + 1, word: word))
                         
                     }
                 }

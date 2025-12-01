@@ -15,6 +15,15 @@ private struct MoreRootViewAssets {
     static var buttonReset: String { LanguageManager.shared.localizedString(forKey: "reset_completed_chapters") }
     static var buttonResetWallet: String { LanguageManager.shared.localizedString(forKey: "reset_wallet") }
     
+    static var accNavigationHint: String { LanguageManager.shared.localizedString(forKey: "accessibility_opens_screen_hint") }
+    static var accResetLessonsHint: String { LanguageManager.shared.localizedString(forKey: "accessibility_reset_lessons_hint") }
+    
+    static func accAppVersion(_ version: String) -> String {
+        let label = LanguageManager.shared.localizedString(forKey: "accessibility_app_version")
+        let value = separatorWithVersion(version)
+        return "\(label), \(value)"
+    }
+    
     static func separatorWithVersion(_ version: String) -> String {
         "\(LanguageManager.shared.localizedString(forKey: "padawan_wallet")) \(version)"
     }
@@ -47,6 +56,8 @@ struct MoreRootView: View {
                             .font(Fonts.subtitle)
                     }
                     .foregroundStyle(colors.text)
+                    .accessibilityElement(children: .combine)
+                    .accessibilityAddTraits(.isHeader)
                     
                     buildButtons()
                     
@@ -60,6 +71,7 @@ struct MoreRootView: View {
                         viewModel.resetLessons()
                     }
                     .padding(.top, 12)
+                    .accessibilityHint(MoreRootViewAssets.accResetLessonsHint)
                     
                     FilledButton(
                         title: MoreRootViewAssets.buttonResetWallet,
@@ -87,6 +99,7 @@ struct MoreRootView: View {
             ) {
                 viewModel.showRecoveryPhrase()
             }
+            .accessibilityHint(MoreRootViewAssets.accNavigationHint)
             
             FilledButton(
                 title: MoreRootViewAssets.buttonSendCoinBack,
@@ -94,6 +107,7 @@ struct MoreRootView: View {
             ) {
                 viewModel.showSendCoinsBack()
             }
+            .accessibilityHint(MoreRootViewAssets.accNavigationHint)
             
             FilledButton(
                 title: MoreRootViewAssets.buttonSelectLanguage,
@@ -101,6 +115,7 @@ struct MoreRootView: View {
             ) {
                 viewModel.showLanguage()
             }
+            .accessibilityHint(MoreRootViewAssets.accNavigationHint)
             
             FilledButton(
                 title: MoreRootViewAssets.buttonAboutPadawan,
@@ -108,6 +123,7 @@ struct MoreRootView: View {
             ) {
                 viewModel.showAbout()
             }
+            .accessibilityHint(MoreRootViewAssets.accNavigationHint)
         }
         .padding(.top)
         .navigationDestination(for: MoreScreenNavigation.self) { item in
@@ -138,13 +154,18 @@ struct MoreRootView: View {
         VStack(spacing: 4) {
             Divider()
                 .background(colors.textFaded)
+                .accessibilityHidden(true)
             Text(MoreRootViewAssets.separatorWithVersion(viewModel.version))
                 .font(.footnote)
                 .foregroundColor(colors.textLight)
+                .accessibilityAddTraits(.isStaticText)
             Divider()
                 .background(colors.textFaded)
+                .accessibilityHidden(true)
         }
         .padding(.top, 16)
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel(MoreRootViewAssets.accAppVersion(viewModel.version))
     }
 }
 

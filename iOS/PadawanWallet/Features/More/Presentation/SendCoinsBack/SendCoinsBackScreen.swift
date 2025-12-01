@@ -10,6 +10,12 @@ private struct SendCoinsBackScreenAssets {
     static var title: String { LanguageManager.shared.localizedString(forKey: "send_signet_coins_back") }
     static var sendCoinsBackAddress: String { LanguageManager.shared.localizedString(forKey: "send_coins_back_address") }
     static var text: String { LanguageManager.shared.localizedString(forKey: "send_coins_back") }
+    
+    static var accQRCodeLabel: String { LanguageManager.shared.localizedString(forKey: "accessibility_qr_code_return_label") }
+    static var accCopyHint: String { LanguageManager.shared.localizedString(forKey: "accessibility_copy_address_hint") }
+    static var accAddressCopied: String { LanguageManager.shared.localizedString(forKey: "accessibility_return_address_copied") }
+    static var accAddressLabel: String { LanguageManager.shared.localizedString(forKey: "accessibility_return_address") }
+    
     static var copyIcon = Image(systemName: "document.on.document")
     static var copiedIcon = Image(systemName: "checkmark.circle.fill")
 }
@@ -60,6 +66,8 @@ struct SendCoinsBackScreen: View {
                 }
             }
         }
+        .accessibilityLabel(SendCoinsBackScreenAssets.accAddressLabel)
+        .accessibilityHint(SendCoinsBackScreenAssets.accCopyHint)
     }
     
     @ViewBuilder
@@ -73,13 +81,19 @@ struct SendCoinsBackScreen: View {
                 QRCodeView(qrCodeType: .bitcoin(SendCoinsBackScreenAssets.sendCoinsBackAddress))
                     .padding()
             }
+            .accessibilityLabel(SendCoinsBackScreenAssets.accQRCodeLabel)
+            .accessibilityHint(SendCoinsBackScreenAssets.accCopyHint)
+            .accessibilityRemoveTraits(.isImage)
+            .accessibilityAddTraits(.isButton)
         }
         .frame(width: 320, height: 320)
+        .accessibilityElement(children: .contain)
     }
     
     private func copyAddress() {
         UIPasteboard.general.string = SendCoinsBackScreenAssets.sendCoinsBackAddress
         copiedAddress = true
+        UIAccessibility.post(notification: .announcement, argument: SendCoinsBackScreenAssets.accAddressCopied)
         DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
             copiedAddress = false
         }

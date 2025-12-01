@@ -22,6 +22,7 @@ struct LanguageThemeScreen: View {
                 VStack(alignment: .leading, spacing: 12.0) {
                     Text(languageManager.localizedString(forKey: "select_language"))
                         .font(Fonts.subtitle)
+                        .accessibilityAddTraits(.isHeader)
                     
                     buildSection(
                         title: languageManager.localizedString(forKey: "app_level_language"),
@@ -67,6 +68,7 @@ struct LanguageThemeScreen: View {
     ) -> some View {
         VStack(alignment: .leading) {
             SectionTitleView(title)
+            .accessibilityAddTraits(.isHeader)
             Spacer().frame(height: 10)
             
             buildItems(
@@ -85,6 +87,8 @@ struct LanguageThemeScreen: View {
         disableItems: [T]
     ) -> some View {
         ForEach(Array(T.allCases)) { item in
+            let isSelectedItem = itemSelected.rawValue == item.rawValue
+            let isDisabled = disableItems.contains(item)
             Button {
                 viewModel.selectItem(item)
             } label: {
@@ -92,6 +96,7 @@ struct LanguageThemeScreen: View {
                 HStack(spacing: 12) {
                     RadioBoxView(isSelected: .constant(isSelectedItem))
                         .allowsHitTesting(false)
+                        .accessibilityHidden(true)
                     Text(item.rawValue)
                         .font(Fonts.font(.regular, 18))
                         .foregroundStyle(.black)
@@ -100,6 +105,8 @@ struct LanguageThemeScreen: View {
                 .padding(.vertical, 6)
                 .opacity(disableItems.contains(item) ? 0.2 : 1.0)
             }
+            .accessibilityAddTraits(isSelectedItem ? [.isButton, .isSelected] : [.isButton])
+            .disabled(isDisabled)
         }
     }
 }
