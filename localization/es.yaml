@@ -290,3 +290,11 @@ accessibility_qr_code_return_label: "Código QR de dirección de devolución"
 accessibility_copy_address_hint: "Toque para copiar la dirección al portapapeles"
 accessibility_return_address_copied: "Dirección copiada"
 accessibility_return_address: "Dirección del remitente"
+
+# Accessibility Lessons
+accessibility_lesson_completed: "Completado"
+accessibility_lesson_pending: "Pendiente"
+accessibility_open_lesson_hint: "Abre los detalles de la lección"
+accessibility_page: "Página"
+accessibility_of: "de"
+accessibility_finish_lesson: "Finalizar lección"

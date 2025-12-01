@@ -290,3 +290,11 @@ accessibility_qr_code_return_label: "Return address QR code"
 accessibility_copy_address_hint: "Tap to copy the address to the clipboard"
 accessibility_return_address_copied: "Copied address"
 accessibility_return_address: "Return address"
+
+# Accessibility Lessons
+accessibility_lesson_completed: "Completed"
+accessibility_lesson_pending: "Not completed"
+accessibility_open_lesson_hint: "Opens the lesson details"
+accessibility_page: "Page"
+accessibility_of: "of"
+accessibility_finish_lesson: "Finish lesson"

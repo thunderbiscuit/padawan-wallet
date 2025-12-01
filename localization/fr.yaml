@@ -290,3 +290,11 @@ accessibility_qr_code_return_label: "Code QR de l'adresse de retour"
 accessibility_copy_address_hint: "Appuyez pour copier l'adresse dans le presse-papiers"
 accessibility_return_address_copied: "Adresse copiée"
 accessibility_return_address: "Adresse de retour"
+
+# Accessibility Lessons
+accessibility_lesson_completed: "Terminée"
+accessibility_lesson_pending: "Non terminée"
+accessibility_open_lesson_hint: "Ouvre les détails de la leçon"
+accessibility_page: "Page"
+accessibility_of: "sur"
+accessibility_finish_lesson: "Terminer la leçon"

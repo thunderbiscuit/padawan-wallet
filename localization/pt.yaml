@@ -290,3 +290,11 @@ accessibility_qr_code_return_label: "Código QR do endereço de devolução"
 accessibility_copy_address_hint: "Toque para copiar o endereço para a área de transferência"
 accessibility_return_address_copied: "Endereço copiado"
 accessibility_return_address: "Endereço de devolução"
+
+# Accessibility Lessons
+accessibility_lesson_completed: "Concluído"
+accessibility_lesson_pending: "Pendente"
+accessibility_open_lesson_hint: "Abre os detalhes da lição"
+accessibility_page: "Página"
+accessibility_of: "de"
+accessibility_finish_lesson: "Concluir lição"

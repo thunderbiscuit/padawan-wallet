@@ -24,10 +24,13 @@ struct LessonsListView: View {
                     Group {
                         Text(languageManager.localizedString(forKey: "padawan_journey"))
                             .font(Fonts.title)
+                            .accessibilityAddTraits(.isHeader)
                         Text(languageManager.localizedString(forKey: "continue_on_your_journey"))
                             .font(Fonts.subtitle)
                     }
                     .foregroundStyle(colors.text)
+                    .accessibilityElement(children: .combine)
+                    
                     Spacer().frame(height: 4)
                     
                     buildList()
@@ -55,6 +58,7 @@ struct LessonsListView: View {
             Section {
                 SectionTitleView(languageManager.localizedString(forKey: item.title))
                 
+                .accessibilityAddTraits(.isHeader)
                 ForEach(item.items) { lesson in
                     buildListItem(
                         lesson: lesson
@@ -74,6 +78,11 @@ struct LessonsListView: View {
             isOn: lesson.isDone) {
                 viewModel.path.append(lesson)
             }
+            .accessibilityElement(children: .ignore)
+            .accessibilityAddTraits(.isButton)
+            .accessibilityLabel("\(lesson.sort). \(lessonTitle)")
+            .accessibilityValue(lesson.isDone ? languageManager.localizedString(forKey: "accessibility_lesson_completed") : languageManager.localizedString(forKey: "accessibility_lesson_pending"))
+            .accessibilityHint(languageManager.localizedString(forKey: "accessibility_open_lesson_hint"))
     }
 }
 
