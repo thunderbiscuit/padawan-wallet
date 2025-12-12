@@ -62,6 +62,7 @@ struct BalanceCard: View {
                         .accessibilityValue(Text(balanceFormatOption.rawValue))
                         .accessibilityAddTraits(.isButton)
                         .accessibilityHint(Text(BalanceCardStrings.accessibilityUnitSelectorHint))
+                        .accessibilityIdentifier("walletUnitSelector")
                     }
                     .frame(maxWidth: .infinity, alignment: .topLeading)
                     
@@ -69,6 +70,7 @@ struct BalanceCard: View {
                     .accessibilityElement(children: .combine)
                     .accessibilityLabel(Text(BalanceCardStrings.accessibilityTotalBalance))
                     .accessibilityValue(Text("\(balance) \(balanceFormatOption.rawValue)"))
+                    .accessibilityIdentifier("walletBalanceLabel")
                     
                     buildSyncButton()
                 }
@@ -113,6 +115,7 @@ struct BalanceCard: View {
             .accessibilityLabel(Text(BalanceCardStrings.buttonSync))
             .accessibilityLabel(Text(BalanceCardStrings.accessibilitySyncButton))
             .accessibilityAddTraits(.isButton)
+            .accessibilityIdentifier("walletSyncButton")
         }
         .frame(maxWidth: .infinity, alignment: .center)
     }

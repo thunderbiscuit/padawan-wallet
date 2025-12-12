@@ -17,7 +17,22 @@ struct PadawanWalletApp: App {
     
     init() {
         UINavigationBarAppearance.setupNavigationBar(.tatooineDesert)
+        
+        #if DEBUG
+        setupTestLaunch()
+        #endif
+        
     }
+    
+    private func setupTestLaunch() {
+            let args = ProcessInfo.processInfo.arguments
+            if args.contains("-resetOnboarding") {
+                Session.shared.resetWallet()
+            }
+            if args.contains("-skipOnboarding") {
+                Session.shared.setNeedOnboarding(false)
+            }
+        }
     
     var body: some Scene {
         WindowGroup {

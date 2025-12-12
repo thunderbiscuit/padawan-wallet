@@ -108,6 +108,7 @@ struct TransactionsCard: View {
                         }
                     }
                     .frame(width: 180, height: 60)
+                    .accessibilityIdentifier("walletGetCoinsButton")
                         
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)

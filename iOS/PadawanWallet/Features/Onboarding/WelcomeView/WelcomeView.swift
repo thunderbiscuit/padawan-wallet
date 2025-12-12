@@ -113,12 +113,14 @@ struct WelcomeView: View {
                         }
             .frame(height: 105)
             .accessibilityHint(languageManager.localizedString(forKey: "accessibility_create_wallet_hint"))
+            .accessibilityIdentifier("createWalletButton")
             
             PadawanButton(title: languageManager.localizedString(forKey: viewModel.importWalletButtonTitleKey)) {
                             viewModel.importWallet()
                         }
             .frame(height: 105)
             .accessibilityHint(languageManager.localizedString(forKey: "accessibility_restore_wallet_hint"))
+            .accessibilityIdentifier("importWalletButton")
         }
     }
     
@@ -139,6 +141,7 @@ struct WelcomeView: View {
                 }
                 .buttonStyle(ScaleButtonStyle())
                 .accessibilityLabel(accPreviousPage)
+                .accessibilityIdentifier("onboardingPrevButton")
                 .accessibilityRemoveTraits(.isImage)
             } else {
                 Spacer().frame(width: 50, height: 50)
@@ -179,6 +182,7 @@ struct WelcomeView: View {
                     ? accFinishOnboarding
                     : accNextPage
                 )
+                .accessibilityIdentifier("onboardingNextButton")
             } else {
                 Spacer().frame(width: 50, height: 50)
             }

@@ -116,6 +116,7 @@ struct WalletView: View {
             )
             .accessibilityLabel(Text(WalletViewAssets.receiveButtonTitle))
             .accessibilityHint(Text(WalletViewAssets.accessibilityReceiveButton))
+            .accessibilityIdentifier("walletReceiveButton")
             
                 PadawanButton(
                 title: WalletViewAssets.sendButtonTitle,
@@ -126,6 +127,7 @@ struct WalletView: View {
             )
             .accessibilityLabel(Text(WalletViewAssets.sendButtonTitle))
             .accessibilityHint(Text(WalletViewAssets.accessibilitySendButton))
+            .accessibilityIdentifier("walletSendButton")
         }
         .frame(minHeight: 50)
     }
