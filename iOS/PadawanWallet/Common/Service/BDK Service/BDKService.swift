@@ -9,7 +9,7 @@ import BitcoinDevKit
 import SwiftUI
 
 // MARK: - BDKService
-private class BDKService {
+final class BDKService {
     
     // MARK: - Configs
     private let network: Network = .signet
