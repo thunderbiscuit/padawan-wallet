@@ -34,12 +34,16 @@ final class WalletViewModel: ObservableObject {
         }
     }
     
+    private let checkWalletExists: () -> Bool
+    
     init(
         path: Binding<NavigationPath>,
-        bdkClient: BDKClient
+        bdkClient: BDKClient,
+        walletExistsChecker: @escaping () -> Bool = { Session.shared.walletExists() }
     ) {
         _path = path
         self.bdkClient = bdkClient
+        self.checkWalletExists = walletExistsChecker
     }
     
     func loadWallet() {
@@ -61,7 +65,7 @@ final class WalletViewModel: ObservableObject {
         defer {
             isSyncing = false
         }
-        guard Session.shared.walletExists() else {
+        guard checkWalletExists() else {
             return
         }
         isSyncing = true
