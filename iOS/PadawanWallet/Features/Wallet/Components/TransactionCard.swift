@@ -162,6 +162,7 @@ struct TransactionsCard: View {
                 .padding(.top, 18)
         }
         .opacity(item.confirmed ? 1.0 : 0.7)
+        .accessibilityIdentifier("txItem_\(item.id)")
         .padding([.horizontal, .top], 24)
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
         .accessibilityElement(children: .combine)

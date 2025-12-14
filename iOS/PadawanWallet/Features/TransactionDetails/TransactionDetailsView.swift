@@ -106,6 +106,7 @@ struct TransactionDetailsView: View {
                     .accessibilityHidden(true)
             }
         }
+        .accessibilityIdentifier("txDetail_\(item.key)")
         .accessibilityElement(children: .ignore)
         .accessibilityLabel(accessibilityLabelForItem(item))
         .accessibilityAddTraits(item.displayType == .link ? .isButton : [])

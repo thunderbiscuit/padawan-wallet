@@ -39,6 +39,7 @@ struct CameraScannView: View {
                 PadawanButton(title: languageManager.localizedString(forKey: "cancel")) {
                     dismiss()
                 }
+                .accessibilityIdentifier("cameraCancelButton")
                 .frame(width: 150)
                 .fixedSize(horizontal: false, vertical: true)
                 .accessibilityHint(languageManager.localizedString(forKey: "accessibility_cancel_scan_hint"))

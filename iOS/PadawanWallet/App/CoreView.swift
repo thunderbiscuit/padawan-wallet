@@ -36,6 +36,7 @@ struct CoreView: View {
                 }
             }
 
+            .accessibilityIdentifier("tabBarWallet")
             NavigationStack(path: $lessonPath) {
                 LessonsListView(
                     path: $lessonPath
@@ -48,6 +49,8 @@ struct CoreView: View {
                     Image(systemName: "graduationcap")
                 }
             }
+
+            .accessibilityIdentifier("tabBarLessons")
 
             NavigationStack(path: $morePath) {
                 MoreRootView(
@@ -62,6 +65,7 @@ struct CoreView: View {
                     Image(systemName: "ellipsis")
                 }
             }
+            .accessibilityIdentifier("tabBarSettings")
         }
         .accentColor(colors.accent3)
     }

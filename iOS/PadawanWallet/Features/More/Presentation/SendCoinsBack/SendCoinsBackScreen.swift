@@ -66,6 +66,7 @@ struct SendCoinsBackScreen: View {
                 }
             }
         }
+        .accessibilityIdentifier("sendCoinsBackCopyBtn")
         .accessibilityLabel(SendCoinsBackScreenAssets.accAddressLabel)
         .accessibilityHint(SendCoinsBackScreenAssets.accCopyHint)
     }

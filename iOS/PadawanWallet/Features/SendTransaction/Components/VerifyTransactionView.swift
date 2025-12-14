@@ -65,6 +65,7 @@ struct VerifyTransactionView: View {
                     dismiss()
                     primaryAction()
                 }
+                .accessibilityIdentifier("confirmBroadcastButton")
                 .fixedSize(horizontal: false, vertical: true)
                 .accessibilityHint(ViewAssets.accBroadcastHint)
             }

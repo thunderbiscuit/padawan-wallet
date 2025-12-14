@@ -78,6 +78,7 @@ struct LessonsListView: View {
             isOn: lesson.isDone) {
                 viewModel.path.append(lesson)
             }
+            .accessibilityIdentifier("lessonItem_\(lesson.sort)")
             .accessibilityElement(children: .ignore)
             .accessibilityAddTraits(.isButton)
             .accessibilityLabel("\(lesson.sort). \(lessonTitle)")

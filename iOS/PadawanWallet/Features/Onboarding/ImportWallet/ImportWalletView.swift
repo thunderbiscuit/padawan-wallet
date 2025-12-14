@@ -59,6 +59,7 @@ struct ImportWalletView: View {
                         dismissKeyBoard()
                         viewModel.importWallet()
                     }
+                    .accessibilityIdentifier("buttonRecoverWalletAction")
                     .accessibilityHint(ImportWalletViewStrings.accButtonHint)
                 }
                 .frame(maxWidth: .maxWidthScreen, alignment: .leading)
@@ -108,6 +109,7 @@ struct ImportWalletView: View {
             autocorrectionDisabled: true,
             autocapitalization: .never
         )
+        .accessibilityIdentifier("importWordField_\(index)")
         .accessibilityLabel(ImportWalletViewStrings.accWordLabel(index))
         .keyboardType(.asciiCapable)
     }

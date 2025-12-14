@@ -62,7 +62,7 @@ struct SendTransactionView: View {
                         viewModel.verifyTransaction()
                     }
                 )
-
+                .accessibilityIdentifier("sendVerifyButton")
                 .fixedSize(horizontal: false, vertical: true)
                 .padding(.horizontal)
                 .accessibilityHint(Text(ViewAssets.accVerifyTransaction))
@@ -116,6 +116,7 @@ struct SendTransactionView: View {
                 buildInputText(
                     label: ViewAssets.labelInputAmount,
                     placeholder: ViewAssets.placeHolderInputAmount,
+                    identifier: "sendAmountInput",
                     text: $viewModel.amountValue,
                     trailingIcon: nil,
                     keyboardType: .numberPad
@@ -124,6 +125,7 @@ struct SendTransactionView: View {
                 buildInputText(
                     label: ViewAssets.labelInputAddress,
                     placeholder: ViewAssets.placeHolderInputAddress,
+                    identifier: "sendAddressInput",
                     text: $viewModel.address,
                     trailingIcon: ViewAssets.cameraIcon,
                     trailingAction: {
@@ -163,6 +165,7 @@ struct SendTransactionView: View {
     private func buildInputText(
         label: String,
         placeholder: String,
+        identifier: String,
         text: Binding<String>,
         trailingIcon: Image? = nil,
         trailingAction: (() -> Void)? = nil,
@@ -183,6 +186,7 @@ struct SendTransactionView: View {
                             standardAppearance: true,
                             keyboardType: keyboardType
                         )
+                        .accessibilityIdentifier(identifier)
                         .accessibilityLabel(label)
                         
                         if let trailingIcon {

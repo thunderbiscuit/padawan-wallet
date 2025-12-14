@@ -70,6 +70,7 @@ struct MoreRootView: View {
                     ) {
                         viewModel.resetLessons()
                     }
+                    .accessibilityIdentifier("settingsResetLessons")
                     .padding(.top, 12)
                     .accessibilityHint(MoreRootViewAssets.accResetLessonsHint)
                     
@@ -80,6 +81,7 @@ struct MoreRootView: View {
                     ) {
                         viewModel.resetWallet()
                     }
+                    .accessibilityIdentifier("settingsResetWallet")
                     .padding(.top, 12)
                     
                     Spacer()
@@ -99,6 +101,7 @@ struct MoreRootView: View {
             ) {
                 viewModel.showRecoveryPhrase()
             }
+            .accessibilityIdentifier("settingsRecoveryPhrase")
             .accessibilityHint(MoreRootViewAssets.accNavigationHint)
             
             FilledButton(
@@ -107,6 +110,7 @@ struct MoreRootView: View {
             ) {
                 viewModel.showSendCoinsBack()
             }
+            .accessibilityIdentifier("settingsSendCoinsBack")
             .accessibilityHint(MoreRootViewAssets.accNavigationHint)
             
             FilledButton(
@@ -115,6 +119,7 @@ struct MoreRootView: View {
             ) {
                 viewModel.showLanguage()
             }
+            .accessibilityIdentifier("settingsLanguage")
             .accessibilityHint(MoreRootViewAssets.accNavigationHint)
             
             FilledButton(
@@ -123,6 +128,7 @@ struct MoreRootView: View {
             ) {
                 viewModel.showAbout()
             }
+            .accessibilityIdentifier("settingsAbout")
             .accessibilityHint(MoreRootViewAssets.accNavigationHint)
         }
         .padding(.top)

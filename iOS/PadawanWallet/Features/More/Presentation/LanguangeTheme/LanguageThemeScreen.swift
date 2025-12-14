@@ -105,6 +105,7 @@ struct LanguageThemeScreen: View {
                 .padding(.vertical, 6)
                 .opacity(disableItems.contains(item) ? 0.2 : 1.0)
             }
+            .accessibilityIdentifier("selection_\(item.rawValue)")
             .accessibilityAddTraits(isSelectedItem ? [.isButton, .isSelected] : [.isButton])
             .disabled(isDisabled)
         }

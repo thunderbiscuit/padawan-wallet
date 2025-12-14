@@ -19,19 +19,9 @@ struct PadawanWalletApp: App {
         UINavigationBarAppearance.setupNavigationBar(.tatooineDesert)
         
         #if DEBUG
-        setupTestLaunch()
+        PadawanTestsConfiguration.setup()
         #endif
-        
-    }
     
-    private func setupTestLaunch() {
-            let args = ProcessInfo.processInfo.arguments
-            if args.contains("-resetOnboarding") {
-                Session.shared.resetWallet()
-            }
-            if args.contains("-skipOnboarding") {
-                Session.shared.setNeedOnboarding(false)
-            }
         }
     
     var body: some Scene {
@@ -39,12 +29,10 @@ struct PadawanWalletApp: App {
             Group {
                 if session.isOnboarding && !session.walletExists() {
                     NavigationStack(path: $navigationPath) {
-                        WelcomeView(
-                            path: $navigationPath
-                        )
+                        WelcomeView(path: $navigationPath)
                     }
                 } else {
-                    CoreView()
+                    CoreView(bdkClient: PadawanTestsConfiguration.bdkClient)
                 }
             }
             .environment(\.padawanColors, session.themeChoice.colors)

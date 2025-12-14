@@ -122,6 +122,7 @@ struct LessonsDetailView: View {
                     viewModel.goBack()
                 }
             )
+            .accessibilityIdentifier("lessonPrevButton")
             .frame(height: 30)
             .accessibilityLabel(LessonsDetailAssets.accPrevPage)
             .accessibilityRemoveTraits(.isImage)
@@ -132,6 +133,7 @@ struct LessonsDetailView: View {
                     viewModel.goToNextPage()
                 }
             )
+            .accessibilityIdentifier("lessonNextButton")
             .frame(height: 30)
             .accessibilityLabel(
                 viewModel.selectedIndex == viewModel.totalPages - 1

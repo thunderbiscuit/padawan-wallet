@@ -57,6 +57,7 @@ struct ReceiveTransactionView: View {
                             ViewAssets.copyIcon
                         }
                     }
+                    .accessibilityIdentifier("accessibility_address_label")
                     .accessibilityLabel(ViewAssets.accAddressLabel)
                     .accessibilityValue(getAccessibleAddressSummary(address))
                     .accessibilityHint(ViewAssets.accQrCodeHint)
@@ -67,6 +68,7 @@ struct ReceiveTransactionView: View {
                 PadawanButton(title: ViewAssets.button) {
                                     viewModel.generateAddress()
                 }
+                .accessibilityIdentifier("receiveGenerateButton")
                 .fixedSize(horizontal: false, vertical: true)
             }
             .frame(maxWidth: .maxWidthScreen)

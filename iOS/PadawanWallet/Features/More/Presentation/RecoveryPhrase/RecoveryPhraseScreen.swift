@@ -44,6 +44,7 @@ struct RecoveryPhraseScreen: View {
                             }
                             .frame(height: 50)
                             .accessibilityElement(children: .ignore)
+                            .accessibilityIdentifier("recoveryWord_\(index)")
                             .accessibilityLabel(RecoveryPhraseScreenAssets.accWordLabel(index: index + 1, word: word))
                         
                     }

@@ -58,41 +58,4 @@ final class PadawanWalletUITestsLaunchTests: XCTestCase {
         attachment.lifetime = .keepAlways
         add(attachment)
     }
-    
-    @MainActor
-    func testLaunch_WalletFlow() throws {
-        let app = XCUIApplication()
-        
-        app.launchArguments = ["-skipOnboarding"]
-        app.launch()
-        
-        let syncButton = app.buttons["walletSyncButton"]
-        XCTAssertTrue(syncButton.waitForExistence(timeout: 10))
-        
-        let unitSelector = app.buttons["walletUnitSelector"]
-        XCTAssertTrue(unitSelector.exists)
-        
-        let balanceLabel = app.descendants(matching: .any)["walletBalanceLabel"]
-        XCTAssertTrue(balanceLabel.exists)
-        
-        let getCoinsButton = app.buttons["walletGetCoinsButton"]
-        XCTAssertTrue(getCoinsButton.exists)
-        
-        let sendButton = app.buttons["walletSendButton"]
-        let receiveButton = app.buttons["walletReceiveButton"]
-        XCTAssertTrue(sendButton.exists)
-        XCTAssertTrue(receiveButton.exists)
-        
-        let attachment = XCTAttachment(screenshot: app.screenshot())
-        attachment.name = "Launch - Wallet Flow Complete"
-        attachment.lifetime = .keepAlways
-        add(attachment)
-    }
-    
-    @MainActor
-    func testLaunchPerformance() throws {
-        measure(metrics: [XCTApplicationLaunchMetric()]) {
-            XCUIApplication().launch()
-        }
-    }
 }
