@@ -47,13 +47,13 @@ class LessonsViewModel : ViewModel() {
         initialCompletedChaptersState = completedChapters
     }
 
-    private val _rootState = MutableStateFlow(LessonsRootScreenState(initialCompletedChaptersState))
-    val rootState: StateFlow<LessonsRootScreenState> = _rootState.asStateFlow()
+    val rootState: StateFlow<LessonsRootScreenState>
+        field = MutableStateFlow(LessonsRootScreenState(initialCompletedChaptersState))
 
     fun onAction(action: LessonAction) {
         when (action) {
-            is LessonAction.SetCompleted     -> setCompleted(action.lessonNum)
-            is LessonAction.ResetAll -> resetCompletedLessons()
+            is LessonAction.SetCompleted -> setCompleted(action.lessonNum)
+            is LessonAction.ResetAll     -> resetCompletedLessons()
         }
     }
 
@@ -63,13 +63,13 @@ class LessonsViewModel : ViewModel() {
             LessonsRepository.setCompletedLesson(chapterNum)
             completedChapters = LessonsRepository.getCompletedLessons()
         }
-        _rootState.update { it.copy(completedChapters.toMap()) }
+        rootState.update { it.copy(completedChapters.toMap()) }
     }
 
     private fun resetCompletedLessons() {
         viewModelScope.launch {
             LessonsRepository.resetCompletedLessons()
         }
-        _rootState.update { LessonsRootScreenState() }
+        rootState.update { LessonsRootScreenState() }
     }
 }

@@ -70,21 +70,21 @@ class WalletViewModel(application: Application) : AndroidViewModel(application) 
     private var singleTxDetails: TransactionDetails? = null
     private var userCanRequestFaucetCoins: Boolean by mutableStateOf(false)
 
-    private val _walletState: MutableStateFlow<WalletState> = MutableStateFlow(
-        WalletState(
-            balance = 0u,
-            transactions = txList,
-            txAndFee = null,
-            isOnline = isOnline,
-            currentlySyncing = false
+    val walletState: StateFlow<WalletState>
+        field = MutableStateFlow<WalletState>(
+            WalletState(
+                balance = 0u,
+                transactions = txList,
+                txAndFee = null,
+                isOnline = isOnline,
+                currentlySyncing = false
+           )
         )
-    )
-    val walletState: StateFlow<WalletState> = _walletState.asStateFlow()
 
     init {
         isOnline = updateNetworkStatus(application)
         userCanRequestFaucetCoins = !WalletRepository.hasUserClaimedFaucetCoins()
-        _walletState.update { it.copy(isOnline = isOnline, userCanRequestFaucetCoins = userCanRequestFaucetCoins) }
+        walletState.update { it.copy(isOnline = isOnline, userCanRequestFaucetCoins = userCanRequestFaucetCoins) }
         // firstAutoSync()
     }
 
@@ -103,7 +103,7 @@ class WalletViewModel(application: Application) : AndroidViewModel(application) 
 
     private fun sync() {
         if (isOnline) {
-            _walletState.update { it.copy(currentlySyncing = true) }
+            walletState.update<WalletState> { it.copy(currentlySyncing = true) }
 
             viewModelScope.launch(Dispatchers.IO) {
                 val minDurationMillis = 3000L
@@ -115,7 +115,7 @@ class WalletViewModel(application: Application) : AndroidViewModel(application) 
                 val remaining = minDurationMillis - elapsed
                 if (remaining > 0) delay(remaining)
 
-                _walletState.update { it.copy(currentlySyncing = false) }
+                walletState.update { it.copy(currentlySyncing = false) }
             }
         }
     }
@@ -144,7 +144,7 @@ class WalletViewModel(application: Application) : AndroidViewModel(application) 
         Wallet.sync()
         val balance = Wallet.getBalance()
         Log.i(TAG, "Balance updated to: $balance")
-        _walletState.update { it.copy(balance = balance) }
+        walletState.update { it.copy(balance = balance) }
     }
 
     private fun requestCoins() {
@@ -187,18 +187,18 @@ class WalletViewModel(application: Application) : AndroidViewModel(application) 
                 }
             }
             delay(1000)
-            _walletState.update { it.copy(userCanRequestFaucetCoins = false) }
+            walletState.update { it.copy(userCanRequestFaucetCoins = false) }
             sync()
         }
     }
 
     private fun sendMessageToUi(type: MessageType, message: String) {
-        _walletState.update { it.copy(messageForUi = Pair(type, message)) }
+        walletState.update { it.copy(messageForUi = Pair(type, message)) }
     }
 
     private fun updateSendAddress(address: String) {
         Log.i(TAG, "Updating send address to $address")
-        _walletState.update { it.copy(sendAddress = address) }
+        walletState.update { it.copy(sendAddress = address) }
     }
 
     private fun broadcastTransaction(tx: Transaction) {
@@ -216,7 +216,7 @@ class WalletViewModel(application: Application) : AndroidViewModel(application) 
     }
 
     private fun uiMessageDelivered() {
-        _walletState.update { it.copy(messageForUi = null) }
+        walletState.update { it.copy(messageForUi = null) }
     }
 
     private fun firstAutoSync() {
@@ -229,7 +229,7 @@ class WalletViewModel(application: Application) : AndroidViewModel(application) 
     private fun syncTransactionHistory() {
         val txHistory = Wallet.listTransactions()
         Log.i(TAG, "Transaction history synced, number of transactions: ${txHistory.size}")
-        _walletState.update { it.copy(transactions = txHistory) }
+        walletState.update { it.copy(transactions = txHistory) }
     }
 
     private fun setSingleTxDetails(tx: String) {
@@ -247,6 +247,6 @@ class WalletViewModel(application: Application) : AndroidViewModel(application) 
         Wallet.sign(psbt)
         val fee = psbt.fee()
         val tx: Transaction = psbt.extractTx()
-        _walletState.update { it.copy(txAndFee = Pair(tx, Amount.fromSat(fee))) }
+        walletState.update { it.copy(txAndFee = Pair(tx, Amount.fromSat(fee))) }
     }
 }

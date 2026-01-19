@@ -34,8 +34,11 @@ sealed interface ReceiveScreenAction {
 }
 
 internal class ReceiveViewModel : ViewModel() {
-    private val _state: MutableStateFlow<ReceiveScreenState> = MutableStateFlow(ReceiveScreenState())
-    val state: StateFlow<ReceiveScreenState> = _state.asStateFlow()
+    // private val _state: MutableStateFlow<ReceiveScreenState> = MutableStateFlow(ReceiveScreenState())
+    // val state: StateFlow<ReceiveScreenState> = _state.asStateFlow()
+
+    val state: StateFlow<ReceiveScreenState>
+        field = MutableStateFlow(ReceiveScreenState())
 
     fun onAction(action: ReceiveScreenAction) {
         when (action) {
@@ -45,14 +48,14 @@ internal class ReceiveViewModel : ViewModel() {
 
     private fun updateLastUnusedAddress() {
         viewModelScope.launch {
-            _state.update { it.copy(qrState = QrUiState.Loading) }
+            state.update { it.copy(qrState = QrUiState.Loading) }
 
             val address = Wallet.getLastUnusedAddress()
             delay(400)
             val uri = Bip21URI(address = address.address.toString()).toURI()
             Log.i(TAG, "New address URI: $uri")
 
-            _state.update {
+            state.update {
                 it.copy(
                     address = address.address.toString(),
                     bip21Uri = uri,
