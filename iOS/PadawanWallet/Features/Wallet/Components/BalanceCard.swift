@@ -45,7 +45,7 @@ struct BalanceCard: View {
                     HStack {
                         Text(BalanceCardStrings.cardTitle)
                             .font(Fonts.body)
-                            .foregroundStyle(colors.textFaded)
+                            .foregroundStyle(colors.textLight)
                             .accessibilityLabel(Text(BalanceCardStrings.accessibilityHeaderBalance))
                         
                         Spacer()
@@ -99,12 +99,12 @@ struct BalanceCard: View {
                 } else {
                     Text(BalanceCardStrings.buttonSync)
                         .font(Fonts.caption)
-                        .foregroundStyle(.white)
+                        .foregroundStyle(colors.text)
                 }
                 
             }
             .frame(width: 130, height: 40)
-            .background(.black)
+            .background(colors.background)
             .mask {
                 RoundedRectangle(
                     cornerRadius: 12,

@@ -135,7 +135,7 @@ struct WelcomeView: View {
                 } label: {
                     Image(systemName: "chevron.left")
                         .font(.system(size: 20, weight: .medium))
-                        .foregroundStyle(.black)
+                        .foregroundStyle(colors.text)
                         .frame(width: 50, height: 50)
                         
                 }
@@ -152,7 +152,7 @@ struct WelcomeView: View {
             HStack(spacing: 8) {
                 ForEach(0...viewModel.onboardingPages.count, id: \.self) { index in
                     Circle()
-                        .fill(index == currentPage ? Color.black : Color.black.opacity(0.4))
+                        .fill(index == currentPage ? colors.text : colors.textFaded)
                         .frame(width: 10, height: 10)
                 }
             }
@@ -172,7 +172,7 @@ struct WelcomeView: View {
                 } label: {
                     Image(systemName: currentPage == viewModel.onboardingPages.count - 1 ? "hand.thumbsup" : "chevron.right")
                         .font(.system(size: 20, weight: .medium))
-                        .foregroundStyle(.black)
+                        .foregroundStyle(colors.text)
                         .frame(width: 50, height: 50)
                         
                 }

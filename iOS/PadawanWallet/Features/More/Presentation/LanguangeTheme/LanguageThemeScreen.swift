@@ -22,6 +22,7 @@ struct LanguageThemeScreen: View {
                 VStack(alignment: .leading, spacing: 12.0) {
                     Text(languageManager.localizedString(forKey: "select_language"))
                         .font(Fonts.subtitle)
+                        .foregroundStyle(colors.text)
                         .accessibilityAddTraits(.isHeader)
                     
                     buildSection(
@@ -99,7 +100,7 @@ struct LanguageThemeScreen: View {
                         .accessibilityHidden(true)
                     Text(item.rawValue)
                         .font(Fonts.font(.regular, 18))
-                        .foregroundStyle(.black)
+                        .foregroundStyle(colors.text)
                 }
                 .padding(.leading, 8)
                 .padding(.vertical, 6)

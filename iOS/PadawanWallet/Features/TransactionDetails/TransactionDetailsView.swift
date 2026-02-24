@@ -66,6 +66,7 @@ struct TransactionDetailsView: View {
                     .lineLimit(1)
                     .minimumScaleFactor(0.7)
                     .layoutPriority(1)
+                    .foregroundStyle(colors.text)
                 
                 Spacer()
                 
@@ -91,11 +92,13 @@ struct TransactionDetailsView: View {
                             RoundedRectangle(cornerRadius: 8)
                                 .fill(colors.accent1)
                         )
+                        .foregroundStyle(colors.text)
                     
                 case .standard:
                     Text(languageManager.localizedString(forKey: item.value))
                         .font(Fonts.body)
                         .multilineTextAlignment(.trailing)
+                        .foregroundStyle(colors.text)
                 }
             }
             

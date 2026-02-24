@@ -17,6 +17,7 @@ private extension String {
 
 final class Session: ObservableObject {
     @Published var isOnboarding: Bool
+    @Published var themeChoice: PadawanColorTheme
     
     private let keyClient: KeyClient
     
@@ -56,23 +57,25 @@ final class Session: ObservableObject {
         }
     }
     
-    var themeChoice: PadawanColorTheme {
-        get {
-            guard let theme = defaults.string(forKey: .themeChoiceKey) else {
-                return .tatooine
-            }
-            return .init(rawValue: theme) ?? .tatooine
+    init(keyClient: KeyClient = .live) {
+        // Load theme from UserDefaults first
+        if let themeString = UserDefaults.standard.string(forKey: .themeChoiceKey),
+           let savedTheme = PadawanColorTheme(rawValue: themeString) {
+            self.themeChoice = savedTheme
+        } else {
+            self.themeChoice = .tatooine
         }
-        set {
-            defaults.set(newValue.rawValue, forKey: .languageChoiceKey)
-        }
+        
+        let onboardingValue = UserDefaults.standard.object(forKey: .onboardingKey) == nil ?
+            true :
+            UserDefaults.standard.bool(forKey: .onboardingKey)
+        self.isOnboarding = onboardingValue
+        self.keyClient = keyClient
     }
     
-    init(keyClient: KeyClient = .live) {
-        isOnboarding = defaults.object(forKey: .onboardingKey) == nil ?
-            true :
-        defaults.bool(forKey: .onboardingKey)
-        self.keyClient = keyClient
+    func updateTheme(_ newTheme: PadawanColorTheme) {
+        themeChoice = newTheme
+        defaults.set(newTheme.rawValue, forKey: .themeChoiceKey)
     }
     
     func setNeedOnboarding(_ value: Bool) {

@@ -16,13 +16,14 @@ struct PadawanWalletApp: App {
     @ObservedObject var session = Session.shared
     
     init() {
-        UINavigationBarAppearance.setupNavigationBar(.tatooineDesert)
+        let themeChoice = session.themeChoice
+        UINavigationBarAppearance.setupNavigationBar(themeChoice.colors)
         
-        #if DEBUG
+#if DEBUG
         PadawanTestsConfiguration.setup()
-        #endif
-    
-        }
+#endif
+        
+    }
     
     var body: some Scene {
         WindowGroup {
@@ -38,38 +39,5 @@ struct PadawanWalletApp: App {
             .environment(\.padawanColors, session.themeChoice.colors)
             .environmentObject(LanguageManager.shared)
         }
-    }
-}
-
-extension UINavigationBarAppearance {
-    static func setupNavigationBar(_ color: PadawanColors) {
-        let font = Fonts.uiKitFont(.medium, 18)
-        let textColor = UIColor(color.textFaded)
-
-        let appearance = UINavigationBarAppearance()
-        appearance.configureWithTransparentBackground()
-        appearance.backgroundColor = .clear
-        appearance.titleTextAttributes = [
-            .foregroundColor: textColor,
-            .font: font
-        ]
-        appearance.largeTitleTextAttributes = [
-            .foregroundColor: textColor,
-            .font: font
-        ]
-        
-        let backButtonAppearance = UIBarButtonItemAppearance()
-        backButtonAppearance.normal.titleTextAttributes = [
-            .foregroundColor: textColor,
-            .font: font
-        ]
-        appearance.backButtonAppearance = backButtonAppearance
-        
-        UINavigationBar.appearance().tintColor = textColor
-        UIBarButtonItem.appearance().tintColor = textColor
-        
-        UINavigationBar.appearance().standardAppearance = appearance
-        UINavigationBar.appearance().scrollEdgeAppearance = appearance
-        UINavigationBar.appearance().compactAppearance = appearance
     }
 }

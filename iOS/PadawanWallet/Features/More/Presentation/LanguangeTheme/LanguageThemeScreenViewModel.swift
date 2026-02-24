@@ -22,7 +22,7 @@ final class LanguageThemeScreenViewModel: ObservableObject {
     @Published var selectedTheme: PadawanColorTheme = Session.shared.themeChoice
     
     var disabledLanguages: [PadawanLanguage] = []
-    var disabledThemes: [PadawanColorTheme] = [.vader]
+    var disabledThemes: [PadawanColorTheme] = []
     
     func selectItem<T: LanguageThemeItemProtocol>(_ item: T) {
         
@@ -33,33 +33,14 @@ final class LanguageThemeScreenViewModel: ObservableObject {
                   newLanguage != selectedLanguage
             else { return }
             
-            let previousLanguage = selectedLanguage
-            
             selectedLanguage = newLanguage
-            
-            fullScreenCover = .alert(
-                data: .init(
-                    titleKey: "attention",
-                    subtitleKey: "alert_change_language",
-                    primaryButtonTitleKey: "button_yes",
-                    secondaryButtonTitleKey: "button_no",
-                    overrideLanguage: newLanguage,
-                    onPrimaryButtonTap: {
-                        Session.shared.languageChoice = newLanguage
-                        LanguageManager.shared.setLanguage(newLanguage)
-                        self.fullScreenCover = nil
-                    },
-                    onSecondaryButtonTap: {
-                        self.selectedLanguage = previousLanguage
-                        self.fullScreenCover = nil
-                    }
-                )
-            )
+            Session.shared.languageChoice = newLanguage
+            LanguageManager.shared.setLanguage(newLanguage)
             
         case is PadawanColorTheme:
             if let theme = item as? PadawanColorTheme, !disabledThemes.contains(theme) {
                 selectedTheme = theme
-                Session.shared.themeChoice = theme
+                Session.shared.updateTheme(theme)
             }
             
         default:

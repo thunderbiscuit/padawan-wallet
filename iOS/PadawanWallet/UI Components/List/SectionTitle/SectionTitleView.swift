@@ -18,14 +18,14 @@ struct SectionTitleView: View {
     }
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 2) {
+        VStack(alignment: .leading, spacing: 4) {
             Text(title)
                 .font(Fonts.font(.semibold, 20))
                 .foregroundStyle(colors.text)
         
             Rectangle()
                 .frame(height: 1)
-                .background(colors.text)
+                .foregroundStyle(colors.text)
         }
         .frame(maxWidth: .infinity, alignment: .leading)
     }

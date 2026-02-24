@@ -22,7 +22,7 @@ struct PadawanColors {
     let cardShadowColor: Color
 }
 
-extension PadawanColors {
+extension PadawanColors: Equatable {
     static let tatooineDesert = PadawanColors(
         background: Asset.Colors.tatooineDesertBackground.toColor,
         background2: Asset.Colors.tatooineDesertBackground2.toColor,
