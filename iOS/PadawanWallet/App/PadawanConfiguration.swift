@@ -37,7 +37,7 @@ enum PadawanLanguage: String, LanguageThemeItemProtocol {
 
 enum PadawanColorTheme: String, LanguageThemeItemProtocol {
     case tatooine = "Tatooine Desert"
-    case vader = "Vader Dark (Coming Soon!)"
+    case vader = "Vader Dark"
 
     var id: String { self.rawValue }
     
