@@ -57,32 +57,37 @@ final class BDKService {
             let mnemonicWords = Mnemonic(wordCount: .words12)
             _seed = mnemonicWords.description
         }
-        
-        let mnemonic = try Mnemonic.fromString(mnemonic: _seed)
-        let secretKey = DescriptorSecretKey(
-            network: network,
-            mnemonic: mnemonic,
-            password: nil
-        )
-        let descriptors = Descriptor.createDescriptors(
-            secretKey: secretKey,
-            network: network
-        )
-        
-        let wallet = try Wallet(
-            descriptor: descriptors.descriptor,
-            changeDescriptor: descriptors.changeDescriptor,
-            network: network,
-            persister: persister
-        )
-        self.wallet = wallet
-        
-        let backupInfo = BackupInfo(
-            mnemonic: mnemonic.description,
-            descriptor: descriptors.descriptor.toStringWithSecret(),
-            changeDescriptor: descriptors.changeDescriptor.toStringWithSecret()
-        )
-        try keyClient.saveBackupInfo(backupInfo)
+        do {
+            let mnemonic = try Mnemonic.fromString(mnemonic: _seed)
+            let secretKey = DescriptorSecretKey(
+                network: network,
+                mnemonic: mnemonic,
+                password: nil
+            )
+            let descriptors = Descriptor.createDescriptors(
+                secretKey: secretKey,
+                network: network
+            )
+            
+            let wallet = try Wallet(
+                descriptor: descriptors.descriptor,
+                changeDescriptor: descriptors.changeDescriptor,
+                network: network,
+                persister: persister
+            )
+            self.wallet = wallet
+            
+            let backupInfo = BackupInfo(
+                mnemonic: mnemonic.description,
+                descriptor: descriptors.descriptor.toStringWithSecret(),
+                changeDescriptor: descriptors.changeDescriptor.toStringWithSecret()
+            )
+            try keyClient.saveBackupInfo(backupInfo)
+        } catch _ as Bip39Error {
+            throw BDKServiceError.invalidSeed
+        } catch {
+            throw BDKServiceError.walletNotFound
+        }
     }
     
     func loadWalletFromBackup() throws {
