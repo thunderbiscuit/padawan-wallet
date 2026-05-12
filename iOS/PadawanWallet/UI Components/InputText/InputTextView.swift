@@ -55,14 +55,16 @@ struct InputTextView: View {
                     .zIndex(0)
                 
                 TextField(
-                    placeholder,
-                    text: $text
+                    "",
+                    text: $text,
+                    prompt: Text(placeholder).foregroundColor(colors.textFaded)
                 )
                 .font(Fonts.body)
                 .padding(.horizontal, 12)
                 .autocorrectionDisabled(autocorrectionDisabled)
                 .textInputAutocapitalization(autocapitalization)
                 .keyboardType(keyboardType)
+                .foregroundStyle(colors.text)
             }
             .frame(maxWidth: .infinity)
         }

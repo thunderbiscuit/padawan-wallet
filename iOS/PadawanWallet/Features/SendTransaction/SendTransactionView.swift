@@ -38,39 +38,41 @@ struct SendTransactionView: View {
     
     var body: some View {
         BackgroundView {
-            VStack(spacing: 20) {
-                HStack {
-                    Spacer()
-                    Text("\(ViewAssets.labelBalance) \(viewModel.getBalance()) sats")
-                        .font(Fonts.subtitle)
-                        .multilineTextAlignment(.trailing)
-                        .foregroundStyle(colors.textFaded)
-                        .accessibilityLabel("\(ViewAssets.labelBalance), \(viewModel.getBalance()) sats")
-                        .accessibilityAddTraits(.isStaticText)
-                }
-                
-                buildInputTexts()
-                
-                buildTax()
-                
-                Spacer().frame(minHeight: 50)
-                
-                PadawanButton(
-                title: ViewAssets.buttonVerifyTransaction,
-                    action: {
-                        dismissKeyBoard()
-                        viewModel.verifyTransaction()
+            ScrollView {
+                VStack(spacing: 20) {
+                    HStack {
+                        Spacer()
+                        Text("\(ViewAssets.labelBalance) \(viewModel.getBalance()) sats")
+                            .font(Fonts.subtitle)
+                            .multilineTextAlignment(.trailing)
+                            .foregroundStyle(colors.textFaded)
+                            .accessibilityLabel("\(ViewAssets.labelBalance), \(viewModel.getBalance()) sats")
+                            .accessibilityAddTraits(.isStaticText)
                     }
-                )
-                .accessibilityIdentifier("sendVerifyButton")
-                .fixedSize(horizontal: false, vertical: true)
-                .padding(.horizontal)
-                .accessibilityHint(Text(ViewAssets.accVerifyTransaction))
-                
-                Spacer()
+                    
+                    buildInputTexts()
+                    
+                    buildTax()
+                    
+                    Spacer().frame(minHeight: 50)
+                    
+                    PadawanButton(
+                        title: ViewAssets.buttonVerifyTransaction,
+                        action: {
+                            dismissKeyBoard()
+                            viewModel.verifyTransaction()
+                        }
+                    )
+                    .accessibilityIdentifier("sendVerifyButton")
+                    .fixedSize(horizontal: false, vertical: true)
+                    .padding(.horizontal)
+                    .accessibilityHint(Text(ViewAssets.accVerifyTransaction))
+                    
+                    Spacer()
+                }
+                .frame(maxWidth: .maxWidthScreen, alignment: .leading)
+                .padding()
             }
-            .frame(maxWidth: .maxWidthScreen, alignment: .leading)
-            .padding()
         }
         .toolbar(.hidden, for: .tabBar)
         .navigationTitle(ViewAssets.navigationTitle)
@@ -78,11 +80,11 @@ struct SendTransactionView: View {
             dismissKeyBoard()
         }
         .fullScreenCover(item: $viewModel.fullScreenCover) { item in
-            switch item {                
+            switch item {
             case .alert(let data):
                 AlertModalView(data: data)
                     .background(BackgroundClearView())
-            
+                
             case .openCamera:
                 CameraScannView { address in
                     viewModel.address = address
@@ -111,31 +113,31 @@ struct SendTransactionView: View {
     }
     
     @ViewBuilder
-        private func buildInputTexts() -> some View {
-            VStack(spacing: 20) {
-                buildInputText(
-                    label: ViewAssets.labelInputAmount,
-                    placeholder: ViewAssets.placeHolderInputAmount,
-                    identifier: "sendAmountInput",
-                    text: $viewModel.amountValue,
-                    trailingIcon: nil,
-                    keyboardType: .numberPad
-                )
-                
-                buildInputText(
-                    label: ViewAssets.labelInputAddress,
-                    placeholder: ViewAssets.placeHolderInputAddress,
-                    identifier: "sendAddressInput",
-                    text: $viewModel.address,
-                    trailingIcon: ViewAssets.cameraIcon,
-                    trailingAction: {
-                        dismissKeyBoard()
-                        viewModel.openCamera()
-                    },
-                    trailingAccessibilityLabel: ViewAssets.accScanQRCode
-                )
-            }
+    private func buildInputTexts() -> some View {
+        VStack(spacing: 20) {
+            buildInputText(
+                label: ViewAssets.labelInputAmount,
+                placeholder: ViewAssets.placeHolderInputAmount,
+                identifier: "sendAmountInput",
+                text: $viewModel.amountValue,
+                trailingIcon: nil,
+                keyboardType: .numberPad
+            )
+            
+            buildInputText(
+                label: ViewAssets.labelInputAddress,
+                placeholder: ViewAssets.placeHolderInputAddress,
+                identifier: "sendAddressInput",
+                text: $viewModel.address,
+                trailingIcon: ViewAssets.cameraIcon,
+                trailingAction: {
+                    dismissKeyBoard()
+                    viewModel.openCamera()
+                },
+                trailingAccessibilityLabel: ViewAssets.accScanQRCode
+            )
         }
+    }
     
     @ViewBuilder
     private func buildTax() -> some View {
@@ -149,6 +151,9 @@ struct SendTransactionView: View {
                 step: viewModel.feeRateStep
             )
             .accentColor(colors.accent1)
+            .onAppear {
+                UISlider.appearance().maximumTrackTintColor = UIColor.white.withAlphaComponent(0.5)
+            }
             .accessibilityLabel(ViewAssets.labelTax)
             .accessibilityValue("\(Int(viewModel.feeRate)) \(ViewAssets.accSlideTaxs)")
             
@@ -174,7 +179,7 @@ struct SendTransactionView: View {
     ) -> some View {
         VStack(spacing: 6) {
             buildHeader(title: label)
-            .accessibilityAddTraits(.isStaticText)
+                .accessibilityAddTraits(.isStaticText)
             PadawanCardView(
                 backgroundColor: colors.background2) {
                     HStack {
