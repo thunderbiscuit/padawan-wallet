@@ -87,7 +87,7 @@ struct SendTransactionView: View {
                 
             case .openCamera:
                 CameraScannView { address in
-                    viewModel.address = address
+                    viewModel.handleScannedAddress(address)
                 }
                 
             default:

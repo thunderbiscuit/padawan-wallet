@@ -37,6 +37,29 @@ final class SendTransactionViewModel: ObservableObject {
     func openCamera() {
         fullScreenCover = .openCamera
     }
+
+    func handleScannedAddress(_ scanned: String) {
+        guard let separatorIndex = scanned.firstIndex(of: "?") else {
+            address = scanned
+            return
+        }
+
+        let addressPart = String(scanned[..<separatorIndex])
+        let queryPart = scanned[scanned.index(after: separatorIndex)...]
+
+        for pair in queryPart.split(separator: "&") {
+            let components = pair.split(separator: "=", maxSplits: 1).map(String.init)
+            if components.count == 2, components[0] == "amount" {
+                if amountValue.isEmpty, let btc = Double(components[1]) {
+                    let sats = UInt64((btc * 100_000_000).rounded())
+                    amountValue = String(sats)
+                }
+                break
+            }
+        }
+
+        address = addressPart
+    }
     
     func getBalance() -> String {
         let balance = try? bdkClient.getBalance()
