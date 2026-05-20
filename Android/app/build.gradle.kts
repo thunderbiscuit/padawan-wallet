@@ -1,4 +1,3 @@
-
 import org.gradle.api.tasks.testing.logging.TestExceptionFormat.FULL
 import org.gradle.api.tasks.testing.logging.TestLogEvent.FAILED
 import org.gradle.api.tasks.testing.logging.TestLogEvent.PASSED
@@ -7,10 +6,9 @@ import org.gradle.api.tasks.testing.logging.TestLogEvent.STANDARD_ERROR
 import org.gradle.api.tasks.testing.logging.TestLogEvent.STANDARD_OUT
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
-// All versions of the kotlin android, serialization, and compose plugins should be the same
+// Versions of the serialization and compose plugins should be the same
 plugins {
-    id("com.android.application") version "8.9.1"
-    id("org.jetbrains.kotlin.android") version "2.3.0"
+    id("com.android.application") version "9.2.1"
     id("org.jetbrains.kotlin.plugin.serialization") version "2.3.0"
     id("org.jetbrains.kotlin.plugin.compose") version "2.3.0"
 }
@@ -32,8 +30,7 @@ android {
         applicationId = "com.coyotebitcoin.padawanwallet"
         minSdk = 30
         targetSdk = 36
-        // This version code must be updated for each release but the version on the master branch
-        // stays at 1.
+        // This version code must be updated for each release but the version on the master branch stays at 1.
         versionCode = 1
         versionName = "v0.17.0-SNAPSHOT"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -45,11 +42,6 @@ android {
             abiFilters += "arm64-v8a"
         }
 
-        resValue(
-            type = "string",
-            name = "app_name",
-            value = "Padawan Wallet",
-        )
         buildConfigField("String", "FAUCET_URL", faucetUrl)
         buildConfigField("String", "FAUCET_TOKEN", faucetToken)
     }
@@ -64,11 +56,6 @@ android {
     buildTypes {
         getByName("debug") {
             applicationIdSuffix = ".debug"
-            resValue(
-                type = "string",
-                name = "app_name",
-                value = "Padawan Wallet DEBUG",
-            )
             // debuggable(true)
             isDebuggable = true
         }
@@ -103,10 +90,6 @@ android {
             jvmTarget.set(JvmTarget.JVM_17)
             freeCompilerArgs.add("-Xexplicit-backing-fields")
         }
-    }
-
-    composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.4"
     }
 
     packaging {

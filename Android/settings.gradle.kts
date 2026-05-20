@@ -1,7 +1,6 @@
 rootProject.name = "Padawan Wallet"
 
 include(":app")
-include(":padawankmp")
 
 pluginManagement {
     repositories {
