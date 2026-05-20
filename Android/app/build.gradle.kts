@@ -17,7 +17,7 @@ val faucetUrl: String by project
 val faucetToken: String by project
 
 android {
-    compileSdk = 36
+    compileSdk = 37
     ndkVersion = "21.4.7075529"
 
     buildFeatures {
@@ -29,7 +29,7 @@ android {
     defaultConfig {
         applicationId = "com.coyotebitcoin.padawanwallet"
         minSdk = 30
-        targetSdk = 36
+        targetSdk = 37
         // This version code must be updated for each release but the version on the master branch stays at 1.
         versionCode = 1
         versionName = "v0.17.0-SNAPSHOT"
