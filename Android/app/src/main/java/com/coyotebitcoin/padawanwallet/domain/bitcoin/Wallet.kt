@@ -11,7 +11,6 @@ import com.coyotebitcoin.padawanwallet.domain.utils.netSendWithoutFees
 import org.bitcoindevkit.Address
 import org.bitcoindevkit.AddressInfo
 import org.bitcoindevkit.Amount
-import org.bitcoindevkit.Connection
 import org.bitcoindevkit.Descriptor
 import org.bitcoindevkit.DescriptorSecretKey
 import org.bitcoindevkit.ElectrumClient
@@ -19,21 +18,25 @@ import org.bitcoindevkit.FeeRate
 import org.bitcoindevkit.KeychainKind
 import org.bitcoindevkit.Mnemonic
 import org.bitcoindevkit.Network
+import org.bitcoindevkit.NetworkKind
+import org.bitcoindevkit.Persister
 import org.bitcoindevkit.Psbt
 import org.bitcoindevkit.Transaction
 import org.bitcoindevkit.TxBuilder
+import org.bitcoindevkit.Txid
 import org.bitcoindevkit.Update
 import org.bitcoindevkit.WordCount
 import org.bitcoindevkit.ChainPosition as BdkChainPosition
+import org.bitcoindevkit.Wallet as BdkWallet
 
 private const val TAG = "WalletObject"
 private const val SIGNET_ELECTRUM_URL: String = "ssl://mempool.space:60602"
-const val PERSISTENCE_VERSION = "V1"
+const val PERSISTENCE_VERSION = "V2"
 
 object Wallet {
-    private lateinit var wallet: org.bitcoindevkit.Wallet
+    private lateinit var wallet: BdkWallet
     private lateinit var dbPath: String
-    private lateinit var dbConnection: Connection
+    private lateinit var db: Persister
 
     private val blockchainClient: ElectrumClient by lazy { ElectrumClient(SIGNET_ELECTRUM_URL) }
     private var fullScanRequired: Boolean = !WalletRepository.isFullScanCompleted()
@@ -41,17 +44,23 @@ object Wallet {
     // Setting the path requires the application context and is done once by PadawanWalletApplication
     fun setPathAndConnectDb(path: String) {
         dbPath = "$path/padawanDB_$PERSISTENCE_VERSION.sqlite3"
-        dbConnection = Connection(dbPath)
+        db = Persister.newSqlite(dbPath)
         Log.i(TAG, "Connecting to database at: $dbPath")
     }
 
     fun createWallet() {
         val mnemonic = Mnemonic(WordCount.WORDS12)
-        val bip32ExtendedRootKey = DescriptorSecretKey(Network.SIGNET, mnemonic, null)
-        val descriptor: Descriptor =
-            Descriptor.newBip84(bip32ExtendedRootKey, KeychainKind.EXTERNAL, Network.SIGNET)
-        val changeDescriptor: Descriptor =
-            Descriptor.newBip84(bip32ExtendedRootKey, KeychainKind.INTERNAL, Network.SIGNET)
+        val bip32ExtendedRootKey = DescriptorSecretKey(NetworkKind.TEST, mnemonic, null)
+        val descriptor: Descriptor = Descriptor.newBip84(
+            bip32ExtendedRootKey,
+            KeychainKind.EXTERNAL,
+            NetworkKind.TEST
+        )
+        val changeDescriptor: Descriptor = Descriptor.newBip84(
+            bip32ExtendedRootKey,
+            KeychainKind.INTERNAL,
+            NetworkKind.TEST
+        )
         initialize(
             descriptor = descriptor,
             changeDescriptor = changeDescriptor,
@@ -68,11 +77,11 @@ object Wallet {
         descriptor: Descriptor,
         changeDescriptor: Descriptor,
     ) {
-        wallet = org.bitcoindevkit.Wallet(
+        wallet = BdkWallet(
             descriptor,
             changeDescriptor,
             Network.SIGNET,
-            dbConnection
+            db
         )
     }
 
@@ -80,23 +89,29 @@ object Wallet {
         val initialWalletData: RequiredInitialWalletData = WalletRepository.getInitialWalletData()
         Log.i(TAG, "Loading existing wallet with descriptor: ${initialWalletData.descriptor}")
         Log.i(TAG, "Loading existing wallet with change descriptor: ${initialWalletData.changeDescriptor}")
-        val descriptor = Descriptor(initialWalletData.descriptor, Network.SIGNET)
-        val changeDescriptor = Descriptor(initialWalletData.changeDescriptor, Network.SIGNET)
+        val descriptor = Descriptor(initialWalletData.descriptor, NetworkKind.TEST)
+        val changeDescriptor = Descriptor(initialWalletData.changeDescriptor, NetworkKind.TEST)
 
-        wallet = org.bitcoindevkit.Wallet.load(
+        wallet = BdkWallet.load(
             descriptor,
             changeDescriptor,
-            dbConnection,
+            db,
         )
     }
 
     fun recoverWallet(recoveryPhrase: String) {
         val mnemonic = Mnemonic.fromString(recoveryPhrase)
-        val bip32ExtendedRootKey = DescriptorSecretKey(Network.SIGNET, mnemonic, null)
-        val descriptor: Descriptor =
-            Descriptor.newBip84(bip32ExtendedRootKey, KeychainKind.EXTERNAL, Network.SIGNET)
-        val changeDescriptor: Descriptor =
-            Descriptor.newBip84(bip32ExtendedRootKey, KeychainKind.INTERNAL, Network.SIGNET)
+        val bip32ExtendedRootKey = DescriptorSecretKey(NetworkKind.TEST, mnemonic, null)
+        val descriptor: Descriptor = Descriptor.newBip84(
+            bip32ExtendedRootKey,
+            KeychainKind.EXTERNAL,
+            NetworkKind.TEST
+        )
+        val changeDescriptor: Descriptor = Descriptor.newBip84(
+            bip32ExtendedRootKey,
+            KeychainKind.INTERNAL,
+            NetworkKind.TEST
+        )
         initialize(
             descriptor = descriptor,
             changeDescriptor = changeDescriptor,
@@ -118,7 +133,7 @@ object Wallet {
             fetchPrevTxouts = true
         )
         wallet.applyUpdate(update)
-        wallet.persist(dbConnection)
+        wallet.persist(db)
     }
 
     fun sync() {
@@ -136,7 +151,7 @@ object Wallet {
                 fetchPrevTxouts = true
             )
             wallet.applyUpdate(update)
-            wallet.persist(dbConnection)
+            wallet.persist(db)
         }
     }
 
@@ -199,7 +214,7 @@ object Wallet {
         }
     }
 
-    fun getTransaction(txid: String): TransactionDetails? {
+    fun getTransaction(txid: Txid): TransactionDetails? {
         val allTransactions = listTransactions()
         allTransactions.forEach {
             if (it.txid == txid) {
@@ -209,7 +224,7 @@ object Wallet {
         return null
     }
 
-    fun broadcast(tx: Transaction): String {
+    fun broadcast(tx: Transaction): Txid {
         blockchainClient.transactionBroadcast(tx)
         return tx.computeTxid()
     }

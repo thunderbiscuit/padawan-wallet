@@ -22,10 +22,10 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.rememberScrollState
@@ -470,8 +470,9 @@ fun TransactionListBox(
                         Box(modifier = Modifier
                             .fillMaxWidth()
                         ) {
+                            val txidString = tx.txid.toString()
                             Text(
-                                text = "${tx.txid.take(n = 5)}.....${tx.txid.takeLast(n = 5)}",
+                                text = "${txidString.take(n = 5)}.....${txidString.takeLast(n = 5)}",
                                 style = PadawanTypography.bodyMedium,
                                 fontWeight = FontWeight.SemiBold,
                                 maxLines = 1,

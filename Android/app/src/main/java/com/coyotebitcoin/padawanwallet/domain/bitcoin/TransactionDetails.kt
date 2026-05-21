@@ -7,9 +7,10 @@ package com.coyotebitcoin.padawanwallet.domain.bitcoin
 
 import org.bitcoindevkit.Amount
 import org.bitcoindevkit.FeeRate
+import org.bitcoindevkit.Txid
 
 data class TransactionDetails(
-    val txid: String,
+    val txid: Txid,
     val sent: Amount,
     val received: Amount,
     val paymentAmount: ULong,

@@ -25,13 +25,13 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.bitcoindevkit.Amount
 import org.bitcoindevkit.FeeRate
 import org.bitcoindevkit.Transaction
+import org.bitcoindevkit.Txid
 import kotlin.system.measureTimeMillis
 
 private const val TAG = "WalletViewModel"
@@ -59,7 +59,7 @@ sealed interface WalletAction {
     data class  QRCodeScanned(val address: String) : WalletAction
     data class  Broadcast(val tx: Transaction) : WalletAction
     data object UiMessageDelivered : WalletAction
-    data class  SeeSingleTx(val tx: String) : WalletAction
+    data class  SeeSingleTx(val txid: Txid) : WalletAction
     data class  BuildAndSignPsbt(val address: String, val amount: Amount, val feeRate: FeeRate) : WalletAction
 }
 
@@ -96,7 +96,7 @@ class WalletViewModel(application: Application) : AndroidViewModel(application) 
             is WalletAction.QRCodeScanned -> updateSendAddress(action.address)
             is WalletAction.Broadcast -> broadcastTransaction(action.tx)
             is WalletAction.UiMessageDelivered -> uiMessageDelivered()
-            is WalletAction.SeeSingleTx -> setSingleTxDetails(action.tx)
+            is WalletAction.SeeSingleTx -> setSingleTxDetails(action.txid)
             is WalletAction.BuildAndSignPsbt -> buildAndSignPsbt(action.address, action.amount, action.feeRate)
         }
     }
@@ -232,8 +232,8 @@ class WalletViewModel(application: Application) : AndroidViewModel(application) 
         walletState.update { it.copy(transactions = txHistory) }
     }
 
-    private fun setSingleTxDetails(tx: String) {
-        Wallet.getTransaction(tx)?.let {
+    private fun setSingleTxDetails(txid: Txid) {
+        Wallet.getTransaction(txid)?.let {
             singleTxDetails = it
         }
     }
