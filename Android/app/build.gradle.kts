@@ -141,7 +141,7 @@ dependencies {
     implementation("androidx.compose.material:material-icons-extended:1.7.8")
 
     // Bitcoin
-    implementation("org.bitcoindevkit:bdk-android:3.0.0-RC3")
+    implementation("org.bitcoindevkit:bdk-android:3.0.0")
     implementation("org.kotlinbitcointools:bip21:0.1.0")
 
     // Ktor
