@@ -106,9 +106,9 @@ android {
 }
 
 dependencies {
-    implementation("androidx.core:core-ktx:1.17.0")
-    implementation("androidx.core:core-splashscreen:1.0.1")
-    implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.7.1")
+    implementation("androidx.core:core-ktx:1.19.0")
+    implementation("androidx.core:core-splashscreen:1.2.0")
+    implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.8.0")
 
     // Compose
     // Adding the Bill of Materials synchronizes dependencies in the androidx.compose namespace
@@ -125,12 +125,12 @@ dependencies {
     implementation("androidx.activity:activity-compose")
 
     // Navigation
-    implementation("androidx.navigation3:navigation3-runtime:1.0.0-alpha09")
-    implementation("androidx.navigation3:navigation3-ui:1.0.0-alpha09")
-    implementation("org.jetbrains.kotlinx:kotlinx-serialization-core:1.9.0")
+    implementation("androidx.navigation3:navigation3-runtime:1.1.2")
+    implementation("androidx.navigation3:navigation3-ui:1.1.2")
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-core:1.11.0")
 
-    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.9.4")
-    implementation("androidx.navigation:navigation-compose:2.9.4")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.10.0")
+    implementation("androidx.navigation:navigation-compose:2.9.8")
     implementation("androidx.constraintlayout:constraintlayout-compose:1.1.1")
 
     // composables.com
@@ -145,15 +145,15 @@ dependencies {
     implementation("org.kotlinbitcointools:bip21:0.1.0")
 
     // Ktor
-    implementation("io.ktor:ktor-client-cio:3.3.0")
-    implementation("io.ktor:ktor-client-auth:3.3.0")
+    implementation("io.ktor:ktor-client-cio:3.5.0")
+    implementation("io.ktor:ktor-client-auth:3.5.0")
 
     // QR codes
     implementation("com.google.zxing:core:3.5.3")
     implementation("com.google.mlkit:barcode-scanning:17.3.0")
-    implementation("androidx.camera:camera-camera2:1.5.0")
+    implementation("androidx.camera:camera-camera2:1.6.1")
     implementation("androidx.camera:camera-lifecycle:1.5.0")
-    implementation("androidx.camera:camera-view:1.5.0")
+    implementation("androidx.camera:camera-view:1.6.1")
 
     // Unit testing
     testImplementation("junit:junit:4.13.2")
