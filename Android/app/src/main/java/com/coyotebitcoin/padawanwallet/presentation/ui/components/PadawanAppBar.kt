@@ -30,13 +30,13 @@ private const val TAG = "PadawanAppBar"
 fun PadawanAppBar(
     title: String,
     onClick: () -> Unit,
-    color: Color = Color.Transparent
+    color: Color = Color.Transparent,
 ) {
     CenterAlignedTopAppBar(
         title = {
             Text(
                 text = title,
-                fontWeight = FontWeight.Bold
+                fontWeight = FontWeight.Bold,
             )
         },
         navigationIcon = {
@@ -44,13 +44,11 @@ fun PadawanAppBar(
                 Icon(
                     imageVector = Lucide.ArrowLeft,
                     contentDescription = stringResource(id = R.string.back_icon),
-                    tint = Color.Black
+                    tint = Color.Black,
                 )
             }
         },
-        colors = TopAppBarDefaults.topAppBarColors(
-            containerColor = color
-        )
+        colors = TopAppBarDefaults.topAppBarColors(containerColor = color),
     )
 }
 
@@ -60,7 +58,7 @@ internal fun PreviewPadawanAppBar() {
     PadawanTheme(PadawanColorTheme.TATOOINE_DESERT) {
         PadawanAppBar(
             title = "Preview App Bar",
-            onClick = { }
+            onClick = {},
         )
     }
 }

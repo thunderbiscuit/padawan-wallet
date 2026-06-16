@@ -10,12 +10,11 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import com.coyotebitcoin.padawanwallet.R
 
-val Outfit = FontFamily(
-    Font(R.font.outfit_regular, FontWeight.Normal),
-    Font(R.font.outfit_medium, FontWeight.Medium),
-    Font(R.font.outfit_semibold, FontWeight.SemiBold),
-)
+val Outfit =
+    FontFamily(
+        Font(R.font.outfit_regular, FontWeight.Normal),
+        Font(R.font.outfit_medium, FontWeight.Medium),
+        Font(R.font.outfit_semibold, FontWeight.SemiBold),
+    )
 
-val ShareTechMono = FontFamily(
-    Font(R.font.share_tech_mono, FontWeight.Normal),
-)
+val ShareTechMono = FontFamily(Font(R.font.share_tech_mono, FontWeight.Normal))

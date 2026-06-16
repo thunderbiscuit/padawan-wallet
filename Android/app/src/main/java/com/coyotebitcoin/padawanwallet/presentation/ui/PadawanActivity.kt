@@ -25,16 +25,15 @@ class PadawanActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
 
-        // Ask shared preferences if a wallet already exists. If so, load it and launch into wallet screens, otherwise go
+        // Ask shared preferences if a wallet already exists. If so, load it and launch into wallet screens, otherwise
+        // go
         // to onboarding screens.
         val onboardingDone = WalletRepository.doesWalletExist()
         if (onboardingDone) Wallet.loadWallet()
 
         setContent {
             PadawanTheme(SettingsRepository.getTheme()) {
-                NavigationRoot(
-                    onboardingDone = onboardingDone
-                )
+                NavigationRoot(onboardingDone = onboardingDone)
             }
         }
     }

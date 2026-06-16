@@ -11,12 +11,14 @@ const val defaultCompletedLessons = "false,false,false,false,false,false,false,f
 
 object LessonsRepository {
     private lateinit var sharedPreferences: SharedPreferences
+
     fun setSharedPreferences(sharedPref: SharedPreferences) {
         sharedPreferences = sharedPref
     }
 
     fun getCompletedLessons(): Map<Int, Boolean> {
-        val completedLessonsString: String = sharedPreferences.getString("completedLessons", defaultCompletedLessons) ?: defaultCompletedLessons
+        val completedLessonsString: String =
+            sharedPreferences.getString("completedLessons", defaultCompletedLessons) ?: defaultCompletedLessons
         val list = completedLessonsString.split(",").map { it.toBooleanStrict() }
         return list.mapIndexed { index, value -> index + 1 to value }.toMap()
     }
@@ -25,14 +27,20 @@ object LessonsRepository {
         val completedLessons: MutableMap<Int, Boolean> = getCompletedLessons().toMutableMap()
         completedLessons[index] = true
         val completedLessonsString = completedLessons.flatMap { listOf(it.value) }.joinToString(separator = ",")
-        sharedPreferences.edit().apply {
-            putString("completedLessons", completedLessonsString)
-        }.apply()
+        sharedPreferences
+            .edit()
+            .apply {
+                putString("completedLessons", completedLessonsString)
+            }
+            .apply()
     }
 
     fun resetCompletedLessons() {
-        sharedPreferences.edit().apply {
-            putString("completedLessons", defaultCompletedLessons)
-        }.apply()
+        sharedPreferences
+            .edit()
+            .apply {
+                putString("completedLessons", defaultCompletedLessons)
+            }
+            .apply()
     }
 }

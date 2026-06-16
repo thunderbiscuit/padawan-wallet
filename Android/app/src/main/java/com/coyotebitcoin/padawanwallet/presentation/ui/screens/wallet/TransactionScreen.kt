@@ -49,48 +49,44 @@ internal fun TransactionScreen(
     onBack: () -> Unit,
 ) {
     val colors = LocalPadawanColors.current
-    val padding = when (getScreenSizeWidth(LocalConfiguration.current.screenWidthDp)) {
-        ScreenSizeWidth.Small -> PaddingValues(12.dp)
-        ScreenSizeWidth.Phone -> PaddingValues(32.dp)
-    }
+    val padding =
+        when (getScreenSizeWidth(LocalConfiguration.current.screenWidthDp)) {
+            ScreenSizeWidth.Small -> PaddingValues(12.dp)
+            ScreenSizeWidth.Phone -> PaddingValues(32.dp)
+        }
 
     Scaffold(
         topBar = {
             PadawanAppBar(
                 title = stringResource(R.string.transaction_details),
-                onClick = { onBack() }
+                onClick = { onBack() },
             )
         },
         content = { scaffoldPadding ->
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Center,
-                modifier = Modifier
-                    .padding(scaffoldPadding)
-                    .innerScreenPadding(padding)
+                modifier = Modifier.padding(scaffoldPadding).innerScreenPadding(padding),
             ) {
-                val walletBalanceDelta: String = if (txDetails.balanceDelta > 0) {
-                    "+${txDetails.balanceDelta} sats"
-                } else {
-                    "${txDetails.balanceDelta} sats"
-                }
+                val walletBalanceDelta: String =
+                    if (txDetails.balanceDelta > 0) {
+                        "+${txDetails.balanceDelta} sats"
+                    } else {
+                        "${txDetails.balanceDelta} sats"
+                    }
                 Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(vertical = 8.dp),
-                    horizontalArrangement = Arrangement.SpaceBetween
+                    modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp),
+                    horizontalArrangement = Arrangement.SpaceBetween,
                 ) {
                     Text(
                         text = stringResource(R.string.balance_delta),
-                        style = PadawanTypography.titleSmall
+                        style = PadawanTypography.titleSmall,
                     )
                     Text(walletBalanceDelta)
                 }
                 Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(vertical = 8.dp),
-                    horizontalArrangement = Arrangement.SpaceBetween
+                    modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp),
+                    horizontalArrangement = Arrangement.SpaceBetween,
                 ) {
                     Text(
                         text = stringResource(R.string.transaction_type),
@@ -98,39 +94,38 @@ internal fun TransactionScreen(
                     )
                     Box {
                         Row(
-                            modifier = Modifier
-                                .align(Alignment.CenterEnd)
-                                .background(
-                                    color = if (txDetails.txType == TxType.OUTBOUND) colors.accent2 else colors.accent1,
-                                    shape = RoundedCornerShape(size = 5.dp)
-                                )
+                            modifier =
+                                Modifier.align(Alignment.CenterEnd)
+                                    .background(
+                                        color =
+                                            if (txDetails.txType == TxType.OUTBOUND) colors.accent2 else colors.accent1,
+                                        shape = RoundedCornerShape(size = 5.dp),
+                                    )
                         ) {
                             Text(
-                                text = if (txDetails.txType == TxType.OUTBOUND) stringResource(R.string.send) else stringResource(R.string.receive),
+                                text =
+                                    if (txDetails.txType == TxType.OUTBOUND) stringResource(R.string.send)
+                                    else stringResource(R.string.receive),
                                 style = PadawanTypography.bodySmall,
-                                modifier = Modifier
-                                    .align(Alignment.CenterVertically)
-                                    .padding(horizontal = 12.dp, vertical = 4.dp)
+                                modifier =
+                                    Modifier.align(Alignment.CenterVertically)
+                                        .padding(horizontal = 12.dp, vertical = 4.dp),
                             )
                         }
                     }
                 }
                 HorizontalDivider(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(40.dp),
+                    modifier = Modifier.fillMaxWidth().padding(40.dp),
                     color = Color(0xff8f8f8f),
-                    thickness = 1.dp
+                    thickness = 1.dp,
                 )
                 Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(vertical = 8.dp),
-                    horizontalArrangement = Arrangement.SpaceBetween
+                    modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp),
+                    horizontalArrangement = Arrangement.SpaceBetween,
                 ) {
                     Text(
                         text = stringResource(R.string.time),
-                        style = PadawanTypography.titleSmall
+                        style = PadawanTypography.titleSmall,
                     )
                     Text(
                         when (txDetails.chainPosition) {
@@ -140,10 +135,8 @@ internal fun TransactionScreen(
                     )
                 }
                 Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(vertical = 8.dp),
-                    horizontalArrangement = Arrangement.SpaceBetween
+                    modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp),
+                    horizontalArrangement = Arrangement.SpaceBetween,
                 ) {
                     Text(
                         text = stringResource(R.string.block),
@@ -157,10 +150,8 @@ internal fun TransactionScreen(
                     )
                 }
                 Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(vertical = 8.dp),
-                    horizontalArrangement = Arrangement.SpaceBetween
+                    modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp),
+                    horizontalArrangement = Arrangement.SpaceBetween,
                 ) {
                     Text(
                         text = stringResource(R.string.txid),
@@ -170,19 +161,15 @@ internal fun TransactionScreen(
                     val link: String = "https://mempool.space/signet/tx/${txDetails.txid}"
                     Text(
                         text = "${txDetails.txid} (mempool.space)",
-                        modifier = Modifier
-                            .clickable { mUriHandler.openUri(link) }
-                            .width(270.dp),
+                        modifier = Modifier.clickable { mUriHandler.openUri(link) }.width(270.dp),
                         style = PadawanTypography.bodyMedium,
                         color = PadawanColorsTatooineDesert.accent2,
-                        textDecoration = TextDecoration.Underline
+                        textDecoration = TextDecoration.Underline,
                     )
                 }
                 Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(vertical = 8.dp),
-                    horizontalArrangement = Arrangement.SpaceBetween
+                    modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp),
+                    horizontalArrangement = Arrangement.SpaceBetween,
                 ) {
                     val fee = txDetails.fee
 
@@ -193,6 +180,6 @@ internal fun TransactionScreen(
                     Text("${fee.toSat()} sats")
                 }
             }
-        }
+        },
     )
 }

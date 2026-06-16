@@ -51,9 +51,7 @@ import com.coyotebitcoin.padawanwallet.presentation.ui.components.VerticalTextFi
 import com.coyotebitcoin.padawanwallet.presentation.utils.copyToClipboard
 
 @Composable
-internal fun SendCoinsBackScreen(
-    onBackArrow: () -> Unit,
-) {
+internal fun SendCoinsBackScreen(onBackArrow: () -> Unit) {
     val scrollState = rememberScrollState()
     val context = LocalContext.current
     val scope = rememberCoroutineScope()
@@ -63,42 +61,40 @@ internal fun SendCoinsBackScreen(
     val (copyClicked, setCopyClicked) = remember { mutableStateOf(false) }
 
     val copyAddressString = buildAnnotatedString {
-        if (!copyClicked) append(stringResource(id = R.string.copy_address_string)) else append(stringResource(R.string.text_copied))
+        if (!copyClicked) append(stringResource(id = R.string.copy_address_string))
+        else append(stringResource(R.string.text_copied))
     }
 
-    val inlineContentMap = mapOf(
-        "copyAddressImageId" to InlineTextContent(
-            Placeholder(17.sp, 17.sp, PlaceholderVerticalAlign.TextCenter)
-        ) {
-            if (copyClicked) {
-                Image(
-                    imageVector = Lucide.CircleCheck,
-                    contentDescription = stringResource(R.string.checkmark_image),
-                    colorFilter = ColorFilter.tint(Color.Green)
-                )
-            } else {
-                Image(
-                    imageVector = Lucide.ClipboardCopy,
-                    contentDescription = stringResource(R.string.copy_to_clipboard_image),
-                )
-            }
-        }
-    )
+    val inlineContentMap =
+        mapOf(
+            "copyAddressImageId" to
+                InlineTextContent(Placeholder(17.sp, 17.sp, PlaceholderVerticalAlign.TextCenter)) {
+                    if (copyClicked) {
+                        Image(
+                            imageVector = Lucide.CircleCheck,
+                            contentDescription = stringResource(R.string.checkmark_image),
+                            colorFilter = ColorFilter.tint(Color.Green),
+                        )
+                    } else {
+                        Image(
+                            imageVector = Lucide.ClipboardCopy,
+                            contentDescription = stringResource(R.string.copy_to_clipboard_image),
+                        )
+                    }
+                }
+        )
     Scaffold(
         topBar = {
             PadawanAppBar(
                 title = stringResource(R.string.send_signet_coins_back),
-                onClick = { onBackArrow() }
+                onClick = { onBackArrow() },
             )
         },
-        snackbarHost = { SnackbarHost(snackbarHostState) }
+        snackbarHost = { SnackbarHost(snackbarHostState) },
     ) { scaffoldPadding ->
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
-            modifier = Modifier
-                .fillMaxSize()
-                .verticalScroll(state = scrollState)
-                .padding(scaffoldPadding)
+            modifier = Modifier.fillMaxSize().verticalScroll(state = scrollState).padding(scaffoldPadding),
         ) {
             val returnAddress: String = stringResource(R.string.send_coins_back_address)
             val returnQr = addressToQR(returnAddress)
@@ -107,38 +103,35 @@ internal fun SendCoinsBackScreen(
                 Image(
                     bitmap = it,
                     contentDescription = stringResource(R.string.qr_code),
-                    Modifier
-                        .padding(vertical = 16.dp)
-                        .size(340.dp)
-                        .clip(RoundedCornerShape(16.dp))
-                        .clickable {
-                            copyToClipboard(
-                                returnAddress,
-                                context,
-                                scope,
-                                snackbarHostState,
-                                null
-                            )
-                        }
-                )
-            }
-            Row(
-                Modifier
-                    .clickable(onClick = {
-                        setCopyClicked(true)
+                    Modifier.padding(vertical = 16.dp).size(340.dp).clip(RoundedCornerShape(16.dp)).clickable {
                         copyToClipboard(
                             returnAddress,
                             context,
                             scope,
                             snackbarHostState,
-                            setCopyClicked
+                            null,
                         )
-                    })
+                    },
+                )
+            }
+            Row(
+                Modifier.clickable(
+                        onClick = {
+                            setCopyClicked(true)
+                            copyToClipboard(
+                                returnAddress,
+                                context,
+                                scope,
+                                snackbarHostState,
+                                setCopyClicked,
+                            )
+                        }
+                    )
                     .padding(start = 24.dp, end = 24.dp, bottom = 20.dp)
             ) {
                 Text(
                     text = stringResource(R.string.send_coins_back_address),
-                    fontSize = 14.sp
+                    fontSize = 14.sp,
                 )
                 VerticalTextFieldDivider()
                 Image(
@@ -151,7 +144,7 @@ internal fun SendCoinsBackScreen(
                 text = stringResource(id = R.string.send_coins_back),
                 style = PadawanTypography.bodyMedium,
                 color = colors.textLight,
-                modifier = Modifier.padding(start = 24.dp, end = 24.dp)
+                modifier = Modifier.padding(start = 24.dp, end = 24.dp),
             )
         }
     }
@@ -161,8 +154,6 @@ internal fun SendCoinsBackScreen(
 @Composable
 internal fun PreviewSendCoinsBackScreen() {
     PadawanTheme {
-        SendCoinsBackScreen(
-            onBackArrow = {}
-        )
+        SendCoinsBackScreen(onBackArrow = {})
     }
 }

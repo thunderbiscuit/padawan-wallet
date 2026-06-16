@@ -7,5 +7,5 @@ package com.coyotebitcoin.padawanwallet.domain.utils
 
 data class RequiredInitialWalletData(
     val descriptor: String,
-    val changeDescriptor: String
+    val changeDescriptor: String,
 )

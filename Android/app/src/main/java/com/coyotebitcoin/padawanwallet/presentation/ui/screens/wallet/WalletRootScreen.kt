@@ -104,32 +104,31 @@ internal fun WalletHomeScreen(
     if (openDialog) FaucetDialog(onAction, setOpenDialog)
     val userCanRequestFaucetCoins = state.userCanRequestFaucetCoins
 
-    val padding = when (getScreenSizeWidth(LocalConfiguration.current.screenWidthDp)) {
-        ScreenSizeWidth.Small -> PaddingValues(horizontal = 12.dp)
-        ScreenSizeWidth.Phone -> PaddingValues(start = 32.dp, top = 12.dp, end = 32.dp, bottom = 0.dp)
-    }
+    val padding =
+        when (getScreenSizeWidth(LocalConfiguration.current.screenWidthDp)) {
+            ScreenSizeWidth.Small -> PaddingValues(horizontal = 12.dp)
+            ScreenSizeWidth.Phone -> PaddingValues(start = 32.dp, top = 12.dp, end = 32.dp, bottom = 0.dp)
+        }
 
     if (state.messageForUi != null) {
         Toast.makeText(
-            LocalContext.current,
-            state.messageForUi.second,
-            Toast.LENGTH_LONG
-        ).show()
+                LocalContext.current,
+                state.messageForUi.second,
+                Toast.LENGTH_LONG,
+            )
+            .show()
         onAction(WalletAction.UiMessageDelivered)
     }
 
-    Column(
-        modifier = Modifier
-            .fillMaxHeight()
-            .padding(paddingValues)
-            .innerScreenPadding(padding)
-    ) {
-        if (!state.isOnline) { NoNetworkBanner(onAction) }
+    Column(modifier = Modifier.fillMaxHeight().padding(paddingValues).innerScreenPadding(padding)) {
+        if (!state.isOnline) {
+            NoNetworkBanner(onAction)
+        }
         BalanceBox(balance = state.balance, currentlySyncing = state.currentlySyncing, onAction = onAction)
         Spacer(modifier = Modifier.height(height = 12.dp))
         SendReceive(
             onNavigation = onNavigation,
-            isOnline = state.isOnline
+            isOnline = state.isOnline,
         )
         TransactionListBox(
             setOpenDialog = setOpenDialog,
@@ -137,7 +136,7 @@ internal fun WalletHomeScreen(
             userCanRequestFaucetCoins = userCanRequestFaucetCoins,
             isOnline = state.isOnline,
             onAction = onAction,
-            onNavigation = onNavigation
+            onNavigation = onNavigation,
         )
     }
 }
@@ -146,17 +145,17 @@ internal fun WalletHomeScreen(
 fun NoNetworkBanner(onAction: (WalletAction) -> Unit) {
     val colors = LocalPadawanColors.current
     val screenSizeWidth = getScreenSizeWidth(LocalConfiguration.current.screenWidthDp)
-    val fontSize = when (screenSizeWidth) {
-        ScreenSizeWidth.Small -> 12.sp
-        ScreenSizeWidth.Phone -> 16.sp
-    }
+    val fontSize =
+        when (screenSizeWidth) {
+            ScreenSizeWidth.Small -> 12.sp
+            ScreenSizeWidth.Phone -> 16.sp
+        }
 
     Card(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(bottom = 8.dp)
-            .height(40.dp)
-            .clickable { onAction(WalletAction.CheckNetworkStatus) },
+        modifier =
+            Modifier.fillMaxWidth().padding(bottom = 8.dp).height(40.dp).clickable {
+                onAction(WalletAction.CheckNetworkStatus)
+            },
         border = standardBorder,
         colors = CardDefaults.cardColors(colors.accent2),
     ) {
@@ -167,7 +166,7 @@ fun NoNetworkBanner(onAction: (WalletAction) -> Unit) {
         ) {
             Text(
                 text = stringResource(R.string.unable_to_access_network),
-                fontSize = fontSize
+                fontSize = fontSize,
             )
         }
     }
@@ -186,14 +185,10 @@ fun BalanceBox(
         border = standardBorder,
         shape = RoundedCornerShape(20.dp),
         colors = CardDefaults.cardColors(colors.accent1),
-        modifier = Modifier
-            .neuBrutalismShadow()
-            .fillMaxWidth()
+        modifier = Modifier.neuBrutalismShadow().fillMaxWidth(),
     ) {
         ConstraintLayout(
-            modifier = Modifier
-                .padding(start = 24.dp, end = 24.dp, top = 24.dp, bottom = 0.dp)
-                .fillMaxWidth()
+            modifier = Modifier.padding(start = 24.dp, end = 24.dp, top = 24.dp, bottom = 0.dp).fillMaxWidth()
         ) {
             val (cardName, currencyToggle, balanceText, currencyText, buttonRow) = createRefs()
             var currencyToggleState by remember { mutableStateOf(true) }
@@ -201,100 +196,95 @@ fun BalanceBox(
                 text = stringResource(R.string.bitcoin_signet),
                 style = PadawanTypography.bodyMedium,
                 color = Color(0x771a1a1a), // Standard text color with some transparency
-                modifier = Modifier.constrainAs(cardName) {
-                    top.linkTo(parent.top)
-                    start.linkTo(parent.start)
-                }
+                modifier =
+                    Modifier.constrainAs(cardName) {
+                        top.linkTo(parent.top)
+                        start.linkTo(parent.start)
+                    },
             )
             Box(
-                modifier = Modifier
-                    .noRippleClickable {
-                        currencyToggleState = !currencyToggleState
-                    }
-                    // .border(width = 2.dp, color = PadawanColors.text)
-                    .background(
-                        shape = RoundedCornerShape(size = 10.dp),
-                        color = colors.accent1Light,
-                    )
-                    .constrainAs(currencyToggle) {
-                        top.linkTo(parent.top)
-                        end.linkTo(parent.end)
-                    }
+                modifier =
+                    Modifier.noRippleClickable {
+                            currencyToggleState = !currencyToggleState
+                        }
+                        // .border(width = 2.dp, color = PadawanColors.text)
+                        .background(
+                            shape = RoundedCornerShape(size = 10.dp),
+                            color = colors.accent1Light,
+                        )
+                        .constrainAs(currencyToggle) {
+                            top.linkTo(parent.top)
+                            end.linkTo(parent.end)
+                        }
             ) {
-                Row(
-                    modifier = Modifier
-                        .height(IntrinsicSize.Min)
-                        .padding(horizontal = 8.dp)
-                ) {
+                Row(modifier = Modifier.height(IntrinsicSize.Min).padding(horizontal = 8.dp)) {
                     CurrencyToggleText(
                         currencyToggleState = currencyToggleState,
-                        text = BitcoinUnit.BTC
+                        text = BitcoinUnit.BTC,
                     )
                     CurrencyToggleText(
                         currencyToggleState = currencyToggleState,
-                        text = BitcoinUnit.SATS
+                        text = BitcoinUnit.SATS,
                     )
                 }
             }
             var balanceDisplay: String = if (currencyToggleState) balance.toString() else balance.formatInBtc()
             balanceDisplay = formatCurrency(balanceDisplay)
-            val currencyDisplay: String = if (currencyToggleState) {
-                BitcoinUnit.SATS.toString().lowercase()
-            } else {
-                BitcoinUnit.BTC.toString().lowercase()
-            }
-            val fontSize = when (getScreenSizeWidth(LocalConfiguration.current.screenWidthDp)) {
-                ScreenSizeWidth.Small -> 28.sp
-                ScreenSizeWidth.Phone -> 36.sp
-            }
+            val currencyDisplay: String =
+                if (currencyToggleState) {
+                    BitcoinUnit.SATS.toString().lowercase()
+                } else {
+                    BitcoinUnit.BTC.toString().lowercase()
+                }
+            val fontSize =
+                when (getScreenSizeWidth(LocalConfiguration.current.screenWidthDp)) {
+                    ScreenSizeWidth.Small -> 28.sp
+                    ScreenSizeWidth.Phone -> 36.sp
+                }
 
             Text(
                 text = balanceDisplay,
                 style = PadawanTypography.displaySmall,
                 fontSize = fontSize,
-                modifier = Modifier
-                    .padding(top = 16.dp)
-                    .constrainAs(balanceText) {
+                modifier =
+                    Modifier.padding(top = 16.dp).constrainAs(balanceText) {
                         top.linkTo(cardName.bottom)
                         start.linkTo(parent.start)
-                    }
+                    },
             )
             Text(
                 text = currencyDisplay,
                 style = PadawanTypography.bodyMedium,
-                modifier = Modifier
-                    .padding(all = 8.dp)
-                    .constrainAs(currencyText) {
+                modifier =
+                    Modifier.padding(all = 8.dp).constrainAs(currencyText) {
                         start.linkTo(balanceText.end)
                         bottom.linkTo(balanceText.bottom)
-                    }
+                    },
             )
             Row(
-                modifier = Modifier
-                    .padding(top = 16.dp, bottom = 0.dp)
-                    .constrainAs(buttonRow) {
+                modifier =
+                    Modifier.padding(top = 16.dp, bottom = 0.dp).constrainAs(buttonRow) {
                         top.linkTo(balanceText.bottom)
                         start.linkTo(parent.start)
                         end.linkTo(parent.end)
                     }
             ) {
-                CompositionLocalProvider(
-                    LocalMinimumInteractiveComponentSize provides 0.dp,
-                ) {
+                CompositionLocalProvider(LocalMinimumInteractiveComponentSize provides 0.dp) {
                     Button(
                         onClick = { onAction(WalletAction.Sync) },
-                        colors = ButtonDefaults.buttonColors(
-                            containerColor = Color.Black,
-                            disabledContainerColor = Color.Black
-                        ),
+                        colors =
+                            ButtonDefaults.buttonColors(
+                                containerColor = Color.Black,
+                                disabledContainerColor = Color.Black,
+                            ),
                         shape = RoundedCornerShape(20.dp, 20.dp, 0.dp, 0.dp),
                         border = standardBorder,
                         modifier = Modifier.widthIn(min = 134.dp),
-                        enabled = !currentlySyncing
+                        enabled = !currentlySyncing,
                     ) {
                         Row(
                             verticalAlignment = Alignment.CenterVertically,
-                            horizontalArrangement = Arrangement.Center
+                            horizontalArrangement = Arrangement.Center,
                         ) {
                             if (currentlySyncing) {
                                 LoadingAnimation(circleColor = colors.accent2)
@@ -304,7 +294,7 @@ fun BalanceBox(
                                     style = PadawanTypography.labelLarge,
                                     fontWeight = FontWeight.Normal,
                                     color = colors.background,
-                                    modifier = Modifier.padding(horizontal = 2.dp)
+                                    modifier = Modifier.padding(horizontal = 2.dp),
                                 )
                             }
                         }
@@ -318,25 +308,17 @@ fun BalanceBox(
 @Composable
 fun SendReceive(
     onNavigation: (SecondaryDestinations) -> Unit,
-    isOnline: Boolean
+    isOnline: Boolean,
 ) {
     val screenSizeWidth: ScreenSizeWidth = getScreenSizeWidth(LocalConfiguration.current.screenWidthDp)
 
-    Row(
-        modifier = Modifier
-            .padding(top = 4.dp)
-            .height(70.dp)
-    ) {
+    Row(modifier = Modifier.padding(top = 4.dp).height(70.dp)) {
         Button(
             onClick = { ClickHelper.clickOnce { onNavigation(SecondaryDestinations.ReceiveScreen) } },
             colors = ButtonDefaults.buttonColors(containerColor = PadawanColorsTatooineDesert.accent2),
             shape = RoundedCornerShape(20.dp),
             border = standardBorder,
-            modifier = Modifier
-                .padding(all = 4.dp)
-                .neuBrutalismShadow()
-                .weight(weight = 0.5f)
-                .fillMaxHeight()
+            modifier = Modifier.padding(all = 4.dp).neuBrutalismShadow().weight(weight = 0.5f).fillMaxHeight(),
         ) {
             Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.padding(vertical = 8.dp)) {
                 Text(
@@ -346,26 +328,23 @@ fun SendReceive(
                 if (screenSizeWidth == ScreenSizeWidth.Phone) {
                     Image(
                         imageVector = Lucide.ArrowDownToLine,
-                        contentDescription  = stringResource(id = R.string.receive_icon),
-                        modifier = Modifier.padding(start = 8.dp)
+                        contentDescription = stringResource(id = R.string.receive_icon),
+                        modifier = Modifier.padding(start = 8.dp),
                     )
                 }
             }
         }
         Button(
-            onClick = { ClickHelper.clickOnce { onNavigation(SecondaryDestinations.SendScreen) }},
-            colors = ButtonDefaults.buttonColors(
-                containerColor = PadawanColorsTatooineDesert.accent2,
-                disabledContainerColor = Color.White
-            ),
+            onClick = { ClickHelper.clickOnce { onNavigation(SecondaryDestinations.SendScreen) } },
+            colors =
+                ButtonDefaults.buttonColors(
+                    containerColor = PadawanColorsTatooineDesert.accent2,
+                    disabledContainerColor = Color.White,
+                ),
             shape = RoundedCornerShape(20.dp),
             border = standardBorder,
             enabled = isOnline,
-            modifier = Modifier
-                .padding(all = 4.dp)
-                .neuBrutalismShadow()
-                .weight(weight = 0.5f)
-                .fillMaxHeight(),
+            modifier = Modifier.padding(all = 4.dp).neuBrutalismShadow().weight(weight = 0.5f).fillMaxHeight(),
         ) {
             Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.padding(vertical = 8.dp)) {
                 Text(
@@ -376,7 +355,7 @@ fun SendReceive(
                     Image(
                         imageVector = Lucide.ArrowUpFromLine,
                         contentDescription = stringResource(id = R.string.send_icon),
-                        modifier = Modifier.padding(start = 8.dp)
+                        modifier = Modifier.padding(start = 8.dp),
                     )
                 }
             }
@@ -391,7 +370,7 @@ fun TransactionListBox(
     userCanRequestFaucetCoins: Boolean,
     isOnline: Boolean,
     onAction: (WalletAction) -> Unit,
-    onNavigation: (SecondaryDestinations) -> Unit
+    onNavigation: (SecondaryDestinations) -> Unit,
 ) {
     val colors = LocalPadawanColors.current
 
@@ -401,9 +380,7 @@ fun TransactionListBox(
             style = PadawanTypography.headlineSmall,
             color = PadawanColorsTatooineDesert.text,
             textAlign = TextAlign.Start,
-            modifier = Modifier
-                .align(Alignment.Bottom)
-                .weight(weight = 0.5f)
+            modifier = Modifier.align(Alignment.Bottom).weight(weight = 0.5f),
         )
     }
 
@@ -413,39 +390,41 @@ fun TransactionListBox(
         shape = RoundedCornerShape(20.dp),
         colors = CardDefaults.cardColors(PadawanColorsTatooineDesert.background),
     ) {
-        val padding = when (getScreenSizeWidth(LocalConfiguration.current.screenWidthDp)) {
-            ScreenSizeWidth.Small -> 12.dp
-            ScreenSizeWidth.Phone -> 24.dp
-        }
+        val padding =
+            when (getScreenSizeWidth(LocalConfiguration.current.screenWidthDp)) {
+                ScreenSizeWidth.Small -> 12.dp
+                ScreenSizeWidth.Phone -> 24.dp
+            }
 
         if (transactionList.isEmpty() && userCanRequestFaucetCoins) {
-            Row(
-                modifier = Modifier.padding(all = padding).background(PadawanColorsTatooineDesert.background2)
-            ) {
+            Row(modifier = Modifier.padding(all = padding).background(PadawanColorsTatooineDesert.background2)) {
                 val scrollState = rememberScrollState()
 
                 Column(
-                    modifier = Modifier.verticalScroll(state = scrollState).background(PadawanColorsTatooineDesert.background)
+                    modifier =
+                        Modifier.verticalScroll(state = scrollState).background(PadawanColorsTatooineDesert.background)
                 ) {
                     Text(
                         text = stringResource(R.string.transaction_list_empty),
                         style = PadawanTypography.bodyMedium,
-                        modifier = Modifier.padding(all = 8.dp)
+                        modifier = Modifier.padding(all = 8.dp),
                     )
                     Button(
                         onClick = { setOpenDialog(true) },
                         enabled = isOnline,
-                        modifier = Modifier
-                            .padding(all = 8.dp)
-                            .neuBrutalismShadow(),
-                        colors = ButtonDefaults.buttonColors(
-                            containerColor = PadawanColorsTatooineDesert.accent2,
-                            disabledContainerColor = Color.White
-                        ),
+                        modifier = Modifier.padding(all = 8.dp).neuBrutalismShadow(),
+                        colors =
+                            ButtonDefaults.buttonColors(
+                                containerColor = PadawanColorsTatooineDesert.accent2,
+                                disabledContainerColor = Color.White,
+                            ),
                         shape = RoundedCornerShape(20.dp),
-                        border = standardBorder
+                        border = standardBorder,
                     ) {
-                        Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.padding(vertical = 8.dp)) {
+                        Row(
+                            verticalAlignment = Alignment.CenterVertically,
+                            modifier = Modifier.padding(vertical = 8.dp),
+                        ) {
                             Text(text = stringResource(R.string.get_coins), style = PadawanTypography.bodyMedium)
                         }
                     }
@@ -453,84 +432,86 @@ fun TransactionListBox(
             }
         } else {
             LazyColumn(
-                modifier = Modifier
-                    .background(color = PadawanColorsTatooineDesert.background2)
-                    .padding(horizontal = 24.dp)
+                modifier =
+                    Modifier.background(color = PadawanColorsTatooineDesert.background2).padding(horizontal = 24.dp)
             ) {
                 itemsIndexed(transactionList) { index, tx ->
                     if (index == 0) {
                         Spacer(modifier = Modifier.height(24.dp))
                     }
                     Column(
-                        modifier = Modifier.noRippleClickable {
-                            onAction(WalletAction.SeeSingleTx(tx.txid))
-                            onNavigation(SecondaryDestinations.TransactionScreen)
-                        }
+                        modifier =
+                            Modifier.noRippleClickable {
+                                onAction(WalletAction.SeeSingleTx(tx.txid))
+                                onNavigation(SecondaryDestinations.TransactionScreen)
+                            }
                     ) {
-                        Box(modifier = Modifier
-                            .fillMaxWidth()
-                        ) {
+                        Box(modifier = Modifier.fillMaxWidth()) {
                             val txidString = tx.txid.toString()
                             Text(
                                 text = "${txidString.take(n = 5)}.....${txidString.takeLast(n = 5)}",
                                 style = PadawanTypography.bodyMedium,
                                 fontWeight = FontWeight.SemiBold,
                                 maxLines = 1,
-                                modifier = Modifier
-                                    .align(Alignment.BottomStart)
-                                    .padding(top = 8.dp)
+                                modifier = Modifier.align(Alignment.BottomStart).padding(top = 8.dp),
                             )
-                            val walletBalanceDelta: String = if (tx.balanceDelta > 0) {
-                                "+${tx.balanceDelta} sats"
-                            } else {
-                                "${tx.balanceDelta} sats"
-                            }
+                            val walletBalanceDelta: String =
+                                if (tx.balanceDelta > 0) {
+                                    "+${tx.balanceDelta} sats"
+                                } else {
+                                    "${tx.balanceDelta} sats"
+                                }
                             Text(
                                 text = walletBalanceDelta,
                                 style = PadawanTypography.bodyMedium,
                                 textAlign = TextAlign.End,
-                                modifier = Modifier.align(Alignment.BottomEnd)
+                                modifier = Modifier.align(Alignment.BottomEnd),
                             )
                         }
-                        Box(modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(vertical = 4.dp)
-                        ) {
-                            val confirmationText: String = when (tx.chainPosition) {
-                                is ChainPosition.Unconfirmed -> stringResource(id = R.string.pending)
-                                is ChainPosition.Confirmed -> tx.chainPosition.timestamp.timestampToString()
-                            }
+                        Box(modifier = Modifier.fillMaxWidth().padding(vertical = 4.dp)) {
+                            val confirmationText: String =
+                                when (tx.chainPosition) {
+                                    is ChainPosition.Unconfirmed -> stringResource(id = R.string.pending)
+                                    is ChainPosition.Confirmed -> tx.chainPosition.timestamp.timestampToString()
+                                }
                             Text(
                                 text = confirmationText,
                                 style = PadawanTypography.bodySmall,
                                 maxLines = 1,
-                                modifier = Modifier.align(Alignment.CenterStart)
+                                modifier = Modifier.align(Alignment.CenterStart),
                             )
                             Box(modifier = Modifier.align(Alignment.BottomEnd)) {
                                 Row(
-                                    modifier = Modifier
-                                        .align(Alignment.CenterEnd)
-                                        .background(
-                                            color = Color(0xFFEDE0C4),
-                                            // color = if (tx.txType == TxType.OUTBOUND) PadawanColors.sendPrimary else PadawanColors.receivePrimary,
-                                            shape = RoundedCornerShape(size = 5.dp)
-                                        )
+                                    modifier =
+                                        Modifier.align(Alignment.CenterEnd)
+                                            .background(
+                                                color = Color(0xFFEDE0C4),
+                                                // color = if (tx.txType == TxType.OUTBOUND) PadawanColors.sendPrimary
+                                                // else PadawanColors.receivePrimary,
+                                                shape = RoundedCornerShape(size = 5.dp),
+                                            )
                                 ) {
                                     Text(
-                                        text = if (tx.txType == TxType.OUTBOUND) stringResource(id = R.string.send) else stringResource(id = R.string.receive),
+                                        text =
+                                            if (tx.txType == TxType.OUTBOUND) stringResource(id = R.string.send)
+                                            else stringResource(id = R.string.receive),
                                         style = PadawanTypography.bodySmall,
-                                        modifier = Modifier
-                                            .align(Alignment.CenterVertically)
-                                            .padding(start = 8.dp, top = 4.dp, bottom = 4.dp)
+                                        modifier =
+                                            Modifier.align(Alignment.CenterVertically)
+                                                .padding(start = 8.dp, top = 4.dp, bottom = 4.dp),
                                     )
                                     Icon(
-                                        imageVector = if (tx.txType == TxType.OUTBOUND) Lucide.ArrowUpFromLine else Lucide.ArrowDownToLine,
+                                        imageVector =
+                                            if (tx.txType == TxType.OUTBOUND) Lucide.ArrowUpFromLine
+                                            else Lucide.ArrowDownToLine,
                                         tint = colors.textFaded,
-                                        contentDescription = if (tx.txType == TxType.OUTBOUND) stringResource(id = R.string.send_icon) else stringResource(id = R.string.receive_icon),
-                                        modifier = Modifier
-                                            .align(Alignment.CenterVertically)
-                                            .scale(scale = 0.75f)
-                                            .padding(end = 8.dp),
+                                        contentDescription =
+                                            if (tx.txType == TxType.OUTBOUND) stringResource(id = R.string.send_icon)
+                                            else stringResource(id = R.string.receive_icon),
+                                        modifier =
+                                            Modifier.align(Alignment.CenterVertically)
+                                                .scale(scale = 0.75f)
+                                                .padding(end = 8.dp),
                                     )
                                 }
                             }
@@ -550,18 +531,21 @@ fun TransactionListBox(
 @Composable
 private fun CurrencyToggleText(currencyToggleState: Boolean, text: BitcoinUnit) {
     val colors = LocalPadawanColors.current
-    val currencyState = (!currencyToggleState && text == BitcoinUnit.BTC) || (currencyToggleState && text == BitcoinUnit.SATS)
+    val currencyState =
+        (!currencyToggleState && text == BitcoinUnit.BTC) || (currencyToggleState && text == BitcoinUnit.SATS)
 
-    val colorTransition = updateTransition(
-        targetState = if (currencyState) colors.textFaded else colors.text,
-        label = stringResource(R.string.currency_toggle_text)
-    )
-    val color by colorTransition.animateColor(
-        transitionSpec = { tween(durationMillis = 500) },
-        label = stringResource(R.string.changing_color_animation),
-    ) {
-        if (it == colors.textFaded) colors.text else colors.textFaded
-    }
+    val colorTransition =
+        updateTransition(
+            targetState = if (currencyState) colors.textFaded else colors.text,
+            label = stringResource(R.string.currency_toggle_text),
+        )
+    val color by
+        colorTransition.animateColor(
+            transitionSpec = { tween(durationMillis = 500) },
+            label = stringResource(R.string.changing_color_animation),
+        ) {
+            if (it == colors.textFaded) colors.text else colors.textFaded
+        }
 
     Text(
         text = text.toString().lowercase(),
@@ -586,7 +570,7 @@ private fun FaucetDialog(
             Text(
                 text = stringResource(R.string.hello_there),
                 style = PadawanTypography.headlineMedium,
-                color = colors.text
+                color = colors.text,
             )
         },
         text = {
@@ -594,35 +578,33 @@ private fun FaucetDialog(
                 text = stringResource(R.string.faucet_dialog),
                 fontSize = 18.sp,
                 lineHeight = 24.sp,
-                color = colors.textLight
+                color = colors.textLight,
             )
         },
-
         dismissButton = {
             Button(
                 onClick = { setOpenDialog(false) },
                 colors = ButtonDefaults.buttonColors(containerColor = colors.errorRed),
                 shape = RoundedCornerShape(20.dp),
                 border = standardBorder,
-                modifier = Modifier
-                    .padding(top = 4.dp, start = 4.dp, end = 4.dp, bottom = 4.dp)
-                    .neuBrutalismShadow()
-                    .height(70.dp)
-                    .width(110.dp)
+                modifier =
+                    Modifier.padding(top = 4.dp, start = 4.dp, end = 4.dp, bottom = 4.dp)
+                        .neuBrutalismShadow()
+                        .height(70.dp)
+                        .width(110.dp),
             ) {
                 Row(
                     verticalAlignment = Alignment.CenterVertically,
-                    modifier = Modifier.padding(vertical = 4.dp)
+                    modifier = Modifier.padding(vertical = 4.dp),
                 ) {
                     Icon(
                         imageVector = Lucide.ThumbsDown,
                         contentDescription = stringResource(R.string.no_thank_you_icon),
-                        tint = Color(0xff000000)
+                        tint = Color(0xff000000),
                     )
                 }
             }
         },
-
         confirmButton = {
             Button(
                 onClick = {
@@ -633,20 +615,20 @@ private fun FaucetDialog(
                 shape = RoundedCornerShape(20.dp),
                 contentPadding = PaddingValues(0.dp),
                 border = standardBorder,
-                modifier = Modifier
-                    .padding(top = 4.dp, start = 4.dp, end = 4.dp, bottom = 4.dp)
-                    .neuBrutalismShadow()
-                    .height(70.dp)
-                    .width(110.dp)
+                modifier =
+                    Modifier.padding(top = 4.dp, start = 4.dp, end = 4.dp, bottom = 4.dp)
+                        .neuBrutalismShadow()
+                        .height(70.dp)
+                        .width(110.dp),
             ) {
                 Row(
                     verticalAlignment = Alignment.CenterVertically,
-                    modifier = Modifier.padding(vertical = 4.dp)
+                    modifier = Modifier.padding(vertical = 4.dp),
                 ) {
                     Icon(
                         imageVector = Lucide.ThumbsUp,
                         contentDescription = stringResource(R.string.proceed_icon),
-                        tint = Color(0xff000000)
+                        tint = Color(0xff000000),
                     )
                 }
             }
@@ -661,7 +643,7 @@ internal fun PreviewSendReceiveRow() {
     PadawanTheme {
         SendReceive(
             onNavigation = {},
-            isOnline = true
+            isOnline = true,
         )
     }
 }

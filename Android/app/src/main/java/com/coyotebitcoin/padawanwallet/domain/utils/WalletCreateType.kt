@@ -7,5 +7,6 @@ package com.coyotebitcoin.padawanwallet.domain.utils
 
 sealed class WalletCreateType {
     data object FROMSCRATCH : WalletCreateType()
+
     class RECOVER(val recoveryPhrase: String) : WalletCreateType()
 }

@@ -14,22 +14,23 @@ import com.coyotebitcoin.padawanwallet.domain.settings.PadawanColorTheme
 
 val LocalPadawanColors = staticCompositionLocalOf<PadawanColors> { PadawanColorsTatooineDesert }
 
-
 @Composable
 fun PadawanTheme(
     theme: PadawanColorTheme = PadawanColorTheme.TATOOINE_DESERT,
-    content: @Composable () -> Unit
+    content: @Composable () -> Unit,
 ) {
-    val PadawanColors = when (theme) {
-        PadawanColorTheme.TATOOINE_DESERT -> PadawanColorsTatooineDesert
-        PadawanColorTheme.VADER_DARK -> PadawanColorsVaderDark
-    }
+    val PadawanColors =
+        when (theme) {
+            PadawanColorTheme.TATOOINE_DESERT -> PadawanColorsTatooineDesert
+            PadawanColorTheme.VADER_DARK -> PadawanColorsVaderDark
+        }
 
-    val PadawanMaterialThemeColors = lightColorScheme(
-        onPrimary = PadawanMaterialColors.onPrimary, // This is the default text color on buttons
-        background = PadawanColors.background,
-        surface = PadawanMaterialColors.surface
-    )
+    val PadawanMaterialThemeColors =
+        lightColorScheme(
+            onPrimary = PadawanMaterialColors.onPrimary, // This is the default text color on buttons
+            background = PadawanColors.background,
+            surface = PadawanMaterialColors.surface,
+        )
 
     MaterialTheme(
         colorScheme = PadawanMaterialThemeColors,

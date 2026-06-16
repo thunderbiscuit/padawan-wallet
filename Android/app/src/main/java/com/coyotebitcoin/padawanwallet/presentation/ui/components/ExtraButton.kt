@@ -32,20 +32,18 @@ fun ExtraButton(
         onClick = onClick,
         colors = ButtonDefaults.buttonColors(containerColor = colors.background2),
         shape = RoundedCornerShape(8.dp),
-        modifier = Modifier
-            .size(width = 400.dp, height = 80.dp)
-            .padding(start = 24.dp, end = 24.dp, top = 24.dp)
+        modifier = Modifier.size(width = 400.dp, height = 80.dp).padding(start = 24.dp, end = 24.dp, top = 24.dp),
     ) {
         Text(
             text = label,
             fontWeight = FontWeight.Normal,
-            color = colors.textLight
+            color = colors.textLight,
         )
         Spacer(modifier = Modifier.weight(1f))
         Icon(
             imageVector = Lucide.ChevronsRight,
             contentDescription = null,
-            tint = colors.accent2
+            tint = colors.accent2,
         )
     }
 }

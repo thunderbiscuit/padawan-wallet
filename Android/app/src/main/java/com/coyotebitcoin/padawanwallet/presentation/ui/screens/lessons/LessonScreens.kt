@@ -77,43 +77,40 @@ fun LessonScreens(
             PadawanAppBar(
                 title = stringResource(appBarTitleResourceId),
                 onClick = { onBack() },
-                color = colors.accent1
+                color = colors.accent1,
             )
-        },
+        }
     ) { scaffoldPadding ->
         Column(
-            modifier = Modifier
-                .padding(scaffoldPadding)
-                .fillMaxSize()
-                .background(color = colors.background),
-            horizontalAlignment = Alignment.CenterHorizontally
+            modifier = Modifier.padding(scaffoldPadding).fillMaxSize().background(color = colors.background),
+            horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .background(colors.accent1)
-                    .padding(top = 2.dp, bottom = 12.dp),
+                modifier = Modifier.fillMaxWidth().background(colors.accent1).padding(top = 2.dp, bottom = 12.dp),
                 horizontalArrangement = Arrangement.Center,
-                verticalAlignment = Alignment.CenterVertically
+                verticalAlignment = Alignment.CenterVertically,
             ) {
                 Row(
                     modifier = Modifier.padding(vertical = 8.dp),
                     horizontalArrangement = Arrangement.spacedBy(6.dp, Alignment.CenterHorizontally),
-                    verticalAlignment = Alignment.CenterVertically
+                    verticalAlignment = Alignment.CenterVertically,
                 ) {
                     repeat(numPages) { pageIndex ->
                         Box(
-                            modifier = Modifier
-                                .height(6.dp)
-                                .width(52.dp)
-                                .background(color = if (pagerState.currentPage >= pageIndex) colors.text else colors.background)
+                            modifier =
+                                Modifier.height(6.dp)
+                                    .width(52.dp)
+                                    .background(
+                                        color =
+                                            if (pagerState.currentPage >= pageIndex) colors.text else colors.background
+                                    )
                         )
                     }
                 }
             }
             HorizontalDivider(
                 thickness = 3.dp,
-                color = colors.text
+                color = colors.text,
             )
 
             // This is the main content area. It has 2 main parts:
@@ -122,9 +119,7 @@ fun LessonScreens(
             Column {
                 HorizontalPager(
                     state = pagerState,
-                    modifier = Modifier
-                        .weight(1f)
-                        .fillMaxWidth()
+                    modifier = Modifier.weight(1f).fillMaxWidth(),
                 ) { pageNumber ->
                     LessonPage(pages[pageNumber])
                 }
@@ -134,7 +129,7 @@ fun LessonScreens(
                     pagerState = pagerState,
                     numPages = numPages,
                     onLessonDone = { onLessonDone(LessonAction.SetCompleted(lessonNum)) },
-                    onBack = onBack
+                    onBack = onBack,
                 )
             }
         }
@@ -147,12 +142,9 @@ fun LessonPage(page: Page) {
     val scrollState = rememberScrollState()
 
     Column(
-        modifier = Modifier
-            .padding(24.dp)
-            .fillMaxSize()
-            .verticalScroll(scrollState),
+        modifier = Modifier.padding(24.dp).fillMaxSize().verticalScroll(scrollState),
         horizontalAlignment = Alignment.Start,
-        verticalArrangement = Arrangement.Top
+        verticalArrangement = Arrangement.Top,
     ) {
         for (element in page) {
             when (element.elementType) {
@@ -160,40 +152,37 @@ fun LessonPage(page: Page) {
                     Text(
                         text = stringResource(id = element.resourceId),
                         style = PadawanTypography.headlineMedium,
-                        color = colors.text
+                        color = colors.text,
                     )
                 }
                 ElementType.SUBTITLE -> {
                     Text(
                         text = stringResource(id = element.resourceId),
                         style = PadawanTypography.headlineSmall,
-                        color = colors.text
+                        color = colors.text,
                     )
                 }
                 ElementType.BODY -> {
                     Text(
                         text = stringResource(id = element.resourceId),
                         style = PadawanTypography.bodyMedium,
-                        color = colors.text
+                        color = colors.text,
                     )
                 }
                 ElementType.RESOURCE -> {
                     Card(
                         colors = CardDefaults.cardColors(PadawanColorsTatooineDesert.accent1Light),
                         border = standardBorder,
-                        modifier = Modifier
-                            .height(height = 150.dp)
-                            .fillMaxWidth()
-                            .neuBrutalismShadow()
+                        modifier = Modifier.height(height = 150.dp).fillMaxWidth().neuBrutalismShadow(),
                     ) {
                         Row(
                             modifier = Modifier.fillMaxSize(),
                             verticalAlignment = Alignment.CenterVertically,
-                            horizontalArrangement = Arrangement.Center
+                            horizontalArrangement = Arrangement.Center,
                         ) {
                             Image(
                                 painter = painterResource(id = element.resourceId),
-                                contentDescription = stringResource(R.string.image)
+                                contentDescription = stringResource(R.string.image),
                             )
                         }
                     }
@@ -213,10 +202,8 @@ fun NavigationRow(
     onBack: () -> Unit,
 ) {
     Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(start = 16.dp, end = 16.dp, bottom = 4.dp),
-        horizontalArrangement = Arrangement.spacedBy(12.dp)
+        modifier = Modifier.fillMaxWidth().padding(start = 16.dp, end = 16.dp, bottom = 4.dp),
+        horizontalArrangement = Arrangement.spacedBy(12.dp),
     ) {
         NavigationButton(
             onClick = {
@@ -225,7 +212,7 @@ fun NavigationRow(
                 }
             },
             icon = Lucide.ChevronLeft,
-            modifier = Modifier.weight(1f)
+            modifier = Modifier.weight(1f),
         )
         Spacer(modifier = Modifier.width(16.dp))
         NavigationButton(
@@ -240,7 +227,7 @@ fun NavigationRow(
                 }
             },
             icon = if (pagerState.currentPage < numPages - 1) Lucide.ChevronRight else Lucide.CircleCheckBig,
-            modifier = Modifier.weight(1f)
+            modifier = Modifier.weight(1f),
         )
     }
 }
@@ -256,14 +243,11 @@ fun NavigationButton(
         border = standardBorder,
         shape = RoundedCornerShape(20.dp),
         colors = CardDefaults.cardColors(PadawanColorsTatooineDesert.accent2),
-        modifier = modifier
-            .neuBrutalismShadow()
-            .height(50.dp)
+        modifier = modifier.neuBrutalismShadow().height(50.dp),
     ) {
         Box(
-            modifier = Modifier
-                .fillMaxSize(),
-            contentAlignment = Alignment.Center
+            modifier = Modifier.fillMaxSize(),
+            contentAlignment = Alignment.Center,
         ) {
             Icon(
                 imageVector = icon,
@@ -276,11 +260,12 @@ fun NavigationButton(
 @Preview(showBackground = true, widthDp = 360, heightDp = 800)
 @Composable
 fun LessonScreensPreview() {
-    val lessonData = LessonData(
-        chapterNum = 1,
-        appBarTitleResourceId = R.string.l1_app_bar,
-        pages = chapter1
-    )
+    val lessonData =
+        LessonData(
+            chapterNum = 1,
+            appBarTitleResourceId = R.string.l1_app_bar,
+            pages = chapter1,
+        )
 
     PadawanTheme {
         LessonScreens(

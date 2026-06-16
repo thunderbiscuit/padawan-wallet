@@ -18,9 +18,6 @@ import androidx.compose.ui.unit.dp
 internal fun VerticalTextFieldDivider() {
     HorizontalDivider(
         color = Color.Black,
-        modifier = Modifier
-            .fillMaxHeight()
-            .width(3.dp)
-            .padding(vertical = 14.dp)
+        modifier = Modifier.fillMaxHeight().width(3.dp).padding(vertical = 14.dp),
     )
 }

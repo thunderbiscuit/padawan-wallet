@@ -20,13 +20,12 @@ private const val TAG = "WalletRecoveryScreenTest"
 
 class WalletRecoveryScreenTest {
 
-    @get:Rule
-    val composeTestRule = createComposeRule()
+    @get:Rule val composeTestRule = createComposeRule()
 
     @Before
     fun setUp() {
 
-        val onBuildWalletButtonClicked : (WalletCreateType) -> Unit = { walletCreateType ->
+        val onBuildWalletButtonClicked: (WalletCreateType) -> Unit = { walletCreateType ->
             when (walletCreateType) {
                 is WalletCreateType.FROMSCRATCH -> Log.i(TAG, "Successful wallet initialization")
                 is WalletCreateType.RECOVER -> Log.i(TAG, "Successful wallet recovery")
@@ -48,13 +47,9 @@ class WalletRecoveryScreenTest {
     @Test
     fun recoveryWalletInit() {
         for (i in 1..12) {
-            composeTestRule
-                .onNodeWithText("Word $i")
-                .assertExists()
+            composeTestRule.onNodeWithText("Word $i").assertExists()
         }
 
-        composeTestRule
-            .onNodeWithTag(testTag = "Intro EnterRecoveryPhrase Button")
-            .assertExists()
+        composeTestRule.onNodeWithTag(testTag = "Intro EnterRecoveryPhrase Button").assertExists()
     }
 }

@@ -87,10 +87,11 @@ internal fun ReceiveScreen(
         }
     }
 
-    val qrCodeSize = when (getScreenSizeWidth(LocalConfiguration.current.screenWidthDp)) {
-        ScreenSizeWidth.Small -> 220.dp
-        ScreenSizeWidth.Phone -> 340.dp
-    }
+    val qrCodeSize =
+        when (getScreenSizeWidth(LocalConfiguration.current.screenWidthDp)) {
+            ScreenSizeWidth.Small -> 220.dp
+            ScreenSizeWidth.Phone -> 340.dp
+        }
 
     val context = LocalContext.current
     val scope = rememberCoroutineScope()
@@ -99,23 +100,16 @@ internal fun ReceiveScreen(
         topBar = {
             PadawanAppBar(
                 title = stringResource(R.string.receive_bitcoin),
-                onClick = { onBack() }
+                onClick = { onBack() },
             )
         },
-        snackbarHost = { SnackbarHost(snackbarHostState) }
+        snackbarHost = { SnackbarHost(snackbarHostState) },
     ) { scaffoldPadding ->
-        Box(
-            modifier = Modifier
-                .fillMaxSize()
-                .background(colors.background)
-                .padding(scaffoldPadding)
-        ) {
+        Box(modifier = Modifier.fillMaxSize().background(colors.background).padding(scaffoldPadding)) {
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Center,
-                modifier = Modifier
-                    .align(Center)
-                    .padding(bottom = 120.dp)
+                modifier = Modifier.align(Center).padding(bottom = 120.dp),
             ) {
                 if (state.qrState == QrUiState.Loading) {
                     LoadingAnimation(circleColor = colors.accent2, circleSize = 38.dp)
@@ -124,53 +118,45 @@ internal fun ReceiveScreen(
                         Image(
                             bitmap = it,
                             contentDescription = stringResource(R.string.qr_code),
-                            Modifier
-                                .size(qrCodeSize)
-                                .clip(RoundedCornerShape(16.dp))
-                                .clickable {
-                                    copyToClipboard(
-                                        state.address,
-                                        context,
-                                        scope,
-                                        snackbarHostState,
-                                        null
-                                    )
-                                }
+                            Modifier.size(qrCodeSize).clip(RoundedCornerShape(16.dp)).clickable {
+                                copyToClipboard(
+                                    state.address,
+                                    context,
+                                    scope,
+                                    snackbarHostState,
+                                    null,
+                                )
+                            },
                         )
                         Spacer(Modifier.height(16.dp))
-                        Box(
-                            modifier = Modifier.padding(horizontal = 16.dp)
-                        ) {
+                        Box(modifier = Modifier.padding(horizontal = 16.dp)) {
                             SelectionContainer {
                                 Text(
-                                    modifier = Modifier
-                                        .background(
-                                            color = colors.background,
-                                            shape = RoundedCornerShape(16.dp)
-                                        )
-                                        .clickable {
-                                            copyToClipboard(
-                                                state.address,
-                                                context,
-                                                scope,
-                                                snackbarHostState,
-                                                null,
+                                    modifier =
+                                        Modifier.background(
+                                                color = colors.background,
+                                                shape = RoundedCornerShape(16.dp),
                                             )
-                                        }
-                                        .padding(12.dp),
+                                            .clickable {
+                                                copyToClipboard(
+                                                    state.address,
+                                                    context,
+                                                    scope,
+                                                    snackbarHostState,
+                                                    null,
+                                                )
+                                            }
+                                            .padding(12.dp),
                                     text = state.address.chunked(4).joinToString(" "),
                                     fontFamily = ShareTechMono,
-                                    fontSize = 18.sp
+                                    fontSize = 18.sp,
                                 )
                             }
                             Icon(
                                 Lucide.ClipboardCopy,
                                 tint = Color.Black,
                                 contentDescription = "Copy to clipboard",
-                                modifier = Modifier
-                                    .padding(8.dp)
-                                    .size(20.dp)
-                                    .align(Alignment.BottomEnd)
+                                modifier = Modifier.padding(8.dp).size(20.dp).align(Alignment.BottomEnd),
                             )
                         }
                     }
@@ -182,16 +168,14 @@ internal fun ReceiveScreen(
                 colors = ButtonDefaults.buttonColors(containerColor = PadawanColorsTatooineDesert.accent2),
                 shape = RoundedCornerShape(20.dp),
                 border = standardBorder,
-                modifier = Modifier
-                    .height(100.dp)
-                    .fillMaxWidth(0.9f)
-                    .padding(vertical = 8.dp, horizontal = 8.dp)
-                    .neuBrutalismShadow()
-                    .align(BottomCenter)
+                modifier =
+                    Modifier.height(100.dp)
+                        .fillMaxWidth(0.9f)
+                        .padding(vertical = 8.dp, horizontal = 8.dp)
+                        .neuBrutalismShadow()
+                        .align(BottomCenter),
             ) {
-                Text(
-                    text = stringResource(R.string.generate_a_new_address),
-                )
+                Text(text = stringResource(R.string.generate_a_new_address))
             }
         }
     }

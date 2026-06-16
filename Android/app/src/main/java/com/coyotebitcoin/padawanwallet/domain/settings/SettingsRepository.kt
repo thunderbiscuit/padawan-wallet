@@ -10,6 +10,7 @@ import androidx.core.content.edit
 
 object SettingsRepository {
     private lateinit var sharedPreferences: SharedPreferences
+
     fun setSharedPreferences(sharedPref: SharedPreferences) {
         sharedPreferences = sharedPref
     }

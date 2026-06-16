@@ -47,39 +47,40 @@ fun SupportedLanguagesPicker() {
     // On Android 13 and above, we can use the LocaleManager to get an application-specific language setting.
     // On older versions, we fall back to the system default locale.
     // If the default system locale is not supported, we default to English.
-    var currentLocale: AppLanguage = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-        val localeManager: LocaleManager = context.getSystemService(LocaleManager::class.java)
-        val currentApplicationLocales: LocaleList = localeManager.applicationLocales
-        Log.i(TAG, "Current application locales are: $currentApplicationLocales")
-        if (currentApplicationLocales.isEmpty) {
-            Log.i(TAG, "No application locales set, using default system locale.")
+    var currentLocale: AppLanguage =
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            val localeManager: LocaleManager = context.getSystemService(LocaleManager::class.java)
+            val currentApplicationLocales: LocaleList = localeManager.applicationLocales
+            Log.i(TAG, "Current application locales are: $currentApplicationLocales")
+            if (currentApplicationLocales.isEmpty) {
+                Log.i(TAG, "No application locales set, using default system locale.")
+                val systemLevelLocale: Locale = Locale.getDefault()
+                Log.i(TAG, "Current system locale is: $systemLevelLocale")
+                val match = supportedLanguages.find { it.matchesLanguageOf(systemLevelLocale) }
+                if (match != null) {
+                    Log.i(TAG, "System locale '$match' is supported. We are using it as the app language.")
+                    AppLanguage.OsLevelChoice(systemLevelLocale)
+                } else {
+                    Log.i(TAG, "System locale not supported, defaulting to English.")
+                    AppLanguage.EnglishAsDefaultLanguage
+                }
+            } else if (currentApplicationLocales[0] in supportedLanguages) {
+                AppLanguage.AppLevelChoice(currentApplicationLocales[0])
+            } else {
+                Log.i(TAG, "Current application locale not supported, defaulting to English.")
+                AppLanguage.EnglishAsDefaultLanguage
+            }
+        } else {
+            // For Android versions below 13, we use the system default locale if we can, otherwise default to English.
             val systemLevelLocale: Locale = Locale.getDefault()
             Log.i(TAG, "Current system locale is: $systemLevelLocale")
-            val match = supportedLanguages.find { it.matchesLanguageOf(systemLevelLocale) }
-            if (match != null) {
-                Log.i(TAG, "System locale '$match' is supported. We are using it as the app language.")
+            if (systemLevelLocale in supportedLanguages) {
                 AppLanguage.OsLevelChoice(systemLevelLocale)
             } else {
                 Log.i(TAG, "System locale not supported, defaulting to English.")
                 AppLanguage.EnglishAsDefaultLanguage
             }
-        } else if (currentApplicationLocales[0] in supportedLanguages) {
-            AppLanguage.AppLevelChoice(currentApplicationLocales[0])
-        } else {
-            Log.i(TAG, "Current application locale not supported, defaulting to English.")
-            AppLanguage.EnglishAsDefaultLanguage
         }
-    } else {
-        // For Android versions below 13, we use the system default locale if we can, otherwise default to English.
-        val systemLevelLocale: Locale = Locale.getDefault()
-        Log.i(TAG, "Current system locale is: $systemLevelLocale")
-        if (systemLevelLocale in supportedLanguages) {
-            AppLanguage.OsLevelChoice(systemLevelLocale)
-        } else {
-            Log.i(TAG, "System locale not supported, defaulting to English.")
-            AppLanguage.EnglishAsDefaultLanguage
-        }
-    }
 
     Log.i(TAG, "Current locale for the app is: ${currentLocale.language}")
     val (selectedOption, onOptionSelected) = remember { mutableStateOf(currentLocale.language) }
@@ -89,19 +90,20 @@ fun SupportedLanguagesPicker() {
             supportedLanguages.forEach { language ->
                 Row(
                     verticalAlignment = Alignment.CenterVertically,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .selectable(
-                            selected = (language.language == selectedOption.language),
-                            onClick = {
-                                onOptionSelected(language)
-                                val appLocale = Locale.forLanguageTag(language.language)
-                                // This will only ever be called on Android 13+ devices.
-                                val localeManager: LocaleManager = context.getSystemService(LocaleManager::class.java)
-                                localeManager.applicationLocales = LocaleList(appLocale)
-                                currentLocale = AppLanguage.AppLevelChoice(appLocale)
-                            }
-                        )
+                    modifier =
+                        Modifier.fillMaxWidth()
+                            .selectable(
+                                selected = (language.language == selectedOption.language),
+                                onClick = {
+                                    onOptionSelected(language)
+                                    val appLocale = Locale.forLanguageTag(language.language)
+                                    // This will only ever be called on Android 13+ devices.
+                                    val localeManager: LocaleManager =
+                                        context.getSystemService(LocaleManager::class.java)
+                                    localeManager.applicationLocales = LocaleList(appLocale)
+                                    currentLocale = AppLanguage.AppLevelChoice(appLocale)
+                                },
+                            ),
                 ) {
                     RadioButton(
                         selected = (language.language == selectedOption.language),
@@ -113,11 +115,9 @@ fun SupportedLanguagesPicker() {
                             localeManager.applicationLocales = LocaleList(appLocale)
                             currentLocale = AppLanguage.AppLevelChoice(appLocale)
                         },
-                        colors = RadioButtonDefaults.colors(selectedColor = colors.accent1)
+                        colors = RadioButtonDefaults.colors(selectedColor = colors.accent1),
                     )
-                    Text(
-                        text = language.displayLanguage.lowercase().replaceFirstChar { it.uppercase() },
-                    )
+                    Text(text = language.displayLanguage.lowercase().replaceFirstChar { it.uppercase() })
                 }
             }
         } else {
@@ -128,23 +128,21 @@ fun SupportedLanguagesPicker() {
             supportedLanguages.forEach { language ->
                 Row(
                     verticalAlignment = Alignment.CenterVertically,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .selectable(
-                            selected = (language.language == selectedOption.language),
-                            enabled = false,
-                            onClick = {}
-                        )
+                    modifier =
+                        Modifier.fillMaxWidth()
+                            .selectable(
+                                selected = (language.language == selectedOption.language),
+                                enabled = false,
+                                onClick = {},
+                            ),
                 ) {
                     RadioButton(
                         selected = (language.language == selectedOption.language),
                         enabled = false,
                         onClick = {},
-                        colors = RadioButtonDefaults.colors(selectedColor = colors.accent1)
+                        colors = RadioButtonDefaults.colors(selectedColor = colors.accent1),
                     )
-                    Text(
-                        text = language.displayLanguage.lowercase().replaceFirstChar { it.uppercase() },
-                    )
+                    Text(text = language.displayLanguage.lowercase().replaceFirstChar { it.uppercase() })
                 }
             }
         }

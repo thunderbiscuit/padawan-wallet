@@ -42,10 +42,7 @@ fun getDateDifference(date: String): String {
 }
 
 private fun formatPeriod(name: String, period: Int): String {
-    return if (period == 1)
-        "$period $name"
-    else
-        "$period ${name}s"
+    return if (period == 1) "$period $name" else "$period ${name}s"
 }
 
 fun ULong.timestampToString(): String {

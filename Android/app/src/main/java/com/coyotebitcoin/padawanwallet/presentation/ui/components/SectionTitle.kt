@@ -21,13 +21,15 @@ fun SectionTitle(title: String, first: Boolean) {
     val colors = LocalPadawanColors.current
 
     Text(
-        modifier = if (first) Modifier.padding(top = 16.dp, start = 4.dp) else Modifier.padding(top = 42.dp, start = 4.dp),
+        modifier =
+            if (first) Modifier.padding(top = 16.dp, start = 4.dp) else Modifier.padding(top = 42.dp, start = 4.dp),
         text = title,
-        style = TextStyle(
-            fontFamily = Outfit,
-            color = colors.text,
-            fontSize = 20.sp,
-            fontWeight = FontWeight.SemiBold
-        )
+        style =
+            TextStyle(
+                fontFamily = Outfit,
+                color = colors.text,
+                fontSize = 20.sp,
+                fontWeight = FontWeight.SemiBold,
+            ),
     )
 }

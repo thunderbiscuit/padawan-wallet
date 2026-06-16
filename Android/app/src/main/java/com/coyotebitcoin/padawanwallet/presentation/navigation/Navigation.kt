@@ -46,15 +46,14 @@ import com.coyotebitcoin.padawanwallet.presentation.viewmodels.WalletViewModel
 private const val TAG = "PadawanTag/Navigation"
 
 /**
- * The root navigation composable. This decides whether to show the onboarding flow or the core app screens
- * based on whether the user has completed onboarding. When users navigate to one of the core app screens (wallet,
- * chapters, more), they enter a sub-navigation structure defined in [NavigationCoreScreens].
+ * The root navigation composable. This decides whether to show the onboarding flow or the core app screens based on
+ * whether the user has completed onboarding. When users navigate to one of the core app screens (wallet, chapters,
+ * more), they enter a sub-navigation structure defined in [NavigationCoreScreens].
  */
 @Composable
-fun NavigationRoot(
-    onboardingDone: Boolean,
-) {
-    val startingScreen = if (onboardingDone) SecondaryDestinations.CoreScreens else SecondaryDestinations.OnboardingScreens
+fun NavigationRoot(onboardingDone: Boolean) {
+    val startingScreen =
+        if (onboardingDone) SecondaryDestinations.CoreScreens else SecondaryDestinations.OnboardingScreens
     val backStack = remember { mutableStateListOf<SecondaryDestinations>(startingScreen) }
     val bottom = remember { mutableStateListOf<CoreDestinations>(CoreDestinations.WalletRootScreen) }
     val walletViewModel: WalletViewModel = viewModel()
@@ -73,124 +72,127 @@ fun NavigationRoot(
         popTransitionSpec = {
             fadeIn(tween(250)) togetherWith fadeOut(tween(250))
         },
-        entryProvider = entryProvider {
-            // ---------------------------------------------------------------------------------------------------------
-            // Screens accessible from the onboarding flow
-            // ---------------------------------------------------------------------------------------------------------
-            entry<SecondaryDestinations.OnboardingScreens> {
-                OnboardingScreens(
-                    onBuildWallet = ::onBuildWallet,
-                    onCreateNav = {
-                        backStack.clear()
-                        backStack.add(SecondaryDestinations.CoreScreens)
-                    },
-                    onRecoverNav = { backStack.add(SecondaryDestinations.WalletRecoveryScreen) },
-                )
-            }
+        entryProvider =
+            entryProvider {
+                // -----------------------------------------------------------------------------------------------------
+                // Screens accessible from the onboarding flow
+                // -----------------------------------------------------------------------------------------------------
+                entry<SecondaryDestinations.OnboardingScreens> {
+                    OnboardingScreens(
+                        onBuildWallet = ::onBuildWallet,
+                        onCreateNav = {
+                            backStack.clear()
+                            backStack.add(SecondaryDestinations.CoreScreens)
+                        },
+                        onRecoverNav = { backStack.add(SecondaryDestinations.WalletRecoveryScreen) },
+                    )
+                }
 
-            entry<SecondaryDestinations.WalletRecoveryScreen> {
-                WalletRecoveryScreen(
-                    onBuildWallet = ::onBuildWallet,
-                    onRecoverNav = {
-                        backStack.clear()
-                        backStack.add(SecondaryDestinations.CoreScreens)
-                        walletViewModel.onAction(WalletAction.Sync)
-                    },
-                )
-            }
+                entry<SecondaryDestinations.WalletRecoveryScreen> {
+                    WalletRecoveryScreen(
+                        onBuildWallet = ::onBuildWallet,
+                        onRecoverNav = {
+                            backStack.clear()
+                            backStack.add(SecondaryDestinations.CoreScreens)
+                            walletViewModel.onAction(WalletAction.Sync)
+                        },
+                    )
+                }
 
-            // ---------------------------------------------------------------------------------------------------------
-            // Core screens
-            // This will lead you to the 3 core app screens with bottom navigation, and the sub NavDisplay [NavigationCoreScreens]
-            // ---------------------------------------------------------------------------------------------------------
-            entry<SecondaryDestinations.CoreScreens> {
-                CoreScreens(
-                    backStack = backStack,
-                    bottomBarBackStack = bottom,
-                    walletViewModel = walletViewModel,
-                    chaptersViewModel = chaptersViewModel,
-                )
-            }
+                // -----------------------------------------------------------------------------------------------------
+                // Core screens
+                // This will lead you to the 3 core app screens with bottom navigation, and the sub NavDisplay
+                // [NavigationCoreScreens]
+                // -----------------------------------------------------------------------------------------------------
+                entry<SecondaryDestinations.CoreScreens> {
+                    CoreScreens(
+                        backStack = backStack,
+                        bottomBarBackStack = bottom,
+                        walletViewModel = walletViewModel,
+                        chaptersViewModel = chaptersViewModel,
+                    )
+                }
 
-            // ---------------------------------------------------------------------------------------------------------
-            // Screens accessible from the Wallet tab
-            // ---------------------------------------------------------------------------------------------------------
-            entry<SecondaryDestinations.TransactionScreen> {
-                val txDetails = walletViewModel.getSingleTxDetails()
-                if (txDetails != null) {
-                    TransactionScreen(
-                        txDetails = txDetails,
+                // -----------------------------------------------------------------------------------------------------
+                // Screens accessible from the Wallet tab
+                // -----------------------------------------------------------------------------------------------------
+                entry<SecondaryDestinations.TransactionScreen> {
+                    val txDetails = walletViewModel.getSingleTxDetails()
+                    if (txDetails != null) {
+                        TransactionScreen(
+                            txDetails = txDetails,
+                            onBack = { backStack.removeLastOrNull() },
+                        )
+                    } else {
+                        Log.w(TAG, "Transaction not found")
+                    }
+                }
+
+                entry<SecondaryDestinations.ReceiveScreen> {
+                    val state: ReceiveScreenState by receiveViewModel.state.collectAsState()
+
+                    ReceiveScreen(
+                        state = state,
+                        onAction = receiveViewModel::onAction,
                         onBack = { backStack.removeLastOrNull() },
                     )
-                } else {
-                    Log.w(TAG, "Transaction not found")
                 }
-            }
 
-            entry<SecondaryDestinations.ReceiveScreen> {
-                val state: ReceiveScreenState by receiveViewModel.state.collectAsState()
+                entry<SecondaryDestinations.SendScreen> {
+                    val state by walletViewModel.walletState.collectAsState()
+                    SendScreen(
+                        state = state,
+                        onAction = walletViewModel::onAction,
+                        onBack = { backStack.removeLastOrNull() },
+                        onQrScreenNavigate = { backStack.add(SecondaryDestinations.QrScanScreen) },
+                    )
+                }
 
-                ReceiveScreen(
-                    state = state,
-                    onAction = receiveViewModel::onAction,
-                    onBack = { backStack.removeLastOrNull() },
-                )
-            }
+                entry<SecondaryDestinations.QrScanScreen> {
+                    QrScanScreen(
+                        onAction = walletViewModel::onAction,
+                        onBack = { backStack.removeLastOrNull() },
+                    )
+                }
 
-            entry<SecondaryDestinations.SendScreen> {
-                val state by walletViewModel.walletState.collectAsState()
-                SendScreen(
-                    state = state,
-                    onAction = walletViewModel::onAction,
-                    onBack = { backStack.removeLastOrNull() },
-                    onQrScreenNavigate = { backStack.add(SecondaryDestinations.QrScanScreen) }
-                )
-            }
+                // -----------------------------------------------------------------------------------------------------
+                // Screens accessible from the Learn tab
+                // -----------------------------------------------------------------------------------------------------
+                entry<SecondaryDestinations.ChapterScreen> { chapter ->
+                    // The lessons are numbered from 1, but the list is 0-indexed
+                    // When we call "navigate to chapter 1", we need to get the 0th element of the list and so on.
+                    val lessonData =
+                        LessonData(
+                            chapterNum = chapter.chapter,
+                            appBarTitleResourceId = allAppBarTitlesResourceId.get(chapter.chapter - 1),
+                            pages = allChapters.get(chapter.chapter - 1),
+                        )
+                    LessonScreens(
+                        lessonData = lessonData,
+                        onLessonDone = chaptersViewModel::onAction,
+                        onBack = { backStack.removeLastOrNull() },
+                    )
+                }
 
-            entry<SecondaryDestinations.QrScanScreen> {
-                QrScanScreen(
-                    onAction = walletViewModel::onAction,
-                    onBack = { backStack.removeLastOrNull() }
-                )
-            }
+                // -----------------------------------------------------------------------------------------------------
+                // Screens accessible from the More tab
+                // -----------------------------------------------------------------------------------------------------
+                entry<SecondaryDestinations.RecoveryPhraseScreen> {
+                    RecoveryPhraseScreen(onBackArrow = { backStack.removeLastOrNull() })
+                }
 
-            // ---------------------------------------------------------------------------------------------------------
-            // Screens accessible from the Learn tab
-            // ---------------------------------------------------------------------------------------------------------
-            entry<SecondaryDestinations.ChapterScreen> { chapter ->
-                // The lessons are numbered from 1, but the list is 0-indexed
-                // When we call "navigate to chapter 1", we need to get the 0th element of the list and so on.
-                val lessonData = LessonData(
-                    chapterNum = chapter.chapter,
-                    appBarTitleResourceId = allAppBarTitlesResourceId.get(chapter.chapter - 1),
-                    pages = allChapters.get(chapter.chapter - 1)
-                )
-                LessonScreens(
-                    lessonData = lessonData,
-                    onLessonDone = chaptersViewModel::onAction,
-                    onBack = { backStack.removeLastOrNull() },
-                )
-            }
+                entry<SecondaryDestinations.SendCoinsBackScreen> {
+                    SendCoinsBackScreen(onBackArrow = { backStack.removeLastOrNull() })
+                }
 
-            // ---------------------------------------------------------------------------------------------------------
-            // Screens accessible from the More tab
-            // ---------------------------------------------------------------------------------------------------------
-            entry<SecondaryDestinations.RecoveryPhraseScreen> {
-                RecoveryPhraseScreen(onBackArrow = { backStack.removeLastOrNull() })
-            }
+                entry<SecondaryDestinations.LanguagesScreen> {
+                    LanguagesScreen(onBackArrow = { backStack.removeLastOrNull() })
+                }
 
-            entry<SecondaryDestinations.SendCoinsBackScreen> {
-                SendCoinsBackScreen(onBackArrow = { backStack.removeLastOrNull() })
-            }
-
-            entry<SecondaryDestinations.LanguagesScreen> {
-                LanguagesScreen(onBackArrow = { backStack.removeLastOrNull() })
-            }
-
-            entry<SecondaryDestinations.AboutScreen> {
-                AboutScreen(onBackArrow = { backStack.removeLastOrNull() })
-            }
-        }
+                entry<SecondaryDestinations.AboutScreen> {
+                    AboutScreen(onBackArrow = { backStack.removeLastOrNull() })
+                }
+            },
     )
 }
 
@@ -200,66 +202,67 @@ fun NavigationCoreScreens(
     bottomBarBackStack: SnapshotStateList<CoreDestinations>,
     walletViewModel: WalletViewModel,
     chaptersViewModel: LessonsViewModel,
-    scaffoldPadding: PaddingValues
+    scaffoldPadding: PaddingValues,
 ) {
     // TODO: Consider scoping the viewmodels to the NavEntries.
     //       https://developer.android.com/guide/navigation/navigation-3/save-state#scoping-viewmodels
 
     NavDisplay(
         backStack = bottomBarBackStack,
-        onBack = { },
+        onBack = {},
         transitionSpec = {
             fadeIn(tween(250)) togetherWith fadeOut(tween(250))
         },
         popTransitionSpec = {
             fadeIn(tween(250)) togetherWith fadeOut(tween(250))
         },
-        entryProvider = entryProvider {
-            entry<CoreDestinations.WalletRootScreen> {
-                val walletState: WalletState by walletViewModel.walletState.collectAsState()
+        entryProvider =
+            entryProvider {
+                entry<CoreDestinations.WalletRootScreen> {
+                    val walletState: WalletState by walletViewModel.walletState.collectAsState()
 
-                WalletHomeScreen(
-                    state = walletState,
-                    onAction = walletViewModel::onAction,
-                    onNavigation = { destination: SecondaryDestinations ->
-                        when (destination) {
-                            is SecondaryDestinations.ReceiveScreen     -> backStack.add(destination)
-                            is SecondaryDestinations.SendScreen        -> backStack.add(destination)
-                            is SecondaryDestinations.TransactionScreen -> backStack.add(destination)
-                            else -> Unit
-                        }
-                    },
-                    paddingValues = scaffoldPadding
-                )
-            }
+                    WalletHomeScreen(
+                        state = walletState,
+                        onAction = walletViewModel::onAction,
+                        onNavigation = { destination: SecondaryDestinations ->
+                            when (destination) {
+                                is SecondaryDestinations.ReceiveScreen -> backStack.add(destination)
+                                is SecondaryDestinations.SendScreen -> backStack.add(destination)
+                                is SecondaryDestinations.TransactionScreen -> backStack.add(destination)
+                                else -> Unit
+                            }
+                        },
+                        paddingValues = scaffoldPadding,
+                    )
+                }
 
-            entry<CoreDestinations.LessonsRootScreen> {
-                val state: LessonsRootScreenState by chaptersViewModel.rootState.collectAsState()
+                entry<CoreDestinations.LessonsRootScreen> {
+                    val state: LessonsRootScreenState by chaptersViewModel.rootState.collectAsState()
 
-                LessonsRootScreen(
-                    state = state,
-                    onChapterNav = { chapter: Int ->
-                        backStack.add(SecondaryDestinations.ChapterScreen(chapter))
-                    },
-                    paddingValues = scaffoldPadding
-                )
-            }
+                    LessonsRootScreen(
+                        state = state,
+                        onChapterNav = { chapter: Int ->
+                            backStack.add(SecondaryDestinations.ChapterScreen(chapter))
+                        },
+                        paddingValues = scaffoldPadding,
+                    )
+                }
 
-            entry<CoreDestinations.SettingsRootScreen> {
-                SettingsRootScreen(
-                    onAction = chaptersViewModel::onAction,
-                    onNavigation = { destination: SecondaryDestinations ->
-                        when (destination) {
-                            is SecondaryDestinations.RecoveryPhraseScreen -> backStack.add(destination)
-                            is SecondaryDestinations.SendCoinsBackScreen  -> backStack.add(destination)
-                            is SecondaryDestinations.LanguagesScreen      -> backStack.add(destination)
-                            is SecondaryDestinations.AboutScreen          -> backStack.add(destination)
-                            else -> Unit
-                        }
-                    },
-                )
-            }
-        }
+                entry<CoreDestinations.SettingsRootScreen> {
+                    SettingsRootScreen(
+                        onAction = chaptersViewModel::onAction,
+                        onNavigation = { destination: SecondaryDestinations ->
+                            when (destination) {
+                                is SecondaryDestinations.RecoveryPhraseScreen -> backStack.add(destination)
+                                is SecondaryDestinations.SendCoinsBackScreen -> backStack.add(destination)
+                                is SecondaryDestinations.LanguagesScreen -> backStack.add(destination)
+                                is SecondaryDestinations.AboutScreen -> backStack.add(destination)
+                                else -> Unit
+                            }
+                        },
+                    )
+                }
+            },
     )
 }
 
@@ -268,7 +271,7 @@ fun onBuildWallet(walletCreateType: WalletCreateType) {
     try {
         when (walletCreateType) {
             is WalletCreateType.FROMSCRATCH -> Wallet.createWallet()
-            is WalletCreateType.RECOVER     -> Wallet.recoverWallet(walletCreateType.recoveryPhrase)
+            is WalletCreateType.RECOVER -> Wallet.recoverWallet(walletCreateType.recoveryPhrase)
         }
     } catch (e: Throwable) {
         Log.i(TAG, "Could not build wallet: $e")

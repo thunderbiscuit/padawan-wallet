@@ -16,10 +16,8 @@ import androidx.compose.ui.unit.dp
 @Composable
 fun SectionDivider() {
     HorizontalDivider(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(top = 2.dp, bottom = 8.dp, start = 4.dp, end = 4.dp),
+        modifier = Modifier.fillMaxWidth().padding(top = 2.dp, bottom = 8.dp, start = 4.dp, end = 4.dp),
         color = Color.Black,
-        thickness = 2.dp
+        thickness = 2.dp,
     )
 }

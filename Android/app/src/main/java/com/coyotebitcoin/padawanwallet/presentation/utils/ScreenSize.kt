@@ -21,7 +21,7 @@ fun getScreenSizeWidth(width: Int): ScreenSizeWidth {
     return when {
         width < 340 -> ScreenSizeWidth.Small
         else -> ScreenSizeWidth.Phone
-        // else -> ScreenSize.Tablet
+    // else -> ScreenSize.Tablet
     }
 }
 
@@ -29,6 +29,6 @@ fun getScreenSizeHeight(height: Int): ScreenSizeHeight {
     return when {
         height < 700 -> ScreenSizeHeight.Small
         else -> ScreenSizeHeight.Phone
-        // else -> ScreenSize.Tablet
+    // else -> ScreenSize.Tablet
     }
 }

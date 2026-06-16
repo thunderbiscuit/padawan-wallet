@@ -10,7 +10,6 @@ import androidx.lifecycle.viewModelScope
 import com.coyotebitcoin.padawanwallet.domain.lessons.LessonsRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
@@ -18,21 +17,23 @@ import kotlinx.coroutines.runBlocking
 private const val TAG = "PTag/ChaptersViewModel"
 
 data class LessonsRootScreenState(
-    val completedLessons: Map<Int, Boolean> = mapOf(
-        Pair(1, false),
-        Pair(2, false),
-        Pair(3, false),
-        Pair(4, false),
-        Pair(5, false),
-        Pair(6, false),
-        Pair(7, false),
-        Pair(8, false),
-        Pair(9, false),
-    )
+    val completedLessons: Map<Int, Boolean> =
+        mapOf(
+            Pair(1, false),
+            Pair(2, false),
+            Pair(3, false),
+            Pair(4, false),
+            Pair(5, false),
+            Pair(6, false),
+            Pair(7, false),
+            Pair(8, false),
+            Pair(9, false),
+        )
 )
 
 sealed interface LessonAction {
-    data class  SetCompleted(val lessonNum: Int) : LessonAction
+    data class SetCompleted(val lessonNum: Int) : LessonAction
+
     data object ResetAll : LessonAction
 }
 
@@ -53,7 +54,7 @@ class LessonsViewModel : ViewModel() {
     fun onAction(action: LessonAction) {
         when (action) {
             is LessonAction.SetCompleted -> setCompleted(action.lessonNum)
-            is LessonAction.ResetAll     -> resetCompletedLessons()
+            is LessonAction.ResetAll -> resetCompletedLessons()
         }
     }
 

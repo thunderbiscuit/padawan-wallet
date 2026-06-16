@@ -50,7 +50,7 @@ import kotlinx.coroutines.delay
 fun TransactionBroadcastAnimation(
     strokeWidth: Dp = 8.dp,
     durationMillis: Int = 800,
-    onAnimationEnd: () -> Unit
+    onAnimationEnd: () -> Unit,
 ) {
     val circleProgress = remember { Animatable(0f) }
     val emojiScale = remember { Animatable(0f) }
@@ -60,11 +60,11 @@ fun TransactionBroadcastAnimation(
     LaunchedEffect(Unit) {
         circleProgress.animateTo(
             targetValue = 1f,
-            animationSpec = tween(durationMillis, easing = LinearOutSlowInEasing)
+            animationSpec = tween(durationMillis, easing = LinearOutSlowInEasing),
         )
         emojiScale.animateTo(
             targetValue = 1f,
-            animationSpec = tween(durationMillis / 2, easing = FastOutSlowInEasing)
+            animationSpec = tween(durationMillis / 2, easing = FastOutSlowInEasing),
         )
         showText.value = true
         delay(1500)
@@ -74,11 +74,11 @@ fun TransactionBroadcastAnimation(
     Column(
         modifier = Modifier.fillMaxSize().background(colors.background),
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
+        verticalArrangement = Arrangement.Center,
     ) {
         Box(
             contentAlignment = Alignment.Center,
-            modifier = Modifier.size(120.dp)
+            modifier = Modifier.size(120.dp),
         ) {
             // Circle animation
             Canvas(modifier = Modifier.fillMaxSize()) {
@@ -93,18 +93,18 @@ fun TransactionBroadcastAnimation(
                     useCenter = false,
                     topLeft = topLeft,
                     size = size,
-                    style = Stroke(width = strokeWidth.toPx(), cap = StrokeCap.Round)
+                    style = Stroke(width = strokeWidth.toPx(), cap = StrokeCap.Round),
                 )
             }
 
             Text(
                 text = "👍",
                 fontSize = 48.sp,
-                modifier = Modifier
-                    .graphicsLayer {
+                modifier =
+                    Modifier.graphicsLayer {
                         scaleX = emojiScale.value
                         scaleY = emojiScale.value
-                    }
+                    },
             )
         }
 
@@ -112,10 +112,9 @@ fun TransactionBroadcastAnimation(
 
         Box(
             modifier = Modifier.height(50.dp).padding(top = 16.dp).fillMaxWidth(),
-            contentAlignment = Alignment.Center
+            contentAlignment = Alignment.Center,
         ) {
             Column {
-
                 AnimatedVisibility(
                     visible = showText.value,
                     enter = fadeIn(animationSpec = tween(400)) + slideInVertically(initialOffsetY = { it / 2 }),
@@ -138,8 +137,6 @@ fun TransactionBroadcastAnimation(
 @Composable
 internal fun PreviewTransactionBroadcastAnimation() {
     PadawanTheme {
-        TransactionBroadcastAnimation(
-            onAnimationEnd = {}
-        )
+        TransactionBroadcastAnimation(onAnimationEnd = {})
     }
 }

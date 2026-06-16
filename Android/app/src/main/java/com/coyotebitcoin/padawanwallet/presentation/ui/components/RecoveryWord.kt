@@ -34,25 +34,22 @@ fun RecoveryWord(
         border = standardBorder,
         shape = RoundedCornerShape(20.dp),
         colors = CardDefaults.cardColors(PadawanColorsTatooineDesert.accent2),
-        modifier = Modifier
-            .padding(vertical = 4.dp, horizontal = 12.dp)
-            .neuBrutalismShadow()
-            .width(100.dp)
-            .height(50.dp)
+        modifier =
+            Modifier.padding(vertical = 4.dp, horizontal = 12.dp).neuBrutalismShadow().width(100.dp).height(50.dp),
     ) {
         Box(
-            modifier = Modifier
-                .fillMaxSize(),
-            contentAlignment = Alignment.Center
+            modifier = Modifier.fillMaxSize(),
+            contentAlignment = Alignment.Center,
         ) {
             Text(
                 text = "${index + 1}. $word",
                 modifier = Modifier.padding(all = 8.dp),
-                style = TextStyle(
-                    fontFamily = Outfit,
-                    fontWeight = FontWeight.SemiBold,
-                    fontSize = 18.sp,
-                )
+                style =
+                    TextStyle(
+                        fontFamily = Outfit,
+                        fontWeight = FontWeight.SemiBold,
+                        fontSize = 18.sp,
+                    ),
             )
         }
     }

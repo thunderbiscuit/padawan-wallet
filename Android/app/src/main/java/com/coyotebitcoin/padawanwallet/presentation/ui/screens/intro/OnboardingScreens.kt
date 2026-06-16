@@ -69,45 +69,41 @@ fun OnboardingScreens(
 ) {
     val colors = LocalPadawanColors.current
 
-    val pages = listOf(
-        OnboardingPage(
-            title = stringResource(id = R.string.onboard_title_1),
-            description = stringResource(id = R.string.onboard_1),
-            drawableRes = R.drawable.padawan_icon_bw
-        ),
-        OnboardingPage(
-            title = stringResource(id = R.string.onboard_title_2),
-            description = stringResource(id = R.string.onboard_2),
-            icon = Icons.Rounded.CurrencyBitcoin
-        ),
-        OnboardingPage(
-            title = stringResource(id = R.string.onboard_title_3),
-            description = stringResource(id = R.string.onboard_3),
-            icon = Lucide.GraduationCap
+    val pages =
+        listOf(
+            OnboardingPage(
+                title = stringResource(id = R.string.onboard_title_1),
+                description = stringResource(id = R.string.onboard_1),
+                drawableRes = R.drawable.padawan_icon_bw,
+            ),
+            OnboardingPage(
+                title = stringResource(id = R.string.onboard_title_2),
+                description = stringResource(id = R.string.onboard_2),
+                icon = Icons.Rounded.CurrencyBitcoin,
+            ),
+            OnboardingPage(
+                title = stringResource(id = R.string.onboard_title_3),
+                description = stringResource(id = R.string.onboard_3),
+                icon = Lucide.GraduationCap,
+            ),
         )
-    )
 
     val pagerState = rememberPagerState(pageCount = { 4 })
     val coroutineScope = rememberCoroutineScope()
 
     Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(color = colors.background)
-            .padding(16.dp),
-        horizontalAlignment = Alignment.CenterHorizontally
+        modifier = Modifier.fillMaxSize().background(color = colors.background).padding(16.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         // Pager content
         HorizontalPager(
             state = pagerState,
-            modifier = Modifier
-                .weight(1f)
-                .fillMaxWidth()
+            modifier = Modifier.weight(1f).fillMaxWidth(),
         ) { page ->
             if (page < 3) {
                 OnboardingPageContent(
                     page = pages[page],
-                    modifier = Modifier.fillMaxSize()
+                    modifier = Modifier.fillMaxSize(),
                 )
             } else {
                 CreateWalletPage(onBuildWallet, onCreateNav, onRecoverNav)
@@ -116,11 +112,9 @@ fun OnboardingScreens(
 
         // Navigation buttons
         Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(bottom = 32.dp),
+            modifier = Modifier.fillMaxWidth().padding(bottom = 32.dp),
             horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.CenterVertically
+            verticalAlignment = Alignment.CenterVertically,
         ) {
             if (pagerState.currentPage > 0 && pagerState.currentPage < 3) {
                 IconButton(
@@ -142,19 +136,16 @@ fun OnboardingScreens(
             Row(
                 modifier = Modifier.padding(vertical = 16.dp),
                 horizontalArrangement = Arrangement.Center,
-                verticalAlignment = Alignment.CenterVertically
+                verticalAlignment = Alignment.CenterVertically,
             ) {
                 repeat(4) { index ->
                     val isSelected = pagerState.currentPage == index
                     Box(
-                        modifier = Modifier
-                            .size(if (isSelected) 16.dp else 12.dp)
-                            .clip(CircleShape)
-                            .background(
-                                if (isSelected) Color.Black
-                                else Color.Black.copy(alpha = 0.3f)
-                            )
-                            .padding(horizontal = 12.dp)
+                        modifier =
+                            Modifier.size(if (isSelected) 16.dp else 12.dp)
+                                .clip(CircleShape)
+                                .background(if (isSelected) Color.Black else Color.Black.copy(alpha = 0.3f))
+                                .padding(horizontal = 12.dp)
                     )
                     if (index < pages.size) {
                         Spacer(modifier = Modifier.width(8.dp))
@@ -193,26 +184,22 @@ fun OnboardingScreens(
 @Composable
 fun OnboardingPageContent(
     page: OnboardingPage,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     val colors = LocalPadawanColors.current
     Column(
         modifier = modifier.padding(horizontal = 24.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
+        verticalArrangement = Arrangement.Center,
     ) {
         Card(
-            modifier = Modifier
-                .size(160.dp)
-                .padding(bottom = 32.dp),
+            modifier = Modifier.size(160.dp).padding(bottom = 32.dp),
             shape = RoundedCornerShape(24.dp),
-            colors = CardDefaults.cardColors(
-                containerColor = colors.background2
-            )
+            colors = CardDefaults.cardColors(containerColor = colors.background2),
         ) {
             Box(
                 modifier = Modifier.fillMaxSize(),
-                contentAlignment = Alignment.Center
+                contentAlignment = Alignment.Center,
             ) {
                 if (page.drawableRes != null) {
                     Image(
@@ -225,7 +212,7 @@ fun OnboardingPageContent(
                         imageVector = page.icon,
                         contentDescription = null,
                         modifier = Modifier.size(80.dp),
-                        tint = Color.Black
+                        tint = Color.Black,
                     )
                 }
             }
@@ -236,7 +223,7 @@ fun OnboardingPageContent(
             text = page.title,
             fontSize = 26.sp,
             textAlign = TextAlign.Center,
-            modifier = Modifier.padding(bottom = 16.dp)
+            modifier = Modifier.padding(bottom = 16.dp),
         )
 
         // Description
@@ -245,7 +232,7 @@ fun OnboardingPageContent(
             fontSize = 16.sp,
             textAlign = TextAlign.Center,
             lineHeight = 24.sp,
-            modifier = Modifier.padding(horizontal = 16.dp)
+            modifier = Modifier.padding(horizontal = 16.dp),
         )
     }
 }
@@ -260,7 +247,7 @@ fun CreateWalletPage(
 
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = Modifier.fillMaxWidth()
+        modifier = Modifier.fillMaxWidth(),
     ) {
         Image(
             painter = painterResource(id = R.drawable.padawan_icon_bw),
@@ -276,21 +263,17 @@ fun CreateWalletPage(
                 onBuildWallet(WalletCreateType.FROMSCRATCH)
                 onCreateNav(SecondaryDestinations.CoreScreens)
             },
-            colors = ButtonDefaults.buttonColors(
-                containerColor = colors.accent2,
-            ),
+            colors = ButtonDefaults.buttonColors(containerColor = colors.accent2),
             shape = RoundedCornerShape(20.dp),
             border = standardBorder,
-            modifier = Modifier
-                .padding(top = 4.dp, start = 4.dp, end = 4.dp, bottom = 4.dp)
-                .neuBrutalismShadow()
-                .height(120.dp)
-                .fillMaxWidth(0.9f)
-                .align(Alignment.CenterHorizontally)
+            modifier =
+                Modifier.padding(top = 4.dp, start = 4.dp, end = 4.dp, bottom = 4.dp)
+                    .neuBrutalismShadow()
+                    .height(120.dp)
+                    .fillMaxWidth(0.9f)
+                    .align(Alignment.CenterHorizontally),
         ) {
-            Text(
-                text = stringResource(R.string.create_a_wallet),
-            )
+            Text(text = stringResource(R.string.create_a_wallet))
         }
 
         Spacer(modifier = Modifier.padding(8.dp))
@@ -300,18 +283,18 @@ fun CreateWalletPage(
             colors = ButtonDefaults.buttonColors(containerColor = colors.accent2),
             shape = RoundedCornerShape(20.dp),
             border = standardBorder,
-            modifier = Modifier
-                .padding(top = 4.dp, start = 4.dp, end = 4.dp, bottom = 4.dp)
-                .neuBrutalismShadow()
-                .height(120.dp)
-                .fillMaxWidth(0.9f)
-                .align(Alignment.CenterHorizontally)
+            modifier =
+                Modifier.padding(top = 4.dp, start = 4.dp, end = 4.dp, bottom = 4.dp)
+                    .neuBrutalismShadow()
+                    .height(120.dp)
+                    .fillMaxWidth(0.9f)
+                    .align(Alignment.CenterHorizontally),
         ) {
             Text(
                 text = stringResource(id = R.string.already_have_a_wallet),
                 modifier = Modifier.fillMaxWidth(),
                 textAlign = TextAlign.Center,
-                color = colors.text
+                color = colors.text,
             )
         }
     }
@@ -321,5 +304,5 @@ data class OnboardingPage(
     val title: String,
     val description: String,
     val icon: ImageVector? = null,
-    val drawableRes: Int? = null
+    val drawableRes: Int? = null,
 )

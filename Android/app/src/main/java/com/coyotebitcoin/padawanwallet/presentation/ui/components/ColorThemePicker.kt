@@ -33,16 +33,16 @@ fun ColorThemePicker() {
         radioOptions.forEach { theme: PadawanColorTheme ->
             Row(
                 verticalAlignment = Alignment.CenterVertically,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .selectable(
-                        selected = (theme == selectedOption),
-                        enabled = theme != PadawanColorTheme.VADER_DARK,
-                        onClick = {
-                            onOptionSelected(theme)
-                            SettingsRepository.setTheme(theme)
-                        }
-                    )
+                modifier =
+                    Modifier.fillMaxWidth()
+                        .selectable(
+                            selected = (theme == selectedOption),
+                            enabled = theme != PadawanColorTheme.VADER_DARK,
+                            onClick = {
+                                onOptionSelected(theme)
+                                SettingsRepository.setTheme(theme)
+                            },
+                        ),
             ) {
                 RadioButton(
                     selected = (theme == selectedOption),
@@ -51,11 +51,11 @@ fun ColorThemePicker() {
                         onOptionSelected(theme)
                         SettingsRepository.setTheme(theme)
                     },
-                    colors = RadioButtonDefaults.colors(selectedColor = colors.accent1)
+                    colors = RadioButtonDefaults.colors(selectedColor = colors.accent1),
                 )
                 Text(
                     text = theme.nickname,
-                    color = if (theme == PadawanColorTheme.TATOOINE_DESERT) colors.text else colors.textFaded
+                    color = if (theme == PadawanColorTheme.TATOOINE_DESERT) colors.text else colors.textFaded,
                 )
             }
         }

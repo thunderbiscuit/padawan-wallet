@@ -61,80 +61,66 @@ internal fun SettingsRootScreen(
         snackbarHost = {
             SnackbarHost(
                 snackbarHostState,
-                Modifier
-                    .navigationBarsPadding()
-                    .padding(bottom = 70.dp)
+                Modifier.navigationBarsPadding().padding(bottom = 70.dp),
             )
         }
     ) { scaffoldPadding ->
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(scaffoldPadding)
-                .verticalScroll(scrollState)
-        ) {
+        Column(modifier = Modifier.fillMaxSize().padding(scaffoldPadding).verticalScroll(scrollState)) {
             // Title
             Text(
                 text = stringResource(R.string.settings),
                 style = PadawanTypography.headlineSmall,
                 color = colors.text,
-                modifier = Modifier
-                    .padding(top = 32.dp, start = 24.dp, end = 24.dp, bottom = 8.dp)
+                modifier = Modifier.padding(top = 32.dp, start = 24.dp, end = 24.dp, bottom = 8.dp),
             )
             Text(
                 text = stringResource(R.string.everything_else),
                 color = colors.textLight,
-                modifier = Modifier
-                    .padding(start = 24.dp, end = 24.dp, bottom = 12.dp)
+                modifier = Modifier.padding(start = 24.dp, end = 24.dp, bottom = 12.dp),
             )
-
 
             ExtraButton(
                 label = stringResource(R.string.recovery_phrase),
-                onClick = { onNavigation(SecondaryDestinations.RecoveryPhraseScreen) }
+                onClick = { onNavigation(SecondaryDestinations.RecoveryPhraseScreen) },
             )
 
             ExtraButton(
                 label = stringResource(R.string.send_signet_coins_back),
-                onClick = { onNavigation(SecondaryDestinations.SendCoinsBackScreen) }
+                onClick = { onNavigation(SecondaryDestinations.SendCoinsBackScreen) },
             )
 
             ExtraButton(
                 label = stringResource(R.string.change_language),
-                onClick = { onNavigation(SecondaryDestinations.LanguagesScreen) }
+                onClick = { onNavigation(SecondaryDestinations.LanguagesScreen) },
             )
 
             ExtraButton(
                 label = stringResource(R.string.about_padawan),
-                onClick = { onNavigation(SecondaryDestinations.AboutScreen) }
+                onClick = { onNavigation(SecondaryDestinations.AboutScreen) },
             )
 
             HorizontalDivider(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(top = 40.dp, bottom = 8.dp, start = 40.dp, end = 40.dp),
+                modifier = Modifier.fillMaxWidth().padding(top = 40.dp, bottom = 8.dp, start = 40.dp, end = 40.dp),
                 color = colors.textLight,
-                thickness = 1.dp
+                thickness = 1.dp,
             )
 
             Row(
                 horizontalArrangement = Arrangement.Center,
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier.fillMaxWidth(),
             ) {
                 val padawanVersion = "${stringResource(R.string.padawan_wallet)} ${BuildConfig.VERSION_NAME}"
                 Text(
                     text = padawanVersion,
                     style = PadawanTypography.bodySmall,
-                    color = PadawanColorsTatooineDesert.textLight
+                    color = PadawanColorsTatooineDesert.textLight,
                 )
             }
 
             HorizontalDivider(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(top = 8.dp, bottom = 40.dp, start = 40.dp, end = 40.dp),
+                modifier = Modifier.fillMaxWidth().padding(top = 8.dp, bottom = 40.dp, start = 40.dp, end = 40.dp),
                 color = colors.textLight,
-                thickness = 1.dp
+                thickness = 1.dp,
             )
 
             val chaptersResetMessage = stringResource(R.string.lessons_reset_successful)
@@ -145,14 +131,12 @@ internal fun SettingsRootScreen(
                 },
                 colors = ButtonDefaults.buttonColors(containerColor = colors.accent1),
                 shape = RoundedCornerShape(8.dp),
-                modifier = Modifier
-                    .size(width = 400.dp, height = 60.dp)
-                    .padding(start = 24.dp, end = 24.dp)
+                modifier = Modifier.size(width = 400.dp, height = 60.dp).padding(start = 24.dp, end = 24.dp),
             ) {
                 Text(
                     text = stringResource(R.string.reset_completed_chapters),
                     fontWeight = FontWeight.Normal,
-                    color = colors.text
+                    color = colors.text,
                 )
             }
 
@@ -166,8 +150,8 @@ internal fun SettingsRootScreen(
 internal fun PreviewSettingsRootScreen() {
     PadawanTheme {
         SettingsRootScreen(
-            onAction = { },
-            onNavigation = { }
+            onAction = {},
+            onNavigation = {},
         )
     }
 }

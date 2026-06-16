@@ -29,29 +29,22 @@ import com.coyotebitcoin.padawanwallet.presentation.ui.components.SupportedLangu
 private const val TAG = "PadawanTag/SettingsScreen"
 
 @Composable
-internal fun LanguagesScreen(
-    onBackArrow: () -> Unit
-) {
+internal fun LanguagesScreen(onBackArrow: () -> Unit) {
     val colors = LocalPadawanColors.current
 
     Scaffold(
         topBar = {
             PadawanAppBar(
                 title = stringResource(R.string.change_language),
-                onClick = { onBackArrow() }
+                onClick = { onBackArrow() },
             )
         }
     ) { scaffoldPadding ->
-        Column(
-            Modifier
-                .padding(scaffoldPadding)
-                .padding(horizontal = 24.dp)
-                .fillMaxSize()
-        ) {
+        Column(Modifier.padding(scaffoldPadding).padding(horizontal = 24.dp).fillMaxSize()) {
             Text(
                 text = stringResource(R.string.select_language),
                 style = PadawanTypography.bodyMedium,
-                color = colors.textLight
+                color = colors.textLight,
             )
             SectionTitle("App-Level Language", false)
             SectionDivider()
@@ -68,8 +61,6 @@ internal fun LanguagesScreen(
 @Composable
 internal fun PreviewLanguagesScreen() {
     PadawanTheme {
-        LanguagesScreen(
-            onBackArrow = { }
-        )
+        LanguagesScreen(onBackArrow = {})
     }
 }

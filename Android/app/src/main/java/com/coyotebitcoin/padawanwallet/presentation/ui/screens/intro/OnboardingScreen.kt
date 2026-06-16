@@ -63,14 +63,14 @@ internal fun OnboardingScreen(
             pageScrollState = pageScrollState,
             onBuildWallet = onBuildWallet,
             onCreateNav = onCreateNav,
-            onRecoverNav = onRecoverNav
+            onRecoverNav = onRecoverNav,
         )
     } else {
         PhoneOnboarding(
             pageScrollState = pageScrollState,
             onBuildWallet = onBuildWallet,
             onCreateNav = onCreateNav,
-            onRecoverNav = onRecoverNav
+            onRecoverNav = onRecoverNav,
         )
     }
 }
@@ -86,22 +86,19 @@ internal fun SmallOnboarding(
     Column(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = Modifier
-            .fillMaxSize()
-            .background(colors.background)
-            .verticalScroll(pageScrollState)
+        modifier = Modifier.fillMaxSize().background(colors.background).verticalScroll(pageScrollState),
     ) {
         Image(
             painter = painterResource(id = R.drawable.ic_padawan_colour_foreground),
             contentDescription = stringResource(R.string.padawan_logo),
-            Modifier.size(140.dp)
+            Modifier.size(140.dp),
         )
         Text(
             text = stringResource(R.string.padawan_wallet),
             style = PadawanTypography.headlineLarge,
             fontSize = 34.sp,
             color = colors.text,
-            modifier = Modifier.padding(start = 24.dp, end = 24.dp, bottom = 8.dp)
+            modifier = Modifier.padding(start = 24.dp, end = 24.dp, bottom = 8.dp),
         )
 
         Text(
@@ -109,7 +106,7 @@ internal fun SmallOnboarding(
             style = PadawanTypography.bodyMedium,
             fontSize = 16.sp,
             color = colors.text,
-            modifier = Modifier.padding(start = 24.dp, end = 24.dp, bottom = 12.dp)
+            modifier = Modifier.padding(start = 24.dp, end = 24.dp, bottom = 12.dp),
         )
 
         Button(
@@ -118,21 +115,17 @@ internal fun SmallOnboarding(
                 onBuildWallet(WalletCreateType.FROMSCRATCH)
                 onCreateNav(SecondaryDestinations.CoreScreens)
             },
-            colors = ButtonDefaults.buttonColors(
-                containerColor = colors.accent2,
-            ),
+            colors = ButtonDefaults.buttonColors(containerColor = colors.accent2),
             shape = RoundedCornerShape(20.dp),
             border = standardBorder,
-            modifier = Modifier
-                .padding(top = 4.dp, start = 4.dp, end = 4.dp, bottom = 4.dp)
-                .neuBrutalismShadow()
-                .height(90.dp)
-                .width(240.dp)
-                .align(Alignment.CenterHorizontally)
+            modifier =
+                Modifier.padding(top = 4.dp, start = 4.dp, end = 4.dp, bottom = 4.dp)
+                    .neuBrutalismShadow()
+                    .height(90.dp)
+                    .width(240.dp)
+                    .align(Alignment.CenterHorizontally),
         ) {
-            Text(
-                text = stringResource(R.string.create_a_wallet),
-            )
+            Text(text = stringResource(R.string.create_a_wallet))
         }
 
         Button(
@@ -140,18 +133,18 @@ internal fun SmallOnboarding(
             colors = ButtonDefaults.buttonColors(containerColor = colors.accent2),
             shape = RoundedCornerShape(20.dp),
             border = standardBorder,
-            modifier = Modifier
-                .padding(top = 4.dp, start = 4.dp, end = 4.dp, bottom = 4.dp)
-                .neuBrutalismShadow()
-                .height(90.dp)
-                .width(240.dp)
-                .align(Alignment.CenterHorizontally)
+            modifier =
+                Modifier.padding(top = 4.dp, start = 4.dp, end = 4.dp, bottom = 4.dp)
+                    .neuBrutalismShadow()
+                    .height(90.dp)
+                    .width(240.dp)
+                    .align(Alignment.CenterHorizontally),
         ) {
             Text(
                 text = stringResource(id = R.string.already_have_a_wallet),
                 modifier = Modifier.fillMaxWidth(),
                 textAlign = TextAlign.Center,
-                color = colors.text
+                color = colors.text,
             )
         }
     }
@@ -166,45 +159,36 @@ internal fun PhoneOnboarding(
 ) {
     val colors = LocalPadawanColors.current
 
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(colors.background)
-            .verticalScroll(pageScrollState)
-    ) {
+    Column(modifier = Modifier.fillMaxSize().background(colors.background).verticalScroll(pageScrollState)) {
         Column(
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally,
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(top = 60.dp)
+            modifier = Modifier.fillMaxWidth().padding(top = 60.dp),
         ) {
             Image(
                 painter = painterResource(id = R.drawable.ic_padawan_colour_foreground),
                 contentDescription = stringResource(id = R.string.padawan_logo),
-                Modifier.size(140.dp)
+                Modifier.size(140.dp),
             )
             Text(
                 text = stringResource(R.string.padawan_wallet),
                 style = PadawanTypography.headlineLarge,
                 fontSize = 32.sp,
                 color = colors.text,
-                modifier = Modifier
-                    .padding(start = 24.dp, end = 24.dp, bottom = 32.dp)
+                modifier = Modifier.padding(start = 24.dp, end = 24.dp, bottom = 32.dp),
             )
         }
 
         Column(
             horizontalAlignment = Alignment.Start,
-            modifier = Modifier.fillMaxSize()
+            modifier = Modifier.fillMaxSize(),
         ) {
             Text(
                 stringResource(R.string.welcome_statement),
                 style = PadawanTypography.bodyMedium,
                 fontSize = 18.sp,
                 color = colors.textLight,
-                modifier = Modifier
-                    .padding(start = 24.dp, end = 24.dp, bottom = 12.dp)
+                modifier = Modifier.padding(start = 24.dp, end = 24.dp, bottom = 12.dp),
             )
 
             Spacer(modifier = Modifier.weight(1f))
@@ -218,20 +202,20 @@ internal fun PhoneOnboarding(
                 colors = ButtonDefaults.buttonColors(containerColor = colors.accent2),
                 shape = RoundedCornerShape(20.dp),
                 border = standardBorder,
-                modifier = Modifier
-                    .padding(top = 4.dp, start = 4.dp, end = 4.dp, bottom = 4.dp)
-                    .neuBrutalismShadow()
-                    .height(90.dp)
-                    .width(300.dp)
-                    .align(Alignment.CenterHorizontally)
+                modifier =
+                    Modifier.padding(top = 4.dp, start = 4.dp, end = 4.dp, bottom = 4.dp)
+                        .neuBrutalismShadow()
+                        .height(90.dp)
+                        .width(300.dp)
+                        .align(Alignment.CenterHorizontally),
             ) {
                 Row(
                     verticalAlignment = Alignment.CenterVertically,
-                    modifier = Modifier.padding(vertical = 4.dp)
+                    modifier = Modifier.padding(vertical = 4.dp),
                 ) {
                     Text(
                         text = stringResource(R.string.create_a_wallet),
-                        color = colors.text
+                        color = colors.text,
                     )
                 }
             }
@@ -241,18 +225,18 @@ internal fun PhoneOnboarding(
                 colors = ButtonDefaults.buttonColors(containerColor = colors.accent2),
                 shape = RoundedCornerShape(20.dp),
                 border = standardBorder,
-                modifier = Modifier
-                    .padding(top = 4.dp, start = 4.dp, end = 4.dp, bottom = 32.dp)
-                    .neuBrutalismShadow()
-                    .height(90.dp)
-                    .width(300.dp)
-                    .align(Alignment.CenterHorizontally)
+                modifier =
+                    Modifier.padding(top = 4.dp, start = 4.dp, end = 4.dp, bottom = 32.dp)
+                        .neuBrutalismShadow()
+                        .height(90.dp)
+                        .width(300.dp)
+                        .align(Alignment.CenterHorizontally),
             ) {
                 Text(
                     text = stringResource(id = R.string.already_have_a_wallet),
                     modifier = Modifier.fillMaxWidth(),
                     textAlign = TextAlign.Center,
-                    color = colors.text
+                    color = colors.text,
                 )
             }
         }
@@ -267,7 +251,7 @@ internal fun PreviewOnboardingScreen() {
         OnboardingScreen(
             onBuildWallet = {},
             onCreateNav = {},
-            onRecoverNav = {}
+            onRecoverNav = {},
         )
     }
 }

@@ -34,9 +34,7 @@ import com.coyotebitcoin.padawanwallet.presentation.theme.PadawanTypography
 import com.coyotebitcoin.padawanwallet.presentation.ui.components.PadawanAppBar
 
 @Composable
-internal fun AboutScreen(
-    onBackArrow: () -> Unit
-) {
+internal fun AboutScreen(onBackArrow: () -> Unit) {
     val scrollState = rememberScrollState()
     val mUriHandler = LocalUriHandler.current
     val privacyLink = stringResource(id = R.string.privacy_link)
@@ -47,14 +45,13 @@ internal fun AboutScreen(
         topBar = {
             PadawanAppBar(
                 title = stringResource(R.string.about_padawan),
-                onClick = { onBackArrow() }
+                onClick = { onBackArrow() },
             )
         },
-        modifier = Modifier.fillMaxHeight()
+        modifier = Modifier.fillMaxHeight(),
     ) { scaffoldPadding ->
         Column(
-            Modifier
-                .background(PadawanColorsTatooineDesert.background)
+            Modifier.background(PadawanColorsTatooineDesert.background)
                 .padding(scaffoldPadding)
                 .padding(horizontal = 24.dp)
                 .fillMaxSize()
@@ -63,7 +60,7 @@ internal fun AboutScreen(
             Text(
                 text = stringResource(R.string.about_text),
                 style = PadawanTypography.bodyMedium,
-                color = colors.textLight
+                color = colors.textLight,
             )
             Spacer(Modifier.height(24.dp))
             Text(
@@ -77,7 +74,7 @@ internal fun AboutScreen(
                 style = PadawanTypography.bodyMedium,
                 color = PadawanColorsTatooineDesert.accent2,
                 textDecoration = TextDecoration.Underline,
-                modifier = Modifier.clickable(onClick = openPrivacyLink)
+                modifier = Modifier.clickable(onClick = openPrivacyLink),
             )
         }
     }
@@ -87,6 +84,6 @@ internal fun AboutScreen(
 @Composable
 internal fun PreviewAboutScreen() {
     PadawanTheme {
-        AboutScreen(onBackArrow = { })
+        AboutScreen(onBackArrow = {})
     }
 }

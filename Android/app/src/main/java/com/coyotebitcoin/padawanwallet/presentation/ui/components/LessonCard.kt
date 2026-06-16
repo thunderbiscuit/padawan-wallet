@@ -46,43 +46,38 @@ fun LessonCard(
     Card(
         border = standardBorder,
         shape = RoundedCornerShape(20.dp),
-        colors = if (done) CardDefaults.cardColors(PadawanColorsTatooineDesert.accent1) else CardDefaults.cardColors(PadawanColorsTatooineDesert.background2),
-        modifier = Modifier
-            .padding(vertical = 4.dp)
-            .height(70.dp)
-            .fillMaxWidth()
-            .neuBrutalismShadow()
-            .clickable { onClick() }
+        colors =
+            if (done) CardDefaults.cardColors(PadawanColorsTatooineDesert.accent1)
+            else CardDefaults.cardColors(PadawanColorsTatooineDesert.background2),
+        modifier =
+            Modifier.padding(vertical = 4.dp).height(70.dp).fillMaxWidth().neuBrutalismShadow().clickable { onClick() },
     ) {
         Row(
             modifier = Modifier.fillMaxSize(),
             verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.SpaceBetween
+            horizontalArrangement = Arrangement.SpaceBetween,
         ) {
             Text(
                 text = title,
                 modifier = Modifier.padding(all = 16.dp),
-                style = TextStyle(
-                    fontFamily = Outfit,
-                    fontWeight = FontWeight.Medium,
-                    fontSize = 18.sp,
-                ),
+                style =
+                    TextStyle(
+                        fontFamily = Outfit,
+                        fontWeight = FontWeight.Medium,
+                        fontSize = 18.sp,
+                    ),
             )
             if (done) {
                 Image(
                     painter = painterResource(id = R.drawable.lucide_star),
                     contentDescription = "Done",
-                    modifier = Modifier
-                        .size(48.dp)
-                        .padding(end = 16.dp)
+                    modifier = Modifier.size(48.dp).padding(end = 16.dp),
                 )
             } else {
                 Image(
                     imageVector = Lucide.Circle,
                     contentDescription = "Not done",
-                    modifier = Modifier
-                        .size(48.dp)
-                        .padding(end = 16.dp)
+                    modifier = Modifier.size(48.dp).padding(end = 16.dp),
                 )
             }
         }
@@ -96,7 +91,7 @@ internal fun PreviewCompletedLessonCard() {
         LessonCard(
             title = "Lesson Card",
             done = true,
-            onClick = { }
+            onClick = {},
         )
     }
 }

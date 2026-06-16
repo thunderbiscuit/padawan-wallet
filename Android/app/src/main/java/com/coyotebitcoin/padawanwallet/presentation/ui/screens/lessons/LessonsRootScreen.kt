@@ -42,32 +42,24 @@ internal fun LessonsRootScreen(
     onChapterNav: (Int) -> Unit,
     paddingValues: PaddingValues,
 ) {
-    val padding = when (getScreenSizeWidth(LocalConfiguration.current.screenWidthDp)) {
-        ScreenSizeWidth.Small -> 12.dp
-        ScreenSizeWidth.Phone -> 18.dp
-    }
+    val padding =
+        when (getScreenSizeWidth(LocalConfiguration.current.screenWidthDp)) {
+            ScreenSizeWidth.Small -> 12.dp
+            ScreenSizeWidth.Phone -> 18.dp
+        }
 
-    Column(
-        Modifier
-            .background(PadawanColorsTatooineDesert.background)
-            .padding(paddingValues)
-    ) {
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(horizontal = padding)
-                .verticalScroll(rememberScrollState())
-        ) {
+    Column(Modifier.background(PadawanColorsTatooineDesert.background).padding(paddingValues)) {
+        Column(modifier = Modifier.fillMaxSize().padding(horizontal = padding).verticalScroll(rememberScrollState())) {
             Text(
                 text = stringResource(R.string.padawan_journey),
                 style = PadawanTypography.headlineSmall,
                 color = Color(0xff1f0208),
-                modifier = Modifier.padding(top = 32.dp, end = 24.dp, bottom = 8.dp)
+                modifier = Modifier.padding(top = 32.dp, end = 24.dp, bottom = 8.dp),
             )
             Text(
                 text = stringResource(R.string.continue_on_your_journey),
                 color = Color(0xff787878),
-                modifier = Modifier.padding(bottom = 16.dp)
+                modifier = Modifier.padding(bottom = 16.dp),
             )
             SectionTitle(stringResource(id = R.string.getting_started), true)
             SectionDivider()
@@ -76,21 +68,21 @@ internal fun LessonsRootScreen(
                 done = state.completedLessons[1] ?: false,
                 onClick = {
                     onChapterNav(1)
-                }
+                },
             )
             LessonCard(
                 title = "2. ${stringResource(id = R.string.l2_title)}",
                 done = state.completedLessons[2] ?: false,
                 onClick = {
                     onChapterNav(2)
-                }
+                },
             )
             LessonCard(
                 title = "3. ${stringResource(id = R.string.l3_title)}",
                 done = state.completedLessons[3] ?: false,
                 onClick = {
                     onChapterNav(3)
-                }
+                },
             )
 
             SectionTitle("Transactions", false)
@@ -100,21 +92,21 @@ internal fun LessonsRootScreen(
                 done = state.completedLessons[4] ?: false,
                 onClick = {
                     onChapterNav(4)
-                }
+                },
             )
             LessonCard(
                 title = "5. ${stringResource(id = R.string.l5_title)}",
                 done = state.completedLessons[5] ?: false,
                 onClick = {
                     onChapterNav(5)
-                }
+                },
             )
             LessonCard(
                 title = "6. ${stringResource(id = R.string.l6_title)}",
                 done = state.completedLessons[6] ?: false,
                 onClick = {
                     onChapterNav(6)
-                }
+                },
             )
 
             SectionTitle("Wallets", false)
@@ -124,21 +116,21 @@ internal fun LessonsRootScreen(
                 done = state.completedLessons[7] ?: false,
                 onClick = {
                     onChapterNav(7)
-                }
+                },
             )
             LessonCard(
                 title = "8. ${stringResource(id = R.string.l8_title)}",
                 done = state.completedLessons[8] ?: false,
                 onClick = {
                     onChapterNav(8)
-                }
+                },
             )
             LessonCard(
                 title = "9. ${stringResource(id = R.string.l9_title)}",
                 done = state.completedLessons[9] ?: false,
                 onClick = {
                     onChapterNav(9)
-                }
+                },
             )
             Spacer(modifier = Modifier.padding(bottom = 16.dp))
         }

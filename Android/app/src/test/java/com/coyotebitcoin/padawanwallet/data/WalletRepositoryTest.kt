@@ -18,7 +18,6 @@ import org.mockito.Mockito.times
 import org.mockito.Mockito.verify
 import org.mockito.Mockito.`when`
 
-
 class WalletRepositoryTest {
 
     private val repo: WalletRepository = WalletRepository
@@ -36,12 +35,13 @@ class WalletRepositoryTest {
     @Test
     fun `Check if wallet exists`() {
         `when`(sharedPrefsMock.getBoolean(anyString(), anyBoolean())).thenReturn(true)
-        assertEquals("Wallet does not exist",true, repo.doesWalletExist())
+        assertEquals("Wallet does not exist", true, repo.doesWalletExist())
     }
 
     @Test
     fun `Check if wallet data is correct`() {
-        val requiredInitialWalletDataTest = RequiredInitialWalletData(descriptor = "descriptorTest", changeDescriptor = "changeTest")
+        val requiredInitialWalletDataTest =
+            RequiredInitialWalletData(descriptor = "descriptorTest", changeDescriptor = "changeTest")
         `when`(sharedPrefsMock.getString("descriptor", null)).thenReturn("descriptorTest")
         `when`(sharedPrefsMock.getString("changeDescriptor", null)).thenReturn("changeTest")
         assertEquals("Wallet data is incorrect", requiredInitialWalletDataTest, repo.getInitialWalletData())

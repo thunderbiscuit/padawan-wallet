@@ -66,7 +66,7 @@ private const val TAG = "WalletRecoveryScreen"
 @Composable
 internal fun WalletRecoveryScreen(
     onBuildWallet: (WalletCreateType) -> Unit,
-    onRecoverNav: () -> Unit
+    onRecoverNav: () -> Unit,
 ) {
     val scrollState = rememberScrollState()
     val snackbarHostState = remember { SnackbarHostState() }
@@ -77,51 +77,50 @@ internal fun WalletRecoveryScreen(
             // reuse default SnackbarHost to have default animation and timing handling
             SnackbarHost(snackbarHostState) { data ->
                 Snackbar(
-                    modifier = Modifier
-                        .padding(12.dp)
-                        .semantics { testTag = "Intro WalletRecoveryScreen Snackbar" },
+                    modifier = Modifier.padding(12.dp).semantics { testTag = "Intro WalletRecoveryScreen Snackbar" },
                     containerColor = colors.background2,
-
                 ) {
                     Text(
                         text = data.visuals.message,
-                        color = colors.text
+                        color = colors.text,
                     )
                 }
             }
-        },
+        }
     ) { innerPadding ->
-        Column(
-            modifier = Modifier
-                .fillMaxHeight()
-                .verticalScroll(scrollState)
-        ) {
-
-            val emptyRecoveryPhrase: Map<Int, String> = mapOf(
-                1 to "", 2 to "", 3 to "", 4 to "", 5 to "", 6 to "",
-                7 to "", 8 to "", 9 to "", 10 to "", 11 to "", 12 to ""
-            )
+        Column(modifier = Modifier.fillMaxHeight().verticalScroll(scrollState)) {
+            val emptyRecoveryPhrase: Map<Int, String> =
+                mapOf(
+                    1 to "",
+                    2 to "",
+                    3 to "",
+                    4 to "",
+                    5 to "",
+                    6 to "",
+                    7 to "",
+                    8 to "",
+                    9 to "",
+                    10 to "",
+                    11 to "",
+                    12 to "",
+                )
             val (recoveryPhraseWordMap, setRecoveryPhraseWordMap) = remember { mutableStateOf(emptyRecoveryPhrase) }
 
             Column(
                 horizontalAlignment = Alignment.Start,
-                modifier = Modifier
-                    .padding(innerPadding)
-                    .padding(top = 48.dp)
+                modifier = Modifier.padding(innerPadding).padding(top = 48.dp),
             ) {
                 Text(
                     text = stringResource(R.string.recover_a_wallet),
                     style = PadawanTypography.headlineSmall,
                     color = Color(0xff1f0208),
-                    modifier = Modifier
-                        .padding(start = 24.dp, end = 24.dp, bottom = 8.dp)
+                    modifier = Modifier.padding(start = 24.dp, end = 24.dp, bottom = 8.dp),
                 )
                 Text(
                     text = stringResource(R.string.enter_your_12_words),
                     style = PadawanTypography.bodyMedium,
                     color = Color(0xff787878),
-                    modifier = Modifier
-                        .padding(start = 24.dp, end = 24.dp, bottom = 12.dp)
+                    modifier = Modifier.padding(start = 24.dp, end = 24.dp, bottom = 12.dp),
                 )
             }
 
@@ -131,7 +130,7 @@ internal fun WalletRecoveryScreen(
                 onBuildWallet = onBuildWallet,
                 onRecoverNav = onRecoverNav,
                 snackbarHostState,
-                modifier = Modifier
+                modifier = Modifier,
             )
         }
     }
@@ -148,33 +147,29 @@ fun MyList(
 ) {
     val colors = LocalPadawanColors.current
     Column(
-        modifier
-            .fillMaxWidth()
-            .padding(horizontal = 16.dp),
+        modifier.fillMaxWidth().padding(horizontal = 16.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         val scope = rememberCoroutineScope()
         val focusManager = LocalFocusManager.current
         for (row in 0..5) {
-            Row(
-                modifier = Modifier.fillMaxWidth()
-            ) {
+            Row(modifier = Modifier.fillMaxWidth()) {
                 val leftWordNumber = row * 2 + 1
                 val rightWordNumber = row * 2 + 2
-                
+
                 WordField(
                     wordNumber = leftWordNumber,
                     recoveryPhraseWordMap,
                     setRecoveryPhraseWordMap,
                     focusManager,
-                    modifier = Modifier.weight(1f)
+                    modifier = Modifier.weight(1f),
                 )
                 WordField(
                     wordNumber = rightWordNumber,
                     recoveryPhraseWordMap,
                     setRecoveryPhraseWordMap,
                     focusManager,
-                    modifier = Modifier.weight(1f)
+                    modifier = Modifier.weight(1f),
                 )
             }
         }
@@ -192,7 +187,7 @@ fun MyList(
                         scope.launch {
                             snackbarHostState.showSnackbar(
                                 message = wordCheck.errorMessage,
-                                duration = SnackbarDuration.Short
+                                duration = SnackbarDuration.Short,
                             )
                         }
                     }
@@ -201,19 +196,18 @@ fun MyList(
             colors = ButtonDefaults.buttonColors(colors.accent2),
             shape = RoundedCornerShape(20.dp),
             border = standardBorder,
-            modifier = Modifier
-                .padding(top = 12.dp, start = 4.dp, end = 4.dp, bottom = 12.dp)
-                .neuBrutalismShadow()
-                .height(70.dp)
-                .width(300.dp)
-                .semantics { testTag = "Intro EnterRecoveryPhrase Button" }
+            modifier =
+                Modifier.padding(top = 12.dp, start = 4.dp, end = 4.dp, bottom = 12.dp)
+                    .neuBrutalismShadow()
+                    .height(70.dp)
+                    .width(300.dp)
+                    .semantics { testTag = "Intro EnterRecoveryPhrase Button" },
         ) {
             Text(
                 stringResource(R.string.recover_wallet),
                 textAlign = TextAlign.Center,
             )
         }
-
     }
 }
 
@@ -223,7 +217,7 @@ fun WordField(
     recoveryWordMap: Map<Int, String>,
     setRecoveryPhraseWordMap: (Map<Int, String>) -> Unit,
     focusManager: FocusManager,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     OutlinedTextField(
         value = recoveryWordMap[wordNumber] ?: "elvis is here",
@@ -240,24 +234,27 @@ fun WordField(
                 color = PadawanColorsTatooineDesert.text,
             )
         },
-        textStyle = TextStyle(
-            fontSize = 18.sp,
-            color = MaterialTheme.colorScheme.onBackground
-        ),
-        colors = OutlinedTextFieldDefaults.colors(
-            focusedBorderColor = Color(0xff2f2f2f),
-            unfocusedBorderColor = Color(0xff8a8a8a),
-        ),
-        modifier = modifier
-            .padding(8.dp),
-        keyboardOptions = when (wordNumber) {
-            12 -> KeyboardOptions(imeAction = ImeAction.Done)
-            else -> KeyboardOptions(imeAction = ImeAction.Next)
-        },
-        keyboardActions = KeyboardActions(
-            onNext = { focusManager.moveFocus(FocusDirection.Next) },
-            onDone = { focusManager.clearFocus() }
-        ),
+        textStyle =
+            TextStyle(
+                fontSize = 18.sp,
+                color = MaterialTheme.colorScheme.onBackground,
+            ),
+        colors =
+            OutlinedTextFieldDefaults.colors(
+                focusedBorderColor = Color(0xff2f2f2f),
+                unfocusedBorderColor = Color(0xff8a8a8a),
+            ),
+        modifier = modifier.padding(8.dp),
+        keyboardOptions =
+            when (wordNumber) {
+                12 -> KeyboardOptions(imeAction = ImeAction.Done)
+                else -> KeyboardOptions(imeAction = ImeAction.Next)
+            },
+        keyboardActions =
+            KeyboardActions(
+                onNext = { focusManager.moveFocus(FocusDirection.Next) },
+                onDone = { focusManager.clearFocus() },
+            ),
         singleLine = true,
     )
 }
@@ -267,8 +264,8 @@ fun WordField(
 internal fun PreviewWalletRecoveryScreen() {
     PadawanTheme {
         WalletRecoveryScreen(
-            onBuildWallet = { },
-            onRecoverNav = { }
+            onBuildWallet = {},
+            onRecoverNav = {},
         )
     }
 }

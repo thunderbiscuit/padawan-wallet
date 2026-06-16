@@ -18,10 +18,11 @@ data class TransactionDetails(
     val fee: Amount,
     val feeRate: FeeRate,
     val txType: TxType,
-    val chainPosition: ChainPosition
+    val chainPosition: ChainPosition,
 )
 
 sealed interface ChainPosition {
     data object Unconfirmed : ChainPosition
+
     data class Confirmed(val height: UInt, val timestamp: ULong) : ChainPosition
 }

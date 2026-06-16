@@ -68,16 +68,17 @@ internal fun QrScanScreen(
         mutableStateOf(
             ContextCompat.checkSelfPermission(
                 context,
-                Manifest.permission.CAMERA
+                Manifest.permission.CAMERA,
             ) == PackageManager.PERMISSION_GRANTED
         )
     }
-    val launcher = rememberLauncherForActivityResult(
-        contract = ActivityResultContracts.RequestPermission(),
-        onResult = { granted ->
-            hasCameraPermission = granted
-        }
-    )
+    val launcher =
+        rememberLauncherForActivityResult(
+            contract = ActivityResultContracts.RequestPermission(),
+            onResult = { granted ->
+                hasCameraPermission = granted
+            },
+        )
 
     LaunchedEffect(key1 = true) {
         launcher.launch(Manifest.permission.CAMERA)
@@ -85,18 +86,14 @@ internal fun QrScanScreen(
 
     Scaffold(
         modifier = Modifier.fillMaxSize(),
-        snackbarHost = { SnackbarHost(snackbarHostState) }
+        snackbarHost = { SnackbarHost(snackbarHostState) },
     ) { scaffoldPadding ->
-        ConstraintLayout(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(scaffoldPadding)
-        ) {
+        ConstraintLayout(modifier = Modifier.fillMaxSize().padding(scaffoldPadding)) {
             val (camera, cancelButton) = createRefs()
 
             Box(
-                modifier = Modifier
-                    .constrainAs(camera) {
+                modifier =
+                    Modifier.constrainAs(camera) {
                         top.linkTo(parent.top)
                         absoluteLeft.linkTo(parent.absoluteLeft)
                         absoluteRight.linkTo(parent.absoluteRight)
@@ -109,47 +106,50 @@ internal fun QrScanScreen(
                             factory = { context ->
                                 val previewView = PreviewView(context)
                                 val preview = Preview.Builder().build()
-                                val selector = CameraSelector.Builder()
-                                    .requireLensFacing(CameraSelector.LENS_FACING_BACK)
-                                    .build()
+                                val selector =
+                                    CameraSelector.Builder().requireLensFacing(CameraSelector.LENS_FACING_BACK).build()
                                 preview.setSurfaceProvider(previewView.surfaceProvider)
-                                val imageAnalysis = ImageAnalysis.Builder()
-                                    .setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST)
-                                    .build()
+                                val imageAnalysis =
+                                    ImageAnalysis.Builder()
+                                        .setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST)
+                                        .build()
                                 imageAnalysis.setAnalyzer(
                                     ContextCompat.getMainExecutor(context),
                                     QRCodeAnalyzer { result ->
                                         result?.let {
                                             Log.i(TAG, "QR Code detected: $it")
 
-                                            val address = try {
-                                                Bip21URI.fromUri(it).address.lowercase()
-                                            } catch (e: Exception) {
-                                                Log.i(TAG, "BIP21 parsing unsuccessful, $e")
-                                                it
-                                            }
+                                            val address =
+                                                try {
+                                                    Bip21URI.fromUri(it).address.lowercase()
+                                                } catch (e: Exception) {
+                                                    Log.i(TAG, "BIP21 parsing unsuccessful, $e")
+                                                    it
+                                                }
 
                                             onAction(WalletAction.QRCodeScanned(address))
                                             imageAnalysis.clearAnalyzer()
                                             onBack()
                                         }
-                                    }
+                                    },
                                 )
 
                                 try {
-                                    cameraProviderFuture.get().bindToLifecycle(
-                                        lifecycleOwner,
-                                        selector,
-                                        preview,
-                                        imageAnalysis
-                                    )
+                                    cameraProviderFuture
+                                        .get()
+                                        .bindToLifecycle(
+                                            lifecycleOwner,
+                                            selector,
+                                            preview,
+                                            imageAnalysis,
+                                        )
                                 } catch (e: Exception) {
                                     e.printStackTrace()
                                 }
 
                                 return@AndroidView previewView
                             },
-                            modifier = Modifier.weight(weight = 1f)
+                            modifier = Modifier.weight(weight = 1f),
                         )
                     }
                 }
@@ -162,23 +162,23 @@ internal fun QrScanScreen(
                 colors = ButtonDefaults.buttonColors(containerColor = Color(0xfff6cf47)),
                 shape = RoundedCornerShape(20.dp),
                 border = standardBorder,
-                modifier = Modifier
-                    .constrainAs(cancelButton) {
-                        absoluteRight.linkTo(parent.absoluteRight, margin = 16.dp)
-                        bottom.linkTo(parent.bottom, margin = 16.dp)
-                    }
-                    .padding(top = 4.dp, start = 4.dp, end = 4.dp, bottom = 4.dp)
-                    .neuBrutalismShadow()
-                    .height(70.dp)
-                    .width(200.dp)
+                modifier =
+                    Modifier.constrainAs(cancelButton) {
+                            absoluteRight.linkTo(parent.absoluteRight, margin = 16.dp)
+                            bottom.linkTo(parent.bottom, margin = 16.dp)
+                        }
+                        .padding(top = 4.dp, start = 4.dp, end = 4.dp, bottom = 4.dp)
+                        .neuBrutalismShadow()
+                        .height(70.dp)
+                        .width(200.dp),
             ) {
                 Row(
                     verticalAlignment = Alignment.CenterVertically,
-                    modifier = Modifier.padding(vertical = 4.dp)
+                    modifier = Modifier.padding(vertical = 4.dp),
                 ) {
                     Text(
                         text = stringResource(R.string.cancel),
-                        color = Color(0xff000000)
+                        color = Color(0xff000000),
                     )
                 }
             }

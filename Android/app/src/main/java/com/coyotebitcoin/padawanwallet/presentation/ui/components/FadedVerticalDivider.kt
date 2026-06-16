@@ -18,9 +18,6 @@ import com.coyotebitcoin.padawanwallet.presentation.theme.PadawanColorsTatooineD
 internal fun FadedVerticalDivider() {
     HorizontalDivider(
         color = PadawanColorsTatooineDesert.text,
-        modifier = Modifier
-            .fillMaxHeight()
-            .width(1.dp)
-            .padding(vertical = 8.dp)
+        modifier = Modifier.fillMaxHeight().width(1.dp).padding(vertical = 8.dp),
     )
 }

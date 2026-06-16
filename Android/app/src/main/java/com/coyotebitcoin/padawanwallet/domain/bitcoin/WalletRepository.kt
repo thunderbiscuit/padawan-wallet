@@ -20,7 +20,10 @@ object WalletRepository {
 
     fun doesWalletExist(): Boolean {
         val compatibleWalletInitialized = sharedPreferences.getBoolean("initialized$PERSISTENCE_VERSION", false)
-        Log.i(TAG, "Checking whether the wallet persistence is compatible with $PERSISTENCE_VERSION: $compatibleWalletInitialized")
+        Log.i(
+            TAG,
+            "Checking whether the wallet persistence is compatible with $PERSISTENCE_VERSION: $compatibleWalletInitialized",
+        )
         return compatibleWalletInitialized
     }
 
@@ -32,12 +35,15 @@ object WalletRepository {
 
     fun saveWallet(path: String, descriptor: String, changeDescriptor: String) {
         Log.i(TAG, "Saved wallet: path -> $path, descriptor -> $descriptor, change descriptor -> $changeDescriptor")
-        sharedPreferences.edit().apply {
-            putBoolean("initialized$PERSISTENCE_VERSION", true)
-            putString("path", path)
-            putString("descriptor", descriptor)
-            putString("changeDescriptor", changeDescriptor)
-        }.apply()
+        sharedPreferences
+            .edit()
+            .apply {
+                putBoolean("initialized$PERSISTENCE_VERSION", true)
+                putString("path", path)
+                putString("descriptor", descriptor)
+                putString("changeDescriptor", changeDescriptor)
+            }
+            .apply()
     }
 
     fun saveMnemonic(mnemonic: String) {

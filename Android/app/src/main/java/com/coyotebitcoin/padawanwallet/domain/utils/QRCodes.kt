@@ -23,17 +23,12 @@ import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel
 
 private const val TAG = "QrCodes"
 
-class QRCodeAnalyzer(
-    private val onQrCodeScanned: (result: String?) -> Unit
-) : ImageAnalysis.Analyzer {
+class QRCodeAnalyzer(private val onQrCodeScanned: (result: String?) -> Unit) : ImageAnalysis.Analyzer {
 
     override fun analyze(imageProxy: ImageProxy) {
-        BarcodeScannerOptions.Builder()
-            .setBarcodeFormats(Barcode.FORMAT_QR_CODE)
-            .build()
+        BarcodeScannerOptions.Builder().setBarcodeFormats(Barcode.FORMAT_QR_CODE).build()
 
-        @androidx.camera.core.ExperimentalGetImage
-        val mediaImage = imageProxy.image
+        @androidx.camera.core.ExperimentalGetImage val mediaImage = imageProxy.image
 
         if (mediaImage == null) {
             Log.e(TAG, "mediaImage was null")
@@ -43,7 +38,8 @@ class QRCodeAnalyzer(
             val image = InputImage.fromMediaImage(mediaImage, imageProxy.imageInfo.rotationDegrees)
             val scanner = BarcodeScanning.getClient()
 
-            scanner.process(image)
+            scanner
+                .process(image)
                 .addOnSuccessListener { barcodes ->
                     for (barcode in barcodes) {
                         val bounds = barcode.boundingBox
@@ -70,24 +66,28 @@ fun addressToQR(address: String): ImageBitmap? {
     Log.i(TAG, "Generating the QR code for address $address")
     val width = 1000
     val height = 1000
-    val hints: Map<EncodeHintType, Any> = mapOf(
-        EncodeHintType.CHARACTER_SET to "UTF-8",
-        EncodeHintType.QR_VERSION to 7,
-        EncodeHintType.ERROR_CORRECTION to ErrorCorrectionLevel.H
-    )
+    val hints: Map<EncodeHintType, Any> =
+        mapOf(
+            EncodeHintType.CHARACTER_SET to "UTF-8",
+            EncodeHintType.QR_VERSION to 7,
+            EncodeHintType.ERROR_CORRECTION to ErrorCorrectionLevel.H,
+        )
 
     try {
-        val bitMatrix: BitMatrix = QRCodeWriter().encode(
-            address,
-            BarcodeFormat.QR_CODE,
-            width,
-            height,
-            hints
-        )
+        val bitMatrix: BitMatrix =
+            QRCodeWriter()
+                .encode(
+                    address,
+                    BarcodeFormat.QR_CODE,
+                    width,
+                    height,
+                    hints,
+                )
         val bitMap = createBitmap(width, height)
-        for (x in 0 ..< 1000) {
-            for (y in 0 ..< 1000) {
-                // Uses PadawanColorsTatooineDesert.navigationBar for light and PadawanColorsTatooineDesert.darkBackground for dark
+        for (x in 0..<1000) {
+            for (y in 0..<1000) {
+                // Uses PadawanColorsTatooineDesert.navigationBar for light and
+                // PadawanColorsTatooineDesert.darkBackground for dark
                 bitMap.setPixel(x, y, if (bitMatrix[x, y]) 0xFF2E1B0A.toInt() else 0xFFEAD1B4.toInt())
             }
         }
@@ -100,6 +100,8 @@ fun addressToQR(address: String): ImageBitmap? {
 
 sealed class QrUiState {
     data object NoQR : QrUiState()
+
     data object Loading : QrUiState()
+
     data object QR : QrUiState()
 }

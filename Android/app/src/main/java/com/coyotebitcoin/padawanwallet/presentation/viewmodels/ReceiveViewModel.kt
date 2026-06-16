@@ -14,7 +14,6 @@ import com.coyotebitcoin.padawanwallet.domain.utils.QrUiState
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import org.kotlinbitcointools.bip21.Bip21URI
@@ -26,7 +25,7 @@ data class ReceiveScreenState(
     val address: String? = null,
     val bip21Uri: String? = null,
     val addressIndex: UInt? = null,
-    val qrState: QrUiState = QrUiState.NoQR
+    val qrState: QrUiState = QrUiState.NoQR,
 )
 
 sealed interface ReceiveScreenAction {
@@ -60,7 +59,7 @@ internal class ReceiveViewModel : ViewModel() {
                     address = address.address.toString(),
                     bip21Uri = uri,
                     addressIndex = address.index,
-                    qrState = QrUiState.QR
+                    qrState = QrUiState.QR,
                 )
             }
         }

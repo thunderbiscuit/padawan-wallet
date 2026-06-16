@@ -25,15 +25,16 @@ class FaucetService {
         faucetUrl: String,
         faucetToken: String,
     ): FaucetCall {
-        val ktorClient = HttpClient(CIO) {
-            install(Auth) {
-                bearer {
-                    loadTokens {
-                        BearerTokens(faucetToken, "")
+        val ktorClient =
+            HttpClient(CIO) {
+                install(Auth) {
+                    bearer {
+                        loadTokens {
+                            BearerTokens(faucetToken, "")
+                        }
                     }
                 }
             }
-        }
 
         return ktorClient.use {
             try {
@@ -45,15 +46,17 @@ class FaucetService {
                 }
 
                 when (response.status.value) {
-                    200 -> FaucetCall.Success(
-                        status = response.status.value,
-                        description = response.status.description,
-                    )
+                    200 ->
+                        FaucetCall.Success(
+                            status = response.status.value,
+                            description = response.status.description,
+                        )
 
-                    else -> FaucetCall.Error(
-                        status = response.status.value,
-                        description = response.status.description
-                    )
+                    else ->
+                        FaucetCall.Error(
+                            status = response.status.value,
+                            description = response.status.description,
+                        )
                 }
             } catch (exception: Exception) {
                 FaucetCall.ExceptionThrown(exception = exception)
@@ -64,6 +67,8 @@ class FaucetService {
 
 sealed class FaucetCall {
     data class Success(val status: Int, val description: String) : FaucetCall()
+
     data class Error(val status: Int, val description: String) : FaucetCall()
+
     data class ExceptionThrown(val exception: Exception) : FaucetCall()
 }

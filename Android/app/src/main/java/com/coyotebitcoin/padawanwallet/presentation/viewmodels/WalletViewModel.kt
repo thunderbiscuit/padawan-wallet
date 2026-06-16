@@ -21,6 +21,7 @@ import com.coyotebitcoin.padawanwallet.domain.bitcoin.FaucetService
 import com.coyotebitcoin.padawanwallet.domain.bitcoin.TransactionDetails
 import com.coyotebitcoin.padawanwallet.domain.bitcoin.Wallet
 import com.coyotebitcoin.padawanwallet.domain.bitcoin.WalletRepository
+import kotlin.system.measureTimeMillis
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -32,7 +33,6 @@ import org.bitcoindevkit.Amount
 import org.bitcoindevkit.FeeRate
 import org.bitcoindevkit.Transaction
 import org.bitcoindevkit.Txid
-import kotlin.system.measureTimeMillis
 
 private const val TAG = "WalletViewModel"
 
@@ -54,13 +54,20 @@ enum class MessageType {
 
 sealed interface WalletAction {
     data object Sync : WalletAction
+
     data object RequestCoins : WalletAction
+
     data object CheckNetworkStatus : WalletAction
-    data class  QRCodeScanned(val address: String) : WalletAction
-    data class  Broadcast(val tx: Transaction) : WalletAction
+
+    data class QRCodeScanned(val address: String) : WalletAction
+
+    data class Broadcast(val tx: Transaction) : WalletAction
+
     data object UiMessageDelivered : WalletAction
-    data class  SeeSingleTx(val txid: Txid) : WalletAction
-    data class  BuildAndSignPsbt(val address: String, val amount: Amount, val feeRate: FeeRate) : WalletAction
+
+    data class SeeSingleTx(val txid: Txid) : WalletAction
+
+    data class BuildAndSignPsbt(val address: String, val amount: Amount, val feeRate: FeeRate) : WalletAction
 }
 
 class WalletViewModel(application: Application) : AndroidViewModel(application) {
@@ -71,15 +78,16 @@ class WalletViewModel(application: Application) : AndroidViewModel(application) 
     private var userCanRequestFaucetCoins: Boolean by mutableStateOf(false)
 
     val walletState: StateFlow<WalletState>
-        field = MutableStateFlow<WalletState>(
-            WalletState(
-                balance = 0u,
-                transactions = txList,
-                txAndFee = null,
-                isOnline = isOnline,
-                currentlySyncing = false
-           )
-        )
+        field =
+            MutableStateFlow<WalletState>(
+                WalletState(
+                    balance = 0u,
+                    transactions = txList,
+                    txAndFee = null,
+                    isOnline = isOnline,
+                    currentlySyncing = false,
+                )
+            )
 
     init {
         isOnline = updateNetworkStatus(application)
@@ -125,16 +133,17 @@ class WalletViewModel(application: Application) : AndroidViewModel(application) 
         val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         val capabilities = connectivityManager.getNetworkCapabilities(connectivityManager.activeNetwork)
 
-        val isOnlineNow: Boolean = if (capabilities != null) {
-            when {
-                capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) -> true
-                capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> true
-                capabilities.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET) -> true
-                else -> false
+        val isOnlineNow: Boolean =
+            if (capabilities != null) {
+                when {
+                    capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) -> true
+                    capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> true
+                    capabilities.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET) -> true
+                    else -> false
+                }
+            } else {
+                false
             }
-        } else {
-            false
-        }
         Log.i(TAG, "Updating online status to $isOnlineNow")
         return isOnlineNow
     }
@@ -160,20 +169,21 @@ class WalletViewModel(application: Application) : AndroidViewModel(application) 
 
         val faucetService = FaucetService()
         viewModelScope.launch {
-            val response = withContext(Dispatchers.IO) {
-                faucetService.callTatooineFaucet(
-                    address = address.toString(),
-                    faucetUrl = faucetUrl,
-                    faucetToken = faucetToken,
-                )
-            }
+            val response =
+                withContext(Dispatchers.IO) {
+                    faucetService.callTatooineFaucet(
+                        address = address.toString(),
+                        faucetUrl = faucetUrl,
+                        faucetToken = faucetToken,
+                    )
+                }
 
             when (response) {
                 is FaucetCall.Success -> {
                     WalletRepository.userHasClaimedFaucetCoins()
                     Log.i(
                         TAG,
-                        "Faucet call succeeded with status: ${response.status}, description: ${response.description}"
+                        "Faucet call succeeded with status: ${response.status}, description: ${response.description}",
                     )
                 }
 
