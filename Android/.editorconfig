@@ -1,0 +1,5 @@
+root = true
+
+[*.kt]
+# This ensures that ktfmt respects the 120 character line length
+max_line_length = 120

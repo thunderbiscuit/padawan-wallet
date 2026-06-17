@@ -8,6 +8,14 @@
 repo:
   open https://github.com/thunderbiscuit/padawan-wallet
 
+[group("Format")]
+[doc("Format Android app using ktfmt.")]
+format:
+  ktfmt --kotlinlang-style --enable-editorconfig \
+    Android/app/src/main/java \
+    Android/app/src/test/java \
+    Android/app/src/androidTest/java
+
 [group("Tests")]
 [doc("Run all unit tests.")]
 unittests:
