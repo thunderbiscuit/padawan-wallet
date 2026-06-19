@@ -5,10 +5,18 @@ This changelog is not a typical source code changelog. It is used primarily to k
 ## Unreleased
 
 ### Android
+### iOS
+
+<br>
+
+## 0.18.0: Clever Clone
+
+### Android
 
 - Drop support for Android API 29
-
-### iOS
+- Fix sync button width for a wider range of languages
+- Clean up UI shadows
+- Upgrade bdk-android to 3.0.0
 
 <br>
 
