@@ -15,7 +15,7 @@ jobs:
 
     steps:
       - name: "Checkout repository"
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: "Create faucetconfig example for CI"
         run: |
@@ -45,7 +45,7 @@ jobs:
             ${{ runner.os }}-xcode-
 
       - name: "Set up python"
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
           python-version: "3.11"
 
