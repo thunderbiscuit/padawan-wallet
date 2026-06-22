@@ -112,7 +112,7 @@ dependencies {
     // Adding the Bill of Materials synchronizes dependencies in the androidx.compose namespace
     // https://developer.android.com/develop/ui/compose/bom/bom-mapping
     // Once declared, you remove the library versions in your dependency declarations
-    implementation(platform("androidx.compose:compose-bom:2026.05.01"))
+    implementation(platform("androidx.compose:compose-bom:2026.06.00"))
     implementation("androidx.compose.material3:material3")
     implementation("androidx.compose.ui:ui")
     implementation("androidx.compose.animation:animation")
@@ -135,7 +135,8 @@ dependencies {
 
     // Icons
     implementation("com.composables:icons-lucide:1.1.0")
-    implementation("androidx.compose.material:material-icons-extended:1.7.8")
+    // The version for this lib is handled by the Compose BOM
+    implementation("androidx.compose.material:material-icons-extended")
 
     // Bitcoin
     implementation("org.bitcoindevkit:bdk-android:3.0.0")
