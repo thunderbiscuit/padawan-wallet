@@ -6,8 +6,8 @@
 package com.coyotebitcoin.padawanwallet.utils
 
 import com.coyotebitcoin.padawanwallet.domain.utils.netSendWithoutFees
-import org.junit.Assert.assertEquals
-import org.junit.Test
+import kotlin.test.Test
+import kotlin.test.assertEquals
 
 class UtilsTest {
 
@@ -34,6 +34,6 @@ class UtilsTest {
         val testFees = 15uL
         val netSendWithoutFeesTest: ULong = netSendWithoutFees(txSatsOut = 300uL, txSatsIn = 20uL, fee = testFees)
         // expected = 300 - (20 + 15) = 265
-        assertEquals("netSendWithoutFees() calculation failed", 265uL, netSendWithoutFeesTest)
+        assertEquals(265uL, netSendWithoutFeesTest, "netSendWithoutFees() calculation failed")
     }
 }

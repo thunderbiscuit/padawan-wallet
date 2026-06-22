@@ -154,8 +154,9 @@ dependencies {
     implementation("androidx.camera:camera-view:1.6.1")
 
     // Unit testing
-    testImplementation("junit:junit:4.13.2")
-    testRuntimeOnly("org.junit.vintage:junit-vintage-engine:5.13.4")
+    testImplementation("org.jetbrains.kotlin:kotlin-test-junit5:2.3.0")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:6.1.0")
+    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
     testImplementation("org.mockito:mockito-core:5.19.0")
 
     // Instrumentation testing

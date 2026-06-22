@@ -7,8 +7,8 @@ package com.coyotebitcoin.padawanwallet.utils
 
 import com.coyotebitcoin.padawanwallet.domain.utils.WordCheckResult
 import com.coyotebitcoin.padawanwallet.domain.utils.checkWords
-import org.junit.Assert.assertEquals
-import org.junit.Test
+import kotlin.test.Test
+import kotlin.test.assertEquals
 
 class CheckWords {
     private val correctRecoveryPhraseMap =
@@ -47,7 +47,7 @@ class CheckWords {
                 12 to "organ",
             )
         val words: WordCheckResult = checkWords(wrongRecoveryPhraseMap)
-        assertEquals(words is WordCheckResult.FAILURE, true)
+        assertEquals(true, words is WordCheckResult.FAILURE)
     }
 
     @Test
