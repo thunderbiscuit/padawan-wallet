@@ -1,6 +1,13 @@
-name: Run Unit Tests
+name: Run Android Unit Tests
 
-on: [pull_request, workflow_dispatch]
+on:
+  push:
+    paths:
+      - "Android/**"
+  pull_request:
+    paths:
+      - "Android/**"
+  workflow_dispatch:
 
 jobs: 
   unit_tests:
