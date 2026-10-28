@@ -13,9 +13,6 @@ plugins {
     id("org.jetbrains.kotlin.plugin.compose") version "2.3.0"
 }
 
-val faucetUrl: String by project
-val faucetToken: String by project
-
 android {
     compileSdk = 37
 
@@ -39,9 +36,6 @@ android {
         ndk {
             abiFilters += "arm64-v8a"
         }
-
-        buildConfigField("String", "FAUCET_URL", faucetUrl)
-        buildConfigField("String", "FAUCET_TOKEN", faucetToken)
     }
 
     androidResources {

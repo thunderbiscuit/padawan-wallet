@@ -15,7 +15,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
-import com.coyotebitcoin.padawanwallet.BuildConfig
+import com.coyotebitcoin.padawanwallet.data.FaucetConfig
 import com.coyotebitcoin.padawanwallet.domain.bitcoin.FaucetCall
 import com.coyotebitcoin.padawanwallet.domain.bitcoin.FaucetService
 import com.coyotebitcoin.padawanwallet.domain.bitcoin.TransactionDetails
@@ -158,8 +158,9 @@ class WalletViewModel(application: Application) : AndroidViewModel(application) 
 
     private fun requestCoins() {
         val address = Wallet.getLastUnusedAddress().address
-        val faucetUrl: String = BuildConfig.FAUCET_URL
-        val faucetToken: String = BuildConfig.FAUCET_TOKEN
+        val faucetConfig = FaucetConfig.load(getApplication())
+        val faucetUrl: String = faucetConfig.url
+        val faucetToken: String = faucetConfig.token
         Log.i(TAG, "############################################")
         // Log.i(TAG, "Calling server with url: $faucetUrl")
         // Log.i(TAG, "Calling server with username: $faucetUsername")

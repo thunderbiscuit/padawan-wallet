@@ -10,9 +10,11 @@
 /Android/app/release/
 /Android/debug
 /Android/app/gradle.properties
-
+/Android/app/src/main/assets/faucet.properties
 /Android/padawankmp/build
-
+/Android/keystore.properties
+/Android/assets/faucet.properties
+/Android/release/
 xcuserdata/
 
 output-metadata.json
