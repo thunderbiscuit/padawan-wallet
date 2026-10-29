@@ -1,13 +1,6 @@
-name: Run Android Unit Tests
+name: Run Unit Tests
 
-on:
-  push:
-    paths:
-      - "Android/**"
-  pull_request:
-    paths:
-      - "Android/**"
-  workflow_dispatch:
+on: [pull_request, workflow_dispatch]
 
 jobs: 
   unit_tests:
@@ -18,15 +11,9 @@ jobs:
         working-directory: ./Android/
     steps:
       - name: "Check out PR branch"
-        uses: actions/checkout@v7
+        uses: actions/checkout@v4
         with:
           fetch-depth: 1
 
-      - name: "Set up JDK"
-        uses: actions/setup-java@v5
-        with:
-          distribution: temurin
-          java-version: 17
-
       - name: "Run unit tests"
-        run: ./gradlew test --no-daemon --stacktrace
+        run: ./kotlin test

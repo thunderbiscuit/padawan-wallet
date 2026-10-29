@@ -1,0 +1,81 @@
+product: android/app
+
+settings:
+  android:
+    namespace: "com.coyotebitcoin.padawanwallet"
+    applicationId: "com.coyotebitcoin.padawanwallet"
+    compileSdk: 37
+    minSdk: 30
+    targetSdk: 37
+    # This version code must be updated for each release but the version on the master branch stays at 1.
+    versionCode: 1
+    versionName: "v0.17.0-SNAPSHOT"
+    abiFilters: [ arm64-v8a ]
+    # Release builds are signed with the keystore described in keystore.properties (gitignored)
+    signing: enabled
+    resourcePackaging:
+      excludes:
+        # for JNA and JNA-platform
+        - META-INF/AL2.0
+        - META-INF/LGPL2.1
+        # for byte-buddy
+        - META-INF/licenses/ASM
+      pickFirsts:
+        - win32-x86-64/attach_hotspot_windows.dll
+        - win32-x86/attach_hotspot_windows.dll
+  compose: enabled
+  kotlin:
+    version: 2.4.10
+    freeCompilerArgs: [ -Xexplicit-backing-fields ]
+    serialization:
+      enabled: true
+      version: 1.11.0
+  junit: junit-4
+
+dependencies:
+  - androidx.core:core-ktx:1.19.0
+  - androidx.core:core-splashscreen:1.2.0
+  - org.jetbrains.kotlinx:kotlinx-datetime:0.8.0
+
+  # Compose
+  # Adding the Bill of Materials synchronizes dependencies in the androidx.compose namespace
+  # https://developer.android.com/develop/ui/compose/bom/bom-mapping
+  - bom: androidx.compose:compose-bom:2025.09.00
+  - androidx.compose.material3:material3
+  - androidx.compose.ui:ui
+  - androidx.compose.animation:animation
+  - androidx.compose.ui:ui-tooling
+  - androidx.activity:activity-compose:1.12.0
+
+  # Navigation
+  - androidx.navigation3:navigation3-runtime:1.1.2
+  - androidx.navigation3:navigation3-ui:1.1.2
+
+  - androidx.lifecycle:lifecycle-viewmodel-compose:2.10.0
+  - androidx.navigation:navigation-compose:2.9.8
+  - androidx.constraintlayout:constraintlayout-compose:1.1.1
+
+  # composables.com
+  - com.composables:core:1.43.1
+
+  # Icons
+  - com.composables:icons-lucide:1.1.0
+  - androidx.compose.material:material-icons-extended:1.7.8
+
+  # Bitcoin
+  - org.bitcoindevkit:bdk-android:3.0.0
+  - org.kotlinbitcointools:bip21:0.1.0
+
+  # Ktor
+  - io.ktor:ktor-client-cio:3.5.0
+  - io.ktor:ktor-client-auth:3.5.0
+
+  # QR codes
+  - com.google.zxing:core:3.5.3
+  - com.google.mlkit:barcode-scanning:17.3.0
+  - androidx.camera:camera-camera2:1.6.1
+  - androidx.camera:camera-lifecycle:1.5.0
+  - androidx.camera:camera-view:1.6.1
+
+test-dependencies:
+  - org.mockito:mockito-core:5.19.0

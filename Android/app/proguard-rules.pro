@@ -1,3 +1,0 @@
--keep class org.bitcoindevkit.** { *; }
--keep interface org.bitcoindevkit.** { *; }
--keep enum org.bitcoindevkit.** { *; }

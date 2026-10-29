@@ -6,11 +6,14 @@
 
 /build/
 
-/Android/app/build
-/Android/app/release/
+/Android/build
 /Android/debug
-/Android/app/gradle.properties
-/Android/app/src/main/assets/faucet.properties
+# Leftovers from the Gradle build, including local secrets files
+/Android/app/
+/Android/assets/faucet.properties
+/Android/keystore.properties
+/Android/keystore.jks
+/Android/release/
 /Android/padawankmp/build
 /Android/keystore.properties
 /Android/assets/faucet.properties

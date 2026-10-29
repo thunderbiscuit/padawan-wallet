@@ -29,12 +29,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.coyotebitcoin.padawanwallet.BuildConfig
 import com.coyotebitcoin.padawanwallet.R
 import com.coyotebitcoin.padawanwallet.presentation.navigation.SecondaryDestinations
 import com.coyotebitcoin.padawanwallet.presentation.theme.LocalPadawanColors
@@ -109,7 +109,9 @@ internal fun SettingsRootScreen(
                 horizontalArrangement = Arrangement.Center,
                 modifier = Modifier.fillMaxWidth(),
             ) {
-                val padawanVersion = "${stringResource(R.string.padawan_wallet)} ${BuildConfig.VERSION_NAME}"
+                val context = LocalContext.current
+                val versionName = context.packageManager.getPackageInfo(context.packageName, 0).versionName
+                val padawanVersion = "${stringResource(R.string.padawan_wallet)} $versionName"
                 Text(
                     text = padawanVersion,
                     style = PadawanTypography.bodySmall,
